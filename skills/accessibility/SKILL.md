@@ -1,0 +1,24 @@
+# Accessibility Review
+
+Use this skill when designing, implementing, or reviewing user interfaces.
+
+## Workflow
+
+1. Use semantic native controls before adding ARIA roles.
+2. Provide programmatic names for controls, meaningful text alternatives, and text-based error guidance.
+3. Verify keyboard reachability, visible focus, predictable focus movement, and escape paths for transient UI.
+4. Do not rely on colour, position, or sound as the only way to convey information.
+5. Check text contrast, target size, zoom/reflow, and dynamic status announcements.
+6. Record known accessibility gaps and their remediation plan in the change specification.
+
+## Review checklist
+
+- [ ] Every interactive control has an accessible name and a native role where possible.
+- [ ] Keyboard navigation and focus order are usable.
+- [ ] Validation feedback is clear, associated with its field, and does not expose sensitive data.
+- [ ] Images and icons have appropriate text alternatives or are hidden when decorative.
+- [ ] UI changes include focused accessibility tests or documented manual evidence.
+
+## Provenance
+
+Curated adaptation of ECC `skills/accessibility/SKILL.md` at commit `ed387446052dfbc6b52de149406b70efa65edc59`, MIT License. No ECC code, scripts, hooks, or configuration were imported.

@@ -1,0 +1,25 @@
+{
+  "name": "casops",
+  "version": "2.0.0-kiro-claude-only",
+  "private": true,
+  "type": "module",
+  "description": "Common Agent Swarm Operation System CASOPS: executable Kiro and Claude Code configuration operations.",
+  "scripts": {
+    "bootstrap": "node scripts/project-starter.mjs bootstrap",
+    "create": "node scripts/project-starter.mjs create",
+    "init": "node scripts/project-starter.mjs init",
+    "doctor": "node scripts/doctor.mjs",
+    "sources:download": "node scripts/source-download.mjs",
+    "sources:update": "node scripts/source-download.mjs --update",
+    "sources:check": "node scripts/source-download.mjs --check",
+    "sources:audit": "node scripts/source-audit.mjs",
+    "sync": "node scripts/sync.mjs",
+    "sync:check": "node scripts/sync.mjs --check",
+    "security": "node scripts/security.mjs",
+    "review": "node scripts/review.mjs",
+    "sdd:check": "node scripts/sdd-check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "format": "node scripts/project-starter.mjs format"
+  },
+  "engines": { "node": ">=20.0.0" }
+}

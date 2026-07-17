@@ -1,0 +1,82 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-07-17T06:19:32.454Z",
+  "sources": [
+    {
+      "id": "ecc",
+      "name": "ECC / Everything Claude Code",
+      "url": "https://github.com/affaan-m/ECC.git",
+      "resolved_url": "https://github.com/affaan-m/ECC.git",
+      "target": "external/sources/ecc",
+      "status": "ok",
+      "commit": "ed387446052dfbc6b52de149406b70efa65edc59",
+      "branch": "main",
+      "last_commit_at": "2026-07-13T21:31:12-04:00",
+      "last_commit_subject": "fix(hooks): require successful shell probe in observe runner (#2403)",
+      "license_files": [
+        "LICENSE"
+      ],
+      "package_files": [
+        "package.json",
+        "pyproject.toml"
+      ],
+      "quarantine": false,
+      "import_policy": "curated-only"
+    },
+    {
+      "id": "anthropic-skills",
+      "name": "Anthropic Agent Skills",
+      "url": "https://github.com/anthropics/skills.git",
+      "resolved_url": "https://github.com/anthropics/skills.git",
+      "target": "external/sources/anthropic-skills",
+      "status": "ok",
+      "commit": "fa0fa64bdc967915dc8399e803be67759e1e62b8",
+      "branch": "main",
+      "last_commit_at": "2026-07-16T19:47:37-07:00",
+      "last_commit_subject": "Update docx, pptx, and xlsx skills (#1447)",
+      "license_files": [],
+      "package_files": [],
+      "quarantine": true,
+      "import_policy": "curated-only"
+    },
+    {
+      "id": "modelcontextprotocol-servers",
+      "name": "Model Context Protocol Servers",
+      "url": "https://github.com/modelcontextprotocol/servers.git",
+      "resolved_url": "https://github.com/modelcontextprotocol/servers.git",
+      "target": "external/sources/modelcontextprotocol-servers",
+      "status": "ok",
+      "commit": "d31124c982401739917fd817c2a59db344529c16",
+      "branch": "main",
+      "last_commit_at": "2026-07-06T10:15:49-07:00",
+      "last_commit_subject": "fix(filesystem): declare openWorldHint on all tools (#4480)",
+      "license_files": [
+        "LICENSE"
+      ],
+      "package_files": [
+        "package.json"
+      ],
+      "quarantine": true,
+      "import_policy": "reference-only"
+    },
+    {
+      "id": "awesome-agent-skills",
+      "name": "Awesome Agent Skills",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills.git",
+      "resolved_url": "https://github.com/VoltAgent/awesome-agent-skills.git",
+      "target": "external/sources/awesome-agent-skills",
+      "status": "ok",
+      "commit": "c97eda5e3406670f3285c6bf9eb7639a7ecc03cc",
+      "branch": "main",
+      "last_commit_at": "2026-07-10T16:55:37+03:00",
+      "last_commit_subject": "Merge pull request #760 from taisly/add-taisly-agent-kit-mr8r5x2j",
+      "license_files": [
+        "LICENSE"
+      ],
+      "package_files": [],
+      "quarantine": true,
+      "import_policy": "reference-only"
+    }
+  ],
+  "failures": []
+}

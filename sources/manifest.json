@@ -1,0 +1,13 @@
+{
+  "schema_version": "2.0",
+  "generated_from": "starter.md",
+  "default_profile": "all",
+  "download_root": "external/sources",
+  "sources": [
+    {"id":"ecc","name":"ECC / Everything Claude Code","url":"https://github.com/affaan-m/ECC.git","target":"external/sources/ecc","type":"git","enabled":true,"priority":"required","tier":"core","quarantine":false,"import_policy":"curated-only","purpose":"Reference for Claude Code patterns and compatible curation."},
+    {"id":"anthropic-skills","name":"Anthropic Agent Skills","url":"https://github.com/anthropics/skills.git","target":"external/sources/anthropic-skills","type":"git","enabled":true,"priority":"required","tier":"official","quarantine":true,"import_policy":"curated-only","purpose":"Official skill structure and packaging reference."},
+    {"id":"modelcontextprotocol-servers","name":"Model Context Protocol Servers","url":"https://github.com/modelcontextprotocol/servers.git","target":"external/sources/modelcontextprotocol-servers","type":"git","enabled":true,"priority":"required","tier":"official","quarantine":true,"import_policy":"reference-only","purpose":"MCP server and safety reference."},
+    {"id":"awesome-agent-skills","name":"Awesome Agent Skills","url":"https://github.com/VoltAgent/awesome-agent-skills.git","target":"external/sources/awesome-agent-skills","type":"git","enabled":true,"priority":"optional","tier":"discovery","quarantine":true,"import_policy":"reference-only","purpose":"Discovery reference subject to CASOPS policy."},
+    {"id":"mcp-servers-archived","name":"MCP Servers Archived","url":"https://github.com/modelcontextprotocol/servers-archived.git","target":"external/sources/mcp-servers-archived","type":"git","enabled":false,"priority":"archived","tier":"historical","quarantine":true,"import_policy":"never-import","purpose":"Historical reference; disabled by default."}
+  ]
+}

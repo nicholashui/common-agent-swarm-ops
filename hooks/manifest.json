@@ -1,0 +1,1 @@
+{"schema_version":"1.0","hooks":[{"id":"sdd-gate","event":"preCommit","command":"npm run sdd:check","approved":true}]}

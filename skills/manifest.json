@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "skills": [
+    {"id": "sdd", "path": "lifecycle/SKILL.md", "approved": true},
+    {"id": "review", "path": "review/SKILL.md", "approved": true},
+    {"id": "testing", "path": "testing/SKILL.md", "approved": true},
+    {"id": "accessibility", "path": "accessibility/SKILL.md", "approved": true, "source": "ecc", "source_commit": "ed387446052dfbc6b52de149406b70efa65edc59"},
+    {"id": "architecture-decisions", "path": "architecture-decisions/SKILL.md", "approved": true, "source": "ecc", "source_commit": "ed387446052dfbc6b52de149406b70efa65edc59"},
+    {"id": "error-handling", "path": "error-handling/SKILL.md", "approved": true, "source": "ecc", "source_commit": "ed387446052dfbc6b52de149406b70efa65edc59"},
+    {"id": "coding-standards", "path": "coding-standards/SKILL.md", "approved": true, "source": "ecc", "source_commit": "ed387446052dfbc6b52de149406b70efa65edc59"}
+  ]
+}

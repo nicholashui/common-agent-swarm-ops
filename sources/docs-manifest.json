@@ -1,0 +1,8 @@
+{
+  "schema_version": "2.0",
+  "docs": [
+    {"id":"kiro-docs","name":"Kiro Documentation","url":"https://kiro.dev/docs","target":"external/docs/kiro.md","enabled":true,"purpose":"Kiro steering, hooks, settings, and MCP reference."},
+    {"id":"claude-code-docs","name":"Claude Code Documentation","url":"https://docs.anthropic.com/en/docs/claude-code","target":"external/docs/claude-code.md","enabled":true,"purpose":"Claude Code project instructions, skills, commands, agents, and settings reference."},
+    {"id":"mcp-docs","name":"Model Context Protocol Docs","url":"https://modelcontextprotocol.io","target":"external/docs/modelcontextprotocol.md","enabled":true,"purpose":"MCP concepts and safety reference."}
+  ]
+}
