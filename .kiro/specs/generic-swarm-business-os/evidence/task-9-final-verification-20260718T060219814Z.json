@@ -1,0 +1,76 @@
+{
+  "task_id": "9. Checkpoint — Ensure all tests pass",
+  "workspace": "C:\\Project\\common-agent-swarm-ops",
+  "spec_path": "C:\\Project\\common-agent-swarm-ops\\.kiro\\specs\\generic-swarm-business-os",
+  "recorded_at_utc": "2026-07-18T06:04:56.6861369Z",
+  "outcome": "passed",
+  "commands": [
+    {
+      "name": "sdd-check",
+      "command": "npm run sdd:check",
+      "cwd": ".",
+      "started_at_utc": "2026-07-18T06:02:19.8142499Z",
+      "finished_at_utc": "2026-07-18T06:02:32.3290026Z",
+      "exit_status": 0,
+      "result": "SDD gate: OK",
+      "output_log": "task-9-final-verification-20260718T060219814Z-sdd-check.log",
+      "output_sha256": "E57158ABD65BCFD12409ECFD37BF9968BBBA6980A1A85F7CF3266B31CEEE99F0"
+    },
+    {
+      "name": "pytest",
+      "command": "python -m pytest --tb=short -q",
+      "cwd": "backend",
+      "started_at_utc": "2026-07-18T06:02:37.8115633Z",
+      "finished_at_utc": "2026-07-18T06:03:30.4580452Z",
+      "exit_status": 0,
+      "result": "206 passed in 24.27s",
+      "output_log": "task-9-final-verification-20260718T060219814Z-pytest.log",
+      "output_sha256": "C9F213358823887F0F6356752E79777D4A8391E936085FE51B64B682C1C51131"
+    },
+    {
+      "name": "ruff",
+      "command": "python -m ruff check app tests",
+      "cwd": "backend",
+      "started_at_utc": "2026-07-18T06:03:36.1540187Z",
+      "finished_at_utc": "2026-07-18T06:03:49.7411774Z",
+      "exit_status": 0,
+      "result": "All checks passed!",
+      "output_log": "task-9-final-verification-20260718T060219814Z-ruff.log",
+      "output_sha256": "A4443AFDCFB6D7363ADB285762515CCF7CF50473B1A05C20C1A50F6BED4D26B0"
+    },
+    {
+      "name": "mypy",
+      "command": "python -m mypy app tests",
+      "cwd": "backend",
+      "started_at_utc": "2026-07-18T06:03:56.0034321Z",
+      "finished_at_utc": "2026-07-18T06:04:12.8554302Z",
+      "exit_status": 0,
+      "result": "Success: no issues found in 159 source files",
+      "output_log": "task-9-final-verification-20260718T060219814Z-mypy.log",
+      "output_sha256": "625ECC28D11F1617F5C855C1C62883950AE3EC10E444C50275172ED0D3B45BE7"
+    }
+  ],
+  "hashes": {
+    "git_head": "f38e86fdfb940ed126b6042a1d88155f8bc33109",
+    "package_json_sha256": "B8826664559AD7C20D5192BC9D9349FC9A52950E6676ABF979C4ADD66E99CE30",
+    "backend_pyproject_sha256": "087AAFC33049189A1E2B5485B9D5303EE02843EC32C7A5C2E7F7E2104DA5653A",
+    "requirements_sha256": "D926C4E22F40739A8EC5269E1430DE733DA2AEE26C2026357642F4EC0FF60C29",
+    "design_sha256": "7F66C6B15AE2D1FAC224B8ED9E86EF303D8462E408C2C52D512F07B0702BE30F",
+    "tasks_sha256": "0E0A3AD1AC286C6E4D6CC8B1428C68BCB6BF2B8D11A4129F5E046C58B44407A1"
+  },
+  "resolved_failures": [
+    "Prior pytest collection ImportError for RetrievalMatch is resolved; the full suite collected and passed.",
+    "Current Ruff baseline: 19 findings (E501, unused imports, and constant getattr); all are resolved without changing strict settings.",
+    "Current mypy baseline: 3 errors: retrieval enum-to-literal response mapping (2) and Property 21 fixed-tuple inference (1); all are resolved.",
+    "The previously reported 16-error mypy state was not reproduced in this working tree; the current full gate found and resolved every remaining error."
+  ],
+  "counterexamples": [],
+  "constraints_observed": [
+    "target-local only",
+    "no development server",
+    "no network services",
+    "no deployment or provisioning",
+    "no production-canary activation",
+    "no video-artifact release"
+  ]
+}

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\contracts.py
+# hypothesis_version: 6.151.12
+
+['audit_unavailable', 'authorization_denied', 'conflict', 'invalid_transition', 'not_found', 'validation_failed']

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\memory\models.py
+# hypothesis_version: 6.151.12
+
+['agent', 'critical', 'high', 'low', 'normal', 'organization', 'recovery', 'workflow']

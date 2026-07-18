@@ -1,0 +1,1 @@
+{"schema_version":1,"task_id":"golden-002","scenario":"invoice-reconciliation","input":{"case_id":"invoice-002","organization_id":"org-eval"},"expected_outcome":"pass"}

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\process_intelligence\service.py
+# hypothesis_version: 6.151.12
+
+['artifact_drafts', 'host', 'must not be empty']

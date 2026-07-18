@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\inventory.py
+# hypothesis_version: 6.151.12
+
+[100, 114, '/', 'L0', 'NFKC', 'agent_id', 'agent_spec.json', 'agent_spec_path', 'agents', 'allowed_tools', 'budget_policy', 'configuration', 'critique_edges', 'draft', 'duplicate_agent_spec', 'entries', 'expected_agent_count', 'extra_agent_spec', 'inputs', 'invalid_agent_count', 'invalid_agent_entry', 'invalid_agent_role', 'invalid_model_policy', 'invalid_object', 'invalid_pack_id', 'inventory', 'inventory.json', 'inventory.pack_id', 'local_deterministic', 'manifest', 'manifest.json', 'maturity_level', 'max_input_tokens', 'max_output_tokens', 'max_refinement_count', 'max_tool_requests', 'missing_agent_spec', 'model_id', 'model_policy', 'network_access', 'outputs', 'pack_id', 'production_active', 'prompt', 'prompt_reference', 'provider', 'registered', 'role', 'rubric', 'rubric_reference', 'status', 'utf-8', 'validation', 'video', 'video.']

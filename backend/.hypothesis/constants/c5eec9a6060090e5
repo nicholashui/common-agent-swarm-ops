@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\tool_broker.py
+# hypothesis_version: 6.151.12
+
+[',', 'adapter_id', 'execute', 'invalid_tool_input', 'local_only', 'retain_tool_effect', 'tool.request', 'utf-8', 'version']

@@ -1,0 +1,1 @@
+{"schema_version":1,"task_id":"golden-012","scenario":"incident-escalation","input":{"case_id":"incident-012","organization_id":"org-eval"},"expected_outcome":"pass"}

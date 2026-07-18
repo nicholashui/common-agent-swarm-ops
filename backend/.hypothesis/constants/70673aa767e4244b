@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\inventory.py
+# hypothesis_version: 6.151.12
+
+[100, 114, 'NFKC', 'agent_id', 'agents', 'configuration', 'draft', 'entries', 'invalid_agent_count', 'invalid_agent_entry', 'invalid_object', 'invalid_pack_id', 'inventory', 'inventory.json', 'manifest', 'manifest.json', 'pack_id', 'production_active', 'registered', 'status', 'utf-8', 'video']

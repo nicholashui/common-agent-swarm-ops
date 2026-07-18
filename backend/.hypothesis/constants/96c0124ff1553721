@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\repositories\evolution_repository.py
+# hypothesis_version: 6.151.12
+
+['Canary', 'Promotion approval', 'Rollback record', 'Sandbox variant', 'T', 'evolution-repository', 'permitted']

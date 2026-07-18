@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\identifiers.py
+# hypothesis_version: 6.151.12
+
+['ActorId', 'ApprovalId', 'AuditEventId', 'CorrelationId', 'EvidenceId', 'OrganizationId', 'RecordId', 'RunId', 'WorkflowDefinitionId']

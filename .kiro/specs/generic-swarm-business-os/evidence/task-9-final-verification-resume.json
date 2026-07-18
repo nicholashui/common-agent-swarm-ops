@@ -1,0 +1,32 @@
+{
+  "task_id": "9. Checkpoint — Ensure all tests pass",
+  "workspace": "C:\\Project\\common-agent-swarm-ops",
+  "spec_path": "C:\\Project\\common-agent-swarm-ops\\.kiro\\specs\\generic-swarm-business-os",
+  "recorded_at_utc": "2026-07-18T05:23:11.9576179Z",
+  "outcome": "failed",
+  "constraints": [
+    "target-local only",
+    "no development server",
+    "no network services",
+    "no deployment or provisioning",
+    "no production canary activation",
+    "no video artifact release"
+  ],
+  "commands": [
+    {
+      "name": "sdd-check",
+      "command": "npm run sdd:check",
+      "cwd": ".",
+      "started_at_utc": null,
+      "finished_at_utc": null,
+      "observed_at_utc": "2026-07-18T05:23:11.9576179Z",
+      "exit_status": -1,
+      "output_log": ".kiro\\specs\\generic-swarm-business-os\\evidence\\task-9-final-verification-resume-sdd-check.log",
+      "output_sha256": "5D7DFCDD063536AE0D596AABAAC04736C7321C0F98E956093C32DBB5B6C596B8",
+      "result": "The command was not executed due to an error: Signal was cancelled\n\nExit Code: -1",
+      "counterexamples": [],
+      "failure": "The command was not executed due to an error: Signal was cancelled\n\nExit Code: -1",
+      "note": "The execution provider cancelled the invocation before it exposed command start or finish timestamps; observed_at_utc is the evidence-recording time. No subsequent quality gate was run."
+    }
+  ]
+}

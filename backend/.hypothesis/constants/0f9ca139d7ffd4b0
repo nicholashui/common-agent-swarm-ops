@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\__init__.py
+# hypothesis_version: 6.151.12
+
+['AdoptionApproval', 'ArchitectureDecision', 'BoundaryErrorCode', 'BoundaryOperation', 'WorkspaceBoundary']

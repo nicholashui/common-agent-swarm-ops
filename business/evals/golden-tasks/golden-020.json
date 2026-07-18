@@ -1,0 +1,1 @@
+{"schema_version":1,"task_id":"golden-020","scenario":"release-readiness","input":{"case_id":"release-020","organization_id":"org-eval"},"expected_outcome":"pass"}

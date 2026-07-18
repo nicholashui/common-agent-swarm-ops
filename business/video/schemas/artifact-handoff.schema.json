@@ -1,0 +1,19 @@
+{
+  "$id": "video/artifact-handoff.schema.json",
+  "title": "Video Artifact Handoff",
+  "type": "object",
+  "required": ["artifact_id", "version", "parent_assets", "brief_scope", "technical_spec", "rights_and_consent", "continuity_state", "qc_status", "target_channels", "provenance_manifest"],
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "parent_assets": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "brief_scope": {"type": "object"},
+    "technical_spec": {"type": "object"},
+    "rights_and_consent": {"type": "object", "required": ["license", "likeness_consent", "voice_consent", "territories", "embargo_state"], "properties": {"license": {"type": "string", "minLength": 1}, "likeness_consent": {"type": "string", "minLength": 1}, "voice_consent": {"type": "string", "minLength": 1}, "territories": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "embargo_state": {"type": "string", "minLength": 1}}},
+    "continuity_state": {"type": "object"},
+    "qc_status": {"type": "object", "required": ["l1", "l2", "l3", "q1", "q2", "q3", "q4", "q5", "q6"]},
+    "target_channels": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "provenance_manifest": {"type": "object", "required": ["provenance_reference", "critique_log_reference", "final_signoff_chain", "model_prompt_inputs"], "properties": {"provenance_reference": {"type": "string", "minLength": 1}, "critique_log_reference": {"type": "string", "minLength": 1}, "final_signoff_chain": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "model_prompt_inputs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}}}
+  },
+  "additionalProperties": false
+}

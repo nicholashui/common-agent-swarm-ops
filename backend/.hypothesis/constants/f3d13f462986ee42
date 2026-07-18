@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\runs.py
+# hypothesis_version: 6.151.12
+
+['cancelled', 'completed', 'dispatching', 'failed', 'graph', 'legacy', 'queued', 'waiting_for_approval']

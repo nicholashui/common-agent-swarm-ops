@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\__init__.py
+# hypothesis_version: 6.151.12
+
+['ActorId', 'ApprovalId', 'AuditDecision', 'AuditEvent', 'AuditEventId', 'AuditEventProjection', 'CorrelationId', 'DispatchAttempt', 'ErrorCode', 'ErrorDetail', 'ErrorField', 'EvidenceId', 'EvidenceItem', 'EvidenceProjection', 'EvidenceReference', 'FailureState', 'OptimisticTransition', 'OrganizationId', 'RecordId', 'RecordMetadata', 'RepositoryError', 'Result', 'RunId', 'RunRecord', 'RunStatus', 'ToolEffect', 'VersionedRecord', 'WorkflowDefinitionId', 'WorkflowEngineKind']

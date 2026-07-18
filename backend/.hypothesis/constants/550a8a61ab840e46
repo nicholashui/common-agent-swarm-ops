@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\engines\graph.py
+# hypothesis_version: 6.151.12
+
+['T', 'definition_type', 'engine', 'graph_metrics', 'graph_node_failed', 'handoffs', 'id', 'node_visits', 'pack_graph', 'tool_requests', 'version']

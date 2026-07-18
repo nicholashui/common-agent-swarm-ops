@@ -1,0 +1,31 @@
+{
+  "$id": "video/video-pack.schema.json",
+  "title": "Video Pack Manifest",
+  "type": "object",
+  "required": ["pack_id", "pack_version", "production_activation_requested", "validation", "agents"],
+  "properties": {
+    "pack_id": {"type": "string", "const": "video"},
+    "pack_version": {"type": "string", "minLength": 1},
+    "production_activation_requested": {"type": "boolean", "const": false},
+    "validation": {
+      "type": "object", "required": ["validator", "expected_agent_count"],
+      "properties": {
+        "validator": {"type": "string", "const": "VideoInventoryValidator"},
+        "expected_agent_count": {"type": "integer", "const": 114}
+      }, "additionalProperties": false
+    },
+    "agents": {
+      "type": "array", "minItems": 114, "maxItems": 114,
+      "items": {
+        "type": "object", "required": ["agent_id", "status", "allowed_tools", "agent_spec_path"],
+        "properties": {
+          "agent_id": {"type": "string", "pattern": "^video\\.[a-z][a-z0-9_]*$"},
+          "status": {"type": "string", "enum": ["draft", "registered"]},
+          "allowed_tools": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "agent_spec_path": {"type": "string", "pattern": "^agents/video\\.[a-z][a-z0-9_]*/agent_spec\\.json$"}
+        }, "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

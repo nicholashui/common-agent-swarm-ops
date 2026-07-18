@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\dependencies.py
+# hypothesis_version: 6.151.12
+
+['code', 'message']

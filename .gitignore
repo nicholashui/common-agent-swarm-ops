@@ -3,3 +3,14 @@ external/sources/
 external/docs/
 *.log
 .DS_Store
+
+# Python backend local environments, caches, and build artifacts.
+backend/.venv/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.ruff_cache/
+backend/**/__pycache__/
+backend/**/*.py[cod]
+backend/build/
+backend/dist/
+backend/**/*.egg-info/

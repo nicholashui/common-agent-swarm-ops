@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evolution\models.py
+# hypothesis_version: 6.151.12
+
+['CanaryId', 'PromotionApprovalId', 'RollbackRecordId', 'SandboxVariantId', 'active', 'approved', 'blocked', 'decrease', 'draft', 'increase', 'performed', 'permitted', 'planned', 'stopped', 'under_consideration', 'withdrawn']

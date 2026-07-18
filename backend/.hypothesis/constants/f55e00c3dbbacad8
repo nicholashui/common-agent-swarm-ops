@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\schemas.py
+# hypothesis_version: 6.151.12
+
+[100, 200, 500, 1000, 2000, 'decrease', 'forbid', 'increase']

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\registry\pack_validator.py
+# hypothesis_version: 6.151.12
+
+[100, 1000000, ',', '.json', ':', 'NFKC', 'agent_id', 'agents', 'allowed_tools', 'business', 'duplicate_json_key', 'host', 'invalid_count', 'invalid_extension', 'invalid_identifier', 'invalid_json', 'invalid_status', 'invalid_tools', 'invalid_type', 'manifest', 'manifest_too_large', 'pack_id', 'read', 'requires_learning', 'source_error', 'status', 'unreadable_manifest', 'utf-8']

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evidence\fixtures.py
+# hypothesis_version: 6.151.12
+
+[10.0, 11.0, 2025, '1.0.0', 'adapter-audit-effect', 'artifact-fixture', 'assessment-fixture', 'completed', 'crm.lookup', 'effect', 'evaluation-config', 'evaluation-fixture', 'event-fixture', 'fixture', 'fixture-rights', 'frontend-forms', 'graph', 'host-migration', 'legacy', 'log-set-fixture', 'media.stub', 'migration-config', 'migration-fixture', 'operator-path', 'org-evidence-fixture', 'postgres-recovery', 'process', 'record-evaluation', 'record-migration', 'record-process', 'record-promotion', 'record-release', 'release-denial-cases', 'release-fixture', 'request', 'rights_and_consent', 'run-record', 'utf-8', 'variant-fixture', 'video-release']

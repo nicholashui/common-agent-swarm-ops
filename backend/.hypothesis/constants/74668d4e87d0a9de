@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\video.py
+# hypothesis_version: 6.151.12
+
+[1.0, '/artifacts', '/video', 'action_id', 'confidence', 'correction_control', 'emitted_at', 'evidence_references', 'intended_effect', 'name', 'passed', 'summary', 'uncertainty', 'video']

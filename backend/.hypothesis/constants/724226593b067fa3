@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\engines\compiler.py
+# hypothesis_version: 6.151.12
+
+[',', ':', 'agent_id', 'authorization_id', 'critique', 'definition', 'definition_type', 'edge', 'edges', 'engine', 'entry_node', 'execution_budget', 'from', 'id', 'map_reduce', 'max_handoffs', 'max_node_visits', 'max_tool_requests', 'max_traversals', 'memory', 'memory_reads', 'memory_writes', 'node', 'node tool_ids', 'nodes', 'owner_id', 'pack_graph', 'pack_spine', 'pattern', 'pipeline', 'risk_gate_ids', 'rollback', 'router', 'supervisor', 'terminal_node_ids', 'to', 'tool_ids', 'utf-8', 'version']

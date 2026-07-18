@@ -1,0 +1,1 @@
+{"schema_version":1,"task_id":"golden-011","scenario":"supplier-onboarding","input":{"case_id":"supplier-011","organization_id":"org-eval"},"expected_outcome":"pass"}

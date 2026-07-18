@@ -1,0 +1,34 @@
+{
+  "definition_type": "pack_graph",
+  "id": "video.pack-spine",
+  "version": "1.0.0",
+  "owner_id": "video.orchestrator",
+  "authorization_id": "video.local-spine",
+  "engine": "graph",
+  "execution_budget": {
+    "max_node_visits": 4,
+    "max_handoffs": 3,
+    "max_wall_clock_seconds": 5,
+    "max_tool_requests": 1
+  },
+  "memory": {"reads": [], "writes": []},
+  "risk_gate_ids": ["video.local-safe"],
+  "rollback": {
+    "plan_id": "video.stub-compensation",
+    "compensation_step_ids": ["media-stub"]
+  },
+  "pattern": "pack_spine",
+  "nodes": [
+    {"id": "supervise", "agent_id": "video.orchestrator", "tool_ids": [], "memory_reads": [], "memory_writes": []},
+    {"id": "media-stub", "agent_id": "video.generative_media_operator", "tool_ids": ["media.stub"], "memory_reads": [], "memory_writes": []},
+    {"id": "compliance-review", "agent_id": "video.compliance_agent", "tool_ids": [], "memory_reads": [], "memory_writes": []},
+    {"id": "complete", "agent_id": "video.delivery_packager", "tool_ids": [], "memory_reads": [], "memory_writes": []}
+  ],
+  "edges": [
+    {"from": "supervise", "to": "media-stub", "max_traversals": 1},
+    {"from": "media-stub", "to": "compliance-review", "max_traversals": 1},
+    {"from": "compliance-review", "to": "complete", "max_traversals": 1}
+  ],
+  "entry_node": "supervise",
+  "terminal_node_ids": ["complete"]
+}

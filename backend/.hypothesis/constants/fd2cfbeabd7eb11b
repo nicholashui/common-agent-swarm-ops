@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evaluation\golden_tasks.py
+# hypothesis_version: 6.151.12
+
+['*.json', 'business', 'evals', 'expected_outcome', 'golden-tasks', 'input', 'scenario', 'schema_version', 'task_id', 'utf-8']

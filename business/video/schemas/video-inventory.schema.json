@@ -1,0 +1,23 @@
+{
+  "$id": "video/video-inventory.schema.json",
+  "title": "Video Pack Inventory",
+  "type": "object",
+  "required": ["inventory_version", "pack_id", "entries"],
+  "properties": {
+    "inventory_version": {"type": "string", "minLength": 1},
+    "pack_id": {"type": "string", "const": "video"},
+    "entries": {
+      "type": "array", "minItems": 114, "maxItems": 114,
+      "items": {
+        "type": "object", "required": ["agent_id", "status", "maturity_level", "agent_spec_path"],
+        "properties": {
+          "agent_id": {"type": "string", "pattern": "^video\\.[a-z][a-z0-9_]*$"},
+          "status": {"type": "string", "enum": ["draft", "registered"]},
+          "maturity_level": {"type": "string", "const": "L0"},
+          "agent_spec_path": {"type": "string", "pattern": "^agents/video\\.[a-z][a-z0-9_]*/agent_spec\\.json$"}
+        }, "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

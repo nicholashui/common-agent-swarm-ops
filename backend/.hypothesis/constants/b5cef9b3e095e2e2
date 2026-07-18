@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\authorization.py
+# hypothesis_version: 6.151.12
+
+[',', '-', '//', 'ToolInputValue', '[', ']', '_', 'agent_allowed_tools', 'api_key', 'apikey', 'approval_state', 'approved', 'authorization', 'command', 'cookie', 'credential', 'denied', 'endpoint', 'executable', 'header', 'host', 'input', 'not_required', 'organization_scope', 'password', 'pending', 'risk_policy', 'role_permissions', 'script', 'secret', 'shell', 'step_declared_tools', 'token', 'uri', 'url', '{', '}']

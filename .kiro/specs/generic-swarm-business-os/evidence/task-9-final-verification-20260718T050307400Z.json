@@ -1,0 +1,59 @@
+{
+  "task_id": "9. Checkpoint — Ensure all tests pass",
+  "workspace": "C:\\Project\\common-agent-swarm-ops",
+  "spec_path": "C:\\Project\\common-agent-swarm-ops\\.kiro\\specs\\generic-swarm-business-os",
+  "recorded_at_utc": "2026-07-18T05:03:12.7612636Z",
+  "outcome": "failed",
+  "constraints": [
+    "target-local only",
+    "no development server",
+    "no network services",
+    "no deployment or provisioning",
+    "no production canary activation",
+    "no video artifact release"
+  ],
+  "hashes": {
+    "verification_input_sha256": "4E0B491F7411540693F6F9344F80A20854A6E4AC122C86419336BF0E95AD1A9F",
+    "package_json_sha256": "B8826664559AD7C20D5192BC9D9349FC9A52950E6676ABF979C4ADD66E99CE30",
+    "backend_pyproject_sha256": "087AAFC33049189A1E2B5485B9D5303EE02843EC32C7A5C2E7F7E2104DA5653A",
+    "git_head": "f38e86fdfb940ed126b6042a1d88155f8bc33109"
+  },
+  "commands": [
+    {
+      "name": "sdd-check",
+      "command": "npm run sdd:check",
+      "cwd": ".",
+      "started_at_utc": "2026-07-18T05:03:08.1872237Z",
+      "finished_at_utc": "2026-07-18T05:03:08.7026008Z",
+      "exit_status": 0,
+      "output_log": ".kiro\\specs\\generic-swarm-business-os\\evidence\\task-9-final-verification-20260718T050307400Z-sdd-check.log",
+      "output_sha256": "ED6CFF2D4BA426DD889F6F42FC722C30075DE1ADCBD28238943D58AE98C3E558",
+      "result": "\r\n> casops@2.0.0-kiro-claude-only sdd:check\r\n> node scripts/sdd-check.mjs\r\n\r\nSDD gate: OK",
+      "counterexamples": []
+    },
+    {
+      "name": "focused-evidence-tests",
+      "command": "python -m pytest --tb=short -q tests/evidence/test_product_bar.py tests/evidence/test_evidence_gates.py",
+      "cwd": "backend",
+      "started_at_utc": "2026-07-18T05:03:08.7599942Z",
+      "finished_at_utc": "2026-07-18T05:03:10.4605945Z",
+      "exit_status": 0,
+      "output_log": ".kiro\\specs\\generic-swarm-business-os\\evidence\\task-9-final-verification-20260718T050307400Z-focused-evidence-tests.log",
+      "output_sha256": "AC17ECD2ABBA9DEBFE19DFBAD11DDE96E3C9C44E8465BB9B88E1B246B5CC2532",
+      "result": "....................................                                     [100%]\r\n36 passed in 0.51s",
+      "counterexamples": []
+    },
+    {
+      "name": "pytest",
+      "command": "python -m pytest --tb=short -q",
+      "cwd": "backend",
+      "started_at_utc": "2026-07-18T05:03:10.4744721Z",
+      "finished_at_utc": "2026-07-18T05:03:12.7599796Z",
+      "exit_status": 2,
+      "output_log": ".kiro\\specs\\generic-swarm-business-os\\evidence\\task-9-final-verification-20260718T050307400Z-pytest.log",
+      "output_sha256": "64052A5DD9BF83790DB816A080DBD2E77515A03D7AF3E093BC43EA25894D476D",
+      "result": "\r\n=================================== ERRORS ====================================\r\n_______ ERROR collecting tests/properties/test_property_07_retrieval.py _______\r\nImportError while importing test module 'C:\\Project\\common-agent-swarm-ops\\backend\\tests\\properties\\test_property_07_retrieval.py'.\r\nHint: make sure your test modules/packages have valid Python names.\r\nTraceback:\r\nC:\\Users\\NH24831\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\importlib\\__init__.py:88: in import_module\r\n    return _bootstrap._gcd_import(name[level:], package, level)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntests\\properties\\test_property_07_retrieval.py:10: in <module>\r\n    from app.memory import (\r\nE   ImportError: cannot import name 'RetrievalMatch' from 'app.memory' (C:\\Project\\common-agent-swarm-ops\\backend\\app\\memory\\__init__.py)\r\n=========================== short test summary info ===========================\r\nERROR tests/properties/test_property_07_retrieval.py\r\n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\r\n1 error in 1.04s",
+      "counterexamples": []
+    }
+  ]
+}

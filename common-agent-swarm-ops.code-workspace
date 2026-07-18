@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../va-agent-swarm"
+		},
+		{
+			"path": "../generic-swarm-ops"
+		}
+	],
+	"settings": {
+	}
+}

@@ -1,0 +1,29 @@
+{
+  "agent_id": "video.asset_security_officer",
+  "allowed_tools": [],
+  "budget_policy": {
+    "max_input_tokens": 2048,
+    "max_output_tokens": 1024,
+    "max_tool_requests": 0
+  },
+  "critique_edges": {
+    "inputs": [
+      "video.critique_coordinator"
+    ],
+    "outputs": [
+      "video.judge_agent"
+    ]
+  },
+  "max_refinement_count": 3,
+  "model_policy": {
+    "model_id": "local-video-config-v1",
+    "network_access": false,
+    "provider": "local_deterministic"
+  },
+  "production_activation_requested": false,
+  "prompt_reference": "video.prompt.asset_security_officer.v1",
+  "role": "Video Asset Security Officer configuration specialist",
+  "rubric_reference": "video.rubric.asset_security_officer.v1",
+  "schema_version": "1.0",
+  "status": "registered"
+}

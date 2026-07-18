@@ -1,0 +1,1 @@
+{"schema_version":1,"task_id":"golden-010","scenario":"renewal-forecast","input":{"case_id":"renewal-010","organization_id":"org-eval"},"expected_outcome":"pass"}

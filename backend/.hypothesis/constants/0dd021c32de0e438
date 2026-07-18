@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\process_intelligence\validation.py
+# hypothesis_version: 6.151.12
+
+[100, 250, 10000, '+00:00', 'NFKC', 'Z', 'activity', 'case_id', 'log_set', 'log_set_id', 'must be a JSON array', 'occurred_at', 'permitted', 'record_id', 'records']

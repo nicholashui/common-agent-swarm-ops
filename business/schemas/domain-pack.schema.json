@@ -1,0 +1,26 @@
+{
+  "$id": "domain-pack.schema.json",
+  "title": "Domain Pack Manifest",
+  "type": "object",
+  "required": ["pack_id", "agents"],
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+    },
+    "agents": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": { "$ref": "agent.schema.json" }
+    },
+    "production_activation_requested": {
+      "type": "boolean",
+      "const": false,
+      "description": "Registration may load agents but cannot activate them in production."
+    }
+  },
+  "additionalProperties": true
+}

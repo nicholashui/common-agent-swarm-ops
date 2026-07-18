@@ -1,0 +1,20 @@
+{
+  "$id": "critique-message.schema.json",
+  "title": "Inter-Agent Critique Message",
+  "type": "object",
+  "required": ["critique_id", "sender", "receiver", "artifact_reference", "severity", "category", "evidence", "suggested_action", "rubric", "deadline_or_phase", "timestamp"],
+  "properties": {
+    "critique_id": {"type": "string", "minLength": 1},
+    "sender": {"type": "string", "minLength": 1},
+    "receiver": {"type": "string", "minLength": 1},
+    "artifact_reference": {"type": "string", "minLength": 1},
+    "severity": {"type": "string", "enum": ["blocker", "major", "minor", "nit"]},
+    "category": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "suggested_action": {"type": "string", "minLength": 1},
+    "rubric": {"type": "object", "required": ["reference", "score"], "properties": {"reference": {"type": "string", "minLength": 1}, "score": {"type": "number", "minimum": 0, "maximum": 1}}},
+    "deadline_or_phase": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}

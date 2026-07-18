@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\operations.py
+# hypothesis_version: 6.151.12
+
+['code', 'host_code_rewrite', 'message', 'operation_id', 'operations', 'orchestration', 'other', 'permitted', 'production_promotion', 'prohibited', 'prohibited_operation', 'reason']

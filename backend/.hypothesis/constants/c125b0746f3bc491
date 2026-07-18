@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evaluation\models.py
+# hypothesis_version: 6.151.12
+
+['adversarial', 'compliance', 'cost', 'cost.local-budget', 'fail', 'historical-replay', 'latency', 'latency.local-budget', 'pass', 'regression', 'safety', 'safety.policy-gate']

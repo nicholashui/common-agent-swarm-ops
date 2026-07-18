@@ -1,0 +1,27 @@
+{
+  "$id": "agent.schema.json",
+  "title": "Domain Pack Agent",
+  "type": "object",
+  "required": ["agent_id", "status"],
+  "properties": {
+    "agent_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "registered"]
+    },
+    "requires_learning": {
+      "type": "boolean"
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,45 @@
+{
+  "$id": "agent-spec.schema.json",
+  "title": "Data-Only Domain Pack Agent Specification",
+  "type": "object",
+  "required": [
+    "schema_version", "agent_id", "status", "role", "allowed_tools",
+    "model_policy", "budget_policy", "prompt_reference", "rubric_reference",
+    "critique_edges", "max_refinement_count", "production_activation_requested"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "agent_id": {"type": "string", "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"},
+    "status": {"type": "string", "enum": ["draft", "registered"]},
+    "role": {"type": "string", "minLength": 1},
+    "allowed_tools": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "model_policy": {
+      "type": "object", "required": ["provider", "model_id", "network_access"],
+      "properties": {
+        "provider": {"type": "string", "const": "local_deterministic"},
+        "model_id": {"type": "string", "minLength": 1},
+        "network_access": {"type": "boolean", "const": false}
+      }, "additionalProperties": false
+    },
+    "budget_policy": {
+      "type": "object", "required": ["max_input_tokens", "max_output_tokens", "max_tool_requests"],
+      "properties": {
+        "max_input_tokens": {"type": "integer", "minimum": 1},
+        "max_output_tokens": {"type": "integer", "minimum": 1},
+        "max_tool_requests": {"type": "integer", "minimum": 0}
+      }, "additionalProperties": false
+    },
+    "prompt_reference": {"type": "string", "pattern": "^video\\.prompt\\.[a-z0-9._-]+\\.v[0-9]+$"},
+    "rubric_reference": {"type": "string", "pattern": "^video\\.rubric\\.[a-z0-9._-]+\\.v[0-9]+$"},
+    "critique_edges": {
+      "type": "object", "required": ["inputs", "outputs"],
+      "properties": {
+        "inputs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "outputs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }, "additionalProperties": false
+    },
+    "max_refinement_count": {"type": "integer", "minimum": 1, "maximum": 3},
+    "production_activation_requested": {"type": "boolean", "const": false}
+  },
+  "additionalProperties": false
+}

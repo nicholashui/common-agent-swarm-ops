@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\repositories\run_repository.py
+# hypothesis_version: 6.151.12
+
+['business', 'correlation_id', 'created_at', 'dispatch attempt', 'dispatch_attempts', 'engine', 'failure_code', 'graph_id', 'graph_thread_id', 'idempotency_key', 'organization_id', 'output', 'record_id', 'requested_at', 'run', 'run-repository', 'run_id', 'runs', 'runs.json', 'schema_version', 'seed root', 'seeds', 'status', 'updated_at', 'utf-8', 'version']
