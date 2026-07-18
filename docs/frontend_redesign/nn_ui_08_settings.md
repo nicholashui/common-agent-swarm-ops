@@ -1,0 +1,1 @@
+full content of nn_ui_08_settings.md from local artifacts

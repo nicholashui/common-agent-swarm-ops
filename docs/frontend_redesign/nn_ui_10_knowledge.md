@@ -1,0 +1,1 @@
+full content of nn_ui_10_knowledge.md from local artifacts

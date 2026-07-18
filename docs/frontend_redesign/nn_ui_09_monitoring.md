@@ -1,0 +1,1 @@
+full content of nn_ui_09_monitoring.md from local artifacts
