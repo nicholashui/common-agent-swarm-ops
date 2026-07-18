@@ -1,307 +1,423 @@
 # Frontend Redesign for common-agent-swarm-ops
 
-**Version:** 2.1 (Complete UI Inventory Added for Full System Control & Visibility)  
+**Version:** 2.0 (Deep Redesign — Common-First, Ops-Centric, Graph-Native)  
 **Date:** July 18, 2026  
 **Prepared for:** Nicholas (@n1ch01as_ai / nicholashui) – N1ch01as Architect, Moltbot & common agent swarm ecosystem  
-**Repo Alignment:** Fully matched to `common-agent-swarm-ops` (common/reusable agent & swarm pattern primitives + production ops layer).  
-**Research Basis:** 2026 trends (graphs, verification loops, collective improvement), xAI/Grok, your YouTube (Moltbot, templates, AI dev), best of n8n/Langflow/Dify + common patterns from AutoGen/CrewAI/etc.
+**Repo Alignment:** Fully matched to `common-agent-swarm-ops` (common/reusable agent & swarm pattern primitives + production ops layer for swarms built on them).  
+**Research Basis:** Deep rethink incorporating 2026 trends (graphs over simple loops for agent organizations, verification/iteration loops, token-efficient multi-agent patterns from LangGraph/Slate discussions & arXiv multi-agent papers), xAI/Grok capabilities (strong reasoning/meta-critique, tool use), your YouTube content (Moltbot distributed AI agents, template-driven AI dev, AI-driven development workflows), and best features from n8n, Langflow, Dify, Flowise, plus common patterns from AutoGen/CrewAI/MetaGPT/AgentVerse.
 
-**Core Vision (Rethought):** The frontend is the complete control plane and visibility layer for a living ecosystem of **Common Agents** and **Common Swarm Patterns**. It enables users to discover, compose, run, monitor, govern, improve collectively, audit, integrate, and optimize at scale — all while maintaining deep provenance, real-time observability, and safe evolution of the commons.
+**Core Rethink (1000x iterated):**  
+The project is **not** just another workflow builder. It is the **common foundational layer** for agent swarms: standardized, versioned, reusable **Common Agents** and **Common Swarm Patterns** (parallel independent, hierarchical supervisor-worker, debate/consensus, map-reduce, verification-loop, dynamic router graphs, etc.) that anyone can discover, fork, compose, and improve collectively. The frontend makes the "common" layer visible, usable, and improvable while providing world-class **ops** (monitoring fleets of swarms, safe rollouts of common component versions, aggregate eval & self-improvement, shared knowledge contributions, A/B testing, cost governance across usages).  
 
----
+Every agent in a swarm is preferably a linked version from the **Common Registry** (with provenance, usage stats aggregated across all swarms/businesses, eval scores from common harness). Custom agents are possible but encouraged to contribute back. Subworkflows are instantiated from **Common Patterns**. The UI treats the common layer as the source of truth and the ops layer as the control plane.
 
-## 1–7. Core UIs (Already Detailed in Per-Screen Specs)
-
-See the companion files created alongside this document:
-- `nn_ui_01_login.md`
-- `nn_ui_02_dashboard.md` (Common Health + Fleet Ops)
-- `nn_ui_03_swarm_composer.md`
-- `nn_ui_04_canvas.md` (Graph-native + BIG ROWs + live common-linked ops)
-- `nn_ui_05_agent_detail.md`
-- `nn_ui_06_activity.md`
-- `nn_ui_07_registry_hub.md` (Star discovery & governance hub)
-
-These 7 form the foundation for building, running, and improving swarms on the common layer.
+This delivers reusability at scale, collective improvement (your N1ch01as Architect self-refine loops applied to the commons), and production ops that n8n-style tools lack for pure agent swarms, while going deeper on standardization and shared intelligence than Langflow/Dify.
 
 ---
 
-## 8. Complete UI Inventory for Full Control & Visibility
+## 1. Design Principles (Rethought for Common + Ops)
+
+1. **Common Layer First** — Default to reusable, versioned Common Agents & Common Swarm Patterns from central Registry. Custom = fork from common. Every usage feeds back stats/eval/improvement signals to the commons.
+2. **Graph-Native Swarm Organizations** (2026 evolution) — Canvas supports stateful graphs (not just DAGs): dynamic routing (LLM routers), cycles/iteration loops with verifiers, parallelism, hierarchical nesting, consensus/voting nodes. "BIG ROWs" as visual for parallel independent sub-swarms or map-reduce shards.
+3. **Ops as First-Class Citizen** — Dashboard, activity, and monitoring focus on fleet health of swarms + health/impact/rollout of *common components* across fleets. Safe version rollouts, canary/A/B in production swarms, bulk updates with approval gates.
+4. **Collective Self-Improvement** — Every common agent/pattern has aggregate performance (success, tokens, latency, cost, groundedness) from *all* usages. One-click "Propose Improvement to Commons" runs meta-critic (Grok-powered or local) on failures + successes and suggests new version. Training guides/eval rubrics evolve from real runs.
+5. **Standardized Interfaces for Interoperability** — Common Agents expose consistent I/O schemas, tool-calling format (OpenAI-compatible), structured outputs, eval metrics (task success, efficiency, human preference, RAG faithfulness). This enables mixing agents from different creators safely in one swarm.
+6. **Observable & Replayable at Swarm + Common Level** — Trace any run back to the exact common versions used. See "this common agent v1.3 improved after 847 runs across 23 swarms — view diff & rationale".
+7. **Knowledge as Shared Commons Contribution** — Successful/verified outputs or distilled insights from runs can (opt-in) contribute to common knowledge collections. Per-agent RAG + shared commons.
+8. **Production Discipline + Cost as Shared Resource** — Token/cost budgets at common-component, swarm-instance, and business level. Estimates before run. Rollout impact analysis ("updating this common agent to v2.0 will affect 14 active swarms, est. +12% token efficiency").
+9. **Desktop Power + Mobile Ops** — Rich graph canvas + registry exploration on desktop. Mobile/PWA optimized for ops monitoring, approvals, quick replays, health alerts.
+10. **Self-Host + Extensible + Bilingual** — Deep Keycloak integration, pluggable to any backend orchestrator (LangGraph graphs, CrewAI, custom Moltbot-style distributed, your Hermes/OpenClaw, OpenAI Swarm ports). Full 繁體中文 / Cantonese prompt support. Export to standardized common formats (YAML/JSON graph + Python with common lib stubs).
+
+**Color & Visual Language:** Dark-first professional (slate #0f172a). Accent indigo/violet for common/registry items (to distinguish from custom). Status colors consistent. Registry cards have "Common vX.Y • 12.4k runs • 94% success" badges. Graph edges animated for data/state flow; cycles highlighted with iteration count.
+
+---
+
+## 2. Repo Architecture Alignment (How Frontend Maps to common-agent-swarm-ops Backend)
+
+Assume (and recommend) backend services in the repo:
+
+- **Common Registry Service**: CRUD + versioning + semantic search + usage stats + eval aggregates for CommonAgent and CommonSwarmPattern. Forking, contribution workflow (propose → review → merge or auto if tests pass).
+- **Swarm Orchestrator Service**: Executes SwarmInstance from graph definition (supports common patterns as first-class). Handles parallelism, state, dynamic routing, verification loops, human gates. Adapters for different runtimes (local asyncio, distributed Moltbot-style, containerized, LangGraph export).
+- **Ops & Observability Service**: Aggregated metrics across all SwarmInstances and Common components. Health dashboards, alerting, rollout management, A/B testing framework, cost tracking, replay/partial replay engine.
+- **Knowledge Service**: Common collections (contributable from runs) + business/project-scoped. Hybrid search, contribution pipeline (verified outputs → proposed chunks with provenance).
+- **Eval & Improvement Service**: Common harness (standard metrics + rubrics). Meta-critic that analyzes aggregate traces/failures/successes to propose improved CommonAgent versions or Pattern tweaks. Ties directly to your self-refinement loops.
+- **Auth/ Multi-tenancy**: Keycloak realms or workspaces for businesses/projects. Common layer is cross-workspace (with opt-in sharing or org-private commons).
+
+**Frontend Mapping**:
+- Registry Hub ↔ Common Registry Service (search, stats, propose improvement, fork).
+- Canvas + Composer ↔ Orchestrator (build/compose graphs from common patterns/agents, execute, live trace).
+- Dashboard / Activity / Monitoring ↔ Ops Service (fleet view, common component impact, rollouts, A/B).
+- Agent Detail (Ui5) ↔ Registry + Eval Service (usage across swarms, propose to commons, eval results, improvement history).
+- Knowledge panels ↔ Knowledge Service (common contribution toggle, provenance).
+- All history/views show **provenance** (which common version was used at runtime).
+
+This makes the frontend the perfect control plane and discovery layer for the common primitives + ops.
+
+---
+
+## 3. Tech Stack (Same Strong Base, with Common/Graph Focus)
+
+Unchanged core (Next.js 15 + TS + Tailwind + shadcn/ui + React Flow/XYFlow for graphs with groups, parent nodes, custom edges for state vs data, cycles). Add:
+- Strong emphasis on **Registry components** (searchable grid like Hugging Face models or npm, but with agent graph previews, run stats, "usage in live swarms" indicators).
+- Graph enhancements in React Flow: support for cyclic edges (visual loop with iteration badge), dynamic/conditional edges (LLM router node renders as special diamond or cloud icon), sub-swarm nesting (expandable group nodes that can themselves contain patterns).
+- State: TanStack Query for registry data (cache common items aggressively). WebSocket for live swarm runs + ops events (e.g. "common agent vX rollout started affecting 8 swarms").
+- Storybook stories for CommonAgentCard, SwarmPatternPreview, RegistrySearch, RolloutApprovalModal, etc.
+
+Folder structure similar, with added `components/registry/`, `components/ops/`, `lib/common-types.ts` (mirroring backend Pydantic models for CommonAgentSpec, CommonPatternGraph, EvalReport, etc.).
+
+---
+
+## 4. Page-by-Page Design (Ui1–Ui7+ Deeply Rethought for Common + Ops)
+
+### Ui1: Login (Unchanged, but post-login lands in Registry-aware Dashboard)
+
+### Ui2: Dashboard — Now **Common Health + Ops Fleet Overview**
+
+**Header**: Business/workspace switcher + prominent **"Go to Common Registry Hub"** button (or global nav item) + Command Palette (now includes "search common agents", "propose improvement to commons", "start A/B test on common agent X in my swarms", "rollout common pattern v2").
+
+**Main Sections (rethought)**:
+
+- **Common Components Health** (top hero row, live):
+  - Cards or mini stats: "Common Agents in Use: 87 versions across 142 active swarms • Avg success 91.4% (↑ from last week)". "Top Improved This Week: MarketSentimentAgent v2.1 ( +8% token efficiency from 2.3k runs)". Quick links to Registry filtered by "recently improved" or "high impact".
+  - "Pending Improvement Proposals": 3 proposals awaiting review (for org admins or community if shared commons).
+
+- **Your Swarms Fleet Ops**:
+  - Running Swarms: Live cards with overall status, linked common agents count, cost rate, "View Graph" or "Pause Fleet".
+  - Recent Swarm Runs: Table with columns now including "Common Agents Used (versions)", "Deviations from Common Patterns", quick "Replay with current commons" or "Compare to baseline common version".
+  - **Common Impact Insights** (AI-generated from Ops service): "Updating CommonReportAgent to v3.0 would improve 19 of your active swarms by est. 15% latency and save ~$47/mo. Affected swarms: [list]. Safe to rollout? [Approve for my swarms] [A/B test first]".
+
+- **Quick Common Actions**:
+  - "Explore / Search Common Registry"
+  - "Compose New Swarm from Common Patterns"
+  - "Review Improvement Proposals for Commons I'm Using"
+  - "Run Eval Harness on My Custom Agents (contribute back?)"
+
+- **Business-Scoped + Cross-Common Trends**: Charts showing your usage vs global commons trends (anonymized).
+
+This dashboard makes you feel you are operating on top of a living, improving common foundation rather than isolated workflows.
+
+### Ui3: Swarm Composer / Pattern Composer (Deeply Enhanced from Chat Suggester)
+
+**Layout**: Chat on left (or top), **Common Pattern Palette + Preview** on right or bottom.
+
+**Chat (rethought)**: 
+- Specialized prompt: "You are Common Swarm Architect (powered by Grok reasoning). User describes goal in context of [business]. Recommend starting from one or more **Common Swarm Patterns** (e.g. Parallel Independent Research + Verification Loop + Hierarchical Synthesis). Then suggest specific **Common Agents** (or forks) to instantiate in the pattern. Prioritize token efficiency, verifiability, parallelism where independent, collective improvement potential. Output structured: recommended pattern(s) + why, agent slots with rationale + suggested common versions, estimated aggregate metrics, risks & mitigations. Offer to load directly into canvas or propose new common pattern if none fit perfectly."
+- User can say "use Moltbot-style distributed for the data fetchers" or "add verification loop on report quality" or "optimize for low cost like my trading swarms".
+- Streaming, iteration in chat, "Load Recommended Pattern + Agents into Canvas" (pre-populates graph with linked common items + any suggested custom forks).
+
+**Right Panel — Common Pattern Browser**:
+- Horizontal or grid of **Common Swarm Pattern Cards** (visual mini-graph preview using small React Flow or static SVG/Mermaid render of the pattern structure).
+  - Examples: "Parallel Independent Sub-Swarms (BIG ROWs visual)" — for independent data/analysis/synthesis. "Hierarchical Supervisor + Workers". "Debate & Consensus (multi-agent voting)". "Map-Reduce + Verification Loop". "Dynamic Router Graph (stateful, LLM decides next)". "Iterative Refinement with Verifier (your self-refine style)".
+  - Each card: Name, description, when to use, avg metrics from real usages (success, tokens, iterations), "number of swarms using", "last improved", "Instantiate in Canvas", "Fork as Custom Pattern".
+- Search/filter patterns by domain, parallelism level, verification strength, cost tier.
+- "Suggest Custom Pattern from my goal" → meta-agent proposes new common pattern candidate (with graph JSON) for contribution to registry.
+
+This makes composition start from battle-tested, collectively improved common patterns rather than blank canvas or pure NL (though NL still works and maps to patterns).
+
+### Ui4: Visual Swarm Graph Canvas (Graph-Native, Common-Linked, BIG ROWs for Parallel)
+
+**Top Toolbar Enhancements**:
+- Swarm name + linked Common Pattern badge (e.g. "Based on: Parallel Independent + Verification Loop v1.4") with "Update to latest common pattern" or "Fork pattern".
+- "Common Agents Used: 8/12 (4 custom forks)" — click to see list + bulk "Update all to latest safe versions" or "A/B test variants".
+- Run controls + new **"Rollout / A/B in Production"** (for swarms using commons).
+- AI Co-Pilot toolbar: "Optimize for token efficiency (using aggregate commons data)", "Add verification loop where missing", "Suggest dynamic router for this branch", "Propose this entire swarm structure as new Common Pattern".
+
+**Left Palette — Split "Common" vs "Custom"**:
+- **Common Registry Tab** (default, searchable): Drag CommonAgent or CommonPatternFragment. Shows live stats badge ("v2.3 • 94% success • used in 312 swarms"). Hover shows mini eval report. Double-click or drag creates **linked instance** in graph (shows provenance pill "Common v2.3").
+- **Custom / Local Tab**: Ad-hoc agents or forks (clearly visually distinct, e.g. dashed border or different accent). "Contribute this fork back to Commons as vX proposal" action.
+- Categories now include Common Patterns as draggable "macro nodes" that expand into pre-wired sub-graph groups (BIG ROWs or nested structures).
+
+**Main Canvas (React Flow — deeply enhanced for common swarms)**:
+- **Nodes**:
+  - **Common Agent Node** (primary): Icon + name + "Common vX.Y" badge (color coded by health or your usage). Live status summary (when running). Metrics strip (tokens, cost, last eval score). "Open in Registry" or "Propose Improvement" quick actions. Ports for I/O (standardized schema preview on hover/click). When selected, right sidebar shows "This is linked to Common Registry — changes here are local fork unless contributed".
+  - **Custom Agent Node**: Visually distinct (e.g. "Custom Fork of CommonReportAgent v2.1").
+  - **Sub-Swarm / Pattern Group Node** (BIG ROWs realized): Expandable/collapsible container representing a Common Pattern instantiation or parallel independent branch. Header shows pattern name + version + aggregate status. Internal nodes (agents) visible when expanded. Supports nesting (hierarchical swarms). Visual treatment: stronger border or background tint for common patterns. "Update internal common agents to latest" bulk action on group.
+  - Special nodes for patterns: Supervisor (hub with spokes to workers), Router (diamond, dynamic), Verifier (check icon, cycle back edge), Consensus/Vote (multiple inputs → single output with vote viz), Map (fan-out) / Reduce (fan-in).
+- **Edges**: Data flow (solid), State/control flow (dashed or different color), Cycle edges for iteration loops (curved with iteration counter badge when running, e.g. "iter 3/ max 5"). Animated particles for active flow. LLM Router edges can be "suggested by model at runtime".
+- **Interactions**:
+  - Drag from Common Registry → linked node (immutable link unless fork).
+  - Right-click node/group → "Replace with newer Common version", "A/B test alternative common agent here", "View aggregate eval for this common component", "Contribute local changes as improvement proposal".
+  - Multi-select groups of common agents → bulk ops (update, propose improvement, view cross-swarm usage).
+  - Auto-layout with awareness of common patterns (e.g. nice parallel BIG ROWs for independent sub-swarms, radial for supervisor).
+  - Mini-map + search/highlight nodes by common name or status.
+  - Live run mode: Nodes update with real-time status + partial outputs if streaming. Cycle nodes show current iteration + verifier result ("pass" green or "iterate with feedback: ...").
+  - Validation: On save/run, check "all agents linked to common or explicitly forked?", "verification loop present on critical paths?", "token budget respected?", "standard I/O schemas compatible?".
+
+**Right Sidebar (contextual, powerful for common)**:
+- When common node selected: Registry info (description, current eval scores from *all* usages, improvement history with diffs & rationales from meta-critic, "Propose new version based on this swarm's traces"). Quick "Update to latest common" or "Pin this version for this swarm".
+- When group/pattern selected: Pattern details, "Instantiate more parallel shards", "Add verifier to this sub-swarm".
+- Workflow-level: Linked common pattern info, "Contribute this composed swarm as new Common Pattern candidate", global cost/token budget, orchestration mode (enforce common pattern rules or allow deviations).
+
+This canvas makes building with commons delightful and makes contributing back frictionless. The "BIG ROWs" for parallel independent subworkflows are a natural visual outcome of instantiating common parallel patterns.
+
+### Ui5: Common Agent / Instance Detail (Now Registry-Centric with Cross-Swarm Ops)
+
+When you click a (common) agent node or from Registry:
+
+**Header**: Common Agent name + current version badge + aggregate stats (total runs across all swarms, global success %, avg tokens/cost, improvement velocity). Quick actions: "Propose Improvement to Commons", "A/B Test this version vs newer in my swarms", "Fork to Custom", "View All Usage Across Swarms".
+
+**Tabs (refined to  your 4 + ops additions)**:
+
+**Tab 1: Instance History + Cross-Swarm Usage**  
+- Filters now include "This Swarm only" vs "All Swarms using this Common Agent (vX.Y or all versions)".  
+- Table shows provenance (which SwarmInstance + business).  
+- New "Impact" column or section: how this agent's performance affects downstream in various patterns.  
+- "Replay using latest common version" vs "replay pinned version".
+
+**Tab 2: Configuration / Spec (Common Versioned)**  
+- Form shows the **Common Spec** (standardized fields: role, goals, system prompt with variables, tools (standard schema), model prefs, memory config, RAG attachments (common or mixed), output schema, guardrails, eval rubric (common metrics + custom)).  
+- Version history with diffs (visual or side-by-side). "This change improved token efficiency +7% across 1.8k runs — rationale from meta-critic: ...".  
+- "Edit & Propose as vNext to Commons" (creates proposal with this swarm's traces attached for context). Admin/review flow for merge.  
+- User Guide & Training Guide: Markdown, auto-suggested improvements from real failures/successes. "Regenerate from aggregate traces".
+
+**Tab 3: Playground (Now with Common Context + Eval)**  
+- Chat/test interface same polish.  
+- New toggles: "Test against Common Eval Harness" (runs standard metrics + rubric, shows scores), "Simulate in Common Pattern context" (injects typical upstream from the pattern this agent is usually used in).  
+- "Compare to other versions of this Common Agent" side-by-side or batch.  
+- After test: "This run's output qualifies as high-quality — contribute distilled insight to Common Knowledge?" toggle.
+
+**Tab 4: Backed Knowledge + Common Contribution**  
+- Per-agent RAG same as before.  
+- New "Common Knowledge Subscriptions": which shared collections this common agent draws from + contribution stats (how much this agent/version has added to commons via verified runs).  
+- "Propose new common knowledge chunk from successful runs" (with provenance & verification).
+
+**New Tab or Section: Ops & Rollout (for common agents)**  
+- Where used: List of active SwarmInstances + businesses using this exact version. Health indicators.  
+- Rollout controls: "Safe rollout to all my swarms" (with impact analysis: expected metric changes, affected count). Canary options, A/B test setup (split traffic or specific swarms to new version). Approval workflow if shared commons.  
+- Deprecation warnings, migration helpers for breaking spec changes.
+
+This tab set turns every common agent into a living, collectively improved asset with full ops visibility.
+
+### Ui6: Big Activity History & Ops Intelligence (Fleet + Common Component View)
+
+**Header + Filters**: Date, business, swarm, **Common Agent / Pattern filter** (multi-select from registry), status, "Only show runs using outdated common versions", search.
+
+**Views**:
+
+**A. Subworkflow / Pattern Column Board (your original request, enhanced)**: Columns per instantiated Common Pattern or major sub-swarm phase. Cards now show which common agent versions were active, any deviations/forks, and quick "Update commons in this run's pattern" or "View common component health".
+
+**B. Detailed Table**: Added columns "Common Agents (versions)", "Pattern Deviations", "Contributed to Commons? (knowledge/eval signals)".
+
+**C. Timeline/Gantt per SwarmInstance or aggregated across commons**: Shows execution with common version labels on bars. Useful for seeing impact of version changes over time.
+
+**Insights Panel (rethought as Ops Intelligence)**:
+- "Common Component Health Trends": Which common agents/patterns are improving or degrading globally or in your usage.
+- "Rollout Opportunities": "CommonVerifierAgent v1.8 shows +12% verification pass rate. Safe to rollout to  your  swarms using older versions?"
+- "Collective Improvement Impact": "Your contributions + usage data helped improve 4 common agents this month, saving est. X tokens across the ecosystem."
+- Anomaly detection tied to common versions (e.g. "After v2.1 rollout, error rate on ReportAgent increased in 3 swarms — investigate or rollback?").
+- Bulk actions: Select runs or affected by specific common version → bulk replay with updated commons, bulk contribute signals, create improvement proposal.
+
+**My Rethought Addition**: "Common Version Timeline" view — for a specific CommonAgent, horizontal timeline of its versions with key metrics at each version (success, tokens) and "what changed / why proposed" from meta-critic. Click version → see which swarms benefited.
+
+This page becomes the command center for both individual swarm debugging *and* steering the commons.
+
+### Ui7+: Additional UIs (Common Registry Hub as Star Feature, Ops Rollouts, Eval Dashboard)
+
+**New/Enhanced: /registry — Common Registry Hub (Discovery + Contribution + Governance)**  
+This is the heart of "common-agent-swarm-ops" frontend. Prominent nav item.
+
+- **Search & Discovery**: Powerful semantic + facet search (domain tags, success rate >X, token efficiency tier, last improved, compatibility with patterns, "used in my active swarms", "has verification support"). Results as rich cards or table.
+  - Card: Icon/name/version, short desc, key aggregate metrics (success, avg tokens/cost/latency, improvement trend sparkline), usage count (global + your swarms), "last improved by meta-critic: [rationale snippet]", badges (e.g. "High Verification", "Parallel Optimized", "Moltbot Compatible"). Actions: "Add to Swarm / Instantiate", "Fork & Customize", "Propose Improvement" (even without using), "View Full Eval Report & History", "Preview in Mini Graph".
+- **Categories & Curated Collections**: "Core Patterns" (parallel, hierarchical, verification loop, debate), "Domain Specialists" (Trading Analyst, Content Director for wuxia/anime/YouTube, DSE ICT Tutor, Legacy Code Modernizer, Distributed Data Fetcher for Moltbot-style), "Experimental / Community".
+- **My Contributions / Forks**: Section for your custom forks and proposals.
+- **Governance (for maintainers/admins)**: Pending proposals queue with diff viewer, attached traces from proposing swarm, meta-critic rationale, one-click approve/merge (runs common eval harness automatically), or request changes. Impact analysis ("merging this will affect X active swarms globally").
+- **Stats Dashboard for Registry**: Total commons, improvement velocity, top contributors (anonymized or credited), token/cost savings realized by using commons vs custom, etc.
+
+**/ops or enhanced Monitoring**: Dedicated fleet ops view with rollout management UI (canary, A/B, approval gates, post-rollout monitoring with auto-rollback triggers based on common eval metrics). "Swarm Blueprints" (saved common pattern + agent version combinations that are known-good).
+
+**/eval — Common Eval & Improvement Dashboard**: Overview of harness results across commons. Propose/ review improvements in bulk. "Self-Improvement Campaigns" (meta-agent scans underperforming commons and auto-generates proposals for review).
+
+**Other Enhancements**:
+- Settings: Common Registry sync preferences, contribution defaults (auto-propose knowledge? require human review for agent improvements?), A/B testing defaults, common version pinning policy per business ("always latest safe" vs "pin until I approve").
+- Templates Gallery → now "Common Patterns & Swarm Blueprints Gallery" with the rich previews and one-click instantiate + customize.
+- Knowledge: Explicit "Contribute to Commons" flow with verification step (run through eval harness or human review).
+
+---
+
+## 5. Key Interactions & Polish (Common & Ops Focused)
+
+- **Command Palette Evolution**: Even more powerful — "update all my swarms to latest safe common agents", "find common patterns good for verification-heavy tasks", "show me swarms where CommonReportAgent underperforms and suggest fixes", "contribute last successful run's insights to commons".
+- **Provenance & Lineage Everywhere**: Hover or click any common reference → shows version, when linked, aggregate impact, improvement history link.
+- **Safe Evolution of Commons**: Changes to common specs are versioned. Breaking changes trigger migration helpers or deprecation warnings in affected swarms. Rollouts are deliberate ops actions, not silent.
+- **Collective Intelligence UI**: "This improvement to CommonMarketPredictor came from analysis of 4,200 runs across 67 swarms (including 12 of yours). Key insight: added X verification step reduced hallucinations by Y%."
+- **Mobile Ops**: Push notifications for rollout approvals, common agent health degradation, high-cost anomalies. Quick approve/reject or "view impact".
+- **Export/Portability**: Export swarm graph as standardized Common Swarm Definition (JSON/YAML with common version pins). Generate Python code using the common-agent-swarm-ops library (adapters for different backends). Import from other tools with mapping to closest common patterns/agents.
+- **Onboarding**: Tour emphasizes "Start by exploring the Common Registry — these are battle-tested building blocks improved by the community/your usage."
+
+---
+
+## 6. Data Models (Key Common Entities — Align with Backend)
+
+- **CommonAgent**: id, version, spec (standardized: role, prompts, tools schema, model_config, memory, RAG refs to common collections, output_schema, guardrails, eval_rubric), stats (global_runs, success_rate, avg_tokens, improvement_history[] with meta_critic_rationale, traces_sample), created_by, status (active/deprecated).
+- **CommonSwarmPattern**: id, version, graph_template (nodes/edges with placeholders for common agents or slots), description, when_to_use, metrics, compatible_agents (constraints), usage_stats.
+- **SwarmInstance**: id, business_id, linked_pattern (common_pattern_id + version), graph (instantiated with specific common_agent versions or custom forks), status, metrics, provenance_log.
+- **AgentExecution / Run**: ... + common_agent_version_used, contribution_signals (to eval/knowledge).
+- **ImprovementProposal**: from_user_or_meta, target_common_id, proposed_spec_diff, supporting_traces (from specific runs), meta_critic_analysis, status (proposed/review/merged/rejected), impact_analysis.
+
+These enable the rich cross-references and ops features.
+
+---
+
+## 7. Implementation Phasing (Common-First Priority)
+
+**Phase 1 (MVP for common-agent-swarm-ops identity)**: Login + Dashboard (common health + fleet), Common Registry Hub (search, cards, basic stats, instantiate), basic Canvas with linked Common Agent nodes + simple groups (BIG ROWs for parallel), basic Agent Detail (history + config + playground, propose improvement stub), Activity with common version filters. WebSocket live status. Seed with 5–10 core Common Patterns and example Common Agents (trading, content, tutor, verifier, supervisor, etc.).
+
+**Phase 2**: Full graph features (cycles, routers, verification loops, dynamic), cross-swarm usage in Ui5/Ui6, Ops rollout/A/B UI, aggregate insights in dashboard/activity, Common Eval harness integration in playground, knowledge contribution flows. Polish Registry (proposals, diffs, governance).
+
+**Phase 3**: Advanced self-improvement (meta-critic deeply integrated, auto-proposals from aggregate data), A/B and canary at scale, mobile PWA ops views, full i18n + Cantonese examples, export to common lib code, deeper Moltbot/distributed runtime support in canvas/ops, community/shared commons mode.
+
+**Phase 4**: Ecosystem (public registry contributions if desired, integration marketplace for tools/nodes, advanced tracing/visualizations, cost governance campaigns).
+
+---
+
+## 8. Why This Deep Redesign Wins for common-agent-swarm-ops
+
+- **Matches Repo Name & Intent**: "Common" is not an afterthought — it's the core value prop and visible in every major screen (Registry Hub, linked nodes, cross-swarm stats, collective improvement, provenance).
+- **Ops Reality**: Production users don't just build once; they run fleets, update components safely, measure aggregate impact, and benefit from collective learning. This UI delivers that.
+- **2026 Agent Trends + Your Vision**: Graphs + verification/iteration loops (beyond simple chains), self-refinement applied at commons scale (N1ch01as Architect at ecosystem level), distributed/Moltbot inspiration in patterns and ops, strong HK/creative/trading/education templates.
+- **Differentiators vs n8n/Langflow/Dify**: Deeper standardization + reusability (like a "Hugging Face for Agent Swarms" + "npm for patterns"), built-in collective improvement loops, ops/control plane for common components across swarms (rollouts, A/B, impact), graph-native for modern agent organizations.
+- **Extensible & Future-Proof**: Adapters for any backend/runtime, exportable standards, contribution workflows that grow the commons.
+
+This version has been rethought extensively for coherence with the repo name, your broader work (Moltbot, templates, self-refining agents, large knowledge corpora, bilingual content), and the evolving multi-agent landscape. It positions **common-agent-swarm-ops** as the go-to self-hosted/common foundation for serious, improvable, observable agent swarm operations.
+
+---
+
+**Next Steps Recommendation**:  
+Review this v2.1 against your actual repo structure/code (backend models, existing agents/patterns, Moltbot details). I can then:
+- Generate specific code (e.g. RegistrySearch component, CommonAgentNode in React Flow, proposal diff viewer).
+- Create visual mockups of the Registry Hub or canvas with common linked nodes + BIG ROW parallel groups.
+- Refine data models or add exact TypeScript interfaces matching your backend.
+- Seed example Common Patterns/Agents based on your YouTube/videos or specific needs (trading swarm, DSE tutor with verification, content pipeline with verification loop, etc.).
+- Create the additional `nn_ui_XX_*.md` spec files for UIs 08–20.
+- Iterate further on any section.
+
+The file is ready in `/home/workdir/artifacts/frontend_redesign.md`. This is a living spec — let's make common-agent-swarm-ops exceptional. What would you like to tackle first?
+
+---
+
+## Complete UI Inventory for Full Control & Visibility (Added in v2.1)
 
 To ensure users can **fully control and view every aspect** of the system (commons governance, fleet operations, knowledge, evaluation, costs, security, integrations, auditing, collaboration, and extensibility), the following additional UIs are required. They close all gaps for production use, self-hosting, and collective improvement at scale.
 
-Each is described with purpose, key capabilities, layout highlights, data needs, and how it ties into the common + ops vision. These should be implemented as dedicated routes/pages (or advanced drawers/modals where appropriate) with consistent design system (shadcn, React Flow where visual, real-time WS, TanStack Query, bilingual support).
-
 ### Ui8: Global Settings & Configuration (`/settings`)
-**Purpose:** Central control for all backend integrations, policies, and defaults so users can fully configure the platform to their infrastructure and governance needs.
+**Purpose:** Central control for all backend integrations, policies, and defaults.
 
-**Key Capabilities:**
-- LLM Providers & Models: Add/edit/test connections (xAI/Grok, DeepSeek, Ollama, vLLM, OpenAI-compatible, etc.). Model tier defaults (fast/cheap vs reasoning). Rate limits, fallbacks.
-- Credentials & Secrets Vault: Secure storage (encrypted) for API keys, DB creds, trading exchange keys, YouTube/Remotion, Strapi, Jenkins, ESP32, etc. Scoped to business or global. Audit of access. Never plaintext after save.
-- Integrations: Manage Slack/Discord/Telegram (notifs + agent tools), Email, Webhooks, Git (knowledge sync), external vector DBs, hardware fleets. OAuth where possible + health checks.
-- Policies & Defaults: Global retry/timeout/cost caps, logging verbosity, human-approval matrix for high-impact actions (trading exec, code changes, external API calls). Common version pinning policy ("always latest safe" vs manual approve). Data retention for history/logs.
-- Workflow/Swarm Defaults: Default common knowledge collections, notification channels on complete/fail/cost threshold, orchestration mode preferences.
-- UI Preferences: Theme (dark default), language (EN/繁體中文), canvas snap/grid defaults, notification prefs, keyboard shortcuts help, feature flags (live collab, advanced tracing).
-- Business/Workspace Management: Create/edit workspaces, member invites/roles (Owner, Editor, Runner, Viewer), access control to commons vs private.
+**Key Capabilities:** LLM Providers & Models configuration + testing; encrypted Credentials & Secrets Vault (scoped, audited); Integrations management (Slack, Git, Strapi, trading APIs, hardware, webhooks) with health checks; Policies & Defaults (retry, cost caps, human-approval matrix, common version pinning); Workflow defaults; UI Preferences (theme, language, canvas); Business/Workspace & role management (via Keycloak).
 
-**Layout:** Tabbed or accordion sections (Providers, Secrets, Integrations, Policies, Defaults, UI, Workspaces). Forms with validation + test buttons. Secrets never shown after save (reveal on explicit action with audit log). Impact warnings when changing policies that affect running swarms.
+**Layout:** Tabbed sections with forms, test buttons, impact warnings. Secrets never plaintext.
 
-**Data:** Strong integration with Keycloak for users/roles. Backend secrets manager (e.g., Vault or encrypted DB). Real-time health checks on integrations.
-
-**Full Control Enabled:** Users can lock down the system, connect all their existing tools (your stack: FastAPI, Strapi, OpenWebUI, Jenkins, trading APIs, hardware), set safety guardrails, and customize defaults for their HK/creative/trading/education workflows.
+**Full Control:** Users lock down the system, connect their full stack (FastAPI, Strapi, OpenWebUI, Jenkins, trading, ESP32), set safety guardrails, and customize for HK/creative/trading/education workflows.
 
 ### Ui9: Advanced Monitoring, Tracing & Alerts (`/monitoring`)
-**Purpose:** Deep observability and alerting so users can fully view system health, performance bottlenecks, distributed traces, and set proactive controls.
+**Purpose:** Deep observability for fleet health, performance, and proactive control.
 
-**Key Capabilities:**
-- Real-time Fleet Dashboard: Live running swarms (mini canvas thumbnails or status), resource usage (if containerized: CPU/mem/queue), LLM-specific (tokens/sec, rate limit queues).
-- Distributed Tracing Explorer: Tree view (like LangSmith/Phoenix/Jaeger) for any run — every LLM call, tool call, agent step, verifier iteration, with timings, tokens, errors, common version used. Clickable to nn_ui_05 or canvas. Search/filter traces.
-- Alerts & Notifications Center: Rule builder (e.g., "if CommonReportAgent success < 90% last hour or cost > $X → Slack #alerts + email + pause affected swarms"). History of fired alerts. One-click actions (rollback, investigate).
-- Metrics Explorer: Custom queries on executions (p95 latency per common agent/version, cost by business/pattern, error rate after version change). Export to Prometheus/Grafana or built-in dashboards. Heatmaps, histograms.
-- Anomaly Detection: Auto or rule-based detection of version-related issues, cost spikes, latency regressions tied to specific common changes.
-- Resource & Cost Governance: Token burn rate, projected monthly cost, budget alerts per business/common component. "What-if" simulator for common version updates.
+**Key Capabilities:** Real-time fleet dashboard; Distributed Tracing Explorer (tree + timeline, clickable to agent/canvas, common version labeled); Alerts rule builder + history + one-click actions; Metrics explorer with custom queries & export; Anomaly detection tied to common versions; Cost/resource governance with what-if simulators.
 
-**Layout:** Dashboard with live cards + tabs (Traces, Alerts, Metrics, Anomalies). Tracing view is expandable tree + timeline. Alert rules in table with create/edit modal (condition builder + action selector).
+**Layout:** Live cards + tabs (Traces, Alerts, Metrics). Expandable tree for traces. Rule builder modal.
 
-**Data:** OpenTelemetry or custom tracing from orchestrator. WS for live metrics. Efficient time-series storage (ClickHouse or Postgres + Timescale).
-
-**Full Visibility Enabled:** Users can see exactly what every common agent and swarm is doing at any moment, trace issues to specific versions or patterns, and set automated controls — essential for production fleets and safe commons evolution.
+**Full Visibility:** See exactly what every common agent and swarm is doing, trace issues to versions/patterns, set automated controls for production fleets.
 
 ### Ui10: Knowledge Management Hub (`/knowledge`)
-**Purpose:** Full control and visibility over all knowledge (common + scoped) that powers RAG agents, with easy contribution from verified swarm runs.
+**Purpose:** Full control over all knowledge (common + scoped) powering RAG, with easy verified contribution.
 
-**Key Capabilities:**
-- Global + Common Collections Browser: Cards or table of collections/namespaces (per business or shared commons). Stats (chunks, last sync, usage by agents, contribution volume). Health indicators.
-- Per-Collection Deep View: Sources list (MD, PDF, web, Git, Strapi, manual), chunking strategy config, metadata, reindex controls. Search test with filters (hybrid, metadata, score threshold). Relevance feedback.
-- Contribution Pipeline: From successful/verified runs (nn_ui_05 playground or activity) → "Contribute distilled insight / verified output to Common Knowledge" with provenance, auto or human review step, deduping.
-- Sync & Ingestion: Git folder/repo sync (perfect for your ~52k–60k MD corpora), URL crawl, Strapi/CMS connector, bulk upload with AI classification/tagging. Scheduled jobs management.
-- Advanced RAG Controls: Chunking strategies (recursive, semantic, agentic), embedding model choice per collection, hybrid search, reranker, graph RAG extraction (entities/relations viz if supported). Usage analytics (which agents query what, common failure queries → improvement suggestions).
-- Knowledge Graph Viz (optional advanced): Force-directed or hierarchical view of extracted entities/relations across collections. Click entity → "Which common agents use this?" or "Run targeted query".
+**Key Capabilities:** Collections browser (stats, health); Per-collection sources, search test, chunking config, reindex; Contribution pipeline from verified runs (provenance, review step); Git/Strapi/URL/bulk upload sync (ideal for large MD corpora); Advanced RAG controls (hybrid, reranker, graph extraction); Optional knowledge graph viz.
 
-**Layout:** Hub with search + filters. Collection cards → detail drawer/page with tabs (Sources, Search Test, Config, Contribution History, Analytics).
+**Layout:** Hub with cards → detail drawer (Sources, Test, Config, Contribution, Analytics).
 
-**Data:** Vector DB (Qdrant/Pinecone/Weaviate/Chroma) + metadata store. Contribution workflow state machine. Graph DB optional (Neo4j or simple).
-
-**Full Control Enabled:** Users can manage the "brain" of all agents (your large MD corpora, trading strategies, DSE materials, legacy docs, creative lore), ensure high-quality RAG via testing/contribution loops, and grow the shared commons knowledge layer.
+**Full Control:** Manage the "brain" of agents, ensure high-quality RAG via testing/contribution loops, grow shared commons knowledge.
 
 ### Ui11: Eval & Self-Improvement Dashboard (`/eval`)
-**Purpose:** Visibility into collective performance of commons + tools to run improvement campaigns and review proposals at scale — closing the self-refinement loop for the entire ecosystem.
+**Purpose:** Visibility into collective commons performance + tools for systematic improvement campaigns.
 
-**Key Capabilities:**
-- Harness Results Overview: Aggregate scores across Common Agents/Patterns (task success, token efficiency, latency, groundedness, human preference, verifier pass rate). Trends and regressions after version changes.
-- Proposal Campaigns: "Run batch eval on selected/underperforming commons" → generates improvement proposals automatically (meta-critic powered). Review queue with impact estimates.
-- Improvement History & Impact: Timeline of merged proposals with before/after metrics (global and per-business). "Your runs contributed to X improvements".
-- Custom Eval Rubrics: Create/edit rubrics (for domain-specific like trading P&L simulation, content quality, tutor assessment accuracy). Apply to agents or patterns.
-- A/B & Canary Results: Dedicated view of ongoing/ past experiments with statistical significance, winner recommendation, auto-promote or rollback.
-- Meta-Critic Insights: Top failure modes across commons, suggested common pattern tweaks, token waste hotspots.
+**Key Capabilities:** Aggregate harness scores & trends across commons; Proposal campaigns (batch eval → auto proposals); Improvement history with before/after metrics & impact; Custom rubrics; A/B & canary results with stats; Meta-critic insights (failure modes, optimization hotspots).
 
-**Layout:** Dashboard with scorecards + charts. Proposal queue (table with diff links, approve buttons). Campaign launcher (select commons → run harness → generate proposals). History timeline with metric deltas.
+**Layout:** Scorecards + charts; Proposal queue; Campaign launcher; Timeline with deltas.
 
-**Data:** Eval results stored with run provenance. Meta-critic endpoint that can analyze aggregate traces. A/B framework in orchestrator.
+**Full Control:** Systematically measure and improve the entire common layer using real usage data.
 
-**Full Control Enabled:** Users (and the system) can systematically measure, improve, and govern the quality of the entire common layer — turning usage data into better agents and patterns for everyone.
+### Ui12: Notifications Center (`/notifications`)
+**Purpose:** Actionable, centralized alerts and updates hub.
 
-### Ui12: Notifications Center (`/notifications` or advanced drawer)
-**Purpose:** Centralized, actionable alert and update hub so users never miss critical ops events, improvement opportunities, or governance tasks.
+**Key Capabilities:** Unified inbox (swarm events, common updates, proposals, cost/alerts); Smart grouping & priority; One-click actions (deep links to canvas/approval); Preferences & delivery (in-app, email, Slack/Telegram, PWA push); Full history & search.
 
-**Key Capabilities:**
-- Unified Inbox: Swarm complete/fail, cost thresholds, common version updates available, new proposals affecting your swarms, rollout impacts, integration health issues, eval regressions.
-- Smart Grouping & Priority: Group by swarm/business/common component. Priority scoring (high-impact commons changes first).
-- One-Click Actions: From notification → open canvas with context, approve rollout, review proposal, replay with latest commons, contribute signals.
-- Preferences: Per-type, per-business, delivery (in-app, email, Slack/Telegram/Discord, push for PWA). Quiet hours, digest mode.
-- History & Search: Full searchable log of all notifications.
+**Layout:** List/kanban with filters & rich actionable cards. Global bell badge.
 
-**Layout:** Clean list or kanban (To Do / In Progress / Done) with filters. Rich notifications with embedded actions or deep links. Badge count on global header bell (already in dashboard/header).
-
-**Data:** Notification service (triggered by orchestrator, registry, eval, etc.). User preference store. Read/unread + action-taken state.
-
-**Full Control Enabled:** Users stay on top of the living system without constant manual checking — critical for production ops and active commons participation.
+**Full Control:** Stay on top of the living system without manual checking.
 
 ### Ui13: User Profile & Preferences (`/profile`)
-**Purpose:** Personal control center for identity, usage insights, API access, and preferences.
+**Purpose:** Personal control, usage insights, and programmatic access.
 
-**Key Capabilities:**
-- Account & Security: Profile info, password/magic link management, connected SSO (Keycloak, Google, GitHub), API tokens (create/revoke for programmatic swarm runs, with scopes).
-- Usage Dashboard (Personal): Your swarms run count, cost, contribution impact (improvements helped, knowledge contributed), favorite commons, recent activity.
-- Preferences: Language, theme, default business/workspace, notification settings (detailed), canvas defaults, demo mode controls.
-- API & Integration Tokens: Manage personal access tokens with fine-grained permissions (run specific swarms, read registry, propose improvements). Usage logs.
-- Contribution Stats & Badges (light gamification): "Top contributor in Trading domain this month", impact numbers.
+**Key Capabilities:** Account/security + connected SSO; Personal usage & contribution impact dashboard; Preferences (language, theme, defaults); API token management (scoped, usage logs); Contribution stats & light gamification.
 
-**Layout:** Clean profile page with sections/tabs. Token management with copy + revoke. Personal impact cards with sparklines.
+**Layout:** Clean sections with token manager and impact cards.
 
-**Data:** User model + preferences in backend/Keycloak. Usage aggregation queries. Token service.
-
-**Full Control Enabled:** Users manage their identity, programmatic access (for Jenkins, scripts, trading bots, etc.), and see their personal value from participating in the commons.
+**Full Control:** Manage identity, automation access (Jenkins, scripts, bots), and see personal value from commons participation.
 
 ### Ui14: Audit Logs & Compliance (`/audit`)
-**Purpose:** Complete visibility and exportable record of all actions for security, compliance, debugging, and governance.
+**Purpose:** Complete, exportable record for security, compliance, debugging, governance.
 
-**Key Capabilities:**
-- Immutable Log: All config changes (commons, policies, integrations), swarm runs (who, what inputs/outputs at high level, common versions used), secret access, proposal/merge actions, rollout decisions, knowledge contributions.
-- Powerful Filters & Search: By user, business, common agent/version, action type, date, success/failure. Export to CSV/JSON/Parquet for external SIEM or analysis.
-- Detail View: Expandable entries with before/after diffs (for config changes), linked traces or swarm IDs.
-- Compliance Reports: Pre-built or custom (e.g., "All changes to trading-related commons last 90 days", "Who ran high-cost swarms").
+**Key Capabilities:** Immutable log of all actions (config changes, runs with common versions, secret access, proposals, rollouts, contributions); Powerful filters/search/export (CSV/JSON/Parquet); Detail with diffs & context links; Pre-built compliance reports.
 
-**Layout:** Dense table (virtualized) with expandable rows. Filters sidebar or top bar. Export buttons. Detail modal with rich diff + context links (to canvas or agent detail).
+**Layout:** Virtualized table with expandable rows, filters, export, detail modal with rich diffs.
 
-**Data:** Append-only audit log table (or service like immutable ledger). Efficient indexing for search/export.
-
-**Full Control Enabled:** Full transparency and accountability — essential for production, shared commons governance, regulated domains (trading, education data), and debugging complex swarm behaviors.
+**Full Control:** Full transparency and accountability for production, shared commons, regulated domains, and complex debugging.
 
 ### Ui15: API & Developer Portal (`/api` or `/developers`)
-**Purpose:** Programmatic control and extensibility so power users and scripts can fully automate and integrate with the platform.
+**Purpose:** Programmatic control, automation, and extensibility.
 
-**Key Capabilities:**
-- Interactive API Docs: Auto-generated from OpenAPI (Swagger UI or similar) for all endpoints (registry, swarms, activity, eval, proposals, etc.). Try-it-out with auth.
-- SDK / Client Snippets: Generate curl, Python (with common lib), TypeScript, etc. for common actions (run swarm from pattern, update common version, propose improvement).
-- Personal Access Tokens Management (link to profile): Create with scopes, usage dashboard, revocation.
-- Webhook Management: Configure outgoing webhooks for events (swarm complete, common updated, alert fired) with secret signing + retry.
-- Extensibility: Docs for custom node/tool development, adapter for new runtimes (Moltbot distributed, new LLM providers), contribution guidelines for new Common Patterns/Agents.
-- Rate Limits & Quotas: Visibility into current usage vs limits.
+**Key Capabilities:** Interactive OpenAPI docs (try-it-out); SDK/client snippets (curl, Python common-lib, TS); Personal access token management (scoped); Webhook configuration + logs; Extensibility docs (custom nodes, adapters, contribution guidelines); Rate limit visibility.
 
-**Layout:** Clean portal with docs explorer, code samples, token manager, webhook config. "Quick start" guides for common integrations (Jenkins pipeline, trading bot, content pipeline script).
+**Layout:** Clean portal with docs explorer, code samples, token/webhook managers, quick-start guides.
 
-**Data:** OpenAPI spec from backend. Token service. Webhook delivery logs.
+**Full Control:** Treat the entire common + ops system as code (CI/CD, scripts, bots) while respecting governance.
 
-**Full Control Enabled:** Developers and automation scripts can treat the entire common + ops system as code — run swarms from CI/CD, sync commons, react to events, extend with custom tools/nodes — while staying within governance guardrails.
+### Ui16: Onboarding, Help & Documentation (`/onboarding` or contextual)
+**Purpose:** Fast adoption and proficiency with the common layer.
 
-### Ui16: Onboarding, Help & Documentation (`/onboarding` or contextual help)
-**Purpose:** Lower barrier to full adoption and ensure users quickly understand how to control and benefit from the common layer.
+**Key Capabilities:** Interactive product tour; Contextual help ("?" + AI chat or your YouTube videos, bilingual); Searchable docs hub (concepts, patterns with visuals, governance, API, troubleshooting); Sample guided projects; Contribution & feedback forms.
 
-**Key Capabilities:**
-- Interactive Product Tour: Step-by-step (first login → explore Registry → compose first swarm from common pattern → run with live view → review improvement proposal).
-- Contextual Help: "?" icons everywhere that open relevant docs or short video (your YouTube content, Cantonese + English). AI help chat ("How do I safely rollout a new common agent version?").
-- Documentation Hub: Searchable docs (concepts, common patterns explained with visuals, governance model, contribution guide, API reference, troubleshooting). Bilingual.
-- Sample Projects: Preloaded demo swarms with guided walkthroughs (Trading Intel with verification, Content Pipeline, DSE Tutor).
-- Community / Feedback: Links to GitHub discussions, "Request new common pattern" form, "Report issue with commons" that creates proposal.
+**Layout:** Onboarding flow + persistent help center + in-app tours.
 
-**Layout:** Dedicated onboarding flow (modal or page) + persistent help center. In-app guided tours using libraries like Shepherd.js or custom.
-
-**Data:** Docs as MD/MDX or CMS (Strapi friendly). Tour state per user.
-
-**Full Control Enabled:** New and returning users quickly become proficient at using, governing, and contributing to the system — accelerating collective improvement.
+**Full Control:** Users quickly master building, governing, and contributing to the system.
 
 ### Ui17: Mobile / PWA Companion Views
-**Purpose:** On-the-go visibility and control for ops without full desktop canvas editing.
+**Purpose:** On-the-go visibility and control.
 
-**Key Capabilities (Read-heavy, action-light):**
-- Dashboard summary (common health, running swarms count, critical alerts).
-- Activity feed (recent runs, filterable, quick replay or "update to latest commons").
-- Notifications center with actions.
-- Registry search + quick "add to my favorites" or "propose improvement".
-- Agent detail (history, playground limited, ops status).
-- Approval flows (rollouts, proposals) with impact summary.
-- PWA installable, push notifications for critical events, offline cache for recent activity.
+**Key Capabilities (read-heavy):** Dashboard summary, activity feed with quick replay/update-to-latest, notifications with actions, Registry search + quick actions, Agent detail (history/ops), Approval flows with impact summary. PWA install, push notifications, offline cache.
 
-**Layout:** Responsive or dedicated mobile-optimized views (simplified cards, bottom nav, large tap targets). Avoid complex canvas editing on small screens (link to desktop or read-only mini graph).
+**Layout:** Responsive or dedicated simplified views (cards, bottom nav, large targets). Read-only mini graphs.
 
-**Tech:** Next.js PWA (service worker, manifest), responsive Tailwind, touch-friendly components.
+**Full Control:** Monitor and act from phone/tablet (important for mobile ops culture).
 
-**Full Control Enabled:** Users can monitor and act on the live system from phone/tablet (important for HK mobile-first culture and on-call ops).
+### Ui18: Collaboration, Sharing & Multi-User (Phase 2+)
+**Purpose:** Team and cross-business work on swarms/commons.
 
-### Ui18: Collaboration, Sharing & Multi-User Features (Future/Optional)
-**Purpose:** Team and cross-business collaboration on swarms and commons.
+**Key Capabilities:** Share links (view/edit perms), embed read-only views; Real-time canvas collab (cursors, CRDT); Comments/mentions; Team workspaces & roles; Proposal review workflows; Opt-in public/community commons publishing.
 
-**Key Capabilities:**
-- Sharing: Share swarm links (view or edit permissions), embed read-only canvas or activity.
-- Real-time Collaboration: On canvas (multiple cursors, conflict-free via Yjs/CRDT — later phase). Comments/mentions on nodes or proposals.
-- Team Workspaces: Role-based access, shared favorites/commons views.
-- Proposal Review Workflows: Assignment, discussion threads, approval chains for team/official.
-- Public / Community Mode (opt-in): Publish anonymized or credited common patterns/agents for wider ecosystem.
+**Layout:** Sharing modals, presence avatars, comment sidebar, team widgets.
 
-**Layout:** Sharing modals, presence avatars on canvas, comment sidebar, team dashboard widgets.
+**Full Control:** Teams collaborate without losing individual control or auditability.
 
-**Data:** Permissions model, real-time sync (Yjs + backend), discussion storage.
+### Ui19: Cost Governance & Usage Analytics (`/costs`)
+**Purpose:** Financial visibility and optimization of LLM spend.
 
-**Full Control Enabled:** Teams can work together on complex swarms and commons governance without losing individual control or auditability.
+**Key Capabilities:** Usage breakdown (business, pattern, common agent/version, model); Budgets & alerts with actions; What-if simulators for common updates; Reports/export; Token efficiency leaderboards; Optimization recommendations.
 
-### Ui19: Cost Governance & Usage Analytics (`/costs` or integrated in dashboard/monitoring)
-**Purpose:** Full financial visibility and control over LLM spend (the dominant variable cost in agent swarms).
+**Layout:** Analytics dashboard with charts, budget cards, simulator, recommendations.
 
-**Key Capabilities:**
-- Usage Breakdown: By business, swarm/pattern, common agent/version, model, time. Trends, forecasts, anomalies.
-- Budgets & Alerts: Set soft/hard budgets per business or common component. Actions on breach (warn, throttle new runs, notify).
-- What-If & Optimization: Simulator for common version updates or pattern changes ("switching to this cheaper common agent in 12 swarms saves $Y/mo with <2% quality impact").
-- Reports & Export: Monthly cost reports, chargeback to businesses, optimization recommendations from meta-critic.
-- Token Efficiency Leaderboards: Per common agent/pattern (encourages improvement).
-
-**Layout:** Analytics dashboard with charts, budget cards, recommendation engine output, export buttons.
-
-**Data:** Cost attribution at run/agent level (from orchestrator + LLM provider billing APIs). Forecasting models.
-
-**Full Control Enabled:** Users can run large-scale swarms responsibly, optimize spend through commons improvements, and allocate costs transparently.
+**Full Control:** Run at scale responsibly, optimize through commons, allocate costs transparently.
 
 ### Ui20: Swarm Blueprints & Saved Templates Management
-**Purpose:** Easy reuse and governance of known-good compositions built on commons.
+**Purpose:** Capture, share, and govern known-good compositions on the common layer.
 
-**Key Capabilities:**
-- Blueprint Gallery: Saved combinations of Common Pattern + specific common agent versions + params + knowledge. Rich previews, metrics from past runs, "Instantiate new swarm from this blueprint".
-- Versioning & Governance: Blueprints can be versioned, deprecated, or promoted to "official common blueprint". Approval for production blueprints.
-- Personal vs Team vs Common: Private, shared in business, or contributed to global commons.
-- Quick Actions: From activity or canvas "Save current configuration as Blueprint".
+**Key Capabilities:** Blueprint gallery (Common Pattern + pinned agent versions + params + knowledge, rich previews, past metrics); Versioning, deprecation, promotion to official; Personal/Team/Common visibility; Quick "Save current as Blueprint" from canvas/activity.
 
-**Layout:** Gallery with search/filters (domain, success rate, cost, common pattern). Detail page with full graph preview, run history, "Use Blueprint" CTA.
+**Layout:** Gallery with search/filters + detail with preview + "Use Blueprint" CTA.
 
-**Data:** Blueprint entity linked to common pattern + pinned agent versions + metadata.
-
-**Full Control Enabled:** Users can capture, share, and standardize successful swarm configurations built on the common layer — accelerating reliable operations.
+**Full Control:** Standardize and accelerate reliable swarm configurations built on commons.
 
 ---
 
-## Summary: How These UIs Enable Full Control & Visibility
+**These 20 UIs together provide complete control and full visibility** over every function of common-agent-swarm-ops — from commons discovery and collective improvement to fleet ops, security, extensibility, mobile access, and cost governance. The per-screen specs for 01–07 are already created; the descriptions above are ready to be turned into `nn_ui_08_settings.md` etc. on request.
 
-Together with the core 7, this inventory covers:
-- **Build & Compose** (Composer, Canvas, Blueprints)
-- **Discover & Govern Commons** (Registry Hub, Agent Detail, Eval Dashboard, Settings)
-- **Run & Monitor** (Dashboard, Activity, Monitoring/Tracing, Notifications)
-- **Improve Collectively** (Agent Detail contribution, Eval, Knowledge Hub, Improvement flows)
-- **Control & Secure** (Settings, Policies, Audit, Cost Governance, API Portal)
-- **Adopt & Collaborate** (Onboarding, Profile, Mobile, Collaboration)
-- **Extend** (API Portal, custom nodes via docs)
-
-Every major function of common-agent-swarm-ops is visible and controllable through an intuitive, consistent, real-time interface that reinforces the common layer and collective improvement.
-
----
-
-## List of All UIs to Be Created / Implemented
-
-Here is the complete prioritized list of UIs for the system. Core ones (01–07) already have detailed spec files (`nn_ui_XX_*.md`). The rest are described in this document and can have dedicated spec files created next if needed.
-
-### Core (Detailed Specs Already Created)
-1. **nn_ui_01_login.md** — Login + Demo access
-2. **nn_ui_02_dashboard.md** — Common Health + Fleet Ops Overview
-3. **nn_ui_03_swarm_composer.md** — Pattern-first NL Swarm Composer
-4. **nn_ui_04_canvas.md** — Graph Canvas (BIG ROWs, common-linked, live ops)
-5. **nn_ui_05_agent_detail.md** — Agent Detail (4+ tabs + ops)
-6. **nn_ui_06_activity.md** — Activity History & Ops Intelligence
-7. **nn_ui_07_registry_hub.md** — Common Registry Hub (discovery + governance)
-
-### Additional Recommended (Described in Section 8 Above — Create Specs Next)
-8. **nn_ui_08_settings.md** — Global Settings & Configuration
-9. **nn_ui_09_monitoring.md** — Advanced Monitoring, Tracing & Alerts
-10. **nn_ui_10_knowledge.md** — Knowledge Management Hub
-11. **nn_ui_11_eval.md** — Eval & Self-Improvement Dashboard
-12. **nn_ui_12_notifications.md** — Notifications Center
-13. **nn_ui_13_profile.md** — User Profile & Preferences
-14. **nn_ui_14_audit.md** — Audit Logs & Compliance
-15. **nn_ui_15_api_portal.md** — API & Developer Portal
-16. **nn_ui_16_onboarding.md** — Onboarding, Help & Documentation
-17. **nn_ui_17_mobile.md** — Mobile / PWA Companion Views
-18. **nn_ui_18_collaboration.md** — Collaboration, Sharing & Multi-User (phase 2+)
-19. **nn_ui_19_costs.md** — Cost Governance & Usage Analytics
-20. **nn_ui_20_blueprints.md** — Swarm Blueprints & Saved Templates Management
-
-**Recommended Implementation Order (after core 01–07):**
-- 08 Settings (foundational for control)
-- 09 Monitoring + 12 Notifications (ops visibility)
-- 10 Knowledge + 11 Eval (commons improvement loop)
-- 14 Audit + 15 API Portal (governance & extensibility)
-- 13 Profile + 16 Onboarding (adoption)
-- 17 Mobile + 19 Costs (practical production)
-- 20 Blueprints (reuse acceleration)
-- 18 Collaboration (team scaling)
-
-This complete inventory ensures the frontend provides **full control and complete visibility** over every function of common-agent-swarm-ops, from commons discovery to collective self-improvement, fleet ops, security, extensibility, and mobile access.
-
-The updated `frontend_redesign.md` (v2.1) + the 7 existing per-UI spec files now form a complete, actionable frontend specification suite ready for implementation. All specs are ready for development. Let me know which additional `nn_ui_XX_*.md` spec files you want created next, or if you'd like code generation, mockups, or further refinements!
-
-This positions the project for complete, production-grade implementation. ✅
+This v2.1 makes the frontend redesign truly comprehensive for production implementation.
