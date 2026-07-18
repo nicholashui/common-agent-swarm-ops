@@ -1,0 +1,1 @@
+full content of nn_ui_20_blueprints.md
