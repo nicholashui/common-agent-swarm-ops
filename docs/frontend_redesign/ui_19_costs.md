@@ -39,3 +39,8 @@ Clear financial visualizations (positive/negative deltas color coded). Accessibl
 Top filters. Left: Budget cards + alerts. Center: Breakdown charts + trends. Right: Simulator panel + recommendations. Bottom: Leaderboards + export.
 
 **Implementation Notes:** Accurate per-common-version cost attribution is powerful for commons optimization. Simulator is high-leverage for safe decision making. Integrate with existing billing APIs where possible.
+
+
+## VA-Agent-Swarm Cost Alignment
+
+Cost views must attribute budget to the graph/task structure in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md): Common version, model/provider/tool, iteration/retry, concurrency, phase/template, artifact/delivery target, and quality/gate outcome. Optimizations may recommend policy-approved model or routing changes but cannot silently weaken required L1/L2/L3 quality, rights/provenance, or approval controls.

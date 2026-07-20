@@ -1,0 +1,23 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+import { COMMON_AGENTS } from "../lib/demo-data";
+import { StatusBadge, VersionPill } from "./design";
+
+interface CanvasNode { readonly id: string; readonly name: string; readonly version: string; readonly kind: "common" | "verifier" | "custom"; }
+const nodes: readonly [CanvasNode, ...CanvasNode[]] = [{ id: "signal", name: "Market Sentinel", version: "2.4", kind: "common" }, { id: "research", name: "Research Collector", version: "1.3", kind: "common" }, { id: "writer", name: "Executive Synthesizer", version: "1.1", kind: "custom" }, { id: "verify", name: "Research Verifier", version: "1.8", kind: "verifier" }];
+const DEFAULT_NODE = nodes[0];
+
+if (!DEFAULT_NODE) throw new Error("The canvas requires a default node.");
+
+export function Canvas(): JSX.Element {
+  const [selectedId, setSelectedId] = useState("verify");
+  const selected = nodes.find((node) => node.id === selectedId) ?? DEFAULT_NODE;
+  return <div className="canvas-page"><header className="canvas-toolbar"><div><input aria-label="Swarm name" defaultValue="Market intelligence swarm" /><p><VersionPill label="Based on pattern" version="1.4" /> <span>4/4 linked common agents</span></p></div><div className="toolbar-actions"><button className="button button--ghost" type="button">Auto layout</button><button className="button button--secondary" type="button">Validate</button><button className="button button--primary" type="button">Run swarm <span>▶</span></button></div></header><div className="live-bar"><StatusBadge status="running" /><strong>Research digest is running</strong><span>2 of 4 nodes complete · $0.71 so far · 12m 08s elapsed</span><button type="button">Pause run</button></div><div className="canvas-layout"><aside className="canvas-palette"><p className="eyebrow">COMMON REGISTRY</p><label className="search-input"><span>⌕</span><input placeholder="Search common agents" aria-label="Search common agents" /></label>{COMMON_AGENTS.map((agent) => <button className="palette-agent" key={agent.id} type="button"><span className="agent-icon">◈</span><div><strong>{agent.name}</strong><VersionPill version={agent.version} /><small>{agent.successRate} success</small></div><b>+</b></button>)}</aside><section className="graph-canvas" aria-label="Swarm graph canvas"><div className="canvas-controls"><button type="button">+</button><button type="button">−</button><button type="button">⊙</button></div><div className="group-node"><header><VersionPill label="Parallel group" version="1.4" /><strong>Evidence & signal analysis</strong><span>BIG ROW · 2 parallel branches</span></header><div className="node-row">{nodes.slice(0, 2).map((node) => <GraphNode key={node.id} node={node} selected={node.id === selectedId} onSelect={setSelectedId} />)}</div></div><div className="graph-link graph-link--down" aria-hidden="true">↓</div><div className="node-row node-row--lower">{nodes.slice(2).map((node) => <GraphNode key={node.id} node={node} selected={node.id === selectedId} onSelect={setSelectedId} />)}</div><div className="graph-loop" aria-hidden="true">↶ iterate when verification fails</div></section><aside className="canvas-inspector"><p className="eyebrow">SELECTED NODE</p><h2>{selected.name}</h2><VersionPill version={selected.version} label={selected.kind === "custom" ? "Custom fork" : "Common"} /><StatusBadge status={selected.kind === "verifier" ? "running" : "success"} /><p>{selected.kind === "custom" ? "This local fork can be proposed back to the commons after verified runs." : "Linked to the registry. Changes here create a local fork."}</p><dl><div><dt>Last eval</dt><dd>0.94</dd></div><div><dt>Tokens</dt><dd>2.8k</dd></div><div><dt>Cost</dt><dd>$0.12</dd></div></dl><Link className="button button--secondary button--wide" href="/registry/agents/research-verifier">Open registry detail</Link><button className="button button--ghost button--wide" type="button">Propose improvement</button></aside></div></div>;
+}
+
+function GraphNode({ node, selected, onSelect }: { readonly node: CanvasNode; readonly selected: boolean; readonly onSelect: (id: string) => void }): JSX.Element {
+  return <button className={`graph-node graph-node--${node.kind}${selected ? " graph-node--selected" : ""}`} type="button" onClick={() => onSelect(node.id)}><span className="node-status" /><strong>{node.name}</strong><VersionPill version={node.version} label={node.kind === "custom" ? "Fork" : "Common"} /><small>{node.kind === "verifier" ? "Verifying evidence…" : "Connected · healthy"}</small><div><span>2.8k tok</span><span>$0.12</span></div></button>;
+}

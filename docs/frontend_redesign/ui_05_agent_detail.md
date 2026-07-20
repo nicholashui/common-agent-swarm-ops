@@ -120,3 +120,12 @@ Tabs: History | Config | Playground | Knowledge | Ops (for common)
 This detail view turns every Common Agent into a transparent, improvable, governable asset with full ops visibility. It is the primary place users interact with the "common" layer deeply.
 
 Cross-reference main redesign for standardized spec fields, eval metrics, contribution flows, and how this integrates with Registry Hub and Canvas. Implement tabs with shadcn Tabs or custom for persistence. Form heavy — use React Hook Form + Zod for validation + nice UX (collapsible sections, live preview for prompt).
+
+
+## VA-Agent-Swarm Agent Contract Alignment
+
+This detail view is the complete UI for the `CommonAgentVersionSpec` in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). The Configuration tab must add canonical name, category, in-scope/out-of-scope boundaries, escalation targets, approval authority, architecture pattern, model fallback policy, runtime limits (iteration, cost, concurrency, timeout, retries), and input/output schema references.
+
+Tools must show allowed purpose/scope and audit requirement. Relationships must separately render `accepts_critique_from` and `comments_on`; invalid peer-critique links must be rejected by the backend. Quality displays the agent rubric and the L1/L2/L3 contract, not only a generic evaluation score.
+
+The History/usage tab must show graph revision, task state, iteration/retry, artifact and critique references, gate outcomes, and pinned agent version. Playground supports task/artifact context, mock critique, bounded self-refine, cost estimate, tool trace summaries, quality results, and saved benchmark cases. Knowledge must distinguish RAG sources, few-shot examples, correction memory, constitutional rules, and evaluation benchmarks. Provenance/rights/continuity data are displayed when an output artifact or release decision is involved.

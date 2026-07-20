@@ -45,3 +45,10 @@ Top search + filters + "Create new from current". Masonry grid of blueprint card
 These, together with the updated `frontend_redesign.md` (v2.1), provide a complete, production-ready frontend specification for common-agent-swarm-ops — covering every function needed for full control and visibility of the common layer, swarm operations, collective improvement, governance, extensibility, and mobile use.
 
 You now have everything required to implement a best-in-class, common-first, ops-centric agent swarm platform. Let me know if you want code generation, visual mockups, prioritization, or further refinements! 🚀
+
+
+## VA-Agent-Swarm Blueprint Alignment
+
+Blueprints are `CommonSwarmPatternVersion` records that preserve the VA production-template mapping in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). A compatible VA blueprint can record template A–J, production phases (intent/planning, creative development, pre-production, generation, post-production, delivery/optimization), required artifacts, task dependencies, gate criteria, role slots, and release/delivery obligations.
+
+The preview must expose required Common Agent versions/categories, architecture patterns, critique relationships, task constraints, parallel branches, self-refine loops, approval gates, artifact handoff schemas, L1/L2/L3 quality requirements, rights/consent, continuity, provenance, and target-channel delivery settings. Instantiation creates a new graph revision with pinned versions; it does not copy opaque tool credentials or bypass required validation/gates.

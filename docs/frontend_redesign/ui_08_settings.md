@@ -51,3 +51,8 @@ Dark theme, high contrast status, full keyboard nav, bilingual labels, ARIA for 
 Left nav (Providers | Secrets | Integrations | Policies | Defaults | UI | Workspaces). Main area shows active section form/cards with test/impact elements. Top header with search across settings.
 
 **Implementation Notes:** Integrate deeply with Keycloak for auth/roles. Use secure patterns for secrets (never store plaintext in frontend). Impact analysis is key for safe commons governance.
+
+
+## VA-Agent-Swarm Settings Alignment
+
+Settings must configure only policy-approved defaults referenced by [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md): model routing/quality-cost rules, tool scopes, runtime retry/concurrency/budget limits, artifact retention/rights policies, provenance requirements, and gate/notification defaults. Workspace settings cannot override an immutable agent version, a required approval, or tool authorization for a live run.

@@ -147,3 +147,14 @@ Large central canvas area with:
 **Implementation Priority:** Start with static Common Agent nodes + basic groups + drag from palette + save/load. Then add live WS status. Then special nodes (verifier cycles, routers). Then AI co-pilot + bulk common ops. Then performance optimizations.
 
 Cross-reference main `frontend_redesign.md` for full node visual specs, common pattern examples, React Flow recommendations, and ops actions (rollout/A/B from canvas context). This is the highest-leverage UI — make the "common + graph + live ops" experience delightful and unmistakable.
+
+
+## VA-Agent-Swarm Runtime Alignment
+
+This canvas implements the graph/task portion of [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). A Common Agent node must expose its pinned `id`/version, category, architecture pattern, tool-permission summary, rubric state, input/output schema references, and explicit fork provenance. Group nodes must retain the mapped VA production-template/phase reference where applicable.
+
+Each node displays the lifecycle union `idle`, `queued`, `running`, `self_refine`, `waiting_for_critique`, `blocked`, `failed`, or `complete`, plus iteration, retry count, task constraints, checkpoint/replay reference, and redacted metrics. Edges carry dependency condition and optional gate ID; a graph cannot represent a prerequisite only visually.
+
+The contextual inspector must provide tabs for **Task**, **Artifacts**, **Critique**, **Quality**, and **Provenance**. Artifact projections include parent lineage, technical specification, rights/consent, continuity, QC, target channels, and provenance reference. Critique projections include source/target, severity, evidence, rubric score, and resolution. Quality distinguishes L1, L2, L3, Judge/GateKeeper evidence, and the human approval state. A blocked node must state whether it lacks input, critique, or approval; status color alone is insufficient.
+
+Run/retry/skip/gate actions operate on server-issued task or approval IDs only. They display the affected graph revision and retained audit reference; they do not construct tool payloads or C2PA signatures in the client.

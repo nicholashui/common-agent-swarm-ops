@@ -38,3 +38,8 @@ Clean, trustworthy design for security-sensitive areas. Accessible forms and tok
 Header with avatar. Sections with cards and tables. Token management with create/revoke actions prominent.
 
 **Implementation Notes:** Token scopes must align with backend permissions. Personal impact stats reinforce value of participating in commons.
+
+
+## VA-Agent-Swarm Profile Alignment
+
+Profile data controls presentation and personal preferences only. It may show authorized contribution, review, and operational impact from the projections in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md), but it must not grant roles, reveal other users' artifacts/critique, or expose credentials/tool authority. Effective role and organization scope remain server-derived.

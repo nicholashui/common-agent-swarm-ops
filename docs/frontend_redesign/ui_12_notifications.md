@@ -37,3 +37,10 @@ Clear priority indicators. Accessible list with keyboard nav. Real-time push via
 Header with filters. Main list of rich actionable cards. Side or modal: Preferences. Badge count on global bell.
 
 **Implementation Notes:** Integrate with global header bell. Actionable notifications dramatically improve ops experience. PWA push is high value for mobile.
+
+
+## VA-Agent-Swarm Notification Alignment
+
+Notifications are derived from the event contract in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). Define payload and deep-link support for task state changes, artifact creation/QC failure, directed critique, gate ready/resolved, budget threshold, metric failure, memory/contribution outcome, tool completion/error, phase transition, rollout, and recoverable/terminal error events.
+
+A gate notification includes criteria, affected artifacts, L1/L2/L3 status, Judge/GateKeeper evidence, expiration/assignment, and an approval link. A critique notification includes source, target, severity, evidence reference, and resolution state. Delivery channels receive redacted summaries only; user actions call an authorized server command and never embed an approval operation, secret, or raw artifact content in the notification payload.

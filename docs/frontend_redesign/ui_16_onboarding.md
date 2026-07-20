@@ -38,3 +38,8 @@ Smooth tour animations. Accessible help content and chat. Bilingual docs and tou
 Onboarding: Progress steps with illustrations. Help Center: Search + category cards + article viewer. In-app: "?" icon → popover or drawer with relevant content + "Ask AI" button.
 
 **Implementation Notes:** Leverage your existing YouTube content (bilingual). Tour completion should feel rewarding. AI help (RAG over docs + commons) is powerful for self-service.
+
+
+## VA-Agent-Swarm Onboarding Alignment
+
+Onboarding must introduce the common model alongside the structures in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md): agents are versioned configurations, graphs run task/dependency/gate lifecycles, artifacts carry lineage/rights/QC/provenance, critique is directed evidence, and releases require quality and approval gates. Domain-adapter onboarding may introduce VA roles, production phases, and templates without implying they are universal requirements.

@@ -40,3 +40,8 @@ Presence avatars clear and non-intrusive. Accessible comments and modals. Confli
 Canvas with presence avatars top-right. Share modal with permission toggles. Comment sidebar on selected node. Team dashboard widgets.
 
 **Implementation Notes:** Real-time collab is advanced (Yjs + awareness protocol). Start with sharing links + comments (simpler). Auditability must never be compromised. High value for teams working on complex swarms or commons governance.
+
+
+## VA-Agent-Swarm Collaboration Alignment
+
+Collaboration must respect the directed critique and governance contracts in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). Comments are not interchangeable with critiques: a critique has source/target, severity, rubric/evidence, status, and authorized delivery relationship. Shared graph editing retains revision/provenance, task/gate conflicts, artifact rights, and approval/audit evidence; collaborators cannot alter historical run or signature data.

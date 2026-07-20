@@ -41,3 +41,10 @@ Virtualized tables for large source lists. Accessible search and forms. Bilingua
 Top search + filters. Grid of collection cards. Detail view: Tabs with sources table, search box + results, contribution queue.
 
 **Implementation Notes:** Deep integration with vector DB and contribution pipeline from nn_ui_05/ nn_ui_06. Git sync is especially valuable for user's large MD corpora. Graph viz is nice-to-have (phase 2).
+
+
+## VA-Agent-Swarm Knowledge Alignment
+
+Knowledge screens implement the `knowledgeBindings` portion of [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). They must distinguish: licensed/validated reference documents, RAG collections, few-shot examples, correction/Reflexion memory, constitutional rules, shared continuity/budget/decision memory, and evaluation benchmark cases. Each item records scope, source/license, freshness, embedding/index state, owner, retention, and access policy.
+
+Runtime retrieval views must show a redacted retrieval trace: task/agent version, query purpose, selected references, freshness, correction-memory use, and resulting artifact/run reference. Contributions retain opt-in, artifact provenance, verification state, and approval outcome. A knowledge item cannot be promoted to a Common collection solely because it was retrieved or generated; its verification and governance state must be explicit.

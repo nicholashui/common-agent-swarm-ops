@@ -38,3 +38,10 @@ Clean developer-focused design. Syntax highlighting in samples. Accessible explo
 Sidebar nav. Main: Explorer or samples with copy/generate buttons. Token and webhook management sections.
 
 **Implementation Notes:** OpenAPI must be comprehensive and up-to-date. "Common lib" Python examples are high value for users. Webhook reliability important for integrations.
+
+
+## VA-Agent-Swarm API Alignment
+
+The API portal must document both the versioned common control-plane contract and its VA compatibility mapping from [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). Clearly label the documented VA production semantics as an adapter/reference, not as an already deployed common-agent-swarm-ops endpoint.
+
+Publish schemas and examples for Common Agent versions, Swarm graph revisions, tasks/lifecycle states, artifacts/handoffs, critiques, L1/L2/L3 quality gates, approvals, provenance references, and redacted SSE events. Include the mapped command semantics for create/launch production, gate decision, critique submission, retry/skip, artifact detail, router configuration, and live events. All examples must use opaque IDs and omit credentials, raw tool requests, private prompts, and unredacted artifact data.

@@ -166,3 +166,8 @@ These are self-contained, reference the main redesign, use consistent design sys
 You can now develop screen-by-screen with high fidelity. Let me know if you want code generation for any of these (e.g., the Registry Hub cards + search, Canvas CommonAgentNode component, proposal diff modal, etc.), visual mockups, or adjustments to any spec! 
 
 This completes a full, actionable UI spec suite for common-agent-swarm-ops. 🚀
+
+
+## VA-Agent-Swarm Registry Alignment
+
+Registry cards and details must follow the Common Agent and Pattern contracts in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). VA-adapted entries expose category/role, architecture pattern, tool/knowledge summary, rubric and critique compatibility, runtime limits, required artifact schemas, phase/template compatibility, and provenance/release requirements. The 114-agent taxonomy is a domain facet; it does not replace the generic registry taxonomy.

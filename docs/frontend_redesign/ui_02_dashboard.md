@@ -152,3 +152,8 @@ Common Impact Insights
 **Implementation Notes:** Build with shadcn/ui + Recharts/Tremor for charts + @tanstack/react-table. Heavy use of shared components from main design system (StatusBadge, CommonVersionPill, ImpactInsightCard). WebSocket hook `useWebSocket` shared across dashboard, canvas, activity.
 
 Cross-reference main `frontend_redesign.md` for color tokens, common component patterns, and global command palette spec. This dashboard makes users feel they are operating on a living, collectively improving commons foundation.
+
+
+## VA-Agent-Swarm Dashboard Alignment
+
+Dashboard health and fleet cards must link to the normalized run/task/artifact/quality/approval projections in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). When a VA domain adapter is active, aggregate cards may include phase/template, blocked reason, L1/L2/L3 gate health, artifact QC/provenance risk, critique backlog, and lifecycle counts beyond generic success/error. Summaries remain redacted and link to detail rather than carrying private artifact/tool data.

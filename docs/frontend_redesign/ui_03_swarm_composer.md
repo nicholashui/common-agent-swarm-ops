@@ -148,3 +148,8 @@ Header: [Business] [Swarm Name input]          [Save Draft] [Close]
 **Implementation Notes:** Use streaming (fetch + readableStream or tRPC subscription). Structured response rendering with React components for recommendation cards. Shared `MiniGraphPreview` component (read-only React Flow wrapper). Heavy reuse of Registry components (CommonAgentCard, PatternCard).
 
 This composer makes starting with high-quality, collectively improved common building blocks the default, delightful path. Cross-reference main redesign for chat system prompt details, common pattern examples, and canvas handoff spec.
+
+
+## VA-Agent-Swarm Composer Alignment
+
+Composer recommendations and pattern templates must satisfy the Common Agent, graph/task, artifact handoff, critique, quality, and gate contracts in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). For VA patterns, recommend role slots/category, required artifacts, phase/template, dependencies, task constraints, peer-critique paths, quality thresholds, and human gates—not only agent names. Canvas handoff creates a revision with pinned versions and required validations.

@@ -153,3 +153,12 @@ Rollout Opportunities:
 **Implementation Notes:** Build views as separate components (ActivityBoard, ActivityTable, ActivityTimeline) switched by segmented control. Share filter state via URL or context. Heavy reuse of StatusBadge, CommonVersionPill, ExecutionCard from design system. This page is the ops command center for both debugging and steering the commons.
 
 Cross-reference main redesign for exact column meanings, bulk action specs, and how insights tie into rollout/A/B flows. Make filters and common version integration best-in-class so users naturally operate at the "common component" level.
+
+
+## VA-Agent-Swarm Activity Alignment
+
+Activity records must follow the run/task/artifact/critique/gate projections in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md). Board, table, and timeline views show graph revision, pinned Common versions, production/template phase when present, full task lifecycle, iteration, retry, dependency/gate wait reason, checkpoint/replay reference, budget/cost, and redacted metric values.
+
+Add drill-down affordances for artifact lineage and technical/QC/rights/continuity/provenance status; directed critique records with severity, rubric score, evidence, and resolution; and quality-gate results separated into L1 validation, L2 rubric, L3 baseline preference, Judge/GateKeeper evidence, and human decision. Filters must include lifecycle/retry state, gate state, artifact QC/provenance state, critique severity, and phase/template as supported by the domain adapter.
+
+Replay, retry, and skip actions must use server-determined eligibility and show the prior task/run state. They must preserve immutable common-version and artifact provenance rather than silently using the latest version.

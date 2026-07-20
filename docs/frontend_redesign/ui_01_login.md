@@ -151,3 +151,8 @@
 **Dependencies:** next-auth or @react-oauth, sonner for toasts, lucide-react icons.
 
 This spec is self-contained for a developer or AI coding agent (Cursor/Kiro) to implement the page + auth flow integration. Cross-reference main `frontend_redesign.md` for global design system, color tokens, and component library.
+
+
+## VA-Agent-Swarm Alignment Reference
+
+This screen is intentionally limited to identity and session entry. Post-authentication context must identify authorized workspace/organization, role, and locale without accepting actor or tenant identity from browser input. Downstream runtime structures are defined in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md); login must not expose agent, task, artifact, critique, or provenance data before authorization.

@@ -1,7 +1,8 @@
-import { OperatorConsole } from "../components/OperatorConsole";
+import { AppShell } from "../components/AppShell";
+import { Dashboard } from "../components/Dashboard";
 
-export function HomePage(): JSX.Element {
-  return <main><OperatorConsole /></main>;
+function HomePage(): JSX.Element {
+  return <AppShell><Dashboard /></AppShell>;
 }
 
 export default HomePage;

@@ -38,3 +38,8 @@ Touch-friendly (44px+ targets). Offline indicators. Push permission flow. High c
 Bottom nav. Cards and lists optimized for vertical scrolling. Bottom sheets for actions/detail. Notification badge prominent.
 
 **Implementation Notes:** Next.js PWA setup (manifest, service worker). Avoid heavy canvas editing on mobile (read-only mini views or deep link to desktop). Push notifications via service worker + backend. High value for real ops use.
+
+
+## VA-Agent-Swarm Mobile Alignment
+
+Mobile views must preserve the high-risk operational signals defined in [`va_agent_structure_mapping.md`](va_agent_structure_mapping.md): blocked reason, task lifecycle, gate criteria, L1/L2/L3 outcome, critique severity, artifact QC/rights/provenance alert, and rollback/retry eligibility. Mobile summaries remain redacted; approval and recovery actions use the same server-issued IDs and evidence views as desktop.
