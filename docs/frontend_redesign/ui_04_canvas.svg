@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#1c1917" flood-opacity="0.08"/></filter>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="#e7e5e4"/></pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0l6 3-6 3z" fill="#a8a29e"/></marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0l6 3-6 3z" fill="#3b82f6"/></marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0l6 3-6 3z" fill="#10b981"/></marker>
+  </defs>
+  <rect width="1440" height="1000" fill="#ffffff"/>
+
+  <!-- ===== TOP TOOLBAR ===== -->
+  <rect width="1440" height="52" fill="#fff"/><line x1="0" y1="52" x2="1440" y2="52" stroke="#e7e5e4"/>
+  <text x="20" y="32" font-size="14" font-weight="600" fill="#1c1917">TradingResearch α</text>
+  <rect x="168" y="14" width="230" height="24" rx="12" fill="#eef2ff" stroke="#c7d2fe"/><text x="182" y="30" font-size="10" fill="#4f46e5">Based on: Parallel Indep. + Verify v1.4</text>
+  <!-- center: view mode + status -->
+  <rect x="560" y="12" width="200" height="28" rx="8" fill="#f5f5f4"/>
+  <rect x="562" y="14" width="66" height="24" rx="7" fill="#fff" stroke="#e7e5e4"/><text x="595" y="30" text-anchor="middle" font-size="11" fill="#1c1917" font-weight="500">Design</text>
+  <text x="662" y="30" text-anchor="middle" font-size="11" fill="#78716c">Run</text>
+  <text x="730" y="30" text-anchor="middle" font-size="11" fill="#78716c">Compare</text>
+  <rect x="772" y="14" width="180" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="786" y="30" font-size="10" fill="#57534e">12/14 on latest common · 2 forks</text>
+  <!-- right actions -->
+  <g font-size="11">
+    <rect x="1020" y="12" width="90" height="28" rx="14" fill="#f5f3ff" stroke="#ddd6fe"/><text x="1065" y="30" text-anchor="middle" fill="#7c3aed">✧ Co-Pilot</text>
+    <rect x="1118" y="12" width="70" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="1153" y="30" text-anchor="middle" fill="#57534e">Layout</text>
+    <rect x="1196" y="12" width="66" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="1229" y="30" text-anchor="middle" fill="#57534e">Export</text>
+    <rect x="1270" y="12" width="70" height="28" rx="14" fill="#10b981"/><text x="1305" y="30" text-anchor="middle" fill="#fff">▶ Run</text>
+    <rect x="1348" y="12" width="74" height="28" rx="14" fill="#1c1917"/><text x="1385" y="30" text-anchor="middle" fill="#fff">A/B Test</text>
+  </g>
+
+  <!-- ===== LEFT PALETTE ===== -->
+  <rect x="0" y="52" width="248" height="948" fill="#fafaf9"/><line x1="248" y1="52" x2="248" y2="1000" stroke="#e7e5e4"/>
+  <!-- tabs -->
+  <g transform="translate(16,66)" font-size="11">
+    <rect width="216" height="28" rx="8" fill="#f5f5f4"/>
+    <rect x="2" y="2" width="74" height="24" rx="7" fill="#fff" stroke="#e7e5e4"/><text x="39" y="18" text-anchor="middle" fill="#4f46e5" font-weight="500">Common</text>
+    <text x="112" y="18" text-anchor="middle" fill="#78716c">Custom</text>
+    <text x="180" y="18" text-anchor="middle" fill="#78716c">Patterns</text>
+  </g>
+  <!-- AI suggest node -->
+  <rect x="16" y="104" width="216" height="30" rx="8" fill="#fff" stroke="#ddd6fe"/><text x="30" y="123" font-size="10" fill="#7c3aed">✧ AI Suggest Node…</text>
+  <!-- search -->
+  <rect x="16" y="142" width="216" height="30" rx="8" fill="#fff" stroke="#e7e5e4"/><circle cx="32" cy="157" r="5" fill="none" stroke="#a8a29e" stroke-width="1.4"/><path d="M36 161l3 3" stroke="#a8a29e" stroke-width="1.4"/><text x="46" y="161" font-size="10" fill="#a8a29e">Search Common Agents…</text>
+  <!-- palette items -->
+  <g transform="translate(16,182)" font-size="11">
+    <g><rect width="216" height="48" rx="10" fill="#fff" stroke="#e7e5e4"/><rect x="10" y="10" width="28" height="28" rx="8" fill="#eef2ff"/><circle cx="24" cy="24" r="6" fill="none" stroke="#4f46e5" stroke-width="1.4"/><text x="46" y="22" font-weight="600" fill="#1c1917">DataFetcher</text><text x="46" y="38" font-size="9" fill="#4f46e5">Common v2.1 · 94% · drag →</text></g>
+    <g transform="translate(0,56)"><rect width="216" height="48" rx="10" fill="#fff" stroke="#e7e5e4"/><rect x="10" y="10" width="28" height="28" rx="8" fill="#eef2ff"/><circle cx="24" cy="24" r="6" fill="none" stroke="#4f46e5" stroke-width="1.4"/><text x="46" y="22" font-weight="600" fill="#1c1917">SentimentAgent</text><text x="46" y="38" font-size="9" fill="#4f46e5">Common v1.9 · 91%</text></g>
+    <g transform="translate(0,112)"><rect width="216" height="48" rx="10" fill="#fff" stroke="#e7e5e4"/><rect x="10" y="10" width="28" height="28" rx="8" fill="#eef2ff"/><circle cx="24" cy="24" r="6" fill="none" stroke="#4f46e5" stroke-width="1.4"/><text x="46" y="22" font-weight="600" fill="#1c1917">MarketPredictor</text><text x="46" y="38" font-size="9" fill="#4f46e5">Common v2.0 · 92%</text></g>
+    <g transform="translate(0,168)"><rect width="216" height="48" rx="10" fill="#fff" stroke="#a7f3d0"/><rect x="10" y="10" width="28" height="28" rx="8" fill="#ecfdf5"/><path d="M18 24l4 4 8-8" stroke="#059669" stroke-width="1.6" fill="none"/><text x="46" y="22" font-weight="600" fill="#1c1917">VerifierNode</text><text x="46" y="38" font-size="9" fill="#059669">Common v3.0 · 97%</text></g>
+    <g transform="translate(0,224)"><rect width="216" height="48" rx="10" fill="#fff" stroke="#fde68a" stroke-dasharray="4 3"/><rect x="10" y="10" width="28" height="28" rx="8" fill="#fffbeb"/><path d="M24 14v20M16 20l8-6 8 6" stroke="#d97706" stroke-width="1.4" fill="none"/><text x="46" y="22" font-weight="600" fill="#1c1917">CustomReportAgent</text><text x="46" y="38" font-size="9" fill="#d97706">Fork of Common v2.3</text></g>
+  </g>
+
+  <!-- ===== MAIN CANVAS ===== -->
+  <rect x="248" y="52" width="900" height="948" fill="url(#dots)"/>
+
+  <!-- BIG ROW parallel group -->
+  <g transform="translate(300,120)">
+    <rect width="500" height="180" rx="16" fill="#eef2ff" fill-opacity="0.5" stroke="#c7d2fe" stroke-width="2"/>
+    <text x="20" y="30" font-size="13" font-weight="600" fill="#4338ca">⊞ Parallel Data &amp; Analysis (BIG ROW)</text>
+    <rect x="330" y="14" width="60" height="20" rx="10" fill="#fff" stroke="#c7d2fe"/><text x="360" y="28" text-anchor="middle" font-size="9" fill="#4f46e5">v1.4</text>
+    <text x="400" y="28" font-size="9" fill="#6366f1">Update all →</text>
+    <!-- three agent nodes in a row -->
+    <g transform="translate(20,52)">
+      <rect width="145" height="108" rx="12" fill="#fff" stroke="#c7d2fe" stroke-width="2" filter="url(#sh)"/>
+      <rect x="10" y="10" width="24" height="24" rx="7" fill="#eef2ff"/><circle cx="22" cy="22" r="5" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+      <text x="42" y="20" font-size="10" font-weight="600" fill="#1c1917">DataFetcher</text>
+      <rect x="10" y="40" width="76" height="16" rx="8" fill="#eef2ff"/><text x="16" y="52" font-size="8" fill="#4f46e5">Common v2.1</text>
+      <rect x="98" y="14" width="40" height="16" rx="8" fill="#ecfdf5" stroke="#a7f3d0"/><text x="118" y="26" text-anchor="middle" font-size="8" fill="#047857">Done</text>
+      <text x="10" y="72" font-size="8" fill="#78716c">tok 612 · $0.02 · 1.2s</text>
+      <path d="M0 88l6-3-6-3" fill="#a8a29e"/><line x1="6" y1="85" x2="0" y2="85" stroke="#a8a29e"/>
+      <text x="10" y="98" font-size="8" fill="#4f46e5" font-style="italic">🔗 Registry-linked</text>
+    </g>
+    <g transform="translate(178,52)">
+      <rect width="145" height="108" rx="12" fill="#fff" stroke="#c7d2fe" stroke-width="2" filter="url(#sh)"/>
+      <rect x="10" y="10" width="24" height="24" rx="7" fill="#eef2ff"/><circle cx="22" cy="22" r="5" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+      <text x="42" y="20" font-size="10" font-weight="600" fill="#1c1917">Sentiment</text>
+      <rect x="10" y="40" width="76" height="16" rx="8" fill="#eef2ff"/><text x="16" y="52" font-size="8" fill="#4f46e5">Common v1.9</text>
+      <rect x="98" y="14" width="40" height="16" rx="8" fill="#eff6ff" stroke="#bfdbfe"/><circle cx="106" cy="22" r="2.5" fill="#3b82f6"/><text x="112" y="26" font-size="8" fill="#1d4ed8">Run</text>
+      <text x="10" y="72" font-size="8" fill="#78716c">tok 847 · streaming…</text>
+      <rect x="10" y="80" width="118" height="4" rx="2" fill="#f5f5f4"/><rect x="10" y="80" width="70" height="4" rx="2" fill="#3b82f6"/>
+    </g>
+    <g transform="translate(336,52)">
+      <rect width="145" height="108" rx="12" fill="#fff" stroke="#c7d2fe" stroke-width="2" filter="url(#sh)"/>
+      <rect x="10" y="10" width="24" height="24" rx="7" fill="#eef2ff"/><circle cx="22" cy="22" r="5" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+      <text x="42" y="20" font-size="10" font-weight="600" fill="#1c1917">Predictor</text>
+      <rect x="10" y="40" width="76" height="16" rx="8" fill="#eef2ff"/><text x="16" y="52" font-size="8" fill="#4f46e5">Common v2.0</text>
+      <rect x="98" y="14" width="42" height="16" rx="8" fill="#f5f5f4"/><text x="119" y="26" text-anchor="middle" font-size="8" fill="#78716c">Idle</text>
+      <text x="10" y="72" font-size="8" fill="#78716c">eval 0.92 · queued</text>
+    </g>
+  </g>
+
+  <!-- edge from parallel group to synthesis -->
+  <path d="M800 210 C 850 210, 850 380, 900 380" fill="none" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Supervisor node (hub) -->
+  <g transform="translate(340,340)">
+    <rect width="150" height="70" rx="12" fill="#fff" stroke="#fde68a" stroke-width="2" filter="url(#sh)"/>
+    <rect x="12" y="12" width="26" height="26" rx="13" fill="#fffbeb"/><circle cx="21" cy="22" r="3" fill="#f59e0b"/><circle cx="29" cy="22" r="3" fill="#f59e0b"/>
+    <text x="46" y="24" font-size="11" font-weight="600" fill="#1c1917">Supervisor</text>
+    <rect x="46" y="32" width="50" height="16" rx="8" fill="#eff6ff"/><text x="52" y="44" font-size="8" fill="#1d4ed8">Running</text>
+    <g font-size="8" fill="#57534e"><text x="12" y="60">↓ Worker A</text><text x="72" y="60">↓ Worker B</text></g>
+  </g>
+
+  <!-- Synthesis + Verification group with cycle -->
+  <g transform="translate(880,340)">
+    <rect width="220" height="200" rx="16" fill="#ecfdf5" fill-opacity="0.4" stroke="#a7f3d0" stroke-width="2"/>
+    <text x="18" y="28" font-size="12" font-weight="600" fill="#047857">Synthesis + Verification</text>
+    <!-- synthesis node -->
+    <g transform="translate(20,44)">
+      <rect width="180" height="60" rx="12" fill="#fff" stroke="#c7d2fe" stroke-width="2" filter="url(#sh)"/>
+      <rect x="10" y="10" width="24" height="24" rx="7" fill="#eef2ff"/><circle cx="22" cy="22" r="5" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+      <text x="42" y="22" font-size="10" font-weight="600" fill="#1c1917">SynthesisAgent</text>
+      <rect x="42" y="30" width="70" height="16" rx="8" fill="#eef2ff"/><text x="48" y="42" font-size="8" fill="#4f46e5">Common v2.2</text>
+    </g>
+    <!-- verifier node -->
+    <g transform="translate(20,120)">
+      <rect width="180" height="64" rx="12" fill="#fff" stroke="#10b981" stroke-width="2" filter="url(#sh)"/>
+      <rect x="10" y="10" width="24" height="24" rx="12" fill="#ecfdf5"/><path d="M16 22l4 4 8-8" stroke="#059669" stroke-width="1.6" fill="none"/>
+      <text x="42" y="20" font-size="10" font-weight="600" fill="#1c1917">VerifierNode</text>
+      <text x="120" y="20" font-size="9" fill="#059669" font-family="ui-monospace, monospace">↻ 3/5</text>
+      <rect x="42" y="30" width="120" height="5" rx="2.5" fill="#f5f5f4"/><rect x="42" y="30" width="72" height="5" rx="2.5" fill="#10b981"/>
+      <text x="42" y="52" font-size="8" fill="#78716c">iterating with feedback…</text>
+    </g>
+    <!-- cycle edge -->
+    <path d="M195 150 C 232 150 232 90 205 90" fill="none" stroke="#10b981" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arrowG)"/>
+    <text x="215" y="122" font-size="8" fill="#059669">cycle ↺</text>
+  </g>
+
+  <!-- custom fork node -->
+  <g transform="translate(420,620)">
+    <rect width="200" height="86" rx="12" fill="#fff" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" filter="url(#sh)"/>
+    <rect x="12" y="12" width="26" height="26" rx="7" fill="#fffbeb"/><path d="M25 16v20M17 22l8-6 8 6" stroke="#d97706" stroke-width="1.4" fill="none"/>
+    <text x="46" y="24" font-size="11" font-weight="600" fill="#1c1917">CustomReportAgent</text>
+    <rect x="46" y="32" width="120" height="16" rx="8" fill="#fffbeb" stroke="#fde68a"/><text x="52" y="44" font-size="8" fill="#b45309">Fork of Common v2.3</text>
+    <text x="12" y="66" font-size="9" fill="#d97706" font-style="italic">Custom — contribute back?</text>
+    <text x="12" y="80" font-size="8" fill="#78716c">Complete · tok 1.2k</text>
+  </g>
+
+  <!-- router diamond -->
+  <g transform="translate(700,600)">
+    <rect x="0" y="0" width="56" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="2" transform="rotate(45 28 28)"/>
+    <text x="28" y="33" text-anchor="middle" font-size="16" fill="#7c3aed">◇</text>
+    <text x="72" y="24" font-size="11" font-weight="600" fill="#6d28d9">Dynamic Router</text>
+    <text x="72" y="40" font-size="9" fill="#78716c">LLM-decided</text>
+    <g font-size="8" fill="#57534e"><text x="72" y="56">→ Research  → Synthesis  → Escalate</text></g>
+  </g>
+
+  <!-- minimap + zoom controls -->
+  <g transform="translate(1000,900)">
+    <rect width="130" height="80" rx="8" fill="#fff" stroke="#e7e5e4" opacity="0.95"/><rect x="10" y="10" width="40" height="20" rx="4" fill="#eef2ff"/><rect x="56" y="16" width="24" height="14" rx="3" fill="#ecfdf5"/><rect x="20" y="40" width="30" height="14" rx="3" fill="#fffbeb"/>
+  </g>
+  <g transform="translate(1090,720)">
+    <rect width="34" height="94" rx="10" fill="#fff" stroke="#e7e5e4"/>
+    <text x="17" y="26" text-anchor="middle" font-size="16" fill="#57534e">+</text><line x1="8" y1="34" x2="26" y2="34" stroke="#e7e5e4"/>
+    <text x="17" y="56" text-anchor="middle" font-size="16" fill="#57534e">−</text><line x1="8" y1="64" x2="26" y2="64" stroke="#e7e5e4"/>
+    <text x="17" y="84" text-anchor="middle" font-size="12" fill="#57534e">⤢</text>
+  </g>
+
+  <!-- ===== RIGHT CONTEXTUAL SIDEBAR ===== -->
+  <rect x="1148" y="52" width="292" height="948" fill="#fafaf9"/><line x1="1148" y1="52" x2="1148" y2="1000" stroke="#e7e5e4"/>
+  <g transform="translate(1164,68)">
+    <text x="0" y="14" font-size="10" fill="#a8a29e">SELECTED · COMMON AGENT</text>
+    <text x="0" y="38" font-size="15" font-weight="600" fill="#1c1917">VerifierNode</text>
+    <rect x="0" y="46" width="94" height="20" rx="10" fill="#eef2ff" stroke="#c7d2fe"/><text x="10" y="60" font-size="9" fill="#4f46e5">Common v3.0</text>
+    <rect x="100" y="46" width="60" height="20" rx="10" fill="#ecfdf5" stroke="#a7f3d0"/><circle cx="112" cy="56" r="3" fill="#10b981"/><text x="120" y="60" font-size="9" fill="#047857">Live</text>
+    <!-- aggregate eval -->
+    <rect x="0" y="78" width="260" height="86" rx="12" fill="#fff" stroke="#e7e5e4"/>
+    <text x="14" y="98" font-size="10" font-weight="600" fill="#57534e">Aggregate eval (all swarms)</text>
+    <g font-size="9" fill="#78716c">
+      <text x="14" y="118">Runs</text><text x="14" y="134" font-size="12" fill="#1c1917" font-weight="600">31.2k</text>
+      <text x="94" y="118">Success</text><text x="94" y="134" font-size="12" fill="#059669" font-weight="600">97%</text>
+      <text x="180" y="118">Avg tok</text><text x="180" y="134" font-size="12" fill="#1c1917" font-weight="600">640</text>
+    </g>
+    <!-- improvement history -->
+    <text x="0" y="188" font-size="10" font-weight="600" fill="#57534e">Improvement history</text>
+    <rect x="0" y="196" width="260" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <text x="12" y="216" font-size="9" fill="#6d28d9">v3.0 · meta-critic rationale</text>
+    <text x="12" y="232" font-size="9" fill="#78716c">Added structured verification step</text>
+    <text x="12" y="246" font-size="9" fill="#059669">+12% pass rate · 1.8k runs</text>
+    <!-- quick actions -->
+    <rect x="0" y="266" width="260" height="30" rx="15" fill="#1c1917"/><text x="130" y="285" text-anchor="middle" font-size="11" fill="#fff">Update to latest safe</text>
+    <rect x="0" y="302" width="126" height="30" rx="15" fill="#fff" stroke="#e7e5e4"/><text x="63" y="321" text-anchor="middle" font-size="10" fill="#57534e">Pin version</text>
+    <rect x="134" y="302" width="126" height="30" rx="15" fill="#fff" stroke="#ddd6fe"/><text x="197" y="321" text-anchor="middle" font-size="10" fill="#7c3aed">Propose imp.</text>
+    <rect x="0" y="338" width="260" height="30" rx="15" fill="#fff" stroke="#e7e5e4"/><text x="130" y="357" text-anchor="middle" font-size="10" fill="#57534e">Open Detail (nn_ui_05) →</text>
+    <!-- live inspector -->
+    <text x="0" y="398" font-size="10" font-weight="600" fill="#57534e">Live Inspector</text>
+    <rect x="0" y="406" width="260" height="120" rx="10" fill="#0f172a"/>
+    <text x="14" y="426" font-size="9" fill="#94a3b8" font-family="ui-monospace, monospace">iter 3/5 · verifier feedback</text>
+    <text x="14" y="446" font-size="9" fill="#cbd5e1" font-family="ui-monospace, monospace">"groundedness below 0.9,</text>
+    <text x="14" y="460" font-size="9" fill="#cbd5e1" font-family="ui-monospace, monospace"> re-check source citations"</text>
+    <text x="14" y="484" font-size="9" fill="#34d399" font-family="ui-monospace, monospace">tool: retrieve() 220ms</text>
+    <text x="14" y="500" font-size="9" fill="#94a3b8" font-family="ui-monospace, monospace">token burn: 42/s</text>
+    <text x="14" y="516" font-size="9" fill="#fbbf24" font-family="ui-monospace, monospace">as_of just now · seq 4421</text>
+  </g>
+
+  <!-- ===== BOTTOM RUN BAR ===== -->
+  <rect x="248" y="948" width="900" height="52" fill="#fff"/><line x1="248" y1="948" x2="1148" y2="948" stroke="#e7e5e4"/>
+  <circle cx="272" cy="974" r="4" fill="#3b82f6"/><text x="286" y="978" font-size="11" fill="#1d4ed8">Running · 2 nodes active</text>
+  <rect x="420" y="966" width="200" height="6" rx="3" fill="#f5f5f4"/><rect x="420" y="966" width="120" height="6" rx="3" fill="#3b82f6"/>
+  <text x="640" y="978" font-size="11" fill="#78716c">cost so far $1.68 · elapsed 12m</text>
+  <rect x="900" y="960" width="110" height="26" rx="13" fill="#fff" stroke="#e7e5e4"/><text x="955" y="977" text-anchor="middle" font-size="10" fill="#57534e">Partial replay</text>
+  <rect x="1020" y="960" width="60" height="26" rx="13" fill="#fef2f2" stroke="#fecaca"/><text x="1050" y="977" text-anchor="middle" font-size="10" fill="#dc2626">Cancel</text>
+  <text x="1094" y="978" font-size="14" fill="#57534e">≡ logs</text>
+</svg>
