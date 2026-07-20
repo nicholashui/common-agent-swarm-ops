@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1c1917" flood-opacity="0.06"/></filter></defs>
+  <rect width="1440" height="1000" fill="#ffffff"/>
+  <!-- HEADER -->
+  <rect width="1440" height="56" fill="#fff"/><line x1="0" y1="56" x2="1440" y2="56" stroke="#e7e5e4"/>
+  <rect x="24" y="15" width="26" height="26" rx="8" fill="#4f46e5"/><g stroke="#fff" stroke-width="1.4" fill="none"><circle cx="37" cy="24" r="1.9"/><circle cx="31" cy="34" r="1.9"/><circle cx="43" cy="34" r="1.9"/><path d="M37 26l-6 7M37 26l6 7M31.6 34h10.8"/></g>
+  <text x="60" y="33" font-size="12" fill="#a8a29e">Blueprints &amp; Templates</text>
+  <rect x="560" y="13" width="320" height="30" rx="8" fill="#f5f5f4" stroke="#e7e5e4"/><text x="578" y="32" font-size="12" fill="#a8a29e">Search blueprints, templates…  ⌘K</text>
+  <circle cx="1360" cy="28" r="14" fill="#fafaf9" stroke="#e7e5e4"/><circle cx="1404" cy="28" r="15" fill="#eef2ff" stroke="#c7d2fe"/><text x="1404" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">NH</text>
+
+  <text x="40" y="94" font-size="24" font-weight="700" fill="#1c1917">Blueprints &amp; Templates Gallery</text>
+  <text x="40" y="116" font-size="13" fill="#78716c">Complete swarm blueprints: pattern + agents + knowledge config. One-click deploy or customize.</text>
+  <rect x="1240" y="80" width="160" height="34" rx="17" fill="#1c1917"/><text x="1320" y="102" text-anchor="middle" font-size="12" fill="#fff">+ Publish Blueprint</text>
+
+  <!-- search + filters -->
+  <rect x="40" y="136" width="720" height="38" rx="10" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+  <circle cx="62" cy="155" r="6" fill="none" stroke="#a8a29e" stroke-width="1.4"/><path d="M66 159l4 4" stroke="#a8a29e" stroke-width="1.4"/>
+  <text x="78" y="160" font-size="12" fill="#a8a29e">Search blueprints or describe your use case…</text>
+  <g transform="translate(40,186)" font-size="10" fill="#57534e">
+    <rect width="66" height="24" rx="12" fill="#eef2ff" stroke="#c7d2fe"/><text x="33" y="16" text-anchor="middle" fill="#4f46e5">All (24)</text>
+    <rect x="74" width="70" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="109" y="16" text-anchor="middle">Trading</text>
+    <rect x="152" width="72" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="188" y="16" text-anchor="middle">Content</text>
+    <rect x="232" width="80" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="272" y="16" text-anchor="middle">Education</text>
+    <rect x="320" width="80" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="360" y="16" text-anchor="middle">Research</text>
+    <rect x="408" width="100" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="458" y="16" text-anchor="middle">Most deployed</text>
+    <rect x="516" width="100" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="566" y="16" text-anchor="middle">Highest rated</text>
+  </g>
+
+  <!-- Blueprint cards grid 3x2 -->
+  <g transform="translate(40,226)">
+    <!-- Featured blueprint -->
+    <g>
+      <rect width="1360" height="160" rx="16" fill="#eef2ff" stroke="#c7d2fe" filter="url(#sh)"/>
+      <rect x="20" y="16" width="56" height="56" rx="14" fill="#fff" stroke="#c7d2fe"/><text x="48" y="52" text-anchor="middle" font-size="26" fill="#4f46e5">⊞</text>
+      <rect x="86" y="16" width="72" height="20" rx="10" fill="#4f46e5"/><text x="122" y="30" text-anchor="middle" font-size="9" fill="#fff">Featured</text>
+      <text x="86" y="52" font-size="18" font-weight="700" fill="#1c1917">Market Intelligence Pipeline</text>
+      <text x="86" y="72" font-size="12" fill="#57534e">Complete daily market analysis: data fetch → sentiment → prediction → synthesis → verified report.</text>
+      <!-- included -->
+      <g transform="translate(86,84)" font-size="9">
+        <rect width="200" height="18" rx="9" fill="#fff" stroke="#c7d2fe"/><text x="10" y="13" fill="#4f46e5">Pattern: Parallel + Verify v1.4</text>
+        <rect x="208" width="150" height="18" rx="9" fill="#fff" stroke="#c7d2fe"/><text x="218" y="13" fill="#4f46e5">8 Common Agents</text>
+        <rect x="366" width="140" height="18" rx="9" fill="#fff" stroke="#a7f3d0"/><text x="376" y="13" fill="#047857">Knowledge: Trading Corpus</text>
+      </g>
+      <text x="86" y="124" font-size="10" fill="#059669">312 deployments · 94% success · est $0.14/run · by @ecosystem</text>
+      <g transform="translate(86,130)"><rect width="130" height="24" rx="12" fill="#1c1917"/><text x="65" y="16" text-anchor="middle" font-size="10" fill="#fff">Deploy to Workspace</text><rect x="140" width="100" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="190" y="16" text-anchor="middle" font-size="10" fill="#57534e">Customize</text><rect x="250" width="80" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="290" y="16" text-anchor="middle" font-size="10" fill="#57534e">Preview</text></g>
+      <!-- ratings -->
+      <g transform="translate(1120,32)">
+        <text x="0" y="0" font-size="22" fill="#fbbf24">★★★★★</text>
+        <text x="0" y="24" font-size="10" fill="#78716c">4.9 (142 reviews)</text>
+      </g>
+    </g>
+
+    <!-- Row of 3 cards -->
+    <g transform="translate(0,180)">
+      <g>
+        <rect width="432" height="250" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+        <rect x="20" y="20" width="44" height="44" rx="12" fill="#f5f3ff" stroke="#ddd6fe"/><text x="42" y="50" text-anchor="middle" font-size="20" fill="#7c3aed">◇</text>
+        <text x="76" y="38" font-size="15" font-weight="600" fill="#1c1917">Cinematic Content Pipeline</text>
+        <text x="76" y="56" font-size="10" fill="#78716c">YouTube wuxia production · bilingual</text>
+        <g transform="translate(20,76)" font-size="9">
+          <rect width="200" height="18" rx="9" fill="#f5f3ff" stroke="#ddd6fe"/><text x="10" y="13" fill="#7c3aed">Pattern: Dynamic Router v2.2</text>
+          <rect x="208" width="100" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="218" y="13" fill="#4f46e5">6 Agents</text>
+        </g>
+        <text x="20" y="118" font-size="10" fill="#57534e">Script → storyboard → voice → edit → publish.</text>
+        <text x="20" y="136" font-size="10" fill="#059669">89 deployments · 91% · by @content-team</text>
+        <g transform="translate(20,148)" font-size="14" fill="#fbbf24"><text x="0" y="0">★★★★☆</text><text x="80" y="0" font-size="9" fill="#78716c">4.6 (38)</text></g>
+        <g transform="translate(20,170)" font-size="9">
+          <rect width="68" height="18" rx="9" fill="#f5f3ff" stroke="#ddd6fe"/><text x="34" y="13" text-anchor="middle" fill="#7c3aed">Creative</text>
+          <rect x="76" width="64" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="108" y="13" text-anchor="middle" fill="#4f46e5">Bilingual</text>
+          <rect x="148" width="72" height="18" rx="9" fill="#f5f5f4" stroke="#e7e5e4"/><text x="184" y="13" text-anchor="middle" fill="#57534e">Video</text>
+        </g>
+        <rect x="20" y="202" width="120" height="28" rx="14" fill="#1c1917"/><text x="80" y="220" text-anchor="middle" font-size="10" fill="#fff">Deploy</text>
+        <rect x="148" y="202" width="100" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="198" y="220" text-anchor="middle" font-size="10" fill="#57534e">Customize</text>
+        <rect x="256" y="202" width="80" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="296" y="220" text-anchor="middle" font-size="10" fill="#57534e">Preview</text>
+      </g>
+      <g transform="translate(452,0)">
+        <rect width="432" height="250" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+        <rect x="20" y="20" width="44" height="44" rx="12" fill="#ecfdf5" stroke="#a7f3d0"/><path d="M36 36l5 5 10-10" stroke="#059669" stroke-width="1.8" fill="none"/>
+        <text x="76" y="38" font-size="15" font-weight="600" fill="#1c1917">DSE Adaptive Tutor</text>
+        <text x="76" y="56" font-size="10" fill="#78716c">Hong Kong DSE ICT education</text>
+        <g transform="translate(20,76)" font-size="9">
+          <rect width="180" height="18" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/><text x="10" y="13" fill="#047857">Pattern: Verification Loop v1.2</text>
+          <rect x="188" width="100" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="198" y="13" fill="#4f46e5">5 Agents</text>
+        </g>
+        <text x="20" y="118" font-size="10" fill="#57534e">Diagnostic → generate → verify → adapt.</text>
+        <text x="20" y="136" font-size="10" fill="#059669">64 deployments · 96% · by @edu-team</text>
+        <g transform="translate(20,148)" font-size="14" fill="#fbbf24"><text x="0" y="0">★★★★★</text><text x="80" y="0" font-size="9" fill="#78716c">4.8 (52)</text></g>
+        <g transform="translate(20,170)" font-size="9">
+          <rect width="76" height="18" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/><text x="38" y="13" text-anchor="middle" fill="#047857">Education</text>
+          <rect x="84" width="72" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="120" y="13" text-anchor="middle" fill="#4f46e5">Adaptive</text>
+          <rect x="164" width="60" height="18" rx="9" fill="#f5f5f4" stroke="#e7e5e4"/><text x="194" y="13" text-anchor="middle" fill="#57534e">繁中</text>
+        </g>
+        <rect x="20" y="202" width="120" height="28" rx="14" fill="#1c1917"/><text x="80" y="220" text-anchor="middle" font-size="10" fill="#fff">Deploy</text>
+        <rect x="148" y="202" width="100" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="198" y="220" text-anchor="middle" font-size="10" fill="#57534e">Customize</text>
+        <rect x="256" y="202" width="80" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="296" y="220" text-anchor="middle" font-size="10" fill="#57534e">Preview</text>
+      </g>
+      <g transform="translate(904,0)">
+        <rect width="432" height="250" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+        <rect x="20" y="20" width="44" height="44" rx="12" fill="#fffbeb" stroke="#fde68a"/><path d="M42 30v24M34 36l8-6 8 6" stroke="#d97706" stroke-width="1.6" fill="none"/>
+        <text x="76" y="38" font-size="15" font-weight="600" fill="#1c1917">Legacy Code Modernizer</text>
+        <text x="76" y="56" font-size="10" fill="#78716c">Automated codebase refactoring</text>
+        <g transform="translate(20,76)" font-size="9">
+          <rect width="190" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="10" y="13" fill="#4f46e5">Pattern: Map-Reduce + Verifier v1.1</text>
+          <rect x="198" width="100" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="208" y="13" fill="#4f46e5">7 Agents</text>
+        </g>
+        <text x="20" y="118" font-size="10" fill="#57534e">Analyze → plan → refactor → verify → PR.</text>
+        <text x="20" y="136" font-size="10" fill="#059669">42 deployments · 87% · by @dev-team</text>
+        <g transform="translate(20,148)" font-size="14" fill="#fbbf24"><text x="0" y="0">★★★★☆</text><text x="80" y="0" font-size="9" fill="#78716c">4.3 (19)</text></g>
+        <g transform="translate(20,170)" font-size="9">
+          <rect width="56" height="18" rx="9" fill="#fffbeb" stroke="#fde68a"/><text x="28" y="13" text-anchor="middle" fill="#b45309">DevOps</text>
+          <rect x="64" width="80" height="18" rx="9" fill="#f5f5f4" stroke="#e7e5e4"/><text x="104" y="13" text-anchor="middle" fill="#57534e">Refactoring</text>
+          <rect x="152" width="56" height="18" rx="9" fill="#fef2f2" stroke="#fecaca"/><text x="180" y="13" text-anchor="middle" fill="#dc2626">β Beta</text>
+        </g>
+        <rect x="20" y="202" width="120" height="28" rx="14" fill="#1c1917"/><text x="80" y="220" text-anchor="middle" font-size="10" fill="#fff">Deploy</text>
+        <rect x="148" y="202" width="100" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="198" y="220" text-anchor="middle" font-size="10" fill="#57534e">Customize</text>
+        <rect x="256" y="202" width="80" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="296" y="220" text-anchor="middle" font-size="10" fill="#57534e">Preview</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(40,720)">
+    <text x="0" y="0" font-size="12" font-weight="600" fill="#57534e">Create Your Own Blueprint</text>
+    <text x="0" y="20" font-size="10" fill="#78716c">Save any working swarm as a reusable blueprint, optionally publish to the gallery.</text>
+    <rect y="30" width="200" height="34" rx="17" fill="#7c3aed"/><text x="100" y="52" text-anchor="middle" font-size="12" fill="#fff">Save Current Swarm as Blueprint</text>
+    <rect x="210" y="30" width="200" height="34" rx="17" fill="#fff" stroke="#e7e5e4"/><text x="310" y="52" text-anchor="middle" font-size="12" fill="#57534e">Import from JSON / YAML</text>
+    <text x="0" y="86" font-size="9" fill="#a8a29e">Blueprints include: pattern graph + pinned agent versions + knowledge sources + default config.</text>
+    <text x="0" y="102" font-size="9" fill="#a8a29e">Publishing requires evaluation pass. Commons provenance preserved in all derivatives.</text>
+  </g>
+</svg>

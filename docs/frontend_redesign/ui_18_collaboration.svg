@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1c1917" flood-opacity="0.06"/></filter></defs>
+  <rect width="1440" height="1000" fill="#ffffff"/>
+  <!-- HEADER -->
+  <rect width="1440" height="56" fill="#fff"/><line x1="0" y1="56" x2="1440" y2="56" stroke="#e7e5e4"/>
+  <rect x="24" y="15" width="26" height="26" rx="8" fill="#4f46e5"/><g stroke="#fff" stroke-width="1.4" fill="none"><circle cx="37" cy="24" r="1.9"/><circle cx="31" cy="34" r="1.9"/><circle cx="43" cy="34" r="1.9"/><path d="M37 26l-6 7M37 26l6 7M31.6 34h10.8"/></g>
+  <text x="60" y="33" font-size="12" fill="#a8a29e">Collaboration &amp; Sharing</text>
+  <rect x="560" y="13" width="320" height="30" rx="8" fill="#f5f5f4" stroke="#e7e5e4"/><text x="578" y="32" font-size="12" fill="#a8a29e">Search shared items…  ⌘K</text>
+  <circle cx="1360" cy="28" r="14" fill="#fafaf9" stroke="#e7e5e4"/><circle cx="1404" cy="28" r="15" fill="#eef2ff" stroke="#c7d2fe"/><text x="1404" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">NH</text>
+
+  <text x="40" y="94" font-size="24" font-weight="700" fill="#1c1917">Collaboration &amp; Sharing Hub</text>
+  <text x="40" y="116" font-size="13" fill="#78716c">Share swarms, contribute back to commons, manage team workflows &amp; live co-editing.</text>
+
+  <!-- tabs -->
+  <g transform="translate(40,134)" font-size="11">
+    <line x1="0" y1="28" x2="1360" y2="28" stroke="#e7e5e4"/>
+    <text x="8" y="18" font-weight="600" fill="#1c1917">Shared with me</text><rect x="0" y="26" width="108" height="2.5" fill="#1c1917"/>
+    <text x="140" y="18" fill="#78716c">My shares</text><text x="240" y="18" fill="#78716c">Contribution proposals</text><text x="420" y="18" fill="#78716c">Team activity</text>
+  </g>
+
+  <!-- Shared items list -->
+  <g transform="translate(40,180)">
+    <rect width="820" height="600" rx="14" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <g font-size="10" fill="#a8a29e"><text x="20" y="28">ITEM</text><text x="320" y="28">SHARED BY</text><text x="500" y="28">SCOPE</text><text x="650" y="28">ACTIONS</text></g>
+    <line x1="16" y1="36" x2="804" y2="36" stroke="#f5f5f4"/>
+    <!-- items -->
+    <g font-size="11" fill="#44403c">
+      <g transform="translate(0,46)">
+        <rect x="20" y="0" width="28" height="28" rx="7" fill="#eef2ff"/><text x="34" y="19" text-anchor="middle" font-size="12" fill="#4f46e5">⊞</text>
+        <text x="56" y="14" font-weight="600" fill="#1c1917">TradingResearch α (Swarm)</text>
+        <text x="56" y="30" font-size="9" fill="#4f46e5">Parallel + Verify v1.4 · 8 agents</text>
+        <text x="320" y="14">Ava Lin</text><text x="320" y="30" font-size="9" fill="#78716c">Jul 18 · Editor</text>
+        <rect x="492" y="4" width="86" height="18" rx="9" fill="#eef2ff" stroke="#c7d2fe"/><text x="535" y="17" text-anchor="middle" font-size="8" fill="#4f46e5">Team: Trading</text>
+        <rect x="642" y="2" width="70" height="22" rx="11" fill="#1c1917"/><text x="677" y="17" text-anchor="middle" font-size="9" fill="#fff">Open</text>
+        <rect x="718" y="2" width="70" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="753" y="17" text-anchor="middle" font-size="9" fill="#57534e">Duplicate</text>
+        <line x1="16" y1="40" x2="804" y2="40" stroke="#f5f5f4"/>
+      </g>
+      <g transform="translate(0,98)">
+        <rect x="20" y="0" width="28" height="28" rx="7" fill="#ecfdf5"/><path d="M27 14l5 5 10-10" stroke="#059669" stroke-width="1.4" fill="none"/>
+        <text x="56" y="14" font-weight="600" fill="#1c1917">VerifierNode v3.0 (Common Agent)</text>
+        <text x="56" y="30" font-size="9" fill="#059669">Common · 97% success · 31.2k runs</text>
+        <text x="320" y="14">Ecosystem</text><text x="320" y="30" font-size="9" fill="#78716c">Jul 12 · Viewer</text>
+        <rect x="492" y="4" width="62" height="18" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/><text x="523" y="17" text-anchor="middle" font-size="8" fill="#047857">Public</text>
+        <rect x="642" y="2" width="70" height="22" rx="11" fill="#1c1917"/><text x="677" y="17" text-anchor="middle" font-size="9" fill="#fff">Add</text>
+        <rect x="718" y="2" width="70" height="22" rx="11" fill="#fff" stroke="#ddd6fe"/><text x="753" y="17" text-anchor="middle" font-size="9" fill="#7c3aed">Propose</text>
+        <line x1="16" y1="40" x2="804" y2="40" stroke="#f5f5f4"/>
+      </g>
+      <g transform="translate(0,150)">
+        <rect x="20" y="0" width="28" height="28" rx="7" fill="#f5f3ff"/><text x="34" y="19" text-anchor="middle" font-size="14" fill="#7c3aed">◇</text>
+        <text x="56" y="14" font-weight="600" fill="#1c1917">Dynamic Router Pattern (Template)</text>
+        <text x="56" y="30" font-size="9" fill="#7c3aed">Pattern · 89% · 112 swarms</text>
+        <text x="320" y="14">Bob Wu</text><text x="320" y="30" font-size="9" fill="#78716c">Jul 15 · Viewer</text>
+        <rect x="492" y="4" width="86" height="18" rx="9" fill="#f5f3ff" stroke="#ddd6fe"/><text x="535" y="17" text-anchor="middle" font-size="8" fill="#7c3aed">Content team</text>
+        <rect x="642" y="2" width="70" height="22" rx="11" fill="#1c1917"/><text x="677" y="17" text-anchor="middle" font-size="9" fill="#fff">Open</text>
+        <line x1="16" y1="40" x2="804" y2="40" stroke="#f5f5f4"/>
+      </g>
+    </g>
+    <!-- share dialog -->
+    <g transform="translate(20,268)">
+      <text x="0" y="14" font-size="13" font-weight="600" fill="#1c1917">Share TradingResearch α</text>
+      <rect x="0" y="24" width="400" height="34" rx="8" fill="#fafaf9" stroke="#e7e5e4"/><text x="12" y="46" font-size="11" fill="#a8a29e">Add people or teams…</text>
+      <g transform="translate(0,68)" font-size="10">
+        <circle cx="12" cy="12" r="10" fill="#eef2ff"/><text x="12" y="16" text-anchor="middle" font-size="8" fill="#4f46e5">NH</text><text x="30" y="12" fill="#1c1917">Nicholas Hui</text><text x="30" y="26" fill="#78716c">Owner</text>
+        <rect x="300" y="2" width="80" height="22" rx="11" fill="#f5f5f4"/><text x="340" y="17" text-anchor="middle" fill="#57534e">Owner ▾</text>
+      </g>
+      <g transform="translate(0,104)" font-size="10">
+        <circle cx="12" cy="12" r="10" fill="#f5f5f4"/><text x="12" y="16" text-anchor="middle" font-size="8" fill="#57534e">AL</text><text x="30" y="12" fill="#1c1917">Ava Lin</text><text x="30" y="26" fill="#78716c">Editor</text>
+        <rect x="300" y="2" width="80" height="22" rx="11" fill="#f5f5f4"/><text x="340" y="17" text-anchor="middle" fill="#57534e">Editor ▾</text>
+      </g>
+      <line x1="0" y1="140" x2="400" y2="140" stroke="#f5f5f4"/>
+      <text x="0" y="160" font-size="10" fill="#57534e">Link sharing</text>
+      <rect x="0" y="168" width="400" height="26" rx="8" fill="#fafaf9" stroke="#e7e5e4"/><text x="12" y="186" font-size="9" font-family="ui-monospace,monospace" fill="#a8a29e">https://caso.local/s/tr-alpha-7f2a</text>
+      <rect x="320" y="170" width="70" height="22" rx="11" fill="#1c1917"/><text x="355" y="185" text-anchor="middle" font-size="9" fill="#fff">Copy link</text>
+      <text x="0" y="214" font-size="9" fill="#a8a29e">Access controlled server-side · link can be revoked anytime.</text>
+    </g>
+  </g>
+
+  <!-- Right: contribute back + live presence -->
+  <g transform="translate(880,180)">
+    <rect width="480" height="290" rx="14" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <text x="20" y="30" font-size="14" font-weight="600" fill="#1c1917">Contribute Back to Commons</text>
+    <text x="20" y="50" font-size="10" fill="#78716c">Turn your custom agents &amp; verified improvements into shared commons.</text>
+    <!-- candidate list -->
+    <g transform="translate(20,64)">
+      <rect width="440" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/>
+      <rect width="4" height="56" rx="2" fill="#f59e0b"/>
+      <text x="16" y="20" font-size="11" font-weight="600" fill="#1c1917">CustomReportAgent</text>
+      <text x="16" y="38" font-size="9" fill="#57534e">Fork of Common v2.3 · used 312 times · 93% success</text>
+      <rect x="310" y="14" width="116" height="28" rx="14" fill="#7c3aed"/><text x="368" y="32" text-anchor="middle" font-size="10" fill="#fff">Propose to Registry</text>
+    </g>
+    <g transform="translate(20,128)">
+      <rect width="440" height="56" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+      <text x="16" y="20" font-size="11" font-weight="600" fill="#1c1917">Improved SentimentAgent</text>
+      <text x="16" y="38" font-size="9" fill="#57534e">Fork of v1.9 · +5% quality · 12 swarm runs verified</text>
+      <rect x="310" y="14" width="116" height="28" rx="14" fill="#fff" stroke="#ddd6fe"/><text x="368" y="32" text-anchor="middle" font-size="10" fill="#7c3aed">Create Proposal</text>
+    </g>
+    <text x="20" y="218" font-size="9" fill="#a8a29e">Proposals go through eval + review before merge. Provenance &amp; attribution preserved.</text>
+    <line x1="20" y1="232" x2="460" y2="232" stroke="#f5f5f4"/>
+    <text x="20" y="256" font-size="11" font-weight="600" fill="#57534e">Your ecosystem impact</text>
+    <text x="20" y="276" font-size="10" fill="#059669">18 contributions merged · $3.1k savings driven · rank #12</text>
+  </g>
+
+  <!-- Live presence / co-editing -->
+  <g transform="translate(880,490)">
+    <rect width="480" height="196" rx="14" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <text x="20" y="30" font-size="14" font-weight="600" fill="#1c1917">Live Co-Editing</text>
+    <text x="20" y="50" font-size="10" fill="#78716c">Real-time collaboration on swarm canvases.</text>
+    <g transform="translate(20,64)">
+      <rect width="440" height="56" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+      <text x="16" y="24" font-size="11" font-weight="600" fill="#1c1917">TradingResearch α — Canvas</text>
+      <g transform="translate(16,32)" font-size="9">
+        <circle cx="8" cy="8" r="8" fill="#eef2ff" stroke="#4f46e5"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#4f46e5">NH</text>
+        <circle cx="26" cy="8" r="8" fill="#f5f5f4" stroke="#a7f3d0"/><text x="26" y="11" text-anchor="middle" font-size="7" fill="#047857">AL</text>
+        <text x="44" y="11" fill="#78716c">2 editing now</text>
+      </g>
+      <rect x="330" y="16" width="96" height="24" rx="12" fill="#1c1917"/><text x="378" y="32" text-anchor="middle" font-size="10" fill="#fff">Join session</text>
+    </g>
+    <g transform="translate(20,132)">
+      <rect width="440" height="44" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+      <text x="16" y="18" font-size="11" font-weight="600" fill="#1c1917">ContentPipeline β — Canvas</text>
+      <text x="16" y="34" font-size="9" fill="#78716c">No one editing · last edit 2h ago</text>
+    </g>
+  </g>
+
+  <!-- Team activity feed -->
+  <g transform="translate(880,706)">
+    <rect width="480" height="254" rx="14" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="20" y="30" font-size="14" font-weight="600" fill="#1c1917">Team Activity</text>
+    <g transform="translate(20,44)" font-size="10" fill="#57534e">
+      <g><circle cx="8" cy="8" r="6" fill="#f5f5f4"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#57534e">AL</text><text x="22" y="12" fill="#1c1917">Ava Lin</text><text x="22" y="28" fill="#78716c">Merged VerifierNode v3.0 → 47 swarms</text><text x="370" y="12" fill="#a8a29e">2h ago</text><line x1="0" y1="36" x2="440" y2="36" stroke="#e7e5e4"/></g>
+      <g transform="translate(0,44)"><circle cx="8" cy="8" r="6" fill="#f5f5f4"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#57534e">BW</text><text x="22" y="12" fill="#1c1917">Bob Wu</text><text x="22" y="28" fill="#78716c">Shared Dynamic Router pattern with Content team</text><text x="370" y="12" fill="#a8a29e">4h ago</text><line x1="0" y1="36" x2="440" y2="36" stroke="#e7e5e4"/></g>
+      <g transform="translate(0,88)"><circle cx="8" cy="8" r="6" fill="#eef2ff"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#4f46e5">NH</text><text x="22" y="12" fill="#1c1917">Nicholas Hui</text><text x="22" y="28" fill="#78716c">Proposed DataFetcher v2.2 improvement</text><text x="370" y="12" fill="#a8a29e">6h ago</text><line x1="0" y1="36" x2="440" y2="36" stroke="#e7e5e4"/></g>
+      <g transform="translate(0,132)"><circle cx="8" cy="8" r="6" fill="#f5f3ff"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#7c3aed">MC</text><text x="22" y="12" fill="#7c3aed">meta-critic</text><text x="22" y="28" fill="#78716c">Auto-proposed ReportAgent v3.0 from 2.1k traces</text><text x="370" y="12" fill="#a8a29e">8h ago</text></g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1480" viewBox="0 0 1440 1480" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1c1917" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="1480" fill="#ffffff"/>
+
+  <!-- ===== GLOBAL HEADER ===== -->
+  <g>
+    <rect width="1440" height="56" fill="#ffffff"/>
+    <line x1="0" y1="56" x2="1440" y2="56" stroke="#e7e5e4"/>
+    <rect x="24" y="15" width="26" height="26" rx="8" fill="#4f46e5"/>
+    <g stroke="#fff" stroke-width="1.4" fill="none"><circle cx="37" cy="24" r="1.9"/><circle cx="31" cy="34" r="1.9"/><circle cx="43" cy="34" r="1.9"/><path d="M37 26l-6 7M37 26l6 7M31.6 34h10.8"/></g>
+    <text x="60" y="33" font-size="13" font-weight="600" fill="#1c1917">caso</text>
+    <!-- workspace switcher -->
+    <rect x="112" y="14" width="168" height="28" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+    <circle cx="128" cy="28" r="4" fill="#4f46e5"/>
+    <text x="140" y="32" font-size="12" font-weight="500" fill="#44403c">Trading Lab</text>
+    <path d="M266 26l4 4 4-4" stroke="#a8a29e" stroke-width="1.4" fill="none"/>
+    <!-- command palette -->
+    <rect x="560" y="13" width="320" height="30" rx="8" fill="#f5f5f4" stroke="#e7e5e4"/>
+    <circle cx="578" cy="28" r="5" fill="none" stroke="#a8a29e" stroke-width="1.4"/><path d="M582 32l3 3" stroke="#a8a29e" stroke-width="1.4"/>
+    <text x="594" y="32" font-size="12" fill="#a8a29e">Search commons, run ops actions…</text>
+    <rect x="838" y="20" width="34" height="16" rx="4" fill="#e7e5e4"/><text x="855" y="31" text-anchor="middle" font-size="10" fill="#78716c">⌘K</text>
+    <!-- bell + avatar -->
+    <circle cx="1360" cy="28" r="14" fill="#fafaf9" stroke="#e7e5e4"/>
+    <path d="M1360 21c-3 0-4 2-4 5v3l-1 2h10l-1-2v-3c0-3-1-5-4-5z" fill="none" stroke="#57534e" stroke-width="1.3"/>
+    <circle cx="1368" cy="21" r="4" fill="#ef4444"/><text x="1368" y="24" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">3</text>
+    <circle cx="1404" cy="28" r="15" fill="#eef2ff" stroke="#c7d2fe"/><text x="1404" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="#4f46e5">NH</text>
+  </g>
+
+  <!-- page title -->
+  <text x="40" y="98" font-size="28" font-weight="700" fill="#1c1917">Common Health &amp; Fleet Ops</text>
+  <text x="40" y="122" font-size="13" fill="#78716c">Operating on a living, collectively improving commons foundation.</text>
+  <!-- freshness label -->
+  <g transform="translate(1180,84)">
+    <rect width="220" height="26" rx="13" fill="#ecfdf5" stroke="#a7f3d0"/>
+    <circle cx="16" cy="13" r="4" fill="#10b981"/>
+    <text x="28" y="17" font-size="11" font-weight="500" fill="#047857">Live · SSE connected · as_of just now</text>
+  </g>
+
+  <!-- ===== COMMON HEALTH ROW (stat cards) ===== -->
+  <text x="40" y="162" font-size="11" font-weight="700" letter-spacing="1.5" fill="#a8a29e">COMMON HEALTH</text>
+  <g transform="translate(40,174)">
+    <!-- card 1 -->
+    <g filter="url(#sh)"><rect width="264" height="120" rx="16" fill="#fff" stroke="#e7e5e4"/></g>
+    <text x="20" y="34" font-size="12" fill="#78716c">Common Agents Active</text>
+    <text x="20" y="72" font-size="34" font-weight="700" fill="#1c1917" font-family="ui-monospace, monospace">87</text>
+    <text x="90" y="72" font-size="12" fill="#78716c">versions · 142 swarms</text>
+    <polyline points="20,100 50,92 80,96 110,84 140,88 170,74 200,80 244,66" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="20" y="112" font-size="11" fill="#059669">↑ 4 new improvements this week</text>
+
+    <g transform="translate(288,0)">
+      <g filter="url(#sh)"><rect width="264" height="120" rx="16" fill="#fff" stroke="#e7e5e4"/></g>
+      <text x="20" y="34" font-size="12" fill="#78716c">Global Success Rate</text>
+      <text x="20" y="72" font-size="34" font-weight="700" fill="#1c1917" font-family="ui-monospace, monospace">91.4%</text>
+      <text x="120" y="72" font-size="12" fill="#059669">↑ 1.2%</text>
+      <polyline points="20,104 50,100 80,102 110,94 140,96 170,88 200,90 244,82" fill="none" stroke="#10b981" stroke-width="2"/>
+    </g>
+
+    <g transform="translate(576,0)">
+      <g filter="url(#sh)"><rect width="264" height="120" rx="16" fill="#fff" stroke="#ddd6fe"/></g>
+      <text x="20" y="34" font-size="12" fill="#78716c">Pending Improvement Proposals</text>
+      <text x="20" y="80" font-size="42" font-weight="700" fill="#7c3aed" font-family="ui-monospace, monospace">3</text>
+      <rect x="150" y="52" width="94" height="26" rx="13" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="197" y="69" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="500">Review →</text>
+      <text x="20" y="104" font-size="11" fill="#78716c">2 from meta-critic · 1 awaiting merge</text>
+    </g>
+
+    <g transform="translate(864,0)">
+      <g filter="url(#sh)"><rect width="220" height="120" rx="16" fill="#fff" stroke="#e7e5e4"/></g>
+      <text x="20" y="34" font-size="12" fill="#78716c">Your Fleet Health</text>
+      <text x="20" y="72" font-size="34" font-weight="700" fill="#059669" font-family="ui-monospace, monospace">94%</text>
+      <text x="20" y="98" font-size="11" fill="#78716c">12 swarms on latest commons</text>
+    </g>
+
+    <g transform="translate(1108,0)">
+      <g filter="url(#sh)"><rect width="252" height="120" rx="16" fill="#fff" stroke="#e7e5e4"/></g>
+      <text x="20" y="34" font-size="12" fill="#78716c">Est. Monthly Savings</text>
+      <text x="20" y="72" font-size="34" font-weight="700" fill="#1c1917" font-family="ui-monospace, monospace">$412</text>
+      <text x="20" y="98" font-size="11" fill="#78716c">from commons token efficiency</text>
+    </g>
+  </g>
+
+  <!-- ===== QUICK COMMON ACTIONS ===== -->
+  <text x="40" y="344" font-size="11" font-weight="700" letter-spacing="1.5" fill="#a8a29e">QUICK ACTIONS</text>
+  <g transform="translate(40,356)">
+    <rect width="430" height="72" rx="16" fill="#4f46e5"/>
+    <rect x="20" y="20" width="32" height="32" rx="9" fill="#6366f1"/>
+    <text x="66" y="34" font-size="15" font-weight="600" fill="#fff">Explore Common Registry Hub</text>
+    <text x="66" y="54" font-size="12" fill="#c7d2fe">Discover versioned agents &amp; patterns  →</text>
+
+    <g transform="translate(446,0)">
+      <rect width="430" height="72" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <rect x="20" y="20" width="32" height="32" rx="9" fill="#eef2ff"/>
+      <text x="66" y="34" font-size="15" font-weight="600" fill="#1c1917">Compose from Common Patterns</text>
+      <text x="66" y="54" font-size="12" fill="#78716c">Parallel · verification loop · router  →</text>
+    </g>
+    <g transform="translate(892,0)">
+      <rect width="428" height="72" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <rect x="20" y="20" width="32" height="32" rx="9" fill="#f5f3ff"/>
+      <text x="66" y="34" font-size="15" font-weight="600" fill="#1c1917">Review Improvement Proposals</text>
+      <text x="66" y="54" font-size="12" fill="#78716c">3 pending for commons you use  →</text>
+    </g>
+  </g>
+
+  <!-- ===== YOUR SWARMS FLEET OPS ===== -->
+  <text x="40" y="490" font-size="20" font-weight="600" fill="#1c1917">Your Swarms Fleet Ops</text>
+
+  <!-- Running Now -->
+  <text x="40" y="524" font-size="12" font-weight="600" fill="#57534e">Running Now</text>
+  <g transform="translate(40,536)">
+    <!-- swarm running card -->
+    <rect width="640" height="96" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <text x="20" y="30" font-size="14" font-weight="600" fill="#1c1917">TradingResearch α</text>
+    <rect x="150" y="16" width="78" height="20" rx="10" fill="#eff6ff" stroke="#bfdbfe"/><circle cx="163" cy="26" r="3" fill="#3b82f6"/><text x="172" y="30" font-size="10" fill="#1d4ed8">Running</text>
+    <rect x="20" y="44" width="220" height="20" rx="6" fill="#eef2ff"/><text x="30" y="58" font-size="10" fill="#4f46e5">Parallel Indep. + Verify v1.4</text>
+    <text x="20" y="82" font-size="11" fill="#78716c">8/8 on latest common · elapsed 12m · $0.14/min</text>
+    <!-- progress -->
+    <rect x="330" y="44" width="290" height="6" rx="3" fill="#f5f5f4"/><rect x="330" y="44" width="200" height="6" rx="3" fill="#3b82f6"/>
+    <rect x="452" y="70" width="80" height="22" rx="11" fill="#1c1917"/><text x="492" y="85" text-anchor="middle" font-size="10" fill="#fff">View Canvas</text>
+    <rect x="540" y="70" width="80" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="580" y="85" text-anchor="middle" font-size="10" fill="#57534e">Pause</text>
+
+    <g transform="translate(0,108)">
+      <rect width="640" height="96" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="20" y="30" font-size="14" font-weight="600" fill="#1c1917">ContentPipeline β</text>
+      <rect x="150" y="16" width="60" height="20" rx="10" fill="#ecfdf5" stroke="#a7f3d0"/><circle cx="163" cy="26" r="3" fill="#10b981"/><text x="172" y="30" font-size="10" fill="#047857">Live</text>
+      <rect x="20" y="44" width="240" height="20" rx="6" fill="#eef2ff"/><text x="30" y="58" font-size="10" fill="#4f46e5">Hierarchical Supervisor v2.0</text>
+      <text x="20" y="82" font-size="11" fill="#78716c">5/5 on latest common · elapsed 4m · $0.06/min</text>
+      <rect x="330" y="44" width="290" height="6" rx="3" fill="#f5f5f4"/><rect x="330" y="44" width="120" height="6" rx="3" fill="#10b981"/>
+      <rect x="452" y="70" width="80" height="22" rx="11" fill="#1c1917"/><text x="492" y="85" text-anchor="middle" font-size="10" fill="#fff">View Canvas</text>
+      <rect x="540" y="70" width="80" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="580" y="85" text-anchor="middle" font-size="10" fill="#57534e">Pause</text>
+    </g>
+  </g>
+
+  <!-- Recent Activity table -->
+  <text x="704" y="524" font-size="12" font-weight="600" fill="#57534e">Recent Activity</text>
+  <text x="1360" y="524" text-anchor="end" font-size="11" fill="#4f46e5">View all →</text>
+  <g transform="translate(704,536)">
+    <rect width="656" height="204" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <!-- head -->
+    <text x="20" y="26" font-size="10" fill="#a8a29e">TIME</text>
+    <text x="90" y="26" font-size="10" fill="#a8a29e">SWARM · PATTERN</text>
+    <text x="330" y="26" font-size="10" fill="#a8a29e">COMMONS</text>
+    <text x="430" y="26" font-size="10" fill="#a8a29e">STATUS</text>
+    <text x="540" y="26" font-size="10" fill="#a8a29e">ACTION</text>
+    <line x1="16" y1="34" x2="640" y2="34" stroke="#f5f5f4"/>
+    <!-- rows -->
+    <g font-size="11" fill="#44403c">
+      <g transform="translate(0,44)">
+        <text x="20" y="14">2m</text><text x="90" y="14" fill="#1c1917" font-weight="500">TradingResearch α</text><text x="90" y="28" fill="#4f46e5" font-size="9">Parallel + Verify v1.4</text>
+        <text x="330" y="14">7 · v2.1</text>
+        <rect x="424" y="4" width="66" height="18" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/><text x="457" y="17" text-anchor="middle" font-size="9" fill="#047857">Complete</text>
+        <text x="540" y="14" fill="#4f46e5">Replay ↻</text>
+        <line x1="16" y1="34" x2="640" y2="34" stroke="#f5f5f4"/>
+      </g>
+      <g transform="translate(0,88)">
+        <text x="20" y="14">8m</text><text x="90" y="14" fill="#1c1917" font-weight="500">ContentPipeline β</text><text x="90" y="28" fill="#4f46e5" font-size="9">Hierarchical v2.0</text>
+        <text x="330" y="14">5 · v1.8</text>
+        <rect x="424" y="4" width="86" height="18" rx="9" fill="#faf5ff" stroke="#e9d5ff"/><text x="467" y="17" text-anchor="middle" font-size="9" fill="#7e22ce">Self-Refining</text>
+        <text x="540" y="14" fill="#4f46e5">Replay ↻</text>
+        <line x1="16" y1="34" x2="640" y2="34" stroke="#f5f5f4"/>
+      </g>
+      <g transform="translate(0,132)">
+        <text x="20" y="14">1h</text><text x="90" y="14" fill="#1c1917" font-weight="500">DSE Tutor Fleet</text><text x="90" y="28" fill="#4f46e5" font-size="9">Verification Loop v1.2</text>
+        <text x="330" y="14">4 · v1.2</text>
+        <rect x="424" y="4" width="66" height="18" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/><text x="457" y="17" text-anchor="middle" font-size="9" fill="#047857">Complete</text>
+        <text x="540" y="14" fill="#4f46e5">Replay ↻</text>
+        <line x1="16" y1="34" x2="640" y2="34" stroke="#f5f5f4"/>
+      </g>
+      <g transform="translate(0,176)">
+        <text x="20" y="14">3h</text><text x="90" y="14" fill="#1c1917" font-weight="500">LegacyModernizer</text><text x="90" y="28" fill="#4f46e5" font-size="9">Map-Reduce + Verifier v1.1</text>
+        <text x="330" y="14">3 · v2.0</text>
+        <rect x="424" y="4" width="54" height="18" rx="9" fill="#fef2f2" stroke="#fecaca"/><text x="451" y="17" text-anchor="middle" font-size="9" fill="#dc2626">Failed</text>
+        <text x="540" y="14" fill="#4f46e5">Debug →</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ===== COMMON IMPACT INSIGHTS ===== -->
+  <text x="40" y="792" font-size="20" font-weight="600" fill="#1c1917">Common Impact Insights</text>
+  <text x="40" y="812" font-size="12" fill="#78716c">AI-generated from Ops service &amp; meta-critic aggregate analysis.</text>
+
+  <!-- opportunity card -->
+  <g transform="translate(40,830)">
+    <rect width="860" height="120" rx="16" fill="#fff" stroke="#c7d2fe" filter="url(#sh)"/>
+    <rect width="5" height="120" rx="2.5" fill="#f59e0b"/>
+    <rect x="24" y="24" width="44" height="44" rx="12" fill="#eef2ff"/><path d="M46 34l-8 14h8l-2 12 10-16h-8z" fill="#4f46e5"/>
+    <text x="88" y="42" font-size="15" font-weight="600" fill="#1c1917">Rollout Opportunity</text>
+    <rect x="270" y="28" width="86" height="20" rx="10" fill="#eef2ff" stroke="#c7d2fe"/><text x="313" y="42" text-anchor="middle" font-size="10" fill="#4f46e5">19 swarms</text>
+    <text x="88" y="64" font-size="12" fill="#57534e">Updating CommonReportAgent v2.1 → v2.2 improves 19 active swarms by +15% latency, saves ~$47/mo.</text>
+    <rect x="88" y="78" width="128" height="28" rx="14" fill="#1c1917"/><text x="152" y="96" text-anchor="middle" font-size="11" fill="#fff">Approve Rollout</text>
+    <rect x="224" y="78" width="108" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="278" y="96" text-anchor="middle" font-size="11" fill="#57534e">A/B Test First</text>
+    <rect x="340" y="78" width="104" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="392" y="96" text-anchor="middle" font-size="11" fill="#57534e">View Diff</text>
+  </g>
+  <!-- collective card -->
+  <g transform="translate(920,830)">
+    <rect width="440" height="120" rx="16" fill="#fff" stroke="#ddd6fe" filter="url(#sh)"/>
+    <rect width="5" height="120" rx="2.5" fill="#7c3aed"/>
+    <rect x="24" y="24" width="44" height="44" rx="12" fill="#f5f3ff"/><path d="M46 32a10 10 0 100 20 10 10 0 000-20zm0 4a6 6 0 110 12 6 6 0 010-12z" fill="#7c3aed"/>
+    <text x="88" y="42" font-size="15" font-weight="600" fill="#1c1917">Collective Intelligence</text>
+    <text x="88" y="66" font-size="12" fill="#57534e">Your usage data helped improve 4 common</text>
+    <text x="88" y="82" font-size="12" fill="#57534e">agents this month across the ecosystem.</text>
+    <text x="88" y="104" font-size="11" fill="#4f46e5">View collective impact →</text>
+  </g>
+
+  <!-- ===== CONTROL-PLANE HEALTH / FRESHNESS PANEL ===== -->
+  <text x="40" y="1000" font-size="20" font-weight="600" fill="#1c1917">Control-Plane Health &amp; Freshness</text>
+  <g transform="translate(40,1018)">
+    <rect width="1320" height="128" rx="16" fill="#fafaf9" stroke="#e7e5e4"/>
+    <!-- API health -->
+    <g transform="translate(24,24)">
+      <text x="0" y="0" font-size="11" fill="#78716c">API / Projection Health</text>
+      <rect x="0" y="12" width="120" height="24" rx="12" fill="#ecfdf5" stroke="#a7f3d0"/><circle cx="14" cy="24" r="3.5" fill="#10b981"/><text x="26" y="28" font-size="11" fill="#047857">Healthy</text>
+      <text x="0" y="60" font-size="11" fill="#78716c">Delayed-event warning</text>
+      <rect x="0" y="72" width="150" height="24" rx="12" fill="#fefce8" stroke="#fde68a"/><text x="12" y="88" font-size="11" fill="#a16207">0 · queue nominal</text>
+    </g>
+    <!-- backlog -->
+    <g transform="translate(340,24)">
+      <text x="0" y="0" font-size="11" fill="#78716c">Queue / Run Backlog</text>
+      <text x="0" y="42" font-size="30" font-weight="700" font-family="ui-monospace, monospace" fill="#1c1917">14</text>
+      <text x="52" y="42" font-size="11" fill="#78716c">queued runs</text>
+      <text x="0" y="72" font-size="11" fill="#78716c">Approval expiry alert</text>
+      <rect x="0" y="80" width="180" height="20" rx="10" fill="#fff7ed" stroke="#fed7aa"/><text x="12" y="94" font-size="10" fill="#c2410c">1 approval expires in 8m</text>
+    </g>
+    <!-- SSE -->
+    <g transform="translate(680,24)">
+      <text x="0" y="0" font-size="11" fill="#78716c">SSE Transport</text>
+      <rect x="0" y="12" width="150" height="24" rx="12" fill="#ecfdf5" stroke="#a7f3d0"/><circle cx="14" cy="24" r="3.5" fill="#10b981"/><text x="26" y="28" font-size="11" fill="#047857">Connected · seq 4421</text>
+      <text x="0" y="60" font-size="11" fill="#78716c">Last-Event-ID validated · no gaps</text>
+      <text x="0" y="80" font-size="11" fill="#a8a29e" font-family="ui-monospace, monospace">as_of 2026-07-20T04:12Z · corr a3f9b1c2</text>
+    </g>
+    <!-- affected swarms link -->
+    <g transform="translate(1040,24)">
+      <text x="0" y="0" font-size="11" fill="#78716c">Affected swarms</text>
+      <rect x="0" y="12" width="256" height="80" rx="12" fill="#fff" stroke="#e7e5e4"/>
+      <text x="16" y="38" font-size="12" fill="#44403c">3 swarms in degraded projection</text>
+      <rect x="16" y="52" width="120" height="26" rx="13" fill="#1c1917"/><text x="76" y="69" text-anchor="middle" font-size="11" fill="#fff">View affected →</text>
+    </g>
+  </g>
+
+  <!-- footer note -->
+  <text x="40" y="1200" font-size="11" fill="#a8a29e">Last synced commons: 2026-07-20T04:12Z · Contribute to the commons by running &amp; verifying swarms · Redacted projections only — no host names or credentials shown.</text>
+
+  <!-- Pinned / Favorites -->
+  <text x="40" y="1256" font-size="12" font-weight="600" fill="#57534e">Pinned / Favorites</text>
+  <g transform="translate(40,1268)" font-size="11">
+    <rect width="200" height="60" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="16" y="26" font-weight="600" fill="#1c1917">VerificationLoopAgent</text><rect x="16" y="34" width="94" height="18" rx="9" fill="#eef2ff"/><text x="24" y="47" fill="#4f46e5" font-size="9">Common v3.0</text>
+    <g transform="translate(216,0)"><rect width="200" height="60" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="16" y="26" font-weight="600" fill="#1c1917">Parallel Indep. v1.4</text><rect x="16" y="34" width="70" height="18" rx="9" fill="#f5f3ff"/><text x="24" y="47" fill="#7c3aed" font-size="9">Pattern</text></g>
+    <g transform="translate(432,0)"><rect width="200" height="60" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="16" y="26" font-weight="600" fill="#1c1917">TradingResearch α</text><rect x="16" y="34" width="60" height="18" rx="9" fill="#eff6ff"/><text x="24" y="47" fill="#1d4ed8" font-size="9">Swarm</text></g>
+  </g>
+</svg>

@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1c1917" flood-opacity="0.06"/></filter></defs>
+  <rect width="1440" height="1000" fill="#ffffff"/>
+
+  <!-- HEADER -->
+  <rect width="1440" height="56" fill="#fff"/><line x1="0" y1="56" x2="1440" y2="56" stroke="#e7e5e4"/>
+  <rect x="24" y="15" width="26" height="26" rx="8" fill="#4f46e5"/><g stroke="#fff" stroke-width="1.4" fill="none"><circle cx="37" cy="24" r="1.9"/><circle cx="31" cy="34" r="1.9"/><circle cx="43" cy="34" r="1.9"/><path d="M37 26l-6 7M37 26l6 7M31.6 34h10.8"/></g>
+  <rect x="72" y="14" width="150" height="28" rx="8" fill="#fafaf9" stroke="#e7e5e4"/><circle cx="88" cy="28" r="4" fill="#4f46e5"/><text x="100" y="32" font-size="12" fill="#44403c">Trading Lab</text>
+  <!-- swarm name input -->
+  <rect x="236" y="14" width="330" height="28" rx="8" fill="#fff" stroke="#e7e5e4"/><text x="250" y="32" font-size="12" fill="#57534e">Untitled Swarm from Parallel + Verification</text>
+  <path d="M552 24l-3 3 3 3" stroke="#a8a29e" fill="none"/>
+  <rect x="1180" y="14" width="96" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="1228" y="32" text-anchor="middle" font-size="11" fill="#57534e">Save Draft</text>
+  <rect x="1284" y="14" width="88" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/><text x="1328" y="32" text-anchor="middle" font-size="11" fill="#57534e">Load Template</text>
+  <text x="1404" y="33" text-anchor="middle" font-size="16" fill="#a8a29e">✕</text>
+
+  <!-- title -->
+  <text x="40" y="94" font-size="24" font-weight="700" fill="#1c1917">Swarm Composer</text>
+  <text x="40" y="116" font-size="13" fill="#78716c">Turn goals into Common Pattern + Common Agent compositions — pattern-first, NL-driven.</text>
+
+  <!-- ===== LEFT: Chat Composer ===== -->
+  <g transform="translate(40,136)">
+    <rect width="760" height="824" rx="16" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+    <!-- system banner -->
+    <rect x="16" y="16" width="728" height="40" rx="10" fill="#eef2ff" stroke="#c7d2fe"/>
+    <circle cx="36" cy="36" r="8" fill="#4f46e5"/><path d="M33 36l2 2 4-4" stroke="#fff" stroke-width="1.4" fill="none"/>
+    <text x="52" y="33" font-size="11" font-weight="600" fill="#4338ca">Common Swarm Architect</text>
+    <text x="52" y="47" font-size="10" fill="#6366f1">Recommends from Registry · prioritizes verification, parallelism, token efficiency</text>
+    <text x="726" y="41" text-anchor="end" font-size="12" fill="#818cf8">⌄</text>
+
+    <!-- user msg -->
+    <g transform="translate(0,72)">
+      <rect x="360" y="0" width="384" height="52" rx="12" fill="#1c1917"/>
+      <text x="380" y="24" font-size="12" fill="#fff">Build a daily market intelligence swarm</text>
+      <text x="380" y="42" font-size="12" fill="#fff">with a report-quality verification loop.</text>
+    </g>
+
+    <!-- assistant structured msg -->
+    <g transform="translate(0,140)">
+      <circle cx="30" cy="16" r="12" fill="#eef2ff" stroke="#c7d2fe"/><text x="30" y="20" text-anchor="middle" font-size="10" fill="#4f46e5">AI</text>
+      <rect x="52" y="0" width="640" height="300" rx="12" fill="#fafaf9" stroke="#e7e5e4"/>
+      <text x="72" y="26" font-size="12" fill="#44403c">Recommended starting Common Pattern:</text>
+      <!-- rec pattern card -->
+      <rect x="72" y="38" width="600" height="72" rx="10" fill="#fff" stroke="#c7d2fe"/>
+      <rect x="88" y="54" width="40" height="40" rx="10" fill="#eef2ff"/><text x="108" y="80" text-anchor="middle" font-size="18" fill="#4f46e5">⊞</text>
+      <text x="140" y="62" font-size="13" font-weight="600" fill="#1c1917">Parallel Independent + Verification Loop v1.4</text>
+      <rect x="470" y="48" width="132" height="20" rx="10" fill="#eef2ff" stroke="#c7d2fe"/><text x="536" y="62" text-anchor="middle" font-size="9" fill="#4f46e5">Recommended for goal</text>
+      <text x="140" y="82" font-size="10" fill="#78716c">Independent branches benefit from parallel; final verifier cuts hallucinations.</text>
+      <text x="140" y="98" font-size="10" fill="#059669">Est. 23% token saving vs sequential · 94% success · 1.2k runs</text>
+      <!-- agent slots -->
+      <text x="72" y="134" font-size="11" font-weight="600" fill="#57534e">Suggested Common Agent slots</text>
+      <g font-size="10" fill="#44403c">
+        <rect x="72" y="142" width="192" height="28" rx="8" fill="#fff" stroke="#e7e5e4"/><circle cx="88" cy="156" r="4" fill="#4f46e5"/><text x="98" y="160">DataFetcher · Common v2.1</text>
+        <rect x="276" y="142" width="192" height="28" rx="8" fill="#fff" stroke="#e7e5e4"/><circle cx="292" cy="156" r="4" fill="#4f46e5"/><text x="302" y="160">SentimentAgent · v1.9</text>
+        <rect x="480" y="142" width="192" height="28" rx="8" fill="#fff" stroke="#e7e5e4"/><circle cx="496" cy="156" r="4" fill="#4f46e5"/><text x="506" y="160">MarketPredictor · v2.0</text>
+        <rect x="72" y="176" width="192" height="28" rx="8" fill="#fff" stroke="#a7f3d0"/><circle cx="88" cy="190" r="4" fill="#10b981"/><text x="98" y="194">VerifierNode · v3.0</text>
+      </g>
+      <!-- CTA -->
+      <rect x="72" y="222" width="188" height="34" rx="17" fill="#1c1917"/><text x="166" y="244" text-anchor="middle" font-size="12" fill="#fff" font-weight="500">Load into Canvas →</text>
+      <rect x="270" y="222" width="150" height="34" rx="17" fill="#fff" stroke="#e7e5e4"/><text x="345" y="244" text-anchor="middle" font-size="12" fill="#57534e">Fork &amp; Customize</text>
+      <rect x="430" y="222" width="180" height="34" rx="17" fill="#fff" stroke="#ddd6fe"/><text x="520" y="244" text-anchor="middle" font-size="12" fill="#7c3aed">Propose as new Pattern</text>
+      <text x="72" y="284" font-size="10" fill="#a8a29e">Iterate: "make verification stricter", "use cheaper models for data agents"…</text>
+    </g>
+
+    <!-- quick chips -->
+    <g transform="translate(0,716)" font-size="10" fill="#57534e">
+      <rect x="16" y="0" width="180" height="26" rx="13" fill="#f5f5f4" stroke="#e7e5e4"/><text x="30" y="17">Daily market intelligence</text>
+      <rect x="204" y="0" width="200" height="26" rx="13" fill="#f5f5f4" stroke="#e7e5e4"/><text x="218" y="17">YouTube wuxia cinematic pipeline</text>
+      <rect x="412" y="0" width="170" height="26" rx="13" fill="#f5f5f4" stroke="#e7e5e4"/><text x="426" y="17">DSE ICT adaptive tutor</text>
+      <rect x="590" y="0" width="154" height="26" rx="13" fill="#f5f5f4" stroke="#e7e5e4"/><text x="604" y="17">Moltbot distributed</text>
+    </g>
+    <!-- input -->
+    <rect x="16" y="754" width="728" height="54" rx="14" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="34" y="785" font-size="12" fill="#a8a29e">Describe your goal (EN / 繁體中文)… ⌘↵ to send</text>
+    <path d="M690 770h6M690 775v6" stroke="#a8a29e"/>
+    <rect x="700" y="768" width="30" height="26" rx="13" fill="#4f46e5"/><path d="M710 781l6-4-6-4v3l-4 1 4 1z" fill="#fff"/>
+  </g>
+
+  <!-- ===== RIGHT: Common Pattern Browser ===== -->
+  <g transform="translate(816,136)">
+    <rect width="584" height="824" rx="16" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="20" y="34" font-size="14" font-weight="600" fill="#1c1917">Common Pattern Browser</text>
+    <!-- search -->
+    <rect x="20" y="46" width="544" height="34" rx="10" fill="#fff" stroke="#e7e5e4"/>
+    <circle cx="40" cy="63" r="5" fill="none" stroke="#a8a29e" stroke-width="1.4"/><path d="M44 67l3 3" stroke="#a8a29e" stroke-width="1.4"/>
+    <text x="56" y="67" font-size="11" fill="#a8a29e">Search patterns…</text>
+    <!-- filters -->
+    <g transform="translate(20,92)" font-size="9" fill="#57534e">
+      <rect width="72" height="22" rx="11" fill="#eef2ff" stroke="#c7d2fe"/><text x="36" y="15" text-anchor="middle" fill="#4f46e5">All domains</text>
+      <rect x="80" width="80" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="120" y="15" text-anchor="middle">Parallelism</text>
+      <rect x="168" width="92" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="214" y="15" text-anchor="middle">Verification</text>
+      <rect x="268" width="70" height="22" rx="11" fill="#fff" stroke="#e7e5e4"/><text x="303" y="15" text-anchor="middle">Cost tier</text>
+    </g>
+
+    <!-- Pattern card 1 (recommended) -->
+    <g transform="translate(20,126)">
+      <rect width="544" height="188" rx="14" fill="#fff" stroke="#c7d2fe" filter="url(#sh)"/>
+      <rect x="16" y="14" width="80" height="20" rx="10" fill="#eef2ff" stroke="#c7d2fe"/><text x="56" y="28" text-anchor="middle" font-size="9" fill="#4f46e5">Recommended</text>
+      <text x="16" y="58" font-size="14" font-weight="600" fill="#1c1917">Parallel Independent + Verification</text>
+      <rect x="360" y="46" width="52" height="18" rx="9" fill="#f5f5f4"/><text x="386" y="59" text-anchor="middle" font-size="9" fill="#78716c">v1.4</text>
+      <!-- mini graph preview: BIG ROWs -->
+      <rect x="16" y="72" width="512" height="66" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+      <g transform="translate(40,86)">
+        <rect width="40" height="36" rx="8" fill="#eef2ff" stroke="#c7d2fe"/><text x="20" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#4f46e5">A</text>
+        <rect x="60" width="40" height="36" rx="8" fill="#eef2ff" stroke="#c7d2fe"/><text x="80" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#4f46e5">B</text>
+        <rect x="120" width="40" height="36" rx="8" fill="#eef2ff" stroke="#c7d2fe"/><text x="140" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#4f46e5">C</text>
+        <path d="M160 18h40" stroke="#d6d3d1" stroke-width="1.4"/>
+        <rect x="200" width="60" height="36" rx="8" fill="#ecfdf5" stroke="#a7f3d0"/><text x="230" y="22" text-anchor="middle" font-size="10" fill="#059669">Verify</text>
+        <path d="M260 24c30 18 30 -30 0 -12" stroke="#10b981" fill="none" stroke-dasharray="3 2"/>
+        <text x="290" y="14" font-size="9" fill="#78716c">BIG ROWs → verifier cycle ↺</text>
+      </g>
+      <text x="16" y="158" font-size="10" fill="#78716c">Independent sub-swarms in parallel; final verifier loop for quality.</text>
+      <text x="16" y="176" font-size="10" fill="#059669">94% success · 1.2k runs · used in 312 swarms</text>
+      <rect x="392" y="158" width="70" height="24" rx="12" fill="#1c1917"/><text x="427" y="174" text-anchor="middle" font-size="10" fill="#fff">Instantiate</text>
+      <rect x="468" y="158" width="60" height="24" rx="12" fill="#fff" stroke="#e7e5e4"/><text x="498" y="174" text-anchor="middle" font-size="10" fill="#57534e">Fork</text>
+    </g>
+
+    <!-- Pattern card 2 -->
+    <g transform="translate(20,328)">
+      <rect width="262" height="180" rx="14" fill="#fff" stroke="#e7e5e4"/>
+      <text x="16" y="30" font-size="18" fill="#059669">↻</text>
+      <text x="42" y="30" font-size="13" font-weight="600" fill="#1c1917">Verification Loop</text>
+      <rect x="16" y="44" width="230" height="56" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+      <rect x="34" y="58" width="46" height="28" rx="6" fill="#f5f5f4" stroke="#e7e5e4"/><text x="57" y="76" text-anchor="middle" font-size="9" fill="#78716c">Agent</text>
+      <path d="M84 72h24" stroke="#d6d3d1"/>
+      <rect x="112" y="58" width="50" height="28" rx="6" fill="#ecfdf5" stroke="#a7f3d0"/><text x="137" y="76" text-anchor="middle" font-size="9" fill="#059669">Verify</text>
+      <text x="176" y="76" font-size="16" fill="#10b981">↺</text>
+      <text x="16" y="122" font-size="10" fill="#78716c">Iterative refine until quality passes.</text>
+      <text x="16" y="140" font-size="10" fill="#059669">97% · 189 swarms</text>
+      <rect x="16" y="150" width="70" height="22" rx="11" fill="#047857"/><text x="51" y="165" text-anchor="middle" font-size="10" fill="#fff">Instantiate</text>
+    </g>
+    <!-- Pattern card 3 -->
+    <g transform="translate(302,328)">
+      <rect width="262" height="180" rx="14" fill="#fff" stroke="#e7e5e4"/>
+      <text x="16" y="30" font-size="16" fill="#7c3aed">◇</text>
+      <text x="40" y="30" font-size="13" font-weight="600" fill="#1c1917">Dynamic Router Graph</text>
+      <rect x="16" y="44" width="230" height="56" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+      <rect x="40" y="58" width="28" height="28" rx="6" fill="#f5f3ff" stroke="#ddd6fe" transform="rotate(45 54 72)"/><text x="54" y="76" text-anchor="middle" font-size="10" fill="#7c3aed">◇</text>
+      <rect x="120" y="52" width="46" height="18" rx="6" fill="#f5f5f4"/><text x="143" y="65" text-anchor="middle" font-size="8" fill="#78716c">→ B1</text>
+      <rect x="120" y="76" width="46" height="18" rx="6" fill="#f5f5f4"/><text x="143" y="89" text-anchor="middle" font-size="8" fill="#78716c">→ B2</text>
+      <text x="16" y="122" font-size="10" fill="#78716c">LLM router picks next node at runtime.</text>
+      <text x="16" y="140" font-size="10" fill="#059669">89% · 112 swarms</text>
+      <rect x="16" y="150" width="70" height="22" rx="11" fill="#7c3aed"/><text x="51" y="165" text-anchor="middle" font-size="10" fill="#fff">Instantiate</text>
+    </g>
+
+    <!-- preview + summary panel -->
+    <g transform="translate(20,524)">
+      <rect width="544" height="128" rx="14" fill="#fff" stroke="#e7e5e4"/>
+      <text x="16" y="26" font-size="12" font-weight="600" fill="#1c1917">Live Preview — Parallel + Verification v1.4</text>
+      <rect x="16" y="36" width="330" height="76" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+      <g transform="translate(40,52)"><rect width="36" height="30" rx="7" fill="#eef2ff" stroke="#c7d2fe"/><rect x="52" width="36" height="30" rx="7" fill="#eef2ff" stroke="#c7d2fe"/><rect x="104" width="36" height="30" rx="7" fill="#eef2ff" stroke="#c7d2fe"/><path d="M140 15h30" stroke="#d6d3d1"/><rect x="170" width="46" height="30" rx="7" fill="#ecfdf5" stroke="#a7f3d0"/><path d="M216 20c26 16 26-26 0-10" stroke="#10b981" fill="none" stroke-dasharray="3 2"/></g>
+      <g transform="translate(362,40)" font-size="10" fill="#57534e">
+        <text x="0" y="12">Total agents / slots: 4</text>
+        <text x="0" y="30">Parallelism factor: 3</text>
+        <text x="0" y="48">Est. cost/latency: $0.14/min · 42s</text>
+        <text x="0" y="66" fill="#059669">Verification coverage: full</text>
+      </g>
+    </g>
+    <!-- suggest new -->
+    <rect x="20" y="668" width="544" height="40" rx="12" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <text x="292" y="693" text-anchor="middle" font-size="12" fill="#7c3aed">✧ Suggest new Common Pattern from my goal</text>
+    <text x="20" y="740" font-size="10" fill="#a8a29e">Graph JSON handoff includes linked_common_pattern_id + pinned agent versions + BIG ROW layout.</text>
+    <text x="20" y="760" font-size="10" fill="#a8a29e">Suggestions are inert data · "Load into Canvas" is a server-authorized action reference.</text>
+  </g>
+</svg>

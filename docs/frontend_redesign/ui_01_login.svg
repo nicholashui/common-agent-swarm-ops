@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.55" stop-color="#131c33"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <pattern id="grid01" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <filter id="card01" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="34" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <linearGradient id="btn01" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="1000" fill="url(#bg01)"/>
+  <rect width="1440" height="1000" fill="url(#grid01)" opacity="0.5"/>
+  <!-- glow accents -->
+  <circle cx="270" cy="180" r="240" fill="#4f46e5" opacity="0.10"/>
+  <circle cx="1180" cy="820" r="260" fill="#7c3aed" opacity="0.10"/>
+
+  <!-- Title strip -->
+  <text x="720" y="40" text-anchor="middle" fill="#334155" font-size="12" letter-spacing="2">nn_ui_01_login · Login Page · common-agent-swarm-ops v2.0</text>
+
+  <!-- Branding top-left -->
+  <g transform="translate(48,60)">
+    <rect x="0" y="0" width="34" height="34" rx="9" fill="#4f46e5"/>
+    <g stroke="#ffffff" stroke-width="1.6" fill="none">
+      <circle cx="17" cy="11" r="2.4"/><circle cx="10" cy="23" r="2.4"/><circle cx="24" cy="23" r="2.4"/>
+      <path d="M17 13.4 11 21M17 13.4 23 21M11.6 23h10.8"/>
+    </g>
+    <text x="44" y="15" fill="#f8fafc" font-size="16" font-weight="700">common-agent-swarm-ops</text>
+    <text x="44" y="32" fill="#64748b" font-size="12">Reusable agent swarms · Collective improvement · Production ops</text>
+  </g>
+
+  <!-- language / links top-right -->
+  <g transform="translate(1392,74)" text-anchor="end" fill="#94a3b8" font-size="12">
+    <rect x="-118" y="-16" width="118" height="26" rx="13" fill="#1e293b" stroke="#334155"/>
+    <text x="-92" y="1" fill="#f8fafc">EN</text>
+    <text x="-60" y="1" fill="#64748b">繁體中文</text>
+    <circle cx="-104" cy="-3" r="2.5" fill="#818cf8"/>
+  </g>
+
+  <!-- Center Card -->
+  <g transform="translate(510,150)" filter="url(#card01)">
+    <rect width="420" height="640" rx="20" fill="#1e2937" stroke="#334155"/>
+    <!-- card gradient top border accent -->
+    <rect width="420" height="4" rx="2" fill="url(#btn01)"/>
+
+    <!-- badge -->
+    <g transform="translate(32,36)">
+      <rect width="196" height="24" rx="12" fill="#312e81" opacity="0.5"/>
+      <circle cx="14" cy="12" r="3" fill="#818cf8"/>
+      <text x="26" y="16" fill="#c7d2fe" font-size="11" font-weight="600">v2.0 · Common Registry Live</text>
+    </g>
+
+    <text x="32" y="98" fill="#f8fafc" font-size="22" font-weight="700">Sign in to orchestrate</text>
+    <text x="32" y="124" fill="#f8fafc" font-size="22" font-weight="700">reusable agent swarms</text>
+    <text x="32" y="150" fill="#94a3b8" font-size="13">Access Common Registry &amp; live ops</text>
+
+    <!-- Email -->
+    <text x="32" y="192" fill="#cbd5e1" font-size="12" font-weight="600">Email</text>
+    <rect x="32" y="202" width="356" height="44" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="46" y="229" fill="#64748b" font-size="13">you@company.com</text>
+
+    <!-- Password -->
+    <text x="32" y="272" fill="#cbd5e1" font-size="12" font-weight="600">Password</text>
+    <rect x="32" y="282" width="356" height="44" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="46" y="309" fill="#e2e8f0" font-size="14" letter-spacing="2">••••••••••••</text>
+    <g transform="translate(360,296)" stroke="#64748b" stroke-width="1.4" fill="none">
+      <path d="M0 8 C4 2 12 2 16 8 C12 14 4 14 0 8Z"/><circle cx="8" cy="8" r="2.4"/>
+    </g>
+
+    <!-- remember + forgot -->
+    <rect x="32" y="342" width="16" height="16" rx="4" fill="#0f172a" stroke="#475569"/>
+    <path d="M36 350l3 3 5-6" stroke="#818cf8" stroke-width="1.6" fill="none"/>
+    <text x="56" y="355" fill="#94a3b8" font-size="12">Remember this device</text>
+    <text x="388" y="355" text-anchor="end" fill="#818cf8" font-size="12">Forgot password?</text>
+
+    <!-- Sign in button -->
+    <rect x="32" y="376" width="356" height="46" rx="23" fill="url(#btn01)"/>
+    <text x="210" y="404" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="600">Sign in</text>
+
+    <!-- divider -->
+    <line x1="32" y1="452" x2="180" y2="452" stroke="#334155"/>
+    <text x="210" y="456" text-anchor="middle" fill="#64748b" font-size="11">or continue with</text>
+    <line x1="240" y1="452" x2="388" y2="452" stroke="#334155"/>
+
+    <!-- Keycloak SSO -->
+    <rect x="32" y="472" width="356" height="42" rx="21" fill="#0f172a" stroke="#4f46e5"/>
+    <rect x="46" y="484" width="18" height="18" rx="4" fill="#4f46e5" opacity="0.4"/>
+    <text x="210" y="498" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="500">Keycloak (Self-hosted)</text>
+
+    <!-- Google / GitHub -->
+    <rect x="32" y="524" width="172" height="40" rx="20" fill="#0f172a" stroke="#334155"/>
+    <text x="118" y="549" text-anchor="middle" fill="#cbd5e1" font-size="13">Google</text>
+    <rect x="216" y="524" width="172" height="40" rx="20" fill="#0f172a" stroke="#334155"/>
+    <text x="302" y="549" text-anchor="middle" fill="#cbd5e1" font-size="13">GitHub</text>
+
+    <!-- Demo access -->
+    <rect x="32" y="580" width="356" height="30" rx="8" fill="none"/>
+    <line x1="32" y1="584" x2="388" y2="584" stroke="#1e293b"/>
+    <rect x="32" y="592" width="356" height="0" fill="none"/>
+  </g>
+
+  <!-- Demo card below (prominent secondary) -->
+  <g transform="translate(510,742)">
+    <rect width="420" height="72" rx="16" fill="#1e2937" stroke="#7c3aed" stroke-dasharray="5 4"/>
+    <g transform="translate(24,22)">
+      <rect width="30" height="30" rx="8" fill="#7c3aed" opacity="0.25"/>
+      <path d="M11 9l10 6-10 6z" fill="#a78bfa"/>
+    </g>
+    <text x="66" y="32" fill="#f8fafc" font-size="14" font-weight="600">Try Demo Workspace  →</text>
+    <text x="66" y="52" fill="#94a3b8" font-size="12">Explore Common Agents, Patterns &amp; live ops — no setup</text>
+  </g>
+
+  <!-- footer links -->
+  <g transform="translate(720,868)" text-anchor="middle" fill="#64748b" font-size="12">
+    <text x="-120" y="0">Docs</text><text x="-40" y="0">GitHub</text><text x="40" y="0">Status</text><text x="130" y="0">Language</text>
+    <text x="0" y="30" fill="#475569" font-size="11">Demo available · No credit card · build 2026.07 · CSP-secured</text>
+  </g>
+</svg>
