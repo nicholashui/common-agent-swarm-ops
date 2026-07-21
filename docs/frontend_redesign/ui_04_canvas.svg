@@ -200,4 +200,5 @@
   <rect x="900" y="960" width="110" height="26" rx="13" fill="#fff" stroke="#e7e5e4"/><text x="955" y="977" text-anchor="middle" font-size="10" fill="#57534e">Partial replay</text>
   <rect x="1020" y="960" width="60" height="26" rx="13" fill="#fef2f2" stroke="#fecaca"/><text x="1050" y="977" text-anchor="middle" font-size="10" fill="#dc2626">Cancel</text>
   <text x="1094" y="978" font-size="14" fill="#57534e">≡ logs</text>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

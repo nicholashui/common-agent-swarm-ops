@@ -55,6 +55,10 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 - **Accessible_Live_Region**: A `role="status"`, `aria-live="polite"`, and `aria-atomic="true"` interface region.
 - **Session_Safe_Cache**: Browser-stored Authorized_Projection data and Event_Cursor values that exclude credentials, tokens, Protected_Fields, raw protected content, and privileged artifact content.
 - **Allowed_Action_Contract**: A server-provided authorization result that permits navigation to an externally addressed destination.
+- **Authorized_Capability**: A generated server-provided result that permits the active Session_Context to receive a screen resource or invoke a screen action.
+- **Session_Transition**: The end of a Session_Context or a change to its organization or actor.
+- **Unavailable_State**: A sanitized screen state that retains authorized shell context while required authorized data or capability is unavailable.
+- **Browser_Security_Policy**: The production response policy that constrains script evaluation, framing, base URIs, object sources, referrer disclosure, content types, transport security, and browser connection destinations.
 
 ## Requirements
 
@@ -64,11 +68,11 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 #### Acceptance Criteria
 
-1. WHEN continuous integration evaluates a change to OpenAPI_Document or Generated_Client, THE Frontend_Redesign SHALL generate or schema-check Generated_Client from the versioned OpenAPI_Document.
-2. IF continuous integration finds that regenerated Generated_Client output differs from the committed artifact or that schema checking fails, THEN THE Frontend_Redesign SHALL fail the integration build.
+1. WHEN continuous integration performs Generated_Client validation after evaluating a change to OpenAPI_Document or Generated_Client, THE Frontend_Redesign SHALL regenerate Generated_Client from the versioned OpenAPI_Document into a temporary artifact and byte-compare the temporary artifact with committed Generated_Client output, or schema-check an approved Generated_Client artifact against the versioned OpenAPI_Document, and type-check Generated_Client.
+2. IF temporary Generated_Client output differs from committed Generated_Client output, schema checking fails, or Generated_Client type checking fails, THEN THE Frontend_Redesign SHALL fail the integration build.
 3. WHEN Frontend_Redesign invokes a Public_API operation, THE Frontend_Redesign SHALL use the Generated_Client request function and generated request and response types for the operation.
-4. WHEN a Public_Envelope contains successful data, THE Frontend_Redesign SHALL map only the generated successful-data fields to view state.
-5. WHEN a Public_Envelope contains an error, THE Frontend_Redesign SHALL map only the returned error code, redaction-safe message, retryability, and Correlation_Identifier to view state.
+4. WHEN a Public_Envelope contains successful data, THE Frontend_Redesign SHALL map only generated successful-data fields and the returned `meta.correlation_id` to view state.
+5. WHEN a Public_Envelope contains an error, THE Frontend_Redesign SHALL map only the returned error code, redaction-safe message, retryability, Correlation_Identifier, and, when present, Retry-After and Action_Reference to view state.
 6. WHILE a Public_API compatibility route remains supported, THE Frontend_Redesign SHALL render the generated Public_API projection rather than an unversioned browser contract.
 
 ### Requirement 2: Authorized and redacted tenant projections
@@ -79,13 +83,13 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 1. WHEN Frontend_Redesign requests an Authorized_Projection, THE Frontend_Redesign SHALL use Session_Context without supplying organization, actor, or permission authority.
 2. WHEN Frontend_Redesign renders an Authorized_Projection, THE Frontend_Redesign SHALL render only fields present in the Authorized_Projection received for the active Session_Context.
-3. WHEN an Authorized_Projection omits a Protected_Field, THE Frontend_Redesign SHALL omit the Protected_Field value, label, placeholder, DOM node, accessibility-tree node, and client-derived fallback from the rendered view.
+3. WHEN an Authorized_Projection omits a Protected_Field, THE Frontend_Redesign SHALL omit the Protected_Field from the rendered view and Session_Safe_Cache, including its value, label, placeholder, DOM node, accessibility-tree node, and client-derived fallback.
 4. IF Public_API returns an authorization, visibility, or policy error, THEN THE Frontend_Redesign SHALL display only the returned redaction-safe error without inferring protected resource state.
 5. WHEN a user selects an Opaque_Reference, THE Frontend_Redesign SHALL request the referenced projection or action through Public_API.
 6. WHEN Frontend_Redesign displays a Correlation_Identifier, THE Frontend_Redesign SHALL provide a control named `Copy correlation identifier` that copies only the returned Correlation_Identifier.
 7. WHEN a view renders an available command, recovery, or navigation control, THE Frontend_Redesign SHALL render only the corresponding returned Action_Reference.
 8. WHEN a view renders evidence, THE Frontend_Redesign SHALL render only the corresponding returned Evidence_Reference and its returned redacted presentation fields.
-9. THE Frontend_Redesign SHALL exclude credentials, access tokens, raw prompts, Protected_Fields, protected artifact content, raw tool arguments, raw tool results, object-storage locations, provider errors, queue names, and internal trace payloads from rendered projections.
+9. THE Frontend_Redesign SHALL exclude credentials, access tokens, raw prompts, Protected_Fields, protected artifact content, raw tool arguments, raw tool results, object-storage locations, provider errors, queue names, and internal trace payloads from rendered projections, view state, Session_Safe_Cache, and client diagnostics.
 
 ### Requirement 3: Idempotent state-changing commands
 
@@ -95,7 +99,7 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 1. WHEN a user initiates a Command_Intent, THE Frontend_Redesign SHALL assign exactly one Idempotency_Identity to the Command_Intent before its first submission.
 2. WHEN Frontend_Redesign submits or reconciles a Command_Intent, THE Frontend_Redesign SHALL send the existing Idempotency_Identity with the authorized Public_API command.
-3. WHILE a Command_Intent is pending or reconciling, THE Frontend_Redesign SHALL disable the initiating Action_Reference control.
+3. WHILE a Command_Intent is submitting, queued, or reconciling, THE Frontend_Redesign SHALL disable the initiating Action_Reference control.
 4. WHEN Public_API accepts a Command_Intent with a queued response, THE Frontend_Redesign SHALL render the returned pending resource or run reference without presenting a terminal outcome.
 5. IF a Command_Intent has an ambiguous transport outcome, THEN THE Frontend_Redesign SHALL retain the existing Idempotency_Identity and enter Command_Reconciliation.
 6. IF a Command_Intent receives a rate-limit, authorization-denied, policy-denied, or Approval_Gate-denied outcome, THEN THE Frontend_Redesign SHALL retain the existing Idempotency_Identity with the Command_Intent.
@@ -105,6 +109,7 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 10. IF Public_API returns a manual-recovery or dead-letter projection, THEN THE Frontend_Redesign SHALL display the returned recovery status, failure summary, Correlation_Identifier, and returned escalation Action_Reference, if present.
 11. WHEN a user retries or reconciles an unresolved Command_Intent, THE Frontend_Redesign SHALL reuse its sole retained Idempotency_Identity.
 12. THE Frontend_Redesign SHALL present a Command_Intent as completed only after Public_API returns a Terminal_Outcome.
+13. IF an Action_Reference control is disabled because its Command_Intent is submitting, queued, or reconciling, THEN THE Frontend_Redesign SHALL ignore every user or programmatic invocation, send no additional Public_API command, and retain the original Command_Intent state.
 
 ### Requirement 4: Authorized ordered SSE replay and REST resynchronization
 
@@ -117,11 +122,11 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 3. WHEN an SSE_Subscription receives an Operational_Event whose resource scope, generated schema version, and sequence equal the Expected_Event_Sequence, THE Frontend_Redesign SHALL apply the Operational_Event to corresponding incremental view state.
 4. WHEN Frontend_Redesign applies an Operational_Event, THE Frontend_Redesign SHALL advance Expected_Event_Sequence to the immediate next sequence and retain the event identifier as Event_Cursor for the SSE_Subscription scope.
 5. WHEN an SSE_Subscription disconnects, THE Frontend_Redesign SHALL display `Reconnecting` or `Stale` for each affected projection until reconnection or Resynchronization succeeds.
-6. IF SSE replay is bounded, expired, denied, schema-incompatible, duplicated, out of order, or sequence-gapped, THEN THE Frontend_Redesign SHALL stop applying incremental events for the affected resource and begin Resynchronization.
+6. IF SSE replay is bounded, expired, denied, schema-incompatible, duplicated, out of order, or sequence-gapped, THEN THE Frontend_Redesign SHALL stop applying incremental Operational_Events for the affected resource and ensure that one serialized Resynchronization is in progress for the affected resource.
 7. WHEN Resynchronization begins, THE Frontend_Redesign SHALL discard the affected incremental view state and Event_Cursor.
 8. WHEN Resynchronization receives a REST_Snapshot, THE Frontend_Redesign SHALL replace the affected view state and establish Expected_Event_Sequence from the returned snapshot sequence context.
 9. WHEN Resynchronization establishes Expected_Event_Sequence, THE Frontend_Redesign SHALL create a new SSE_Subscription from the returned sequence context before applying a later Operational_Event.
-10. THE Frontend_Redesign SHALL not apply an Operational_Event whose sequence differs from Expected_Event_Sequence.
+10. IF an Operational_Event sequence differs from Expected_Event_Sequence, THEN THE Frontend_Redesign SHALL leave the corresponding incremental view state unchanged and ensure that one serialized Resynchronization is in progress for the affected resource.
 11. THE Frontend_Redesign SHALL not infer execution, approval, quality, rights, provenance, or recovery state from SSE connection state.
 
 ### Requirement 5: Truthful health, freshness, and alert presentation
@@ -131,13 +136,14 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 #### Acceptance Criteria
 
 1. WHEN an authorized Operational_Screen requests operational health, THE Frontend_Redesign SHALL use the generated `/api/v1/health` contract.
-2. WHEN an Operational_Screen renders a health or aggregate projection, THE Frontend_Redesign SHALL render the returned `as_of`, freshness, and degraded-state values.
+2. WHEN an Operational_Screen renders a health or aggregate projection, THE Frontend_Redesign SHALL render each returned `as_of`, freshness, and degraded-state value.
 3. WHEN an Operational_Screen renders live, delayed, reconnecting, degraded, unavailable, stale, or recovery-required state, THE Frontend_Redesign SHALL render the exact returned state label and an icon with accessible name `Status: <returned state label>` independent of color.
 4. WHILE an Operational_Screen displays a Stale_Projection, THE Frontend_Redesign SHALL disable every returned Freshness_Critical_Action and block invocation of each disabled action.
 5. WHILE an Operational_Screen displays a Stale_Projection, THE Frontend_Redesign SHALL render `Stale` rather than `Live` for the affected projection.
 6. WHEN an Operational_Screen displays a Stale_Projection, THE Frontend_Redesign SHALL provide a returned refresh or reconnect Action_Reference when Public_API supplies one.
 7. WHEN a health or alert projection identifies a delayed event, queue or run backlog, Approval_Gate expiry, replay gap, outbox lag, or Rollout_Campaign rollback, THE Frontend_Redesign SHALL display the returned redacted summary and affected Opaque_Reference.
 8. THE Frontend_Redesign SHALL exclude liveness and readiness endpoint data from every Operational_Screen.
+9. IF required authorized health or aggregate projection data is unavailable, THEN THE Frontend_Redesign SHALL render an Unavailable_State that retains authorized shell context and displays only the returned redaction-safe error and returned refresh or reconnect Action_Reference, when present, without rendering unavailable health data or inferring health state.
 
 ### Requirement 6: Common registry, dashboard, activity, and graph views
 
@@ -155,7 +161,7 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 8. WHEN a Graph_Revision renders node relationships, THE Frontend_Redesign SHALL distinguish returned data-flow, state-flow, and iteration relationships without color as the only distinction.
 9. WHEN a graph contains a Common_Agent_Version or Common_Pattern_Version, THE Frontend_Redesign SHALL display its returned immutable version and provenance reference on the graph representation.
 10. WHEN a graph contains a custom agent, THE Frontend_Redesign SHALL display the returned fork origin or custom reason.
-11. WHEN a Graph_Revision renders a task node, THE Frontend_Redesign SHALL display the corresponding returned Task_Projection lifecycle state and redacted status detail.
+11. WHEN a Graph_Revision renders a task node, THE Frontend_Redesign SHALL display the corresponding exact returned Task_Projection lifecycle label and returned redacted status detail.
 12. IF graph validation returns an ineligible result, THEN THE Frontend_Redesign SHALL disable the returned run Action_Reference and block invocation of a run command.
 13. WHEN a Run_Projection exposes retry, skip, cancel, replay, or escalation eligibility, THE Frontend_Redesign SHALL render only the corresponding returned Action_Reference.
 14. WHEN a user invokes a graph mutation or run action, THE Frontend_Redesign SHALL submit the returned Action_Reference as a Command_Intent.
@@ -170,13 +176,13 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 #### Acceptance Criteria
 
-1. WHEN an Approval_Gate is projected, THE Frontend_Redesign SHALL display only the returned pending operation, evidence revision, criteria, expiry, redacted artifact references, Quality_Evidence references, and decision Action_References.
+1. WHEN an Approval_Gate is projected, THE Frontend_Redesign SHALL display only the returned exact approval-state label, pending operation, evidence revision, criteria, expiry, redacted artifact references, Quality_Evidence references, and decision Action_References.
 2. WHEN a Quality_Evidence projection is displayed, THE Frontend_Redesign SHALL distinguish returned L1 specification validation, L2 role-rubric evaluation, L3 baseline preference, critique, gate outcome, and human approval evidence.
 3. IF an Approval_Gate evidence revision changes before a decision submission, THEN THE Frontend_Redesign SHALL require a fresh Approval_Gate projection before enabling the decision Action_Reference.
 4. WHILE an Approval_Gate or Rollout_Campaign projection is stale, THE Frontend_Redesign SHALL disable and block invocation of every irreversible Freshness_Critical_Action.
-5. WHEN a Rollout_Campaign projection loads, THE Frontend_Redesign SHALL display only the returned selected version, bounded target scope, impact summary, criteria, approval state, rollback reference, status, and outcome measurements.
+5. WHEN a Rollout_Campaign projection loads, THE Frontend_Redesign SHALL display only the returned selected version, bounded target scope, impact summary, criteria, exact approval-state and status labels, rollback reference, and outcome measurements.
 6. WHEN a Rollout_Campaign exposes an A/B, canary, promotion, rollback, or review action, THE Frontend_Redesign SHALL render only the corresponding returned Action_Reference.
-7. WHEN a rollout criterion fails, THE Frontend_Redesign SHALL display the returned stopped progression and rollback state.
+7. WHEN a rollout criterion fails, THE Frontend_Redesign SHALL display the exact returned stopped-progression and rollback-state labels.
 8. THE Frontend_Redesign SHALL not create an Approval_Gate decision, rollout target scope, success criterion, rollback instruction, policy override, or evidence from client-derived data.
 
 ### Requirement 8: Safe artifact, knowledge, and import experience
@@ -194,6 +200,7 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 7. WHEN Frontend_Redesign renders Untrusted_Content, THE Frontend_Redesign SHALL render Untrusted_Content as inert text or structured data without executable markup, event handlers, scripts, dynamic code evaluation, or embedded remote content.
 8. THE Frontend_Redesign SHALL not convert Untrusted_Content into a tool request, privileged URL, client-side route authority, approval operation, or executable command.
 9. WHEN a client-side artifact or knowledge check detects a correctable input issue, THE Frontend_Redesign SHALL present the result as non-authoritative feedback.
+10. IF the generated authorized ingestion contract is unavailable, THEN THE Frontend_Redesign SHALL block artifact and import submission until the generated authorized ingestion contract becomes available.
 
 ### Requirement 9: VA domain-adapter representation
 
@@ -203,13 +210,14 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 1. WHEN a VA_Projection is present, THE Frontend_Redesign SHALL display the returned VA template and production-phase metadata with its Common_Pattern_Version reference.
 2. WHEN a VA_Projection contains a Common_Agent_Version contract, THE Frontend_Redesign SHALL display the returned identity, scope, capabilities, policies, runtime constraints, quality contract, critique relationships, provenance obligations, and published version.
-3. WHEN a VA_Projection contains a Task_Projection, THE Frontend_Redesign SHALL display the returned graph revision, dependencies, gates, lifecycle, budget, checkpoint, common-version provenance, and recovery state.
-4. WHEN a VA_Projection contains an Artifact_Projection, THE Frontend_Redesign SHALL display the returned artifact version, parent lineage, technical specification, rights and consent state, continuity state, quality-control state, delivery targets, and provenance reference.
-5. WHEN a VA_Projection contains critique or quality information, THE Frontend_Redesign SHALL display the returned critique status and separate Quality_Evidence categories.
+3. WHEN a VA_Projection contains a Task_Projection, THE Frontend_Redesign SHALL display the returned graph revision, dependencies, gates, exact lifecycle and recovery-state labels, budget, checkpoint, and common-version provenance.
+4. WHEN a VA_Projection contains an Artifact_Projection, THE Frontend_Redesign SHALL display the returned artifact version, parent lineage, technical specification, exact rights-and-consent, continuity, quality-control, and delivery-state labels, delivery targets, and provenance reference.
+5. WHEN a VA_Projection contains critique or quality information, THE Frontend_Redesign SHALL display the exact returned critique-state label and separate Quality_Evidence categories.
 6. WHEN a VA_Projection contains an Approval_Gate, THE Frontend_Redesign SHALL apply Requirement 7 approval presentation and command rules.
 7. WHERE a Swarm_Instance has no VA_Projection, THE Frontend_Redesign SHALL render the returned common graph, task, governance, and provenance projection without VA-specific fields.
 8. WHEN a user invokes a VA production action, THE Frontend_Redesign SHALL submit the corresponding returned Action_Reference as a Command_Intent.
 9. WHEN an Artifact_Projection lacks a required delivery field or gate approval, THE Frontend_Redesign SHALL display the returned artifact as blocked from delivery.
+10. IF an Approval_Gate in a VA_Projection cannot render under Requirement 7 because its required authorized data is unavailable, THEN THE Frontend_Redesign SHALL render the remaining returned VA_Projection data and an Unavailable_State for the Approval_Gate.
 
 ### Requirement 10: Accessible, responsive, and session-safe operations
 
@@ -223,13 +231,16 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 4. WHEN a dialog opens, THE Frontend_Redesign SHALL move keyboard focus to the dialog heading and retain keyboard focus within the dialog until the dialog closes.
 5. WHEN a dialog closes, THE Frontend_Redesign SHALL return keyboard focus to the control that opened the dialog.
 6. WHEN an Operational_Screen receives a changed returned status, THE Frontend_Redesign SHALL announce `<resource name>: <returned state label>; updated <as_of>` exactly once through an Accessible_Live_Region.
-7. WHEN Frontend_Redesign represents a lifecycle, freshness, quality, approval, or recovery state, THE Frontend_Redesign SHALL provide the returned textual state independent of color.
+7. WHEN Frontend_Redesign represents a returned lifecycle, freshness, quality, approval, recovery, delivery, critique, validation, rights, or consent state, THE Frontend_Redesign SHALL provide the exact returned textual state label independent of color.
 8. WHEN a Supported_Mobile_Viewport renders an Operational_Screen, THE Frontend_Redesign SHALL expose the same returned status, freshness, recovery, approval, Evidence_Reference, and Action_Reference information available in the corresponding desktop view.
 9. WHEN a Supported_Mobile_Viewport renders an interactive Action_Reference control, THE Frontend_Redesign SHALL provide a target area of at least 44 by 44 CSS pixels.
 10. WHEN Frontend_Redesign stores a recoverable view cache, THE Frontend_Redesign SHALL store only the Authorized_Projection fields and Event_Cursor required to render the active session or resume its authorized SSE_Subscription.
-11. WHEN Session_Context ends, changes organization, or changes actor, THE Frontend_Redesign SHALL clear the Session_Safe_Cache before rendering another Authorized_Projection.
-12. THE Frontend_Redesign SHALL not persist access tokens, tool credentials, Protected_Fields, raw protected data, or privileged artifact content in browser local storage, session storage, IndexedDB, or cache storage.
-13. WHEN a user follows an externally addressed destination, THE Frontend_Redesign SHALL require a returned Allowed_Action_Contract before navigation.
+11. WHEN a Session_Transition begins, THE Frontend_Redesign SHALL abort each affected SSE_Subscription and prevent each affected SSE_Subscription from applying an Operational_Event before another Authorized_Projection renders.
+12. WHEN a Session_Transition begins, THE Frontend_Redesign SHALL clear active-session REST_Snapshot and incremental view state, Session_Safe_Cache, and Command_Intent presentation state before another Authorized_Projection renders.
+13. WHEN a production response serves Frontend_Redesign, THE Frontend_Redesign SHALL provide a Browser_Security_Policy that blocks unsafe script evaluation and external framing, allows only same-origin base URIs and browser connections, allows no object source, sends `no-referrer`, requires HTTPS transport, and sends `nosniff` content-type handling.
+14. WHEN Frontend_Redesign sends a session-bound Public_API request or starts an SSE_Subscription, THE Frontend_Redesign SHALL address only the same-origin `/api/v1` endpoint defined by Public_API.
+15. THE Frontend_Redesign SHALL not persist access tokens, tool credentials, Protected_Fields, raw protected data, or privileged artifact content in browser local storage, session storage, IndexedDB, or cache storage.
+16. WHEN a user follows an externally addressed destination, THE Frontend_Redesign SHALL require a returned Allowed_Action_Contract before navigation.
 
 ### Requirement 11: Deterministic contract, resilience, security, accessibility, and view verification
 
@@ -237,7 +248,7 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 
 #### Acceptance Criteria
 
-1. WHEN continuous integration runs frontend contract verification, THE Frontend_Redesign SHALL use fixed OpenAPI_Document fixtures and fail on a Generated_Client compatibility or generated-artifact mismatch.
+1. WHEN continuous integration runs frontend contract verification, THE Frontend_Redesign SHALL use fixed OpenAPI_Document fixtures, execute the Generated_Client validation in Requirement 1, and fail on a Generated_Client compatibility or generated-artifact mismatch.
 2. WHEN continuous integration runs command verification, THE Frontend_Redesign SHALL use deterministic Public_API fixtures for duplicate interaction, queued command, ambiguous transport, rate limit, authorization denial, policy denial, Approval_Gate denial, cancellation, retry exhaustion, and manual recovery.
 3. WHEN command verification exercises an ambiguous or retry outcome, THE Frontend_Redesign SHALL verify that every submission and reconciliation for one Command_Intent contains the same Idempotency_Identity.
 4. WHEN continuous integration runs SSE verification, THE Frontend_Redesign SHALL use deterministic REST_Snapshot and Operational_Event fixtures for connection, authorized contiguous replay, bounded replay, replay expiry, replay denial, schema mismatch, duplicated event, out-of-order event, and sequence gap.
@@ -247,8 +258,28 @@ The supplied frontend-redesign document, VA mapping, backend-redesign document, 
 8. WHEN continuous integration runs redaction verification, THE Frontend_Redesign SHALL verify that each absent Protected_Field is absent from rendered text, DOM nodes, accessibility-tree nodes, client cache, and Action_Reference payloads.
 9. WHEN continuous integration runs untrusted-content verification, THE Frontend_Redesign SHALL verify that representative Untrusted_Content produces no executable markup, event handler, dynamic code evaluation, external navigation, or action authority.
 10. WHEN continuous integration runs accessibility verification, THE Frontend_Redesign SHALL verify the exact accessible names, focus transitions, focus indicator, Accessible_Live_Region announcement, textual state labels, and 44 by 44 CSS-pixel mobile action targets in Requirement 10.
-11. WHEN continuous integration runs projection-view verification, THE Frontend_Redesign SHALL render deterministic representative generated Authorized_Projections for dashboard, registry, activity, graph canvas, approvals, rollouts, artifacts and knowledge, and VA views.
+11. WHEN continuous integration runs projection-view verification, THE Frontend_Redesign SHALL render deterministic representative generated Authorized_Projections for dashboard, registry, activity, graph canvas, approvals, rollouts, artifacts and knowledge, and VA views, and verify the exact returned graph lifecycle, Quality_Evidence category, approval, rollout, and VA state labels.
 12. WHEN projection-view verification renders a control or evidence item, THE Frontend_Redesign SHALL verify that the rendered item originated from a returned Action_Reference or Evidence_Reference.
+13. WHEN continuous integration runs browser-boundary verification, THE Frontend_Redesign SHALL verify that session-bound Public_API and SSE requests use the same-origin `/api/v1` endpoint and that Browser_Security_Policy enforces the protections required by Requirement 10.
+14. WHEN continuous integration completes a frontend verification run that uses deterministic fixtures or generates visual artifacts, THE Frontend_Redesign SHALL produce immutable evidence containing the executed command, each fixture version, the outcome, and each generated visual artifact.
+
+### Requirement 12: Complete approved screen inventory and layout conformance
+
+**User Story:** As a product owner, I want every approved frontend screen implemented and verified against its approved behavior and layout, so that the delivered control plane matches the complete reviewed user-interface inventory without weakening its governed-operation safeguards.
+
+#### Acceptance Criteria
+
+1. THE Frontend_Redesign SHALL implement a Next.js route or authenticated-shell component for each approved screen: `ui_00_menu`, `ui_01_login`, `ui_02_dashboard`, `ui_03_swarm_composer`, `ui_04_canvas`, `ui_05_agent_detail`, `ui_06_activity`, `ui_07_registry_hub`, `ui_08_settings`, `ui_09_monitoring`, `ui_10_knowledge`, `ui_11_eval`, `ui_12_notifications`, `ui_13_profile`, `ui_14_audit`, `ui_15_api_portal`, `ui_16_onboarding`, `ui_17_mobile`, `ui_18_collaboration`, `ui_19_costs`, and `ui_20_blueprints`.
+2. WHERE an approved screen resource, action, or region requires an Authorized_Capability, THE Frontend_Redesign SHALL render the associated resource, action, or region only when the generated contract for the active Session_Context returns the Authorized_Capability.
+3. WHEN Next.js renders a route or authenticated-shell component for an approved screen, THE Frontend_Redesign SHALL render every specified behavior, region, control, status, interaction, and viewport from the matching `docs/frontend_redesign/ui_*.md` file.
+4. WHEN Next.js renders a route or authenticated-shell component for an approved screen, THE Frontend_Redesign SHALL match the ordering and placement of the matching `docs/frontend_redesign/ui_*.svg` visual baseline.
+5. WHEN an approved screen renders resource data, command controls, recovery controls, navigation controls, or evidence controls, THE Frontend_Redesign SHALL render only returned Authorized_Projection data and returned Action_Reference or Evidence_Reference values for the active Session_Context.
+6. IF the data or Authorized_Capability required by an approved screen is unavailable or an approved-screen rendering failure occurs, THEN THE Frontend_Redesign SHALL render an Unavailable_State that retains authorized shell context and displays only a returned redaction-safe error and returned retry or recovery Action_Reference, when present, without rendering unavailable fields or placeholder Protected_Fields.
+7. WHEN a user initiates a state-changing action from an approved screen, THE Frontend_Redesign SHALL submit the action as one Command_Intent with the Idempotency_Identity required by Requirement 3.
+8. WHEN an approved screen renders interactive or status-bearing content, THE Frontend_Redesign SHALL satisfy the accessible names, keyboard focus behavior, textual state presentation, live-region behavior, and touch-target requirements in Requirement 10.
+9. WHEN an approved screen renders at a viewport specified by the matching `docs/frontend_redesign/ui_*.md` file, THE Frontend_Redesign SHALL preserve the required information and interaction capability through the responsive adaptation required by Requirement 10.
+10. WHEN continuous integration runs the screen-inventory completeness check, THE Frontend_Redesign SHALL produce exactly 21 screen-inventory results, each containing evidence of the matching `docs/frontend_redesign/ui_*.md` file, `docs/frontend_redesign/ui_*.svg` visual baseline, implemented Next.js route or authenticated-shell component, deterministic verification fixture, every specified viewport, a deterministic fixture screenshot for every specified viewport, and its visual-comparison artifact.
+11. IF the screen-inventory completeness check produces a result count other than 21 or finds a missing screen mapping, deterministic verification fixture, specified-viewport evidence, deterministic fixture screenshot, visual-comparison artifact, or `docs/frontend_redesign/ui_*.svg` visual-baseline mismatch, THEN THE Frontend_Redesign SHALL fail the integration build.
 
 ## Review Notes
 

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#78716c" flood-opacity="0.12"/></filter>
+  </defs>
+  <rect width="1440" height="1000" fill="#fafaf9"/>
+  <!-- Blank main-content frame; menu links load existing UI SVGs into this pane. -->
+  <rect x="300" width="1140" height="1000" fill="#fafaf9"/>
+  <foreignObject x="301" y="0" width="1139" height="1000">
+    <iframe xmlns="http://www.w3.org/1999/xhtml" name="main-content" title="Selected UI illustration" src="about:blank" style="width:100%;height:100%;border:0;background:#fafaf9"/>
+  </foreignObject>
+  <rect x="300" width="1" height="1000" fill="#e7e5e4"/>
+  <!-- Persistent light navigation rail -->
+  <rect width="300" height="1000" fill="#ffffff"/>
+  <rect width="300" height="1" fill="#e7e5e4"/>
+  <g transform="translate(20,20)">
+    <rect width="34" height="34" rx="10" fill="#4f46e5"/>
+    <g stroke="#ffffff" stroke-width="1.6" fill="none"><circle cx="17" cy="10" r="2.3"/><circle cx="10" cy="23" r="2.3"/><circle cx="24" cy="23" r="2.3"/><path d="M17 12.5 11 21M17 12.5 23 21M11.5 23h11"/></g>
+    <text x="44" y="14" fill="#1c1917" font-size="14" font-weight="700">common-agent-swarm-ops</text>
+    <text x="44" y="30" fill="#78716c" font-size="10">Common-first control plane</text>
+  </g>
+  <g transform="translate(16,72)">
+    <rect width="268" height="38" rx="10" fill="#fafaf9" stroke="#e7e5e4"/>
+    <circle cx="19" cy="19" r="7" fill="#eef2ff" stroke="#c7d2fe"/><circle cx="19" cy="19" r="2.5" fill="#4f46e5"/>
+    <text x="34" y="16" fill="#1c1917" font-size="11" font-weight="600">Returned workspace</text>
+    <text x="34" y="29" fill="#78716c" font-size="9">Authorized session scope</text>
+    <path d="M246 16l4 4 4-4" fill="none" stroke="#78716c" stroke-width="1.5"/>
+  </g>
+  <line x1="16" y1="126" x2="284" y2="126" stroke="#e7e5e4"/>
+  <g font-size="10" font-weight="700" letter-spacing="1.1" fill="#a8a29e">
+    <text x="20" y="150">HOME</text><text x="20" y="207">BUILD</text><text x="20" y="317">COMMON</text>
+    <text x="20" y="375">OPERATE</text><text x="20" y="530">KNOWLEDGE &amp; QUALITY</text><text x="20" y="610">DOMAIN</text>
+    <text x="20" y="665">GOVERNANCE</text><text x="20" y="755">DEVELOPER &amp; HELP</text><text x="20" y="830">ACCOUNT</text>
+  </g>
+  <!-- Home -->
+  <g transform="translate(12,158)"><rect width="276" height="32" rx="8" fill="#eef2ff"/><rect x="8" y="8" width="16" height="16" rx="4" fill="#4f46e5"/><path d="M12 18h8M16 14v8" stroke="#ffffff" stroke-width="1.3"/><text x="36" y="20" fill="#3730a3" font-size="12" font-weight="700">Dashboard</text><rect x="232" y="9" width="32" height="14" rx="7" fill="#c7d2fe"/><text x="248" y="19" text-anchor="middle" fill="#4338ca" font-size="9" font-weight="700">HOME</text></g>
+  <!-- Build -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><path d="M21 225l6-5 6 5-6 5z"/><rect x="16" y="244" width="12" height="12" rx="2"/><path d="M18 278h12M24 272v12"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="230">Compose</text><text x="44" y="255">Swarm Canvas</text><text x="44" y="280">Blueprints</text></g>
+  <!-- Common -->
+  <g fill="none" stroke="#4f46e5" stroke-width="1.5"><circle cx="22" cy="334" r="7"/><path d="M18 334h8M22 330v8"/></g>
+  <text x="44" y="338" fill="#3730a3" font-size="12" font-weight="600">Registry Hub</text>
+  <text x="44" y="359" fill="#78716c" font-size="10">Agent &amp; Pattern Detail</text>
+  <!-- Operate -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><path d="M16 391h12v10H16zM18 394h8M18 398h5"/><path d="M16 415h12M22 409v12"/><path d="M16 441h12M22 435v12"/><circle cx="22" cy="466" r="6"/><path d="M19 466h6M22 463v6"/><path d="M16 486h12v9H16zM19 483v3M25 483v3"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="396">Activity</text><text x="44" y="421">Monitoring</text><text x="44" y="447">Approvals &amp; Rollouts</text><text x="44" y="472">Notifications</text><text x="44" y="492">Costs</text></g>
+  <!-- Knowledge and quality -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><rect x="16" y="548" width="12" height="10" rx="2"/><path d="M18 545v3M26 545v3M18 562h8"/><path d="M16 577l6-6 6 6-6 6z"/><path d="M22 574v6M19 577h6"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="556">Knowledge</text><text x="44" y="582">Eval &amp; Improvement</text></g>
+  <!-- Domain -->
+  <g fill="none" stroke="#7c3aed" stroke-width="1.5"><rect x="16" y="623" width="12" height="12" rx="3"/><path d="M19 627h6M19 631h4"/></g>
+  <text x="44" y="632" fill="#5b21b6" font-size="12" font-weight="600">VA Production</text>
+  <!-- Governance -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><path d="M16 684h12v12H16zM19 687h6M19 691h6"/><circle cx="20" cy="717" r="4"/><circle cx="27" cy="717" r="4"/><path d="M22 717h3"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="692">Audit</text><text x="44" y="722">Collaboration</text></g>
+  <!-- Developer and help -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><path d="M16 781l4-4-4-4M28 781l-4-4 4-4M22 771l-2 12"/><circle cx="22" cy="803" r="6"/><path d="M22 800v4M22 807h.1"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="781">API Portal</text><text x="44" y="807">Onboarding &amp; Help</text></g>
+  <!-- Account -->
+  <g fill="none" stroke="#78716c" stroke-width="1.5"><circle cx="22" cy="852" r="6"/><path d="M22 842v3M22 859v3M12 852h3M29 852h3M15 845l2 2M27 857l2 2M29 845l-2 2M17 857l-2 2"/><circle cx="22" cy="878" r="5"/><path d="M14 890c1.5-5 14.5-5 16 0"/></g>
+  <g fill="#44403c" font-size="12"><text x="44" y="856">Settings</text><text x="44" y="883">Profile</text></g>
+  <g id="navigation-links" fill="transparent" pointer-events="all">
+    <a href="ui_02_dashboard.svg" target="main-content" aria-label="Open Dashboard"><title>Open Dashboard</title><rect x="12" y="158" width="276" height="32" rx="8"/></a>
+    <a href="ui_03_swarm_composer.svg" target="main-content" aria-label="Open Compose"><title>Open Compose</title><rect x="12" y="212" width="276" height="24" rx="6"/></a>
+    <a href="ui_04_canvas.svg" target="main-content" aria-label="Open Swarm Canvas"><title>Open Swarm Canvas</title><rect x="12" y="238" width="276" height="24" rx="6"/></a>
+    <a href="ui_20_blueprints.svg" target="main-content" aria-label="Open Blueprints"><title>Open Blueprints</title><rect x="12" y="264" width="276" height="24" rx="6"/></a>
+    <a href="ui_07_registry_hub.svg" target="main-content" aria-label="Open Registry Hub"><title>Open Registry Hub</title><rect x="12" y="322" width="276" height="24" rx="6"/></a>
+    <a href="ui_05_agent_detail.svg" target="main-content" aria-label="Open Agent and Pattern Detail"><title>Open Agent and Pattern Detail</title><rect x="12" y="345" width="276" height="20" rx="6"/></a>
+    <a href="ui_06_activity.svg" target="main-content" aria-label="Open Activity"><title>Open Activity</title><rect x="12" y="380" width="276" height="24" rx="6"/></a>
+    <a href="ui_09_monitoring.svg" target="main-content" aria-label="Open Monitoring"><title>Open Monitoring</title><rect x="12" y="405" width="276" height="24" rx="6"/></a>
+    <a href="ui_09_monitoring.svg" target="main-content" aria-label="Open Approvals and Rollouts"><title>Open Approvals and Rollouts</title><rect x="12" y="431" width="276" height="24" rx="6"/></a>
+    <a href="ui_12_notifications.svg" target="main-content" aria-label="Open Notifications"><title>Open Notifications</title><rect x="12" y="456" width="276" height="24" rx="6"/></a>
+    <a href="ui_19_costs.svg" target="main-content" aria-label="Open Costs"><title>Open Costs</title><rect x="12" y="481" width="276" height="24" rx="6"/></a>
+    <a href="ui_10_knowledge.svg" target="main-content" aria-label="Open Knowledge"><title>Open Knowledge</title><rect x="12" y="542" width="276" height="24" rx="6"/></a>
+    <a href="ui_11_eval.svg" target="main-content" aria-label="Open Eval and Improvement"><title>Open Eval and Improvement</title><rect x="12" y="568" width="276" height="24" rx="6"/></a>
+    <a href="ui_05_agent_detail.svg" target="main-content" aria-label="Open VA Production"><title>Open VA Production</title><rect x="12" y="616" width="276" height="24" rx="6"/></a>
+    <a href="ui_14_audit.svg" target="main-content" aria-label="Open Audit"><title>Open Audit</title><rect x="12" y="676" width="276" height="24" rx="6"/></a>
+    <a href="ui_18_collaboration.svg" target="main-content" aria-label="Open Collaboration"><title>Open Collaboration</title><rect x="12" y="704" width="276" height="24" rx="6"/></a>
+    <a href="ui_15_api_portal.svg" target="main-content" aria-label="Open API Portal"><title>Open API Portal</title><rect x="12" y="766" width="276" height="24" rx="6"/></a>
+    <a href="ui_16_onboarding.svg" target="main-content" aria-label="Open Onboarding and Help"><title>Open Onboarding and Help</title><rect x="12" y="792" width="276" height="24" rx="6"/></a>
+    <a href="ui_08_settings.svg" target="main-content" aria-label="Open Settings"><title>Open Settings</title><rect x="12" y="846" width="276" height="20" rx="6"/></a>
+    <a href="ui_13_profile.svg" target="main-content" aria-label="Open Profile"><title>Open Profile</title><rect x="12" y="870" width="276" height="22" rx="6"/></a>
+  </g>
+  <!-- Persistent connection and account footer -->
+  <line x1="16" y1="912" x2="284" y2="912" stroke="#e7e5e4"/>
+  <g transform="translate(16,928)">
+    <rect width="268" height="50" rx="10" fill="#f5f5f4" stroke="#e7e5e4"/>
+    <circle cx="18" cy="18" r="5" fill="#f59e0b"/><text x="30" y="17" fill="#44403c" font-size="11" font-weight="600">Reconnecting</text>
+    <text x="30" y="32" fill="#78716c" font-size="9">Status: returned projection · as_of …</text>
+    <rect x="212" y="13" width="42" height="22" rx="6" fill="#ffffff" stroke="#d6d3d1"/>
+    <text x="233" y="27" text-anchor="middle" fill="#4f46e5" font-size="9" font-weight="700">Profile</text>
+  </g>
+</svg>

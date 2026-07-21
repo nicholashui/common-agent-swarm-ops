@@ -127,4 +127,5 @@
     <text x="0" y="86" font-size="9" fill="#a8a29e">Blueprints include: pattern graph + pinned agent versions + knowledge sources + default config.</text>
     <text x="0" y="102" font-size="9" fill="#a8a29e">Publishing requires evaluation pass. Commons provenance preserved in all derivatives.</text>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

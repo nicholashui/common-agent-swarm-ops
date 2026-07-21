@@ -79,4 +79,5 @@
       <rect x="14" y="48" width="120" height="16" rx="8" fill="#1c1917"/><text x="74" y="60" text-anchor="middle" font-size="9" fill="#fff">Promote winner</text>
     </g>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

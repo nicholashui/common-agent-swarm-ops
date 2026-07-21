@@ -133,4 +133,5 @@
       <g transform="translate(0,132)"><circle cx="8" cy="8" r="6" fill="#f5f3ff"/><text x="8" y="11" text-anchor="middle" font-size="7" fill="#7c3aed">MC</text><text x="22" y="12" fill="#7c3aed">meta-critic</text><text x="22" y="28" fill="#78716c">Auto-proposed ReportAgent v3.0 from 2.1k traces</text><text x="370" y="12" fill="#a8a29e">8h ago</text></g>
     </g>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

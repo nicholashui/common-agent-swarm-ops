@@ -132,4 +132,5 @@
     <text x="20" y="242" font-size="10" fill="#78716c">Auto-share verified insights: <tspan fill="#059669">On</tspan> · Attribution: Public</text>
     <rect x="20" y="256" width="160" height="30" rx="15" fill="#1c1917"/><text x="100" y="276" text-anchor="middle" font-size="11" fill="#fff">Save changes</text>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

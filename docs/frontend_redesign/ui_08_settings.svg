@@ -96,4 +96,5 @@
       <rect x="20" y="116" width="150" height="26" rx="13" fill="#1c1917"/><text x="95" y="133" text-anchor="middle" font-size="11" fill="#fff">+ Invite member</text>
     </g>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

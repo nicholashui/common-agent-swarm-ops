@@ -162,4 +162,5 @@
 
   <!-- footer note -->
   <text x="40" y="812" font-size="11" fill="#a8a29e">Board · Table · Timeline views share URL-synced filters · virtualized for 100k+ rows · redacted event summaries only.</text>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

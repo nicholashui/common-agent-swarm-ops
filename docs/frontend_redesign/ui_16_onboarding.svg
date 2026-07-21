@@ -130,4 +130,5 @@
       <text x="0" y="28" font-size="11" fill="#a8a29e">Step 3 of 5 · You can always adjust later in Registry Hub.</text>
     </g>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>

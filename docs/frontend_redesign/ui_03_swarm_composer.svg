@@ -161,4 +161,5 @@
     <text x="20" y="740" font-size="10" fill="#a8a29e">Graph JSON handoff includes linked_common_pattern_id + pinned agent versions + BIG ROW layout.</text>
     <text x="20" y="760" font-size="10" fill="#a8a29e">Suggestions are inert data · "Load into Canvas" is a server-authorized action reference.</text>
   </g>
+  <a href="ui_00_menu.svg" target="_top" aria-label="Open application menu"><title>Open application menu</title><rect x="16" y="8" width="100" height="42" fill="transparent" pointer-events="all"/></a>
 </svg>
