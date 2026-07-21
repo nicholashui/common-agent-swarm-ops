@@ -6,7 +6,7 @@
 **Destination:** `C:\Project\common-agent-swarm-ops`  
 **Controlled source snapshot:** `C:\Project\generic-swarm-ops\business\video`  
 **Original corpus provenance:** `va-agent-swarm` commit recorded by the source corpus manifest  
-**Problem statement:** `common-agent-swarm-ops` has a safe 114-agent video catalog, policies, schemas, and one stub workflow, but it does not contain the operational/design corpus needed to understand and develop the video domain without another repository. The migration must make `business/video/` the checked-in video source of truth while preserving the common host's domain-neutral architecture and existing agent identities.
+**Problem statement:** `common-agent-swarm-ops` has a safe 114-agent video catalog, policies, schemas, and one safe stub graph, but it does not contain the operational/design corpus, reviewed workflow-role mappings, or blueprint-realizing graph definitions needed to understand and develop the video domain without another repository. The migration must make `business/video/` the checked-in video source of truth while preserving the common host's domain-neutral architecture and existing agent identities. `workflows/pack_spine.json` is the sole current safe stub and must not be presented as blueprint implementation.
 
 ---
 
@@ -18,22 +18,29 @@
 2. The existing common 114-agent inventory and IDs remain authoritative; source agent IDs must not overwrite them.
 3. Imported material retains its original repository, commit, path, license, and SHA-256 provenance.
 4. Runtime activation remains fail-closed; migration does not enable providers, credentials, network access, or production agents.
-5. The universal host remains domain-neutral. Video prompts, rubrics, workflows, policies, and knowledge stay pack-local.
+5. The universal host remains domain-neutral. Video prompts, rubrics, workflows, policies, and knowledge stay pack-local and use no second workflow engine or control plane.
 6. Import and generation tools must support dry-run, reject path traversal, avoid deletion, and fail on incomplete mappings.
 7. Generated Kiro and Claude Code configuration is out of scope; do not place the video corpus in `.kiro/`, `.claude/`, `rules/`, or `skills/`.
+8. Every explicitly documented blueprint workflow family and required phase must be represented by a safe local executable graph definition or an explicit reviewed gap/deferral. A roster or graph stub is not implementation.
+9. Each documented role in each workflow/phase must resolve in a human-reviewed workflow-role map to exactly one existing common `video.*` agent ID, one named composite of common IDs, or a documented gap. Differing source-role names do not require new agents.
+10. A graph counted as implemented must declare phase nodes and typed artifact handoffs; lead and critic roles; bounded critique, refinement, and rollback paths; finite budgets; required quality, risk, and human-approval gates; and only allowed tools. Implemented mappings require local `SPEC.md` runtime-binding and handoff/critique information.
+11. `business/video/workflows/pack_spine.json` remains the sole current safe stub. The pack is not operationally equivalent to the blueprint until mapping and graph gates pass, and it remains non-production-active.
 
 ### 0.2 Acceptance criteria
 
 The migration is complete only when all of the following are evidenced:
 
 - Exactly 114 common inventory entries resolve to existing `agent_spec.json` and substantive local `SPEC.md` files.
-- Every `SPEC.md` contains identity, responsibility, boundaries, quality/critique behavior, runtime binding, local sources, and provenance.
+- Every `SPEC.md` contains identity, responsibility, boundaries, quality/critique behavior, runtime binding, local sources, and provenance; an implemented workflow role also names its relevant typed handoffs and lead/critic/refinement or escalation behavior.
 - Every required `source_ref` resolves beneath the common repository root; external paths may appear only as non-required historical provenance.
 - A corpus manifest verifies every imported file by relative path, size, and SHA-256.
+- A human-reviewed workflow-role mapping artifact covers every documented role in every blueprint workflow/phase with workflow context, rationale, mapping status, maturity/activation state, and exactly one valid resolution: existing common `video.*` ID, named common-ID composite, or explicit gap/deferral.
+- Every explicitly documented workflow family and required phase is represented by a local safe graph or explicit reviewed gap/deferral. Graphs use only common `video.*` IDs and have valid local agent/tool references, phase nodes, typed handoffs, lead/critic roles, finite budgets, bounded critique/refinement/rollback, required quality/risk/human gates, and allowed tools.
+- `workflows/pack_spine.json` is recorded as the sole current safe stub—not a realization of any blueprint family—and no production activation, provider, credential, or network path is enabled.
 - Required workflows, process indexes, knowledge seeds, and approved special-skill integrations are local and reference common agent IDs.
 - The standalone checker passes when both `generic-swarm-ops` and `va-agent-swarm` are unavailable.
-- Focused video inventory, schema, workflow, security, and SDD gates pass.
-- `adoption.md`, `structure.md`, and the pack README describe the checked-in common pack as the video source of truth and do not claim assets that are absent.
+- Focused video inventory, schema, mapping, workflow, security, offline no-activation, and SDD gates pass.
+- `adoption.md`, `structure.md`, and the pack README describe the checked-in common pack as the video source of truth and do not claim assets that are absent or graphs/mappings that are not implemented.
 
 ---
 
@@ -105,6 +112,8 @@ business/video/
   inventory.json
   ROSTER.json                 # common IDs only
   MAP.md                      # source concept/agent → common ID, with rationale
+  WORKFLOW_ROLE_MAP.json      # documented workflow/phase role → common ID, composite, or gap
+  workflow_coverage.json      # blueprint family/phase → graph or explicit reviewed deferral
   PROCESSES.md
   process_coverage.json
   agents/<common_agent_id>/
@@ -156,9 +165,9 @@ A stricter safety rule wins. Provider recommendations, credentials, external inf
 | A | Source provenance, agent/system tables, key workflow and quality documents | Establishes auditable local foundations. |
 | B | Full approved `study/`, `plan/`, and essential root corpus from the pinned generic snapshot | Makes design knowledge standalone. |
 | C | Common-ID mapping and 114 substantive `SPEC.md` files | Makes the existing common roster usable without replacing it. |
-| D | Adapted workflows, process indexes, knowledge seeds, and compatible special skills | Makes local knowledge navigable and operationally connected. |
+| D | Reviewed workflow-role mapping, adapted workflow graphs or explicit deferrals, process indexes, knowledge seeds, and compatible special skills | Makes the local blueprint realization traceable and operationally connected without asserting activation. |
 
-The completion bar is A–D. A copied corpus alone is not sufficient.
+The completion bar is A–D. A copied corpus, a 114-agent catalog, a mapping without graphs, or a graph stub alone is not sufficient.
 
 ### 4.2 Explicit exclusions
 
@@ -210,7 +219,34 @@ Rules:
 - Automation may propose mappings but may not mark them reviewed.
 - Missing, duplicate, ambiguous, or unreviewed mappings fail the write phase.
 
-### 5.2 Per-agent SPEC.md target shape
+### 5.2 Workflow-role mapping contract
+
+Create `business/video/WORKFLOW_ROLE_MAP.json` and `workflow_coverage.json` from the locally pinned blueprint. The map has one record for every documented role in every named workflow and phase, including the shared skeleton (Greenlight, Pre-production packet, Production packet, Post master, Review and release pack, Distribution package, and Post-launch learning set) and the feature-film Development and Pre-Production phases where documented. A record has the following shape:
+
+```json
+{
+  "workflow_id": "video.workflow-a-viral-hook-clip",
+  "phase_id": "concept",
+  "documented_role": "TrendIntelligenceAgent",
+  "resolution": {
+    "kind": "common_agent|composite|gap",
+    "common_agent_id": "video.example",
+    "composite_id": "video.example_composite",
+    "component_agent_ids": ["video.example_a", "video.example_b"],
+    "gap_id": "gap.example"
+  },
+  "mapping_status": "proposed|reviewed|implemented|deferred",
+  "maturity_state": "cataloged|mapped|graph_validated|not_mature",
+  "activation_state": "registered|non_active",
+  "rationale": "Human-reviewed workflow/phase-specific reason",
+  "reviewed_by": "<reviewer>",
+  "reviewed_at": "<ISO-8601 timestamp>"
+}
+```
+
+Exactly one resolution is valid: `common_agent` names one existing common `video.*` ID; `composite` names one composite and only existing common `video.*` component IDs; or `gap` names a documented, reviewed deferral. The map must not silently omit a role, substitute an external/source ID, or require a new agent merely because a source role uses a different name. For `implemented` mappings, the mapped local `SPEC.md` includes its `agent_spec.json` runtime binding, allowed tools/model/network policy, typed input/output handoffs, critic and lead relationship, and bounded critique/refinement or escalation behavior. `workflow_coverage.json` records each workflow family and required phase as either a local graph reference or the corresponding reviewed gap; it cannot mark `pack_spine.json` as a blueprint-realizing graph.
+
+### 5.3 Per-agent SPEC.md target shape
 
 Each common agent specification must contain:
 
@@ -269,30 +305,32 @@ A generic role string such as “configuration specialist” is not substantive 
 
 ### Phase M2 — Reconcile the 114-agent taxonomy
 
-1. Generate mapping candidates from common IDs/roles and source tables.
-2. Human-review all exact, composite, related, and common-only mappings.
+1. Generate source-to-common mapping candidates from common IDs/roles and source tables.
+2. Human-review all exact, composite, related, and common-only source mappings.
 3. Write `AGENT_SOURCE_MAP.json`, `ROSTER.json`, and `MAP.md` using common IDs.
-4. Fail closed if the common inventory and map differ by any ID.
+4. Fail closed if the common inventory and source map differ by any ID.
 
-**Exit gate:** 114 reviewed common entries, no duplicate common IDs, no silent source substitution.
+**Exit gate:** 114 reviewed common entries, no duplicate common IDs, no silent source substitution. This source taxonomy map does not satisfy the separate workflow-role mapping contract.
 
-### Phase M3 — Expand local common agent specifications
+### Phase M3 — Expand local common agent specifications and workflow-role map
 
-1. Generate draft `SPEC.md` files from each common `agent_spec.json`, reviewed mapping, and local corpus sources.
+1. Generate draft `SPEC.md` files from each common `agent_spec.json`, reviewed source mapping, and local corpus sources.
 2. Preserve common budgets, model policy, network restrictions, critique edges, refinement limits, and non-active status.
-3. Add local deep-document links and provenance.
-4. Review safety-critical roles manually: orchestrator, compliance, rights/consent, privacy, legal, safety, provenance, release, judge, and human-review coordination.
+3. Add local deep-document links and provenance, then add runtime binding, typed handoff, critique, and escalation information when a role is mapped as implemented.
+4. Build and human-review `WORKFLOW_ROLE_MAP.json` and `workflow_coverage.json` for every blueprint workflow family, required phase, and documented role; resolve each to one common agent, named common-ID composite, or explicit gap/deferral.
+5. Review safety-critical roles manually: orchestrator, compliance, rights/consent, privacy, legal, safety, provenance, release, judge, and human-review coordination.
 
-**Exit gate:** 114 substantive specs; all local links resolve; no required external source path.
+**Exit gate:** 114 substantive specs; all local links resolve; no required external source path; workflow-role mapping coverage is complete or explicitly deferred and reviewed. No entry becomes active.
 
-### Phase M4 — Adapt workflows and process coverage
+### Phase M4 — Realize workflows and process coverage
 
-1. Keep `pack_spine.json` as the current safe baseline.
-2. Adapt selected source DNA one workflow at a time to common IDs and schemas.
-3. Require allow-listed tools, finite graph budgets, risk gates, compensation, critique loops, and human interrupts.
-4. Build `PROCESSES.md` and `process_coverage.json` from validated local workflows.
+1. Preserve `pack_spine.json` as the sole current safe stub; it is not a realization of a blueprint workflow family.
+2. Translate every explicitly documented blueprint family and required phase—Viral Hook Clip/Meme, UGC-Style Performance Ad, Animated Explainer, Personalized Birthday Video, AI Multi-Scene Short Film, Corporate Training Video, Music Video, AI Avatar Talking-Head, Documentary “Explained” Episode, and Feature-Length AI Film—into local graph definitions or explicit reviewed gaps/deferrals. Preserve the shared Greenlight, Pre-production packet, Production packet, Post master, Review and release pack, Distribution package, and Post-launch learning set; preserve Feature-Length AI Film Development and Pre-Production where documented.
+3. For each graph, use only common `video.*` IDs and declare phase nodes, typed artifact handoffs, mapped lead and critic roles, bounded critique/refinement/rollback paths, finite execution budgets, required quality/risk/human gates, and only allowed tools.
+4. Deterministically validate all graph references offline; verify graph coverage against the role map and process coverage, and fail closed on unmapped implemented roles, missing required phases/gates, non-finite paths, unknown agents/tools, or active/provider/network configuration.
+5. Build `PROCESSES.md` and `process_coverage.json` from the validated local graphs and reviewed deferrals.
 
-**Exit gate:** workflow references are valid common agents/tools; graph and security checks pass; no production activation is implied.
+**Exit gate:** each blueprint family/phase has a valid common-ID graph or explicit reviewed gap; graph-reference integrity, mapping completeness, gate coverage, and deterministic offline validation pass; no production activation is implied or enabled.
 
 ### Phase M5 — Knowledge and special skills
 
@@ -307,12 +345,14 @@ A generic role string such as “configuration specialist” is not substantive 
 Implement `scripts/business/check_video_domain_standalone.py` and focused tests. The checker must:
 
 - validate manifest hashes and reject paths escaping the project root;
-- assert exactly 114 inventory, manifest, directory, mapping, and SPEC identities;
-- validate all local source references;
+- assert exactly 114 inventory, manifest, directory, source-map, and SPEC identities;
+- validate workflow-role-map completeness: every documented workflow/phase role has exactly one reviewed common-ID, named-composite, or explicit-gap resolution with rationale and maturity/activation status;
+- validate all local source references and required `SPEC.md` runtime-binding, typed-handoff, and critique information for implemented mappings;
 - require substantive sections in every SPEC;
-- validate workflow agent/tool references and process coverage;
-- reject primary dependencies on `generic-swarm-ops` or `va-agent-swarm`;
-- run without network access and without reading either source repository.
+- validate workflow coverage and graph-reference integrity using only common `video.*` agents and allowed tools; require phase nodes, typed handoffs, lead/critic roles, finite budgets, bounded critique/refinement/rollback, quality/risk/human gates, and reviewed deferrals for any unimplemented required phase;
+- assert `pack_spine.json` is the sole safe stub and is not counted as blueprint realization;
+- reject primary dependencies on `generic-swarm-ops` or `va-agent-swarm`, production activation, credentials, live providers, and network requirements;
+- run deterministically without network access and without reading either source repository.
 
 **Exit gate:** deterministic `STANDALONE PASS` with both upstream paths unavailable.
 
@@ -352,13 +392,15 @@ required inputs:
   business/video/inventory.json
   business/video/agents/*/agent_spec.json
   business/video/AGENT_SOURCE_MAP.json
+  business/video/WORKFLOW_ROLE_MAP.json
   business/video/corpus/MANIFEST.json
 
 behavior:
-  validate exactly 114 reviewed mappings
+  validate exactly 114 reviewed source mappings
+  consume workflow-role mappings only to enrich implemented local runtime-binding and handoff/critique sections
   generate drafts only from local files
   preserve common IDs and runtime restrictions
-  refuse missing, duplicate, ambiguous, or external primary refs
+  refuse missing, duplicate, ambiguous, unreviewed, or external primary refs
   support --dry-run and --write
 ```
 
@@ -367,10 +409,14 @@ behavior:
 ```text
 exit 0 iff:
   corpus manifest integrity passes
-  inventory/manifest/directories/map/SPECs agree at 114
+  inventory/manifest/directories/source-map/SPECs agree at 114
+  every documented workflow/phase role has exactly one human-reviewed common-ID, named-composite, or explicit-gap mapping with context, rationale, and maturity/activation state
   every required local reference exists beneath the project root
-  every SPEC passes content and section checks
-  every workflow references valid common agents and allowed tools
+  every SPEC passes content, section, and implemented-role runtime-binding/handoff/critique checks
+  every blueprint workflow family and required phase has a valid local graph or explicit reviewed deferral
+  every graph uses valid common video.* agents and allowed tools and passes phase, typed-handoff, lead/critic, finite-budget, bounded-path, quality/risk/human-gate, and rollback validation
+  pack_spine.json is the sole safe stub and is not counted as blueprint realization
+  production activation, credential, live-provider, and network requirements are absent
   no source repository is accessed
 ```
 
@@ -394,15 +440,16 @@ Where a project command differs, use the repository's locked environment and equ
 
 | Gate | Required evidence |
 |---|---|
-| Inventory identity | 114 common IDs agree across manifest, inventory, directories, mapping, and specs. |
+| Inventory and source-map identity | 114 common IDs agree across manifest, inventory, directories, source map, and specs. |
+| Workflow-role mapping completeness | Every blueprint workflow/phase role has one reviewed existing `video.*` ID, named common-ID composite, or explicit gap, with rationale, status, and maturity/activation state. |
 | Corpus integrity | File count, bytes, path, and SHA-256 match the destination manifest. |
-| Local-reference integrity | Every required source, workflow, prompt, rubric, and process reference resolves locally. |
-| Security | Traversal/symlink escapes, secrets, network access, broad tools, and silent activation are rejected. |
-| Workflow validity | Common agent IDs, finite budgets, allow-listed tools, risk gates, and human interrupts validate. |
-| Offline proof | Checker/tests pass with source repositories unavailable and network disabled. |
-| Documentation | As-built counts and ownership statements match the filesystem and executable checks. |
+| Local-reference and SPEC integrity | Every required source, workflow, prompt, rubric, process, and implemented-role runtime-binding/handoff/critique reference resolves locally. |
+| Graph validity | Every blueprint family/phase has a local graph or reviewed gap; graphs use common IDs and allowed tools and validate phase nodes, typed handoffs, lead/critic roles, finite budgets, bounded critique/refinement/rollback, quality/risk/human gates, and references. |
+| Security and no-activation proof | Traversal/symlink escapes, secrets, network access, broad tools, live providers, credentials, production activation, and silent activation are rejected; `pack_spine.json` remains the sole safe stub. |
+| Offline proof | Deterministic checker/tests pass with source repositories unavailable and network disabled. |
+| Documentation | As-built counts, ownership, stub status, mapping/graph maturity, and explicit gaps match the filesystem and executable checks. |
 
-Passing tests are evidence, not proof. Unreviewed semantic mappings, licensing uncertainty, or incomplete workflow adaptation remain explicit blockers.
+Passing tests are evidence, not proof. Unreviewed semantic or workflow-role mappings, licensing uncertainty, an uncovered workflow/phase, an invalid graph reference/gate/path, or any production-activation signal remains an explicit blocker.
 
 ---
 
@@ -410,14 +457,16 @@ Passing tests are evidence, not proof. Unreviewed semantic mappings, licensing u
 
 | Risk | Mitigation |
 |---|---|
-| Wrong agent mapping | Human-reviewed mapping statuses and rationale; fail closed on ambiguity. |
-| Common contract regression | Preserve common schemas, policies, IDs, and safe stub workflow; adapt source assets rather than overwrite. |
+| Wrong source-to-common or workflow-role mapping | Separate human-reviewed source and workflow-role maps; require phase context, rationale, exact-one resolution, and fail-closed ambiguity checks. |
+| Missing blueprint phase or role is concealed by a catalog or stub | Workflow coverage ledger requires every documented family/phase to name a valid graph or explicit reviewed gap; `pack_spine.json` cannot count as realization. |
+| Invalid or unsafe graph is treated as mature | Deterministic offline validation of common IDs, allowed tools, typed handoffs, lead/critic roles, finite budgets, bounded critique/refinement/rollback, gates, and references. |
+| Common contract regression | Preserve common schemas, policies, IDs, and the safe stub workflow; adapt source assets rather than overwrite. |
 | Repository growth | Record measured size and approved scope; deduplicate shared documents instead of copying them per agent. |
 | Stale corpus | Pin source commit and hashes; updates use reviewed manifest-diff PRs. |
 | Malicious or irrelevant instructions in corpus | Treat corpus as untrusted data; never execute embedded commands or generate active configuration from instructions. |
 | License/provenance loss | Preserve metadata and headers; block import until review is recorded. |
 | Secret or personal-data import | Pre-copy scanning and allow-list; no credentials or generated media. |
-| False N3/production claims | Keep maturity and activation unchanged until separate runtime evidence exists. |
+| False maturity or production claims | Keep all 114 agents registered/non-active; require mapping/graph gates and no-activation proof before any maturity claim. |
 | Rollback complexity | Migration is additive; retain pre-import manifest digest and revert the migration change set rather than deleting ad hoc. |
 
 ---
@@ -427,13 +476,15 @@ Passing tests are evidence, not proof. Unreviewed semantic mappings, licensing u
 The video domain is self-contained only when a clean clone of `common-agent-swarm-ops`, with no sibling repositories and no network access, can:
 
 1. Explain every common video agent's responsibility and boundaries from local files.
-2. Validate all 114 configurations and their local source mappings.
+2. Validate all 114 configurations and their reviewed local source mappings.
 3. Read system, workflow, quality, rights, safety, and provenance design from the local pack.
-4. Register or dry-run the pack through common host contracts without external content.
-5. Validate local workflow/process references and execute only existing safe stub paths.
-6. Recompute the corpus manifest and reproduce the standalone pass.
+4. Validate the complete human-reviewed workflow-role map: every documented workflow/phase role resolves exactly once to an existing common ID, named common-ID composite, or explicit reviewed gap.
+5. Register or dry-run the pack through common host contracts without external content.
+6. Deterministically validate every documented workflow family and required phase as a local common-ID graph or explicit reviewed deferral, including graph-reference integrity, typed handoffs, lead/critic roles, bounded paths, finite budgets, gates, and allowed tools.
+7. Prove `pack_spine.json` remains the sole safe stub and that no provider, credential, network path, or production activation is configured or implied.
+8. Recompute the corpus manifest and reproduce the standalone pass.
 
-Self-contained does **not** mean all agents are active, all workflows are production-ready, or live media providers are configured.
+Self-contained does **not** mean all agents are active, all workflows are production-ready, or live media providers are configured. A workflow is not mature merely because individual agents are cataloged, a mapping exists, or a stub graph runs.
 
 ---
 
@@ -445,7 +496,8 @@ Self-contained does **not** mean all agents are active, all workflows are produc
 - Replacing common's host architecture with generic or VA host code.
 - Treating imported research as executable instructions.
 - Hand-editing generated Kiro or Claude Code output.
-- Claiming production maturity based only on agent count, file count, or copied prose.
+- Claiming workflow or production maturity based only on agent count, file count, copied prose, a role map, or a graph stub.
+- Treating external VA/generic repositories as runtime/design dependencies or adding a second workflow engine or control plane.
 
 ---
 
@@ -454,12 +506,13 @@ Self-contained does **not** mean all agents are active, all workflows are produc
 1. Review and approve the exact Phase M0 dry-run import set and provenance report.
 2. Implement the import/check tooling before copying corpus files.
 3. Import the pinned corpus snapshot.
-4. Complete and review the 114-entry common-ID mapping.
-5. Generate/review specs, then adapt workflows incrementally.
-6. Run M6 gates with both source repositories unavailable.
-7. Reconcile `adoption.md` and `structure.md`; only then mark this migration complete.
+4. Complete and review the 114-entry common-ID source mapping.
+5. Complete and review the workflow-role map and coverage ledger for every blueprint workflow/phase role.
+6. Generate/review specs, then realize graphs incrementally or record explicit reviewed deferrals.
+7. Run M6 deterministic offline gates with both source repositories unavailable and no activation-capable configuration.
+8. Reconcile `adoption.md` and `structure.md`; only then mark this migration complete.
 
-Do not copy generic agent directories wholesale and do not retain “see another repository” as the permanent video-domain design.
+Do not copy generic agent directories wholesale, retain “see another repository” as the permanent video-domain design, or present the safe stub as a realized workflow.
 
 ---
 
@@ -469,13 +522,14 @@ Do not copy generic agent directories wholesale and do not retain “see another
 |---|---|
 | Current 114-agent authority | `business/video/manifest.json`, `business/video/inventory.json` |
 | Common runtime restrictions | `business/video/agents/*/agent_spec.json` |
-| Current safe graph | `business/video/workflows/pack_spine.json` |
+| Current safe graph | `business/video/workflows/pack_spine.json` — sole safe stub, not blueprint realization |
 | Common safety contracts | `business/video/policies/`, `business/video/schemas/` |
 | Migration requirements and acceptance criteria | This document §0 |
 | Source provenance and integrity | Planned `business/video/corpus/MANIFEST.json` and `SOURCE_*` files |
-| Taxonomy reconciliation | Planned `AGENT_SOURCE_MAP.json`, `ROSTER.json`, and `MAP.md` |
-| Standalone proof | Planned checker, focused tests, and evidence record |
-| Architecture/ownership reconciliation | Planned updates to `adoption.md`, `structure.md`, and pack README |
+| Source taxonomy reconciliation | Planned `AGENT_SOURCE_MAP.json`, `ROSTER.json`, and `MAP.md` |
+| Workflow realization and role mapping | Planned `WORKFLOW_ROLE_MAP.json`, `workflow_coverage.json`, local graph definitions/explicit deferrals, and implemented-role `SPEC.md` bindings |
+| Standalone proof | Planned checker, focused tests, deterministic offline graph validation, no-activation evidence, and immutable evidence record |
+| Architecture/ownership reconciliation | This document and `docs/adoption_redesign/adoption_redesign.md`; future pack documentation updates when implementation is approved |
 
 ---
 

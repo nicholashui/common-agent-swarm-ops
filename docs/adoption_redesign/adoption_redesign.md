@@ -1,51 +1,49 @@
-# Adoption Plan: `common-agent-swarm-ops` × `va-agent-swarm`
+# Adoption Plan: self-contained video pack on `common-agent-swarm-ops`
 
-**Status:** Proposed — implementation not started  
-**Date:** 2026-07-20  
-**Decision owner:** Product and architecture owners for both repositories  
-**Scope:** A safe, reusable integration model for the generic MMA host and the video-agent domain system.
+**Status:** Proposed — implementation not started<br>
+**Date:** 2026-07-20<br>
+**Decision owner:** Product and architecture owners for the common host and video pack<br>
+**Scope:** A safe, reusable implementation model for a domain-neutral MMA host and its checked-in video domain pack.
 
 ## 1. Executive decision
 
-Adopt a **host-and-domain-pack** model. `common-agent-swarm-ops` becomes the domain-agnostic control plane for many multi-agent (MMA) systems. `va-agent-swarm` remains the canonical repository for every video-specific rule, prompt, rubric, workflow definition, knowledge source, provider selection, and media-policy decision. The common host may validate, register, execute, audit, and learn from a VA pack; it must not become the source of truth for video business logic.
+Adopt a **domain-neutral host and checked-in domain-pack** model. `common-agent-swarm-ops` remains the only control plane for many multi-agent (MMA) systems. Its `business/video/` directory becomes the self-contained, checked-in source of truth for the pinned and adapted common video pack: video roles, prompts, rubrics, workflow graphs, knowledge indexes, policies, mappings, and provenance needed for local design and validation. `va-agent-swarm` and `generic-swarm-ops` are provenance and reviewed future-update inputs only; neither is a runtime or design dependency.
 
 This decision satisfies both non-negotiables:
 
 | Requirement | Binding decision |
 |---|---|
-| VA-specific logic remains in `va-agent-swarm` | Video semantics, prompts, rubrics, workflow definitions, corpora, and adapter configuration are versioned and released from VA. Common retains only generic contracts, host code, and non-semantic test fixtures. |
-| The common project supports dozens of MMA systems | Every domain is integrated through a versioned, declarative pack contract, isolated data namespaces, generic governance hooks, and a common Agent Learning Contract (ALC). No domain receives a custom control plane. |
+| Video behavior is self-contained without a second control plane | `business/video/` owns the pinned/adapted video semantics and compiles only through the common host. External VA/generic material is retained as reviewed historical provenance, never imported at runtime or required to interpret local design. |
+| The common project supports dozens of MMA systems | The host remains domain-neutral: every domain uses the same versioned declarative pack contract, isolated namespaces, generic governance hooks, and common Agent Learning Contract (ALC). Video receives no custom scheduler, public API plane, or governance bypass. |
 
-The target is not a repository merge that copies VA content into common. It is a controlled integration: VA publishes a signed, schema-valid domain package; common registers a specific package version and runs it through shared governance and learning infrastructure.
+The target is not a repository merge or a second video platform. It is a controlled, provenance-preserving adaptation into a local pack that the common host validates, registers, executes, audits, and learns from through shared contracts.
 
 ## 2. Audit basis and confidence
 
 This assessment is based on a local review performed on 2026-07-20 of the two repositories and the reference adoption plan in `generic-swarm-ops`. The reference is useful historical context; this plan prioritizes artifacts currently present in the two target repositories. No external providers, credentials, media APIs, or production environments were accessed.
 
-| Repository | Confirmed state | Audit conclusion |
+| Repository / asset | Confirmed state | Audit conclusion |
 |---|---|---|
-| `va-agent-swarm` | A detailed specification corpus: 114 agents across 10 categories, workflow and quality designs, source material, and planned integrations. Its root contains no application package, test suite, dependency manifest, or CI implementation. | Preserve it as the domain authority, but give it an executable, tested domain-pack layer. |
-| `common-agent-swarm-ops` | FastAPI host modules for registry, workflow engines, memory, governance, evaluation, evidence, and a Next.js frontend. It has property, unit, integration, and video tests. | Reuse its host capabilities, but remove video assumptions from generic contracts and finish the learning lifecycle. |
-| Existing `business/video` in common | 114 `registered` agent records and an inventory are present, but all sampled entries are L0 and the pack contains one stub graph (`pack_spine.json`). The declared 14-workflow/corpus structure in `structure.md` is not present on disk. | Treat it as an interim catalog, not evidence of a completed migration. Reconcile or retire it only after a traceable VA-owned replacement exists. |
+| `va-agent-swarm` | A detailed specification corpus: 114 agents across 10 categories, workflow and quality designs, source material, and planned integrations. Its root contains no application package, test suite, dependency manifest, or CI implementation. | Treat as pinned historical provenance and a reviewed future-update input; adapt compatible material into the checked-in common pack rather than make it a dependency. |
+| `common-agent-swarm-ops` | FastAPI host modules for registry, workflow engines, memory, governance, evaluation, evidence, and a Next.js frontend. It has property, unit, integration, and video tests. | Reuse its host capabilities, keep its contracts domain-neutral, and finish the learning lifecycle. |
+| Existing `business/video` in common | 114 `registered`, non-active (`L0`) agent records and an inventory are present. `workflows/pack_spine.json` is the sole local safe stub graph; no workflow-role map or blueprint-realizing graph is present. | Treat it as an interim catalog and safe stub only, not as operational realization of the blueprint. The local pack becomes authoritative only as its pinned/adapted contents and evidence are checked in. |
 
 ## 3. Current architecture and technical-debt audit
 
-### 3.1 `va-agent-swarm`
+### 3.1 Video blueprint provenance and pack-realization gaps
 
 **Strengths**
 
-- The system reference defines a coherent video-production hierarchy: orchestration, artifact handoffs, quality and continuity, delivery, and observability.
-- The roster documents 114 specialized agents, including the orchestration spine (Orchestrator, Planner, Router, Judge), quality and compliance roles, and workflow-support agents.
-- Agent descriptions already identify learning sources, quality criteria, critique relationships, tools, and intended architectural patterns.
-- The build plan contains sound principles: contracts before code, vertical slice before breadth, one shared agent lifecycle, deterministic inputs, provider abstractions, and mocked external media providers in CI.
+- The blueprint defines a coherent video-production hierarchy: orchestration, artifact handoffs, quality and continuity, delivery, observability, a shared seven-stage skeleton, and ten named workflow archetypes.
+- Its roster documents specialized roles, including orchestration, quality/compliance, critique, and workflow-support responsibilities, with intended quality criteria, critique relationships, tools, and patterns.
+- The build guidance supports contracts before code, a deterministic vertical slice before breadth, one shared agent lifecycle, provider abstractions, and mock-only media behavior in CI.
 
 **Gaps and risks**
 
-- The repository is design-rich but has no executable host, durable state model, provider abstractions, test harness, CI gate, or deployment path.
-- Its proposed stack includes platform choices that overlap the common host. Building a second FastAPI, graph, event-bus, and governance plane would create duplicate identity, audit, retry, and approval semantics.
-- Learning is a stated intention per agent, not an enforceable contract: there are no per-agent episode, reflection, retrieval, promotion, or retention records.
-- Multiple document versions, language variants, scripts, diagrams, and starter plans create source-drift risk. A canonical source index is required before implementation.
-- Provider names and safety assumptions are specifications, not audited integrations; they must remain behind host-controlled, mockable interfaces.
+- Blueprint role names and the 114 common `video.*` IDs are not interchangeable. No reviewed workflow/phase role-to-common mapping exists, and a source/document role must not force creation of a new agent.
+- A roster, a source corpus, or a graph stub does not execute the blueprint. Every explicitly documented workflow family and required phase needs a safe local graph definition or a reviewed, explicit gap/deferral.
+- The blueprint's external topology and provider names are reference material, not an approved runtime. Recreating a separate FastAPI, graph/event-bus, governance, or approval plane would duplicate identity, audit, retry, and approval semantics.
+- Provider names and safety assumptions remain unaudited specifications; all tools stay behind host-controlled, allow-listed, mockable interfaces with no credentials or network access.
 
 ### 3.2 `common-agent-swarm-ops`
 
@@ -78,43 +76,50 @@ When documentation and checked-in artifacts disagree, executable code, schemas, 
 │ FastAPI control plane · graph execution · governance · audit · ALC    │
 │ registry · data isolation · generic provider protocols · evaluation   │
 └──────────────────────────────┬────────────────────────────────────────┘
-                               │ validates and registers immutable release
+                               │ validates and registers immutable local pack releases
                                ▼
 ┌───────────────────────────────────────────────────────────────────────┐
-│ va-agent-swarm — canonical Video Domain Pack                          │
-│ agents · prompts · rubrics · workflows · knowledge · video policies   │
-│ adapter configuration · video-specific evaluations and UI extensions  │
+│ business/video — checked-in, self-contained common video pack         │
+│ common video.* IDs · mappings · local graphs · prompts/rubrics ·      │
+│ policies · knowledge indexes · provenance · pack-specific evaluations │
 └───────────────────────────────────────────────────────────────────────┘
+                               ▲
+                               │ reviewed, pinned provenance and future-update inputs only
+                     va-agent-swarm / generic-swarm-ops
 ```
 
 ### 4.1 Ownership rules
 
 | Asset | Owner and canonical location | Host responsibility |
 |---|---|---|
-| Video agent roles, prompts, rubrics, workflow graphs, critique policy | VA domain package | Schema validation and versioned registration only |
-| Video knowledge corpus and provenance | VA domain package or VA-managed storage | Enforce access, retention, redaction, and audit policies |
-| Video tools and provider choices | VA adapter configuration | Invoke only through a generic allow-listed provider protocol |
+| Pinned/adapted video roles, prompts, rubrics, workflow graphs, workflow-role mappings, critique policy | `common-agent-swarm-ops/business/video/` | Schema validation, versioned registration, execution, and audit only |
+| Video knowledge indexes and provenance | `common-agent-swarm-ops/business/video/` | Enforce access, retention, redaction, and audit policies |
+| External VA/generic source material | Immutable provenance metadata and reviewed import inputs | Never load it as a runtime/design dependency |
+| Video tools and provider choices | Pack-local, capability-scoped configuration | Invoke only through a generic allow-listed provider protocol; default to local stubs |
 | Generic lifecycle, graph compiler, authorization, audit, checkpoints, evaluation engine | Common host | Implement and version |
-| ALC, event, artifact, and manifest schemas | Common host | Define compatible versions; validate packs |
-| Cross-domain fixtures | Common host | Must be synthetic and contain no VA business semantic content |
+| ALC, event, artifact, and manifest schemas | Common host | Define compatible versions and validate packs |
+| Cross-domain fixtures | Common host | Must be synthetic and contain no video business semantic content |
 
 **Boundary controls**
 
-1. Common must not import VA source documents, prompts, rubrics, media strategies, or knowledge corpora into its canonical business tree.
-2. VA packs must be declarative data and approved adapters; arbitrary package code cannot execute inside the host registration path.
+1. `business/video/` must contain all video semantics required to design and validate its pinned pack; upstream repositories are historical provenance, not required paths or imports.
+2. The video pack is declarative data and approved adapters; arbitrary package code cannot execute during registration, and it cannot create a scheduler, governance path, or public control plane outside the common host.
 3. Every invocation carries `organization_id`, `domain_id`, `pack_version`, `agent_id`, `workflow_id`, `run_id`, and a correlation ID.
-4. Cross-domain data access, undeclared tool IDs, and undeclared outbound destinations fail closed and create audit evidence.
-5. A pack upgrade is copy-on-write: prior runs remain reproducible against the exact approved pack and contract versions.
+4. Cross-domain data access, undeclared tool IDs, undeclared outbound destinations, missing required gates, and unmapped implemented roles fail closed and create audit evidence.
+5. A pack upgrade is copy-on-write: prior runs remain reproducible against the exact approved local pack and contract versions.
 
 ### 4.2 Standardized domain-pack contract
 
-Implement an SDK-independent, JSON-schema-first package format in VA. The host should support any domain identifier; `video` is a value, never a hard-coded branch.
+Implement an SDK-independent, JSON-schema-first package format under `common-agent-swarm-ops/business/video/`. The host supports any domain identifier; `video` is a pack value, never a hard-coded host branch.
 
 ```text
-va-agent-swarm/
-  domain-pack/
+common-agent-swarm-ops/
+  business/video/
     manifest.json
-    agents/<agent_id>/agent.json
+    inventory.json
+    agents/<agent_id>/agent_spec.json
+    WORKFLOW_ROLE_MAP.json
+    workflow_coverage.json
     prompts/<id>.md
     rubrics/<id>.json
     workflows/<id>.dna.json
@@ -122,14 +127,21 @@ va-agent-swarm/
     knowledge/index.json
     tools/adapters.json
     evals/{golden,adversarial,regression}/
-    ui/extension-manifest.json
     provenance/sources.json
     release.json
 ```
 
-The pack manifest must contain: immutable `domain_id`, semantic `pack_version`, supported host-contract range, content digest, signer identity, declared agents and workflows, capability-scoped tool IDs, required ALC version, data classifications, evaluation suite references, and optional UI extension metadata. The host stores the manifest digest and signature result with the registration record.
+The pack manifest must contain: immutable `domain_id`, semantic `pack_version`, supported host-contract range, content digest, signer identity, declared agents and workflows, capability-scoped tool IDs, required ALC version, data classifications, evaluation suite references, workflow/mapping coverage references, and optional UI extension metadata. The host stores the manifest digest and signature result with the registration record.
 
-### 4.3 Generic APIs and schemas
+### 4.3 Workflow realization and role-mapping contract
+
+The local pack must translate the blueprint’s explicitly documented workflow families—Viral Hook Clip/Meme, UGC-Style Performance Ad, Animated Explainer, Personalized Birthday Video, AI Multi-Scene Short Film, Corporate Training Video, Music Video, AI Avatar Talking-Head, Documentary “Explained” Episode, and Feature-Length AI Film—and every required phase into a safe local executable graph definition, or record a reviewed explicit gap/deferral. The shared skeleton remains Greenlight, Pre-production packet, Production packet, Post master, Review and release pack, Distribution package, and Post-launch learning set; feature-film development and pre-production remain distinct where documented.
+
+`workflow_role_map.json` is the human-reviewed mapping artifact for each documented role in each workflow and phase. Each record includes workflow and phase context, the source/document role, rationale, reviewer and review time, mapping status, maturity state, and activation state, and resolves to **exactly one** of: (a) one existing common `video.*` agent ID, (b) a named composite consisting only of common `video.*` IDs, or (c) a documented gap/deferral. A differing source role name never by itself requires a new agent. For an implemented mapping, the corresponding local agent `SPEC.md` must state its runtime binding, typed handoffs, critique/lead responsibilities, and refinement or escalation behavior.
+
+A realizing graph declares phase nodes and typed artifact handoffs; lead and critic roles; bounded critique, refinement, and rollback paths; finite execution budgets; required quality and risk gates; required human approvals; and only declared, allowed tools. A roster entry, mapping row, source text, or graph stub is not graph realization. `business/video/workflows/pack_spine.json` remains the sole current safe stub; until mappings and graphs pass these gates, the pack is not operationally equivalent to the blueprint. Providers, credentials, network access, and production activation remain out of scope and fail closed.
+
+### 4.4 Generic APIs and schemas
 
 Version the following contracts under `/api/v1` and preserve backward compatibility within a supported major version:
 
@@ -143,11 +155,11 @@ Version the following contracts under `/api/v1` and preserve backward compatibil
 | `Lesson` | Agent-scoped, versioned, assessed knowledge item with source episode references, confidence, scope, expiry/review date, reuse counter, and revocation state. |
 | `RetrievalRecord` | What knowledge was retrieved before an action, ranking/filters, pack version, and whether it influenced the final decision. |
 | `ImprovementProposal` | Sandbox-only prompt/rubric/tool-policy/workflow variant, evidence, evaluation results, reviewer decision, rollback reference, and promotion state. |
-| `ArtifactHandoff` | Generic immutable artifact lineage, ownership, classification, integrity, approval and provenance references. VA adds video metadata through a pack extension schema. |
+| `ArtifactHandoff` | Generic immutable artifact lineage, ownership, classification, integrity, approval and provenance references. The video pack adds video metadata through a pack extension schema. |
 
 ## 5. Mandatory autonomous learning design
 
-The ALC is the mechanism that turns learning from an aspiration into an enforceable lifecycle. It is required for every agent whose `requires_learning` flag is true; the VA package must set it for every video agent.
+The ALC is the mechanism that turns learning from an aspiration into an enforceable lifecycle. It is required for every agent whose `requires_learning` flag is true; the common video pack must set it for every video agent.
 
 ### 5.1 Required lifecycle
 
@@ -193,25 +205,25 @@ Each phase ends with a reviewable evidence record. Advancing requires the exit c
 
 | Phase | Scope and implementation steps | Exit criteria and rollback |
 |---|---|---|
-| 0. Governance and source baseline | Freeze a named VA source revision; build a canonical source index with hashes, owner, license/consent classification, and mapping to pack assets. Record ADRs for ownership, the host/pack boundary, contract versions, and provider policy. | Every VA asset has a disposition: retained in VA, generated metadata, deferred, or rejected. Rollback is deletion of only newly generated indexes; VA sources remain untouched. |
-| 1. Generic contract hardening | Add neutral manifest, agent, ALC, learning, artifact, and provider schemas; remove video prefixes from generic schemas; version registration responses; implement signature/digest validation and compatibility negotiation. | A synthetic non-video pack and an empty VA skeleton both validate without host code changes. No VA content is copied to common. |
+| 0. Governance and source baseline | Freeze reviewed VA/generic provenance revisions; build a canonical local source index with hashes, owner, license/consent classification, and disposition into the common pack. Record ADRs for local ownership, the host/pack boundary, contract versions, provider policy, and no-production-activation scope. | Each source asset is retained as provenance, adapted locally, explicitly deferred, or rejected. Rollback removes only generated local indexes; upstream sources remain untouched. |
+| 1. Generic contract hardening | Add neutral manifest, agent, ALC, learning, artifact, and provider schemas; remove video prefixes from generic schemas; version registration responses; implement signature/digest validation and compatibility negotiation. | A synthetic non-video pack and the local video skeleton validate without host code changes. No external source is needed at runtime or design time. |
 | 2. Learning enforcement | Add lifecycle interceptors for retrieval, episode capture, reflection assessment, retention, metrics, and sandbox proposals. Persist contracts and learning records with tenant/domain/agent boundaries. Make the activation invariant authoritative. | Negative tests prove bypass attempts fail; positive tests prove individual growth and retrieval are observable. Legacy behavior remains available behind a migration feature flag. |
-| 3. VA package construction | Create VA’s declarative `domain-pack/` from the canonical source index. Build a one-to-one roster map for all 114 agents; attach prompts, rubrics, critique edges, policies, tool declarations, and ALC configurations. Preserve all original study assets and provenance. | Package validation confirms 114 mapped agents with no orphan source entries. Pack remains `registered`; no live media provider is enabled. |
-| 4. Vertical video spine | Implement a deterministic brief-to-artifact path using the VA orchestration, research, creative, media-stub, compliance, and delivery roles. Use mock providers, immutable artifact handoffs, critique gates, and human approval. | Repeated runs are reproducible; compliance/rights blockers halt execution; each participating agent has ALC evidence. Rollback selects the prior pack version and disables the new workflow. |
-| 5. Controlled breadth | Migrate remaining VA workflow families in priority order: planning, generation, editorial, sound, quality, localization, distribution, analytics, and support. Keep every agent registered even when not yet active. Promote a workflow only after its domain evaluation pack passes. | Full roster is retained; every agent is at least cataloged and mapped, while each production workflow has an approved maturity level and explicit known limitations. |
+| 3. Local pack, role mapping, and graph inventory | Build the checked-in pack from the source index. Create the reviewed workflow-role map for every documented workflow/phase role and a workflow coverage ledger that marks each family/phase as graph-realized or explicit reviewed gap/deferral. Maintain the 114 common IDs; use existing IDs, named composites, or gaps rather than renaming source roles into new agents. | Mapping completeness and uniqueness pass; implemented mappings reference local `SPEC.md` runtime bindings and handoff/critique details. The pack remains 114 non-active registered agents; no live provider is enabled. |
+| 4. Safe graph realization | Translate each documented workflow family and required phase to local common-ID graph definitions incrementally, starting with deterministic stub-only paths. Each graph declares phase nodes, typed artifact handoffs, lead/critic roles, bounded critique/refinement/rollback, finite budgets, quality/risk gates, human approvals, and allowed tools. | Deterministic offline validation proves graph-reference integrity and gate coverage. `pack_spine.json` remains the only current safe stub until a specific graph passes its gates; no graph becomes production-active. |
+| 5. Controlled breadth and maturity | Complete or explicitly defer remaining workflow families across planning, generation, editorial, sound, quality, localization, distribution, analytics, and support. Promote only a workflow whose local graph, mapping, evaluations, and human review pass. | Every documented workflow/phase is graph-realized or an explicit reviewed gap; maturity records distinguish cataloged, mapped, graph-validated, and any separately approved future activation. |
 | 6. Multi-domain proof | Onboard at least two synthetic or independently owned non-video packs through the same schema, registry, learning, and UI extension paths. Eliminate host branches that special-case video except generic extension loading. | Domain isolation, registration, activation, observability, and lifecycle operations pass with at least 24 concurrently registered packs in the load environment. |
-| 7. Cutover and maintenance | Publish supported platform/pack compatibility matrices, migration guides, runbooks, dashboards, deprecation schedules, and incident response procedures. Make VA package releases the only source for video behavior. | Production approval is based on evidence, not catalog completion. Rollback remains an immutable pack-version reversion plus data-safe lesson revocation. |
+| 7. Cutover and maintenance | Publish compatibility matrices, migration guides, runbooks, dashboards, deprecation schedules, incident response procedures, and local pack update policy. The checked-in common pack is the only source of current video behavior. | Completion is evidence-based, not catalog-based. Rollback remains an immutable pack-version reversion plus data-safe lesson revocation; providers, network access, and production activation remain separately out of scope. |
 
-## 7. VA architectural redesign
+## 7. Video pack architectural realization
 
-VA should be rebuilt as a domain package on the shared host—not as a second orchestration platform. This retains its unique business design while replacing its weak executable core with the host’s tested lifecycle.
+The checked-in common video pack realizes the blueprint on the shared host—not in a second orchestration platform. Source material retains its domain insight as provenance while the host remains the only executable control plane.
 
-- **Orchestration:** encode VA’s supervisor, planner, router, judge, pipeline, fan-out/fan-in, critique, and human-gate patterns as portable workflow graphs. The host graph compiler owns execution and checkpointing.
-- **Agent factory:** every VA agent is a declarative instance of the generic lifecycle. Its differences are domain-owned configuration—prompt, rubric, tools, knowledge scopes, critique edges, budgets, and evaluators—not bespoke loops.
-- **Artifacts:** use the generic immutable handoff contract with VA extension fields for rights/consent, continuity, media quality, channel requirements, and provenance. Video release stays blocked until all required gates pass.
-- **Tools:** represent media, voice, editing, research, and publishing providers through generic capability protocols. VA selects approved providers by configuration; host adapters enforce authorization, budget, retries, audit, and mock mode.
-- **UI:** retain VA screens and terminology in VA’s extension manifest. The common frontend supplies only authenticated shell, generic projections, accessibility, audit visibility, and extension slots.
-- **Knowledge:** retain VA source materials and curated domain knowledge in VA. The host indexes only approved, classified references and never gives one domain access to another domain’s knowledge.
+- **Orchestration:** encode the documented supervisor, planner, router, judge, pipeline, fan-out/fan-in, critique, and human-gate patterns as portable local workflow graphs. The host graph compiler owns execution and checkpointing.
+- **Agent factory:** every implemented video role is a declarative use of the generic lifecycle. The workflow-role map records whether a documented role is one common agent, a named composite, or a gap; no source-name mismatch creates a new agent automatically.
+- **Artifacts:** use the generic immutable handoff contract with pack-local extension fields for rights/consent, continuity, media quality, channel requirements, and provenance. Graphs must type each phase handoff; video release remains blocked until all required gates pass.
+- **Tools:** represent media, voice, editing, research, and publishing capabilities through generic protocols. Pack configuration selects only approved allow-listed tools; host adapters enforce authorization, budgets, retries, audit, and local stub/mock mode.
+- **UI:** retain video terminology in a pack extension manifest where needed. The common frontend supplies only authenticated shell, generic projections, accessibility, audit visibility, and extension slots.
+- **Knowledge:** retain checked-in, classified video knowledge and provenance in `business/video/`. The host indexes approved references but never gives one domain access to another domain’s knowledge.
 
 ## 8. Testing and verification strategy
 
@@ -219,27 +231,27 @@ VA should be rebuilt as a domain package on the shared host—not as a second or
 
 | Layer | Scope | Required evidence |
 |---|---|---|
-| Schema and unit tests | Neutral contracts, digest/signature checks, lifecycle states, ALC validation, retention, lesson scoring, provider allow-lists, artifact lineage. | Deterministic tests plus property-based tests for contracts and state transitions. |
-| Property tests | Randomized domains, agents, scopes, event sequences, pack versions, failure/retry paths, and malicious identifiers. | Invariants for isolation, activation atomicity, lineage acyclicity, no cross-domain retrieval, and no unapproved promotion. |
-| Integration tests | VA pack registration, host graph compilation, retrieval→episode→reflection path, critique blockers, approval gates, and immutable release checks. | Mock-only provider tests; no credentials or network use. |
-| End-to-end tests | The vertical VA spine from a fixed brief through a released-*readiness* decision, with UI projections and audit records. | Fixed seeds, fixture digests, screenshots where applicable, and a trace bundle. |
-| Compatibility tests | Current and previous supported host/VA pack contract versions. | Consumer-driven contract suite in both repositories. |
-| Security tests | Tenant/domain isolation, tool namespace denial, schema/path traversal rejection, secret redaction, malicious pack rejection, and lesson poisoning attempts. | Fail-closed assertions and audit-event checks. |
+| Schema and unit tests | Neutral contracts, digest/signature checks, lifecycle states, ALC validation, retention, lesson scoring, provider allow-lists, artifact lineage, workflow-role-map shape, and graph-reference rules. | Deterministic tests plus property-based tests for contracts and state transitions. |
+| Property tests | Randomized domains, agents, scopes, event sequences, pack versions, failure/retry paths, malicious identifiers, graph edges, and mapping combinations. | Invariants for isolation, activation atomicity, lineage acyclicity, no cross-domain retrieval, no unapproved promotion, finite graph traversal, and one valid resolution per mapped role. |
+| Integration tests | Local video pack registration, graph compilation, mapping-to-`SPEC.md` bindings, typed handoffs, critique blockers, approval/risk/quality gates, retrieval→episode→reflection path, and immutable release checks. | Offline, mock-only provider tests; no credentials or network use. |
+| End-to-end tests | A fixed-brief local graph through a released-*readiness* decision, with UI projections and audit records. | Fixed seeds, fixture digests, a trace bundle, explicit gate outcomes, and proof that no production activation occurred. |
+| Compatibility tests | Current and previous supported host/local-pack contract versions. | Consumer-driven contract suite in this repository. |
+| Security tests | Tenant/domain isolation, tool namespace denial, schema/path traversal rejection, secret redaction, malicious pack rejection, lesson poisoning attempts, and provider/network denial. | Fail-closed assertions and audit-event checks. |
 | Performance and load tests | Registration, retrieval, graph execution, and event fan-out with synthetic packs and stub tools. | Capacity report for at least 24 concurrently registered domains; SLOs must be approved before production. |
-| Resilience tests | Provider timeout, duplicate delivery, partial persistence, restart, replay, approval loss, and rollback. | Idempotency, recovery, and immutable-version evidence. |
+| Resilience tests | Provider timeout, duplicate delivery, partial persistence, restart, replay, approval loss, rollback, critique-limit exhaustion, and explicit-gap handling. | Idempotency, recovery, immutable-version, and bounded-path evidence. |
 
 ### 8.2 Test gates
 
 Run focused backend tests first (`python -m pytest -q` with appropriate selectors), followed by type checking and linting. Run existing repository gates—`npm run sdd:check`, `npm run sync:check`, and `npm test -- --silent`—for changes that touch the common project’s automation. CI must keep provider integrations disabled by default and use approved mock adapters only.
 
-Do not declare a workflow production-ready from unit-test success alone. Promotion requires its declared domain evaluations, human approval where policy requires it, a reproducible trace, and no unresolved security or data-governance finding.
+Do not declare a workflow mature, operationally equivalent to the blueprint, or production-ready from a catalog, mapping, graph stub, or unit-test success. Promotion requires complete reviewed mapping coverage or explicit reviewed gaps; deterministic offline graph validation with valid local `video.*` references; typed handoffs; bounded critique/refinement/rollback; declared budgets/tools; required quality, risk, and human-approval gates; declared domain evaluations; a reproducible trace; no unresolved security or data-governance finding; and proof that no production activation, live provider, credential, or network path was enabled.
 
 ## 9. Long-term maintenance and reuse rules
 
 1. **Versioning:** Use semantic versions independently for host API, pack format, ALC format, and each domain pack. A host publishes a supported pack/ALC compatibility range; a pack declares the range it requires.
-2. **Change control:** Contract-breaking changes require an ADR, migration plan, consumer tests, a deprecation window, and an explicit rollback plan. Domain behavior changes stay in the domain repository.
-3. **Contribution workflow:** Use short-lived branches, conventional commits, scoped reviews, deterministic tests, and a code-owner review for host contracts, governance, and VA safety/rights policies.
-4. **Documentation:** Maintain a pack README, source/provenance index, architecture diagram, API contract changelog, runbook, threat model, evaluation catalog, and a current maturity matrix. Documentation claims must distinguish cataloged, registered, active, and production-proven agents.
+2. **Change control:** Contract-breaking changes require an ADR, migration plan, consumer tests, a deprecation window, and an explicit rollback plan. Video behavior changes stay in the checked-in `business/video/` pack; upstream material is incorporated only through reviewed, provenance-preserving updates.
+3. **Contribution workflow:** Use short-lived branches, conventional commits, scoped reviews, deterministic tests, and a code-owner review for host contracts, governance, and video safety/rights policies.
+4. **Documentation:** Maintain a pack README, source/provenance index, architecture diagram, API contract changelog, runbook, threat model, evaluation catalog, workflow coverage ledger, workflow-role map, and current maturity matrix. Claims must distinguish cataloged, mapped, graph-validated, active, and production-proven states.
 5. **Knowledge governance:** Periodically review lesson quality, stale content, retention, privacy classification, and source licenses. Revocation is an audited lifecycle action, not deletion of history.
 6. **Provider governance:** Providers are optional adapters with explicit capability, cost, retention, residency, and safety declarations. Credentials remain outside source control; mock mode is mandatory in tests.
 7. **Reuse bar:** A new MMA system may be added only by producing a schema-valid pack and evaluations. If onboarding requires a domain-specific host branch, first generalize the contract or reject the extension.
@@ -248,22 +260,23 @@ Do not declare a workflow production-ready from unit-test success alone. Promoti
 
 | Risk | Preventive control | Recovery plan |
 |---|---|---|
-| VA logic leaks into common and makes it non-reusable | Canonical ownership rules, source index, CI checks for disallowed VA paths/content, neutral host schemas. | Revert the host change; restore VA-owned package artifact by digest. |
-| Loss of VA source semantics during conversion | One-to-one source-to-pack map, review by domain owners, immutable original source revision, evaluation coverage. | Rebuild affected pack assets from the frozen VA source and rerun mapping checks. |
-| Dual control planes diverge | One FastAPI public control plane; VA graphs compile into the host; no VA-local scheduler or governance bypass. | Disable new workflow and route to the prior approved host definition. |
+| Local video semantics leak into generic host contracts | Canonical ownership rules, neutral host schemas, and review for host branches. | Revert the host change; restore the prior local pack artifact by digest. |
+| Loss or misuse of upstream source semantics during adaptation | Reviewed source-to-pack and workflow-role maps, immutable provenance, evaluation coverage, and explicit gaps rather than forced matches. | Rebuild affected local pack assets from the pinned source and rerun mapping/graph checks. |
+| Dual control planes diverge | One FastAPI public control plane; local video graphs compile into the host; no pack-local scheduler or governance bypass. | Disable the affected graph and restore the prior approved local definition. |
+| Blueprint is mistaken for implemented capability | Require workflow/phase coverage, reviewed mappings, graph-reference integrity, deterministic offline validation, and maturity evidence; `pack_spine.json` is labelled as the sole safe stub. | Correct documentation/dashboard claims; retain explicit gaps and block maturity or activation. |
+| Graph omits a required gate, handoff, or bounded path | Validate phase nodes, typed handoffs, lead/critic assignments, budgets, tools, quality/risk/human gates, critique/refinement bounds, and rollback. | Fail closed, mark the workflow incomplete, and revert the graph version. |
 | “Learning” creates unsafe self-modification | ALC activation gate, assessed lessons, sandbox-only proposals, human promotion, provenance and rollback. | Revoke lessons/proposals, restore prior agent/pack version, investigate audit trail. |
 | Cross-domain or cross-tenant knowledge disclosure | Mandatory identity namespace filters, least-privilege retrieval, redaction and security property tests. | Disable affected retrieval scope, revoke session access, preserve forensic evidence. |
-| Provider cost, outage, or unsafe output | Capability allow-lists, budgets, mock providers, circuit breakers, human gates, content/release controls. | Fail closed, enqueue recoverable work, use approved fallback or pause. |
-| Catalog is mistaken for live capability | Maturity matrix and evidence gates separate L0 catalog, L1 registered, L2 active, and production-proven status. | Correct release notes/dashboard; block promotion until the stated evidence exists. |
+| Provider cost, outage, unsafe output, or unintended activation | Capability allow-lists, finite budgets, local stubs/mocks, circuit breakers, human gates, and no-production-activation evidence. | Fail closed, enqueue recoverable work, pause; never substitute a live provider. |
 | Contract incompatibility breaks packs | Semver compatibility negotiation, consumer contract tests, deprecation windows, immutable package versions. | Pin host to last compatible pack or pack to last compatible host; execute documented migration. |
 | Performance collapses with many MMA systems | Isolation, bounded queues and budgets, load testing with 24+ synthetic packs, capacity SLOs, observability. | Throttle or disable low-priority packs and scale only after capacity evidence is reviewed. |
 
 ## 11. Implementation checklist and approval gates
 
-Before any code migration, approve these decisions: the host/pack boundary, which VA revision is canonical, the first vertical workflow, data classifications, required approvers, compatibility policy, and target SLOs. Then execute phases 0–7 in order.
+Before any implementation migration, approve these decisions: the host/pack boundary; the pinned provenance revisions; the first workflow family; data classifications; required approvers; compatibility policy; target SLOs; the workflow-role-map review criteria; and no-production-activation evidence criteria. Then execute phases 0–7 in order.
 
-No phase may claim completion without: passing focused tests, an evidence record, updated source mapping/maturity status, and review by both host and VA owners. No external provider, credential, production migration, deletion, or activation should occur without explicit approval.
+No phase may claim completion without passing focused tests, an immutable evidence record, updated source/mapping/graph/maturity status, and review by the designated host and video-pack owners. A workflow cannot claim maturity merely because agents are cataloged: it also needs complete reviewed role mapping or explicit gaps, graph-reference integrity, deterministic offline graph validation, and gate evidence. No external provider, credential, network access, production migration, deletion, or activation may occur without explicit approval.
 
 ## 12. Definition of successful adoption
 
-Adoption is successful when the common repository can register and operate multiple unrelated domain packs without domain-specific host code; VA retains the canonical video domain package and its full 114-agent source mapping; every active VA agent has enforceable, auditable individual knowledge acquisition; and every production workflow is traceable, governed, reproducible, and reversible. Cataloging agents alone is not completion.
+Adoption is successful when the common repository can register and operate multiple unrelated domain packs without domain-specific host code; `business/video/` is the checked-in self-contained source of truth for the pinned/adapted pack and its complete 114-agent source mapping; every active video agent has enforceable, auditable individual knowledge acquisition; and every documented video workflow family and required phase is backed by a reviewed local graph or explicit reviewed gap. Any graph counted as mature is traceable, governed, reproducible, reversible, mapping-complete, reference-integral, deterministically validated offline, and evidenced as non-production-active. Cataloging agents, retaining source prose, or keeping `pack_spine.json` alone is not completion.

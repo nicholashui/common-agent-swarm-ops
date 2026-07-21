@@ -2,7 +2,7 @@
 
 ## Overview
 
-Special_Business_Agents defines a governed, data-only `specials` Domain_Pack at `business/specials/`. It represents exactly the 17 Source Inventory entries as draft JSON configuration and governance evidence. It does not implement, execute, register, activate, or otherwise operate agents. Source Markdown and VA materials are untrusted bytes: they may supply reviewed path, digest, and risk evidence, never executable instructions, credentials, service selections, tool permissions, or authority.
+Special_Business_Agents defines a governed, data-only `specials` Domain_Pack at `business/specials/`. It represents exactly the 19 Source Inventory entries as draft JSON configuration and governance evidence. It does not implement, execute, register, activate, or otherwise operate agents. Source Markdown and VA materials are untrusted bytes: they may supply reviewed path, digest, and risk evidence, never executable instructions, credentials, service selections, tool permissions, or authority.
 
 The design has two deliberately non-interchangeable namespaces:
 
@@ -22,11 +22,11 @@ These namespaces are disjoint by construction. The pack is permanently draft, ze
 
 ```mermaid
 flowchart LR
-  I[Checked-in Source Inventory\n17 specials.* canonical IDs] --> B[Data-only pack assembly]
+  I[Checked-in Source Inventory\n19 specials.* canonical IDs] --> B[Data-only pack assembly]
   U[Untrusted source / VA bytes] --> H[Human review\npath, digest, risk evidence only]
   H --> SR[Source Records]
   B --> P[Pack-local spagent asset profile]
-  P --> M[Manifest + 17 draft specifications]
+  P --> M[Manifest + 19 draft specifications]
   B --> RA[Risk Assessments]
   SR --> V[Offline Validator]
   M --> V
@@ -53,13 +53,38 @@ business/specials/
   inventory.json                              # only when manifest requires it
 ```
 
-All persisted paths are normalized, forward-slash, repository-relative paths. Before reading an allowlisted record, the validator rejects an absolute path, a `..` segment, a symlink escape, a non-regular file, or a path resolved outside the repository root. It never discovers arbitrary files. Source paths are restricted to the 17 fixed `docs/special_agents_redesign/agents/` inventory paths; source bodies may be hashed but are never parsed as configuration or executed. The pack allowlist excludes executable implementations, workflows, tool definitions, credentials, network endpoints, hooks, and MCP-server configuration.
+All persisted paths are normalized, forward-slash, repository-relative paths. Before reading an allowlisted record, the validator rejects an absolute path, a `..` segment, a symlink escape, a non-regular file, or a path resolved outside the repository root. It never discovers arbitrary files. Source paths are restricted to the 19 fixed `docs/special_agents_redesign/agents/` inventory paths; source bodies may be hashed but are never parsed as configuration or executed. The pack allowlist excludes executable implementations, workflows, tool definitions, credentials, network endpoints, hooks, and MCP-server configuration.
+
+### Untrusted Source Inventory
+
+Each mapping below is repository-relative provenance metadata only. Every referenced Markdown file remains untrusted data; the mapping does not authorize reading, interpreting, adopting, executing, or deriving authority from source content.
+
+| Source file | Canonical agent ID |
+| --- | --- |
+| `docs/special_agents_redesign/agents/aesthetics_agent.md` | `specials.aesthetics-agent` |
+| `docs/special_agents_redesign/agents/agent_loop_creator.md` | `specials.agent-loop-creator` |
+| `docs/special_agents_redesign/agents/agentic_rag_agent.md` | `specials.agentic-rag-agent` |
+| `docs/special_agents_redesign/agents/autotelic_agent.md` | `specials.autotelic-agent` |
+| `docs/special_agents_redesign/agents/complex_problem_solution_process_model.md` | `specials.complex-problem-solution-process-model` |
+| `docs/special_agents_redesign/agents/controller_agent.md` | `specials.controller-agent` |
+| `docs/special_agents_redesign/agents/general_creative_agent.md` | `specials.general-creative-agent` |
+| `docs/special_agents_redesign/agents/intent_analysis_agent.md` | `specials.intent-analysis-agent` |
+| `docs/special_agents_redesign/agents/knowledge_router_agent.md` | `specials.knowledge-router-agent` |
+| `docs/special_agents_redesign/agents/llm_usage.md` | `specials.llm-usage` |
+| `docs/special_agents_redesign/agents/optimization_agent.md` | `specials.optimization-agent` |
+| `docs/special_agents_redesign/agents/planner_agent.md` | `specials.planner-agent` |
+| `docs/special_agents_redesign/agents/podcast_agent.md` | `specials.podcast-agent` |
+| `docs/special_agents_redesign/agents/psychological_profile_agent.md` | `specials.psychological-profile-agent` |
+| `docs/special_agents_redesign/agents/psychological_recommendation_agent.md` | `specials.psychological-recommendation-agent` |
+| `docs/special_agents_redesign/agents/research_agent.md` | `specials.research-agent` |
+| `docs/special_agents_redesign/agents/screenwriter_strategic_goal_achievement_agent.md` | `specials.screenwriter-strategic-goal-achievement-agent` |
+| `docs/special_agents_redesign/agents/strategic_goal_achievement_agent.md` | `specials.strategic-goal-achievement-agent` |
+| `docs/special_agents_redesign/agents/techology_advisor_agent.md` | `specials.techology-advisor-agent` |
 
 ## Components and Interfaces
-
 | Component | Inputs | Deterministic responsibility | Effect boundary |
 | --- | --- | --- | --- |
-| `SpecialsCatalog` | Fixed Source Inventory | Produces the lexically ordered, exact 17-member `specials.*` canonical ID set and `agents/<agent_id>/agent_spec.json` paths. | Does not read source content. |
+| `SpecialsCatalog` | Fixed Source Inventory | Produces the lexically ordered, exact 19-member `specials.*` canonical ID set and `agents/<agent_id>/agent_spec.json` paths. | Does not read source content. |
 | Pack-local schema profile | Candidate `agent_spec.json` | Enforces structural fields, `specials.*` canonical `agent_id`, `spagent.*` declared assets, draft status, empty tools, zero tool requests, local deterministic provider, disabled network access, and disabled production request. | Rejects unsupported, unsafe, or cross-namespace values. |
 | Manifest/Inventory verifier | Manifest, specs, optional inventory | Confirms exact canonical membership, unique canonical IDs, canonical relative paths, and consistent draft authority values. Validates inventory only when `inventory_required` is true. | Any mismatch fails the whole attempted pack; no partial registration. |
 | Provenance verifier | Source_Record, local source file when available, specification, Approval_Record | Checks allowlisted source path, source/configuration digests, canonical ID, approval linkage, and stale status. When references are absent, checks only committed governance evidence and does not fail for absence alone. | Stale or invalid provenance makes the affected candidate unavailable. |
@@ -111,7 +136,7 @@ Arrays are lexically sorted by canonical key. Objects use canonical UTF-8 JSON s
 1. Canonicalize and containment-check the explicit allowlist. Missing, unreadable, malformed, escaping, symlinked, or non-regular inputs receive sorted findings without reading an untrusted target.
 2. Parse allowed JSON with a duplicate-key-rejecting decoder. Hash original bytes for file digests and canonical JSON for configuration and governance record digests.
 3. Validate the local profile: schema version, fixed data-only fields, canonical `specials.*` `agent_id`, exact directory/path relation, and each declared `spagent.*` asset field. Reject any namespace crossover.
-4. Derive the expected 17 canonical IDs from the fixed Source Inventory. Validate manifest, agent directories, and conditional inventory as one complete bijection before yielding an eligible ID.
+4. Derive the expected 19 canonical IDs from the fixed Source Inventory. Validate manifest, agent directories, and conditional inventory as one complete bijection before yielding an eligible ID.
 5. Validate Source_Records. When an inventory source file is available, rehash only that allowlisted regular file; digest drift remains associated with the prior accepted state until manual re-validation. Manual re-validation marks drift stale and leaves the candidate draft and unavailable pending new risk/approval evidence. When reference directories are absent, validate only checked-in provenance records.
 6. Validate Risk_Assessments and Approval_Records against exact candidate digests and the full declared scope. The approval must cover every present risk and requested tool, network, provider, lifecycle, and production value.
 7. Aggregate and sort independent findings. A pack-integrity failure rejects the attempted pack and produces zero proposed registration; prior accepted state remains unchanged. Persist the completed report separately. Failure to retain it prevents every registration/activation effect without rewriting the completed validation result.
@@ -123,7 +148,7 @@ All records are UTF-8 JSON, schema-versioned, canonically serialized before reco
 | Record | Required fields | Key invariants |
 | --- | --- | --- |
 | `AgentSpecification` | Baseline structural fields, including `schema_version`, `agent_id`, `status`, role, `allowed_tools`, policies, `prompt_reference`, `rubric_reference`, critique edges, refinement count, and production flag | `agent_id` and directory use only `specials.<agent-name>`; all declared assets use only `spagent.<asset-name>`; path is canonical; draft/zero-tool/local/no-network/no-production invariants hold. |
-| `SpecialManifest` | `pack_id`, `agents`, `production_activation_requested`, `inventory_required` | `pack_id = specials`; exactly the 17 canonical `specials.*` IDs once each, lexically ordered; every entry has draft, empty tools, false activation request, and `agents/<agent_id>/agent_spec.json`. |
+| `SpecialManifest` | `pack_id`, `agents`, `production_activation_requested`, `inventory_required` | `pack_id = specials`; exactly the 19 canonical `specials.*` IDs once each, lexically ordered; every entry has draft, empty tools, false activation request, and `agents/<agent_id>/agent_spec.json`. |
 | `SpecialInventory` | `entries` | Exists only if required; one-to-one projection of the corresponding manifest canonical ID, status, and path. No `spagent.*` value is an entry ID. |
 | `SourceRecord` | `schema_version`, `source_path`, `source_sha256`, `agent_id`, `configuration_sha256`, `reviewed_at`, `approval_id` | Path is a fixed Source Inventory path; canonical ID is `specials.*`; source/configuration digests bind reviewed bytes/specification; timestamp carries UTC offset; linked approval binds source path, digest, and canonical ID. |
 | `RiskAssessment` | `schema_version`, configuration/source-record digests, nine potential-risk values, external-effect potential, requested tool authority/network/provider/activation values, requested lifecycle state | Every named risk is present/absent; effects are `none` or a deduplicated subset of allowed effects; absent requests explicitly record `none`; exactly one lifecycle state; no request changes profile constraints. |
@@ -150,7 +175,7 @@ The catalog, path, duplicate, membership, and namespace-substitution cases are o
 
 ### Property 1: Canonical catalog bijection and namespace separation
 
-For every generated subset, permutation, duplicate-containing arrangement, path, and candidate identifier, pack validation passes exactly when the manifest, agent directories, and required inventory contain the same set of all 17 `specials.<agent-name>` canonical IDs exactly once at their exact canonical paths; no `spagent.<asset-name>` value may substitute for a canonical ID.
+For every generated subset, permutation, duplicate-containing arrangement, path, and candidate identifier, pack validation passes exactly when the manifest, agent directories, and required inventory contain the same set of all 19 `specials.<agent-name>` canonical IDs exactly once at their exact canonical paths; no `spagent.<asset-name>` value may substitute for a canonical ID.
 
 **Validates: Requirements 1.1, 1.2, 1.3, 1.4, 3.1, 3.2, 3.3, 3.4**
 
@@ -193,7 +218,7 @@ The validator accumulates non-secret, stable findings rather than stopping at th
 | Absolute/traversing/escaping/non-regular path | `path` finding; do not read target; reject attempted pack. | Correct the checked-in relative allowlist path. |
 | Malformed, duplicate-keyed, unreadable, unsupported, or schema-invalid JSON | `schema` or `io` finding; reject affected ID and attempted registration. | Replace only the invalid data record. |
 | `specials.*` in an asset field, `spagent.*` in a canonical field, or malformed asset ID | `asset_namespace` finding; no authority or registration. | Use the correct namespace and revalidate. |
-| Catalog/manifest/spec/inventory mismatch or duplicate | `integrity` finding; no partial registration. | Restore the exact 17-ID canonical projection. |
+| Catalog/manifest/spec/inventory mismatch or duplicate | `integrity` finding; no partial registration. | Restore the exact 19-ID canonical projection. |
 | Unsafe status/tool/provider/network/budget/activation value | `schema` or `least_privilege` finding; approval cannot bypass it. | Return to the immutable draft-only profile. |
 | Missing, stale, or mismatched source/governance evidence | `provenance` or `risk_gate` finding; candidate unavailable. | Add new digest-bound risk assessment and human approval after review. |
 | Reference directories absent | No finding solely for absence; use checked-in evidence. | Restore them only to review new source bytes. |
@@ -206,7 +231,7 @@ No product code is implemented in this design phase. The future implementation u
 - Each property has one Hypothesis test with at least 100 examples, `derandomize=True`, and `database=None`, marked by `Feature: special-business-agents, Property N: <property title>`.
 - Generators produce canonical `specials.*` IDs separately from `spagent.*` asset values, then deliberately cross them, vary malformed kebab-case names, paths, digests, scopes, ordering, and authority fields. They never generate source instructions for execution.
 - Fixtures use temporary local repository trees and fixed UTF-8 bytes. Sentinels/spies fail tests on socket/network, subprocess, credential lookup, provider call, or dynamic code execution. Assertions compare report bytes and pre/post input and registration state.
-- Example tests cover the exact 17-ID catalog, profile field examples, both namespace regex boundaries, draft activation denial, approval reason lengths 1 and 1,024, and not-required inventory. Integration tests cover symlink containment where supported, absent references, report-retention failure, data-only file allowlists, and pre/post Video_Pack hashes/count/rules.
+- Example tests cover the exact 19-ID catalog, profile field examples, both namespace regex boundaries, draft activation denial, approval reason lengths 1 and 1,024, and not-required inventory. Integration tests cover symlink containment where supported, absent references, report-retention failure, data-only file allowlists, and pre/post Video_Pack hashes/count/rules.
 - Focused one-shot commands run from `backend/`: `python -m pytest -q tests/properties -k special_business_agents` and `python -m pytest -q tests/integration -k special_business_agents`. Tests are offline; no watcher, development server, or remote request is permitted.
 
 | Requirements | Primary coverage |
@@ -224,7 +249,7 @@ Passing tests are evidence, not a substitute for the human source/provenance and
 | Decision | Status | Rationale / required review |
 | --- | --- | --- |
 | Create only `business/specials/` data records and local evidence | Required | Keeps the feature data-only, offline, fail-closed, and without runtime/network behavior. |
-| Retain fixed 17 canonical `specials.*` IDs and canonical paths | Required | The Source Inventory is authoritative for identity; implementation review confirms the exact catalog. |
+| Retain fixed 19 canonical `specials.*` IDs and canonical paths | Required | The Source Inventory is authoritative for identity; implementation review confirms the exact catalog. |
 | Use the specified pack-local schema profile with `spagent` asset regexes | Specified — conformance review required | The profile fixes canonical `agent_id` values to `specials.*` and prompt/rubric/critique/other declared assets to `spagent.*`, while preserving closed, data-only baseline constraints. It requires no shared-schema or Video_Pack change. |
 | Treat source/VA material as untrusted and retain reviewed provenance only | Required human provenance gate | A matching Source_Record and Approval_Record are mandatory before source-derived representation; changed digests require manual re-validation. |
 | Retain digest-bound Risk_Assessments and Approval_Records | Required human risk gate | A reviewer must approve complete matching scope for every present risk and requested value; approval cannot permit profile violations. |
