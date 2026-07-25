@@ -11,6 +11,7 @@
 		}
 	],
 	"settings": {
-		"typescript.autoClosingTags": false
+		"typescript.autoClosingTags": false,
+		"kiroAgent.modelSelection": "gpt-5.6-luna"
 	}
 }

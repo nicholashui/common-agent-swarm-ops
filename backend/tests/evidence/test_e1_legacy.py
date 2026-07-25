@@ -148,6 +148,9 @@ def test_e1_legacy_execution_retains_hashes_and_denied_adapter_evidence() -> Non
     assert denied.denial_audit_recorded is True
     assert denied.authorization.denied_constraints
     assert len(audit_repository.events) == 1
+    assert audit_repository.events[0].metadata.organization_id == ORGANIZATION_ID
+    assert audit_repository.events[0].operation == "tool.request"
+    assert audit_repository.events[0].decision.value == "denied"
 
     local_adapter = next(
         adapter for adapter in default_local_adapters() if adapter.adapter_id == "crm.lookup"
@@ -192,6 +195,8 @@ def test_e1_legacy_execution_retains_hashes_and_denied_adapter_evidence() -> Non
         configuration_hash,
         adapter_hash,
     )
+    assert definition_hash == LegacyEngine._definition_digest(definition)
+    assert len({run_hash, definition_hash, configuration_hash, adapter_hash}) == 4
     assessment = evidence_service.assess(ORGANIZATION_ID, CORRELATION_ID)
     assert assessment.is_success and assessment.value is not None
     assert assessment.value.status is ProductBarStatus.INCOMPLETE

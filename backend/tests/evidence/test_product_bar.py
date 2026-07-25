@@ -95,6 +95,16 @@ def test_each_product_bar_criterion_has_independent_local_evidence(
     assert _failure_criteria(assessment) == {criterion}
     assert assessment.blocked_transitions == (CRITERION_TRANSITIONS[criterion],)
     assert not assessment.production_mutated
+    assert len(assessment.records) == len(ProductBarCriterion)
+    assert len({record.evidence_id for record in assessment.records}) == len(ProductBarCriterion)
+    assert len({record.product_bar_evidence_id for record in assessment.records}) == len(
+        ProductBarCriterion
+    )
+    assert tuple(record.criterion for record in assessment.records) == tuple(ProductBarCriterion)
+    assert all(
+        record.next_transition is CRITERION_TRANSITIONS[record.criterion]
+        for record in assessment.records
+    )
 
 
 def test_complete_product_bar_retains_reproducible_named_local_results() -> None:

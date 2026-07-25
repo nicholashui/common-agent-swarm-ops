@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/general_creative_agent.md",
+  "source_sha256": "35e61afc7c4cfdd5b14ae86ad7ae3baf79d964ede95147932448bac4cdd3c17a",
+  "agent_id": "specials.general-creative-agent",
+  "configuration_sha256": "e812429d00b529ef03d68fe9cdcd6bd8806f2064daa01a76b6f5cebfae7e6494",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.general-creative-agent"
+}

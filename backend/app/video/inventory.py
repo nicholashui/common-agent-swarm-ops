@@ -6,14 +6,14 @@ import json
 import re
 import unicodedata
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Final
 
+from app.evaluation.migration_evidence import SourceDisposition, SourceIndexEntry
+
 EXPECTED_VIDEO_AGENT_COUNT: Final[int] = 114
-_IDENTIFIER_PATTERN: Final[re.Pattern[str]] = re.compile(
-    r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
-)
+_IDENTIFIER_PATTERN: Final[re.Pattern[str]] = re.compile(r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$")
 _ALLOWED_STATUSES: Final[frozenset[str]] = frozenset({"draft", "registered"})
 
 
@@ -45,6 +45,10 @@ class VideoInventoryReport:
     inventory_agent_ids: tuple[str, ...]
     agent_spec_ids: tuple[str, ...]
     issues: tuple[InventoryIssue, ...] = ()
+    source_index_valid: bool | None = None
+    roster_valid: bool | None = None
+    source_index_asset_ids: tuple[str, ...] = ()
+    roster_agent_ids: tuple[str, ...] = ()
 
 
 class VideoInventoryValidator:
@@ -55,6 +59,8 @@ class VideoInventoryValidator:
         manifest: object,
         inventory: object,
         agent_specs: Mapping[str, object] | None = None,
+        source_index: object | None = None,
+        roster: object | None = None,
     ) -> VideoInventoryReport:
         """Accept only the exact non-active manifest, inventory, and supplied records."""
         issues: list[InventoryIssue] = []
@@ -73,17 +79,33 @@ class VideoInventoryValidator:
         self._validate_exact_count(inventory_ids, "entries", issues)
         self._validate_bijection(manifest_ids, inventory_ids, issues)
         self._validate_entry_alignment(manifest_agents, inventory_agents, issues)
+        source_index_valid: bool | None = None
+        source_index_asset_ids: tuple[str, ...] = ()
+        if source_index is not None:
+            source_report = self.validate_source_index(source_index)
+            source_index_valid = source_report.is_valid
+            source_index_asset_ids = source_report.asset_ids
+            issues.extend(source_report.issues)
+        roster_valid: bool | None = None
+        roster_agent_ids: tuple[str, ...] = ()
+        if roster is not None:
+            roster_report = self.validate_roster(roster, manifest_ids)
+            roster_valid = roster_report.is_valid
+            roster_agent_ids = roster_report.agent_ids
+            issues.extend(roster_report.issues)
         agent_spec_ids: tuple[str, ...] = ()
         if agent_specs is not None:
-            agent_spec_ids = self._validate_agent_specs(
-                manifest_agents, agent_specs, issues
-            )
+            agent_spec_ids = self._validate_agent_specs(manifest_agents, agent_specs, issues)
         return VideoInventoryReport(
             is_valid=not issues,
             manifest_agent_ids=tuple(manifest_ids),
             inventory_agent_ids=tuple(inventory_ids),
             agent_spec_ids=agent_spec_ids,
             issues=tuple(issues),
+            source_index_valid=source_index_valid,
+            roster_valid=roster_valid,
+            source_index_asset_ids=source_index_asset_ids,
+            roster_agent_ids=roster_agent_ids,
         )
 
     def validate_directory(self, video_root: Path | str) -> VideoInventoryReport:
@@ -111,9 +133,7 @@ class VideoInventoryValidator:
             issues=issues,
         )
 
-    def _load_agent_specs(
-        self, root: Path
-    ) -> tuple[dict[str, object], tuple[InventoryIssue, ...]]:
+    def _load_agent_specs(self, root: Path) -> tuple[dict[str, object], tuple[InventoryIssue, ...]]:
         agents_root = (root / "agents").resolve()
         agent_specs: dict[str, object] = {}
         issues: list[InventoryIssue] = []
@@ -195,9 +215,10 @@ class VideoInventoryValidator:
                 )
             )
         validation = manifest.get("validation")
-        if not isinstance(validation, Mapping) or validation.get(
-            "expected_agent_count"
-        ) != EXPECTED_VIDEO_AGENT_COUNT:
+        if (
+            not isinstance(validation, Mapping)
+            or validation.get("expected_agent_count") != EXPECTED_VIDEO_AGENT_COUNT
+        ):
             issues.append(
                 InventoryIssue(
                     code="invalid_manifest_validation",
@@ -214,9 +235,7 @@ class VideoInventoryValidator:
         *,
         is_manifest: bool,
     ) -> list[VideoAgentEntry]:
-        if not isinstance(raw_agents, Sequence) or isinstance(
-            raw_agents, (str, bytes, bytearray)
-        ):
+        if not isinstance(raw_agents, Sequence) or isinstance(raw_agents, (str, bytes, bytearray)):
             issues.append(
                 InventoryIssue(
                     code="invalid_agent_collection",
@@ -239,9 +258,7 @@ class VideoInventoryValidator:
                     )
                 )
                 continue
-            agent_id = self._canonical_identifier(
-                raw_agent.get("agent_id"), item_field, issues
-            )
+            agent_id = self._canonical_identifier(raw_agent.get("agent_id"), item_field, issues)
             status = self._validate_status(raw_agent.get("status"), item_field, issues)
             spec_path = self._validate_agent_spec_path(
                 raw_agent.get("agent_spec_path"), agent_id, item_field, issues
@@ -265,8 +282,8 @@ class VideoInventoryValidator:
                         InventoryIssue(
                             code="invalid_maturity_level",
                             message=(
-    "Materialized configuration-only agents must be cataloged at L0."
-),
+                                "Materialized configuration-only agents must be cataloged at L0."
+                            ),
                             field=f"{item_field}.maturity_level",
                         )
                     )
@@ -285,9 +302,7 @@ class VideoInventoryValidator:
                     )
                 )
             seen_ids.add(agent_id)
-            agent_entries.append(
-                VideoAgentEntry(agent_id, status, spec_path, allowed_tools)
-            )
+            agent_entries.append(VideoAgentEntry(agent_id, status, spec_path, allowed_tools))
         return agent_entries
 
     @staticmethod
@@ -318,9 +333,7 @@ class VideoInventoryValidator:
         return identifier
 
     @staticmethod
-    def _validate_status(
-        value: object, field: str, issues: list[InventoryIssue]
-    ) -> str | None:
+    def _validate_status(value: object, field: str, issues: list[InventoryIssue]) -> str | None:
         if not isinstance(value, str) or value not in _ALLOWED_STATUSES:
             issues.append(
                 InventoryIssue(
@@ -339,9 +352,7 @@ class VideoInventoryValidator:
         field: str,
         issues: list[InventoryIssue],
     ) -> str | None:
-        expected_path = (
-            f"agents/{agent_id}/agent_spec.json" if agent_id is not None else None
-        )
+        expected_path = f"agents/{agent_id}/agent_spec.json" if agent_id is not None else None
         if not isinstance(value, str) or value != expected_path:
             issues.append(
                 InventoryIssue(
@@ -388,8 +399,8 @@ class VideoInventoryValidator:
                 InventoryIssue(
                     code="invalid_agent_count",
                     message=(
-    f"Video inventory requires exactly {EXPECTED_VIDEO_AGENT_COUNT} entries."
-),
+                        f"Video inventory requires exactly {EXPECTED_VIDEO_AGENT_COUNT} entries."
+                    ),
                     field=field,
                 )
             )
@@ -533,9 +544,7 @@ class VideoInventoryValidator:
                     field=f"{field}.role",
                 )
             )
-        allowed_tools = self._validate_allowed_tools(
-            spec.get("allowed_tools"), field, issues
-        )
+        allowed_tools = self._validate_allowed_tools(spec.get("allowed_tools"), field, issues)
         if allowed_tools != manifest_entry.allowed_tools:
             issues.append(
                 InventoryIssue(
@@ -548,9 +557,7 @@ class VideoInventoryValidator:
         self._validate_budget_policy(spec.get("budget_policy"), field, issues)
         self._validate_reference(spec.get("prompt_reference"), "prompt", field, issues)
         self._validate_reference(spec.get("rubric_reference"), "rubric", field, issues)
-        self._validate_critique_edges(
-            spec.get("critique_edges"), field, known_agent_ids, issues
-        )
+        self._validate_critique_edges(spec.get("critique_edges"), field, known_agent_ids, issues)
         refinement_count = spec.get("max_refinement_count")
         if (
             isinstance(refinement_count, bool)
@@ -637,8 +644,8 @@ class VideoInventoryValidator:
                 InventoryIssue(
                     code=f"invalid_{kind}_reference",
                     message=(
-    f"{kind.capitalize()} references must be local video configuration IDs."
-),
+                        f"{kind.capitalize()} references must be local video configuration IDs."
+                    ),
                     field=f"{field}.{kind}_reference",
                 )
             )
@@ -673,8 +680,8 @@ class VideoInventoryValidator:
                             InventoryIssue(
                                 code="unknown_critique_edge",
                                 message=(
-    "Critique edges must reference canonical Video_Pack agents."
-),
+                                    "Critique edges must reference canonical Video_Pack agents."
+                                ),
                                 field=edge_field,
                             )
                         )
@@ -686,3 +693,292 @@ class VideoInventoryValidator:
                         field=edge_field,
                     )
                 )
+
+    def validate_migration_inventory(
+        self,
+        manifest: object,
+        inventory: object,
+        source_index: object,
+        roster: object,
+        agent_specs: Mapping[str, object] | None = None,
+    ) -> VideoInventoryReport:
+        """Run the strict frozen-baseline and 114-agent roster checks for registration."""
+        report = self.validate(
+            manifest,
+            inventory,
+            agent_specs,
+            source_index=source_index,
+            roster=roster,
+        )
+        missing_requirements: list[InventoryIssue] = []
+        if source_index is None:
+            missing_requirements.append(
+                InventoryIssue(
+                    code="missing_source_index",
+                    message="A frozen VA baseline requires a Source_Index.",
+                    field="source_index",
+                )
+            )
+        if roster is None:
+            missing_requirements.append(
+                InventoryIssue(
+                    code="missing_va_roster",
+                    message="VA registration requires a complete 114-agent roster mapping.",
+                    field="roster",
+                )
+            )
+        issues = (*report.issues, *missing_requirements)
+        return replace(report, is_valid=not issues, issues=issues)
+
+    def validate_source_index(self, source_index: object) -> SourceIndexValidationReport:
+        """Validate hash, ownership, consent classification, and every disposition."""
+        issues: list[InventoryIssue] = []
+        raw_entries: object = source_index
+        if isinstance(source_index, Mapping):
+            raw_entries = source_index.get(
+                "entries", source_index.get("assets", source_index.get("source_index"))
+            )
+        if not isinstance(raw_entries, Sequence) or isinstance(
+            raw_entries, (str, bytes, bytearray)
+        ):
+            return SourceIndexValidationReport(
+                False,
+                (),
+                (
+                    InventoryIssue(
+                        code="invalid_source_index",
+                        message="Source_Index must be a non-empty array of asset records.",
+                        field="source_index",
+                    ),
+                ),
+            )
+        asset_ids: list[str] = []
+        for index, raw_entry in enumerate(raw_entries):
+            field = f"source_index[{index}]"
+            if not isinstance(raw_entry, Mapping):
+                issues.append(
+                    InventoryIssue(
+                        code="invalid_source_index_entry",
+                        message="Every Source_Index entry must be an object.",
+                        field=field,
+                    )
+                )
+                continue
+            asset_id = self._source_text(raw_entry, "asset_id", "source_id", "id")
+            asset_hash = self._source_text(raw_entry, "asset_hash", "hash", "digest")
+            owner = self._source_text(raw_entry, "owner", "owner_id")
+            classification = self._source_text(
+                raw_entry,
+                "license_or_consent_classification",
+                "license_or_consent",
+                "classification",
+            )
+            disposition = raw_entry.get("disposition")
+            if asset_id is None:
+                issues.append(
+                    InventoryIssue(
+                        code="missing_source_asset_id",
+                        message="Every Source_Index entry requires an asset identifier.",
+                        field=f"{field}.asset_id",
+                    )
+                )
+            else:
+                asset_ids.append(asset_id)
+            for value, value_field, code in (
+                (asset_hash, "asset_hash", "missing_source_asset_hash"),
+                (owner, "owner", "missing_source_owner"),
+                (
+                    classification,
+                    "license_or_consent_classification",
+                    "missing_license_or_consent_classification",
+                ),
+            ):
+                if value is None:
+                    issues.append(
+                        InventoryIssue(
+                            code=code,
+                            message="Every Source_Index entry requires this field.",
+                            field=f"{field}.{value_field}",
+                        )
+                    )
+            if not isinstance(disposition, str):
+                issues.append(
+                    InventoryIssue(
+                        code="missing_source_disposition",
+                        message="Every Source_Index asset requires one disposition.",
+                        field=f"{field}.disposition",
+                    )
+                )
+            else:
+                try:
+                    SourceDisposition(disposition)
+                except ValueError:
+                    issues.append(
+                        InventoryIssue(
+                            code="invalid_source_disposition",
+                            message="Source_Index disposition is not recognized.",
+                            field=f"{field}.disposition",
+                        )
+                    )
+        if not raw_entries:
+            issues.append(
+                InventoryIssue(
+                    code="empty_source_index",
+                    message="A frozen Source_Index must contain at least one asset.",
+                    field="source_index",
+                )
+            )
+        if len(asset_ids) != len(set(asset_ids)):
+            issues.append(
+                InventoryIssue(
+                    code="duplicate_source_asset",
+                    message="Source_Index asset identifiers must be unique.",
+                    field="source_index",
+                )
+            )
+        return SourceIndexValidationReport(not issues, tuple(asset_ids), tuple(issues))
+
+    def validate_roster(
+        self,
+        roster: object,
+        indexed_agent_ids: Sequence[str] | None = None,
+    ) -> RosterValidationReport:
+        """Require exactly one non-empty VA_Domain_Pack mapping for every indexed agent."""
+        issues: list[InventoryIssue] = []
+        expected_ids = tuple(indexed_agent_ids or ())
+        if expected_ids:
+            expected_set = set(expected_ids)
+            if len(expected_ids) != EXPECTED_VIDEO_AGENT_COUNT:
+                issues.append(
+                    InventoryIssue(
+                        code="invalid_indexed_agent_count",
+                        message="The indexed VA roster must contain exactly 114 agents.",
+                        field="indexed_agent_ids",
+                    )
+                )
+        else:
+            expected_set = set()
+        raw_entries: object = roster
+        if isinstance(roster, Mapping):
+            if any(key in roster for key in ("mappings", "entries", "agents")):
+                raw_entries = roster.get("mappings", roster.get("entries", roster.get("agents")))
+            else:
+                raw_entries = [{"agent_id": key, "mapping": value} for key, value in roster.items()]
+        if not isinstance(raw_entries, Sequence) or isinstance(
+            raw_entries, (str, bytes, bytearray)
+        ):
+            return RosterValidationReport(
+                False,
+                (),
+                (
+                    InventoryIssue(
+                        code="invalid_va_roster",
+                        message="The VA roster must be an array of mapping records.",
+                        field="roster",
+                    ),
+                ),
+            )
+        agent_ids: list[str] = []
+        for index, raw_entry in enumerate(raw_entries):
+            field = f"roster[{index}]"
+            if not isinstance(raw_entry, Mapping):
+                issues.append(
+                    InventoryIssue(
+                        code="invalid_va_mapping",
+                        message="Every VA roster mapping must be an object.",
+                        field=field,
+                    )
+                )
+                continue
+            agent_id = self._source_text(raw_entry, "agent_id", "indexed_agent_id", "va_agent_id")
+            mapping = self._source_text(
+                raw_entry,
+                "domain_pack_agent_id",
+                "va_domain_pack_agent_id",
+                "mapped_agent_id",
+                "mapping",
+                "pack_agent_id",
+            )
+            if agent_id is None:
+                issues.append(
+                    InventoryIssue(
+                        code="missing_indexed_agent_id",
+                        message="Every VA roster mapping requires an indexed agent identifier.",
+                        field=f"{field}.agent_id",
+                    )
+                )
+            else:
+                agent_ids.append(agent_id)
+            if mapping is None:
+                issues.append(
+                    InventoryIssue(
+                        code="missing_domain_pack_mapping",
+                        message="Every indexed VA agent requires one VA_Domain_Pack mapping.",
+                        field=f"{field}.mapping",
+                    )
+                )
+        if len(agent_ids) != len(set(agent_ids)):
+            issues.append(
+                InventoryIssue(
+                    code="duplicate_indexed_agent_mapping",
+                    message="Each indexed VA agent must have exactly one mapping.",
+                    field="roster",
+                )
+            )
+        if expected_set:
+            supplied_set = set(agent_ids)
+            for agent_id in sorted(expected_set - supplied_set):
+                issues.append(
+                    InventoryIssue(
+                        code="missing_domain_pack_mapping",
+                        message="Every indexed VA agent requires exactly one mapping.",
+                        field=agent_id,
+                    )
+                )
+            for agent_id in sorted(supplied_set - expected_set):
+                issues.append(
+                    InventoryIssue(
+                        code="extra_indexed_agent_mapping",
+                        message="Roster mappings must correspond to indexed VA agents.",
+                        field=agent_id,
+                    )
+                )
+        elif len(agent_ids) != EXPECTED_VIDEO_AGENT_COUNT:
+            issues.append(
+                InventoryIssue(
+                    code="invalid_roster_agent_count",
+                    message="The VA roster must contain exactly 114 indexed agents.",
+                    field="roster",
+                )
+            )
+        return RosterValidationReport(not issues, tuple(agent_ids), tuple(issues))
+
+    @staticmethod
+    def _source_text(value: Mapping[object, object], *names: str) -> str | None:
+        for name in names:
+            candidate = value.get(name)
+            if isinstance(candidate, str) and candidate.strip():
+                return candidate.strip()
+        return None
+
+
+@dataclass(frozen=True, slots=True)
+class SourceIndexValidationReport:
+    """Redaction-safe validation result for a frozen Source_Index."""
+
+    is_valid: bool
+    asset_ids: tuple[str, ...]
+    issues: tuple[InventoryIssue, ...] = ()
+
+
+@dataclass(frozen=True, slots=True)
+class RosterValidationReport:
+    """Redaction-safe validation result for the indexed 114-agent VA roster."""
+
+    is_valid: bool
+    agent_ids: tuple[str, ...]
+    issues: tuple[InventoryIssue, ...] = ()
+
+
+# Re-export the durable source-index model at the inventory boundary.
+SourceIndex = SourceIndexEntry

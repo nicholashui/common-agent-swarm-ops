@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\contracts.py
+# hypothesis_version: 6.151.12
+
+['Domain_Pack pack_id', 'E_co', 'T_co', '_error', '_value', 'adoption-platform', 'agents', 'allowed', 'asset_references', 'audit_unavailable', 'authorization_denied', 'blocked', 'capabilities', 'conflict', 'content_digest', 'data_classifications', 'denied', 'evidence', 'failed_recoverable', 'health_unavailable', 'immutable_version', 'internal_error', 'invalid_transition', 'memory_scopes', 'method_not_allowed', 'not_found', 'pack_id', 'rate_limited', 'reason', 'reflection_policy', 'required_alc_version', 'required_fields', 'retention_policy', 'retrieval_policy', 'secret_unavailable', 'signer_id', 'validation_failed', 'workflows']

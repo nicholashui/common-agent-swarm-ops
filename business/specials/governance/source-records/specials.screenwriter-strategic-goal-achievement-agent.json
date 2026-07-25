@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/screenwriter_strategic_goal_achievement_agent.md",
+  "source_sha256": "0bea9dd2492e477790853d437dbf68899f98c4128db7ae597ccef23d9af35680",
+  "agent_id": "specials.screenwriter-strategic-goal-achievement-agent",
+  "configuration_sha256": "1e98c87aaf3bf698f9c16cc19f695c0cbb2a2dd4cdb4906c22e7ceb365eaea02",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.screenwriter-strategic-goal-achievement-agent"
+}

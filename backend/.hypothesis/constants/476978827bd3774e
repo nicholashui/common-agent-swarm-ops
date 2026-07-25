@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\memory\lesson_service.py
+# hypothesis_version: 6.151.12
+
+['agent_id', 'assessment', 'domain', 'domain_id', 'domain_policy', 'domain_policy_passed', 'enabled', 'evaluation_score', 'evaluation_threshold', 'evidence_references', 'format', 'format_passed', 'format_valid', 'invalid', 'lesson-output', 'lesson-retrieval', 'lesson-revocation', 'lesson.revocation', 'lesson_references', 'memory_scope', 'on', 'organization_id', 'output_reference', 'pack_version', 'passed', 'revocation', 'revocation_committed', 'safety', 'safety_policy', 'safety_policy_passed', 'scope', 'score', 'source_references', 'threshold', 'true', 'yes']

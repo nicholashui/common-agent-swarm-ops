@@ -11,6 +11,8 @@ from typing import TypeVar
 
 from app.adapters.local import default_local_adapters
 from app.audit import AuditWriter
+from app.core.command_service import CommandService
+from app.core.idempotency import IdempotencyOutcome, IdempotencyService, request_digest
 from app.engines.migration import LegacyEngineRetirement
 from app.evaluation.migration_evidence import (
     InMemoryMigrationEvidenceRepository,
@@ -43,6 +45,7 @@ from app.models.runs import RunRecord
 from app.registry.pack_validator import DomainPackValidator
 from app.repositories.approval_repository import InMemoryApprovalRepository
 from app.repositories.artifact_repository import InMemoryArtifactRepository
+from app.repositories.control_plane import InMemoryControlPlaneDatabase
 from app.repositories.evaluation_repository import InMemoryEvaluationRepository
 from app.repositories.evolution_repository import InMemoryEvolutionRepository
 from app.repositories.pack_repository import (
@@ -52,6 +55,7 @@ from app.repositories.pack_repository import (
 )
 from app.repositories.run_repository import InMemoryRunRepository
 from app.runs.service import DispatchOutcome, RunService
+from app.va.service import VaDomainAdapter
 from app.video.release import ReleaseService, RunOutputBlockerProvider
 from app.workflows.validator import RegisteredReferences, WorkflowDefinitionValidator
 
@@ -112,8 +116,19 @@ class ControlPlaneServices:
         memory_repository: InMemoryMemoryRepository | None = None,
         retrieval_configuration: RetrievalConfiguration | None = None,
         starter: Callable[[RunRecord], None] | None = None,
+        control_plane_database: InMemoryControlPlaneDatabase | None = None,
+        idempotency_service: IdempotencyService | None = None,
     ) -> None:
         self.run_repository = run_repository or InMemoryRunRepository()
+        self.control_plane_database = control_plane_database or InMemoryControlPlaneDatabase()
+        self.idempotency_service = idempotency_service or IdempotencyService(
+            self.control_plane_database.unit_of_work
+        )
+        self.command_service = CommandService(self.control_plane_database.unit_of_work)
+        self.va_domain_adapter = VaDomainAdapter(
+            self.control_plane_database.unit_of_work,
+            self.command_service,
+        )
         self.pack_repository = pack_repository or InMemoryPackRepository()
         self.approval_repository = approval_repository or InMemoryApprovalRepository()
         self.evaluation_repository = evaluation_repository or InMemoryEvaluationRepository()
@@ -315,6 +330,84 @@ class ControlPlaneServices:
             ),
         )
         return Result.success((outcome.record, preview, outcome))
+
+    def dispatch_confirmed(
+        self,
+        organization_id: OrganizationId,
+        actor_id: ActorId,
+        correlation_id: CorrelationId,
+        run_id: RunId,
+        idempotency_key: str,
+    ) -> Result[IdempotencyOutcome, ErrorDetail]:
+        """Atomically retain one confirmed-dispatch response or replay the prior governed outcome."""
+        digest = request_digest(
+            "workflow-runs.dispatch",
+            {"run_id": str(run_id), "confirm": True},
+        )
+        return self.idempotency_service.execute(
+            organization_id,
+            actor_id,
+            correlation_id,
+            idempotency_key,
+            digest,
+            lambda: self._confirmed_dispatch_response(
+                organization_id, correlation_id, run_id, idempotency_key
+            ),
+        )
+
+    def _confirmed_dispatch_response(
+        self,
+        organization_id: OrganizationId,
+        correlation_id: CorrelationId,
+        run_id: RunId,
+        idempotency_key: str,
+    ) -> Result[Mapping[str, object], ErrorDetail]:
+        fetched = self.run_repository.get_by_run_id(organization_id, run_id)
+        if not fetched.is_success:
+            return Result.failure(self._error(fetched.error, correlation_id))
+        current = self._value(fetched)
+        preview = self._dispatch_preview(current)
+        self._record_event(
+            organization_id,
+            run_id,
+            OperatorEvent("action_preview", current.metadata.updated_at, preview),
+        )
+        dispatched = self.run_service.dispatch(
+            organization_id,
+            run_id,
+            idempotency_key,
+            self._starter,
+            correlation_id,
+        )
+        if not dispatched.is_success:
+            return Result.failure(self._error(dispatched.error, correlation_id))
+        outcome = self._value(dispatched)
+        self._record_event(
+            organization_id,
+            run_id,
+            OperatorEvent(
+                "dispatch", outcome.record.metadata.updated_at, detail=outcome.record.status
+            ),
+        )
+        payload: Mapping[str, object] = {
+            "run_id": str(outcome.record.run_id),
+            "status": outcome.record.status.value,
+            "executed": True,
+            "preview": {
+                "action_id": preview.action_id,
+                "summary": preview.summary,
+                "intended_effect": preview.intended_effect,
+                "emitted_at": outcome.record.metadata.updated_at,
+                "rollback_preview": preview.rollback_preview,
+                "supporting_evidence": list(preview.supporting_evidence),
+                "confidence": preview.confidence,
+                "uncertainty": preview.uncertainty,
+                "correction_control": preview.correction_control,
+            },
+            "idempotent": outcome.is_idempotent,
+            "retry_permitted": outcome.retry_permitted,
+        }
+        return Result.success(payload)
 
     def get_run(
         self, organization_id: OrganizationId, run_id: RunId, correlation_id: CorrelationId

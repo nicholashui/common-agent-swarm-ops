@@ -1,0 +1,50 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "scope": "run-fixture-1",
+  "schemaVersion": "1.0.0",
+  "authorizedTopics": ["run.updated"],
+  "initial": {
+    "expectedSequence": 7,
+    "run": {
+      "action_preview": null,
+      "correlation_id": "corr-live-initial",
+      "engine": "workflow",
+      "failure_code": null,
+      "output": null,
+      "run_id": "run-fixture-1",
+      "status": "Live",
+      "updated_at": "2026-03-02T12:00:00Z",
+      "workflow_id": "workflow-fixture",
+      "workflow_version": "1.0.0"
+    }
+  },
+  "replacement": {
+    "expectedSequence": 30,
+    "run": {
+      "action_preview": null,
+      "correlation_id": "corr-live-replacement",
+      "engine": "workflow",
+      "failure_code": null,
+      "output": null,
+      "run_id": "run-fixture-1",
+      "status": "Recovery required",
+      "updated_at": "2026-03-02T12:05:00Z",
+      "workflow_id": "workflow-fixture",
+      "workflow_version": "1.0.0"
+    }
+  },
+  "replayAnomalies": ["bounded", "expired", "denied", "schema_mismatch", "duplicate", "out_of_order", "sequence_gap"],
+  "status": {
+    "freshness": "Delayed",
+    "degradedState": "outbox lag",
+    "actions": [
+      { "id": "refresh-fixture", "label": "Refresh operational projection", "eligible": true, "kind": "refresh" },
+      { "id": "reconnect-fixture", "label": "Reconnect live updates", "eligible": true, "kind": "reconnect" },
+      { "id": "promote-fixture", "label": "Promote rollout", "eligible": true, "freshness_critical": true, "irreversible": true, "kind": "promote" }
+    ]
+  },
+  "unavailable": {
+    "message": "The authorized health projection is unavailable.",
+    "action": { "id": "refresh-fixture", "label": "Refresh operational projection", "eligible": true, "kind": "refresh" }
+  }
+}

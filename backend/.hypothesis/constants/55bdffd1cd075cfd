@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\memory\learning_lifecycle.py
+# hypothesis_version: 6.151.12
+
+['-', 'T', '_', 'agent-scoped-memory', 'agent_id', 'agent_scoped_memory', 'approved_memory', 'change_references', 'disable', 'disabled', 'domain_id', 'enable', 'enabled', 'evaluations_passed', 'evidence_references', 'false', 'lesson_references', 'memory_scope', 'none', 'not_enabled', 'off', 'on', 'organization_id', 'pack_version', 'passed', 'pre-action-retrieval', 'pre_action_retrieval', 'reflection-evaluator', 'reflection_enabled', 'reflection_evaluator', 'required-evaluations', 'required_evaluations', 'retention-policy', 'retention_policy', 'retrieval_enabled', 'true', 'yes']

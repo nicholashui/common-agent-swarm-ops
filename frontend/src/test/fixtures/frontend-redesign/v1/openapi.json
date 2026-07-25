@@ -1,0 +1,35 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Frontend fixture", "version": "1" },
+  "paths": {
+    "/api/v1/runs/{run_id}": {
+      "get": {
+        "operationId": "read_fixture_run_api_v1_runs__run_id__get",
+        "parameters": [{ "name": "run_id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "meta"],
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/FixtureRun" },
+                    "meta": { "$ref": "#/components/schemas/FixtureMeta" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FixtureMeta": { "type": "object", "required": ["correlation_id"], "properties": { "correlation_id": { "type": "string" } } },
+      "FixtureRun": { "type": "object", "required": ["run_id", "status"], "properties": { "run_id": { "type": "string" }, "status": { "type": "string" } } }
+    }
+  }
+}

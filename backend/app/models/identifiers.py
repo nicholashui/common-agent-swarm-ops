@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import NewType
 from uuid import UUID, uuid4
 
@@ -45,3 +46,38 @@ def is_uuid_identifier(value: str) -> bool:
     except (TypeError, ValueError, AttributeError):
         return False
     return True
+
+
+AgentId = NewType("AgentId", str)
+AgentLearningContractId = NewType("AgentLearningContractId", str)
+CommandId = NewType("CommandId", str)
+DomainId = NewType("DomainId", str)
+DomainPackId = NewType("DomainPackId", str)
+HostContractId = NewType("HostContractId", str)
+InvocationId = NewType("InvocationId", str)
+PackContractId = NewType("PackContractId", str)
+
+
+@dataclass(frozen=True, slots=True)
+class CorrelationAwareIdentifier:
+    """A structured identifier that cannot be detached from its request trace."""
+
+    identifier: str
+    correlation_id: CorrelationId
+
+    def __post_init__(self) -> None:
+        if not self.identifier.strip():
+            raise ValueError("Identifiers must be non-empty.")
+        if not str(self.correlation_id).strip():
+            raise ValueError("Correlation identifiers must be non-empty.")
+
+    @property
+    def value(self) -> str:
+        """Return the identifier value for serializers and repository keys."""
+        return self.identifier
+
+
+CorrelatedIdentifier = CorrelationAwareIdentifier
+
+
+CorrelationAwareId = CorrelationAwareIdentifier

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\retention.py
+# hypothesis_version: 6.151.12
+
+['action', 'approvals', 'archive', 'artifacts', 'audit_records', 'delete', 'failed_work_items', 'idempotency_records', 'max_age_days', 'operational_events', 'provenance_evidence', 'traces']

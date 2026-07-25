@@ -1,0 +1,6 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "opaque": { "id": "run-fixture-1", "label": "Open run", "internal_note": "returned-but-not-rendered" },
+  "action": { "id": "retry-fixture-1", "label": "Retry", "eligible": true, "kind": "retry", "internal_note": "returned-but-not-rendered" },
+  "evidence": { "id": "evidence-fixture-1", "label": "Evidence", "summary": "Redacted evidence", "internal_note": "returned-but-not-rendered" }
+}

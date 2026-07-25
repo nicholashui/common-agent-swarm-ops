@@ -13,12 +13,20 @@ from uuid import uuid4
 from app.engines.migration import LegacyExecutionAvailability
 from app.models.common import SCHEMA_VERSION, OptimisticTransition, RecordMetadata, utc_now
 from app.models.contracts import ErrorCode, ErrorDetail, ErrorField, Result
+from app.models.control_plane import (
+    AuditRecord,
+    GraphValidationReport,
+    InvocationAssociation,
+    RunProvenanceId,
+)
 from app.models.identifiers import (
     CorrelationId,
+    DomainPackId,
     OrganizationId,
     RecordId,
     RunId,
     WorkflowDefinitionId,
+    new_record_id,
 )
 from app.models.runs import (
     DispatchAttempt,
@@ -27,8 +35,27 @@ from app.models.runs import (
     RunStatus,
     WorkflowEngineKind,
 )
-from app.repositories.protocols import RunRepository
+from app.registry.compatibility import CompatibilityRegistry
+from app.repositories.protocols import (
+    AuditRecordRepository,
+    InvocationAssociationRepository,
+    RunRepository,
+)
 from app.workflows.validator import RegisteredReferences, WorkflowDefinitionValidator
+
+
+def _library_definition(definition: Mapping[str, object]) -> dict[str, object]:
+    """Restore retained immutable snapshots to JSON-compatible library input values."""
+    return {str(key): _library_value(value) for key, value in definition.items()}
+
+
+def _library_value(value: object) -> object:
+    if isinstance(value, Mapping):
+        return _library_definition(value)
+    if isinstance(value, tuple | frozenset):
+        return [_library_value(item) for item in value]
+    return value
+
 
 DispatchStarter = Callable[[RunRecord], None]
 
@@ -72,29 +99,56 @@ class RunService:
         registered_references: RegisteredReferences,
         clock: Callable[[], datetime] = utc_now,
         legacy_execution_availability: LegacyExecutionAvailability | None = None,
+        *,
+        invocation_association_repository: InvocationAssociationRepository | None = None,
+        association_repository: InvocationAssociationRepository | None = None,
+        audit_repository: AuditRecordRepository | None = None,
+        compatibility_registry: CompatibilityRegistry | None = None,
     ) -> None:
         self._repository = repository
         self._validator = WorkflowDefinitionValidator(registered_references)
         self._clock = clock
         self._legacy_execution_availability = legacy_execution_availability
+        self._association_repository = invocation_association_repository or association_repository
+        self._audit_repository = audit_repository
+        self._compatibility_registry = compatibility_registry
 
     def create_queued_run(
         self,
         organization_id: OrganizationId,
         correlation_id: CorrelationId,
         definition: Mapping[str, object],
+        *,
+        provenance_id: RunProvenanceId | None = None,
+        validated_graph_report: GraphValidationReport | None = None,
     ) -> Result[RunRecord, ErrorDetail]:
         """Validate and persist a uniquely identified queued run before any dispatch occurs."""
-        report = self._validator.validate(definition)
-        if not report.is_valid:
+        library_definition = _library_definition(definition)
+        if validated_graph_report is None:
+            report = self._validator.validate(library_definition)
+            if not report.is_valid:
+                return Result.failure(
+                    ErrorDetail(
+                        ErrorCode.VALIDATION_FAILED,
+                        "Workflow definition must pass validation before a run is created.",
+                        correlation_id,
+                        fields=tuple(
+                            ErrorField(issue.field, issue.reason) for issue in report.issues
+                        ),
+                    )
+                )
+        elif (
+            not validated_graph_report.eligible_for_run
+            or validated_graph_report.workflow_definition != definition
+        ):
             return Result.failure(
                 ErrorDetail(
                     ErrorCode.VALIDATION_FAILED,
-                    "Workflow definition must pass validation before a run is created.",
+                    "Validated graph evidence does not authorize this workflow definition.",
                     correlation_id,
-                    fields=tuple(ErrorField(issue.field, issue.reason) for issue in report.issues),
                 )
             )
+        definition = library_definition
         definition_id = definition.get("id")
         version = definition.get("version")
         engine = definition.get("engine")
@@ -155,11 +209,70 @@ class RunService:
             engine=selected_engine,
             status=RunStatus.QUEUED,
             created_for_dispatch_at=now,
+            provenance_id=provenance_id,
         )
         persisted = self._repository.create_queued(record)
         if not persisted.is_success:
             return Result.failure(self._with_correlation(persisted.error, correlation_id))
         return persisted
+
+    def persist_invocation_association(
+        self,
+        association: InvocationAssociation,
+        *,
+        pack_id: DomainPackId | None = None,
+    ) -> Result[InvocationAssociation, ErrorDetail]:
+        """Persist the complete invocation association before an execution can start."""
+        repository = self._association_repository
+        if repository is None:
+            return self._association_denied(association, "association persistence is unavailable")
+        compatibility_error = self._compatibility_error(
+            association, pack_id=pack_id, correlation_id=association.correlation_id
+        )
+        if compatibility_error is not None:
+            return Result.failure(compatibility_error)
+        if association.metadata.organization_id != association.organization_id:
+            return self._association_denied(association, "association organization is invalid")
+        try:
+            persisted = repository.append(association)
+        except Exception:
+            persisted = Result.failure(
+                ErrorDetail(
+                    ErrorCode.REPOSITORY_UNAVAILABLE,
+                    "Invocation association persistence is unavailable.",
+                    association.correlation_id,
+                    retryable=True,
+                )
+            )
+        if persisted.is_success:
+            return persisted
+        return self._association_denied(association, "association persistence failed")
+
+    def begin_invocation(
+        self,
+        association: InvocationAssociation,
+        node_starter: Callable[[InvocationAssociation], None] | None = None,
+        *,
+        pack_id: DomainPackId | None = None,
+    ) -> Result[InvocationAssociation, ErrorDetail]:
+        """Persist association, then optionally start a node only after persistence succeeds."""
+        persisted = self.persist_invocation_association(association, pack_id=pack_id)
+        if not persisted.is_success or node_starter is None:
+            return persisted
+        try:
+            node_starter(association)
+        except Exception:
+            return Result.failure(
+                ErrorDetail(
+                    ErrorCode.REPOSITORY_UNAVAILABLE,
+                    "The agent node could not start after invocation association.",
+                    association.correlation_id,
+                    retryable=True,
+                )
+            )
+        return persisted
+
+    submit_invocation = begin_invocation
 
     def dispatch(
         self,
@@ -168,6 +281,9 @@ class RunService:
         idempotency_key: str,
         starter: DispatchStarter,
         correlation_id: CorrelationId,
+        *,
+        association: InvocationAssociation | None = None,
+        pack_id: DomainPackId | None = None,
     ) -> Result[DispatchOutcome, ErrorDetail]:
         """Claim one queued request, invoke its starter once, and requeue only
         durably failed starts."""
@@ -201,6 +317,14 @@ class RunService:
                     ),
                 )
             )
+        association_value, association_error = self._ensure_dispatch_association(
+            current,
+            association,
+            pack_id=pack_id,
+            correlation_id=correlation_id,
+        )
+        if association_error is not None:
+            return Result.failure(association_error)
         if current.status is not RunStatus.QUEUED:
             return Result.failure(
                 ErrorDetail(
@@ -231,6 +355,17 @@ class RunService:
             metadata=self._next_metadata(current, correlation_id),
             status=RunStatus.DISPATCHING,
             dispatch_attempts=(*current.dispatch_attempts, attempt),
+            invocation_association_id=(
+                str(association_value.invocation_id)
+                if association_value is not None
+                else current.invocation_association_id
+            ),
+            pack_id=pack_id or current.pack_id,
+            pack_version=(
+                association_value.pack_version
+                if association_value is not None
+                else current.pack_version
+            ),
         )
         persisted_claim = self._repository.transition(
             claimed,
@@ -296,6 +431,167 @@ class RunService:
         if not transitioned.is_success:
             return Result.failure(self._with_correlation(transitioned.error, correlation_id))
         return transitioned
+
+    def _ensure_dispatch_association(
+        self,
+        current: RunRecord,
+        supplied: InvocationAssociation | None,
+        *,
+        pack_id: DomainPackId | None,
+        correlation_id: CorrelationId,
+    ) -> tuple[InvocationAssociation | None, ErrorDetail | None]:
+        repository = self._association_repository
+        if repository is None:
+            if supplied is None and self._compatibility_registry is None:
+                return None, None
+            if supplied is None:
+                return None, self._association_context_error(
+                    current.metadata.organization_id,
+                    correlation_id,
+                    str(current.run_id),
+                    "Invocation association is required before submission.",
+                )
+            persisted = self.persist_invocation_association(supplied, pack_id=pack_id)
+            return persisted.value, persisted.error
+
+        candidate = supplied
+        if candidate is not None:
+            if (
+                candidate.organization_id != current.metadata.organization_id
+                or candidate.run_id != current.run_id
+            ):
+                return None, self._association_context_error(
+                    current.metadata.organization_id,
+                    correlation_id,
+                    str(candidate.invocation_id),
+                    "Invocation association does not match the requested run.",
+                )
+            existing = repository.get_by_invocation_id(
+                current.metadata.organization_id, str(candidate.invocation_id)
+            )
+            if existing.is_success and existing.value is not None:
+                candidate = existing.value
+            else:
+                persisted = self.persist_invocation_association(candidate, pack_id=pack_id)
+                if not persisted.is_success:
+                    return None, persisted.error
+                candidate = persisted.value
+        elif current.invocation_association_id is not None:
+            existing = repository.get_by_invocation_id(
+                current.metadata.organization_id, current.invocation_association_id
+            )
+            if not existing.is_success or existing.value is None:
+                return None, self._association_context_error(
+                    current.metadata.organization_id,
+                    correlation_id,
+                    current.invocation_association_id,
+                    "Invocation association could not be loaded before submission.",
+                )
+            candidate = existing.value
+        else:
+            return None, self._association_context_error(
+                current.metadata.organization_id,
+                correlation_id,
+                str(current.run_id),
+                "Invocation association is required before submission.",
+            )
+
+        assert candidate is not None
+        compatibility_error = self._compatibility_error(
+            candidate,
+            pack_id=pack_id or current.pack_id,
+            correlation_id=correlation_id,
+        )
+        return candidate, compatibility_error
+
+    def _association_denied(
+        self, association: InvocationAssociation, reason: str
+    ) -> Result[InvocationAssociation, ErrorDetail]:
+        return Result.failure(
+            self._association_context_error(
+                association.organization_id,
+                association.correlation_id,
+                str(association.invocation_id),
+                f"Invocation denied because {reason}.",
+            )
+        )
+
+    def _association_context_error(
+        self,
+        organization_id: OrganizationId,
+        correlation_id: CorrelationId,
+        subject_reference: str,
+        message: str,
+    ) -> ErrorDetail:
+        self._write_association_denial_audit(
+            organization_id,
+            correlation_id,
+            subject_reference,
+            "invocation.association.denied",
+        )
+        return ErrorDetail(ErrorCode.AUTHORIZATION_DENIED, message, correlation_id)
+
+    def _write_association_denial_audit(
+        self,
+        organization_id: OrganizationId,
+        correlation_id: CorrelationId,
+        subject_reference: str,
+        action: str,
+    ) -> None:
+        repository = self._audit_repository
+        if repository is None:
+            return
+        now = self._clock()
+        audit = AuditRecord(
+            metadata=RecordMetadata(
+                record_id=new_record_id(),
+                organization_id=organization_id,
+                correlation_id=correlation_id,
+                schema_version=SCHEMA_VERSION,
+                version=1,
+                created_at=now,
+                updated_at=now,
+            ),
+            audit_id=str(new_record_id()),
+            action=action,
+            subject_reference=subject_reference,
+            outcome="denied:association_persistence_failed",
+            recorded_at=now,
+        )
+        try:
+            repository.append(audit)
+        except Exception:
+            return
+
+    def _compatibility_error(
+        self,
+        association: InvocationAssociation,
+        *,
+        pack_id: DomainPackId | None,
+        correlation_id: CorrelationId,
+    ) -> ErrorDetail | None:
+        registry = self._compatibility_registry
+        if registry is None:
+            return None
+        if pack_id is None:
+            return ErrorDetail(
+                ErrorCode.AUTHORIZATION_DENIED,
+                "Invocation submission is denied without a Domain_Pack identity.",
+                correlation_id,
+            )
+        decision = registry.guard_invocation(
+            pack_id,
+            association.pack_version,
+            correlation_id=correlation_id,
+        )
+        if bool(decision):
+            return None
+        reason = getattr(decision, "reason", "incompatible Domain_Pack version")
+        return ErrorDetail(
+            ErrorCode.AUTHORIZATION_DENIED,
+            f"Invocation submission denied: {reason}",
+            correlation_id,
+        )
 
     def _requeue_after_dispatch_failure(
         self,

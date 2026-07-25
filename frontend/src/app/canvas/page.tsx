@@ -1,8 +1,7 @@
-import { AppShell } from "../../components/AppShell";
-import { Canvas } from "../../components/Canvas";
+import { redirect } from "next/navigation";
 
-function CanvasPage(): JSX.Element {
-  return <AppShell><Canvas /></AppShell>;
+function LegacyCanvasPage(): never {
+  redirect("/");
 }
 
-export default CanvasPage;
+export default LegacyCanvasPage;

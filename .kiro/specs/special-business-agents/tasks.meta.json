@@ -1,0 +1,327 @@
+{
+  "pbtResults": {
+    "3.3 Add `backend/tests/properties/test_special_business_agents_property_02_profile.py`": {
+      "status": "passed",
+      "lastRunTimestamp": 1784969317097
+    },
+    "3.2 Add `backend/tests/properties/test_special_business_agents_property_01_catalog.py`": {
+      "status": "passed",
+      "lastRunTimestamp": 1784969393704
+    },
+    "3.4 Add `backend/tests/properties/test_special_business_agents_property_03_integrity.py`": {
+      "status": "failed",
+      "failingExample": "Hypothesis failed its health check before executing examples: the property test uses the function-scoped pytest fixture `tmp_path`, which is not reset between generated inputs.",
+      "lastRunTimestamp": 1784969349339
+    },
+    "4.2 Add `backend/tests/properties/test_special_business_agents_property_04_provenance.py`": {
+      "status": "failed",
+      "failingExample": "Hypothesis found 8 distinct failures. Representative falsifying examples: (1) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='unreadable', approval_state='valid', manual_revalidation=False): expected SOURCE_NOT_READABLE but findings were {'CONFIGURATION_DIGEST_MISMATCH', 'NOT_REGULAR_FILE'}; (2) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='drift', configuration_digest_mode='matching', availability='present', approval_state='missing', manual_revalidation=False): expected pass but validation_outcome was fail; (3) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='malformed', configuration_digest_mode='matching', availability='absent', approval_state='valid', manual_revalidation=False): expected INVALID_SOURCE_DIGEST but findings were {'INVALID_SOURCE_PATH'}; (4) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='matching', configuration_digest_mode='malformed', availability='absent', approval_state='valid', manual_revalidation=False): expected INVALID_CONFIGURATION_DIGEST but findings were {'INVALID_SOURCE_PATH'}; (5) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='valid', manual_revalidation=False): expected CONFIGURATION_DIGEST_MISMATCH but findings were {'INVALID_SOURCE_PATH'}; (6) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='rejected', manual_revalidation=False): expected APPROVAL_NOT_GRANTED but findings were {'CONFIGURATION_DIGEST_MISMATCH'}; (7) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='source_mismatch', manual_revalidation=False): expected APPROVAL_SOURCE_DIGEST_MISMATCH but findings were {'CONFIGURATION_DIGEST_MISMATCH'}; (8) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='missing', manual_revalidation=False): expected MISSING_APPROVAL_RECORD but findings were {'CONFIGURATION_DIGEST_MISMATCH'}.",
+      "lastRunTimestamp": 1784970713080
+    },
+    "4.3 Add `backend/tests/properties/test_special_business_agents_property_05_authority.py`": {
+      "status": "passed",
+      "failingExample": "",
+      "lastRunTimestamp": 1784971127746
+    }
+  },
+  "executionHistory": {
+    "1.1 Create `business/specials/schemas/special-agent-spec.schema.json`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490458
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968498834
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968805996
+      }
+    ],
+    "1.2 Create `backend/app/registry/specials_validator.py` with typed records and pure primitives": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490555
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968502858
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968809281
+      }
+    ],
+    "2.1 Create the pack configuration under `business/specials/`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490593
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968816843
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969122259
+      }
+    ],
+    "2.2 Create provenance records from fixed paths and computed digests in `business/specials/governance/source-records/`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490627
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969131191
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969410978
+      }
+    ],
+    "2.3 Add human-approved risk and approval artifacts before making the pack eligible": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490687
+      },
+      {
+        "executionId": "def3ce89-b2eb-450e-a1c3-a22739bd503a",
+        "chatSessionId": "sess_e4bb2481-b610-4c93-b5f6-fcd678c6f3f4",
+        "timestamp": 1784969814560
+      },
+      {
+        "executionId": "def3ce89-b2eb-450e-a1c3-a22739bd503a",
+        "chatSessionId": "sess_e4bb2481-b610-4c93-b5f6-fcd678c6f3f4",
+        "timestamp": 1784969870213
+      }
+    ],
+    "3.1 Extend `backend/app/registry/specials_validator.py` with allowlisted path, schema, catalog, manifest, specification-directory, and conditional-inventory checks": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490728
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968820624
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969126700
+      }
+    ],
+    "3.2 Add `backend/tests/properties/test_special_business_agents_property_01_catalog.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490765
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969134989
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969415653
+      }
+    ],
+    "3.3 Add `backend/tests/properties/test_special_business_agents_property_02_profile.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490799
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969138731
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969419416
+      }
+    ],
+    "3.4 Add `backend/tests/properties/test_special_business_agents_property_03_integrity.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490829
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969151387
+      },
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784969424030
+      }
+    ],
+    "4.1 Extend `backend/app/registry/specials_validator.py` with provenance and risk-gate verification": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490858
+      },
+      {
+        "executionId": "ac675589-6015-40bd-bf41-d584ea271c75",
+        "chatSessionId": "sess_91d13ad1-a432-4330-8ca3-5d68ef8238e2",
+        "timestamp": 1784969911436
+      },
+      {
+        "executionId": "ac675589-6015-40bd-bf41-d584ea271c75",
+        "chatSessionId": "sess_91d13ad1-a432-4330-8ca3-5d68ef8238e2",
+        "timestamp": 1784970433596
+      }
+    ],
+    "4.2 Add `backend/tests/properties/test_special_business_agents_property_04_provenance.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490890
+      },
+      {
+        "executionId": "839ea957-ab59-4793-a0cf-b6cb06eeaadb",
+        "chatSessionId": "sess_a27611e0-32c8-4317-b250-8f80e9aa8cc0",
+        "timestamp": 1784970478538
+      },
+      {
+        "executionId": "839ea957-ab59-4793-a0cf-b6cb06eeaadb",
+        "chatSessionId": "sess_a27611e0-32c8-4317-b250-8f80e9aa8cc0",
+        "timestamp": 1784970727011
+      }
+    ],
+    "4.3 Add `backend/tests/properties/test_special_business_agents_property_05_authority.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490922
+      },
+      {
+        "executionId": "2a1398c0-5b52-4997-8f04-85cc30008d71",
+        "chatSessionId": "sess_b04e5b91-2eb7-4511-b0d6-3b0561b5ec7f",
+        "timestamp": 1784970784611
+      },
+      {
+        "executionId": "2a1398c0-5b52-4997-8f04-85cc30008d71",
+        "chatSessionId": "sess_b04e5b91-2eb7-4511-b0d6-3b0561b5ec7f",
+        "timestamp": 1784971194466
+      }
+    ],
+    "5.1 Finalize `backend/app/registry/specials_validator.py` report construction, retention, and public integration": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490951
+      },
+      {
+        "executionId": "9f3cfcb6-4eb0-483e-93f2-576dd64424d1",
+        "chatSessionId": "sess_774347b9-7873-4c4d-88a8-e989908337cc",
+        "timestamp": 1784971466067
+      },
+      {
+        "executionId": "9f3cfcb6-4eb0-483e-93f2-576dd64424d1",
+        "chatSessionId": "sess_774347b9-7873-4c4d-88a8-e989908337cc",
+        "timestamp": 1784972094591
+      }
+    ],
+    "5.2 Add `backend/tests/integration/test_special_business_agents_offline.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968490980
+      },
+      {
+        "executionId": "25710052-05ca-4b01-8eae-d1e734e1a9c7",
+        "chatSessionId": "sess_81463fa0-7e13-4ef8-8ac8-699103c4a9f7",
+        "timestamp": 1784972109609
+      },
+      {
+        "executionId": "25710052-05ca-4b01-8eae-d1e734e1a9c7",
+        "chatSessionId": "sess_81463fa0-7e13-4ef8-8ac8-699103c4a9f7",
+        "timestamp": 1784972231755
+      }
+    ],
+    "5.3 Add `backend/tests/integration/test_special_business_agents_pack.py`": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968491015
+      },
+      {
+        "executionId": "d1c9c715-8de0-4e2f-9b06-ef8fb4160a74",
+        "chatSessionId": "sess_f4872919-58c3-4df3-a14b-63e00604195e",
+        "timestamp": 1784972257705
+      },
+      {
+        "executionId": "cfae6f2c-315f-4927-9770-08ab1696f122",
+        "chatSessionId": "sess_fa7d0ca4-7139-4d7d-8d47-2c266c158102",
+        "timestamp": 1784972533501
+      },
+      {
+        "executionId": "cfae6f2c-315f-4927-9770-08ab1696f122",
+        "chatSessionId": "sess_fa7d0ca4-7139-4d7d-8d47-2c266c158102",
+        "timestamp": 1784972829335
+      }
+    ],
+    "6. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968491047
+      },
+      {
+        "executionId": "3655c855-7fec-4572-acaf-758c923d9811",
+        "chatSessionId": "sess_744e72a0-b093-4c15-af77-3420282e4fb5",
+        "timestamp": 1784972924545
+      },
+      {
+        "executionId": "3655c855-7fec-4572-acaf-758c923d9811",
+        "chatSessionId": "sess_744e72a0-b093-4c15-af77-3420282e4fb5",
+        "timestamp": 1784973711030
+      }
+    ],
+    "1. Define the immutable Special_Agent data profile and validator foundation": [
+      {
+        "executionId": "717e7dcc-db1d-4b81-b5c3-013eb0e9cc14",
+        "chatSessionId": "sess_d59b39e6-da0d-4553-a8e1-bc57105c456d",
+        "timestamp": 1784968809317
+      }
+    ],
+    "4. Enforce provenance and human risk/approval gates": [
+      {
+        "executionId": "2a1398c0-5b52-4997-8f04-85cc30008d71",
+        "chatSessionId": "sess_b04e5b91-2eb7-4511-b0d6-3b0561b5ec7f",
+        "timestamp": 1784971194584
+      }
+    ],
+    "5. Produce deterministic offline evidence and wire the completed validator": [
+      {
+        "executionId": "cfae6f2c-315f-4927-9770-08ab1696f122",
+        "chatSessionId": "sess_fa7d0ca4-7139-4d7d-8d47-2c266c158102",
+        "timestamp": 1784972829545
+      }
+    ]
+  }
+}

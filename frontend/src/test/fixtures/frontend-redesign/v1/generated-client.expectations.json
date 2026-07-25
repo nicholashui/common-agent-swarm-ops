@@ -1,0 +1,7 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "openapiVersion": "3.1.0",
+  "operationId": "read_fixture_run_api_v1_runs__run_id__get",
+  "method": "GET",
+  "path": "/api/v1/runs/{run_id}"
+}

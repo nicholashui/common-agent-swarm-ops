@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\registry\admission.py
+# hypothesis_version: 6.151.12
+
+[',', '1.0.0', ';code_locations=', 'agent_id', 'agents', 'alc_range', 'append', 'applies_to', 'asset_references', 'assets', 'capabilities', 'content_digest', 'data_classifications', 'digest', 'evaluate', 'executable_code', 'get_by_pack_version', 'host', 'host_range', 'immutable_version', 'include_maximum', 'include_minimum', 'invalid_manifest', 'invalid_type', 'manifest', 'max_version', 'maximum', 'min_version', 'minimum', 'pack_id', 'passed', 'reference', 'registration_policy', 'rejected:', 'required_alc_version', 'signer_id', 'signer_mismatch', 'unknown-pack', 'untrusted_signer', 'validation failed', 'version', 'workflows']

@@ -1,0 +1,119 @@
+{
+  "pbtResults": {
+    "3.2 Write Hypothesis **Property 7: Retrieval is semantic-first and cannot disclose across scope**.": {
+      "status": "passed",
+      "failingExample": "",
+      "lastRunTimestamp": 1784974005618
+    },
+    "7.4 Write Hypothesis **Property 11: Migration gate satisfaction is an all-evidence conjunction**.": {
+      "status": "passed",
+      "failingExample": "",
+      "lastRunTimestamp": 1784977271754
+    }
+  },
+  "executionHistory": {
+    "3.2 Write Hypothesis **Property 7: Retrieval is semantic-first and cannot disclose across scope**.": [
+      {
+        "executionId": "32b3313a-225e-4624-9c58-5c31a046b1a5",
+        "chatSessionId": "sess_3a2e42fc-8f48-4181-a187-84c5992b93bc",
+        "timestamp": 1784973885014
+      },
+      {
+        "executionId": "32b3313a-225e-4624-9c58-5c31a046b1a5",
+        "chatSessionId": "sess_3a2e42fc-8f48-4181-a187-84c5992b93bc",
+        "timestamp": 1784974025634
+      }
+    ],
+    "3. Complete scoped semantic retrieval and its target-local control-plane integration": [
+      {
+        "executionId": "32b3313a-225e-4624-9c58-5c31a046b1a5",
+        "chatSessionId": "sess_3a2e42fc-8f48-4181-a187-84c5992b93bc",
+        "timestamp": 1784974025888
+      }
+    ],
+    "4.3 Add isolated API, frontend-contract, and LegacyEngine E1 evidence tests.": [
+      {
+        "executionId": "8359c255-cb5f-403b-af6c-d4f9543a86e7",
+        "chatSessionId": "sess_f48048fe-089d-478f-abce-6ae092aeb2b4",
+        "timestamp": 1784974056219
+      },
+      {
+        "executionId": "8359c255-cb5f-403b-af6c-d4f9543a86e7",
+        "chatSessionId": "sess_f48048fe-089d-478f-abce-6ae092aeb2b4",
+        "timestamp": 1784974633410
+      }
+    ],
+    "5.4 Add barrier-controlled evaluation/evolution integration tests.": [
+      {
+        "executionId": "6866fddd-c1b8-4d03-b428-72c27c376779",
+        "chatSessionId": "sess_35f0cac6-326f-4d6e-acb7-d94d54481c4c",
+        "timestamp": 1784974659886
+      },
+      {
+        "executionId": "6866fddd-c1b8-4d03-b428-72c27c376779",
+        "chatSessionId": "sess_35f0cac6-326f-4d6e-acb7-d94d54481c4c",
+        "timestamp": 1784975764308
+      }
+    ],
+    "6.2 Implement immutable video artifact versions, acyclic lineage validation, retained release requests, fail-closed release decisions, and only the necessary versioned video routes.": [
+      {
+        "executionId": "f87ac3ab-00c6-4ff7-96a5-5dfe70fcab3b",
+        "chatSessionId": "sess_2201c09f-01ec-4484-865c-939a2227b9b9",
+        "timestamp": 1784975792338
+      },
+      {
+        "executionId": "f87ac3ab-00c6-4ff7-96a5-5dfe70fcab3b",
+        "chatSessionId": "sess_2201c09f-01ec-4484-865c-939a2227b9b9",
+        "timestamp": 1784976234350
+      }
+    ],
+    "7.3 Implement migration-gate assessment and atomic LegacyEngine retirement.": [
+      {
+        "executionId": "19988516-1e75-4ecb-9081-218cd381ebab",
+        "chatSessionId": "sess_9a086e10-dd05-45d7-89b5-03deca02ccbb",
+        "timestamp": 1784976261894
+      },
+      {
+        "executionId": "19988516-1e75-4ecb-9081-218cd381ebab",
+        "chatSessionId": "sess_9a086e10-dd05-45d7-89b5-03deca02ccbb",
+        "timestamp": 1784977097014
+      }
+    ],
+    "7.4 Write Hypothesis **Property 11: Migration gate satisfaction is an all-evidence conjunction**.": [
+      {
+        "executionId": "e7d2765d-07f2-4b1d-b0ce-c34a3f9ef1e9",
+        "chatSessionId": "sess_f170e266-020b-4df4-b0b2-09c13bf71757",
+        "timestamp": 1784977125485
+      },
+      {
+        "executionId": "e7d2765d-07f2-4b1d-b0ce-c34a3f9ef1e9",
+        "chatSessionId": "sess_f170e266-020b-4df4-b0b2-09c13bf71757",
+        "timestamp": 1784977297181
+      }
+    ],
+    "8.1 Implement the deterministic evidence-gate runner.": [
+      {
+        "executionId": "708b23ee-7a89-4869-82ad-d49d3293889f",
+        "chatSessionId": "sess_edddb852-a4b4-4076-bd3b-7799d302ec6b",
+        "timestamp": 1784977318718
+      },
+      {
+        "executionId": "708b23ee-7a89-4869-82ad-d49d3293889f",
+        "chatSessionId": "sess_edddb852-a4b4-4076-bd3b-7799d302ec6b",
+        "timestamp": 1784978053539
+      }
+    ],
+    "8.2 Add final target-local evidence tests.": [
+      {
+        "executionId": "5254311f-c6e2-448f-8678-4451e13531a6",
+        "chatSessionId": "sess_36cd7487-9bde-4301-910e-cd5ecbc2526f",
+        "timestamp": 1784978077321
+      },
+      {
+        "executionId": "5254311f-c6e2-448f-8678-4451e13531a6",
+        "chatSessionId": "sess_36cd7487-9bde-4301-910e-cd5ecbc2526f",
+        "timestamp": 1784978239306
+      }
+    ]
+  }
+}

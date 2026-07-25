@@ -38,6 +38,20 @@ from app.models.runs import RunRecord
 
 router = APIRouter(tags=["runs", "observation"])
 
+COMPATIBILITY_SUNSET_CRITERIA = (
+    "Retire after the documented deprecation window ends and configured Browser_Client "
+    "consumers have migrated to the versioned canonical projection."
+)
+
+
+def _compatibility_metadata(canonical_projection: str) -> dict[str, object]:
+    """Describe one supported legacy path as a canonical public projection adapter."""
+    return {
+        "x-compatibility-adapter": True,
+        "x-canonical-projection": canonical_projection,
+        "x-sunset-criteria": COMPATIBILITY_SUNSET_CRITERIA,
+    }
+
 
 @router.post("/workflows/{workflow_id}/run", response_model=RunResponse, status_code=status.HTTP_201_CREATED)
 async def create_run(
@@ -60,33 +74,55 @@ async def create_run(
     return _run_response(record, _preview_response(preview, record.metadata.updated_at) if preview else None)
 
 
-@router.post("/workflow-runs/dispatch", response_model=DispatchResponse)
+@router.post(
+    "/workflow-runs/dispatch",
+    response_model=DispatchResponse,
+    openapi_extra=_compatibility_metadata("run.dispatch-command"),
+)
 async def dispatch_run(
     request: DispatchRequest,
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     services: Annotated[ControlPlaneServices, Depends(get_control_plane_services)],
 ) -> DispatchResponse:
     """Return a preview first, then dispatch only after an explicit confirmation."""
-    record, preview, outcome = require_value(
+    if request.confirm:
+        confirmed_outcome = require_value(
+            services.dispatch_confirmed(
+                context.organization_id,
+                context.actor_id,
+                context.correlation_id,
+                RunId(request.run_id),
+                request.idempotency_key,
+            )
+        )
+        return DispatchResponse.model_validate(confirmed_outcome.response_payload)
+
+    record, preview, preview_outcome = require_value(
         services.preview_or_dispatch(
             context.organization_id,
             context.correlation_id,
             RunId(request.run_id),
             request.idempotency_key,
-            request.confirm,
+            confirm=False,
         )
     )
     return DispatchResponse(
         run_id=record.run_id,
         status=record.status,
-        executed=outcome is not None,
+        executed=preview_outcome is not None,
         preview=_preview_response(preview, record.metadata.updated_at),
-        idempotent=outcome.is_idempotent if outcome is not None else False,
-        retry_permitted=outcome.retry_permitted if outcome is not None else False,
+        idempotent=preview_outcome.is_idempotent if preview_outcome is not None else False,
+        retry_permitted=(
+            preview_outcome.retry_permitted if preview_outcome is not None else False
+        ),
     )
 
 
-@router.get("/workflow-runs/{run_id}", response_model=RunResponse)
+@router.get(
+    "/workflow-runs/{run_id}",
+    response_model=RunResponse,
+    openapi_extra=_compatibility_metadata("run.detail"),
+)
 async def read_run(
     run_id: str,
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
@@ -118,7 +154,11 @@ async def read_topology(
     return _topology_response(definition)
 
 
-@router.get("/workflow-runs/{run_id}/graph-state", response_model=GraphStateResponse)
+@router.get(
+    "/workflow-runs/{run_id}/graph-state",
+    response_model=GraphStateResponse,
+    openapi_extra=_compatibility_metadata("run.graph-state"),
+)
 async def read_graph_state(
     run_id: str,
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
@@ -154,7 +194,11 @@ async def read_graph_state(
     )
 
 
-@router.get("/workflow-runs/{run_id}/events", response_model=list[OperatorEventResponse])
+@router.get(
+    "/workflow-runs/{run_id}/events",
+    response_model=list[OperatorEventResponse],
+    openapi_extra=_compatibility_metadata("run.events"),
+)
 async def read_run_events(
     run_id: str,
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],

@@ -1,8 +1,7 @@
-import { AppShell } from "../../components/AppShell";
-import { OperatorConsole } from "../../components/OperatorConsole";
+import { UnavailableScreen } from "../../components/UnavailableScreen";
 
 function OperationsPage(): JSX.Element {
-  return <AppShell><div className="legacy-console"><OperatorConsole /></div></AppShell>;
+  return <UnavailableScreen screenId="ui_09_monitoring" />;
 }
 
 export default OperationsPage;

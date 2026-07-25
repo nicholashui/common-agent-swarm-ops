@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evaluation\migration_evidence.py
+# hypothesis_version: 6.151.12
+
+['activation_eligible', 'active', 'approval_id', 'asset_hash', 'asset_id', 'classification', 'decision_reason', 'deprecate', 'digest', 'disposition', 'domain_evaluations', 'dual-engine', 'evidence_references', 'exclude', 'exit_criteria', 'hash', 'host-migration', 'host_owner_review', 'human_approvals', 'id', 'ineligible', 'license_or_consent', 'migrate', 'migration-control', 'migration-evidence', 'open', 'owner', 'owner_id', 'phase_id', 'phase_scope', 'quarantine', 'required_evidence', 'retain', 'reviewer_identity', 'rollback_procedure', 'source_id', 'status', 'va_owner_review', 'workflow_id']

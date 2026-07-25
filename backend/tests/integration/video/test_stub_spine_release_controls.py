@@ -199,12 +199,12 @@ def test_stub_spine_blocker_gates_tenant_scoped_release_readiness() -> None:
                 json=_artifact_payload(quality_passed=False),
             )
             assert denied_artifact.status_code == 201
+            denied_artifact_id = denied_artifact.json()["data"]["artifact_version_id"]
             denied = client.post(
-                f"/api/v1/video/artifacts/{denied_artifact.json()['artifact_version_id']}"
-                "/release-requests"
+                f"/api/v1/video/artifacts/{denied_artifact_id}/release-requests"
             )
             assert denied.status_code == 201
-            denied_body = denied.json()
+            denied_body = denied.json()["data"]
             assert denied_body["decision"] == "denied"
             assert denied_body["artifact_released"] is False
             unmet_conditions = set(denied_body["unmet_conditions"])
@@ -219,12 +219,12 @@ def test_stub_spine_blocker_gates_tenant_scoped_release_readiness() -> None:
                 json=_artifact_payload(quality_passed=True),
             )
             assert permitted_artifact.status_code == 201
+            permitted_artifact_id = permitted_artifact.json()["data"]["artifact_version_id"]
             permitted = client.post(
-                f"/api/v1/video/artifacts/{permitted_artifact.json()['artifact_version_id']}"
-                "/release-requests"
+                f"/api/v1/video/artifacts/{permitted_artifact_id}/release-requests"
             )
             assert permitted.status_code == 201
-            permitted_body = permitted.json()
+            permitted_body = permitted.json()["data"]
             assert permitted_body["decision"] == "permitted"
             assert permitted_body["unmet_conditions"] == []
             assert permitted_body["artifact_released"] is False
@@ -241,7 +241,7 @@ def test_stub_spine_blocker_gates_tenant_scoped_release_readiness() -> None:
             foreign_read = client.get(
                 f"/api/v1/video/release-requests/{denied_body['release_request_id']}"
             )
-            assert foreign_read.status_code == 404
-            assert foreign_read.json()["detail"]["code"] == "not_found"
+            assert foreign_read.status_code == 403
+            assert foreign_read.json()["error"]["code"] == "authorization_denied"
     finally:
         application.dependency_overrides.clear()

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\adoption.py
+# hypothesis_version: 6.151.12
+
+['/adoption', '/capacity', '/compatibility', '/episodes', '/governance/data', '/governance/outbound', '/governance/tools', '/handoffs/available', '/handoffs/external', '/handoffs/internal', '/invocations', '/lifecycle/activate', '/lifecycle/suspend', '/maturity', '/packs', '/release/verify', '/release/video', '/retrievals', 'adoption', 'agent_id', 'allowed', 'compatibility', 'content_digest', 'denied', 'evidence_reference', 'include_maximum', 'include_minimum', 'max_version', 'maximum', 'memory_scopes', 'min_version', 'minimum', 'reflection_policy', 'retention_policy', 'retrieval_policy', 'version']

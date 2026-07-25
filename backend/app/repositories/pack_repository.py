@@ -8,7 +8,8 @@ from threading import RLock
 
 from app.models.common import OptimisticTransition, RecordMetadata
 from app.models.contracts import ErrorCode, ErrorDetail, RepositoryError, Result
-from app.models.identifiers import CorrelationId, OrganizationId, RecordId
+from app.models.control_plane import Registration
+from app.models.identifiers import CorrelationId, DomainPackId, OrganizationId, RecordId
 
 
 class AgentLifecycleStatus(StrEnum):
@@ -87,10 +88,10 @@ class InMemoryPackRepository:
         self._lock = RLock()
         self._records: dict[RecordId, DomainPackRecord] = {}
         self._registered_pack_ids: dict[str, RecordId] = {}
+        self._registrations: dict[tuple[DomainPackId, str], Registration] = {}
+        self._registration_ids: set[RecordId] = set()
 
-    def record_outcome(
-        self, record: DomainPackRecord
-    ) -> Result[DomainPackRecord, RepositoryError]:
+    def record_outcome(self, record: DomainPackRecord) -> Result[DomainPackRecord, RepositoryError]:
         """Persist one complete valid or inactive outcome without partial agent writes."""
         with self._lock:
             if record.metadata.record_id in self._records:
@@ -106,6 +107,54 @@ class InMemoryPackRepository:
             ):
                 self._registered_pack_ids[persisted.pack_id] = persisted.metadata.record_id
             return Result.success(persisted)
+
+    def append(self, record: Registration) -> Result[Registration, RepositoryError]:
+        """Append one immutable Pack_Contract registration by pack/version."""
+        with self._lock:
+            if record.metadata.record_id in self._registration_ids:
+                return Result.failure(
+                    self._error(ErrorCode.CONFLICT, "Registration already exists.")
+                )
+            if record.identity_key in self._registrations:
+                return Result.failure(
+                    self._error(ErrorCode.CONFLICT, "Pack version is already registered.")
+                )
+            self._registrations[record.identity_key] = record
+            self._registration_ids.add(record.metadata.record_id)
+            return Result.success(record)
+
+    def get_by_pack_version(
+        self,
+        organization_id: OrganizationId,
+        pack_id: DomainPackId,
+        immutable_version: str,
+    ) -> Result[Registration, RepositoryError]:
+        """Return one immutable registration within its organization."""
+        with self._lock:
+            record = self._registrations.get((pack_id, immutable_version))
+            if record is None or record.metadata.organization_id != organization_id:
+                return Result.failure(
+                    self._error(ErrorCode.NOT_FOUND, "Registration was not found.")
+                )
+            return Result.success(record)
+
+    def list_for_organization(
+        self, organization_id: OrganizationId
+    ) -> Result[tuple[Registration, ...], RepositoryError]:
+        """Return registration history without dropping superseded versions."""
+        with self._lock:
+            return Result.success(
+                tuple(
+                    record
+                    for record in self._registrations.values()
+                    if record.metadata.organization_id == organization_id
+                )
+            )
+
+    def registrations(self) -> tuple[Registration, ...]:
+        """Return immutable typed registration snapshots for local inspection."""
+        with self._lock:
+            return tuple(self._registrations.values())
 
     def create(self, record: DomainPackRecord) -> Result[DomainPackRecord, RepositoryError]:
         """Persist an initial registration outcome through the atomic write path."""
@@ -189,3 +238,64 @@ class InMemoryPackRepository:
     @staticmethod
     def _error(code: ErrorCode, message: str) -> ErrorDetail:
         return ErrorDetail(code, message, CorrelationId("pack-repository"))
+
+
+class InMemoryRegistrationRepository:
+    """Append-only typed Pack_Contract registration history."""
+
+    def __init__(self) -> None:
+        self._lock = RLock()
+        self._records: dict[tuple[DomainPackId, str], Registration] = {}
+        self._record_ids: set[RecordId] = set()
+
+    def append(self, record: Registration) -> Result[Registration, RepositoryError]:
+        """Persist one immutable registration and preserve prior versions."""
+        with self._lock:
+            if record.metadata.record_id in self._record_ids:
+                return Result.failure(
+                    self._error(ErrorCode.CONFLICT, "Registration already exists.")
+                )
+            if record.identity_key in self._records:
+                return Result.failure(
+                    self._error(ErrorCode.CONFLICT, "Pack version is already registered.")
+                )
+            self._records[record.identity_key] = record
+            self._record_ids.add(record.metadata.record_id)
+            return Result.success(record)
+
+    def get_by_pack_version(
+        self,
+        organization_id: OrganizationId,
+        pack_id: DomainPackId,
+        immutable_version: str,
+    ) -> Result[Registration, RepositoryError]:
+        """Return one registration only from its owning organization."""
+        with self._lock:
+            record = self._records.get((pack_id, immutable_version))
+            if record is None or record.metadata.organization_id != organization_id:
+                return Result.failure(
+                    self._error(ErrorCode.NOT_FOUND, "Registration was not found.")
+                )
+            return Result.success(record)
+
+    def list_for_organization(
+        self, organization_id: OrganizationId
+    ) -> Result[tuple[Registration, ...], RepositoryError]:
+        """Return all immutable registration versions in insertion order."""
+        with self._lock:
+            return Result.success(
+                tuple(
+                    record
+                    for record in self._records.values()
+                    if record.metadata.organization_id == organization_id
+                )
+            )
+
+    def registrations(self) -> tuple[Registration, ...]:
+        """Return immutable registration snapshots for deterministic inspection."""
+        with self._lock:
+            return tuple(self._records.values())
+
+    @staticmethod
+    def _error(code: ErrorCode, message: str) -> ErrorDetail:
+        return ErrorDetail(code, message, CorrelationId("registration-repository"))

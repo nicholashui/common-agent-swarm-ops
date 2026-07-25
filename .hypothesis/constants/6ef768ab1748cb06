@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\workflows\policy.py
+# hypothesis_version: 6.151.12
+
+['T', 'action', 'action_id', 'action_type', 'actions', 'approval', 'approval_id', 'approval_required', 'approval_status', 'approved', 'authorization_id', 'denied', 'execution_budget', 'handoff', 'id', 'kind', 'max_handoffs', 'max_node_visits', 'max_tool_requests', 'memory', 'memory_read', 'memory_scope', 'memory_write', 'node', 'pending', 'plan_id', 'reads', 'required', 'requires_approval', 'rollback', 'scope', 'tool', 'type', 'writes']

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/knowledge_router_agent.md",
+  "source_sha256": "688ef2556e2e072dddebe5d990cd0f6bb8c7386d194a319a80f7f95981e35e21",
+  "agent_id": "specials.knowledge-router-agent",
+  "configuration_sha256": "31db0eee3ba2539d2670ac035898ca8da5ebd0d964b7a29edae570a71621d8c1",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.knowledge-router-agent"
+}

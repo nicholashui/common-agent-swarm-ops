@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\services.py
+# hypothesis_version: 6.151.12
+
+[1.0, 'T', 'action_id', 'action_preview', 'agents', 'allowed_tools', 'approval-1', 'compensate.crm', 'confidence', 'confirm', 'correction_control', 'critical', 'dispatch', 'emitted_at', 'engine', 'executed', 'id', 'idempotent', 'intended_effect', 'low-risk', 'organization', 'preview', 'retry_permitted', 'rollback_preview', 'run_id', 'status', 'summary', 'supporting_evidence', 'uncertainty', 'version', 'workflow']

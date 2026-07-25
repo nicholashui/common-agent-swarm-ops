@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\runs.py
+# hypothesis_version: 6.151.12
+
+['agent_id', 'alc_version', 'attempt_id', 'blocked', 'cancelled', 'completed', 'dispatching', 'domain_id', 'escalated', 'failed', 'graph', 'legacy', 'node_id', 'organization_id', 'pack_id', 'pack_version', 'queued', 'retried', 'run_id', 'running', 'started', 'status', 'waiting_for_approval', 'workflow_id']

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/aesthetics_agent.md",
+  "source_sha256": "7d5b36b2dbc4e70664e9213d5a89d057935e54a1c3f6ab8cbb639fee5ab0f8d1",
+  "agent_id": "specials.aesthetics-agent",
+  "configuration_sha256": "0b43a418d0a38ce1c44de4422055870f8f676bba4d93c0571c584294476161fd",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.aesthetics-agent"
+}

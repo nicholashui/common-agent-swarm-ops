@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\task_coordinator.py
+# hypothesis_version: 6.151.12
+
+['agent_version_id', 'agent_version_ids', 'approval_gate_ids', 'approval_gates', 'checkpoint_reference', 'constraints', 'created', 'dependencies', 'from', 'from_state', 'graph_revision_id', 'id', 'iteration', 'iteration_count', 'iteration_limit', 'max_iterations', 'max_retries', 'pattern_version_ids', 'reason_code', 'replay_provenance_id', 'retry', 'retry_count', 'retry_limit', 'source_provenance_id', 'state', 'task.transitioned', 'task_claimed', 'task_id', 'to', 'to_state']

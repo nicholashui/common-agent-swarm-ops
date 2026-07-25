@@ -1,6 +1,11 @@
 """Broker-only deterministic local adapters with no network dependency."""
 
 from app.adapters.base import DeterministicLocalAdapter
+from app.adapters.governed import (
+    GovernedDispatchAdapter,
+    LocalInlineGovernedAdapter,
+    RemoteGovernedAdapter,
+)
 from app.adapters.local import (
     LOCAL_ADAPTER_VERSION,
     AuditAdapter,
@@ -23,7 +28,10 @@ __all__ = [
     "CrmAdapter",
     "DeterministicLocalAdapter",
     "EmailAdapter",
+    "GovernedDispatchAdapter",
+    "LocalInlineGovernedAdapter",
     "PolicyLookupAdapter",
+    "RemoteGovernedAdapter",
     "StubMediaAdapter",
     "default_local_adapters",
 ]

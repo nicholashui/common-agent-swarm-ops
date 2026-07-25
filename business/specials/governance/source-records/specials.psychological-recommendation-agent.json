@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/psychological_recommendation_agent.md",
+  "source_sha256": "8739ebcf75af6e2300b57ea9ef968dcdfdb3d96db8780dd1f6cc3c9408dbac0c",
+  "agent_id": "specials.psychological-recommendation-agent",
+  "configuration_sha256": "e9bac9490b3257d0067780991c84c00b63c7d01561d20884170c0fee07e8f30f",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.psychological-recommendation-agent"
+}

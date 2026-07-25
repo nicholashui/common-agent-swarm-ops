@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evidence\release_evidence.py
+# hypothesis_version: 6.151.12
+
+['alc_version', 'audit_records', 'check_name', 'check_results', 'evidence_digest', 'evidence_id', 'evidence_reference', 'fail', 'failure_digest', 'failure_id', 'failure_records', 'failure_reference', 'fixed_seed', 'fixture_digest', 'immutable_version', 'integration', 'layer', 'outcome', 'pass', 'projection_digest', 'projection_id', 'projection_type', 'property', 'recorded_at', 'release-evidence', 'schema', 'status', 'ui_projections', 'unit']

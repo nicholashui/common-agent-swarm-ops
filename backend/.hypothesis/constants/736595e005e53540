@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\operation_guard.py
+# hypothesis_version: 6.151.12
+
+[',', 'adoption-platform', 'available', 'budget_exceeded', 'capabilities', 'capability', 'code', 'cost', 'cost_limit', 'error', 'execute', 'failure_mode', 'health_unavailable', 'invoke', 'is_success', 'provider.authorize', 'provider.execute', 'provider_id', 'rate_limited', 'residency', 'retention_policy', 'safe', 'safety_policy', 'timeout', 'unavailable', 'unsafe', 'unsafe_result', 'value']

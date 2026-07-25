@@ -2,13 +2,22 @@
   "name": "generic-swarm-ops-console",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=20.0.0" },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/contracts.test.ts"
+    "api:generate": "node scripts/generate-api-client.mjs",
+    "api:check": "node scripts/check-generated-api-client.mjs",
+    "api:ci": "npm run api:check && npm run typecheck",
+    "verify:evidence": "node scripts/run-verification-with-evidence.mjs",
+    "source:policy": "node scripts/check-source-policy.mjs",
+    "screens:visual": "tsx scripts/verify-screen-visuals.ts",
+    "screens:inventory": "tsx scripts/verify-screen-inventory.ts",
+    "test": "tsx --test src/lib/contracts.test.ts src/lib/screens/screen-manifest.test.tsx src/lib/screens/visual-verification.test.ts src/lib/screens/screen-inventory.test.ts src/lib/screens/baseline-conformance.test.ts src/lib/screens/deterministic-verification.test.ts src/lib/session/session-runtime.test.ts src/lib/api/transport.test.ts src/lib/api/transport.property.test.ts src/lib/projections/authorized-projection.property.test.tsx src/lib/api/generated-contract.test.ts src/lib/projections/projection-boundary.test.tsx src/components/projection/ingestion-controls.test.tsx src/components/projection/artifact-import.property.test.tsx src/components/projection/ProjectionStatus.test.tsx src/components/projection/ProjectionStatus.property.test.tsx scripts/check-source-policy.test.mjs src/lib/live/LiveProjectionController.test.ts src/lib/live/LiveProjectionController.snapshot-scope.property.test.ts src/lib/live/LiveProjectionController.exact-next-event.property.test.ts src/lib/live/LiveProjectionController.property.test.ts src/lib/live/LiveProjectionController.deterministic.test.tsx src/lib/commands/CommandCoordinator.test.ts src/lib/commands/CommandCoordinator.integration.test.ts src/lib/commands/command-coordinator.property.test.ts src/components/accessibility-primitives.test.tsx src/components/accessibility-primitives.property.test.tsx src/components/browser-boundaries.test.tsx src/lib/session/browser-persistence-navigation.property.test.tsx src/components/OperationalScreens.test.tsx src/components/ApprovalRolloutScreens.test.tsx src/lib/projections/approval-rollout.property.test.tsx src/lib/projections/va-adapters.property.test.tsx src/lib/projections/common-provenance.property.test.tsx src/lib/projections/graph-adapters.test.tsx src/lib/projections/graph-adapters.property.test.tsx src/app/approved-screen-routes.test.tsx src/components/screen-composition.test.tsx scripts/verification-evidence.test.mjs scripts/verification-evidence-metadata.test.mjs"
   },
   "dependencies": {
     "next": "14.2.30",
@@ -19,6 +28,7 @@
     "@types/node": "20.17.30",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
+    "fast-check": "4.3.0",
     "tsx": "4.19.3",
     "typescript": "5.7.3"
   }

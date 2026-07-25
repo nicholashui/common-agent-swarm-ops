@@ -1,23 +1,88 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 
-import { COMMON_AGENTS } from "../lib/demo-data";
-import { StatusBadge, VersionPill } from "./design";
+import type { CommandIntent } from "../lib/commands/CommandCoordinator";
+import type { GeneratedJsonObject } from "../lib/api/client";
+import {
+  createGraphCommandIntent,
+  isGraphActionDisabled,
+  mapGraphProjection,
+  type GraphActionView,
+  type GraphCommandPayload,
+  type GraphNodeView,
+  type GraphProjectionView,
+} from "../lib/projections/graph-adapters";
+import { VersionPill } from "./design";
 
-interface CanvasNode { readonly id: string; readonly name: string; readonly version: string; readonly kind: "common" | "verifier" | "custom"; }
-const nodes: readonly [CanvasNode, ...CanvasNode[]] = [{ id: "signal", name: "Market Sentinel", version: "2.4", kind: "common" }, { id: "research", name: "Research Collector", version: "1.3", kind: "common" }, { id: "writer", name: "Executive Synthesizer", version: "1.1", kind: "custom" }, { id: "verify", name: "Research Verifier", version: "1.8", kind: "verifier" }];
-const DEFAULT_NODE = nodes[0];
+const DEFAULT_CANVAS_PROJECTION = {
+  graph_revision: "graph-revision-42",
+  state_label: "Running",
+  nodes: [
+    { id: "signal", label: "Market Sentinel", kind: "common", immutable_version: "2.4", provenance_reference: "prov:agent:market-sentinel:2.4", task: { lifecycle: "complete", status_detail: "Evidence collection complete" } },
+    { id: "research", label: "Research Collector", kind: "common", immutable_version: "1.3", provenance_reference: "prov:agent:research-collector:1.3", task: { lifecycle: "running", status_detail: "Collecting returned sources" } },
+    { id: "writer", label: "Executive Synthesizer", kind: "custom", fork_origin: "common:executive-synthesizer:1.0", custom_reason: "Executive reporting terminology", task: { lifecycle: "waiting_for_critique", status_detail: "Awaiting verifier critique" } },
+  ],
+  edges: [
+    { id: "signal-to-research", source_id: "signal", target_id: "research", relationship: "data_flow", label: "Evidence bundle" },
+    { id: "research-to-writer", source_id: "research", target_id: "writer", relationship: "state_flow", label: "Ready for synthesis" },
+    { id: "writer-to-research", source_id: "writer", target_id: "research", relationship: "iteration", label: "Critique revision" },
+  ],
+  validation: {
+    eligible: true,
+    categories: [
+      { category: "version", result: "passed" },
+      { category: "schema", result: "passed" },
+      { category: "tool_policy", result: "passed" },
+      { category: "budget", result: "passed" },
+      { category: "verification", result: "passed" },
+      { category: "rollback", result: "available" },
+      { category: "approval", result: "not_required" },
+    ],
+  },
+  action_references: [
+    { id: "run-graph-revision-42", label: "Run swarm", eligible: true, kind: "run" },
+    { id: "replay-graph-revision-42", label: "Replay failed task", eligible: true, kind: "replay" },
+  ],
+} as const satisfies GeneratedJsonObject;
 
-if (!DEFAULT_NODE) throw new Error("The canvas requires a default node.");
-
-export function Canvas(): JSX.Element {
-  const [selectedId, setSelectedId] = useState("verify");
-  const selected = nodes.find((node) => node.id === selectedId) ?? DEFAULT_NODE;
-  return <div className="canvas-page"><header className="canvas-toolbar"><div><input aria-label="Swarm name" defaultValue="Market intelligence swarm" /><p><VersionPill label="Based on pattern" version="1.4" /> <span>4/4 linked common agents</span></p></div><div className="toolbar-actions"><button className="button button--ghost" type="button">Auto layout</button><button className="button button--secondary" type="button">Validate</button><button className="button button--primary" type="button">Run swarm <span>▶</span></button></div></header><div className="live-bar"><StatusBadge status="running" /><strong>Research digest is running</strong><span>2 of 4 nodes complete · $0.71 so far · 12m 08s elapsed</span><button type="button">Pause run</button></div><div className="canvas-layout"><aside className="canvas-palette"><p className="eyebrow">COMMON REGISTRY</p><label className="search-input"><span>⌕</span><input placeholder="Search common agents" aria-label="Search common agents" /></label>{COMMON_AGENTS.map((agent) => <button className="palette-agent" key={agent.id} type="button"><span className="agent-icon">◈</span><div><strong>{agent.name}</strong><VersionPill version={agent.version} /><small>{agent.successRate} success</small></div><b>+</b></button>)}</aside><section className="graph-canvas" aria-label="Swarm graph canvas"><div className="canvas-controls"><button type="button">+</button><button type="button">−</button><button type="button">⊙</button></div><div className="group-node"><header><VersionPill label="Parallel group" version="1.4" /><strong>Evidence & signal analysis</strong><span>BIG ROW · 2 parallel branches</span></header><div className="node-row">{nodes.slice(0, 2).map((node) => <GraphNode key={node.id} node={node} selected={node.id === selectedId} onSelect={setSelectedId} />)}</div></div><div className="graph-link graph-link--down" aria-hidden="true">↓</div><div className="node-row node-row--lower">{nodes.slice(2).map((node) => <GraphNode key={node.id} node={node} selected={node.id === selectedId} onSelect={setSelectedId} />)}</div><div className="graph-loop" aria-hidden="true">↶ iterate when verification fails</div></section><aside className="canvas-inspector"><p className="eyebrow">SELECTED NODE</p><h2>{selected.name}</h2><VersionPill version={selected.version} label={selected.kind === "custom" ? "Custom fork" : "Common"} /><StatusBadge status={selected.kind === "verifier" ? "running" : "success"} /><p>{selected.kind === "custom" ? "This local fork can be proposed back to the commons after verified runs." : "Linked to the registry. Changes here create a local fork."}</p><dl><div><dt>Last eval</dt><dd>0.94</dd></div><div><dt>Tokens</dt><dd>2.8k</dd></div><div><dt>Cost</dt><dd>$0.12</dd></div></dl><Link className="button button--secondary button--wide" href="/registry/agents/research-verifier">Open registry detail</Link><button className="button button--ghost button--wide" type="button">Propose improvement</button></aside></div></div>;
+export interface GraphCommandRuntime {
+  isActionDisabled(actionReferenceId: string): boolean;
+  submit(intent: CommandIntent<GraphCommandPayload>, source: "user"): Promise<unknown>;
 }
 
-function GraphNode({ node, selected, onSelect }: { readonly node: CanvasNode; readonly selected: boolean; readonly onSelect: (id: string) => void }): JSX.Element {
-  return <button className={`graph-node graph-node--${node.kind}${selected ? " graph-node--selected" : ""}`} type="button" onClick={() => onSelect(node.id)}><span className="node-status" /><strong>{node.name}</strong><VersionPill version={node.version} label={node.kind === "custom" ? "Fork" : "Common"} /><small>{node.kind === "verifier" ? "Verifying evidence…" : "Connected · healthy"}</small><div><span>2.8k tok</span><span>$0.12</span></div></button>;
+export interface CanvasProps {
+  readonly projection?: GeneratedJsonObject;
+  readonly commandRuntime?: GraphCommandRuntime;
+}
+
+export function Canvas({ projection = DEFAULT_CANVAS_PROJECTION, commandRuntime }: CanvasProps): JSX.Element {
+  const graph = mapGraphProjection(projection);
+  const [selectedId, setSelectedId] = useState<string | undefined>(graph.nodes[0]?.id);
+  const selected = graph.nodes.find((node) => node.id === selectedId);
+
+  return <div className="canvas-page"><header className="canvas-toolbar"><div><h1>Swarm canvas</h1><input aria-label="Swarm name" defaultValue="Returned swarm graph" /><p>{graph.graphRevision === undefined ? null : <VersionPill label="Graph revision" version={graph.graphRevision} />} {graph.statusLabel === undefined ? null : <span>{graph.statusLabel}</span>}</p></div><div className="toolbar-actions"><button className="button button--secondary" type="button">Validate</button><GraphActionControls graph={graph} commandRuntime={commandRuntime} /></div></header><div className="canvas-layout"><section className="graph-canvas" aria-label="Swarm graph canvas"><div className="graph-edges" aria-label="Graph relationship semantics"><ul>{graph.edges.map((edge) => <li data-edge-line-style={edge.semantics.lineStyle} data-edge-marker={edge.semantics.marker} key={edge.id}><span className={`graph-edge-line graph-edge-line--${edge.semantics.lineStyle}`} aria-hidden="true" />{edge.semantics.textLabel}: {edge.sourceId} to {edge.targetId}{edge.label === undefined ? null : ` — ${edge.label}`}</li>)}</ul></div><div className="node-row">{graph.nodes.map((node) => <GraphNode key={node.id} node={node} selected={node.id === selectedId} onSelect={setSelectedId} />)}</div></section><aside className="canvas-inspector"><p className="eyebrow">SELECTED NODE</p>{selected === undefined ? <p className="muted">Select a returned graph node.</p> : <NodeInspector node={selected} />}<section className="graph-validation" aria-label="Returned graph validation"><h2>Returned validation</h2><ul>{graph.validation.categories.map((category) => <li key={category.category}><strong>{category.category}</strong>: {category.result}{category.detail === undefined ? null : ` — ${category.detail}`}</li>)}</ul></section></aside></div></div>;
+}
+
+function GraphActionControls({ graph, commandRuntime }: { readonly graph: GraphProjectionView; readonly commandRuntime: GraphCommandRuntime | undefined }): JSX.Element {
+  const [, setCommandVersion] = useState(0);
+  return <>{graph.actions.map((action) => <GraphActionControl action={action} commandRuntime={commandRuntime} graph={graph} key={action.id} onSubmitted={(): void => setCommandVersion((version) => version + 1)} />)}</>;
+}
+
+function GraphActionControl({ action, commandRuntime, graph, onSubmitted }: { readonly action: GraphActionView; readonly commandRuntime: GraphCommandRuntime | undefined; readonly graph: GraphProjectionView; readonly onSubmitted: () => void }): JSX.Element {
+  const intent = createGraphCommandIntent(action, graph.graphRevision);
+  const disabled = intent === undefined || isGraphActionDisabled(action, graph.validation) || commandRuntime === undefined || commandRuntime.isActionDisabled(action.id);
+  return <button className={action.kind === "run" ? "button button--primary" : "button button--secondary"} data-action-reference-id={action.id} disabled={disabled} onClick={(): void => {
+    if (intent === undefined || disabled || commandRuntime === undefined) return;
+    void commandRuntime.submit(intent, "user").finally(onSubmitted);
+  }} type="button">{action.label}</button>;
+}
+
+function GraphNode({ node, selected, onSelect }: { readonly node: GraphNodeView; readonly selected: boolean; readonly onSelect: (id: string) => void }): JSX.Element {
+  const provenance = node.kind === "common" ? node.provenanceReference : node.forkOrigin ?? node.customReason;
+  return <button aria-pressed={selected} className={`graph-node graph-node--${node.kind}${selected ? " graph-node--selected" : ""}`} onClick={(): void => onSelect(node.id)} type="button"><strong>{node.label}</strong>{node.kind === "common" && node.immutableVersion !== undefined ? <VersionPill version={node.immutableVersion} label="Common version" /> : null}<small>{node.kind === "common" ? `Provenance: ${provenance ?? ""}` : `Custom: ${provenance ?? ""}`}</small>{node.task === undefined ? null : <div><span>{node.task.lifecycle}</span><span>{node.task.statusDetail}</span></div>}</button>;
+}
+
+function NodeInspector({ node }: { readonly node: GraphNodeView }): JSX.Element {
+  return <><h2>{node.label}</h2>{node.kind === "common" ? <><p>Common version: {node.immutableVersion}</p><p>Provenance: {node.provenanceReference}</p></> : <><p>Fork origin: {node.forkOrigin}</p><p>Custom reason: {node.customReason}</p></>}{node.task === undefined ? null : <><p>Lifecycle: {node.task.lifecycle}</p>{node.task.statusDetail === undefined ? null : <p>Status detail: {node.task.statusDetail}</p>}</>}</>;
 }

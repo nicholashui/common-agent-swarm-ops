@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\migration\paths.py
+# hypothesis_version: 6.151.12
+
+['\x00', '.', '..', '/', 'NFKC', 'Unsafe local path.', '\\', 'absolute_path', 'empty_path', 'invalid_path', 'missing_path', 'not_a_directory', 'not_a_file', 'nul_byte', 'out_of_root', 'path_traversal', 'rb', 'unreadable_path']

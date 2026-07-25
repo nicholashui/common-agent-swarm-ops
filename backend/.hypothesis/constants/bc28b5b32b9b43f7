@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\migration\corpus.py
+# hypothesis_version: 6.151.12
+
+[1024, '+00:00', '.corpus-stage-', '/', '1.0', 'CorpusImportReport', 'CorpusImporter', 'CorpusManifest', 'CorpusWriteReport', 'MANIFEST.json', 'MANIFEST_FILENAME', 'SOURCE_COMMIT.txt', 'SOURCE_COPIED_AT.txt', 'SOURCE_URL.txt', 'SOURCE_URL_FILENAME', 'Z', '__backups__', 'approved_import_set', 'changed_paths', 'classification', 'corpus_path_mismatch', 'corpus_size_mismatch', 'destination_path', 'entries', 'findings', 'import_corpus', 'manifest_digest', 'path', 'rb', 'result', 'schema_version', 'sha256', 'size_bytes', 'source_path', 'unchanged_paths', 'utf-8', 'write_corpus']

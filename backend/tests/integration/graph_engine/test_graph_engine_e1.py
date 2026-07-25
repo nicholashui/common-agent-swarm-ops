@@ -303,7 +303,7 @@ def test_versioned_host_exposes_graph_topology_and_interrupted_graph_state() -> 
                 "/api/v1/workflows/ops.graph-integration/run", json={"version": "1.0.0"}
             )
             assert created.status_code == 201
-            run_id = RunId(str(created.json()["run_id"]))
+            run_id = RunId(str(created.json()["data"]["run_id"]))
             dispatched = client.post(
                 "/api/v1/workflow-runs/dispatch",
                 json={"run_id": run_id, "idempotency_key": "graph-interrupt", "confirm": True},
@@ -327,20 +327,22 @@ def test_versioned_host_exposes_graph_topology_and_interrupted_graph_state() -> 
             graph_state = client.get(f"/api/v1/workflow-runs/{run_id}/graph-state")
 
         assert topology.status_code == 200
-        assert topology.json()["pattern"] == "pipeline"
-        assert [node["node_id"] for node in topology.json()["nodes"]] == [
+        topology_body = topology.json()["data"]
+        assert topology_body["pattern"] == "pipeline"
+        assert [node["node_id"] for node in topology_body["nodes"]] == [
             "plan",
             "review",
             "deliver",
         ]
-        assert topology.json()["edges"] == [
+        assert topology_body["edges"] == [
             {"source": "plan", "target": "review", "max_traversals": 1},
             {"source": "review", "target": "deliver", "max_traversals": 1},
         ]
         assert graph_state.status_code == 200
-        assert graph_state.json()["status"] == "failed"
-        assert graph_state.json()["failure_code"] == "operator-interrupt"
-        assert graph_state.json()["graph_thread_id"] == f"{ORGANIZATION_ID}:{run_id}"
+        graph_state_body = graph_state.json()["data"]
+        assert graph_state_body["status"] == "failed"
+        assert graph_state_body["failure_code"] == "operator-interrupt"
+        assert graph_state_body["graph_thread_id"] == f"{ORGANIZATION_ID}:{run_id}"
 
         stored = services.get_run(ORGANIZATION_ID, run_id, CORRELATION_ID)
         assert stored.is_success and stored.value is not None and stored.value.output is not None

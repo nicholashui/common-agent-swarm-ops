@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/strategic_goal_achievement_agent.md",
+  "source_sha256": "3c2d1bcc4fa2462c2c728074671cdb8afac9abad1d4da7cab378aee1b681c01d",
+  "agent_id": "specials.strategic-goal-achievement-agent",
+  "configuration_sha256": "25f5017aa27dc374bd205e2bfd9b5d48bf5d4e32bc7286d4a278cf6fb8ba8240",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.strategic-goal-achievement-agent"
+}

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\ingress.py
+# hypothesis_version: 6.151.12
+
+[b'%PDF-', b'\x89PNG\r\n\x1a\n', b'\xff\xd8\xff', 100, 120, 128, 1024, 16384, 1048576, 10485760, '\x00', '-', '.', '.-', '..', '/', '/api/v1', ';', 'Invalid value.', 'NFKC', 'Retry-After', '[0-9a-f]{64}', '[^a-z0-9._-]+', '\\', 'allowed', 'application/json', 'application/pdf', 'body', 'checksum', 'content-length', 'content-type', 'content_type', 'default', 'filter', 'filters', 'image/jpeg', 'image/png', 'import', 'import-guard', 'limit', 'media_type', 'multipart/form-data', 'offset', 'page', 'page_size', 'rate_limit', 'rejected', 'request', 'route', 'scan', 'size', 'storage', 'storage_name', 'text/plain', 'unknown-client', 'utf-8']

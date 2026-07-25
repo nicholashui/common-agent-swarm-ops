@@ -9,16 +9,58 @@ from app.models.audit import AuditEvent
 from app.models.common import OptimisticTransition, VersionedRecord
 from app.models.contracts import RepositoryError, Result
 from app.models.evidence import EvidenceItem
-from app.models.identifiers import ApprovalId, OrganizationId, RecordId, RunId
+from app.models.identifiers import (
+    ApprovalId,
+    CorrelationId,
+    OrganizationId,
+    RecordId,
+    RunId,
+)
 from app.models.runs import RunRecord
 
 if TYPE_CHECKING:
     from app.evaluation.product_bar import ProductBarEvidenceRecord
     from app.governance.approvals import ApprovalDecision, ApprovalGate
     from app.memory.models import AuditUnavailableLatch, MemoryScope, ScopedMemory
+    from app.models.control_plane import (
+        AgentLifecycle,
+        AgentNodeAttemptId,
+        ArtifactHandoff,
+        AuditRecord,
+        AuthorizationDecision,
+        InvocationAssociation,
+        MaturityState,
+        RecoveryAction,
+        Registration,
+        ReleaseReadinessDecision,
+        VerificationRun,
+    )
+    from app.models.evidence import LearningEpisode, Lesson, RetrievalRecord
+    from app.models.identifiers import AgentId, DomainPackId
+    from app.models.runs import AgentNodeAttempt
     from app.runs.checkpoints import CheckpointRecord
 
+# Records used in protocol base classes must be available at runtime: Python evaluates
+# generic protocol bases while importing this module, even with postponed annotations.
+from app.models.control_plane import (
+    AgentLifecycle,
+    AgentNodeAttemptId,
+    ArtifactHandoff,
+    AuditRecord,
+    AuthorizationDecision,
+    InvocationAssociation,
+    MaturityState,
+    RecoveryAction,
+    Registration,
+    ReleaseReadinessDecision,
+    VerificationRun,
+)
+from app.models.evidence import LearningEpisode, Lesson, RetrievalRecord
+from app.models.identifiers import AgentId, DomainPackId
+from app.models.runs import AgentNodeAttempt
+
 T = TypeVar("T", bound=VersionedRecord)
+A = TypeVar("A", bound=VersionedRecord)
 
 
 @runtime_checkable
@@ -153,7 +195,9 @@ class MemoryRepository(Protocol):
     ) -> Result[tuple[ScopedMemory, ...], RepositoryError]:
         """Return only records that match the exact organization and scope."""
 
-    def get_audit_unavailable_latch(self) -> Result[AuditUnavailableLatch, RepositoryError]:
+    def get_audit_unavailable_latch(
+        self,
+    ) -> Result[AuditUnavailableLatch, RepositoryError]:
         """Return the durable high-impact write block state."""
 
     def trip_audit_unavailable_latch(
@@ -161,7 +205,9 @@ class MemoryRepository(Protocol):
     ) -> Result[AuditUnavailableLatch, RepositoryError]:
         """Persist the audit-outage block state."""
 
-    def clear_audit_unavailable_latch(self) -> Result[AuditUnavailableLatch, RepositoryError]:
+    def clear_audit_unavailable_latch(
+        self,
+    ) -> Result[AuditUnavailableLatch, RepositoryError]:
         """Clear the block only after an audit health check succeeds."""
 
 
@@ -173,3 +219,175 @@ class EvaluationRepository(VersionedRepository[VersionedRecord], Protocol):
 @runtime_checkable
 class ArtifactRepository(VersionedRepository[VersionedRecord], Protocol):
     """Version-guarded immutable artifact-version persistence seam."""
+
+
+@runtime_checkable
+class AdoptionRecordRepository(Protocol[A]):
+    """Append-only, organization-scoped persistence for adoption evidence."""
+
+    def append(self, record: A) -> Result[A, RepositoryError]:
+        """Persist one immutable adoption record."""
+
+    def get(
+        self, organization_id: OrganizationId, record_id: RecordId
+    ) -> Result[A, RepositoryError]:
+        """Return one record only inside its owning organization."""
+
+    def list_for_organization(
+        self, organization_id: OrganizationId
+    ) -> Result[tuple[A, ...], RepositoryError]:
+        """Return immutable records in deterministic insertion order."""
+
+
+@runtime_checkable
+class RegistrationRepository(AdoptionRecordRepository[Registration], Protocol):
+    """Enforce one immutable registration per pack and version."""
+
+    def get_by_pack_version(
+        self,
+        organization_id: OrganizationId,
+        pack_id: DomainPackId,
+        immutable_version: str,
+    ) -> Result[Registration, RepositoryError]:
+        """Return the registration for one immutable pack identity."""
+
+
+@runtime_checkable
+class InvocationAssociationRepository(
+    AdoptionRecordRepository[InvocationAssociation], Protocol
+):
+    """Persist the complete invocation association before execution starts."""
+
+    def get_by_invocation_id(
+        self, organization_id: OrganizationId, invocation_id: str
+    ) -> Result[InvocationAssociation, RepositoryError]:
+        """Return one organization-scoped invocation association."""
+
+
+@runtime_checkable
+class AuthorizationDecisionRepository(
+    AdoptionRecordRepository[AuthorizationDecision], Protocol
+):
+    """Retain immutable authorization outcomes independently of audit writes."""
+
+
+@runtime_checkable
+class ArtifactHandoffRepository(AdoptionRecordRepository[ArtifactHandoff], Protocol):
+    """Persist opaque handoff metadata without accepting protected content."""
+
+    def available_for_downstream(
+        self, organization_id: OrganizationId
+    ) -> Result[tuple[ArtifactHandoff, ...], RepositoryError]:
+        """Return only metadata-confirmed handoffs available to downstream nodes."""
+
+
+@runtime_checkable
+class AgentLifecycleRepository(AdoptionRecordRepository[AgentLifecycle], Protocol):
+    """Retain immutable lifecycle evidence for learning-required agents."""
+
+
+@runtime_checkable
+class AgentNodeAttemptRepository(AdoptionRecordRepository[AgentNodeAttempt], Protocol):
+    """Retain attempt identities used by retrieval and terminal-episode barriers."""
+
+    def get_by_attempt_id(
+        self, organization_id: OrganizationId, attempt_id: AgentNodeAttemptId
+    ) -> Result[AgentNodeAttempt, RepositoryError]:
+        """Return one organization-scoped node attempt."""
+
+    def mark_blocked_for_recovery(
+        self,
+        organization_id: OrganizationId,
+        attempt_id: AgentNodeAttemptId,
+        correlation_id: CorrelationId,
+    ) -> Result[AgentNodeAttempt, RepositoryError]:
+        """Durably block an attempt when terminal learning evidence needs recovery."""
+
+
+@runtime_checkable
+class RetrievalRecordRepository(AdoptionRecordRepository[RetrievalRecord], Protocol):
+    """Enforce exactly one pre-action retrieval record for each attempt."""
+
+    def get_by_attempt_id(
+        self, organization_id: OrganizationId, attempt_id: AgentNodeAttemptId
+    ) -> Result[RetrievalRecord, RepositoryError]:
+        """Return the retrieval evidence for one node attempt."""
+
+
+@runtime_checkable
+class LearningEpisodeRepository(AdoptionRecordRepository[LearningEpisode], Protocol):
+    """Enforce one immutable terminal learning episode per attempt."""
+
+    def get_by_attempt_id(
+        self, organization_id: OrganizationId, attempt_id: AgentNodeAttemptId
+    ) -> Result[LearningEpisode, RepositoryError]:
+        """Return the terminal episode for one node attempt."""
+
+
+@runtime_checkable
+class LessonRepository(AdoptionRecordRepository[Lesson], Protocol):
+    """Retain scoped, assessed lessons as references to trusted content."""
+
+    def retrievable_for(
+        self,
+        organization_id: OrganizationId,
+        domain_id: str,
+        pack_version: str,
+        agent_id: AgentId,
+        memory_scope: str,
+    ) -> Result[tuple[Lesson, ...], RepositoryError]:
+        """Return only current passed lessons matching every approved scope."""
+
+    def revoke(
+        self, organization_id: OrganizationId, lesson_id: str
+    ) -> Result[Lesson, RepositoryError]:
+        """Persist the post-audit revoked version of one Lesson."""
+
+
+@runtime_checkable
+class VerificationRunRepository(AdoptionRecordRepository[VerificationRun], Protocol):
+    """Retain layered verification evidence without replacing prior runs."""
+
+
+@runtime_checkable
+class ReleaseReadinessDecisionRepository(
+    AdoptionRecordRepository[ReleaseReadinessDecision], Protocol
+):
+    """Enforce one terminal release decision for an evaluated workflow version."""
+
+    def get_terminal(
+        self,
+        organization_id: OrganizationId,
+        pack_id: DomainPackId,
+        immutable_version: str,
+        workflow_id: str,
+    ) -> Result[ReleaseReadinessDecision, RepositoryError]:
+        """Return the terminal decision for one release evaluation identity."""
+
+
+@runtime_checkable
+class RecoveryActionRepository(AdoptionRecordRepository[RecoveryAction], Protocol):
+    """Retain recovery evidence before any version restoration occurs."""
+
+    def replace(
+        self, record: RecoveryAction
+    ) -> Result[RecoveryAction, RepositoryError]:
+        """Retain the completed immutable snapshot for an approved recovery action."""
+
+
+@runtime_checkable
+class MaturityStateRepository(AdoptionRecordRepository[MaturityState], Protocol):
+    """Retain independent maturity state for each pack-version agent."""
+
+
+@runtime_checkable
+class AuditRecordRepository(Protocol):
+    """Append-only audit storage whose failure cannot turn a denial into an allow."""
+
+    def append(self, record: AuditRecord) -> Result[AuditRecord, RepositoryError]:
+        """Attempt to persist one immutable adoption audit record."""
+
+    def list_for_organization(
+        self, organization_id: OrganizationId
+    ) -> Result[tuple[AuditRecord, ...], RepositoryError]:
+        """Return audit records only within the owning organization."""

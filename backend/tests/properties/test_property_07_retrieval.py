@@ -39,12 +39,14 @@ _ORGANIZATION_ID = OrganizationId("org-property-7")
 _FOREIGN_ORGANIZATION_ID = OrganizationId("org-property-7-foreign")
 _CORRELATION_ID = CorrelationId("corr-property-7")
 _QUERY = "scoped-query-token"
+_ALTERNATE_QUERY = "alternate-scoped-query-token"
 
 
 @dataclass(frozen=True, slots=True)
 class RetrievalCase:
     """One bounded local-corpus/query configuration for Property 7."""
 
+    query: str
     local_match_tier: RetrievalTier | None
     requires_relationships: bool
     relationship_enabled: bool
@@ -66,7 +68,7 @@ class ScopedCorpus:
 
 @dataclass(slots=True)
 class RecordingTierFake:
-    """Deterministic local tier seam that always attempts foreign disclosure first."""
+    """Deterministic local tier seam that attempts foreign disclosure first."""
 
     tier: RetrievalTier
     local_match_tier: RetrievalTier | None
@@ -82,9 +84,7 @@ class RecordingTierFake:
         """Return foreign matches plus a local match only for the configured tier."""
         del request
         self.calls.append(self.tier)
-        self.candidate_record_ids.append(
-            tuple(record.metadata.record_id for record in candidates)
-        )
+        self.candidate_record_ids.append(tuple(record.metadata.record_id for record in candidates))
         if self.local_match_tier is self.tier and candidates:
             return (*self.foreign_matches, _match(candidates[0]))
         return self.foreign_matches
@@ -94,9 +94,11 @@ class RecordingTierFake:
 def _retrieval_cases(draw: st.DrawFn) -> RetrievalCase:
     """Generate bounded scope, tier, corpus, and query-control dimensions."""
     return RetrievalCase(
+        query=draw(st.sampled_from((_QUERY, _ALTERNATE_QUERY))),
         local_match_tier=draw(
-            st.sampled_from((None, RetrievalTier.SEMANTIC, RetrievalTier.RELATIONSHIP,
-                            RetrievalTier.SYNTHESIS))
+            st.sampled_from(
+                (None, RetrievalTier.SEMANTIC, RetrievalTier.RELATIONSHIP, RetrievalTier.SYNTHESIS)
+            )
         ),
         requires_relationships=draw(st.booleans()),
         relationship_enabled=draw(st.booleans()),
@@ -140,7 +142,7 @@ def _memory(
 
 
 def _corpus(case: RetrievalCase) -> tuple[InMemoryMemoryRepository, ScopedCorpus]:
-    """Store a bounded corpus with both same-org and cross-org foreign records."""
+    """Store a bounded corpus with same-org and cross-org foreign records."""
     repository = InMemoryMemoryRepository()
     approved_scope = MemoryScope(case.scope_type, "approved-scope-property-7")
     foreign_scope = MemoryScope(case.scope_type, "foreign-scope-property-7")
@@ -149,7 +151,8 @@ def _corpus(case: RetrievalCase) -> tuple[InMemoryMemoryRepository, ScopedCorpus
             f"approved-{index}",
             _ORGANIZATION_ID,
             approved_scope,
-            f"approved {_QUERY}" if index == 0 and case.local_match_tier is RetrievalTier.SEMANTIC
+            f"approved {case.query}"
+            if index == 0 and case.local_match_tier is RetrievalTier.SEMANTIC
             else f"approved-unrelated-{index}",
         )
         for index in range(case.approved_record_count)
@@ -159,7 +162,7 @@ def _corpus(case: RetrievalCase) -> tuple[InMemoryMemoryRepository, ScopedCorpus
             f"foreign-{index}",
             _ORGANIZATION_ID if index % 2 == 0 else _FOREIGN_ORGANIZATION_ID,
             foreign_scope if index % 2 == 0 else approved_scope,
-            f"foreign {_QUERY} {index}",
+            f"foreign {case.query} {index}",
         )
         for index in range(case.foreign_record_count)
     )
@@ -215,21 +218,55 @@ def _expected_searched_tiers(case: RetrievalCase) -> tuple[RetrievalTier, ...]:
 @settings(max_examples=100, deadline=None, derandomize=True)
 @example(
     case=RetrievalCase(
-        RetrievalTier.SEMANTIC, True, True, True, 1, 2, MemoryScopeType.WORKFLOW, 1
+        query=_QUERY,
+        local_match_tier=RetrievalTier.SEMANTIC,
+        requires_relationships=True,
+        relationship_enabled=True,
+        synthesis_enabled=True,
+        approved_record_count=1,
+        foreign_record_count=2,
+        scope_type=MemoryScopeType.WORKFLOW,
+        result_limit=1,
     )
 )
 @example(
     case=RetrievalCase(
-        RetrievalTier.RELATIONSHIP, True, True, True, 2, 2, MemoryScopeType.AGENT, 2
+        query=_ALTERNATE_QUERY,
+        local_match_tier=RetrievalTier.RELATIONSHIP,
+        requires_relationships=True,
+        relationship_enabled=True,
+        synthesis_enabled=True,
+        approved_record_count=2,
+        foreign_record_count=2,
+        scope_type=MemoryScopeType.AGENT,
+        result_limit=2,
     )
 )
 @example(
     case=RetrievalCase(
-        RetrievalTier.SYNTHESIS, True, True, True, 3, 3, MemoryScopeType.ORGANIZATION, 3
+        query=_QUERY,
+        local_match_tier=RetrievalTier.SYNTHESIS,
+        requires_relationships=True,
+        relationship_enabled=True,
+        synthesis_enabled=True,
+        approved_record_count=3,
+        foreign_record_count=3,
+        scope_type=MemoryScopeType.ORGANIZATION,
+        result_limit=3,
     )
 )
 @example(
-    case=RetrievalCase(None, True, True, True, 1, 3, MemoryScopeType.WORKFLOW, 1)
+    case=RetrievalCase(
+        query=_ALTERNATE_QUERY,
+        local_match_tier=None,
+        requires_relationships=True,
+        relationship_enabled=True,
+        synthesis_enabled=True,
+        approved_record_count=1,
+        foreign_record_count=3,
+        scope_type=MemoryScopeType.WORKFLOW,
+        result_limit=1,
+    )
 )
 @given(case=_retrieval_cases())
 def test_retrieval_is_semantic_first_and_cannot_disclose_across_scope(
@@ -253,18 +290,29 @@ def test_retrieval_is_semantic_first_and_cannot_disclose_across_scope(
     response = retriever.retrieve(
         RetrievalRequest(
             requester=corpus.requester,
-            query=_QUERY,
+            query=case.query,
             requires_relationships=case.requires_relationships,
             result_limit=case.result_limit,
         )
     )
 
     expected_tier = _expected_tier(case)
-    assert response.searched_tiers == _expected_searched_tiers(case)
+    expected_searched_tiers = _expected_searched_tiers(case)
+    assert response.searched_tiers == expected_searched_tiers
+    assert response.searched_tiers[0] is RetrievalTier.SEMANTIC
     assert relationship.calls + synthesis.calls == list(response.searched_tiers[1:])
+    if expected_tier is RetrievalTier.SEMANTIC:
+        assert relationship.calls == []
+        assert synthesis.calls == []
 
     approved_ids = {record.metadata.record_id for record in corpus.approved_records}
+    approved_references = {
+        reference for record in corpus.approved_records for reference in record.provenance
+    }
     foreign_ids = {record.metadata.record_id for record in corpus.foreign_records}
+    foreign_references = {
+        reference for record in corpus.foreign_records for reference in record.provenance
+    }
     for fake in (relationship, synthesis):
         assert all(
             set(candidate_ids) == approved_ids for candidate_ids in fake.candidate_record_ids
@@ -276,14 +324,24 @@ def test_retrieval_is_semantic_first_and_cannot_disclose_across_scope(
         assert response.uncertainty == "No permitted knowledge matched within the requester scope."
         return
 
-    expected_record = corpus.approved_records[0]
     assert not response.no_knowledge
     assert response.uncertainty is None
-    assert len(response.results) == 1
-    result = response.results[0]
-    assert result.tier is expected_tier
-    assert result.content_reference == expected_record.content_reference
-    assert result.source_record_ids == (expected_record.metadata.record_id,)
-    assert result.provenance == expected_record.provenance
-    assert set(result.source_record_ids) <= approved_ids
-    assert not set(result.source_record_ids) & foreign_ids
+    assert response.results
+    assert all(result.tier is expected_tier for result in response.results)
+    assert all(result.provenance for result in response.results)
+    assert all(result.source_record_ids for result in response.results)
+    assert all(
+        set(result.source_record_ids) <= approved_ids
+        and not set(result.source_record_ids) & foreign_ids
+        for result in response.results
+    )
+    assert all(
+        result.content_reference
+        not in {record.content_reference for record in corpus.foreign_records}
+        for result in response.results
+    )
+    assert all(
+        all(reference in approved_references for reference in result.provenance)
+        and not any(reference in foreign_references for reference in result.provenance)
+        for result in response.results
+    )

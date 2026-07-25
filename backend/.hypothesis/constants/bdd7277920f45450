@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\engines\recovery.py
+# hypothesis_version: 6.151.12
+
+['adr', 'affected_lessons', 'applied', 'approved', 'archive', 'archived', 'delete', 'deleted', 'deprecation_window', 'evidence_references', 'immutable_version', 'keep', 'migration_plan', 'outcome', 'replace', 'required', 'restored', 'retain', 'retained', 'retention_records', 'revoke', 'revoked', 'rollback_plan', 'stale', 'status']

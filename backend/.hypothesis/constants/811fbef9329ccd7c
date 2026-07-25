@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\dependencies.py
+# hypothesis_version: 6.151.12
+
+['*', '-', '/artifacts', '/dispatch', '/events', '/memory/retrieve', '/operations/', '/replay', '/topics/', 'DELETE', 'PATCH', 'POST', 'PUT', '_', 'actor', 'actor_id', 'aggregate', 'artifact_reference', 'control_plane:*', 'mutation', 'organization', 'organization_id', 'path', 'permission', 'permissions', 'read', 'replay', 'route', 'tenant', 'tenant_id', 'tool_operation', 'topic', 'x_']

@@ -1,8 +1,7 @@
-import { AppShell } from "../components/AppShell";
-import { Dashboard } from "../components/Dashboard";
+import { UnavailableScreen } from "../components/UnavailableScreen";
 
 function HomePage(): JSX.Element {
-  return <AppShell><Dashboard /></AppShell>;
+  return <UnavailableScreen screenId="ui_02_dashboard" />;
 }
 
 export default HomePage;

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evolution\service.py
+# hypothesis_version: 6.151.12
+
+[1000, ',', '-', ':', '_', 'approval_evidence', 'compliance_no_worse', 'evaluation_evidence', 'evidence_references', 'evidence_retained', 'failure_evidence', 'host_code', 'host_source', 'promoted', 'prompt', 'reviewer_evidence', 'risk_tier', 'rollback_evidence', 'rubric', 'safety_no_worse', 'source_evidence', 'tool_authorization', 'tool_policy', 'utf-8', 'validation_evidence', 'workflow', '{}']

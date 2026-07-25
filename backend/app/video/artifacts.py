@@ -47,6 +47,18 @@ class VideoArtifactVersion:
     quality_checks: tuple[NamedReleaseCheck, ...]
     release_checks: tuple[NamedReleaseCheck, ...]
 
+    def __post_init__(self) -> None:
+        """Freeze collection inputs even when callers construct records directly."""
+        if not str(self.artifact_id).strip() or not str(self.artifact_version_id).strip():
+            raise ValueError("Video artifact identifiers must be non-empty.")
+        object.__setattr__(
+            self,
+            "parent_version_ids",
+            tuple(VideoArtifactVersionId(str(parent)) for parent in self.parent_version_ids),
+        )
+        object.__setattr__(self, "quality_checks", tuple(self.quality_checks))
+        object.__setattr__(self, "release_checks", tuple(self.release_checks))
+
 
 @dataclass(frozen=True, slots=True)
 class LineageIssue:
@@ -72,6 +84,12 @@ class ReleaseCondition:
     passed: bool
     evidence_references: tuple[str, ...] = ()
 
+    def __post_init__(self) -> None:
+        """Freeze evidence references on direct construction as well as service output."""
+        if not self.name.strip():
+            raise ValueError("Release conditions require a non-empty name.")
+        object.__setattr__(self, "evidence_references", tuple(self.evidence_references))
+
 
 @dataclass(frozen=True, slots=True)
 class ReleaseRequest:
@@ -84,6 +102,11 @@ class ReleaseRequest:
     unmet_conditions: tuple[str, ...]
     decision: ReleaseDecision
     artifact_released: bool = False
+
+    def __post_init__(self) -> None:
+        """Freeze retained gate projections so decisions remain append-only snapshots."""
+        object.__setattr__(self, "conditions", tuple(self.conditions))
+        object.__setattr__(self, "unmet_conditions", tuple(self.unmet_conditions))
 
 
 class LineageValidator:
@@ -99,6 +122,7 @@ class LineageValidator:
         issue_keys: set[tuple[str, VideoArtifactVersionId]] = set()
         visited: set[VideoArtifactVersionId] = set()
         visiting: set[VideoArtifactVersionId] = set()
+        root_artifact_id: VideoArtifactId | None = None
 
         def add_issue(code: str, version_id: VideoArtifactVersionId) -> None:
             key = (code, version_id)
@@ -107,6 +131,7 @@ class LineageValidator:
                 issues.append(LineageIssue(code, version_id))
 
         def walk(version_id: VideoArtifactVersionId) -> None:
+            nonlocal root_artifact_id
             if version_id in visiting:
                 add_issue("lineage_cyclic", version_id)
                 return
@@ -116,6 +141,10 @@ class LineageValidator:
             if version is None:
                 add_issue("lineage_unknown_version", version_id)
                 return
+            if root_artifact_id is None:
+                root_artifact_id = version.artifact_id
+            elif version.artifact_id != root_artifact_id:
+                add_issue("lineage_ambiguous_artifact", version_id)
             visiting.add(version_id)
             parent_ids = version.parent_version_ids
             if len(parent_ids) != len(set(parent_ids)):

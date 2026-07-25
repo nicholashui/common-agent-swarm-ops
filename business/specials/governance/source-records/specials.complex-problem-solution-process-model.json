@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/complex_problem_solution_process_model.md",
+  "source_sha256": "89a4c10cd30206f2de051ba022946ebce8ef850d57f07c8af4d6cc592b7d014e",
+  "agent_id": "specials.complex-problem-solution-process-model",
+  "configuration_sha256": "6734cd3c156d712646600858a15c2109e3521f47ef82ebfc0ce637f4989b5c23",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.complex-problem-solution-process-model"
+}

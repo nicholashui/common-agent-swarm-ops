@@ -7,9 +7,14 @@ from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
 
-from app.models.common import RecordMetadata
+from app.models.common import RecordMetadata, validate_semantic_version
+from app.models.control_plane import (
+    AgentNodeAttemptId,
+    RunProvenanceId,
+    _validate_adoption_metadata,
+)
 from app.models.evidence import EvidenceReference
-from app.models.identifiers import RunId, WorkflowDefinitionId
+from app.models.identifiers import AgentId, DomainId, DomainPackId, RunId, WorkflowDefinitionId
 from app.models.redaction import redact_mapping
 
 
@@ -92,15 +97,36 @@ class RunRecord:
     engine: WorkflowEngineKind
     status: RunStatus
     created_for_dispatch_at: datetime
+    provenance_id: RunProvenanceId | None = None
     dispatch_attempts: tuple[DispatchAttempt, ...] = ()
     tool_effects: tuple[ToolEffect, ...] = ()
     failure: FailureState | None = None
     output: Mapping[str, object] | None = None
     graph_id: str | None = None
     graph_thread_id: str | None = None
+    invocation_association_id: str | None = None
+    pack_id: DomainPackId | None = None
+    pack_version: str | None = None
+    host_contract_version: str | None = None
+    alc_version: str | None = None
 
     def __post_init__(self) -> None:
         """Keep queued records safe to retry and dispatch attempts uniquely addressable."""
+        if self.provenance_id is not None and not str(self.provenance_id).strip():
+            raise ValueError("Run provenance identifiers must be non-empty when present.")
+        for value, name in (
+            (self.invocation_association_id, "invocation_association_id"),
+            (str(self.pack_id) if self.pack_id is not None else None, "pack_id"),
+        ):
+            if value is not None and not value.strip():
+                raise ValueError(f"{name} must be non-empty when present.")
+        for value, name in (
+            (self.pack_version, "pack_version"),
+            (self.host_contract_version, "host_contract_version"),
+            (self.alc_version, "alc_version"),
+        ):
+            if value is not None:
+                validate_semantic_version(value, name)
         attempt_keys = tuple(attempt.idempotency_key for attempt in self.dispatch_attempts)
         if len(attempt_keys) != len(set(attempt_keys)):
             raise ValueError("Run dispatch attempt idempotency keys must be unique.")
@@ -112,8 +138,12 @@ class RunRecord:
     @property
     def is_dispatch_retryable(self) -> bool:
         """Return whether a failed dispatch is durably retained in the queued state."""
-        return bool(self.dispatch_attempts) and self.status is RunStatus.QUEUED and all(
-            attempt.status is DispatchAttemptStatus.FAILED for attempt in self.dispatch_attempts
+        return (
+            bool(self.dispatch_attempts)
+            and self.status is RunStatus.QUEUED
+            and all(
+                attempt.status is DispatchAttemptStatus.FAILED for attempt in self.dispatch_attempts
+            )
         )
 
     def to_projection(self) -> RunProjection:
@@ -140,3 +170,72 @@ class RunProjection:
     updated_at: datetime
     output: Mapping[str, object] | None
     failure_code: str | None
+
+
+class AgentNodeAttemptStatus(StrEnum):
+    """Execution state for one immutable Agent_Node_Attempt identity."""
+
+    QUEUED = "queued"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    BLOCKED = "blocked"
+    RETRIED = "retried"
+    ESCALATED = "escalated"
+
+
+@dataclass(frozen=True, slots=True)
+class AgentNodeAttempt:
+    """Run-scoped node attempt that can receive one terminal Learning_Episode."""
+
+    metadata: RecordMetadata
+    attempt_id: AgentNodeAttemptId
+    run_id: RunId
+    node_id: str
+    organization_id: str
+    domain_id: DomainId
+    pack_id: DomainPackId
+    pack_version: str
+    agent_id: AgentId
+    workflow_id: str
+    status: AgentNodeAttemptStatus
+    terminal_outcome_reference: str | None = None
+    retrieval_record_reference: str | None = None
+
+    def __post_init__(self) -> None:
+        _validate_adoption_metadata(self.metadata)
+        for value, name in (
+            (str(self.attempt_id), "attempt_id"),
+            (str(self.run_id), "run_id"),
+            (self.node_id, "node_id"),
+            (self.organization_id, "organization_id"),
+            (str(self.domain_id), "domain_id"),
+            (str(self.pack_id), "pack_id"),
+            (self.pack_version, "pack_version"),
+            (str(self.agent_id), "agent_id"),
+            (self.workflow_id, "workflow_id"),
+        ):
+            if not value.strip():
+                raise ValueError(f"{name} must be non-empty.")
+        if self.organization_id != str(self.metadata.organization_id):
+            raise ValueError("Attempt organization must match record metadata.")
+        validate_semantic_version(self.pack_version, "pack_version")
+        object.__setattr__(self, "status", AgentNodeAttemptStatus(self.status))
+        if (
+            self.status
+            in {
+                AgentNodeAttemptStatus.COMPLETED,
+                AgentNodeAttemptStatus.FAILED,
+                AgentNodeAttemptStatus.BLOCKED,
+                AgentNodeAttemptStatus.RETRIED,
+                AgentNodeAttemptStatus.ESCALATED,
+            }
+            and not self.terminal_outcome_reference
+        ):
+            raise ValueError("Terminal node attempts require an outcome reference.")
+        for optional_value, name in (
+            (self.terminal_outcome_reference, "terminal_outcome_reference"),
+            (self.retrieval_record_reference, "retrieval_record_reference"),
+        ):
+            if optional_value is not None and not optional_value.strip():
+                raise ValueError(f"{name} must be non-empty when present.")

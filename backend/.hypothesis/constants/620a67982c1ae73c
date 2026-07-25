@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\artifacts.py
+# hypothesis_version: 6.151.12
+
+['ReleaseRequestId', 'VideoArtifactId', 'conditions', 'denied', 'evidence_references', 'lineage_cyclic', 'parent_version_ids', 'permitted', 'quality_checks', 'release_checks', 'unmet_conditions']

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\adapter_execution.py
+# hypothesis_version: 6.151.12
+
+['authorized', 'capabilities', 'capability', 'cost', 'cost_limit', 'provider_id', 'provider_id_mismatch', 'provider_timeout', 'provider_unavailable', 'residency', 'retention_policy', 'safety_policy', 'verification_mock']

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from datetime import UTC, datetime
+from typing import cast
 
 from app.models.common import RecordMetadata
 from app.models.identifiers import CorrelationId, OrganizationId, RecordId
@@ -135,3 +137,46 @@ def test_passing_readiness_decision_is_non_releasing_and_versions_are_append_onl
     assert parent.value.parent_version_ids == ()
     assert child.value.parent_version_ids == (parent.value.artifact_version_id,)
     assert len(repository.versions_for_organization(ORG_ID)) == 2
+
+
+def test_artifact_versions_freeze_collection_inputs() -> None:
+    """Frozen versions retain tuple snapshots even when constructed from mutable collections."""
+    parent_ids = cast(tuple[VideoArtifactVersionId, ...], [VideoArtifactVersionId("parent")])
+    quality_checks = cast(
+        tuple[NamedReleaseCheck, ...], [NamedReleaseCheck("sharpness", True, "quality-1")]
+    )
+    release_checks = cast(
+        tuple[NamedReleaseCheck, ...], [NamedReleaseCheck("brand-review", True, "gate-1")]
+    )
+
+    version = VideoArtifactVersion(
+        _version("target").metadata,
+        VideoArtifactId("campaign-video"),
+        VideoArtifactVersionId("target"),
+        parent_ids,
+        True,
+        True,
+        quality_checks,
+        release_checks,
+    )
+
+    assert version.parent_version_ids == (VideoArtifactVersionId("parent"),)
+    assert isinstance(version.parent_version_ids, tuple)
+    assert isinstance(version.quality_checks, tuple)
+    assert isinstance(version.release_checks, tuple)
+
+
+def test_lineage_validator_rejects_parent_from_another_artifact() -> None:
+    """A known DAG is still ambiguous when it crosses immutable artifact identities."""
+    parent = replace(_version("parent"), artifact_id=VideoArtifactId("other-video"))
+    target = _version("target", ("parent",))
+
+    validation = LineageValidator().validate(
+        target.artifact_version_id,
+        {parent.artifact_version_id: parent, target.artifact_version_id: target}.get,
+    )
+
+    assert not validation.is_valid
+    assert [(issue.code, issue.version_id) for issue in validation.issues] == [
+        ("lineage_ambiguous_artifact", VideoArtifactVersionId("parent"))
+    ]

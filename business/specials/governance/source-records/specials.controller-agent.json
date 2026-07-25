@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/controller_agent.md",
+  "source_sha256": "ab695387fe27a4fb05d5b861d5f9daceea37a29511c49afce35751ca0b1f564a",
+  "agent_id": "specials.controller-agent",
+  "configuration_sha256": "41d2c61e9b0f66c91c26b5ab058d426bd47b633274460a91e24dc3d71213d29b",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.controller-agent"
+}

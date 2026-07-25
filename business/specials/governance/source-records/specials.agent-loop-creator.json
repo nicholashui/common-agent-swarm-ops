@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/agent_loop_creator.md",
+  "source_sha256": "f0fcb85210fa5fa9827e23f4a2505d2d24caab8df6dabb7f1ea2f007529aa0ea",
+  "agent_id": "specials.agent-loop-creator",
+  "configuration_sha256": "b3fb218183c691a13ffac2e6fa37a07a78ed57aa752deb2cba78b27c97ecc58e",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.agent-loop-creator"
+}

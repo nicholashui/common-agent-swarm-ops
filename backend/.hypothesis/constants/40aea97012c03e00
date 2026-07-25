@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\evidence.py
+# hypothesis_version: 6.151.12
+
+['agent_id', 'approved_filters', 'assessment', 'assessment_outcomes', 'attempt_id', 'blocked', 'category', 'command', 'completed', 'content_digest', 'content_reference', 'digest', 'domain_id', 'episode_id', 'escalated', 'evidence_id', 'evidence_references', 'failed', 'kind', 'lesson_id', 'lesson_references', 'memory_scope', 'organization_id', 'outcome', 'outcome_reference', 'output_reference', 'pack_version', 'passed', 'retried', 'retrieval_record_id', 'terminal_outcome']

@@ -1,0 +1,11 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "projection": {
+    "status": "queued",
+    "summary": "Safe returned summary",
+    "protected_field": "PROTECTED_SENTINEL",
+    "raw_prompt": "RAW_SENTINEL",
+    "internal_trace": "TRACE_SENTINEL"
+  },
+  "allowedFields": ["status", "summary"]
+}

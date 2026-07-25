@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\artifacts\handoff_service.py
+# hypothesis_version: 6.151.12
+
+['append_handoff', 'approval_reference', 'artifact_identity', 'artifact_version', 'blocked', 'classification', 'get', 'handoff', 'integrity_reference', 'metadata_extension', 'owner_reference', 'provenance_reference', 'revoke_availability', 'revoked', 'source_run_reference', 'source_task_id', 'validate', 'validate_lineage']

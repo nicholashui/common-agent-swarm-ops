@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/optimization_agent.md",
+  "source_sha256": "5735afb03877a793c9b958a594778e777d15c467b62828f2cedf95c81f41efbd",
+  "agent_id": "specials.optimization-agent",
+  "configuration_sha256": "c191b1e049c5288c1016d5daff9f2c3b7e9e0f65110d20d1f9b53bc2707ff7f8",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.optimization-agent"
+}

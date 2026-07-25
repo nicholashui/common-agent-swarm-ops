@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\adoption_services.py
+# hypothesis_version: 6.151.12
+
+['1.0.0', ';', 'Agent lifecycle', 'Agent node attempt', 'Artifact handoff', 'KeyT', 'Learning episode', 'Lesson', 'Maturity state', 'RecordT', 'Recovery action', 'Registration', 'Retrieval record', 'Verification run', 'adoption-repository', 'agent_id', 'agents', 'allowed_tools', 'authorization_denied', 'capability', 'denied', 'domain_id', 'governance.denied', 'memory_scopes', 'metadata', 'organization_id', 'record_id', 'signer_id']

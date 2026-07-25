@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\migration\canonical.py
+# hypothesis_version: 6.151.12
+
+[256, '\x00', '+00:00', ',', ':', '<redacted>', 'NFKC', 'Z', 'code', 'field', 'message', 'path', 'utf-8']

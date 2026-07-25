@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\work_recovery.py
+# hypothesis_version: 6.151.12
+
+['authorization', 'cancelled', 'claim_expired', 'dead_letter', 'dead_lettered', 'duplicate_replay', 'manual_recovery', 'max_attempts', 'policy', 'reclaim', 'reclaimed', 'retry_delay_seconds', 'retry_exhausted', 'retry_scheduled', 'rights_or_consent', 'schema', 'transient', 'validation', 'worker_stop_decision', 'worker_stopped']

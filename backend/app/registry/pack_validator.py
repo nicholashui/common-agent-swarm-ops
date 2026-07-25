@@ -14,7 +14,7 @@ from typing import Final
 from app.core.boundary import WorkspaceBoundary
 from app.core.errors import BoundaryErrorCode, BoundaryViolationError
 from app.models.common import SCHEMA_VERSION, RecordMetadata, utc_now
-from app.models.contracts import RepositoryError, Result
+from app.models.contracts import DomainPack, PackContract, RepositoryError, Result
 from app.models.identifiers import CorrelationId, OrganizationId, new_correlation_id, new_record_id
 from app.repositories.pack_repository import (
     AgentLifecycleStatus,
@@ -26,9 +26,7 @@ from app.repositories.pack_repository import (
     ValidationReport,
 )
 
-_IDENTIFIER_PATTERN: Final[re.Pattern[str]] = re.compile(
-    r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
-)
+_IDENTIFIER_PATTERN: Final[re.Pattern[str]] = re.compile(r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$")
 _PRODUCTION_ACTIVATION_FIELDS: Final[frozenset[str]] = frozenset(
     {
         "production_activation_requested",
@@ -36,6 +34,32 @@ _PRODUCTION_ACTIVATION_FIELDS: Final[frozenset[str]] = frozenset(
         "request_production_activation",
         "activate_in_production",
     }
+)
+_DIGEST_PATTERN: Final[re.Pattern[str]] = re.compile(r"^sha256:[^\s]+$", re.IGNORECASE)
+_EXECUTABLE_FIELDS: Final[frozenset[str]] = frozenset(
+    {
+        "code",
+        "executable",
+        "executable_code",
+        "package_code",
+        "source_code",
+        "entrypoint",
+        "handler",
+        "module",
+        "command",
+        "script",
+        "runtime",
+    }
+)
+_EXECUTABLE_EXTENSIONS: Final[tuple[str, ...]] = (
+    ".bat",
+    ".cmd",
+    ".dll",
+    ".exe",
+    ".js",
+    ".py",
+    ".sh",
+    ".ts",
 )
 
 
@@ -65,6 +89,25 @@ class DomainPackValidator:
 
     def validate(self, manifest: object) -> ValidationReport:
         """Return a full report without reading files or changing repository state."""
+        if isinstance(manifest, DomainPack):
+            typed_issues = self.validate_pack(
+                manifest,
+                PackContract(version=manifest.pack_contract_version),
+            )
+            agents = tuple(
+                PackAgentRecord(
+                    agent_id=str(agent_id),
+                    supplied_status=None,
+                    status=AgentLifecycleStatus.REGISTERED,
+                )
+                for agent_id in manifest.agents
+            )
+            return ValidationReport(
+                is_valid=not typed_issues,
+                canonical_pack_id=str(manifest.pack_id),
+                agents=agents,
+                issues=typed_issues,
+            )
         if not isinstance(manifest, Mapping):
             return ValidationReport(
                 is_valid=False,
@@ -85,6 +128,106 @@ class DomainPackValidator:
             agents=tuple(agent_records),
             issues=tuple(issues),
         )
+
+    def validate_pack(
+        self,
+        pack: DomainPack,
+        pack_contract: PackContract,
+        *,
+        raw_manifest: Mapping[str, object] | None = None,
+    ) -> tuple[ValidationIssue, ...]:
+        """Validate typed Pack_Contract fields and declarative-only package content."""
+        issues: list[ValidationIssue] = []
+        for category in pack_contract.validate(pack):
+            issues.append(
+                ValidationIssue(
+                    category,
+                    category,
+                    f"Pack_Contract field {category} did not validate.",
+                )
+            )
+        required_values = (
+            ("pack_id", str(pack.pack_id)),
+            ("immutable_version", pack.immutable_version),
+            ("content_digest", pack.content_digest),
+            ("signer_id", str(pack.signer_id)),
+            ("required_alc_version", pack.required_alc_version or ""),
+        )
+        for field, value in required_values:
+            if not value or not value.strip():
+                issues.append(ValidationIssue(field, field, f"{field} is required."))
+        if not _DIGEST_PATTERN.fullmatch(pack.content_digest):
+            issues.append(
+                ValidationIssue(
+                    "content_digest",
+                    "invalid_digest",
+                    "content_digest must be a non-empty sha256 content digest.",
+                )
+            )
+        for index, reference in enumerate(pack.asset_references):
+            if not self.is_valid_asset_reference(reference):
+                issues.append(
+                    ValidationIssue(
+                        f"asset_references[{index}]",
+                        "invalid_asset_reference",
+                        "Asset references must include a content digest.",
+                    )
+                )
+        executable_locations = self.executable_code_locations(raw_manifest or {})
+        issues.extend(
+            ValidationIssue(
+                location,
+                "executable_code",
+                "Executable package code is not permitted in a declarative Domain_Pack.",
+            )
+            for location in executable_locations
+        )
+        return tuple(issues)
+
+    @staticmethod
+    def is_valid_asset_reference(reference: str) -> bool:
+        """Return whether an asset reference carries an opaque version and digest."""
+        if not isinstance(reference, str) or not reference.strip():
+            return False
+        digest_marker = reference.lower().rfind("sha256:")
+        if digest_marker < 1:
+            return False
+        digest = reference[digest_marker:]
+        return bool(_DIGEST_PATTERN.fullmatch(digest)) and bool(reference[:digest_marker].strip())
+
+    @classmethod
+    def executable_code_locations(cls, value: object, path: str = "$") -> tuple[str, ...]:
+        """Find explicit executable-code declarations without executing package content."""
+        locations: list[str] = []
+        if isinstance(value, Mapping):
+            for key, child in value.items():
+                key_text = str(key).strip().casefold().replace("-", "_")
+                child_path = f"{path}.{key_text}"
+                if (key_text in _EXECUTABLE_FIELDS and cls._has_executable_value(child)) or (
+                    key_text in {"path", "filename", "file"}
+                    and isinstance(child, str)
+                    and child.casefold().endswith(_EXECUTABLE_EXTENSIONS)
+                ):
+                    locations.append(child_path)
+                locations.extend(cls.executable_code_locations(child, child_path))
+        elif isinstance(value, (list, tuple, set, frozenset)):
+            for index, child in enumerate(value):
+                locations.extend(cls.executable_code_locations(child, f"{path}[{index}]"))
+        return tuple(dict.fromkeys(locations))
+
+    @staticmethod
+    def _has_executable_value(value: object) -> bool:
+        if isinstance(value, bool):
+            return value
+        if value is None:
+            return False
+        if isinstance(value, str):
+            return bool(value.strip()) and value.strip().casefold() not in {"false", "none", "null"}
+        if isinstance(value, Mapping):
+            return bool(value)
+        if isinstance(value, (list, tuple, set, frozenset)):
+            return bool(value)
+        return True
 
     def register_inline(
         self,
@@ -138,9 +281,7 @@ class DomainPackValidator:
         self, raw_agents: object, issues: list[ValidationIssue]
     ) -> list[PackAgentRecord]:
         if not isinstance(raw_agents, list):
-            issues.append(
-                ValidationIssue("agents", "invalid_type", "Agents must be a JSON array.")
-            )
+            issues.append(ValidationIssue("agents", "invalid_type", "Agents must be a JSON array."))
             return []
         if not 1 <= len(raw_agents) <= 100:
             issues.append(

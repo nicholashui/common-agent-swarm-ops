@@ -1,18 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
-import { PATTERNS } from "../lib/demo-data";
+import type { CommandIntent } from "../lib/commands/CommandCoordinator";
+import type { GeneratedJsonObject } from "../lib/api/client";
+import {
+  createGraphCommandIntent,
+  mapComposerProjection,
+  type ComposerPatternView,
+  type GraphCommandPayload,
+} from "../lib/projections/graph-adapters";
 import { VersionPill } from "./design";
 
-const prompts = ["Daily market intelligence with verification", "YouTube cinematic pipeline with a quality loop", "DSE ICT adaptive tutor and assessment", "Parallel legacy code analysis"];
-const DEFAULT_PATTERN = PATTERNS[0];
+const DEFAULT_COMPOSER_PROJECTION = {
+  common_patterns: [
+    {
+      id: "pattern-parallel-verification-v1.4",
+      label: "Parallel research + verification",
+      immutable_version: "1.4",
+      provenance_reference: "prov:common-pattern:parallel-verification:1.4",
+      instantiation_action_reference: {
+        id: "instantiate-pattern-parallel-verification-v1.4",
+        label: "Instantiate pattern",
+        eligible: true,
+        kind: "instantiate",
+      },
+    },
+  ],
+} as const satisfies GeneratedJsonObject;
 
-if (!DEFAULT_PATTERN) throw new Error("The composer requires a default common pattern.");
+export interface ComposerProps {
+  readonly projection?: GeneratedJsonObject;
+  readonly onCommandIntent?: (intent: CommandIntent<GraphCommandPayload>) => void | Promise<void>;
+}
 
-export function Composer(): JSX.Element {
-  const [goal, setGoal] = useState("Build a daily market intelligence swarm with evidence verification and concise executive reporting.");
-  const [selectedPattern, setSelectedPattern] = useState<(typeof PATTERNS)[number]>(DEFAULT_PATTERN);
-  return <><header className="composer-header"><div><p className="eyebrow">NEW SWARM DRAFT</p><input aria-label="Swarm name" defaultValue="Market intelligence swarm" /></div><div className="button-row"><button className="button button--secondary" type="button">Save draft</button><Link className="button button--ghost" href="/">Close</Link></div></header><div className="composer-layout"><section className="composer-chat"><div className="architect-note"><span>✦</span><div><strong>Common Swarm Architect</strong><p>Recommends from the registry and prioritizes verification, parallelism, and efficient reuse.</p></div></div><div className="message message--user">{goal}</div><div className="message message--assistant"><p>I recommend <strong>{selectedPattern.name}</strong> because your source gathering and signal analysis can run independently before a final evidence check.</p><article className="recommendation"><div><VersionPill version={selectedPattern.version} label="Recommended pattern" /><h2>{selectedPattern.name}</h2><p>{selectedPattern.metrics}. Suggested linked agents: Market Sentinel v2.4, Research Verifier v1.8, and Content Director v3.1.</p></div><Link className="button button--primary" href="/canvas">Load into canvas <span>→</span></Link></article><p className="muted">Risk mitigation: require evidence on every material claim and pause before external actions.</p></div><div className="goal-chips">{prompts.map((prompt) => <button key={prompt} type="button" onClick={() => setGoal(prompt)}>{prompt}</button>)}</div><label className="composer-input"><textarea value={goal} onChange={(event) => setGoal(event.target.value)} aria-label="Describe your swarm goal" /><button className="button button--primary" type="button">Send <span>↑</span></button></label></section><aside className="pattern-browser"><div className="panel-heading"><div><p className="eyebrow">COMMON PATTERNS</p><h2>Pattern browser</h2></div><button className="icon-button" type="button" aria-label="Search patterns">⌕</button></div>{PATTERNS.map((pattern) => <button className={selectedPattern.id === pattern.id ? "pattern-option pattern-option--selected" : "pattern-option"} type="button" key={pattern.id} onClick={() => setSelectedPattern(pattern)}><div className="mini-graph mini-graph--compact" aria-hidden="true"><i /><i /><i /><b /><b /></div><div><VersionPill version={pattern.version} label="Pattern" /><strong>{pattern.name}</strong><span>{pattern.description}</span><em>{pattern.metrics}</em></div></button>)}</aside></div></>;
+export function Composer({ projection = DEFAULT_COMPOSER_PROJECTION, onCommandIntent }: ComposerProps): JSX.Element {
+  const composer = mapComposerProjection(projection);
+  const [selectedPatternId, setSelectedPatternId] = useState<string | undefined>(composer.patterns[0]?.id);
+  const selectedPattern = composer.patterns.find((pattern) => pattern.id === selectedPatternId);
+
+  return <><header className="composer-header"><div><p className="eyebrow">NEW SWARM DRAFT</p><h1>Swarm composer</h1><input aria-label="Swarm name" defaultValue="Untitled swarm" /></div><div className="button-row"><button className="button button--secondary" type="button">Save draft</button><Link className="button button--ghost" href="/">Close</Link></div></header><div className="composer-layout"><section className="composer-chat"><div className="architect-note"><span>✦</span><div><strong>Common Swarm Architect</strong><p>Compose from returned common patterns and their immutable provenance.</p></div></div>{selectedPattern === undefined ? <p className="muted">No authorized common pattern is available.</p> : <Recommendation pattern={selectedPattern} onCommandIntent={onCommandIntent} />}<label className="composer-input"><textarea aria-label="Describe your swarm goal" defaultValue="Build a daily market intelligence swarm with evidence verification." /><button className="button button--primary" type="button">Send <span>↑</span></button></label></section><aside className="pattern-browser"><div className="panel-heading"><div><p className="eyebrow">COMMON PATTERNS</p><h2>Pattern browser</h2></div></div>{composer.patterns.map((pattern) => <button aria-pressed={selectedPatternId === pattern.id} className={selectedPatternId === pattern.id ? "pattern-option pattern-option--selected" : "pattern-option"} key={pattern.id} onClick={(): void => setSelectedPatternId(pattern.id)} type="button"><div className="mini-graph mini-graph--compact" aria-hidden="true"><i /><i /><i /><b /><b /></div><div><VersionPill version={pattern.immutableVersion} label="Common pattern" /><strong>{pattern.label}</strong><span>Provenance: {pattern.provenanceReference}</span><em>Immutable version {pattern.immutableVersion}</em></div></button>)}</aside></div></>;
+}
+
+function Recommendation({ pattern, onCommandIntent }: { readonly pattern: ComposerPatternView; readonly onCommandIntent: ComposerProps["onCommandIntent"] }): JSX.Element {
+  const intent = pattern.instantiationAction === undefined ? undefined : createGraphCommandIntent(pattern.instantiationAction);
+  const disabled = intent === undefined || onCommandIntent === undefined;
+  return <div className="message message--assistant"><p>Recommended common pattern</p><article className="recommendation"><div><VersionPill version={pattern.immutableVersion} label="Common pattern" /><h2>{pattern.label}</h2><p>Provenance: {pattern.provenanceReference}</p></div>{pattern.instantiationAction === undefined ? null : <button className="button button--primary" disabled={disabled} onClick={(): void => {
+    if (intent !== undefined && onCommandIntent !== undefined) void onCommandIntent(intent);
+  }} type="button">{pattern.instantiationAction.label}</button>}</article></div>;
 }

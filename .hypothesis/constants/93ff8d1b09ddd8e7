@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\models\redaction.py
+# hypothesis_version: 6.151.12
+
+['[REDACTED]', '[^a-z0-9]+', '_', 'api_key', 'audit', 'authorization', 'credential', 'deployment_secret', 'diagnostic', 'error_response', 'log', 'metric', 'operational_event', 'password', 'private_key', 'prohibited_tool', 'protected_artifact', 'public_response', 'raw_prompt', 'secret', 'session_cookie', 'token', 'trace']

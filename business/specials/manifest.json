@@ -1,0 +1,140 @@
+{
+  "pack_id": "specials",
+  "agents": [
+    {
+      "agent_id": "specials.aesthetics-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.aesthetics-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.agent-loop-creator",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.agent-loop-creator/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.agentic-rag-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.agentic-rag-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.autotelic-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.autotelic-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.complex-problem-solution-process-model",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.complex-problem-solution-process-model/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.controller-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.controller-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.general-creative-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.general-creative-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.intent-analysis-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.intent-analysis-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.knowledge-router-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.knowledge-router-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.llm-usage",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.llm-usage/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.optimization-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.optimization-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.planner-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.planner-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.podcast-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.podcast-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.psychological-profile-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.psychological-profile-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.psychological-recommendation-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.psychological-recommendation-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.research-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.research-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.screenwriter-strategic-goal-achievement-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.screenwriter-strategic-goal-achievement-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.strategic-goal-achievement-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.strategic-goal-achievement-agent/agent_spec.json"
+    },
+    {
+      "agent_id": "specials.techology-advisor-agent",
+      "status": "draft",
+      "allowed_tools": [],
+      "production_activation_requested": false,
+      "agent_spec_path": "agents/specials.techology-advisor-agent/agent_spec.json"
+    }
+  ],
+  "production_activation_requested": false,
+  "inventory_required": false
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/podcast_agent.md",
+  "source_sha256": "f8a76576bd0b39c7a6aa4935532040d2c451b783804195f4149e1e38be761dd6",
+  "agent_id": "specials.podcast-agent",
+  "configuration_sha256": "417424cc7948beacbfd7b62c452eff0e024a8958896044f1c71912cef4aff4e7",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.podcast-agent"
+}

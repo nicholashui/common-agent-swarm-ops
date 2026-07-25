@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/research_agent.md",
+  "source_sha256": "7a15002c6e55f47c91013bebc226da1336703b6e1174dce497ecc7332d19cb20",
+  "agent_id": "specials.research-agent",
+  "configuration_sha256": "efd7cb7695516316c329efaf83f4671c5ef75462f90a5ed06c57f5b36450a313",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.research-agent"
+}

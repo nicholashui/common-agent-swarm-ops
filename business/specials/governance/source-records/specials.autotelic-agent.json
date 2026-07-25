@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/autotelic_agent.md",
+  "source_sha256": "02ef3331aafbc33342c3b489ff932a20bb44cda55267cea5fe271a0c66cc89f3",
+  "agent_id": "specials.autotelic-agent",
+  "configuration_sha256": "1b23f9c91a1a32767c7acee0e3a9a29f64b53ed22cb97692551b64f55ea3d35c",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.autotelic-agent"
+}

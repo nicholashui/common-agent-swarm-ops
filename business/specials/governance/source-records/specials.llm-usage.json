@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/llm_usage.md",
+  "source_sha256": "6bac2d5882382f1a85920b5854879cf295edb86fa5a48cfdbcd43c72c6fb97fd",
+  "agent_id": "specials.llm-usage",
+  "configuration_sha256": "08b8ab7101f8780e7353a7cd8167a95fce714793b6c5a957b6c0a2f210771c97",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.llm-usage"
+}

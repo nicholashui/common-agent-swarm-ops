@@ -1,8 +1,7 @@
-import { AppShell } from "../../components/AppShell";
-import { Registry } from "../../components/Registry";
+import { UnavailableScreen } from "../../components/UnavailableScreen";
 
 function RegistryPage(): JSX.Element {
-  return <AppShell><Registry /></AppShell>;
+  return <UnavailableScreen screenId="ui_07_registry_hub" />;
 }
 
 export default RegistryPage;

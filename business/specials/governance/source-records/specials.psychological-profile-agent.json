@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/psychological_profile_agent.md",
+  "source_sha256": "f1fa518cee669e11195bf6fcc62a63d2befa84c3d8c06a08afc22fecde9c495b",
+  "agent_id": "specials.psychological-profile-agent",
+  "configuration_sha256": "cb4219987ff1ea0f0f7bb1f36231a5daa0bf4d1024c7bf16bb8f34a365c8f484",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.psychological-profile-agent"
+}

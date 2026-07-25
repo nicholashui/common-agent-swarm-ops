@@ -113,7 +113,7 @@ def _register_and_create_run(fixture: ApiFixture) -> str:
     assert definition.status_code == 201
     run = fixture.client.post("/api/v1/workflows/ops.onboarding/run", json={"version": "1.0.0"})
     assert run.status_code == 201
-    return str(run.json()["run_id"])
+    return str(run.json()["data"]["run_id"])
 
 
 def test_resources_register_definitions_queue_runs_and_emit_preview_before_dispatch(
@@ -124,7 +124,7 @@ def test_resources_register_definitions_queue_runs_and_emit_preview_before_dispa
 
     topology = api_fixture.client.get("/api/v1/workflows/ops.onboarding/topology?version=1.0.0")
     assert topology.status_code == 200
-    assert topology.json()["nodes"] == [
+    assert topology.json()["data"]["nodes"] == [
         {"node_id": "step-1", "agent_id": "ops.planner", "tool_ids": ["crm.lookup"]}
     ]
 
@@ -133,30 +133,32 @@ def test_resources_register_definitions_queue_runs_and_emit_preview_before_dispa
         json={"run_id": run_id, "idempotency_key": "dispatch-1", "confirm": False},
     )
     assert preview.status_code == 200
-    assert preview.json()["executed"] is False
-    assert preview.json()["status"] == "queued"
+    assert preview.json()["data"]["executed"] is False
+    assert preview.json()["data"]["status"] == "queued"
 
     dispatched = api_fixture.client.post(
         "/api/v1/workflow-runs/dispatch",
         json={"run_id": run_id, "idempotency_key": "dispatch-1", "confirm": True},
     )
     assert dispatched.status_code == 200
-    assert dispatched.json()["executed"] is True
-    assert dispatched.json()["status"] == "dispatching"
+    assert dispatched.json()["data"]["executed"] is True
+    assert dispatched.json()["data"]["status"] == "dispatching"
 
     events = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}/events")
     assert events.status_code == 200
-    assert [event["kind"] for event in events.json()] == [
+    event_data = events.json()["data"]
+    assert [event["kind"] for event in event_data] == [
         "action_preview",
         "action_preview",
         "dispatch",
     ]
-    assert events.json()[1]["action_preview"]["action_id"] == f"dispatch:{run_id}"
+    assert event_data[1]["action_preview"]["action_id"] == f"dispatch:{run_id}"
 
     graph_state = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}/graph-state")
     assert graph_state.status_code == 200
-    assert graph_state.json()["status"] == "dispatching"
-    assert len(graph_state.json()["action_previews"]) == 2
+    graph_state_data = graph_state.json()["data"]
+    assert graph_state_data["status"] == "dispatching"
+    assert len(graph_state_data["action_previews"]) == 2
 
 
 def test_routes_scope_runs_to_trusted_context_and_reject_identity_overrides(
@@ -174,19 +176,20 @@ def test_routes_scope_runs_to_trusted_context_and_reject_identity_overrides(
             "actor_id": "attacker",
         },
     )
-    assert override_attempt.status_code == 422
+    assert override_attempt.status_code == 403
+    assert override_attempt.json()["error"]["code"] == "authorization_denied"
 
     foreign_context = AuthenticatedRequestContext(
         tenant_id=OrganizationId("other-org"),
         actor_id=ActorId("other-actor"),
         correlation_id=CorrelationId("corr-other"),
     )
-    api_fixture.application.dependency_overrides[get_authenticated_request_context] = (
-        lambda: foreign_context
+    api_fixture.application.dependency_overrides[get_authenticated_request_context] = lambda: (
+        foreign_context
     )
     foreign_read = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}")
-    assert foreign_read.status_code == 404
-    assert foreign_read.json()["detail"]["code"] == "not_found"
+    assert foreign_read.status_code == 403
+    assert foreign_read.json()["error"]["code"] == "authorization_denied"
 
 
 def test_approval_decision_uses_trusted_actor_and_redacts_raw_reason(
@@ -239,7 +242,7 @@ def test_approval_decision_uses_trusted_actor_and_redacts_raw_reason(
     )
 
     assert response.status_code == 200
-    body = response.json()
+    body = response.json()["data"]
     assert body["actor_id"] == "trusted-actor"
     assert body["resumed"] is True
     assert "reason" not in body
@@ -276,7 +279,7 @@ def test_approval_gate_preview_is_tenant_scoped_and_available_before_decision(
     preview = api_fixture.client.get(f"/api/v1/approvals/{gate.value.approval_id}")
 
     assert preview.status_code == 200
-    body = preview.json()
+    body = preview.json()["data"]
     assert body["run_id"] == run_id
     assert body["gate_status"] == "paused"
     assert body["action_preview"]["supporting_evidence"] == ["case-123"]
@@ -286,13 +289,13 @@ def test_approval_gate_preview_is_tenant_scoped_and_available_before_decision(
         actor_id=ActorId("other-actor"),
         correlation_id=CorrelationId("corr-other"),
     )
-    api_fixture.application.dependency_overrides[get_authenticated_request_context] = (
-        lambda: foreign_context
+    api_fixture.application.dependency_overrides[get_authenticated_request_context] = lambda: (
+        foreign_context
     )
     foreign_preview = api_fixture.client.get(f"/api/v1/approvals/{gate.value.approval_id}")
 
-    assert foreign_preview.status_code == 404
-    assert foreign_preview.json()["detail"]["code"] == "not_found"
+    assert foreign_preview.status_code == 403
+    assert foreign_preview.json()["error"]["code"] == "authorization_denied"
 
 
 def test_video_artifact_handoff_and_release_readiness_are_versioned_and_non_releasing(
@@ -315,23 +318,28 @@ def test_video_artifact_handoff_and_release_readiness_are_versioned_and_non_rele
         },
     )
     assert artifact.status_code == 201
-    artifact_version_id = artifact.json()["artifact_version_id"]
+    artifact_version_id = artifact.json()["data"]["artifact_version_id"]
 
     decision = api_fixture.client.post(
         f"/api/v1/video/artifacts/{artifact_version_id}/release-requests"
     )
     assert decision.status_code == 201
-    body = decision.json()
+    body = decision.json()["data"]
     assert body["decision"] == "denied"
     assert body["artifact_released"] is False
     assert {"rights_and_consent", "quality:sharpness"} <= set(body["unmet_conditions"])
+    assert body["correlation_id"] == str(CORRELATION_ID)
+    assert body["action_preview"]["supporting_evidence"]
+    assert body["action_preview"]["confidence"] == 1.0
+    assert body["action_preview"]["uncertainty"]
+    assert body["action_preview"]["correction_control"]
     assert body["action_preview"]["intended_effect"].endswith("no video artifact is released.")
 
     retained = api_fixture.client.get(
         f"/api/v1/video/release-requests/{body['release_request_id']}"
     )
     assert retained.status_code == 200
-    assert retained.json()["artifact_released"] is False
+    assert retained.json()["data"]["artifact_released"] is False
 
 
 def _seed_memory(
@@ -419,7 +427,7 @@ def test_memory_retrieval_uses_authenticated_scopes_and_redacts_internal_metadat
     )
 
     assert response.status_code == 200
-    body = response.json()
+    body = response.json()["data"]
     assert body["no_knowledge"] is False
     assert body["searched_tiers"] == ["tier-0-semantic"]
     assert {result["source_record_ids"][0] for result in body["results"]} == {
@@ -452,4 +460,43 @@ def test_memory_retrieval_is_confined_to_the_versioned_target_control_plane(
     assert unversioned.status_code == 404
     assert unversioned.json()["detail"]["code"] == "public_route_not_found"
     assert versioned.status_code == 200
-    assert versioned.json()["no_knowledge"] is True
+    assert versioned.json()["data"]["no_knowledge"] is True
+
+
+def test_confirmed_dispatch_replays_stored_response_and_rejects_key_substitution(
+    api_fixture: ApiFixture,
+) -> None:
+    """Matching dispatches replay without events; changed-digest reuse cannot dispatch again."""
+    first_run_id = _register_and_create_run(api_fixture)
+    first = api_fixture.client.post(
+        "/api/v1/workflow-runs/dispatch",
+        json={"run_id": first_run_id, "idempotency_key": "shared-key", "confirm": True},
+    )
+    duplicate = api_fixture.client.post(
+        "/api/v1/workflow-runs/dispatch",
+        json={"run_id": first_run_id, "idempotency_key": "shared-key", "confirm": True},
+    )
+    second_run = api_fixture.client.post(
+        "/api/v1/workflows/ops.onboarding/run", json={"version": "1.0.0"}
+    )
+    assert second_run.status_code == 201
+    second_run_id = second_run.json()["data"]["run_id"]
+    substituted = api_fixture.client.post(
+        "/api/v1/workflow-runs/dispatch",
+        json={"run_id": second_run_id, "idempotency_key": "shared-key", "confirm": True},
+    )
+
+    assert first.status_code == 200
+    assert duplicate.status_code == 200
+    assert duplicate.json()["data"] == first.json()["data"]
+    assert substituted.status_code == 409
+    assert substituted.json()["error"]["code"] == "conflict"
+
+    first_events = api_fixture.client.get(f"/api/v1/workflow-runs/{first_run_id}/events")
+    second_events = api_fixture.client.get(f"/api/v1/workflow-runs/{second_run_id}/events")
+    assert [event["kind"] for event in first_events.json()["data"]] == [
+        "action_preview",
+        "action_preview",
+        "dispatch",
+    ]
+    assert [event["kind"] for event in second_events.json()["data"]] == ["action_preview"]

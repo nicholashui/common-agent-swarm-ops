@@ -1,0 +1,6 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "data": { "run_id": "run-fixture-1", "status": "queued" },
+  "meta": { "correlation_id": "corr-fixture-1" },
+  "internal_trace": "must-not-reach-view-state"
+}

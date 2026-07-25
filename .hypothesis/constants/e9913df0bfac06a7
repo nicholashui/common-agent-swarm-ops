@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\workflows\validator.py
+# hypothesis_version: 6.151.12
+
+[100, 900, 'agent_id', 'authorization_id', 'definition_type', 'engine', 'execution_budget', 'id', 'max_handoffs', 'max_node_visits', 'max_tool_requests', 'memory', 'memory.reads', 'memory.writes', 'memory_reads', 'memory_writes', 'must be an object', 'must be unique', 'owner_id', 'pack_graph', 'plan_id', 'reads', 'risk_gate_ids', 'rollback', 'rollback.plan_id', 'steps', 'tool_ids', 'version', 'workflow_dna', 'writes']

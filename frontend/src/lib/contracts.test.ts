@@ -62,5 +62,35 @@ test("keeps every operator contract call inside the versioned Host namespace", a
   await api.getGraphState("run-1");
   await api.getApprovalGate("approval-1");
   assert.ok(paths.length === 3 && paths.every((path) => path.startsWith("/api/v1/")));
-  assert.throws(() => createOperatorApi({ baseUrl: "https://host.invalid/api" }), OperatorApiError);
+});
+
+test("E1 operator contract keeps redacted projections on same-origin versioned routes", async () => {
+  const calls: Array<{ readonly path: string; readonly method: string; readonly credentials: RequestCredentials | undefined; readonly body: string | undefined }> = [];
+  const api = createOperatorApi({ fetchImpl: async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    calls.push({ path: String(input), method: init?.method ?? "GET", credentials: init?.credentials, body: typeof init?.body === "string" ? init.body : undefined });
+    const path = String(input);
+    if (path.endsWith("/graph-state")) return Response.json({ run_id: "run-1", status: "waiting_for_approval", engine: "legacy", graph_id: null, graph_thread_id: null, updated_at: "2026-01-02T03:04:05Z", failure_code: null, tool_effects: [], action_previews: [preview] });
+    if (path.endsWith("/decision")) return Response.json({ approval_id: "approval-1", run_id: "run-1", actor_id: "host-derived", selected_value: "approved", reason_is_valid: true, value_is_valid: true, resumed: true, gate_status: "resumed", submitted_at: "2026-01-02T03:04:05Z", action_preview: preview });
+    if (path.includes("/approvals/")) return Response.json({ approval_id: "approval-1", run_id: "run-1", risk_tier: "critical", gate_status: "paused", created_at: "2026-01-02T03:04:05Z", action_preview: preview });
+    return Response.json({ run_id: "run-1", workflow_id: "workflow-1", workflow_version: "1", status: "queued", engine: "legacy", correlation_id: "corr-1", updated_at: "2026-01-02T03:04:05Z", output: { secret: "not rendered" }, failure_code: null, action_preview: null });
+  } });
+
+  const run = await api.getRun("run-1");
+  const graph = await api.getGraphState("run-1");
+  const gate = await api.getApprovalGate("approval-1");
+  const decision = await api.submitApprovalDecision("approval-1", "approved", "Reviewed locally.");
+
+  assert.equal("output" in run, false);
+  assert.equal(graph.action_previews[0]?.action_id, "action-1");
+  assert.equal(gate.gate_status, "paused");
+  assert.equal(decision.actor_id, "host-derived");
+  assert.ok(calls.every((call) => call.path.startsWith("/api/v1/")));
+  assert.ok(calls.every((call) => call.credentials === "include"));
+  assert.deepEqual(calls.map((call) => call.path), [
+    "/api/v1/workflow-runs/run-1",
+    "/api/v1/workflow-runs/run-1/graph-state",
+    "/api/v1/approvals/approval-1",
+    "/api/v1/approvals/approval-1/decision",
+  ]);
+  assert.equal(calls[3]?.body, JSON.stringify({ selected_value: "approved", reason: "Reviewed locally." }));
 });

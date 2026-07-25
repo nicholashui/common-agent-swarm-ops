@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\migration\__init__.py
+# hypothesis_version: 6.151.12
+
+['AgentSourceMapEntry', 'ApprovalReport', 'ApprovedImportFile', 'ApprovedImportSet', 'CommonContractReview', 'ContractComparison', 'ContractFileSnapshot', 'ContractSnapshot', 'CorpusManifestEntry', 'Finding', 'HistoricalProvenance', 'ImportCandidate', 'ImportDryRunReport', 'ImportFinding', 'ImportMode', 'KnowledgeSeedRecord', 'MappingStatus', 'MigrationEvidence', 'MigrationResult', 'ReviewResult', 'SourceSnapshot', 'SpecialSkillReview', 'verify_approval']

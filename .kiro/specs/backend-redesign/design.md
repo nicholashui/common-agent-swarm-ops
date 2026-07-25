@@ -1,6 +1,6 @@
 # Technical Design: Backend Redesign
 
-**Status:** Proposed design — requirements-first
+**Status:** Implemented and validated — requirements-first
 
 ## Overview
 

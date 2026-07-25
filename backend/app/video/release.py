@@ -101,7 +101,7 @@ class ReleaseService:
             self._metadata(organization_id, correlation_id),
             VideoArtifactId(artifact_id),
             VideoArtifactVersionId(str(new_record_id())),
-            parent_version_ids,
+            tuple(VideoArtifactVersionId(str(parent)) for parent in parent_version_ids),
             rights_and_consent_passed,
             provenance_and_signoff_passed,
             normalized_quality,

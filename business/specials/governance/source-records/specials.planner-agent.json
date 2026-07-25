@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/planner_agent.md",
+  "source_sha256": "8b69afb197418ecd41f2af3e502afa70e0b77a355dd511eeffc60151fd01af79",
+  "agent_id": "specials.planner-agent",
+  "configuration_sha256": "e7fd2462eaa9bbedc17d0ae8aa6484fa7ea909490c4cb0de1423c51d16f6ebd9",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.planner-agent"
+}

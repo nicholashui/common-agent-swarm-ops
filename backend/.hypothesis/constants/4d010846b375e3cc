@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\library_delegate.py
+# hypothesis_version: 6.151.12
+
+['-', '//', '_', 'actor', 'adapter', 'adapter-response', 'adapter_id', 'adapter_ids', 'allowed_tool_ids', 'api_key', 'apikey', 'approval', 'arguments', 'authority', 'authorization', 'client', 'command', 'cookie', 'create', 'credential', 'dispatch', 'endpoint', 'evaluate', 'evolve', 'executable', 'graph', 'host', 'identity', 'instruction', 'local-inline', 'organization', 'password', 'permission', 'permissions', 'policy', 'prompt', 'remote', 'resume', 'retrieve', 'role', 'script', 'secret', 'shell', 'supplied_values', 'tenant', 'token', 'tool', 'tool_id', 'tool_ids', 'untrusted-content', 'uri', 'url']

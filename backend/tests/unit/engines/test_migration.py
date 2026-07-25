@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
+from typing import cast
 
 from app.engines.legacy import LegacyEngine, LegacyStep, LegacyStepResult
 from app.engines.migration import LegacyEngineRetirement
@@ -107,9 +108,7 @@ class _RetiringExecutor:
     def execute(self, _run: RunRecord, step: LegacyStep) -> LegacyStepResult:
         self.calls.append(step.step_id)
         if step.step_id == "step-1":
-            retirement = self.retirement.assess_and_retire(
-                CORRELATION_ID, HASH, _gates()
-            )
+            retirement = self.retirement.assess_and_retire(CORRELATION_ID, HASH, _gates())
             assert retirement.is_success and retirement.value is not None
             assert retirement.value.retired_now
         return LegacyStepResult((_effect(step.step_id),))
@@ -161,3 +160,20 @@ def test_retirement_disables_new_and_active_legacy_execution_with_evidence() -> 
     assert executor.calls == ["step-1"]
     assert not retirement.is_available()
     assert not new_execution.is_success
+
+
+def test_unknown_gate_identity_is_rejected_without_retiring_legacy() -> None:
+    """Unrecognized proof names cannot satisfy the fixed migration gate set."""
+    retirement = _retirement()
+    unknown = MigrationGateEvidence(
+        gate=cast(MigrationGate, "future-gate"),
+        passed=True,
+        evidence_hashes=(HASH,),
+    )
+
+    result = retirement.assess_and_retire(CORRELATION_ID, HASH, (unknown,))
+
+    assert not result.is_success
+    assert result.error is not None
+    assert result.error.code.value == "validation_failed"
+    assert retirement.is_available()

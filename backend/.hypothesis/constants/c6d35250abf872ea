@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\governance\operational_containment.py
+# hypothesis_version: 6.151.12
+
+[',', 'approval', 'blocked', 'capacity-containment', 'channel', 'consent', 'continuity', 'denied', 'disable', 'disabled', 'enabled', 'failed', 'immutable_version', 'media_quality', 'missing', 'pack_id', 'pending', 'rejected', 'replace', 'rights', 'throttle', 'throttled', 'unsafe', 'workflow_id']

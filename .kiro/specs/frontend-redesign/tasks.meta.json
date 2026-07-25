@@ -1,0 +1,291 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "6.2 Implement dashboard, registry, agent/pattern detail, activity, monitoring, notifications, audit, profile, and evaluation renderers from shared projection primitives and generated filters.": [
+      {
+        "executionId": "01022451-2aa6-4d7e-a190-3df84fb0aa12",
+        "chatSessionId": "sess_87410950-4bec-42ff-913d-168751b594ff",
+        "timestamp": 1784797288298
+      },
+      {
+        "executionId": "01022451-2aa6-4d7e-a190-3df84fb0aa12",
+        "chatSessionId": "sess_87410950-4bec-42ff-913d-168751b594ff",
+        "timestamp": 1784800194539
+      }
+    ],
+    "6.3 Write the fast-check test for **Property 9: Common registry, activity, and graph metadata preserve returned provenance** with arbitrary common, task, filter, event, validation, and action-reference projections.": [
+      {
+        "executionId": "bc7cf185-70c7-42f0-93eb-d8141fa08ca4",
+        "chatSessionId": "sess_b1cdb861-5690-411c-9fe9-770a6cb6c9c0",
+        "timestamp": 1784805691401
+      },
+      {
+        "executionId": "bc7cf185-70c7-42f0-93eb-d8141fa08ca4",
+        "chatSessionId": "sess_b1cdb861-5690-411c-9fe9-770a6cb6c9c0",
+        "timestamp": 1784810979898
+      }
+    ],
+    "6.4 Implement composer and canvas graph adapters that present non-color edge semantics, common/custom provenance, exact task state, returned validation categories, and command-backed run/recovery actions.": [
+      {
+        "executionId": "a336c50a-0703-4eb6-8865-c8983ecf2fa7",
+        "chatSessionId": "sess_c31d3f74-9a95-444d-9cb5-a2052069889a",
+        "timestamp": 1784811219590
+      }
+    ],
+    "6.6 Implement approvals, rollout, and quality-evidence views that enforce evidence-revision refresh, stale irreversible-action blocking, distinct evidence categories, and returned rollout state/action presentation.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512533
+      },
+      {
+        "executionId": "1c5c512e-ba52-4d01-8b01-08fe847e3144",
+        "chatSessionId": "sess_dfe65de6-18d1-4ea9-ab8c-c50a0e617ad1",
+        "timestamp": 1784820108035
+      },
+      {
+        "executionId": "1c5c512e-ba52-4d01-8b01-08fe847e3144",
+        "chatSessionId": "sess_dfe65de6-18d1-4ea9-ab8c-c50a0e617ad1",
+        "timestamp": 1784822278931
+      }
+    ],
+    "6.7 Write the fast-check test for **Property 11: Approval and rollout UI remains evidence-bound** using arbitrary evidence revisions, evidence categories, rollout projections, and returned actions.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512647
+      },
+      {
+        "executionId": "e900be21-585e-494c-81f9-3028b8b05492",
+        "chatSessionId": "sess_858906cd-be09-4dea-9683-77621cf435cd",
+        "timestamp": 1784853787827
+      },
+      {
+        "executionId": "e900be21-585e-494c-81f9-3028b8b05492",
+        "chatSessionId": "sess_858906cd-be09-4dea-9683-77621cf435cd",
+        "timestamp": 1784854620706
+      }
+    ],
+    "6.8 Implement knowledge/artifact/import and conditional VA renderers that present only returned opaque/redacted data, exact import/rights/delivery state, blocked delivery, and generic fallback when VA data is absent.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512715
+      },
+      {
+        "executionId": "2fafbe3b-ffb3-42e5-8652-b4f8b5105f34",
+        "chatSessionId": "sess_a46fd330-cd8c-47e8-8b5a-6026ad8276b3",
+        "timestamp": 1784856079261
+      },
+      {
+        "executionId": "2fafbe3b-ffb3-42e5-8652-b4f8b5105f34",
+        "chatSessionId": "sess_a46fd330-cd8c-47e8-8b5a-6026ad8276b3",
+        "timestamp": 1784856610940
+      }
+    ],
+    "6.9 Write the fast-check test for **Property 13: VA adapters add returned domain information without inventing state** for present/absent VA projections and blocked-delivery conditions.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512765
+      },
+      {
+        "executionId": "bbf06482-0665-4d39-89fe-2e16bb320d13",
+        "chatSessionId": "sess_3991fb2b-3497-4e62-b78f-b061dc7f13f2",
+        "timestamp": 1784856809791
+      },
+      {
+        "executionId": "bbf06482-0665-4d39-89fe-2e16bb320d13",
+        "chatSessionId": "sess_3991fb2b-3497-4e62-b78f-b061dc7f13f2",
+        "timestamp": 1784856939949
+      }
+    ],
+    "6.10 Implement the `ui_01_login` `/login` authorized session-entry route; implement the remaining capability-gated approved routes—settings, developer API portal, onboarding, mobile companion, collaboration, costs, and blueprints—and register the legacy `/canvas` redirect.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512822
+      },
+      {
+        "executionId": "c02758c7-eca4-43eb-8a99-87a247b456b4",
+        "chatSessionId": "sess_985db535-3874-4a4a-a131-ebf057cec1e8",
+        "timestamp": 1784857021399
+      },
+      {
+        "executionId": "c02758c7-eca4-43eb-8a99-87a247b456b4",
+        "chatSessionId": "sess_985db535-3874-4a4a-a131-ebf057cec1e8",
+        "timestamp": 1784857556689
+      }
+    ],
+    "6.11 Add deterministic screen composition tests for representative dashboard, registry, activity, canvas, approval, rollout, artifact/knowledge, VA, capability-unavailable, and mobile projections.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512874
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855163
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857862952
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858095298
+      }
+    ],
+    "7.1 Implement the manifest verifier to produce exactly 21 complete inventory records, each linking the required capability mapping, baseline Markdown/SVG, route/shell, fixture, every baseline-specified viewport, deterministic fixture screenshot for each viewport, and its visual-comparison artifact; fail on any missing evidence.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512927
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855222
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858099777
+      }
+    ],
+    "7.2 Implement deterministic per-viewport screenshot capture and SVG-baseline raster/visual comparison with fixed fonts, assets, fixture values, and mismatch artifacts.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818512977
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855289
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858103612
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858869716
+      }
+    ],
+    "7.3 Add frontend CI evidence output that immutably records executed command, fixture version, result, screenshot, and visual-comparison artifact for every verification run.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818513063
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855387
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858108027
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858873869
+      }
+    ],
+    "7.4 Add focused automated tests for manifest count/completeness, required semantic regions and control order from every `ui_*.md` baseline at every manifest viewport, visual mismatch failure, CI evidence metadata, and all deterministic verification fixture scenarios.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818513134
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855472
+      },
+      {
+        "executionId": "c590673d-c56d-4583-acda-66437fe718d2",
+        "chatSessionId": "sess_e8df49c3-9d83-43e8-a6ed-c8c8e8e00aa7",
+        "timestamp": 1784861089087
+      },
+      {
+        "executionId": "c590673d-c56d-4583-acda-66437fe718d2",
+        "chatSessionId": "sess_e8df49c3-9d83-43e8-a6ed-c8c8e8e00aa7",
+        "timestamp": 1784861632625
+      }
+    ],
+    "8. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818513185
+      },
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784857855524
+      },
+      {
+        "executionId": "edac950b-b9a8-4108-933e-1696d3232c4e",
+        "chatSessionId": "sess_0bebf3ce-7c2b-4315-919c-109c3cdec069",
+        "timestamp": 1784861863617
+      },
+      {
+        "executionId": "f80dc92a-ead7-4056-8be6-b6403f5c10fe",
+        "chatSessionId": "sess_64304dcc-8e6b-4bea-b4a4-9d214264b3c6",
+        "timestamp": 1784862464470
+      },
+      {
+        "executionId": "f80dc92a-ead7-4056-8be6-b6403f5c10fe",
+        "chatSessionId": "sess_64304dcc-8e6b-4bea-b4a4-9d214264b3c6",
+        "timestamp": 1784862912818
+      }
+    ],
+    "6.5 Write the fast-check test for **Property 10: Graph rendering preserves semantic structure and execution eligibility** for arbitrary nodes, relation types, task states, and eligibility results.": [
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784818525950
+      },
+      {
+        "executionId": "5f1e2ca0-ce0c-4673-9562-1f9e07988608",
+        "chatSessionId": "sess_170281dd-4427-44c2-9f94-d03d885cf849",
+        "timestamp": 1784819817280
+      }
+    ],
+    "6. Compose authorized operational and domain-specific screens": [
+      {
+        "executionId": "ba27399c-3c96-4f50-b03c-9ac7688b841d",
+        "chatSessionId": "sess_4ae81e1f-8fd1-4928-be43-4b3227143219",
+        "timestamp": 1784858095406
+      }
+    ],
+    "line-specified viewport, deterministic fixture screenshot for each viewport, and its visual-comparison artifact; fail on any missing evidence.": [
+      {
+        "executionId": "452482c5-e321-492e-afff-0294a864f489",
+        "chatSessionId": "sess_a4f3f9bb-1e97-4508-be9e-e1b1f9cf8409",
+        "timestamp": 1784860238455
+      },
+      {
+        "executionId": "452482c5-e321-492e-afff-0294a864f489",
+        "chatSessionId": "sess_a4f3f9bb-1e97-4508-be9e-e1b1f9cf8409",
+        "timestamp": 1784860865575
+      }
+    ],
+    "7. Automate full inventory, visual, and immutable-evidence verification": [
+      {
+        "executionId": "c590673d-c56d-4583-acda-66437fe718d2",
+        "chatSessionId": "sess_e8df49c3-9d83-43e8-a6ed-c8c8e8e00aa7",
+        "timestamp": 1784861633492
+      }
+    ]
+  }
+}

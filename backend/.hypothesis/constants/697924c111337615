@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\configuration.py
+# hypothesis_version: 6.151.12
+
+['*', '/', 'configuration', 'credential', 'dispatch', 'environment', 'feature_flags', 'health', 'http', 'https', 'identity', 'not_configured', 'origins', 'password', 'persistence', 'rate_limits', 'retention', 'secret', 'secret_manager', 'token', 'unavailable', 'usable']

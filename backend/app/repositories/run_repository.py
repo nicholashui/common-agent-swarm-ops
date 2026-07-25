@@ -89,6 +89,7 @@ class InMemoryRunRepository:
                 or record.metadata.organization_id != transition.organization_id
                 or record.metadata.version != transition.expected_version + 1
                 or record.run_id != current.run_id
+                or record.provenance_id != current.provenance_id
             ):
                 return Result.failure(
                     self._error(

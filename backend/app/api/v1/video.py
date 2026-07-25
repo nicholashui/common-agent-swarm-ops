@@ -108,6 +108,16 @@ def _artifact_response(version: VideoArtifactVersion) -> VideoArtifactResponse:
 
 def _release_response(decision: ReleaseRequest) -> VideoReleaseRequestResponse:
     """Return all retained gate outcomes plus a no-effect action preview."""
+    supporting_evidence = tuple(
+        dict.fromkeys(
+            reference
+            for condition in decision.conditions
+            for reference in condition.evidence_references
+            if reference.strip()
+        )
+    )
+    if not supporting_evidence:
+        supporting_evidence = (f"release-request:{decision.release_request_id}",)
     return VideoReleaseRequestResponse(
         release_request_id=str(decision.release_request_id),
         artifact_version_id=str(decision.artifact_version_id),
@@ -123,11 +133,13 @@ def _release_response(decision: ReleaseRequest) -> VideoReleaseRequestResponse:
             for item in decision.conditions
         ],
         requested_at=decision.metadata.created_at,
+        correlation_id=str(decision.metadata.correlation_id),
         action_preview=ActionPreviewResponse(
             action_id=f"release-request:{decision.release_request_id}",
             summary="Validate retained local video release gates.",
             intended_effect=("A readiness decision is stored; no video artifact is released."),
             emitted_at=decision.metadata.created_at,
+            supporting_evidence=list(supporting_evidence),
             confidence=1.0,
             uncertainty=(
                 "This control plane does not invoke media providers or release artifacts."

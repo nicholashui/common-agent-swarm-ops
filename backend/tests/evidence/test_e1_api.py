@@ -18,9 +18,15 @@ from app.main import API_V1_PREFIX, create_app
 from app.models.common import OptimisticTransition
 from app.models.identifiers import ActorId, ApprovalId, CorrelationId, OrganizationId, RunId
 from app.models.redaction import REDACTED
+from app.models.runs import RunRecord
 
 ORGANIZATION_ID = OrganizationId("org-e1-api")
 CORRELATION_ID = CorrelationId("corr-e1-api")
+
+
+def _raise_during_dispatch(_record: RunRecord) -> None:
+    """Make the local dispatch starter fail without touching external resources."""
+    raise RuntimeError("deterministic E1 dispatch failure")
 
 
 @dataclass
@@ -100,9 +106,10 @@ def _register_and_queue_run(fixture: ApiFixture) -> str:
     assert definition.status_code == 201
     created = fixture.client.post("/api/v1/workflows/ops.e1-api/run", json={"version": "1.0.0"})
     assert created.status_code == 201
-    assert created.json()["status"] == "queued"
-    assert created.json()["engine"] == "legacy"
-    return str(created.json()["run_id"])
+    created_data = created.json()["data"]
+    assert created_data["status"] == "queued"
+    assert created_data["engine"] == "legacy"
+    return str(created_data["run_id"])
 
 
 def _set_sensitive_output(fixture: ApiFixture, run_id: str) -> None:
@@ -147,31 +154,89 @@ def test_e1_api_exposes_only_versioned_routes_and_observes_queue_dispatch(
         json={"run_id": run_id, "idempotency_key": "e1-dispatch", "confirm": False},
     )
     assert preview.status_code == 200
-    assert preview.json()["status"] == "queued"
-    assert preview.json()["executed"] is False
+    preview_data = preview.json()["data"]
+    assert preview_data["status"] == "queued"
+    assert preview_data["executed"] is False
 
     dispatched = api_fixture.client.post(
         "/api/v1/workflow-runs/dispatch",
         json={"run_id": run_id, "idempotency_key": "e1-dispatch", "confirm": True},
     )
     assert dispatched.status_code == 200
-    assert dispatched.json()["status"] == "dispatching"
-    assert dispatched.json()["executed"] is True
+    dispatched_data = dispatched.json()["data"]
+    assert dispatched_data["status"] == "dispatching"
+    assert dispatched_data["executed"] is True
 
     events = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}/events")
     assert events.status_code == 200
-    assert [event["kind"] for event in events.json()] == [
+    event_data = events.json()["data"]
+    assert [event["kind"] for event in event_data] == [
         "action_preview",
         "action_preview",
         "dispatch",
     ]
-    assert events.json()[1]["action_preview"]["supporting_evidence"] == [
+    assert event_data[1]["action_preview"]["supporting_evidence"] == [
         stored.value.workflow_definition_digest
     ]
     graph_state = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}/graph-state")
     assert graph_state.status_code == 200
-    assert graph_state.json()["status"] == "dispatching"
-    assert len(graph_state.json()["action_previews"]) == 2
+    graph_state_data = graph_state.json()["data"]
+    assert graph_state_data["status"] == "dispatching"
+    assert len(graph_state_data["action_previews"]) == 2
+
+
+def test_e1_api_rejects_invalid_definitions_before_run_persistence(
+    api_fixture: ApiFixture,
+) -> None:
+    """Invalid workflow DNA is rejected without creating a queued or dispatchable run."""
+    registered = api_fixture.client.post("/api/v1/domains/register", json={"manifest": _manifest()})
+    assert registered.status_code == 200
+
+    invalid_definition = _definition()
+    invalid_definition["steps"] = []
+    definition = api_fixture.client.post(
+        "/api/v1/workflows/definitions", json={"definition": invalid_definition}
+    )
+
+    assert definition.status_code == 422
+    assert definition.json()["error"]["code"] == "validation_failed"
+    run = api_fixture.client.post("/api/v1/workflows/ops.e1-api/run", json={"version": "1.0.0"})
+    assert run.status_code == 403
+    assert run.json()["error"]["code"] == "authorization_denied"
+
+
+def test_e1_api_retains_queued_run_after_dispatch_failure() -> None:
+    """A failed local starter leaves a durable queued record and permits a later retry."""
+    application = create_app()
+    services = ControlPlaneServices(starter=_raise_during_dispatch)
+    context = AuthenticatedRequestContext(
+        tenant_id=ORGANIZATION_ID,
+        actor_id=ActorId("e1-failing-operator"),
+        correlation_id=CORRELATION_ID,
+    )
+    application.dependency_overrides[get_authenticated_request_context] = lambda: context
+    application.dependency_overrides[get_control_plane_services] = lambda: services
+    try:
+        with TestClient(application) as client:
+            local_fixture = ApiFixture(application, client, services, context)
+            run_id = _register_and_queue_run(local_fixture)
+            failed_dispatch = client.post(
+                "/api/v1/workflow-runs/dispatch",
+                json={"run_id": run_id, "idempotency_key": "e1-failing-dispatch", "confirm": True},
+            )
+
+            assert failed_dispatch.status_code == 200
+            failed_data = failed_dispatch.json()["data"]
+            assert failed_data["status"] == "queued"
+            assert failed_data["executed"] is True
+            assert failed_data["retry_permitted"] is True
+            retained = services.run_repository.get_by_run_id(ORGANIZATION_ID, RunId(run_id))
+            assert retained.is_success and retained.value is not None
+            assert retained.value.status.value == "queued"
+            assert retained.value.dispatch_attempts[-1].failure_code is not None
+            assert retained.value.dispatch_attempts[-1].failure_code == "repository_unavailable"
+    finally:
+        application.dependency_overrides.clear()
 
 
 def test_e1_api_scopes_tenants_redacts_output_and_retains_paused_approval(
@@ -188,7 +253,7 @@ def test_e1_api_scopes_tenants_redacts_output_and_retains_paused_approval(
 
     read_run = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}")
     assert read_run.status_code == 200
-    assert read_run.json()["output"] == {
+    assert read_run.json()["data"]["output"] == {
         "api_token": REDACTED,
         "summary": "operator-safe summary",
     }
@@ -230,31 +295,45 @@ def test_e1_api_scopes_tenants_redacts_output_and_retains_paused_approval(
 
     approval_preview = api_fixture.client.get(f"/api/v1/approvals/{gate.approval_id}")
     assert approval_preview.status_code == 200
-    assert approval_preview.json()["gate_status"] == "paused"
-    assert approval_preview.json()["action_preview"]["action_id"] == "e1-crm-update"
+    approval_preview_data = approval_preview.json()["data"]
+    assert approval_preview_data["gate_status"] == "paused"
+    assert approval_preview_data["action_preview"]["action_id"] == "e1-crm-update"
+    invalid_decision = api_fixture.client.post(
+        f"/api/v1/approvals/{gate.approval_id}/decision",
+        json={"selected_value": "pending", "reason": "x" * 1001},
+    )
+    assert invalid_decision.status_code == 200
+    invalid_data = invalid_decision.json()["data"]
+    assert invalid_data["selected_value"] == "pending"
+    assert invalid_data["reason_is_valid"] is False
+    assert invalid_data["value_is_valid"] is False
+    assert invalid_data["resumed"] is False
+    assert invalid_data["gate_status"] == "paused"
+    assert "x" * 1001 not in invalid_decision.text
     decision = api_fixture.client.post(
         f"/api/v1/approvals/{gate.approval_id}/decision",
         json={"selected_value": "denied", "reason": "Needs human review."},
     )
     assert decision.status_code == 200
-    assert decision.json()["actor_id"] == "e1-operator"
-    assert decision.json()["resumed"] is False
-    assert decision.json()["gate_status"] == "paused"
-    assert "reason" not in decision.json()
+    decision_data = decision.json()["data"]
+    assert decision_data["actor_id"] == "e1-operator"
+    assert decision_data["resumed"] is False
+    assert decision_data["gate_status"] == "paused"
+    assert "reason" not in decision_data
 
     foreign_context = AuthenticatedRequestContext(
         tenant_id=OrganizationId("org-e1-foreign"),
         actor_id=ActorId("foreign-operator"),
         correlation_id=CorrelationId("corr-e1-foreign"),
     )
-    api_fixture.application.dependency_overrides[get_authenticated_request_context] = (
-        lambda: foreign_context
+    api_fixture.application.dependency_overrides[get_authenticated_request_context] = lambda: (
+        foreign_context
     )
     foreign_run = api_fixture.client.get(f"/api/v1/workflow-runs/{run_id}")
     foreign_approval = api_fixture.client.get(f"/api/v1/approvals/{ApprovalId(gate.approval_id)}")
 
-    assert foreign_run.status_code == 404
-    assert foreign_approval.status_code == 404
-    assert foreign_run.json()["detail"]["code"] == "not_found"
-    assert foreign_approval.json()["detail"]["code"] == "not_found"
+    assert foreign_run.status_code == 403
+    assert foreign_approval.status_code == 403
+    assert foreign_run.json()["error"]["code"] == "authorization_denied"
+    assert foreign_approval.json()["error"]["code"] == "authorization_denied"
     assert "e1-secret" not in foreign_run.text

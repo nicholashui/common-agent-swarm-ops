@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\schemas.py
+# hypothesis_version: 6.151.12
+
+[100, 200, 500, 1000, 2000, 2048, '.*\\S.*', 'ResponseData', 'active', 'allowed', 'cataloged', 'create_run', 'decrease', 'denied', 'disable', 'dispatch_run', 'evaluate_run', 'forbid', 'increase', 'integration', 'permitted', 'production_proven', 'property', 'registered', 'resume_run', 'schema', 'throttle', 'tier-0-semantic', 'tier-1-relationship', 'tier-2-synthesis', 'unit']

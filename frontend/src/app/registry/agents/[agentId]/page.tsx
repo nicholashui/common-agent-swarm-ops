@@ -1,8 +1,7 @@
-import { AgentDetail } from "../../../../components/AgentDetail";
-import { AppShell } from "../../../../components/AppShell";
+import { UnavailableScreen } from "../../../../components/UnavailableScreen";
 
-function AgentDetailPage({ params }: { readonly params: { readonly agentId: string } }): JSX.Element {
-  return <AppShell><AgentDetail agentId={params.agentId} /></AppShell>;
+function AgentDetailPage(): JSX.Element {
+  return <UnavailableScreen screenId="ui_05_agent_detail" />;
 }
 
 export default AgentDetailPage;

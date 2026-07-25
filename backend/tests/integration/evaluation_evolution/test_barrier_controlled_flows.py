@@ -1,4 +1,7 @@
-"""Barrier-controlled local integration coverage for evaluation and sandbox evolution."""
+"""Barrier-controlled local integration coverage for evaluation and sandbox evolution.
+
+Coverage trace: Requirements 7.4-7.8, 7.10, 8.3-8.4, 8.7, and 10.1.
+"""
 
 from __future__ import annotations
 
@@ -46,6 +49,26 @@ ACTOR_ID = ActorId("local-approver")
 MISSING_ROLLBACK_ID = RollbackRecordId("missing-rollback")
 MISSING_CANARY_ID = CanaryId("missing-canary")
 MISSING_APPROVAL_ID = PromotionApprovalId("missing-approval")
+
+
+@dataclass(slots=True)
+class LocalTransitionBarrier:
+    """Deterministic transition gate that can be stopped while already in progress."""
+
+    transition_started: bool = False
+    blocked: bool = False
+
+    def start(self) -> None:
+        """Start a guarded transition before evaluation begins."""
+        self.transition_started = True
+
+    def block(self) -> None:
+        """Latch the barrier so an in-progress transition cannot commit."""
+        self.blocked = True
+
+    def may_commit(self) -> bool:
+        """Return whether the in-progress transition remains allowed to commit."""
+        return self.transition_started and not self.blocked
 
 
 @dataclass(frozen=True, slots=True)
@@ -160,14 +183,18 @@ def _assess(
 def test_blocking_failure_latches_the_transition_barrier_while_nonblocking_checks_finish() -> None:
     """A failed blocker immediately closes the current barrier without aborting later checks."""
     fakes = _local_fakes()
+    barrier = LocalTransitionBarrier()
+    barrier.start()
     executions: list[tuple[str, EvaluationCheckKind, bool]] = []
+    barrier_observations: list[bool] = []
 
     def executor(task_id: str, check_kind: EvaluationCheckKind) -> EvaluationOutcome:
-        executions.append(
-            (task_id, check_kind, fakes.evaluations.current_transition_permitted())
-        )
+        executions.append((task_id, check_kind, fakes.evaluations.current_transition_permitted()))
         if task_id == "golden-001" and check_kind is EvaluationCheckKind.REGRESSION:
+            barrier.block()
             return EvaluationOutcome.FAIL
+        if barrier.blocked:
+            barrier_observations.append(barrier.may_commit())
         return EvaluationOutcome.PASS
 
     result = fakes.evaluation_service.run_suite(
@@ -183,10 +210,21 @@ def test_blocking_failure_latches_the_transition_barrier_while_nonblocking_check
         for index, execution in enumerate(executions)
         if execution[:2] == ("golden-001", EvaluationCheckKind.REGRESSION)
     )
+    assert barrier.transition_started
+    assert barrier.blocked
+    assert not barrier.may_commit()
+    assert barrier_observations
+    assert all(not may_commit for may_commit in barrier_observations)
     assert not result.value.transition_permitted
     assert not fakes.evaluations.current_transition_permitted()
     assert len(result.value.results) == len(result.value.task_ids) * len(result.value.checks)
-    assert all(not permitted for _, _, permitted in executions[failed_index + 1 :])
+    post_failure_checks = executions[failed_index + 1 :]
+    assert post_failure_checks
+    assert any(
+        check_kind in {EvaluationCheckKind.COST, EvaluationCheckKind.LATENCY}
+        for _, check_kind, _ in post_failure_checks
+    )
+    assert all(not permitted for _, _, permitted in post_failure_checks)
     assert any(
         not cell.blocking and cell.outcome is EvaluationOutcome.PASS
         for cell in result.value.results
@@ -195,9 +233,7 @@ def test_blocking_failure_latches_the_transition_barrier_while_nonblocking_check
 
 def test_product_bar_without_e1_pass_is_incomplete_even_when_other_entries_pass() -> None:
     """Independent Product-Bar entries cannot imply a missing E1 pass."""
-    service = ProductBarEvidenceService(
-        InMemoryProductBarEvidenceRepository(), clock=lambda: NOW
-    )
+    service = ProductBarEvidenceService(InMemoryProductBarEvidenceRepository(), clock=lambda: NOW)
     for criterion in tuple(ProductBarCriterion)[1:]:
         recorded = service.record_evidence(
             ORGANIZATION_ID,
@@ -214,9 +250,7 @@ def test_product_bar_without_e1_pass_is_incomplete_even_when_other_entries_pass(
     assert assessment.is_success and assessment.value is not None
     assert assessment.value.status is ProductBarStatus.INCOMPLETE
     e1_entry = next(
-        entry
-        for entry in assessment.value.entries
-        if entry.criterion is ProductBarCriterion.E1
+        entry for entry in assessment.value.entries if entry.criterion is ProductBarCriterion.E1
     )
     assert e1_entry.outcome is ProductBarEvidenceOutcome.FAIL
     assert not e1_entry.evidence_ids
@@ -342,9 +376,7 @@ def test_single_fully_evidenced_candidate_is_permitted_without_production_mutati
     assert assessment.value.decision is PromotionDecision.PERMITTED
     assert not assessment.value.missing_or_failed_conditions
     assert assessment.value.production_applied is False
-    assert fakes.evolution.promotion_permitted(
-        ORGANIZATION_ID, assessment.value.assessment_id
-    )
+    assert fakes.evolution.promotion_permitted(ORGANIZATION_ID, assessment.value.assessment_id)
 
 
 def test_versioned_evolution_api_derives_tenancy_from_trusted_context() -> None:
@@ -358,9 +390,9 @@ def test_versioned_evolution_api_derives_tenancy_from_trusted_context() -> None:
             correlation_id=CorrelationId("owner-correlation"),
         )
     }
-    application.dependency_overrides[get_authenticated_request_context] = (
-        lambda: contexts["current"]
-    )
+    application.dependency_overrides[get_authenticated_request_context] = lambda: contexts[
+        "current"
+    ]
     application.dependency_overrides[get_control_plane_services] = lambda: services
 
     try:
@@ -375,7 +407,7 @@ def test_versioned_evolution_api_derives_tenancy_from_trusted_context() -> None:
                 },
             )
             assert created.status_code == 201
-            variant_id = str(created.json()["variant_id"])
+            variant_id = str(created.json()["data"]["variant_id"])
 
             contexts["current"] = AuthenticatedRequestContext(
                 tenant_id=OrganizationId("org-api-foreign"),
@@ -383,8 +415,8 @@ def test_versioned_evolution_api_derives_tenancy_from_trusted_context() -> None:
                 correlation_id=CorrelationId("foreign-correlation"),
             )
             foreign_consider = client.post(f"/api/v1/evolution/variants/{variant_id}/consider")
-            assert foreign_consider.status_code == 404
-            assert foreign_consider.json()["detail"]["code"] == "not_found"
+            assert foreign_consider.status_code == 403
+            assert foreign_consider.json()["error"]["code"] == "authorization_denied"
 
             unversioned = client.post(f"/evolution/variants/{variant_id}/consider")
             assert unversioned.status_code == 404

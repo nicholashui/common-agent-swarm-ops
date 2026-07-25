@@ -8,9 +8,9 @@
 - [x] 6. Curate user-approved ECC documentation-only skills with attribution and scoped Kiro/Claude sync (REQ-6).
 
 ## Validation
-- [ ] `npm test`
-- [ ] `npm run doctor`
-- [ ] `npm run security`
-- [ ] `npm run sync -- --dry-run`
-- [ ] `npm run sync:check`
-- [ ] `npm run sdd:check`
+- [x] `npm test`
+- [x] `npm run doctor`
+- [x] `npm run security`
+- [x] `npm run sync -- --dry-run`
+- [x] `npm run sync:check`
+- [x] `npm run sdd:check`

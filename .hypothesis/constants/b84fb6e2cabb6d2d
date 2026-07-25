@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\repositories\control_plane.py
+# hypothesis_version: 6.151.12
+
+['Agent version', 'Approval gate', 'Artifact handoff', 'Idempotency record', 'Import record', 'Improvement proposal', 'Operational event', 'Pattern version', 'Quality evidence', 'Rollout campaign', 'Run provenance', 'Task', 'Task already exists.', 'Work item']

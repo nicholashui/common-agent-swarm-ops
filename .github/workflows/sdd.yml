@@ -6,7 +6,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '20' }
+        with: { node-version: "20" }
       - run: npm run sdd:check
       - run: npm test
       - run: npm run sync:check
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: frontend
+      - name: Run frontend verification with immutable evidence
+        run: npm run verify:evidence
+        working-directory: frontend
+        env:
+          FRONTEND_VERIFICATION_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload frontend verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-verification-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: frontend/artifacts/frontend-verification/
+          if-no-files-found: error

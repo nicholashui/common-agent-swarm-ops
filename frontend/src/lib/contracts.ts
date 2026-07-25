@@ -93,7 +93,6 @@ export interface OperatorApi {
 }
 
 interface ClientOptions {
-  readonly baseUrl?: string;
   readonly fetchImpl?: FetchLike;
 }
 
@@ -103,16 +102,19 @@ type JsonParser<T> = (value: unknown) => T;
 const API_PREFIX = "/api/v1/";
 
 export function createOperatorApi(options: ClientOptions = {}): OperatorApi {
-  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
-  const baseUrl = normalizeBaseUrl(options.baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? "");
+  const fetchImpl = options.fetchImpl ?? unavailableLegacyRequest;
   return {
-    getRun: (runId: string): Promise<RunProjection> => request(fetchImpl, baseUrl, runPath(runId), undefined, parseRunProjection),
-    getGraphState: (runId: string): Promise<GraphState> => request(fetchImpl, baseUrl, `${runPath(runId)}/graph-state`, undefined, parseGraphState),
-    getApprovalGate: (approvalId: string): Promise<ApprovalGate> => request(fetchImpl, baseUrl, approvalPath(approvalId), undefined, parseApprovalGate),
+    getRun: (runId: string): Promise<RunProjection> => request(fetchImpl, "", runPath(runId), undefined, parseRunProjection),
+    getGraphState: (runId: string): Promise<GraphState> => request(fetchImpl, "", `${runPath(runId)}/graph-state`, undefined, parseGraphState),
+    getApprovalGate: (approvalId: string): Promise<ApprovalGate> => request(fetchImpl, "", approvalPath(approvalId), undefined, parseApprovalGate),
     submitApprovalDecision: (approvalId: string, value: ApprovalValue, reason: string): Promise<ApprovalDecision> => request(
-      fetchImpl, baseUrl, `${approvalPath(approvalId)}/decision`, { method: "POST", body: JSON.stringify({ selected_value: value, reason }) }, parseApprovalDecision,
+      fetchImpl, "", `${approvalPath(approvalId)}/decision`, { method: "POST", body: JSON.stringify({ selected_value: value, reason }) }, parseApprovalDecision,
     ),
   };
+}
+
+function unavailableLegacyRequest(): Promise<Response> {
+  return Promise.reject(new Error("Legacy operator API requires an injected transport."));
 }
 
 export function operatorCorrection(error: unknown): string {
@@ -228,15 +230,6 @@ function identifier(value: string, name: string): string {
   const normalized = value.trim();
   if (normalized.length === 0 || normalized.length > 100) throw clientError("validation_failed", 0, `Invalid ${name}.`);
   return normalized;
-}
-
-function normalizeBaseUrl(value: string): string {
-  if (value.length === 0) return "";
-  let url: URL;
-  try { url = new URL(value); }
-  catch { throw clientError("client_configuration", 0, "Invalid API base URL."); }
-  if ((url.protocol !== "http:" && url.protocol !== "https:") || url.pathname !== "/" || url.search || url.hash) throw clientError("client_configuration", 0, "Invalid API base URL.");
-  return url.origin;
 }
 
 function apiUrl(baseUrl: string, path: string): string {

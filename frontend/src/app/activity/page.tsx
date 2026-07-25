@@ -1,8 +1,7 @@
-import { Activity } from "../../components/Activity";
-import { AppShell } from "../../components/AppShell";
+import { UnavailableScreen } from "../../components/UnavailableScreen";
 
 function ActivityPage(): JSX.Element {
-  return <AppShell><Activity /></AppShell>;
+  return <UnavailableScreen screenId="ui_06_activity" />;
 }
 
 export default ActivityPage;

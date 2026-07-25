@@ -16,9 +16,12 @@ from app.governance.authorization import (
     AuthorizationContext,
     AuthorizationDecision,
     AuthorizationService,
+    DataAccessRequest,
+    OutboundRequest,
     ToolInputValidationError,
     ToolInputValue,
     canonical_tool_input,
+    is_safe_outbound_destination,
     is_safe_tool_identifier,
     normalize_tool_input,
 )
@@ -40,6 +43,7 @@ class BrokerDenialReason(StrEnum):
     INVALID_TOOL_IDENTIFIER = "invalid_tool_identifier"
     LOCAL_ADAPTER_NOT_ALLOWLISTED = "local_adapter_not_allowlisted"
     INVALID_TOOL_INPUT = "invalid_tool_input"
+    UNDECLARED_OUTBOUND_DESTINATION = "undeclared_outbound_destination"
 
 
 @dataclass(frozen=True, slots=True)
@@ -80,6 +84,46 @@ class ToolRequest:
 
     adapter_id: str
     arguments: Mapping[str, object]
+    outbound_destination: str | None = None
+    data_access: DataAccessRequest | None = None
+    # Flattened fields are accepted for callers that construct requests from transport data.
+    # They are converted into a scope request before an adapter can be dispatched.
+    organization_id: str | None = None
+    domain_id: str | None = None
+    pack_version: str | None = None
+    agent_id: str | None = None
+    memory_scope: str | None = None
+
+    def access_request(self) -> DataAccessRequest | None:
+        """Return the structured access target, rejecting partial transport scopes."""
+        values = (
+            self.organization_id,
+            self.domain_id,
+            self.pack_version,
+            self.agent_id,
+            self.memory_scope,
+        )
+        if self.data_access is not None:
+            if any(value is not None for value in values):
+                return None
+            return self.data_access
+        if all(value is None for value in values):
+            return None
+        if not all(isinstance(value, str) and value for value in values):
+            return None
+        organization_id, domain_id, pack_version, agent_id, memory_scope = values
+        assert isinstance(organization_id, str)
+        assert isinstance(domain_id, str)
+        assert isinstance(pack_version, str)
+        assert isinstance(agent_id, str)
+        assert isinstance(memory_scope, str)
+        return DataAccessRequest(
+            organization_id=organization_id,
+            domain_id=domain_id,
+            pack_version=pack_version,
+            agent_id=agent_id,
+            memory_scope=memory_scope,
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -131,6 +175,35 @@ class HostToolBroker:
         self._audit_writer = audit_writer
         self._authorization_service = authorization_service or AuthorizationService()
 
+    def authorize_data_access(
+        self, request: DataAccessRequest, context: AuthorizationContext
+    ) -> AuthorizationDecision:
+        """Evaluate and audit a data-access denial before data can be returned."""
+        decision = self._authorization_service.authorize_data_access(context, request)
+        if not decision.permitted:
+            self._record_denial(context, decision, (), operation="data.access")
+        return decision
+
+    def authorize_outbound(
+        self, request: OutboundRequest, context: AuthorizationContext
+    ) -> AuthorizationDecision:
+        """Evaluate and audit an outbound destination before dispatch can begin."""
+        decision = self._authorization_service.authorize_outbound(context, request.destination)
+        if not decision.permitted:
+            self._record_denial(
+                context,
+                decision,
+                (BrokerDenialReason.UNDECLARED_OUTBOUND_DESTINATION,),
+                operation="outbound.request",
+            )
+        return decision
+
+    def request_outbound(
+        self, request: OutboundRequest, context: AuthorizationContext
+    ) -> AuthorizationDecision:
+        """Authorize an outbound request without exposing a raw external dispatcher."""
+        return self.authorize_outbound(request, context)
+
     def request_tool(
         self,
         request: ToolRequest,
@@ -138,11 +211,19 @@ class HostToolBroker:
     ) -> ToolInvocationResult:
         """Evaluate this request afresh before any local adapter invocation.
 
-        No previous result is consulted. Every denied request attempts an append-only audit
-        record, while any audit failure remains a denial with no adapter invocation.
+        Organization, domain, pack-version, agent, memory, tool, and outbound checks all
+        complete before an adapter is resolved or dispatched. No previous result is consulted.
+        Every denied request attempts an append-only audit, while any audit failure remains a
+        denial with no adapter invocation.
         """
-        decision = self._authorization_service.evaluate(context, request.adapter_id)
-        denial_reasons = self._request_denial_reasons(request)
+        access_request = request.access_request()
+        decision = self._authorization_service.evaluate(
+            context,
+            request.adapter_id,
+            data_access=access_request,
+            outbound_destination=request.outbound_destination,
+        )
+        denial_reasons = self._request_denial_reasons(request, access_request, context)
         adapter = self._adapters.get(request.adapter_id)
         if adapter is None:
             return self._denied_result(
@@ -179,11 +260,35 @@ class HostToolBroker:
         return ToolInvocationResult(decision, invoked=True, effect=effect)
 
     @staticmethod
-    def _request_denial_reasons(request: ToolRequest) -> tuple[BrokerDenialReason, ...]:
+    def _request_denial_reasons(
+        request: ToolRequest,
+        access_request: DataAccessRequest | None,
+        context: AuthorizationContext,
+    ) -> tuple[BrokerDenialReason, ...]:
         reasons: list[BrokerDenialReason] = []
         if not is_safe_tool_identifier(request.adapter_id):
             reasons.append(BrokerDenialReason.INVALID_TOOL_IDENTIFIER)
-        return tuple(reasons)
+        if request.outbound_destination is not None and (
+            not is_safe_outbound_destination(request.outbound_destination)
+            or request.outbound_destination not in context.declared_outbound_destinations
+        ):
+            reasons.append(BrokerDenialReason.UNDECLARED_OUTBOUND_DESTINATION)
+        if (
+            request.data_access is not None
+            or any(
+                value is not None
+                for value in (
+                    request.organization_id,
+                    request.domain_id,
+                    request.pack_version,
+                    request.agent_id,
+                    request.memory_scope,
+                )
+            )
+        ) and access_request is None:
+            # A partial or conflicting scope request must never silently become a legacy call.
+            reasons.append(BrokerDenialReason.INVALID_TOOL_INPUT)
+        return tuple(dict.fromkeys(reasons))
 
     def _denied_result(
         self,
@@ -191,41 +296,59 @@ class HostToolBroker:
         decision: AuthorizationDecision,
         denial_reasons: tuple[BrokerDenialReason, ...],
     ) -> ToolInvocationResult:
-        audit_result = self._audit_writer.append(
-            AuditEvent(
-                metadata=RecordMetadata(
-                    record_id=new_record_id(),
-                    organization_id=OrganizationId(context.organization_id),
-                    correlation_id=CorrelationId(context.correlation_id),
-                    schema_version=SCHEMA_VERSION,
-                    version=1,
-                    created_at=utc_now(),
-                    updated_at=utc_now(),
-                ),
-                audit_event_id=AuditEventId(str(uuid4())),
-                actor_id=ActorId(context.actor_id),
-                operation="tool.request",
-                decision=AuditDecision.DENIED,
-                reason=self._denial_reason(decision, denial_reasons),
-                recorded_at=utc_now(),
-            )
-        )
+        audit_result = self._record_denial(context, decision, denial_reasons)
         return ToolInvocationResult(
             authorization=decision,
             invoked=False,
             effect=None,
             denial_reasons=denial_reasons,
-            denial_audit_recorded=audit_result.recorded,
+            denial_audit_recorded=audit_result,
         )
+
+    def _record_denial(
+        self,
+        context: AuthorizationContext,
+        decision: AuthorizationDecision,
+        denial_reasons: tuple[BrokerDenialReason, ...],
+        *,
+        operation: str = "tool.request",
+    ) -> bool:
+        """Attempt audit recording without allowing an outage to weaken a denial."""
+        try:
+            audit_result = self._audit_writer.append(
+                AuditEvent(
+                    metadata=RecordMetadata(
+                        record_id=new_record_id(),
+                        organization_id=OrganizationId(context.organization_id),
+                        correlation_id=CorrelationId(context.correlation_id),
+                        schema_version=SCHEMA_VERSION,
+                        version=1,
+                        created_at=utc_now(),
+                        updated_at=utc_now(),
+                    ),
+                    audit_event_id=AuditEventId(str(uuid4())),
+                    actor_id=ActorId(context.actor_id),
+                    operation=operation,
+                    decision=AuditDecision.DENIED,
+                    reason=self._denial_reason(decision, denial_reasons),
+                    recorded_at=utc_now(),
+                )
+            )
+            return audit_result.recorded
+        except Exception:
+            return False
 
     @staticmethod
     def _denial_reason(
         decision: AuthorizationDecision,
         denial_reasons: tuple[BrokerDenialReason, ...],
     ) -> str:
-        values = [str(constraint) for constraint in decision.denied_constraints]
-        values.extend(str(reason) for reason in denial_reasons)
-        return ",".join(values)
+        values = [
+            constraint.value if isinstance(constraint, StrEnum) else str(constraint)
+            for constraint in decision.denied_constraints
+        ]
+        values.extend(reason.value for reason in denial_reasons)
+        return ",".join(values) or "authorization_denied"
 
 
 def _retains_tool_effects(value: object) -> TypeGuard[ToolEffectRetainer]:

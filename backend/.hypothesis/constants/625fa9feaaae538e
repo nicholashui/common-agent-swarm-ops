@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evidence\gates.py
+# hypothesis_version: 6.151.12
+
+['adapter audit check', 'adapter-audit-effect', 'evaluation', 'evaluation-record', 'frontend-forms', 'graph completed', 'legacy completed', 'local-adapter', 'local-check', 'migration', 'migration-gate', 'migration-record', 'operator forms check', 'operator path check', 'operator-path', 'postgres-recovery', 'process-artifact', 'promotion-condition', 'promotion-evaluation', 'promotion-record', 'release denial cases', 'release-denial-cases', 'run', 'run-record', 'sandbox-variant', 'schema', 'utf-8', 'video-inventory', 'video-release', 'video-release-record']

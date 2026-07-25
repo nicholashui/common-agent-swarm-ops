@@ -34,8 +34,8 @@ from app.models.contracts import ErrorCode, ErrorDetail, Result
 from app.models.evidence import EvidenceReference
 from app.models.identifiers import CorrelationId, EvidenceId, OrganizationId, new_record_id
 from app.models.runs import RunStatus, WorkflowEngineKind
-from app.video.artifacts import ReleaseDecision
-from app.video.inventory import EXPECTED_VIDEO_AGENT_COUNT
+from app.video.artifacts import ReleaseDecision, ReleaseRequest
+from app.video.inventory import EXPECTED_VIDEO_AGENT_COUNT, VideoInventoryReport
 
 
 class EvidenceGateRunner:
@@ -50,7 +50,6 @@ class EvidenceGateRunner:
         self._product_bar = product_bar
         self._repository = repository
         self._clock = clock
-
 
     def evaluate(
         self,
@@ -67,18 +66,14 @@ class EvidenceGateRunner:
         records: list[EvidenceGateRecord] = []
         for criterion in ProductBarCriterion:
             passed, reasons = self._evaluate_criterion(criterion, snapshot)
-            outcome = (
-                ProductBarEvidenceOutcome.PASS if passed else ProductBarEvidenceOutcome.FAIL
-            )
+            outcome = ProductBarEvidenceOutcome.PASS if passed else ProductBarEvidenceOutcome.FAIL
             product_bar = self._product_bar.record_evidence(
                 organization_id,
                 correlation_id,
                 criterion,
                 outcome,
                 run_ids=tuple(run.run_id for run in snapshot.runs),
-                evaluation_run_ids=tuple(
-                    run.evaluation_run_id for run in snapshot.evaluations
-                ),
+                evaluation_run_ids=tuple(run.evaluation_run_id for run in snapshot.evaluations),
                 evidence_hashes=self._hashes(snapshot),
                 command_results=(self._command_result(snapshot),),
                 supporting_references=self._references(snapshot),
@@ -122,7 +117,6 @@ class EvidenceGateRunner:
             command.output_digest,
             command.completed_at,
         )
-
 
     def _evaluate_criterion(
         self, criterion: ProductBarCriterion, snapshot: EvidenceGateSnapshot
@@ -193,20 +187,15 @@ class EvidenceGateRunner:
         return passed, failures
 
     @staticmethod
-    def _claim(
-        snapshot: EvidenceGateSnapshot, criterion: ProductBarCriterion, name: str
-    ) -> bool:
+    def _claim(snapshot: EvidenceGateSnapshot, criterion: ProductBarCriterion, name: str) -> bool:
         return any(
             claim.criterion is criterion and claim.name == name and claim.passed
             for claim in snapshot.claims
         )
 
-
     @staticmethod
     def _has_completed_effect(snapshot: EvidenceGateSnapshot) -> bool:
-        return any(
-            run.status is RunStatus.COMPLETED and run.tool_effects for run in snapshot.runs
-        )
+        return any(run.status is RunStatus.COMPLETED and run.tool_effects for run in snapshot.runs)
 
     @staticmethod
     def _has_process_artifact(snapshot: EvidenceGateSnapshot) -> bool:
@@ -219,39 +208,61 @@ class EvidenceGateRunner:
     def _has_safe_sandbox(snapshot: EvidenceGateSnapshot) -> bool:
         return any(
             assessment.candidate_count == 1
-            and assessment.decision
-            in {PromotionDecision.BLOCKED, PromotionDecision.PERMITTED}
+            and assessment.decision in {PromotionDecision.BLOCKED, PromotionDecision.PERMITTED}
             and not assessment.production_applied
             for assessment in snapshot.promotion_assessments
         )
 
     @staticmethod
     def _has_complete_evaluation(snapshot: EvidenceGateSnapshot) -> bool:
-        expected_kinds = {check.kind for check in DEFAULT_NAMED_CHECKS}
-        return any(
-            run.completed
-            and run.transition_permitted
-            and len(run.task_ids) >= 20
-            and {result.check_kind for result in run.results} == expected_kinds
-            and all(result.outcome is EvaluationOutcome.PASS for result in run.results)
-            for run in snapshot.evaluations
-        )
+        expected_checks = {check.name: check for check in DEFAULT_NAMED_CHECKS}
+        expected_check_names = frozenset(expected_checks)
+        for run in snapshot.evaluations:
+            task_ids = tuple(dict.fromkeys(run.task_ids))
+            if not run.completed or not run.transition_permitted or len(task_ids) < 20:
+                continue
+            configured_checks = {check.name: check for check in run.checks}
+            if not expected_check_names.issubset(configured_checks):
+                continue
+            result_cells = {(result.task_id, result.check_name) for result in run.results}
+            expected_cells = {
+                (task_id, check_name) for task_id in task_ids for check_name in expected_check_names
+            }
+            if result_cells != expected_cells or len(result_cells) != len(run.results):
+                continue
+            if all(
+                result.outcome is EvaluationOutcome.PASS
+                and result.check_kind is expected_checks[result.check_name].kind
+                and result.blocking is expected_checks[result.check_name].blocking
+                for result in run.results
+            ):
+                return True
+        return False
 
     @staticmethod
     def _has_video_inventory(snapshot: EvidenceGateSnapshot) -> bool:
-        return any(
-            report.is_valid
-            and len(report.manifest_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
-            and len(report.inventory_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
-            for report in snapshot.video_inventory_reports
-        )
+        for report in snapshot.video_inventory_reports:
+            manifest_ids = tuple(report.manifest_agent_ids)
+            inventory_ids = tuple(report.inventory_agent_ids)
+            if (
+                report.is_valid
+                and len(manifest_ids) == EXPECTED_VIDEO_AGENT_COUNT
+                and len(inventory_ids) == EXPECTED_VIDEO_AGENT_COUNT
+                and len(set(manifest_ids)) == EXPECTED_VIDEO_AGENT_COUNT
+                and len(set(inventory_ids)) == EXPECTED_VIDEO_AGENT_COUNT
+                and set(manifest_ids) == set(inventory_ids)
+            ):
+                return True
+        return False
 
     @staticmethod
     def _has_release_denial(snapshot: EvidenceGateSnapshot) -> bool:
         return any(
             request.decision is ReleaseDecision.DENIED
-            and request.unmet_conditions
             and not request.artifact_released
+            and request.unmet_conditions
+            and {condition.name for condition in request.conditions if not condition.passed}
+            == set(request.unmet_conditions)
             for request in snapshot.release_requests
         )
 
@@ -264,7 +275,6 @@ class EvidenceGateRunner:
             and any(gate.gate is required_gate and gate.passed for gate in assessment.gates)
             for assessment in snapshot.migration_assessments
         )
-
 
     def _new_record(
         self,
@@ -295,9 +305,7 @@ class EvidenceGateRunner:
             next_transition=CRITERION_TRANSITIONS[criterion],
             reasons=reasons,
             run_ids=tuple(run.run_id for run in snapshot.runs),
-            evaluation_run_ids=tuple(
-                run.evaluation_run_id for run in snapshot.evaluations
-            ),
+            evaluation_run_ids=tuple(run.evaluation_run_id for run in snapshot.evaluations),
             migration_evidence_ids=tuple(
                 item.evidence_id for item in snapshot.migration_assessments
             ),
@@ -315,43 +323,197 @@ class EvidenceGateRunner:
 
     @staticmethod
     def _local_record_ids(snapshot: EvidenceGateSnapshot) -> tuple[str, ...]:
-        values = [
+        values: list[str] = [
             *(str(run.metadata.record_id) for run in snapshot.runs),
+            *(str(run.run_id) for run in snapshot.runs),
             *(str(run.metadata.record_id) for run in snapshot.evaluations),
+            *(str(run.evaluation_run_id) for run in snapshot.evaluations),
             *(str(item.metadata.record_id) for item in snapshot.migration_assessments),
+            *(str(item.evidence_id) for item in snapshot.migration_assessments),
             *(str(item.metadata.record_id) for item in snapshot.process_artifacts),
+            *(item.source_log_set_id for item in snapshot.process_artifacts),
+            *(
+                reference
+                for item in snapshot.process_artifacts
+                for reference in item.supporting_record_refs
+            ),
             *(str(item.metadata.record_id) for item in snapshot.promotion_assessments),
+            *(str(item.assessment_id) for item in snapshot.promotion_assessments),
             *(str(item.metadata.record_id) for item in snapshot.release_requests),
+            *(str(item.release_request_id) for item in snapshot.release_requests),
+            *(str(item.artifact_version_id) for item in snapshot.release_requests),
             *(str(item.evidence_id) for item in snapshot.claims),
+            f"command:{snapshot.command_result.output_digest}",
+            *(
+                f"video-inventory:{EvidenceGateRunner._video_inventory_digest(report)}"
+                for report in snapshot.video_inventory_reports
+            ),
         ]
-        return tuple(dict.fromkeys(values))
-
+        for migration_assessment in snapshot.migration_assessments:
+            values.extend(
+                f"{migration_assessment.evidence_id}:{gate.gate.value}"
+                for gate in migration_assessment.gates
+            )
+        for promotion_assessment in snapshot.promotion_assessments:
+            if promotion_assessment.candidate_variant_id is not None:
+                values.append(str(promotion_assessment.candidate_variant_id))
+            if promotion_assessment.evaluation_run_id is not None:
+                values.append(promotion_assessment.evaluation_run_id)
+        return tuple(dict.fromkeys(value for value in values if value.strip()))
 
     def _references(self, snapshot: EvidenceGateSnapshot) -> tuple[EvidenceReference, ...]:
         references: list[EvidenceReference] = []
         references.extend(
-            EvidenceReference(
-                EvidenceId(str(run.run_id)), run.workflow_definition_digest, "run"
-            )
+            reference
             for run in snapshot.runs
+            for reference in (
+                EvidenceReference(
+                    EvidenceId(str(run.metadata.record_id)),
+                    run.workflow_definition_digest,
+                    "run-record",
+                ),
+                EvidenceReference(
+                    EvidenceId(str(run.run_id)),
+                    self._digest(f"{run.run_id}:{run.status.value}"),
+                    "run",
+                ),
+            )
         )
         references.extend(
-            EvidenceReference(
-                EvidenceId(str(run.evaluation_run_id)), run.configuration_digest, "evaluation"
-            )
+            reference
             for run in snapshot.evaluations
+            for reference in (
+                EvidenceReference(
+                    EvidenceId(str(run.metadata.record_id)),
+                    run.configuration_digest,
+                    "evaluation-record",
+                ),
+                EvidenceReference(
+                    EvidenceId(str(run.evaluation_run_id)),
+                    self._digest(f"{run.evaluation_run_id}:{len(run.results)}"),
+                    "evaluation",
+                ),
+            )
         )
-        references.extend(
-            EvidenceReference(item.evidence_id, item.configuration_digest, "migration")
-            for item in snapshot.migration_assessments
-        )
+        for migration_assessment in snapshot.migration_assessments:
+            references.extend(
+                (
+                    EvidenceReference(
+                        EvidenceId(str(migration_assessment.metadata.record_id)),
+                        migration_assessment.configuration_digest,
+                        "migration-record",
+                    ),
+                    EvidenceReference(
+                        migration_assessment.evidence_id,
+                        self._digest(
+                            f"{migration_assessment.evidence_id}:"
+                            f"{migration_assessment.configuration_digest}"
+                        ),
+                        "migration",
+                    ),
+                )
+            )
+            for gate in migration_assessment.gates:
+                references.extend(
+                    EvidenceReference(
+                        EvidenceId(f"{migration_assessment.evidence_id}:{gate.gate.value}:{index}"),
+                        digest,
+                        "migration-gate",
+                    )
+                    for index, digest in enumerate(gate.evidence_hashes)
+                )
+                references.extend(gate.supporting_references)
+        for artifact in snapshot.process_artifacts:
+            references.append(
+                EvidenceReference(
+                    EvidenceId(str(artifact.metadata.record_id)),
+                    self._digest(
+                        f"{artifact.source_log_set_id}:{','.join(artifact.supporting_record_refs)}"
+                    ),
+                    "process-artifact",
+                )
+            )
+            references.extend(
+                EvidenceReference(
+                    EvidenceId(f"{artifact.metadata.record_id}:source:{index}"),
+                    self._digest(reference),
+                    "process-source-record",
+                )
+                for index, reference in enumerate(artifact.supporting_record_refs)
+            )
+        for promotion_assessment in snapshot.promotion_assessments:
+            references.extend(
+                (
+                    EvidenceReference(
+                        EvidenceId(str(promotion_assessment.metadata.record_id)),
+                        self._digest(
+                            f"{promotion_assessment.assessment_id}:"
+                            f"{promotion_assessment.decision.value}:"
+                            f"{promotion_assessment.candidate_count}"
+                        ),
+                        "promotion-record",
+                    ),
+                    EvidenceReference(
+                        EvidenceId(str(promotion_assessment.assessment_id)),
+                        self._digest(str(promotion_assessment.candidate_variant_id)),
+                        "sandbox-variant",
+                    ),
+                )
+            )
+            if promotion_assessment.evaluation_run_id is not None:
+                references.append(
+                    EvidenceReference(
+                        EvidenceId(f"promotion:{promotion_assessment.assessment_id}:evaluation"),
+                        self._digest(promotion_assessment.evaluation_run_id),
+                        "promotion-evaluation",
+                    )
+                )
+            references.extend(
+                EvidenceReference(
+                    EvidenceId(f"promotion:{promotion_assessment.assessment_id}:condition:{index}"),
+                    self._digest(
+                        f"{condition.name}:{condition.passed}:"
+                        f"{','.join(condition.evidence_references)}"
+                    ),
+                    "promotion-condition",
+                )
+                for index, condition in enumerate(promotion_assessment.conditions)
+            )
         references.extend(
             EvidenceReference(
-                EvidenceId(str(item.release_request_id)),
-                self._digest(str(item.release_request_id)),
-                "video-release",
+                EvidenceId(f"video-inventory:{self._video_inventory_digest(report)}"),
+                self._video_inventory_digest(report),
+                "video-inventory",
             )
+            for report in snapshot.video_inventory_reports
+        )
+        references.extend(
+            reference
             for item in snapshot.release_requests
+            for reference in (
+                EvidenceReference(
+                    EvidenceId(str(item.metadata.record_id)),
+                    self._release_request_digest(item),
+                    "video-release-record",
+                ),
+                EvidenceReference(
+                    EvidenceId(str(item.release_request_id)),
+                    self._release_request_digest(item),
+                    "video-release",
+                ),
+                EvidenceReference(
+                    EvidenceId(str(item.artifact_version_id)),
+                    self._digest(str(item.artifact_version_id)),
+                    "video-artifact-version",
+                ),
+            )
+        )
+        references.append(
+            EvidenceReference(
+                EvidenceId(f"command:{snapshot.command_result.output_digest}"),
+                snapshot.command_result.output_digest,
+                "local-command",
+            )
         )
         references.extend(
             EvidenceReference(item.evidence_id, item.digest, "local-check")
@@ -359,7 +521,28 @@ class EvidenceGateRunner:
         )
         references.extend(self._adapter_reference(adapter) for adapter in snapshot.adapter_versions)
         references.extend(self._schema_reference(schema) for schema in snapshot.schema_versions)
-        return tuple(references)
+        return self._unique_references(references)
+
+    @staticmethod
+    def _unique_references(
+        references: list[EvidenceReference],
+    ) -> tuple[EvidenceReference, ...]:
+        seen: set[tuple[str, str, str]] = set()
+        unique: list[EvidenceReference] = []
+        for reference in references:
+            key = (str(reference.evidence_id), reference.digest, reference.kind)
+            if key not in seen:
+                seen.add(key)
+                unique.append(reference)
+        return tuple(unique)
+
+    @staticmethod
+    def _release_request_digest(item: ReleaseRequest) -> str:
+        return EvidenceGateRunner._digest(str(item))
+
+    @staticmethod
+    def _video_inventory_digest(report: VideoInventoryReport) -> str:
+        return EvidenceGateRunner._digest(str(report))
 
     def _adapter_reference(self, adapter: AdapterVersion) -> EvidenceReference:
         return EvidenceReference(
@@ -382,7 +565,6 @@ class EvidenceGateRunner:
     def _digest(value: str) -> str:
         return sha256(value.encode("utf-8")).hexdigest()
 
-
     @staticmethod
     def _validate_snapshot(
         organization_id: OrganizationId, snapshot: EvidenceGateSnapshot
@@ -392,9 +574,7 @@ class EvidenceGateRunner:
         if not snapshot.adapter_versions or not snapshot.schema_versions:
             return "Evidence gates require retained adapter and schema versions."
         command = snapshot.command_result
-        if not command.command.strip() or not EvidenceGateRunner._is_sha256(
-            command.output_digest
-        ):
+        if not command.command.strip() or not EvidenceGateRunner._is_sha256(command.output_digest):
             return "Evidence gates require a local command and SHA-256 output digest."
         if any(
             not item.adapter_id.strip() or not item.version.strip()
@@ -402,8 +582,7 @@ class EvidenceGateRunner:
         ):
             return "Evidence gate adapter versions must be non-empty."
         if any(
-            not item.schema_name.strip() or item.version < 1
-            for item in snapshot.schema_versions
+            not item.schema_name.strip() or item.version < 1 for item in snapshot.schema_versions
         ):
             return "Evidence gate schema versions must be positive and named."
         if (
@@ -443,9 +622,7 @@ class EvidenceGateRunner:
         return len(value) == 64 and all(character in hexdigits for character in value)
 
     @staticmethod
-    def _product_bar_error(
-        error: ErrorDetail | None, correlation_id: CorrelationId
-    ) -> ErrorDetail:
+    def _product_bar_error(error: ErrorDetail | None, correlation_id: CorrelationId) -> ErrorDetail:
         if error is None:
             return ErrorDetail(
                 ErrorCode.REPOSITORY_UNAVAILABLE,

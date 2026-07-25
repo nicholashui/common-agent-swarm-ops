@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\evaluation\verification_suite.py
+# hypothesis_version: 6.151.12
+
+['adoption-release', 'alc_version', 'fixed_seed', 'fixture_digest', 'immutable_version', 'is_allowed', 'is_success', 'layer', 'organization_id', 'pack_id', 'release', 'schema.pack-contract', 'utf-8', 'workflow_id']

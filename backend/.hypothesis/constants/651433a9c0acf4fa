@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\migration\approval.py
+# hypothesis_version: 6.151.12
+
+['*', 'ApprovalReport', 'LicenseDeclaration', 'approval', 'approval_id', 'approval_size_drift', 'approved.files', 'approved_by', 'commit', 'destination_path', 'destination_paths', 'files', 'findings', 'included', 'license_status', 'mode', 'original_commit', 'original_path', 'original_repository', 'path', 'provenance', 'recomputed_files', 'report', 'repository', 'result', 'sha256', 'size_bytes', 'snapshot', 'source_commit', 'source_paths', 'source_repository', 'source_root', 'total_bytes', 'verify_approval']

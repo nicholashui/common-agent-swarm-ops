@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\registry\pack_validator.py
+# hypothesis_version: 6.151.12
+
+[100, 1000000, '$', ',', '-', '.bat', '.cmd', '.dll', '.exe', '.js', '.json', '.py', '.sh', '.ts', ':', 'NFKC', '^sha256:[^\\s]+$', '_', 'agent_id', 'agents', 'allowed_tools', 'business', 'code', 'command', 'content_digest', 'duplicate_json_key', 'entrypoint', 'executable', 'executable_code', 'false', 'file', 'filename', 'handler', 'host', 'immutable_version', 'invalid_count', 'invalid_digest', 'invalid_extension', 'invalid_identifier', 'invalid_json', 'invalid_status', 'invalid_tools', 'invalid_type', 'manifest', 'manifest_too_large', 'module', 'none', 'null', 'pack_id', 'package_code', 'path', 'read', 'required_alc_version', 'requires_learning', 'runtime', 'script', 'sha256:', 'signer_id', 'source_code', 'source_error', 'status', 'unreadable_manifest', 'utf-8']

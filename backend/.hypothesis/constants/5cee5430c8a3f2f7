@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\repositories\artifact_repository.py
+# hypothesis_version: 6.151.12
+
+['Artifact handoff', 'Artifact version', 'Release request', 'approval_reference', 'artifact-repository', 'artifact_identity', 'artifact_version', 'classification', 'integrity_reference', 'owner_reference', 'provenance_reference', 'source_run_reference', 'source_task_id']

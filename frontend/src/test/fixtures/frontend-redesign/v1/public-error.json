@@ -1,0 +1,12 @@
+{
+  "fixtureVersion": "frontend-redesign/v1",
+  "error": {
+    "code": "rate_limited",
+    "message": "Retry after the returned delay.",
+    "retryable": true,
+    "correlation_id": "corr-fixture-2",
+    "retry_after": 7,
+    "action_reference": { "id": "refresh-fixture", "label": "Refresh", "eligible": true },
+    "internal_trace": "must-not-reach-view-state"
+  }
+}

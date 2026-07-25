@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_path": "docs/special_agents_redesign/agents/techology_advisor_agent.md",
+  "source_sha256": "d0d2715c19ac8677d9cec17ba16179f024396e2798e5367698bcce669c762d79",
+  "agent_id": "specials.techology-advisor-agent",
+  "configuration_sha256": "af68bbee0366362781cd63f95d9cdf338dcb71f9755ce3da611a324fde60057b",
+  "reviewed_at": "2026-07-25T08:47:20+00:00",
+  "approval_id": "planned-approval-specials.techology-advisor-agent"
+}

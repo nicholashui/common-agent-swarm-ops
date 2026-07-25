@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\core\transport.py
+# hypothesis_version: 6.151.12
+
+['*', ',', ', ', '/', '/api/v1/', '600', 'Cache-Control', 'DELETE', 'DENY', 'GET', 'HEAD', 'OPTIONS', 'Origin', 'PATCH', 'POST', 'PUT', 'Permissions-Policy', 'Referrer-Policy', 'Retry-After', 'Vary', 'X-Correlation-ID', 'X-Frame-Options', 'accept', 'authorization', 'content-type', 'https', 'idempotency-key', 'last-event-id', 'no-referrer', 'no-store', 'nosniff', 'origin', 'true', 'unknown-client']
