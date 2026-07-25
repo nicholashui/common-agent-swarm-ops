@@ -650,7 +650,9 @@ def verify_standalone(
     available = {
         name.strip() for name in upstream_available if isinstance(name, str) and name.strip()
     }
-    unavailable.difference_update(available)
+    configured_repositories = set(repositories)
+    unavailable.difference_update(available & configured_repositories)
+    unavailable.update(available - configured_repositories)
     preconditions = StandalonePreconditions(
         network_disabled=network_disabled,
         upstream_repositories=repositories,
@@ -953,11 +955,14 @@ class StandaloneVerifier:
 __all__ = [
     "DEFAULT_UPSTREAM_REPOSITORIES",
     "STANDALONE_SCHEMA_VERSION",
+    "AgentSourceMapValidator",
+    "OperationalAssetValidator",
     "StandaloneCheck",
     "StandalonePreconditions",
     "StandaloneReport",
     "StandaloneVerificationBlockedError",
     "StandaloneVerifier",
+    "VideoInventoryValidator",
     "check_standalone",
     "validate_standalone",
     "verify_domain_standalone",

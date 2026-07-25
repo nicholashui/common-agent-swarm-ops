@@ -27,6 +27,7 @@ from app.video.inventory import (
     VideoInventoryReport,
     VideoInventoryValidator,
 )
+from tests.fakes.specials_governance import materialize_specials_governance
 
 # **Validates: Requirements 1.5, 2.2-2.5, 3.5, 4.2-4.3, 6.1-6.5**
 
@@ -79,7 +80,7 @@ def _write_specials_fixture(root: Path) -> tuple[str, ...]:
         source_target.write_bytes(source_bytes)
         allowlisted_paths.append(entry.source_path)
 
-    return tuple(sorted(allowlisted_paths))
+    return tuple(sorted(materialize_specials_governance(root, allowlisted_paths)))
 
 
 def _video_snapshot() -> dict[str, str]:

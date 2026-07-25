@@ -7,7 +7,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Final
+from typing import Final, cast
 
 import pytest
 from hypothesis import example, given, settings, strategies as st
@@ -120,7 +120,7 @@ def _entry_dicts(source_map: dict[str, object]) -> list[dict[str, object]]:
         if not isinstance(raw_entry, dict):
             raise AssertionError("Test source maps must contain object entries.")
         entries.append(raw_entry)
-    return entries
+    return cast(list[dict[str, object]], raw_entries)
 
 
 def _apply_mutation(mutation: MappingMutation) -> tuple[dict[str, object], set[str]]:

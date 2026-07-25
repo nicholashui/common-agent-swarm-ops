@@ -19,6 +19,7 @@ from app.registry.specials_validator import (
     canonical_json_bytes,
     validate_specials_pack,
 )
+from tests.fakes.specials_governance import materialize_specials_governance
 
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 _INVALID_CANONICAL_IDS = (
@@ -184,7 +185,7 @@ def _write_fixture(root: Path, case: _ProfileCase) -> tuple[str, ...]:
         relative_path = f"{SPECIALS_PACK_ROOT}/{canonical_agent_spec_path(agent_id)}"
         _write_json(root / relative_path, specification)
         allowlisted_paths.append(relative_path)
-    return tuple(allowlisted_paths)
+    return materialize_specials_governance(root, allowlisted_paths)
 
 
 def _apply_mutation(specification: dict[str, object], case: _ProfileCase) -> None:

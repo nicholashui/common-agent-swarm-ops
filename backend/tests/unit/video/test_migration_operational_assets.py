@@ -94,16 +94,17 @@ def _write_local_asset_tree(video_root: Path, valid_workflow: dict[str, Any]) ->
     (video_root / "workflows" / "edit.dna.json").write_text(
         json.dumps(valid_workflow, sort_keys=True), encoding="utf-8"
     )
-    (video_root / "knowledge" / "seeds" / "editing.md").write_text(
-        "Editing seed", encoding="utf-8"
-    )
+    (video_root / "knowledge" / "seeds" / "editing.md").write_text("Editing seed", encoding="utf-8")
     (video_root / "knowledge" / "consumers" / "editor.md").write_text(
         "Local editor consumer", encoding="utf-8"
     )
 
 
 class _FindingReport(Protocol):
-    findings: tuple[ImportFinding, ...]
+    @property
+    def findings(self) -> tuple[ImportFinding, ...]:
+        """Return stable findings from any operational asset report."""
+        ...
 
 
 def _finding_codes(report: _FindingReport) -> set[str]:
@@ -140,10 +141,7 @@ def test_unbounded_workflow_graph_is_rejected(valid_workflow: dict[str, Any]) ->
 
     assert report.result == "fail"
     assert "missing_workflow_budget" in _finding_codes(report)
-    assert any(
-        finding.field == "execution_budget.max_node_visits"
-        for finding in report.findings
-    )
+    assert any(finding.field == "execution_budget.max_node_visits" for finding in report.findings)
 
 
 def test_absent_workflow_gates_are_rejected(valid_workflow: dict[str, Any]) -> None:
@@ -201,9 +199,7 @@ def test_knowledge_seed_with_invalid_consumer_is_rejected(
 ) -> None:
     video_root = tmp_path / "business" / "video"
     (video_root / "knowledge" / "seeds").mkdir(parents=True)
-    (video_root / "knowledge" / "seeds" / "editing.md").write_text(
-        "Editing seed", encoding="utf-8"
-    )
+    (video_root / "knowledge" / "seeds" / "editing.md").write_text("Editing seed", encoding="utf-8")
     seed = copy.deepcopy(valid_knowledge_seed)
     seed["consumer_ref"] = "knowledge/consumers/missing.md"
 
@@ -268,9 +264,7 @@ def test_valid_local_operational_assets_are_accepted(
     assert report.result is MigrationResult.PASS
     assert report.process_report is not None and report.process_report.is_valid
     assert report.knowledge_report is not None and report.knowledge_report.is_valid
-    assert (
-        report.special_skill_report is not None and report.special_skill_report.is_valid
-    )
+    assert report.special_skill_report is not None and report.special_skill_report.is_valid
     assert report.accepted_workflow_paths == ("workflows/edit.dna.json",)
     assert report.special_skill_report.accepted_ids == ("caption-quality",)
 

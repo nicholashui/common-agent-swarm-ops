@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Final, cast
+from typing import Final
 
 from hypothesis import example, given, settings, strategies as st
 
@@ -254,7 +254,7 @@ def _expected_codes(mutation: SpecificationMutation) -> set[str]:
             "Runtime binding": "invalid_runtime_binding",
         }
         if mutation.heading in heading_effects:
-            expected.add(heading_effects[cast(str, mutation.heading)])
+            expected.add(heading_effects[mutation.heading])
         return expected
     if mutation.kind == "duplicate_heading":
         return {"duplicate_required_heading"}

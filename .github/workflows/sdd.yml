@@ -10,6 +10,51 @@ jobs:
       - run: npm run sdd:check
       - run: npm test
       - run: npm run sync:check
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install backend test dependencies
+        run: python -m pip install -e ".[dev]"
+        working-directory: backend
+      - name: Run backend tests
+        run: python -m pytest -q --tb=short
+        working-directory: backend
+      - name: Run backend Ruff checks
+        run: python -m ruff check app tests
+        working-directory: backend
+      - name: Run strict backend mypy checks
+        run: python -m mypy app tests --show-error-codes --no-error-summary --no-incremental
+        working-directory: backend
+      - name: Verify Special_Agent governance remains fail-closed
+        run: python scripts/business/check_special_business_agents.py --expect-fail-closed
+      - name: Verify standalone preconditions short-circuit before content reads
+        shell: bash
+        run: |
+          set +e
+          python scripts/business/check_video_domain_standalone.py \
+            --project-root "$PWD" \
+            --video-root business/video \
+            > "$RUNNER_TEMP/standalone-precondition.json"
+          status=$?
+          set -e
+          test "$status" -eq 2
+          grep -q '"content_validation_started":false' "$RUNNER_TEMP/standalone-precondition.json"
+          ! grep -q 'STANDALONE PASS' "$RUNNER_TEMP/standalone-precondition.json"
+      - name: Run standalone local validation with explicit offline claims
+        shell: bash
+        run: |
+          set +e
+          python scripts/business/check_video_domain_standalone.py \
+            --project-root "$PWD" \
+            --video-root business/video \
+            --network-disabled \
+            --upstreams-unavailable \
+            > "$RUNNER_TEMP/standalone-local.json"
+          status=$?
+          set -e
+          test "$status" -eq 2
+          grep -q '"content_validation_started":true' "$RUNNER_TEMP/standalone-local.json"
+          grep -q '"result":"fail"' "$RUNNER_TEMP/standalone-local.json"
       - name: Install frontend dependencies
         run: npm ci
         working-directory: frontend

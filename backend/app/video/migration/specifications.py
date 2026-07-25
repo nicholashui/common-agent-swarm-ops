@@ -185,12 +185,12 @@ SpecificationValidationIssue = SpecificationIssue
 
 def build_specification_document(
     common_agent_id: str,
-    runtime_binding: Mapping[object, object],
+    runtime_binding: Mapping[str, object],
     mapping_entry: AgentSourceMapEntry,
     *,
-    inventory_entry: Mapping[object, object] | None = None,
+    inventory_entry: Mapping[str, object] | None = None,
     pack_version: str = "unknown",
-    workflow_entries: Sequence[Mapping[object, object]] = (),
+    workflow_entries: Sequence[Mapping[str, object]] = (),
     corpus_manifest_path: str | None = None,
 ) -> str:
     """Draft one substantive local SPEC from local runtime and reviewed metadata."""
@@ -298,14 +298,14 @@ def build_specification_document(
 def validate_specification_document(
     document: str,
     common_agent_id: str,
-    runtime_binding: Mapping[object, object],
+    runtime_binding: Mapping[str, object],
     *,
     video_root: Path | str,
     repository_root: Path | str | None = None,
     spec_path: Path | str | None = None,
     mapping_entry: AgentSourceMapEntry | None = None,
     critical_review: object | None = None,
-    workflow_entries: Sequence[Mapping[object, object]] = (),
+    workflow_entries: Sequence[Mapping[str, object]] = (),
 ) -> tuple[SpecificationIssue, ...]:
     """Validate one SPEC document and return every discoverable issue in stable order."""
     issues: list[SpecificationIssue] = []
@@ -392,14 +392,14 @@ def validate_specification_document(
 def validate_specification(
     document: str,
     common_agent_id: str,
-    runtime_binding: Mapping[object, object],
+    runtime_binding: Mapping[str, object],
     *,
     video_root: Path | str,
     repository_root: Path | str | None = None,
     spec_path: Path | str | None = None,
     mapping_entry: AgentSourceMapEntry | None = None,
     critical_review: object | None = None,
-    workflow_entries: Sequence[Mapping[object, object]] = (),
+    workflow_entries: Sequence[Mapping[str, object]] = (),
 ) -> tuple[SpecificationIssue, ...]:
     """Compatibility singular alias for :func:`validate_specification_document`."""
     return validate_specification_document(
@@ -503,7 +503,7 @@ def build_specifications(
                 )
             )
             continue
-        runtime_mapping = cast(Mapping[object, object], runtime)
+        runtime_mapping = cast(Mapping[str, object], runtime)
         inventory_entry = _inventory_entry(inventory_value, agent_id)
         matching_workflows = tuple(
             item for item in workflow_entries if _workflow_agent_id(item) == agent_id
@@ -837,17 +837,17 @@ def _validate_provenance(body: str, agent_id: str, issues: list[SpecificationIss
 def _validate_runtime_binding(
     body: str,
     agent_id: str,
-    runtime_binding: Mapping[object, object],
+    runtime_binding: Mapping[str, object],
     issues: list[SpecificationIssue],
 ) -> None:
-    parsed: Mapping[object, object] | None = None
+    parsed: Mapping[str, object] | None = None
     for match in _JSON_FENCE_PATTERN.finditer(body):
         try:
             candidate = json.loads(match.group("body"))
         except (TypeError, ValueError, json.JSONDecodeError):
             continue
         if isinstance(candidate, Mapping) and candidate.get("agent_id") == agent_id:
-            parsed = cast(Mapping[object, object], candidate)
+            parsed = cast(Mapping[str, object], candidate)
             break
     if parsed is None:
         issues.append(
@@ -956,7 +956,7 @@ def _validate_critical_review(
 def _validate_workflow_enrichment(
     agent_id: str,
     sections: Mapping[str, str],
-    workflow_entries: Sequence[Mapping[object, object]],
+    workflow_entries: Sequence[Mapping[str, object]],
     issues: list[SpecificationIssue],
 ) -> None:
     implemented = [
@@ -986,9 +986,7 @@ def _validate_workflow_enrichment(
         )
 
 
-def _runtime_projection(
-    runtime_binding: Mapping[object, object], agent_id: str
-) -> dict[str, object]:
+def _runtime_projection(runtime_binding: Mapping[str, object], agent_id: str) -> dict[str, object]:
     fields = (
         "agent_id",
         "allowed_tools",
@@ -1014,7 +1012,7 @@ def _runtime_projection(
     return projection
 
 
-def _workflow_context_lines(entries: Sequence[Mapping[object, object]]) -> list[str]:
+def _workflow_context_lines(entries: Sequence[Mapping[str, object]]) -> list[str]:
     lines: list[str] = []
     for entry in entries:
         workflow_id = _text(entry.get("workflow_id")) or "local workflow"
@@ -1144,7 +1142,7 @@ def _validate_corpus_manifest(
 
 def _workflow_entries(
     value: object | None, issues: list[SpecificationIssue]
-) -> tuple[Mapping[object, object], ...]:
+) -> tuple[Mapping[str, object], ...]:
     if value is None:
         return ()
     raw: object = (
@@ -1160,7 +1158,7 @@ def _workflow_entries(
             )
         )
         return ()
-    entries: list[Mapping[object, object]] = []
+    entries: list[Mapping[str, object]] = []
     for index, item in enumerate(raw):
         if not isinstance(item, Mapping):
             issues.append(
@@ -1198,7 +1196,7 @@ def _workflow_entries(
     )
 
 
-def _workflow_agent_id(entry: Mapping[object, object]) -> str:
+def _workflow_agent_id(entry: Mapping[str, object]) -> str:
     direct = _text(entry.get("common_agent_id"))
     if direct:
         return direct
@@ -1229,7 +1227,7 @@ def _review_for(reviews: object | None, agent_id: str) -> object | None:
     return None
 
 
-def _inventory_entry(inventory: object, agent_id: str) -> Mapping[object, object] | None:
+def _inventory_entry(inventory: object, agent_id: str) -> Mapping[str, object] | None:
     if not isinstance(inventory, Mapping):
         return None
     entries = inventory.get("entries")
@@ -1300,7 +1298,7 @@ def _source_link(path: str) -> str:
     return f"../../{normalized}"
 
 
-def _is_critical_role(agent_id: str, runtime_binding: Mapping[object, object]) -> bool:
+def _is_critical_role(agent_id: str, runtime_binding: Mapping[str, object]) -> bool:
     text = f"{agent_id} {_text(runtime_binding.get('role')) or ''}".casefold()
     return any(marker in text for marker in _CRITICAL_ROLE_MARKERS)
 
@@ -1328,14 +1326,14 @@ class SpecificationValidator:
         self,
         document: str,
         common_agent_id: str,
-        runtime_binding: Mapping[object, object],
+        runtime_binding: Mapping[str, object],
         *,
         video_root: Path | str,
         repository_root: Path | str | None = None,
         spec_path: Path | str | None = None,
         mapping_entry: AgentSourceMapEntry | None = None,
         critical_review: object | None = None,
-        workflow_entries: Sequence[Mapping[object, object]] = (),
+        workflow_entries: Sequence[Mapping[str, object]] = (),
     ) -> tuple[SpecificationIssue, ...]:
         """Validate one local SPEC document."""
         return validate_specification_document(

@@ -13,6 +13,7 @@ from hypothesis import example, given, settings, strategies as st
 
 from app.video.migration.common_contracts import (
     CommonPackContractReview,
+    CommonPackContractSnapshot,
     compare_common_contracts,
     snapshot_common_contracts,
     validate_imported_configuration,
@@ -217,7 +218,9 @@ def _write_contract_surface(root: Path, mutation: str) -> None:
 
 
 def _compatible_review(
-    before: object, after: object, changed_paths: tuple[str, ...]
+    before: CommonPackContractSnapshot,
+    after: CommonPackContractSnapshot,
+    changed_paths: tuple[str, ...],
 ) -> CommonPackContractReview:
     """Create the exact passing review required for a non-safety contract delta."""
     before_digest = before.contract_digest

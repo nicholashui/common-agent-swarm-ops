@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from hypothesis import example, given, settings, strategies as st
 
@@ -82,9 +83,7 @@ class DocumentationMutation:
 def _documentation_mutations(draw: st.DrawFn) -> DocumentationMutation:
     """Generate absent-asset, count, and ownership documentation mutations."""
     kind = draw(st.sampled_from(_MUTATION_KINDS))
-    asset_kind = (
-        draw(st.sampled_from(_ASSET_KINDS)) if kind == "missing_asset" else "agents"
-    )
+    asset_kind = draw(st.sampled_from(_ASSET_KINDS)) if kind == "missing_asset" else "agents"
     return DocumentationMutation(
         kind=kind,
         asset_kind=asset_kind,
@@ -121,9 +120,7 @@ def _materialize_local_assets(root: Path, counts: LocalAssetCounts) -> Path:
             )
 
     for index in range(counts.special_skills):
-        (video_root / "special_skills" / f"property-15-skill-{index}").mkdir(
-            parents=True
-        )
+        (video_root / "special_skills" / f"property-15-skill-{index}").mkdir(parents=True)
     return video_root
 
 
@@ -192,25 +189,26 @@ def _apply_mutation(
 @given(counts=_local_asset_counts())
 def test_property_15_generated_local_claims_counts_and_ownership_are_truthful(
     counts: LocalAssetCounts,
-    tmp_path: Path,
 ) -> None:
     """Documentation rendered from local assets passes its integrity gate."""
-    video_root = _materialize_local_assets(tmp_path, counts)
+    with TemporaryDirectory() as temporary_root:
+        tmp_path = Path(temporary_root)
+        video_root = _materialize_local_assets(tmp_path, counts)
 
-    report = write_local_documentation(tmp_path, video_root=video_root)
-    repeat = check_documentation_integrity(tmp_path, video_root=video_root)
+        report = write_local_documentation(tmp_path, video_root=video_root)
+        repeat = check_documentation_integrity(tmp_path, video_root=video_root)
 
-    assert report.result is MigrationResult.PASS
-    assert report.is_valid
-    assert report.findings == ()
-    assert report.assets.counts == counts.as_dict()
-    assert report.completion_gate_passed
-    assert report.allows_unrelated_operations
-    assert all(
-        claim["kind"] != "count" or claim["expected"] == claim["actual"]
-        for claim in report.claims
-    )
-    assert report.canonical_json() == repeat.canonical_json()
+        assert report.result is MigrationResult.PASS
+        assert report.is_valid
+        assert report.findings == ()
+        assert report.assets.counts == counts.as_dict()
+        assert report.completion_gate_passed
+        assert report.allows_unrelated_operations
+        assert all(
+            claim["kind"] != "count" or claim["expected"] == claim["actual"]
+            for claim in report.claims
+        )
+        assert report.canonical_json() == repeat.canonical_json()
 
 
 # **Validates: Requirements 10.1, 10.2, 10.3, 10.4, 10.5, 10.9**
@@ -221,33 +219,31 @@ def test_property_15_generated_local_claims_counts_and_ownership_are_truthful(
 @given(mutation=_documentation_mutations())
 def test_property_15_documentation_mutations_are_deterministic_non_blocking_and_gate_failing(
     mutation: DocumentationMutation,
-    tmp_path: Path,
 ) -> None:
     """Absent claims fail completion without mutating or blocking unrelated checks."""
-    counts = LocalAssetCounts(1, 1, 1, 1, 1, 1, 1)
-    video_root = _materialize_local_assets(tmp_path, counts)
-    initial = write_local_documentation(tmp_path, video_root=video_root)
-    assert initial.is_valid
-    _apply_mutation(tmp_path, video_root, counts, mutation)
-    before_check = _file_snapshot(tmp_path)
+    with TemporaryDirectory() as temporary_root:
+        tmp_path = Path(temporary_root)
+        counts = LocalAssetCounts(1, 1, 1, 1, 1, 1, 1)
+        video_root = _materialize_local_assets(tmp_path, counts)
+        initial = write_local_documentation(tmp_path, video_root=video_root)
+        assert initial.is_valid
+        _apply_mutation(tmp_path, video_root, counts, mutation)
+        before_check = _file_snapshot(tmp_path)
 
-    report = check_documentation_integrity(tmp_path, video_root=video_root)
-    repeat = check_documentation_integrity(tmp_path, video_root=video_root)
+        report = check_documentation_integrity(tmp_path, video_root=video_root)
+        repeat = check_documentation_integrity(tmp_path, video_root=video_root)
 
-    expected_code = {
-        "missing_asset": "documentation_asset_missing",
-        "count_mismatch": "documentation_count_mismatch",
-        "ownership_mismatch": "documentation_ownership_mismatch",
-    }[mutation.kind]
-    assert report.result is MigrationResult.FAIL
-    assert expected_code in {finding.code for finding in report.findings}
-    assert not report.completion_gate_passed
-    assert report.allows_unrelated_operations
-    assert report.findings
-    assert all(not finding.blocks_unrelated_operations for finding in report.findings)
-    assert (
-        collect_local_asset_snapshot(video_root, repository_root=tmp_path)
-        == report.assets
-    )
-    assert report.canonical_json() == repeat.canonical_json()
-    assert _file_snapshot(tmp_path) == before_check
+        expected_code = {
+            "missing_asset": "documentation_asset_missing",
+            "count_mismatch": "documentation_count_mismatch",
+            "ownership_mismatch": "documentation_ownership_mismatch",
+        }[mutation.kind]
+        assert report.result is MigrationResult.FAIL
+        assert expected_code in {finding.code for finding in report.findings}
+        assert not report.completion_gate_passed
+        assert report.allows_unrelated_operations
+        assert report.findings
+        assert all(not finding.blocks_unrelated_operations for finding in report.findings)
+        assert collect_local_asset_snapshot(video_root, repository_root=tmp_path) == report.assets
+        assert report.canonical_json() == repeat.canonical_json()
+        assert _file_snapshot(tmp_path) == before_check

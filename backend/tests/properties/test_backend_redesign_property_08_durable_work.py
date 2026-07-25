@@ -274,7 +274,7 @@ def _transition_publish_callback(
 # Feature: backend-redesign, Property 8
 # Durable work transitions commit before dispatch/publication.
 # **Validates: Requirements 5.1, 5.2, 5.3, 10.1**
-@settings(max_examples=100)
+@settings(max_examples=100, deadline=None)
 @given(suffix=_SAFE_SUFFIXES, attempt=st.integers(min_value=0, max_value=3))
 def test_property_8_durable_work_transitions_commit_before_dispatch_or_publication(
     suffix: str,

@@ -98,6 +98,14 @@ def _texts(values: Iterable[object], name: str) -> tuple[str, ...]:
     return normalized
 
 
+def _deduplicated_texts(values: Iterable[object], name: str) -> tuple[str, ...]:
+    """Normalize text values while retaining the first occurrence deterministically."""
+    normalized = tuple(redact_diagnostic(value) for value in values)
+    if any(not value for value in normalized):
+        raise ValueError(f"{name} must contain only non-empty strings.")
+    return tuple(dict.fromkeys(normalized))
+
+
 def _sha256(value: object, name: str) -> str:
     normalized = _text(value, name).casefold()
     if len(normalized) != 64 or any(
@@ -142,7 +150,7 @@ class ExecutableGateResult(CanonicalRecord):
         object.__setattr__(self, "evidence_ref", redact_diagnostic(self.evidence_ref))
         if not isinstance(self.executable, bool):
             raise TypeError("executable must be a boolean.")
-        object.__setattr__(self, "blockers", _texts(self.blockers, "blockers"))
+        object.__setattr__(self, "blockers", _deduplicated_texts(self.blockers, "blockers"))
         findings = tuple(self.findings)
         if any(not isinstance(finding, ImportFinding) for finding in findings):
             raise TypeError("findings must contain ImportFinding records.")
@@ -353,7 +361,7 @@ class CompletionReport(CanonicalRecord):
         if len(names) != len(set(names)):
             raise ValueError("gates must contain unique names.")
         object.__setattr__(self, "gates", tuple(sorted(gates, key=lambda gate: gate.gate)))
-        object.__setattr__(self, "blockers", _texts(self.blockers, "blockers"))
+        object.__setattr__(self, "blockers", _deduplicated_texts(self.blockers, "blockers"))
         object.__setattr__(self, "residual_risks", _texts(self.residual_risks, "residual_risks"))
         findings = tuple(self.findings)
         if any(not isinstance(finding, ImportFinding) for finding in findings):
@@ -439,7 +447,7 @@ def evaluate_completion(
                     message="Completion vectors may contain only required release gates.",
                 )
             )
-    normalized_blockers = list(_texts(blockers, "blockers"))
+    normalized_blockers = list(_deduplicated_texts(blockers, "blockers"))
     for name in REQUIRED_COMPLETION_GATES:
         candidate_gate = next(
             (candidate for candidate in normalized_gates if candidate.gate == name), None
@@ -714,7 +722,7 @@ class MigrationEvidenceRecorder:
         change_set_digest: str | None = None,
     ) -> MigrationEvidence:
         """Append one phase; any unresolved blocker records the phase as blocked."""
-        normalized_blockers = _texts(blockers, "blockers")
+        normalized_blockers = _deduplicated_texts(blockers, "blockers")
         phase_result = MigrationResult.BLOCKED if normalized_blockers else _result(result)
         record = MigrationEvidence(
             evidence_id=evidence_id,

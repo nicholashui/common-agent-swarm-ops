@@ -48,7 +48,7 @@ from app.video.migration.evidence import (
     evaluate_completion,
     verify_authorized_rollback,
 )
-from app.video.migration.operational_assets import OperationalAssetValidator
+from app.video.migration.operational_assets import AssetValidationReport, OperationalAssetValidator
 from app.video.migration.standalone import DEFAULT_UPSTREAM_REPOSITORIES
 
 NOW = datetime(2025, 1, 1, 12, 0, tzinfo=UTC)
@@ -65,7 +65,14 @@ class PackContext:
     snapshot: SourceSnapshot
     workflow: dict[str, object]
     workflow_path: str
-    process_report: object
+    process_report: AssetValidationReport
+
+
+def _list_field(payload: dict[str, object], field: str) -> list[object]:
+    """Return a JSON array field with a precise type for strict test checking."""
+    value = payload.get(field)
+    assert isinstance(value, list)
+    return value
 
 
 def _write_json(path: Path, value: object) -> None:
@@ -597,7 +604,7 @@ def test_rehash_mismatch_and_standalone_114_id_agreement_use_isolated_cli_fakes(
     )
     assert any(
         finding["code"] == "corpus_digest_mismatch"
-        for finding in mismatch_payload["findings"]
+        for finding in _list_field(mismatch_payload, "findings")
         if isinstance(finding, dict)
     )
     assert guide.is_file()
@@ -623,7 +630,11 @@ def test_rehash_mismatch_and_standalone_114_id_agreement_use_isolated_cli_fakes(
         .strip()
     )
     assert report["result"] == "pass"
-    checks = {check["name"]: check["result"] for check in report["checks"]}
+    checks = {
+        check["name"]: check["result"]
+        for check in _list_field(report, "checks")
+        if isinstance(check, dict)
+    }
     assert checks["agent_id_agreement"] == "pass"
     assert report["preconditions"]["unavailable_upstreams"] == list(DEFAULT_UPSTREAM_REPOSITORIES)
 
@@ -659,11 +670,13 @@ def test_spec_cli_aggregates_multiple_errors_across_the_fixed_114_id_set(
     )
     payload = _assert_canonical_json_result(result, expected_result="fail", report_path=report_path)
     findings = {
-        (item["agent_id"], item["code"]) for item in payload["findings"] if isinstance(item, dict)
+        (item["agent_id"], item["code"])
+        for item in _list_field(payload, "findings")
+        if isinstance(item, dict)
     }
     assert (AGENT_IDS[0], "generic_responsibility") in findings
     assert (AGENT_IDS[1], "missing_required_heading") in findings
-    assert len(payload["inventory_agent_ids"]) == 114
+    assert len(_list_field(payload, "inventory_agent_ids")) == 114
     assert first.read_text(encoding="utf-8") != ""
 
 
@@ -718,9 +731,11 @@ def test_standalone_preconditions_fail_before_content_and_success_is_marker_only
         report_path=tmp_path / "evidence" / "network-failure.json",
     )
     assert network_payload["content_validation_started"] is False
-    assert {finding["code"] for finding in network_payload["findings"]} == {
-        "standalone_network_enabled"
-    }
+    assert {
+        finding["code"]
+        for finding in _list_field(network_payload, "findings")
+        if isinstance(finding, dict)
+    } == {"standalone_network_enabled"}
 
     upstream_failure = _standalone_cli(
         tmp_path,
@@ -738,7 +753,7 @@ def test_standalone_preconditions_fail_before_content_and_success_is_marker_only
     assert upstream_payload["content_validation_started"] is False
     assert any(
         finding["code"] == "standalone_upstream_available"
-        for finding in upstream_payload["findings"]
+        for finding in _list_field(upstream_payload, "findings")
         if isinstance(finding, dict)
     )
 

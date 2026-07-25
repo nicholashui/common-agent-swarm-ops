@@ -398,7 +398,7 @@ def test_property_12_isolated_runs_aggregate_every_local_validator_deterministic
             sorted(("local_inputs", *_LOCAL_CHECK_NAMES))
         )
         assert tuple(report.findings) == tuple(
-            sorted(report.findings, key=lambda finding: finding.to_dict()["code"])
+            sorted(report.findings, key=lambda finding: str(finding.to_dict()["code"]))
         )
         assert (
             report.canonical_json()

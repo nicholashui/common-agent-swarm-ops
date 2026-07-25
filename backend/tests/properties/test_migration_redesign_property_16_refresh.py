@@ -151,7 +151,7 @@ def _tree_bytes(root: Path) -> tuple[tuple[str, bytes], ...]:
 
 def _map_records(changed: bool) -> tuple[dict[str, object], dict[str, object]]:
     """Return a one-entry map before/after pair with a bounded semantic delta."""
-    before = {
+    before: dict[str, object] = {
         "entries": [
             {
                 "common_agent_id": _COMMON_AGENT_ID,
@@ -162,7 +162,7 @@ def _map_records(changed: bool) -> tuple[dict[str, object], dict[str, object]]:
             }
         ]
     }
-    after = {
+    after: dict[str, object] = {
         "entries": [
             {
                 "common_agent_id": _COMMON_AGENT_ID,

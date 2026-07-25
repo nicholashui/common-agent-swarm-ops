@@ -22,6 +22,7 @@ from app.registry.specials_validator import (
     canonical_agent_spec_path,
     validate_specials_pack,
 )
+from tests.fakes.specials_governance import materialize_specials_governance
 
 _REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parents[3]
 _SCHEMA_SOURCE_PATH: Final[Path] = (
@@ -146,7 +147,9 @@ def _write_pack_fixture(
         _write_json(repository_root / SPECIALS_INVENTORY_PATH, inventory)
         allowlisted_paths.append(SPECIALS_INVENTORY_PATH)
 
-    return repository_root, allowlisted_paths
+    return repository_root, list(
+        materialize_specials_governance(repository_root, allowlisted_paths)
+    )
 
 
 def _path_for_target(

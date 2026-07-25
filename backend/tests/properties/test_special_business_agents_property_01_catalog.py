@@ -13,7 +13,6 @@ from hypothesis import example, given, settings, strategies as st
 
 from app.registry.specials_validator import (
     SPECIAL_AGENT_IDS,
-    SPECIAL_AGENT_SPEC_PATHS,
     SPECIAL_SOURCE_CATALOG,
     SPECIAL_SOURCE_PATHS,
     SPECIALS_INVENTORY_PATH,
@@ -28,6 +27,7 @@ from app.registry.specials_validator import (
     source_for_path,
     validate_specials_pack,
 )
+from tests.fakes.specials_governance import materialize_specials_governance
 
 _REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parents[3]
 _SCHEMA_SOURCE_PATH: Final[Path] = (
@@ -255,22 +255,31 @@ def _write_fixture(root: Path, values: FixtureValues) -> tuple[str, ...]:
     schema_target.write_bytes(_SCHEMA_SOURCE_PATH.read_bytes())
     _write_json(root, SPECIALS_MANIFEST_PATH, values.manifest)
     _write_json(root, SPECIALS_INVENTORY_PATH, values.inventory)
-    for agent_id, specification in values.specifications.items():
+    for agent_id in SPECIAL_AGENT_IDS:
+        specification = values.specifications.get(agent_id, _agent_spec(agent_id))
         _write_json(
             root,
             f"{SPECIALS_PACK_ROOT}/{canonical_agent_spec_path(agent_id)}",
             specification,
         )
 
+    represented_specification_paths = tuple(
+        f"{SPECIALS_PACK_ROOT}/{canonical_agent_spec_path(agent_id)}"
+        for agent_id in SPECIAL_AGENT_IDS
+        if agent_id in values.specifications
+    )
     controller_source = root / _CONTROLLER_SOURCE_PATH
     controller_source.parent.mkdir(parents=True, exist_ok=True)
     controller_source.write_bytes(b"untrusted controller source fixture bytes")
-    return (
-        SPECIALS_SCHEMA_PATH,
-        SPECIALS_MANIFEST_PATH,
-        SPECIALS_INVENTORY_PATH,
-        *SPECIAL_AGENT_SPEC_PATHS,
-        _CONTROLLER_SOURCE_PATH,
+    return materialize_specials_governance(
+        root,
+        (
+            SPECIALS_SCHEMA_PATH,
+            SPECIALS_MANIFEST_PATH,
+            SPECIALS_INVENTORY_PATH,
+            *represented_specification_paths,
+            _CONTROLLER_SOURCE_PATH,
+        ),
     )
 
 

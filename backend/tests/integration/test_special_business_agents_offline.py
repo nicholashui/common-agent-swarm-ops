@@ -26,6 +26,7 @@ from app.registry.specials_validator import (
     canonical_json_bytes,
     validate_specials_pack,
 )
+from tests.fakes.specials_governance import materialize_specials_governance
 
 _REPOSITORY_ROOT: Final[Path] = Path(__file__).resolve().parents[3]
 _SCHEMA_SOURCE_PATH: Final[Path] = _REPOSITORY_ROOT / SPECIALS_SCHEMA_PATH
@@ -116,7 +117,7 @@ def _write_fixture(root: Path, *, inventory_required: bool = True) -> tuple[str,
         )
         allowlisted_paths.append(SPECIALS_INVENTORY_PATH)
 
-    return tuple(allowlisted_paths)
+    return materialize_specials_governance(root, allowlisted_paths)
 
 
 def _fixture_snapshot(root: Path, allowlisted_paths: tuple[str, ...]) -> dict[str, bytes]:
@@ -241,14 +242,14 @@ def test_offline_validation_does_not_cross_network_process_credential_or_runtime
     assert report.accepted_agent_ids == SPECIAL_AGENT_IDS
 
 
-def test_absent_reference_directories_do_not_override_checked_in_pack_evidence(
+def test_deterministic_source_fixture_evidence_is_validated_offline(
     tmp_path: Path,
 ) -> None:
-    """Manifest/spec evidence remains sufficient when untrusted references are absent."""
+    """Generated opaque source evidence remains local and does not enable authority."""
     repository_root = tmp_path / "specials-without-references"
     allowlisted_paths = _write_fixture(repository_root)
 
-    assert not (repository_root / "docs" / "special_agents_redesign").exists()
+    assert (repository_root / "docs" / "special_agents_redesign").exists()
     assert not (repository_root / "va").exists()
     report = validate_specials_pack(repository_root, allowlisted_paths)
 

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\registry\compatibility.py
+# hypothesis_version: 6.151.12
+
+[', ', '.', 'alc_range', 'alc_version', 'compatibility', 'compatibility-matrix', 'compatibility_status', 'failure_reasons', 'host_contract_range', 'immutable_version', 'status']

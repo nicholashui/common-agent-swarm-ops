@@ -5,6 +5,8 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
+import pytest
+
 from app.video.migration.canonical import finding_sort_key
 from app.video.migration.contracts import ImportFinding, MigrationResult
 from app.video.migration.standalone import (
@@ -16,7 +18,7 @@ from app.video.migration.standalone import (
 
 
 def test_isolation_failure_short_circuits_content_validation(
-    tmp_path: Path, monkeypatch: object
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Network/upstream failures return before any local validator can run."""
     called = False
@@ -43,6 +45,34 @@ def test_isolation_failure_short_circuits_content_validation(
     )
 
 
+def test_unknown_upstream_availability_is_rejected_before_local_validation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Unknown upstream declarations fail closed before local validators run."""
+    called = False
+
+    def fail_if_called(*_args: object, **_kwargs: object) -> object:
+        nonlocal called
+        called = True
+        raise AssertionError("content validation must not run")
+
+    monkeypatch.setattr("app.video.migration.standalone.validate_corpus_integrity", fail_if_called)
+
+    report = verify_standalone(
+        tmp_path / "business" / "video",
+        network_disabled=True,
+        upstreams_unavailable=True,
+        upstream_available=("unexpected-upstream",),
+    )
+
+    assert not report.is_valid
+    assert not report.content_validation_started
+    assert not called
+    assert {finding.code for finding in report.findings} == {"standalone_unknown_upstream"}
+    assert report.findings[0].path == "unexpected-upstream"
+
+
 def test_isolated_run_aggregates_sorted_machine_readable_failures(tmp_path: Path) -> None:
     """Once isolated, local failures are aggregated and canonically ordered."""
     report = verify_standalone(
@@ -66,7 +96,7 @@ def test_isolated_run_aggregates_sorted_machine_readable_failures(tmp_path: Path
 
 
 def test_cli_prints_exact_success_marker(
-    monkeypatch: object, tmp_path: Path, capsys: object
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """A passing read-only checker emits only the required success marker."""
     module_path = (

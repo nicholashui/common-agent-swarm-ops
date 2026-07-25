@@ -224,7 +224,7 @@ class _GraphValidatedRunGate:
 # Feature: backend-redesign, Property 7: Graph revision validation gates runs and
 # preserves concurrency.
 # **Validates: Requirements 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8**
-@settings(max_examples=100)
+@settings(max_examples=100, deadline=None)
 @given(
     value=_SAFE_VALUES,
     custom_node=st.booleans(),

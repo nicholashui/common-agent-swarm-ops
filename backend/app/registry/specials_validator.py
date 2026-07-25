@@ -1602,8 +1602,6 @@ def _provenance_and_risk_checks(
         or path.startswith(f"{SPECIALS_RISK_ASSESSMENT_ROOT}/")
         or path.startswith(f"{SPECIALS_APPROVAL_ROOT}/")
     )
-    if not governance_paths:
-        return SectionValidationResult("pass"), SectionValidationResult("pass"), False
 
     pending_revalidation = False
     provenance_start = len(findings)
@@ -1728,7 +1726,9 @@ def _provenance_and_risk_checks(
         else "pass"
     )
     risk_result: Literal["pass", "fail"] = (
-        "fail" if any(finding.category == "risk_gate" for finding in risk_findings) else "pass"
+        "fail"
+        if any(finding.category in {"provenance", "risk_gate"} for finding in risk_findings)
+        else "pass"
     )
     governance_file_results = [
         FileValidationResult(file.path, sha256_bytes(file.raw_bytes), file.schema)

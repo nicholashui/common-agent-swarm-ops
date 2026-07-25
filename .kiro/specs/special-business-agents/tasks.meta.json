@@ -9,19 +9,19 @@
       "lastRunTimestamp": 1784969393704
     },
     "3.4 Add `backend/tests/properties/test_special_business_agents_property_03_integrity.py`": {
-      "status": "failed",
+      "status": "passed",
       "failingExample": "Hypothesis failed its health check before executing examples: the property test uses the function-scoped pytest fixture `tmp_path`, which is not reset between generated inputs.",
-      "lastRunTimestamp": 1784969349339
+      "lastRunTimestamp": 1784989496852
     },
     "4.2 Add `backend/tests/properties/test_special_business_agents_property_04_provenance.py`": {
-      "status": "failed",
+      "status": "passed",
       "failingExample": "Hypothesis found 8 distinct failures. Representative falsifying examples: (1) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='unreadable', approval_state='valid', manual_revalidation=False): expected SOURCE_NOT_READABLE but findings were {'CONFIGURATION_DIGEST_MISMATCH', 'NOT_REGULAR_FILE'}; (2) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='drift', configuration_digest_mode='matching', availability='present', approval_state='missing', manual_revalidation=False): expected pass but validation_outcome was fail; (3) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='malformed', configuration_digest_mode='matching', availability='absent', approval_state='valid', manual_revalidation=False): expected INVALID_SOURCE_DIGEST but findings were {'INVALID_SOURCE_PATH'}; (4) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='matching', configuration_digest_mode='malformed', availability='absent', approval_state='valid', manual_revalidation=False): expected INVALID_CONFIGURATION_DIGEST but findings were {'INVALID_SOURCE_PATH'}; (5) ProvenanceCase(target_index=0, source_path_mode='other_inventory', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='valid', manual_revalidation=False): expected CONFIGURATION_DIGEST_MISMATCH but findings were {'INVALID_SOURCE_PATH'}; (6) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='rejected', manual_revalidation=False): expected APPROVAL_NOT_GRANTED but findings were {'CONFIGURATION_DIGEST_MISMATCH'}; (7) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='source_mismatch', manual_revalidation=False): expected APPROVAL_SOURCE_DIGEST_MISMATCH but findings were {'CONFIGURATION_DIGEST_MISMATCH'}; (8) ProvenanceCase(target_index=0, source_path_mode='valid', source_digest_mode='matching', configuration_digest_mode='mismatch', availability='absent', approval_state='missing', manual_revalidation=False): expected MISSING_APPROVAL_RECORD but findings were {'CONFIGURATION_DIGEST_MISMATCH'}.",
       "lastRunTimestamp": 1784970713080
     },
     "4.3 Add `backend/tests/properties/test_special_business_agents_property_05_authority.py`": {
       "status": "passed",
       "failingExample": "",
-      "lastRunTimestamp": 1784971127746
+      "lastRunTimestamp": 1784989496852
     }
   },
   "executionHistory": {
