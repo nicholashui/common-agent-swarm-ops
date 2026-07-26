@@ -1,10 +1,21 @@
 "use client";
 
-import React, { useMemo, useState, type FormEvent, type KeyboardEvent } from "react";
+import React, {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+  type KeyboardEvent,
+} from "react";
 import Link from "next/link";
 
 import {
   LOCAL_COMPOSER_LANDING,
+  buildLocalAssistantReply,
+  type ComposerChatMessage,
+  type ComposerGraphStyle,
   type ComposerLandingView,
   type ComposerPatternCard,
 } from "../lib/projections/composer-landing";
@@ -21,6 +32,13 @@ export function ComposerHome({
   );
   const [query, setQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const [architectOpen, setArchitectOpen] = useState(true);
+  const [patternsOpen, setPatternsOpen] = useState(false);
+  const [messages, setMessages] = useState<readonly ComposerChatMessage[]>(
+    view.messages,
+  );
+  const patternRefs = useRef(new Map<string, HTMLLIElement | null>());
+  const architectPanelId = useId();
 
   const filteredPatterns = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -37,23 +55,88 @@ export function ComposerHome({
   }, [activeFilter, query, view.patterns]);
 
   const selectedPattern =
-    filteredPatterns.find((pattern) => pattern.id === selectedPatternId) ??
+    view.patterns.find((pattern) => pattern.id === selectedPatternId) ??
     filteredPatterns[0] ??
     view.patterns[0];
+
+  useEffect(() => {
+    const latestRec = [...messages]
+      .reverse()
+      .find((message) => message.recommendation)?.recommendation;
+    if (!latestRec) return;
+    setSelectedPatternId(latestRec.patternId);
+    const node = patternRefs.current.get(latestRec.patternId);
+    node?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [messages]);
 
   const applyChip = (chip: string): void => {
     setGoal(chip);
     setStatusMessage(`Goal chip applied: ${chip}`);
   };
 
+  const selectPattern = (patternId: string): void => {
+    setSelectedPatternId(patternId);
+    const pattern = view.patterns.find((entry) => entry.id === patternId);
+    if (pattern) {
+      setSwarmName(`Untitled Swarm from ${pattern.name}`);
+    }
+  };
+
+  const instantiatePattern = (pattern: ComposerPatternCard): void => {
+    selectPattern(pattern.id);
+    setMessages((current) => [
+      ...current,
+      {
+        id: `inst-${Date.now()}`,
+        role: "user",
+        text: `Start with common pattern ${pattern.name} v${pattern.version}.`,
+      },
+      {
+        id: `inst-a-${Date.now()}`,
+        role: "assistant",
+        text: "Pattern selected from browser:",
+        recommendation: {
+          patternId: pattern.id,
+          patternName: pattern.name,
+          version: pattern.version,
+          rationale: pattern.whenToUse,
+          metrics: pattern.metrics,
+          slots: [
+            { id: "slot-a", label: "Slot A", version: "Common" },
+            { id: "slot-b", label: "Slot B", version: "Common" },
+            {
+              id: "slot-v",
+              label: "Verifier",
+              version: "Common",
+              verified: true,
+            },
+          ],
+        },
+      },
+    ]);
+    setStatusMessage(
+      `Instantiated ${pattern.name} into chat recommendation (local preview).`,
+    );
+    setPatternsOpen(false);
+  };
+
   const handleSend = (event?: FormEvent): void => {
     event?.preventDefault();
-    if (goal.trim().length === 0) {
+    const trimmed = goal.trim();
+    if (trimmed.length === 0) {
       setStatusMessage("Enter a goal before sending.");
       return;
     }
+    const userMessage: ComposerChatMessage = {
+      id: `u-${Date.now()}`,
+      role: "user",
+      text: trimmed,
+    };
+    const assistant = buildLocalAssistantReply(trimmed, view.patterns);
+    setMessages((current) => [...current, userMessage, assistant]);
+    setGoal("");
     setStatusMessage(
-      "Local preview: composer recommendation API is not connected. Browse patterns or load the canvas draft.",
+      "Local preview recommendation appended. Browse patterns or load the canvas draft.",
     );
   };
 
@@ -78,10 +161,22 @@ export function ComposerHome({
           </label>
         </div>
         <div className="composer-home__toolbar-actions">
-          <button className="composer-home__ghost" type="button">
+          <button
+            className="composer-home__ghost"
+            onClick={() =>
+              setStatusMessage("Save Draft requires an authorized compose contract.")
+            }
+            type="button"
+          >
             Save Draft
           </button>
-          <button className="composer-home__ghost" type="button">
+          <button
+            className="composer-home__ghost"
+            onClick={() =>
+              setStatusMessage("Load Template requires an authorized template projection.")
+            }
+            type="button"
+          >
             Load Template
           </button>
           <Link aria-label="Close composer" className="composer-home__close" href="/">
@@ -102,26 +197,39 @@ export function ComposerHome({
       ) : null}
 
       <div className="composer-home__layout">
-        <section
-          aria-label="Chat composer"
-          className="composer-home__chat panel"
-        >
+        <section aria-label="Chat composer" className="composer-home__chat panel">
           <div className="composer-home__architect">
-            <span aria-hidden="true" className="composer-home__architect-mark">
-              ✓
-            </span>
-            <div>
-              <strong>{view.architectTitle}</strong>
-              <p>{view.architectSubtitle}</p>
-            </div>
+            <button
+              aria-controls={architectPanelId}
+              aria-expanded={architectOpen}
+              className="composer-home__architect-toggle"
+              onClick={() => setArchitectOpen((open) => !open)}
+              type="button"
+            >
+              <span aria-hidden="true" className="composer-home__architect-mark">
+                ✓
+              </span>
+              <span className="composer-home__architect-copy">
+                <strong>{view.architectTitle}</strong>
+                {architectOpen ? (
+                  <span id={architectPanelId}>{view.architectSubtitle}</span>
+                ) : (
+                  <span>Show system context</span>
+                )}
+              </span>
+              <span aria-hidden="true">{architectOpen ? "⌃" : "⌄"}</span>
+            </button>
           </div>
 
           <div className="composer-home__messages" role="log">
-            {view.messages.map((message) =>
+            {messages.map((message) =>
               message.role === "user" ? (
-                <div className="composer-home__bubble composer-home__bubble--user" key={message.id}>
+                <div
+                  className="composer-home__bubble composer-home__bubble--user"
+                  key={message.id}
+                >
                   {(message.lines ?? [message.text ?? ""]).map((line) => (
-                    <p key={line}>{line}</p>
+                    <p key={`${message.id}-${line}`}>{line}</p>
                   ))}
                 </div>
               ) : (
@@ -133,21 +241,25 @@ export function ComposerHome({
                     {message.text ? <p>{message.text}</p> : null}
                     {message.recommendation ? (
                       <article className="composer-home__rec">
-                        <div className="composer-home__rec-card">
-                          <div>
-                            <strong>
-                              {message.recommendation.patternName} v
-                              {message.recommendation.version}
-                            </strong>
-                            <span className="composer-home__badge">
-                              Recommended for goal
-                            </span>
-                            <p>{message.recommendation.rationale}</p>
-                            <p className="composer-home__metrics">
-                              {message.recommendation.metrics}
-                            </p>
-                          </div>
-                        </div>
+                        <button
+                          className="composer-home__rec-card"
+                          onClick={() =>
+                            selectPattern(message.recommendation!.patternId)
+                          }
+                          type="button"
+                        >
+                          <strong>
+                            {message.recommendation.patternName} v
+                            {message.recommendation.version}
+                          </strong>
+                          <span className="composer-home__badge">
+                            Recommended for goal
+                          </span>
+                          <p>{message.recommendation.rationale}</p>
+                          <p className="composer-home__metrics">
+                            {message.recommendation.metrics}
+                          </p>
+                        </button>
                         <p className="composer-home__slots-label">
                           Suggested Common Agent slots
                         </p>
@@ -170,10 +282,26 @@ export function ComposerHome({
                           <Link className="composer-home__primary" href="/canvas">
                             Load into Canvas →
                           </Link>
-                          <button className="composer-home__ghost" type="button">
+                          <button
+                            className="composer-home__ghost"
+                            onClick={() =>
+                              setStatusMessage(
+                                "Fork & Customize requires an authorized fork action.",
+                              )
+                            }
+                            type="button"
+                          >
                             Fork &amp; Customize
                           </button>
-                          <button className="composer-home__ghost composer-home__ghost--violet" type="button">
+                          <button
+                            className="composer-home__ghost composer-home__ghost--violet"
+                            onClick={() =>
+                              setStatusMessage(
+                                "Propose as new Pattern requires an authorized proposal contract.",
+                              )
+                            }
+                            type="button"
+                          >
                             Propose as new Pattern
                           </button>
                         </div>
@@ -188,7 +316,37 @@ export function ComposerHome({
             )}
           </div>
 
-          <div className="composer-home__chips" role="group" aria-label="Goal examples">
+          <div className="composer-home__bottom-bar">
+            <button
+              className="composer-home__ghost"
+              onClick={() =>
+                setStatusMessage("Regenerate requires the composer recommend stream.")
+              }
+              type="button"
+            >
+              Regenerate
+            </button>
+            <Link className="composer-home__ghost" href="/canvas">
+              Start from blank graph instead
+            </Link>
+            <button
+              className="composer-home__ghost"
+              onClick={() =>
+                setStatusMessage(
+                  "Save conversation as template requires an authorized template write.",
+                )
+              }
+              type="button"
+            >
+              Save this conversation as template
+            </button>
+          </div>
+
+          <div
+            aria-label="Goal examples"
+            className="composer-home__chips"
+            role="group"
+          >
             {view.goalChips.map((chip) => (
               <button
                 className="composer-home__chip"
@@ -212,17 +370,50 @@ export function ComposerHome({
               placeholder={view.inputPlaceholder}
               value={goal}
             />
-            <button aria-label="Send goal" className="composer-home__send" type="submit">
-              ↑
-            </button>
+            <div className="composer-home__input-tools">
+              <label className="composer-home__attach">
+                <span className="visually-hidden">Attach requirements file</span>
+                <input
+                  accept=".md,.pdf,text/markdown,application/pdf"
+                  onChange={() =>
+                    setStatusMessage(
+                      "File attach is local-only feedback; server ingestion is not connected.",
+                    )
+                  }
+                  type="file"
+                />
+                📎
+              </label>
+              <button
+                aria-label="Send goal"
+                className="composer-home__send"
+                type="submit"
+              >
+                ↑
+              </button>
+            </div>
           </form>
         </section>
 
         <aside
           aria-label="Common Pattern Browser"
-          className="composer-home__browser"
+          className={
+            patternsOpen
+              ? "composer-home__browser composer-home__browser--open"
+              : "composer-home__browser"
+          }
+          id="composer-pattern-browser"
         >
-          <h2>Common Pattern Browser</h2>
+          <div className="composer-home__browser-head">
+            <h2>Common Pattern Browser</h2>
+            <button
+              className="composer-home__browser-close"
+              onClick={() => setPatternsOpen(false)}
+              type="button"
+            >
+              Close
+            </button>
+          </div>
           <label className="composer-home__search">
             <span className="visually-hidden">Search patterns</span>
             <input
@@ -231,7 +422,11 @@ export function ComposerHome({
               value={query}
             />
           </label>
-          <div className="composer-home__filters" role="group" aria-label="Pattern filters">
+          <div
+            aria-label="Pattern filters"
+            className="composer-home__filters"
+            role="group"
+          >
             {view.filters.map((filter) => (
               <button
                 aria-pressed={activeFilter === filter}
@@ -250,35 +445,82 @@ export function ComposerHome({
           </div>
           <ul className="composer-home__patterns">
             {filteredPatterns.map((pattern) => (
-              <li key={pattern.id}>
+              <li
+                key={pattern.id}
+                ref={(node) => {
+                  patternRefs.current.set(pattern.id, node);
+                }}
+              >
                 <PatternCard
-                  onSelect={() => setSelectedPatternId(pattern.id)}
+                  onInstantiate={() => instantiatePattern(pattern)}
+                  onSelect={() => selectPattern(pattern.id)}
                   pattern={pattern}
                   selected={selectedPattern?.id === pattern.id}
                 />
               </li>
             ))}
           </ul>
+
           {selectedPattern ? (
             <div className="composer-home__preview panel">
-              <p className="composer-home__preview-label">Preview</p>
-              <strong>{selectedPattern.name}</strong>
-              <p>{selectedPattern.whenToUse}</p>
-              <div className="composer-home__mini-graph" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-                <b />
-                <b />
-              </div>
-              <p className="composer-home__metrics">{selectedPattern.metrics}</p>
+              <p className="composer-home__preview-label">
+                Live Preview — {selectedPattern.name} v{selectedPattern.version}
+              </p>
+              <MiniGraph style={selectedPattern.graphStyle} />
+              <dl className="composer-home__summary">
+                <div>
+                  <dt>Total agents / slots</dt>
+                  <dd>{selectedPattern.previewSummary.totalSlots}</dd>
+                </div>
+                <div>
+                  <dt>Parallelism factor</dt>
+                  <dd>{selectedPattern.previewSummary.parallelism}</dd>
+                </div>
+                <div>
+                  <dt>Est. cost/latency</dt>
+                  <dd>{selectedPattern.previewSummary.estCostLatency}</dd>
+                </div>
+                <div>
+                  <dt>Verification coverage</dt>
+                  <dd className="composer-home__metrics">
+                    {selectedPattern.previewSummary.verificationCoverage}
+                  </dd>
+                </div>
+              </dl>
               <Link className="composer-home__primary" href="/canvas">
-                Instantiate in Canvas →
+                Load into Canvas →
               </Link>
             </div>
           ) : null}
+
+          <button
+            className="composer-home__suggest"
+            onClick={() =>
+              setStatusMessage(
+                "Suggest new Common Pattern requires an authorized proposal action.",
+              )
+            }
+            type="button"
+          >
+            {view.suggestNewLabel}
+          </button>
+          {view.handoffNotes.map((note) => (
+            <p className="composer-home__handoff-note" key={note}>
+              {note}
+            </p>
+          ))}
         </aside>
       </div>
+
+      <button
+        aria-controls="composer-pattern-browser"
+        aria-expanded={patternsOpen}
+        className="composer-home__fab"
+        onClick={() => setPatternsOpen((open) => !open)}
+        type="button"
+      >
+        Browse Patterns
+      </button>
 
       <p className="composer-home__footer">{view.footerNote}</p>
     </section>
@@ -289,36 +531,110 @@ function PatternCard({
   pattern,
   selected,
   onSelect,
+  onInstantiate,
 }: Readonly<{
   pattern: ComposerPatternCard;
   selected: boolean;
   onSelect: () => void;
+  onInstantiate: () => void;
 }>): JSX.Element {
   return (
-    <button
-      aria-pressed={selected}
+    <article
       className={
         selected
           ? "composer-home__pattern composer-home__pattern--selected"
           : "composer-home__pattern"
       }
-      onClick={onSelect}
-      type="button"
     >
-      {pattern.recommended ? (
-        <span className="composer-home__badge">Recommended</span>
-      ) : null}
-      <strong>
-        {pattern.name}
-        <span className="composer-home__version">v{pattern.version}</span>
-      </strong>
-      <span className="composer-home__when">{pattern.whenToUse}</span>
-      <span className="composer-home__metrics">{pattern.metrics}</span>
-      <span className="composer-home__used">{pattern.usedIn}</span>
-      <span className="composer-home__pattern-actions">
-        <span className="composer-home__ghost">Instantiate</span>
-        <span className="composer-home__ghost">Fork as Custom</span>
-      </span>
-    </button>
+      <button
+        aria-pressed={selected}
+        className="composer-home__pattern-select"
+        onClick={onSelect}
+        type="button"
+      >
+        {pattern.recommended ? (
+          <span className="composer-home__badge">Recommended</span>
+        ) : null}
+        <strong>
+          {pattern.name}
+          <span className="composer-home__version">v{pattern.version}</span>
+        </strong>
+        <MiniGraph style={pattern.graphStyle} />
+        <span className="composer-home__when">{pattern.whenToUse}</span>
+        <span className="composer-home__metrics">{pattern.metrics}</span>
+      </button>
+      <div className="composer-home__pattern-actions">
+        <button
+          className="composer-home__primary composer-home__primary--small"
+          onClick={onInstantiate}
+          type="button"
+        >
+          Instantiate
+        </button>
+        <button
+          className="composer-home__ghost"
+          onClick={onSelect}
+          type="button"
+        >
+          Fork
+        </button>
+      </div>
+    </article>
+  );
+}
+
+function MiniGraph({
+  style,
+}: Readonly<{ style: ComposerGraphStyle }>): JSX.Element {
+  if (style === "verification_loop") {
+    return (
+      <div
+        aria-hidden="true"
+        className="composer-home__mini-graph composer-home__mini-graph--loop"
+      >
+        <span>Agent</span>
+        <i>→</i>
+        <span className="composer-home__mini-graph-verify">Verify</span>
+        <b>↺</b>
+      </div>
+    );
+  }
+  if (style === "dynamic_router") {
+    return (
+      <div
+        aria-hidden="true"
+        className="composer-home__mini-graph composer-home__mini-graph--router"
+      >
+        <em>◇</em>
+        <span>→ B1</span>
+        <span>→ B2</span>
+      </div>
+    );
+  }
+  if (style === "supervisor") {
+    return (
+      <div
+        aria-hidden="true"
+        className="composer-home__mini-graph composer-home__mini-graph--supervisor"
+      >
+        <span className="composer-home__mini-graph-hub">S</span>
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+      </div>
+    );
+  }
+  return (
+    <div
+      aria-hidden="true"
+      className="composer-home__mini-graph composer-home__mini-graph--parallel"
+    >
+      <span>A</span>
+      <span>B</span>
+      <span>C</span>
+      <i>→</i>
+      <span className="composer-home__mini-graph-verify">Verify</span>
+      <small>BIG ROWs → verifier cycle ↺</small>
+    </div>
   );
 }
