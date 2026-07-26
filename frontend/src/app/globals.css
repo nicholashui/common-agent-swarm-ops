@@ -1197,3 +1197,71 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .app-shell--compact .menu-group-toggle .menu-group-label {
   display: none;
 }
+
+/* ui_02_dashboard landing */
+.dashboard-home { display: grid; gap: 28px; color: #1c1917; }
+.dashboard-home__header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.dashboard-home__header h1 { margin: 0; letter-spacing: -.04em; font-size: clamp(28px, 3vw, 36px); line-height: 1.1; color: #1c1917; }
+.dashboard-home__freshness { display: inline-flex; align-items: center; gap: 8px; min-height: 28px; margin: 0; padding: 0 12px; color: #047857; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.dashboard-home__freshness--stale { color: #92400e; background: #fffbeb; border-color: #fcd34d; }
+.dashboard-home__freshness-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
+.dashboard-home__freshness--stale .dashboard-home__freshness-dot { background: #f59e0b; }
+.dashboard-home__as-of { color: inherit; font-weight: 500; opacity: .85; }
+.dashboard-home__section { display: grid; gap: 12px; min-width: 0; }
+.dashboard-home__section-label { margin: 0; color: #a8a29e; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.dashboard-home__section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.dashboard-home__section-link { color: #4f46e5; font-size: 12px; font-weight: 600; }
+.dashboard-home__stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.dashboard-stat { min-height: 120px; padding: 16px 18px; background: #fff; border: 1px solid #e7e5e4; border-radius: 16px; box-shadow: 0 2px 10px #1c19170f; }
+.dashboard-stat__label, .dashboard-stat__detail, .dashboard-stat__trend { margin: 0; color: #78716c; font-size: 12px; }
+.dashboard-stat__value { margin: 10px 0 6px; color: #1c1917; font: 700 32px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.04em; }
+.dashboard-stat--violet { border-color: #ddd6fe; }
+.dashboard-stat--violet .dashboard-stat__value { color: #7c3aed; }
+.dashboard-stat--green .dashboard-stat__value { color: #059669; }
+.dashboard-stat--amber .dashboard-stat__value { color: #b45309; }
+.dashboard-stat__trend { margin-top: 8px; color: #059669; font-size: 11px; }
+.dashboard-home__actions { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 12px; }
+.dashboard-action { display: grid; gap: 6px; min-height: 96px; padding: 16px; color: #1c1917; background: #fff; border: 1px solid #e7e5e4; border-radius: 14px; }
+.dashboard-action strong { font-size: 14px; }
+.dashboard-action span { color: #78716c; font-size: 12px; line-height: 1.45; }
+.dashboard-action--primary { color: #fff; background: linear-gradient(135deg, #4f46e5, #7c3aed); border-color: transparent; }
+.dashboard-action--primary span { color: #e0e7ff; }
+.dashboard-home__split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; align-items: start; }
+.dashboard-running { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.dashboard-running__card { display: grid; gap: 8px; padding: 14px 16px; background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; }
+.dashboard-running__topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dashboard-running__pattern, .dashboard-running__progress { margin: 0; color: #78716c; font-size: 12px; }
+.dashboard-running__metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 4px 0 0; }
+.dashboard-running__metrics div { display: grid; gap: 3px; }
+.dashboard-running__metrics dt { color: #a8a29e; font-size: 10px; }
+.dashboard-running__metrics dd { margin: 0; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+.dashboard-running__actions a { color: #4f46e5; font-size: 12px; font-weight: 600; }
+.dashboard-recent { padding: 0; overflow: hidden; background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; }
+.dashboard-recent__head, .dashboard-recent__row { display: grid; grid-template-columns: .9fr 1.3fr .8fr .7fr .7fr .6fr; gap: 10px; align-items: center; padding: 10px 14px; font-size: 12px; }
+.dashboard-recent__head { color: #a8a29e; border-bottom: 1px solid #e7e5e4; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+.dashboard-recent__list { margin: 0; padding: 0; list-style: none; }
+.dashboard-recent__row { border-top: 1px solid #f5f5f4; color: #57534e; }
+.dashboard-recent__row strong { color: #1c1917; }
+.dashboard-insights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.dashboard-insight { display: grid; gap: 10px; padding: 16px 18px; background: #fff; border: 1px solid #e7e5e4; border-left-width: 4px; border-radius: 12px; }
+.dashboard-insight h3 { margin: 0; font-size: 15px; }
+.dashboard-insight p { margin: 0; color: #57534e; font-size: 13px; line-height: 1.5; }
+.dashboard-insight--opportunity { border-left-color: #f59e0b; }
+.dashboard-insight--positive { border-left-color: #10b981; }
+.dashboard-insight__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.dashboard-insight__button { display: inline-flex; min-height: 34px; align-items: center; padding: 0 12px; color: #fff; background: #4f46e5; border-radius: 8px; font-size: 12px; font-weight: 600; }
+.dashboard-insight__button--ghost { color: #4f46e5; background: #eef2ff; }
+.dashboard-empty { display: grid; gap: 8px; padding: 18px; background: #fff; border: 1px dashed #d6d3d1; border-radius: 12px; color: #78716c; font-size: 13px; }
+.dashboard-home__footer { margin: 0; color: #a8a29e; font-size: 11px; }
+.app-shell:has(.menu-workspace) .dashboard-home .panel { border-color: #e7e5e4; background: #fff; }
+@media (max-width: 1200px) {
+  .dashboard-home__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dashboard-home__actions { grid-template-columns: 1fr 1fr; }
+  .dashboard-home__split { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .dashboard-home__stats, .dashboard-home__actions, .dashboard-insights { grid-template-columns: 1fr; }
+  .dashboard-recent { overflow-x: auto; }
+  .dashboard-recent__head, .dashboard-recent__row { min-width: 640px; }
+  .dashboard-running__metrics { grid-template-columns: 1fr 1fr; }
+}

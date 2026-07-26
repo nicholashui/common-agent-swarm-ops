@@ -24,7 +24,7 @@ const UNLOCKED_ROUTE_CASES: readonly UnlockedRouteCase[] = [
     name: "dashboard",
     source: new URL("./page.tsx", import.meta.url),
     screenId: "ui_02_dashboard",
-    mustMatch: /Dashboard|LOCAL_DASHBOARD_PROJECTION/,
+    mustMatch: /DashboardHome/,
     mustNotMatch: /UnavailableScreen/,
   },
   {

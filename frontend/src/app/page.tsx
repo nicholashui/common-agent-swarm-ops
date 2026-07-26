@@ -1,17 +1,10 @@
 import { AppShell } from "../components/AppShell";
-import { Dashboard } from "../components/OperationalScreens";
-import {
-  LOCAL_DASHBOARD_PROJECTION,
-  LOCAL_PREVIEW_HANDLERS,
-} from "../lib/projections/local-preview";
+import { DashboardHome } from "../components/DashboardHome";
 
 function HomePage(): JSX.Element {
   return (
     <AppShell>
-      <Dashboard
-        projection={LOCAL_DASHBOARD_PROJECTION}
-        {...LOCAL_PREVIEW_HANDLERS}
-      />
+      <DashboardHome />
     </AppShell>
   );
 }
