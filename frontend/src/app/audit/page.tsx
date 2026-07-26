@@ -1,14 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Audit } from "../../components/OperationalScreens";
-import {
-  LOCAL_AUDIT_PROJECTION,
-  LOCAL_PREVIEW_HANDLERS,
-} from "../../lib/projections/local-preview";
+import { AuditHome } from "../../components/AuditHome";
 
+/**
+ * Governance & Audit Trail (ui_14). Local presentation landing —
+ * append-only redacted log until authorized audit projections connect.
+ */
 function AuditPage(): JSX.Element {
   return (
     <AppShell>
-      <Audit projection={LOCAL_AUDIT_PROJECTION} {...LOCAL_PREVIEW_HANDLERS} />
+      <AuditHome />
     </AppShell>
   );
 }

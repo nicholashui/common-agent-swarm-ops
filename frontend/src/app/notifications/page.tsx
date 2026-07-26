@@ -1,17 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Notifications } from "../../components/OperationalScreens";
-import {
-  LOCAL_NOTIFICATIONS_PROJECTION,
-  LOCAL_PREVIEW_HANDLERS,
-} from "../../lib/projections/local-preview";
+import { NotificationsHome } from "../../components/NotificationsHome";
 
+/**
+ * Notifications Center (ui_12). Local presentation landing until
+ * notification projections, preferences, and delivery channels connect.
+ */
 function NotificationsPage(): JSX.Element {
   return (
     <AppShell>
-      <Notifications
-        projection={LOCAL_NOTIFICATIONS_PROJECTION}
-        {...LOCAL_PREVIEW_HANDLERS}
-      />
+      <NotificationsHome />
     </AppShell>
   );
 }

@@ -1,17 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Profile } from "../../components/OperationalScreens";
-import {
-  LOCAL_PREVIEW_HANDLERS,
-  LOCAL_PROFILE_PROJECTION,
-} from "../../lib/projections/local-preview";
+import { ProfileHome } from "../../components/ProfileHome";
 
+/**
+ * User Profile & Preferences (ui_13). Local presentation landing — no
+ * credentials, no other users' artifacts, server-derived role only.
+ */
 function ProfilePage(): JSX.Element {
   return (
     <AppShell>
-      <Profile
-        projection={LOCAL_PROFILE_PROJECTION}
-        {...LOCAL_PREVIEW_HANDLERS}
-      />
+      <ProfileHome />
     </AppShell>
   );
 }

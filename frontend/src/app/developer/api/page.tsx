@@ -1,11 +1,14 @@
 import { AppShell } from "../../../components/AppShell";
-import { LocalDestinationPreview } from "../../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../../lib/projections/local-preview";
+import { ApiPortalHome } from "../../../components/ApiPortalHome";
 
+/**
+ * Developer / API Portal (ui_15). Local presentation landing until
+ * generated OpenAPI, token service, and webhook projections connect.
+ */
 function DeveloperApiPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.apiPortal} />
+      <ApiPortalHome />
     </AppShell>
   );
 }
