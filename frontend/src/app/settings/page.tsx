@@ -1,11 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { SettingsHome } from "../../components/SettingsHome";
 
+/**
+ * Global Settings (ui_08). Local presentation landing — no secret values,
+ * no client authority to change live policy without authorized actions.
+ */
 function SettingsPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.settings} />
+      <SettingsHome />
     </AppShell>
   );
 }

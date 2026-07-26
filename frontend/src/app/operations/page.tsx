@@ -1,20 +1,20 @@
 import { AppShell } from "../../components/AppShell";
 import { ApprovalGateScreen } from "../../components/ApprovalRolloutScreens";
-import { Monitoring } from "../../components/OperationalScreens";
+import { MonitoringHome } from "../../components/MonitoringHome";
 import {
   LOCAL_APPROVAL_PROJECTION,
-  LOCAL_MONITORING_PROJECTION,
   LOCAL_PREVIEW_HANDLERS,
 } from "../../lib/projections/local-preview";
 
+/**
+ * Operations surface: ui_09 monitoring landing plus approvals/rollouts
+ * projection (menu shares /operations until a dedicated approvals route exists).
+ */
 function OperationsPage(): JSX.Element {
   return (
     <AppShell>
       <div className="responsive-stack">
-        <Monitoring
-          projection={LOCAL_MONITORING_PROJECTION}
-          {...LOCAL_PREVIEW_HANDLERS}
-        />
+        <MonitoringHome />
         <ApprovalGateScreen
           projection={LOCAL_APPROVAL_PROJECTION}
           {...LOCAL_PREVIEW_HANDLERS}

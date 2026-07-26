@@ -1,17 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Registry } from "../../components/OperationalScreens";
-import {
-  LOCAL_PREVIEW_HANDLERS,
-  LOCAL_REGISTRY_PROJECTION,
-} from "../../lib/projections/local-preview";
+import { RegistryHome } from "../../components/RegistryHome";
 
+/**
+ * Common Registry Hub (ui_07). Local presentation landing until generated
+ * commons registry projections and governance actions connect.
+ */
 function RegistryPage(): JSX.Element {
   return (
     <AppShell>
-      <Registry
-        projection={LOCAL_REGISTRY_PROJECTION}
-        {...LOCAL_PREVIEW_HANDLERS}
-      />
+      <RegistryHome />
     </AppShell>
   );
 }

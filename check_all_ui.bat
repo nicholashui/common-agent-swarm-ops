@@ -5,9 +5,9 @@ REM callgrok.bat "pleaser review / report / update all frontend implementation c
 REM callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_04_canvas.md and docs\frontend_redesign\ui_04_canvas.svg"
 REM callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_05_agent_detail.md and docs\frontend_redesign\ui_05_agent_detail.svg"
 REM callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_06_activity.md and docs\frontend_redesign\ui_06_activity.svg"
+rem callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_07_registry_hub.md and docs\frontend_redesign\ui_07_registry_hub.svg"
+rem callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_08_settings.md and docs\frontend_redesign\ui_08_settings.svg"
 
-callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_07_registry_hub.md and docs\frontend_redesign\ui_07_registry_hub.svg"
-callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_08_settings.md and docs\frontend_redesign\ui_08_settings.svg"
 callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_09_monitoring.md and docs\frontend_redesign\ui_09_monitoring.svg"
 callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_10_knowledge.md and docs\frontend_redesign\ui_10_knowledge.svg"
 callgrok.bat "pleaser review / report / update all frontend implementation correctly based on docs\frontend_redesign\ui_11_eval.md and docs\frontend_redesign\ui_11_eval.svg"

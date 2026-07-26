@@ -1,1 +1,1 @@
-export { Registry } from "./OperationalScreens";
+export { RegistryHome as Registry } from "./RegistryHome";
