@@ -1,17 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Activity } from "../../components/OperationalScreens";
-import {
-  LOCAL_ACTIVITY_PROJECTION,
-  LOCAL_PREVIEW_HANDLERS,
-} from "../../lib/projections/local-preview";
+import { ActivityHome } from "../../components/ActivityHome";
 
+/**
+ * Activity & Ops Intelligence (ui_06). Local presentation landing until
+ * generated activity projections and authorized run actions connect.
+ */
 function ActivityPage(): JSX.Element {
   return (
     <AppShell>
-      <Activity
-        projection={LOCAL_ACTIVITY_PROJECTION}
-        {...LOCAL_PREVIEW_HANDLERS}
-      />
+      <ActivityHome />
     </AppShell>
   );
 }

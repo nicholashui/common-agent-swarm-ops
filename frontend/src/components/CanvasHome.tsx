@@ -17,13 +17,18 @@ export function CanvasHome({
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [mode, setMode] = useState<CanvasViewMode>(view.viewMode);
   const [paletteTab, setPaletteTab] = useState<CanvasPaletteTab>("common");
-  const [selectedId, setSelectedId] = useState<string | undefined>(
-    view.nodes[0]?.id,
-  );
+  const [selectedId, setSelectedId] = useState<string | undefined>("verifier");
   const [paletteQuery, setPaletteQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
-  const [groupExpanded, setGroupExpanded] = useState(true);
+  const [expandedGroups, setExpandedGroups] = useState<ReadonlySet<string>>(
+    () => new Set(view.groups.map((group) => group.id)),
+  );
   const [logsOpen, setLogsOpen] = useState(false);
+  const [copilotOpen, setCopilotOpen] = useState(false);
+  const [inspectorTab, setInspectorTab] = useState<
+    CanvasLandingView["inspectorTabs"][number]["id"]
+  >("task");
+  const [focusMode, setFocusMode] = useState(false);
 
   const selected = view.nodes.find((node) => node.id === selectedId);
 
@@ -41,8 +46,26 @@ export function CanvasHome({
 
   const announce = (message: string): void => setStatusMessage(message);
 
+  const toggleGroup = (groupId: string): void => {
+    setExpandedGroups((current) => {
+      const next = new Set(current);
+      if (next.has(groupId)) next.delete(groupId);
+      else next.add(groupId);
+      return next;
+    });
+  };
+
+  const activeInspector =
+    view.inspectorTabs.find((tab) => tab.id === inspectorTab) ??
+    view.inspectorTabs[0];
+
   return (
-    <section aria-label="Swarm canvas" className="canvas-home">
+    <section
+      aria-label="Swarm canvas"
+      className={
+        focusMode ? "canvas-home canvas-home--focus" : "canvas-home"
+      }
+    >
       <header className="canvas-home__toolbar">
         <div className="canvas-home__toolbar-left">
           <label className="canvas-home__name">
@@ -57,11 +80,7 @@ export function CanvasHome({
             {view.patternBadge}
           </Link>
         </div>
-        <div
-          aria-label="View mode"
-          className="canvas-home__modes"
-          role="group"
-        >
+        <div aria-label="View mode" className="canvas-home__modes" role="group">
           {(["design", "run", "compare"] as const).map((entry) => (
             <button
               aria-pressed={mode === entry}
@@ -83,15 +102,35 @@ export function CanvasHome({
           {view.commonsSummary}
         </p>
         <div className="canvas-home__toolbar-right">
-          <button
-            className="canvas-home__ghost canvas-home__ghost--violet"
-            onClick={() =>
-              announce("AI Co-Pilot requires an authorized assist action.")
-            }
-            type="button"
-          >
-            ✧ Co-Pilot
-          </button>
+          <div className="canvas-home__copilot">
+            <button
+              aria-expanded={copilotOpen}
+              className="canvas-home__ghost canvas-home__ghost--violet"
+              onClick={() => setCopilotOpen((open) => !open)}
+              type="button"
+            >
+              ✧ Co-Pilot
+            </button>
+            {copilotOpen ? (
+              <ul className="canvas-home__copilot-menu">
+                {view.copilotActions.map((action) => (
+                  <li key={action}>
+                    <button
+                      onClick={() => {
+                        setCopilotOpen(false);
+                        announce(
+                          `Co-Pilot “${action}” requires an authorized assist action.`,
+                        );
+                      }}
+                      type="button"
+                    >
+                      {action}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
           <button
             className="canvas-home__ghost"
             onClick={() => announce("Auto layout is local-only feedback.")}
@@ -101,20 +140,28 @@ export function CanvasHome({
           </button>
           <button
             className="canvas-home__ghost"
-            onClick={() => announce("Export requires an authorized export action.")}
+            onClick={() => setFocusMode((open) => !open)}
+            type="button"
+          >
+            {focusMode ? "Exit focus" : "Focus"}
+          </button>
+          <button
+            className="canvas-home__ghost"
+            onClick={() =>
+              announce("Export requires an authorized export action.")
+            }
             type="button"
           >
             Export
           </button>
           <button
             className="canvas-home__run"
-            onClick={() =>
+            onClick={() => {
+              setMode("run");
               announce(
-                mode === "run"
-                  ? "Run command requires an authorized graph action reference."
-                  : "Switch to Run mode, then submit an authorized run command.",
-              )
-            }
+                "Run command requires an authorized graph action reference.",
+              );
+            }}
             type="button"
           >
             ▶ Run
@@ -131,30 +178,19 @@ export function CanvasHome({
         </div>
       </header>
 
-      {mode === "run" && view.runBar ? (
-        <div className="canvas-home__runbar" role="status">
-          <strong>{view.runBar.statusLabel}</strong>
-          <span>{view.runBar.progressLabel}</span>
-          <span>Cost so far: {view.runBar.costSoFar}</span>
-          <button
-            className="canvas-home__ghost"
-            onClick={() => setLogsOpen((open) => !open)}
-            type="button"
-          >
-            {logsOpen ? "Hide logs" : "Streaming logs"}
-          </button>
-        </div>
-      ) : null}
-
       {statusMessage ? (
-        <p className="canvas-home__status" role="status">
+        <p aria-live="polite" className="canvas-home__status" role="status">
           {statusMessage}
         </p>
       ) : null}
 
       <div className="canvas-home__body">
         <aside aria-label="Node palette" className="canvas-home__palette">
-          <div className="canvas-home__tabs" role="tablist" aria-label="Palette tabs">
+          <div
+            aria-label="Palette tabs"
+            className="canvas-home__tabs"
+            role="tablist"
+          >
             {(
               [
                 ["common", "Common"],
@@ -216,7 +252,9 @@ export function CanvasHome({
                       ? "✓"
                       : item.kind === "fork"
                         ? "⑂"
-                        : "●"}
+                        : item.kind === "router"
+                          ? "◇"
+                          : "●"}
                   </span>
                   <span>
                     <strong>{item.name}</strong>
@@ -234,17 +272,20 @@ export function CanvasHome({
               const groupNodes = view.nodes.filter(
                 (node) => node.groupId === group.id,
               );
+              const expanded = expandedGroups.has(group.id);
               return (
                 <section
                   aria-label={group.title}
-                  className="canvas-home__group"
+                  className={`canvas-home__group canvas-home__group--${group.tone}`}
                   key={group.id}
                 >
                   <header className="canvas-home__group-head">
                     <h2>{group.title}</h2>
-                    <span className="canvas-home__version-pill">
-                      {group.versionLabel}
-                    </span>
+                    {group.versionLabel ? (
+                      <span className="canvas-home__version-pill">
+                        {group.versionLabel}
+                      </span>
+                    ) : null}
                     <button
                       className="canvas-home__linkish"
                       onClick={() =>
@@ -258,23 +299,28 @@ export function CanvasHome({
                     </button>
                     <button
                       className="canvas-home__ghost canvas-home__ghost--tiny"
-                      onClick={() => setGroupExpanded((open) => !open)}
+                      onClick={() => toggleGroup(group.id)}
                       type="button"
                     >
-                      {groupExpanded ? "Collapse" : "Expand"}
+                      {expanded ? "Collapse" : "Expand"}
                     </button>
                   </header>
-                  {groupExpanded ? (
-                    <div className="canvas-home__group-nodes">
-                      {groupNodes.map((node) => (
-                        <GraphNodeCard
-                          key={node.id}
-                          node={node}
-                          selected={node.id === selectedId}
-                          onSelect={setSelectedId}
-                        />
-                      ))}
-                    </div>
+                  {expanded ? (
+                    <>
+                      <div className="canvas-home__group-nodes">
+                        {groupNodes.map((node) => (
+                          <GraphNodeCard
+                            key={node.id}
+                            node={node}
+                            selected={node.id === selectedId}
+                            onSelect={setSelectedId}
+                          />
+                        ))}
+                      </div>
+                      {group.cycleLabel ? (
+                        <p className="canvas-home__cycle">{group.cycleLabel}</p>
+                      ) : null}
+                    </>
                   ) : (
                     <p className="canvas-home__muted">
                       Group collapsed · {groupNodes.length} nodes
@@ -304,10 +350,7 @@ export function CanvasHome({
               <h3>Edges</h3>
               <ul>
                 {view.edges.map((edge) => (
-                  <li
-                    data-edge-line-style={edge.style}
-                    key={edge.id}
-                  >
+                  <li data-edge-line-style={edge.style} key={edge.id}>
                     <span
                       aria-hidden="true"
                       className={`canvas-home__edge-line canvas-home__edge-line--${edge.style}`}
@@ -317,6 +360,65 @@ export function CanvasHome({
                 ))}
               </ul>
             </section>
+
+            <div className="canvas-home__overlays" aria-hidden="true">
+              <div className="canvas-home__minimap">
+                <i />
+                <i />
+                <i />
+              </div>
+              <div className="canvas-home__zoom">
+                <button type="button">+</button>
+                <button type="button">−</button>
+                <button type="button">⤢</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            aria-live="polite"
+            className="canvas-home__runbar"
+            role="status"
+          >
+            <span className="canvas-home__run-dot" />
+            <strong>{view.runBar.activeNodesLabel}</strong>
+            <span>{view.runBar.progressLabel}</span>
+            <span
+              aria-label={`Progress ${view.runBar.progressPercent} percent`}
+              className="canvas-home__run-progress"
+            >
+              <i style={{ width: `${view.runBar.progressPercent}%` }} />
+            </span>
+            <span>
+              cost so far {view.runBar.costSoFar} · elapsed {view.runBar.elapsed}
+            </span>
+            <button
+              className="canvas-home__ghost canvas-home__ghost--tiny"
+              onClick={() =>
+                announce(
+                  "Partial replay requires an authorized checkpoint action.",
+                )
+              }
+              type="button"
+            >
+              Partial replay
+            </button>
+            <button
+              className="canvas-home__cancel"
+              onClick={() =>
+                announce("Cancel requires an authorized cancel action.")
+              }
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              className="canvas-home__ghost canvas-home__ghost--tiny"
+              onClick={() => setLogsOpen((open) => !open)}
+              type="button"
+            >
+              ≡ logs
+            </button>
           </div>
 
           {logsOpen ? (
@@ -339,7 +441,9 @@ export function CanvasHome({
               <button
                 className="canvas-home__ghost"
                 onClick={() =>
-                  announce("Contribute as pattern requires an authorized proposal.")
+                  announce(
+                    "Contribute as pattern requires an authorized proposal.",
+                  )
                 }
                 type="button"
               >
@@ -348,51 +452,76 @@ export function CanvasHome({
             </>
           ) : (
             <>
-              <p className="eyebrow">SELECTED NODE</p>
+              <p className="eyebrow">SELECTED · {selected.kind.toUpperCase()}</p>
               <h2>{selected.label}</h2>
-              <StatusPill
-                label={selected.statusLabel}
-                status={selected.status}
-              />
-              <dl className="canvas-home__inspector-dl">
-                <div>
-                  <dt>Kind</dt>
-                  <dd>{selected.kind}</dd>
+              <div className="canvas-home__inspector-badges">
+                <span className="canvas-home__version-pill">
+                  {selected.versionLabel}
+                </span>
+                <StatusPill
+                  label={selected.statusLabel}
+                  status={selected.status}
+                />
+              </div>
+              {selected.blockedReason ? (
+                <p className="canvas-home__blocked" role="status">
+                  Blocked: {selected.blockedReason}
+                </p>
+              ) : null}
+
+              {selected.aggregateEval ? (
+                <div className="canvas-home__aggregate">
+                  <p>Aggregate eval (all swarms)</p>
+                  <dl>
+                    <div>
+                      <dt>Runs</dt>
+                      <dd>{selected.aggregateEval.runs}</dd>
+                    </div>
+                    <div>
+                      <dt>Success</dt>
+                      <dd>{selected.aggregateEval.success}</dd>
+                    </div>
+                    <div>
+                      <dt>Avg tok</dt>
+                      <dd>{selected.aggregateEval.avgTokens}</dd>
+                    </div>
+                  </dl>
                 </div>
-                <div>
-                  <dt>Version</dt>
-                  <dd>{selected.versionLabel}</dd>
+              ) : null}
+
+              {selected.improvementHistory?.length ? (
+                <div className="canvas-home__history">
+                  <p>Improvement history</p>
+                  {selected.improvementHistory.map((item) => (
+                    <article key={item.title}>
+                      <strong>{item.title}</strong>
+                      <span>{item.detail}</span>
+                      <em>{item.impact}</em>
+                    </article>
+                  ))}
                 </div>
-                <div>
-                  <dt>Metrics</dt>
-                  <dd>{selected.metrics}</dd>
-                </div>
-                <div>
-                  <dt>Provenance</dt>
-                  <dd>
-                    {selected.linked
-                      ? "🔗 Registry-linked"
-                      : "Fork / custom override"}
-                  </dd>
-                </div>
-              </dl>
+              ) : null}
+
               <div className="canvas-home__inspector-actions">
-                <Link
-                  className="canvas-home__ghost"
-                  href="/registry/agents/local-preview"
-                >
-                  Open Detail
-                </Link>
                 <button
-                  className="canvas-home__ghost"
+                  className="canvas-home__primary"
                   onClick={() =>
                     announce(
-                      "Update to latest common requires an authorized version action.",
+                      "Update to latest safe requires an authorized version action.",
                     )
                   }
                   type="button"
                 >
-                  Update to latest
+                  Update to latest safe
+                </button>
+                <button
+                  className="canvas-home__ghost"
+                  onClick={() =>
+                    announce("Pin version requires an authorized pin action.")
+                  }
+                  type="button"
+                >
+                  Pin version
                 </button>
                 <button
                   className="canvas-home__ghost canvas-home__ghost--violet"
@@ -403,9 +532,59 @@ export function CanvasHome({
                   }
                   type="button"
                 >
-                  Propose Improvement
+                  Propose imp.
                 </button>
+                <Link
+                  className="canvas-home__ghost"
+                  href="/registry/agents/local-preview"
+                >
+                  Open Detail (nn_ui_05) →
+                </Link>
               </div>
+
+              {selected.liveInspector?.length ? (
+                <div className="canvas-home__live">
+                  <p>Live Inspector</p>
+                  <pre>
+                    {selected.liveInspector.map((line) => (
+                      <span key={line}>
+                        {line}
+                        {"\n"}
+                      </span>
+                    ))}
+                  </pre>
+                </div>
+              ) : null}
+
+              <div
+                aria-label="Inspector tabs"
+                className="canvas-home__inspector-tabs"
+                role="tablist"
+              >
+                {view.inspectorTabs.map((tab) => (
+                  <button
+                    aria-selected={inspectorTab === tab.id}
+                    className={
+                      inspectorTab === tab.id
+                        ? "canvas-home__inspector-tab canvas-home__inspector-tab--active"
+                        : "canvas-home__inspector-tab"
+                    }
+                    key={tab.id}
+                    onClick={() => setInspectorTab(tab.id)}
+                    role="tab"
+                    type="button"
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              {activeInspector ? (
+                <ul className="canvas-home__tab-lines">
+                  {activeInspector.lines.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              ) : null}
             </>
           )}
 
@@ -435,7 +614,9 @@ function StatusPill({
   label,
 }: Readonly<{ status: CanvasNodeStatus; label: string }>): JSX.Element {
   return (
-    <span className={`canvas-home__status-pill canvas-home__status-pill--${status}`}>
+    <span
+      className={`canvas-home__status-pill canvas-home__status-pill--${status}`}
+    >
       <span aria-hidden="true" />
       {label}
     </span>
@@ -462,6 +643,9 @@ function GraphNodeCard({
         <strong>{node.label}</strong>
         <StatusPill label={node.statusLabel} status={node.status} />
       </div>
+      {node.iterationLabel ? (
+        <span className="canvas-home__iteration">{node.iterationLabel}</span>
+      ) : null}
       <span className="canvas-home__node-version">{node.versionLabel}</span>
       <span className="canvas-home__node-metrics">{node.metrics}</span>
       {node.progressPercent !== undefined ? (
@@ -476,7 +660,7 @@ function GraphNodeCard({
         <span className="canvas-home__node-link">🔗 Registry-linked</span>
       ) : (
         <span className="canvas-home__node-link canvas-home__node-link--fork">
-          Fork of common
+          Custom — contribute back?
         </span>
       )}
     </button>

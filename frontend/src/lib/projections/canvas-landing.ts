@@ -5,8 +5,22 @@
 
 export type CanvasViewMode = "design" | "run" | "compare";
 export type CanvasPaletteTab = "common" | "custom" | "patterns";
-export type CanvasNodeKind = "common" | "custom" | "verifier";
-export type CanvasNodeStatus = "idle" | "running" | "done" | "error";
+export type CanvasNodeKind =
+  | "common"
+  | "custom"
+  | "verifier"
+  | "supervisor"
+  | "router";
+export type CanvasNodeStatus =
+  | "idle"
+  | "queued"
+  | "running"
+  | "self_refine"
+  | "waiting_for_critique"
+  | "blocked"
+  | "failed"
+  | "complete"
+  | "done";
 
 export interface CanvasPaletteItem {
   readonly id: string;
@@ -27,13 +41,34 @@ export interface CanvasGraphNode {
   readonly linked: boolean;
   readonly groupId?: string;
   readonly progressPercent?: number;
+  readonly iterationLabel?: string;
+  readonly blockedReason?: string;
+  readonly aggregateEval?: {
+    readonly runs: string;
+    readonly success: string;
+    readonly avgTokens: string;
+  };
+  readonly improvementHistory?: readonly {
+    readonly title: string;
+    readonly detail: string;
+    readonly impact: string;
+  }[];
+  readonly liveInspector?: readonly string[];
 }
 
 export interface CanvasGraphGroup {
   readonly id: string;
   readonly title: string;
-  readonly versionLabel: string;
+  readonly versionLabel?: string;
+  readonly tone: "parallel" | "verification";
   readonly nodeIds: readonly string[];
+  readonly cycleLabel?: string;
+}
+
+export interface CanvasInspectorTab {
+  readonly id: "task" | "artifacts" | "critique" | "quality" | "provenance";
+  readonly label: string;
+  readonly lines: readonly string[];
 }
 
 export interface CanvasLandingView {
@@ -51,12 +86,20 @@ export interface CanvasLandingView {
     readonly label: string;
     readonly style: "solid" | "dashed" | "dotted";
   }[];
-  readonly validation: readonly { readonly category: string; readonly result: string }[];
-  readonly runBar?: {
+  readonly validation: readonly {
+    readonly category: string;
+    readonly result: string;
+  }[];
+  readonly runBar: {
     readonly progressLabel: string;
+    readonly progressPercent: number;
     readonly costSoFar: string;
+    readonly elapsed: string;
     readonly statusLabel: string;
+    readonly activeNodesLabel: string;
   };
+  readonly inspectorTabs: readonly CanvasInspectorTab[];
+  readonly copilotActions: readonly string[];
   readonly footerNote: string;
 }
 
@@ -114,7 +157,15 @@ export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
       id: "big-row",
       title: "⊞ Parallel Data & Analysis (BIG ROW)",
       versionLabel: "v1.4",
+      tone: "parallel",
       nodeIds: ["data", "sentiment", "predictor"],
+    },
+    {
+      id: "synth-verify",
+      title: "Synthesis + Verification",
+      tone: "verification",
+      nodeIds: ["synthesis", "verifier"],
+      cycleLabel: "cycle ↺",
     },
   ],
   nodes: [
@@ -123,7 +174,7 @@ export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
       label: "DataFetcher",
       kind: "common",
       versionLabel: "Common v2.1",
-      status: "done",
+      status: "complete",
       statusLabel: "Done",
       metrics: "tok 612 · $0.02 · 1.2s",
       linked: true,
@@ -143,71 +194,125 @@ export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
     },
     {
       id: "predictor",
-      label: "MarketPredictor",
+      label: "Predictor",
       kind: "common",
       versionLabel: "Common v2.0",
-      status: "idle",
+      status: "queued",
       statusLabel: "Idle",
-      metrics: "waiting for upstream",
+      metrics: "eval 0.92 · queued",
       linked: true,
       groupId: "big-row",
+    },
+    {
+      id: "supervisor",
+      label: "Supervisor",
+      kind: "supervisor",
+      versionLabel: "Common supervisor",
+      status: "running",
+      statusLabel: "Running",
+      metrics: "↓ Worker A · ↓ Worker B",
+      linked: true,
+    },
+    {
+      id: "synthesis",
+      label: "SynthesisAgent",
+      kind: "common",
+      versionLabel: "Common v2.2",
+      status: "waiting_for_critique",
+      statusLabel: "Waiting",
+      metrics: "awaiting verifier",
+      linked: true,
+      groupId: "synth-verify",
     },
     {
       id: "verifier",
       label: "VerifierNode",
       kind: "verifier",
       versionLabel: "Common v3.0",
-      status: "idle",
-      statusLabel: "Idle",
-      metrics: "iteration 0/3",
+      status: "self_refine",
+      statusLabel: "Live",
+      metrics: "iterating with feedback…",
       linked: true,
+      groupId: "synth-verify",
+      iterationLabel: "↻ 3/5",
+      progressPercent: 60,
+      aggregateEval: {
+        runs: "31.2k",
+        success: "97%",
+        avgTokens: "640",
+      },
+      improvementHistory: [
+        {
+          title: "v3.0 · meta-critic rationale",
+          detail: "Added structured verification step",
+          impact: "+12% pass rate · 1.8k runs",
+        },
+      ],
+      liveInspector: [
+        "iter 3/5 · verifier feedback",
+        '"groundedness below 0.9,',
+        ' re-check source citations"',
+        "tool: retrieve() 220ms",
+        "token burn: 42/s",
+        "as_of just now · seq 4421",
+      ],
     },
     {
       id: "report",
       label: "CustomReportAgent",
       kind: "custom",
       versionLabel: "Fork of Common v2.3",
+      status: "complete",
+      statusLabel: "Complete",
+      metrics: "tok 1.2k",
+      linked: false,
+    },
+    {
+      id: "router",
+      label: "Dynamic Router",
+      kind: "router",
+      versionLabel: "LLM-decided",
       status: "idle",
       statusLabel: "Idle",
-      metrics: "awaiting verified synthesis",
-      linked: false,
+      metrics: "→ Research  → Synthesis  → Escalate",
+      linked: true,
     },
   ],
   edges: [
     {
       id: "e1",
-      from: "data",
-      to: "sentiment",
+      from: "big-row",
+      to: "synth-verify",
       label: "Data flow",
       style: "solid",
     },
     {
       id: "e2",
-      from: "sentiment",
-      to: "predictor",
+      from: "synthesis",
+      to: "verifier",
       label: "State flow",
       style: "dashed",
     },
     {
       id: "e3",
-      from: "predictor",
-      to: "verifier",
-      label: "Evidence",
-      style: "solid",
-    },
-    {
-      id: "e4",
       from: "verifier",
-      to: "predictor",
+      to: "synthesis",
       label: "Iteration",
       style: "dotted",
     },
     {
-      id: "e5",
-      from: "verifier",
-      to: "report",
-      label: "Approved synthesis",
+      id: "e4",
+      from: "supervisor",
+      to: "big-row",
+      label: "Delegate",
       style: "solid",
+    },
+    {
+      id: "e5",
+      from: "router",
+      to: "report",
+      label: "Route",
+      style: "dashed",
     },
   ],
   validation: [
@@ -220,10 +325,68 @@ export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
     { category: "approval", result: "not_required" },
   ],
   runBar: {
-    progressLabel: "Local preview · not running",
-    costSoFar: "$0.00",
-    statusLabel: "Design mode",
+    progressLabel: "Running · 2 nodes active",
+    progressPercent: 60,
+    costSoFar: "$1.68",
+    elapsed: "12m",
+    statusLabel: "Local preview run bar",
+    activeNodesLabel: "Sentiment + Verifier",
   },
+  inspectorTabs: [
+    {
+      id: "task",
+      label: "Task",
+      lines: [
+        "Lifecycle: self_refine",
+        "Iteration: 3/5",
+        "Retry: 0",
+        "Checkpoint: local-preview",
+      ],
+    },
+    {
+      id: "artifacts",
+      label: "Artifacts",
+      lines: [
+        "Parent lineage: evidence bundle",
+        "QC: pending verifier",
+        "Rights/consent: not applicable (preview)",
+      ],
+    },
+    {
+      id: "critique",
+      label: "Critique",
+      lines: [
+        "Severity: major",
+        "Evidence: groundedness below 0.9",
+        "Suggested action: re-check citations",
+      ],
+    },
+    {
+      id: "quality",
+      label: "Quality",
+      lines: [
+        "L1: passed",
+        "L2: in progress",
+        "L3: not run",
+        "Human approval: not required",
+      ],
+    },
+    {
+      id: "provenance",
+      label: "Provenance",
+      lines: [
+        "Pinned version: Common v3.0",
+        "Registry-linked",
+        "Audit ref: local-preview",
+      ],
+    },
+  ],
+  copilotActions: [
+    "Optimize tokens",
+    "Add verification where missing",
+    "Propose as new Common Pattern",
+    "Suggest dynamic router",
+  ],
   footerNote:
     "Local preview canvas · nodes show redacted provenance only · Run/SSE require authorized graph commands.",
 };

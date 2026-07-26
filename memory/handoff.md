@@ -1,30 +1,28 @@
 # Handoff
 
 **As of:** 2026-07-26  
-**State:** ui_00_menu frontend implementation reviewed, corrected, and tested.
+**State:** ui_00–ui_06 frontend redesign landings implemented; latest is ui_06 activity.
 
 ## Latest work
 
-### ui_01_login + session entry (current)
-- Login UI per ui_01_login.md/svg + local session entry APIs under `frontend/src/app/api/auth/`
-- Local users: `demo@local`/`demo`, `ops@local`/`ops` (override via `CASOPS_LOCAL_AUTH_USERS`)
-- Demo mode: `/api/auth/demo` + dismissible banner + Exit Demo logout
-- Password reset request/confirm (dev token exposed only non-production)
-- OIDC start + **callback code exchange** for Keycloak/Google/GitHub (`oidc.ts`, `/api/auth/oidc/callback`)
-- Default redirect URI: `{origin}/api/auth/oidc/callback?provider=…` (override with env)
-- Login shows `?error=` from failed SSO; state cookie validated before session issue
-- Signed `frontend_session` httpOnly cookie; shell workspace labels from session
-- Tests: `local-auth.test.ts`, `oidc.test.ts`, `LoginScreen.test.tsx` — pass
+### ui_06_activity (current)
+- Presentation activity landing matches `docs/frontend_redesign/ui_06_activity.md` + `.svg`.
+- Files: `ActivityHome.tsx`, `activity-landing.ts`, `ActivityHome.test.tsx`, CSS in `globals.css`.
+- Route: `/activity` → `ActivityHome`.
+- Covered: header (search, date, Board/Table/Timeline, Live Update), filters + outdated/contributed toggles, board columns (Data Ingestion / Analysis+Verification / Synthesis+Report), table with VA lifecycle/checkpoint fields, timeline lanes, Ops Intelligence sidebar (KPIs, rollout opportunity + anomaly, collective impact, bulk actions).
+- Actions announce server-determined eligibility; preserve immutable version provenance messaging.
+- Tests: `ActivityHome.test.tsx` + route check — pass. `npx tsc --noEmit` — pass.
+- Deferred: live activity API, WS live updates, TanStack virtualization, real replay/rollout mutations.
 
-### ui_00_menu + destination unlock (prior)
-- Menu shell + all destinations local preview — committed `2fbf4d4`
+### ui_00–ui_05 (prior)
+- Menu, login, dashboard, composer, canvas, agent detail landings complete under redesign presentation bar.
 
 ## Resume here
 
-1. Dogfood `/login` → `/` dashboard → `/composer` in browser.
-2. Next redesign screens: canvas (ui_04), agent detail (ui_05), activity (ui_06).
-3. Wire composer recommend API + real instantiate command when contracts land.
-4. Configure real OIDC env when IdP is available.
+1. Dogfood `/activity` (and dashboard → View all activity).
+2. Commit ui_05 + ui_06 when ready (both uncommitted presentation landings).
+3. Next redesign screen: registry hub (ui_07).
+4. Wire live activity projections + authorized bulk actions when contracts land.
 5. Unrelated untracked: `callgrok.bat`, `check_all_ui.bat`, `run_grok.bat`.
 
 ## Do not forget
@@ -36,9 +34,7 @@
 
 ## Validation checklist (when shipping)
 
-- [ ] Focused tests for changed behavior
-- [ ] `npm run sdd:check` (if SDD artifacts touched or gate required)
-- [ ] `npm run sync:check` (if rules/skills/adapters changed)
-- [ ] Frontend: `npm test` / typecheck / api:check as scope requires
-- [ ] Backend: `pytest` as scope requires
+- [x] Focused tests for ui_06 ActivityHome (pass)
+- [x] Frontend typecheck (`npx tsc --noEmit`)
+- [ ] Full frontend `npm test` / api:check as scope requires
 - [ ] Update `status.md` after major work

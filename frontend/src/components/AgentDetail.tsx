@@ -1,1 +1,1 @@
-export { CommonComponentDetail as AgentDetail } from "./OperationalScreens";
+export { AgentDetailHome as AgentDetail } from "./AgentDetailHome";

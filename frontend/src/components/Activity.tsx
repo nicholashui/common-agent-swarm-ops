@@ -1,1 +1,1 @@
-export { Activity } from "./OperationalScreens";
+export { ActivityHome as Activity } from "./ActivityHome";

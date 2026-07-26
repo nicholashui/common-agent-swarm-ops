@@ -45,7 +45,7 @@ const UNLOCKED_ROUTE_CASES: readonly UnlockedRouteCase[] = [
     name: "activity",
     source: new URL("./activity/page.tsx", import.meta.url),
     screenId: "ui_06_activity",
-    mustMatch: /Activity|LOCAL_ACTIVITY_PROJECTION/,
+    mustMatch: /ActivityHome/,
     mustNotMatch: /UnavailableScreen/,
   },
   {
@@ -199,14 +199,14 @@ test("canonical canvas route renders canvas while preserving the opaque resource
   );
 });
 
-test("agent detail route renders component detail local preview", () => {
+test("agent detail route renders AgentDetailHome local preview", () => {
   const source = readSource(
     new URL("./registry/agents/[agentId]/page.tsx", import.meta.url),
   );
 
   assert.match(source, /params/);
   assert.match(source, /agentId/);
-  assert.match(source, /CommonComponentDetail/);
+  assert.match(source, /AgentDetailHome/);
   assert.doesNotMatch(source, /UnavailableScreen/);
   assert.equal(
     getScreenDefinition("ui_05_agent_detail").routeOrShell,

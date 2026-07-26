@@ -1,0 +1,654 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+
+import {
+  AGENT_DETAIL_TABS,
+  LOCAL_AGENT_DETAIL_LANDING,
+  type AgentDetailLandingView,
+  type AgentDetailTabId,
+  type AgentDetailUsageRow,
+} from "../lib/projections/agent-detail-landing";
+
+export function AgentDetailHome({
+  view = LOCAL_AGENT_DETAIL_LANDING,
+  agentId,
+}: Readonly<{
+  view?: AgentDetailLandingView;
+  agentId?: string;
+}>): JSX.Element {
+  const [tab, setTab] = useState<AgentDetailTabId>("history");
+  const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const [playgroundInput, setPlaygroundInput] = useState("");
+  const [knowledgeQuery, setKnowledgeQuery] = useState("");
+
+  const announce = (message: string): void => setStatusMessage(message);
+
+  return (
+    <section aria-label="Common agent detail" className="agent-detail">
+      <header className="agent-detail__header">
+        <div className="agent-detail__header-main">
+          <div className="agent-detail__identity">
+            <span aria-hidden="true" className="agent-detail__mark">
+              VL
+            </span>
+            <div>
+              <p className="eyebrow">COMMON AGENT DETAIL</p>
+              <h1>{view.agentName}</h1>
+              <div className="agent-detail__badges">
+                <span className="agent-detail__version-pill">
+                  {view.versionBadge}
+                </span>
+                <span className="agent-detail__live-pill">{view.statusLabel}</span>
+                <span className="agent-detail__velocity">
+                  {view.velocityLabel}
+                </span>
+              </div>
+              {agentId ? (
+                <p className="agent-detail__opaque-id">
+                  Opaque reference: {agentId}
+                </p>
+              ) : null}
+            </div>
+          </div>
+          <ul className="agent-detail__header-stats">
+            {view.headerStats.map((stat) => (
+              <li key={stat.id}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+                {stat.detail ? <small>{stat.detail}</small> : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="agent-detail__actions" role="group" aria-label="Quick actions">
+          <button
+            className="agent-detail__action agent-detail__action--primary"
+            onClick={() =>
+              announce(
+                "Propose Improvement requires an authorized commons proposal action.",
+              )
+            }
+            type="button"
+          >
+            ✦ Propose Improvement
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              announce("A/B Test requires an authorized rollout contract.")
+            }
+            type="button"
+          >
+            A/B Test vs newer
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              announce("Fork to Custom requires an authorized fork action.")
+            }
+            type="button"
+          >
+            Fork to Custom
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              announce(
+                "Pin / Update in swarms requires an authorized bulk version action.",
+              )
+            }
+            type="button"
+          >
+            Pin / Update in swarms
+          </button>
+          <Link className="agent-detail__action" href="/registry">
+            Open in Registry Hub
+          </Link>
+          <button
+            className="agent-detail__action agent-detail__action--violet"
+            onClick={() => {
+              setTab("playground");
+              announce("Playground is local-preview only until authorized.");
+            }}
+            type="button"
+          >
+            Run Playground
+          </button>
+        </div>
+      </header>
+
+      {statusMessage ? (
+        <p aria-live="polite" className="agent-detail__status" role="status">
+          {statusMessage}
+        </p>
+      ) : null}
+
+      <div
+        aria-label="Agent detail tabs"
+        className="agent-detail__tabs"
+        role="tablist"
+      >
+        {AGENT_DETAIL_TABS.map((entry) => (
+          <button
+            aria-selected={tab === entry.id}
+            className={
+              tab === entry.id
+                ? "agent-detail__tab agent-detail__tab--active"
+                : "agent-detail__tab"
+            }
+            key={entry.id}
+            onClick={() => setTab(entry.id)}
+            role="tab"
+            type="button"
+          >
+            {entry.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="agent-detail__panel">
+        {tab === "history" ? (
+          <HistoryTab
+            view={view}
+            onReplay={() =>
+              announce(
+                "Replay with latest common requires an authorized checkpoint action.",
+              )
+            }
+          />
+        ) : null}
+        {tab === "config" ? (
+          <ConfigTab
+            view={view}
+            onAnnounce={announce}
+          />
+        ) : null}
+        {tab === "playground" ? (
+          <PlaygroundTab
+            view={view}
+            input={playgroundInput}
+            onInput={setPlaygroundInput}
+            onAnnounce={announce}
+          />
+        ) : null}
+        {tab === "knowledge" ? (
+          <KnowledgeTab
+            view={view}
+            query={knowledgeQuery}
+            onQuery={setKnowledgeQuery}
+            onAnnounce={announce}
+          />
+        ) : null}
+        {tab === "ops" ? <OpsTab view={view} onAnnounce={announce} /> : null}
+      </div>
+
+      <p className="agent-detail__footer">{view.footerNote}</p>
+    </section>
+  );
+}
+
+function HistoryTab({
+  view,
+  onReplay,
+}: Readonly<{
+  view: AgentDetailLandingView;
+  onReplay: () => void;
+}>): JSX.Element {
+  return (
+    <div className="agent-detail__history">
+      <div className="agent-detail__insight" role="status">
+        <p>{view.insightStrip}</p>
+        <button className="agent-detail__linkish" type="button">
+          {view.yourUsageNote}
+        </button>
+      </div>
+
+      <div
+        aria-label="History filters"
+        className="agent-detail__filters"
+        role="group"
+      >
+        {view.historyFilters.map((filter) => (
+          <button className="agent-detail__filter" key={filter} type="button">
+            {filter} ▾
+          </button>
+        ))}
+      </div>
+
+      <div className="agent-detail__table-wrap" role="region" aria-label="Cross-swarm usage">
+        <table className="agent-detail__table">
+          <thead>
+            <tr>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Swarm · Pattern</th>
+              <th scope="col">Status</th>
+              <th scope="col">Duration / Tokens / Cost</th>
+              <th scope="col">Summary</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {view.usageRows.map((row) => (
+              <UsageRow key={row.id} onReplay={onReplay} row={row} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="agent-detail__pagination">{view.paginationLabel}</p>
+    </div>
+  );
+}
+
+function UsageRow({
+  row,
+  onReplay,
+}: Readonly<{
+  row: AgentDetailUsageRow;
+  onReplay: () => void;
+}>): JSX.Element {
+  return (
+    <tr>
+      <td>{row.timestamp}</td>
+      <td>
+        <strong>{row.swarm}</strong>
+        <span className="agent-detail__muted">{row.pattern}</span>
+      </td>
+      <td>
+        <span
+          className={`agent-detail__status-pill agent-detail__status-pill--${row.statusTone}`}
+        >
+          {row.status}
+        </span>
+      </td>
+      <td className="agent-detail__metrics-cell">
+        {row.duration} · {row.tokens} · {row.cost}
+      </td>
+      <td>{row.summary}</td>
+      <td>
+        <button className="agent-detail__linkish" onClick={onReplay} type="button">
+          Replay ↻
+        </button>
+      </td>
+    </tr>
+  );
+}
+
+function ConfigTab({
+  view,
+  onAnnounce,
+}: Readonly<{
+  view: AgentDetailLandingView;
+  onAnnounce: (message: string) => void;
+}>): JSX.Element {
+  return (
+    <div className="agent-detail__config">
+      <section
+        aria-labelledby="version-timeline-heading"
+        className="agent-detail__versions"
+      >
+        <h2 id="version-timeline-heading">
+          Version Timeline &amp; Meta-Critic Rationale
+        </h2>
+        <ol className="agent-detail__version-list">
+          {view.versions.map((version) => (
+            <li
+              className={`agent-detail__version agent-detail__version--${version.state}`}
+              key={version.id}
+            >
+              <strong>{version.label}</strong>
+              {version.delta ? <span>{version.delta}</span> : null}
+            </li>
+          ))}
+        </ol>
+        <article className="agent-detail__version-note">
+          <p>{view.currentVersionNote}</p>
+          <p>{view.metaCriticNote}</p>
+          <p className="agent-detail__muted">{view.evidenceNote}</p>
+        </article>
+        <div className="agent-detail__config-actions">
+          <button
+            className="agent-detail__action agent-detail__action--primary"
+            onClick={() =>
+              onAnnounce(
+                "Save as v3.1 proposal requires an authorized proposal action.",
+              )
+            }
+            type="button"
+          >
+            Save as v3.1 proposal
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              onAnnounce("Compare versions is local-preview only.")
+            }
+            type="button"
+          >
+            Compare versions
+          </button>
+        </div>
+      </section>
+
+      <div className="agent-detail__config-grid">
+        {view.configSummaries.map((section) => (
+          <section className="agent-detail__config-card" key={section.id}>
+            <h3>{section.title}</h3>
+            <ul>
+              {section.lines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PlaygroundTab({
+  view,
+  input,
+  onInput,
+  onAnnounce,
+}: Readonly<{
+  view: AgentDetailLandingView;
+  input: string;
+  onInput: (value: string) => void;
+  onAnnounce: (message: string) => void;
+}>): JSX.Element {
+  return (
+    <div className="agent-detail__playground">
+      <div className="agent-detail__chat">
+        <div className="agent-detail__chat-options" role="group" aria-label="Playground options">
+          <button className="agent-detail__filter" type="button">
+            Model override ▾
+          </button>
+          <label className="agent-detail__check">
+            <input defaultChecked type="checkbox" /> Enable Tools
+          </label>
+          <label className="agent-detail__check">
+            <input defaultChecked type="checkbox" /> Stream
+          </label>
+          <button
+            className="agent-detail__filter"
+            onClick={() =>
+              onAnnounce(
+                "Inject Workflow / Pattern Context requires authorized swarm context.",
+              )
+            }
+            type="button"
+          >
+            Inject Pattern Context ▾
+          </button>
+        </div>
+        <ul className="agent-detail__messages">
+          {view.playgroundMessages.map((message) => (
+            <li
+              className={`agent-detail__message agent-detail__message--${message.role}`}
+              key={message.id}
+            >
+              <strong>{message.role}</strong>
+              <p>{message.text}</p>
+            </li>
+          ))}
+        </ul>
+        <form
+          className="agent-detail__composer"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onAnnounce(
+              "Playground test requires an authorized playground action reference.",
+            );
+            onInput("");
+          }}
+        >
+          <label className="visually-hidden" htmlFor="agent-playground-input">
+            Playground prompt
+          </label>
+          <textarea
+            id="agent-playground-input"
+            onChange={(event) => onInput(event.target.value)}
+            placeholder="Test this common agent with a prompt…"
+            rows={3}
+            value={input}
+          />
+          <button className="agent-detail__action agent-detail__action--primary" type="submit">
+            Run test
+          </button>
+        </form>
+      </div>
+
+      <aside className="agent-detail__side-panels" aria-label="Playground panels">
+        <section className="agent-detail__side-card">
+          <h3>Eval Harness</h3>
+          <ul>
+            {view.evalScores.map((score) => (
+              <li key={score.metric}>
+                <span>{score.metric}</span>
+                <strong>{score.score}</strong>
+              </li>
+            ))}
+          </ul>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              onAnnounce("Common Eval Rubric requires an authorized eval action.")
+            }
+            type="button"
+          >
+            Run Common Eval Rubric
+          </button>
+        </section>
+        <section className="agent-detail__side-card">
+          <h3>Live Metrics</h3>
+          <p className="agent-detail__muted">
+            Tokens · cost · latency · tool usage appear when a playground run is authorized.
+          </p>
+        </section>
+        <section className="agent-detail__side-card">
+          <h3>After good run</h3>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              onAnnounce(
+                "Training guide contribution requires an authorized contribution action.",
+              )
+            }
+            type="button"
+          >
+            Mark as high-quality example
+          </button>
+          <button
+            className="agent-detail__action agent-detail__action--violet"
+            onClick={() =>
+              onAnnounce(
+                "Contribute to Common Knowledge requires an authorized contribution.",
+              )
+            }
+            type="button"
+          >
+            Contribute to Common Knowledge?
+          </button>
+        </section>
+      </aside>
+    </div>
+  );
+}
+
+function KnowledgeTab({
+  view,
+  query,
+  onQuery,
+  onAnnounce,
+}: Readonly<{
+  view: AgentDetailLandingView;
+  query: string;
+  onQuery: (value: string) => void;
+  onAnnounce: (message: string) => void;
+}>): JSX.Element {
+  return (
+    <div className="agent-detail__knowledge">
+      <ul className="agent-detail__knowledge-stats">
+        {view.knowledgeStats.map((stat) => (
+          <li key={stat.id}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <label className="agent-detail__search">
+        <span className="visually-hidden">Search knowledge</span>
+        <input
+          onChange={(event) => onQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              onAnnounce(
+                "Knowledge search is local-preview only until retrieval is authorized.",
+              );
+            }
+          }}
+          placeholder="Search test · chunk text, score, source…"
+          value={query}
+        />
+      </label>
+
+      <div className="agent-detail__table-wrap">
+        <table className="agent-detail__table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Status</th>
+              <th scope="col">Chunks</th>
+              <th scope="col">Added</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {view.knowledgeSources.map((source) => (
+              <tr key={source.id}>
+                <td>
+                  <strong>{source.name}</strong>
+                </td>
+                <td>{source.type}</td>
+                <td>{source.status}</td>
+                <td>{source.chunks}</td>
+                <td>{source.added}</td>
+                <td>
+                  <button
+                    className="agent-detail__linkish"
+                    onClick={() =>
+                      onAnnounce(
+                        "Source actions require authorized knowledge operations.",
+                      )
+                    }
+                    type="button"
+                  >
+                    Preview
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="agent-detail__knowledge-actions">
+        <button
+          className="agent-detail__action"
+          onClick={() =>
+            onAnnounce("Add sources requires an authorized import action.")
+          }
+          type="button"
+        >
+          Add sources
+        </button>
+        <button
+          className="agent-detail__action agent-detail__action--primary"
+          onClick={() =>
+            onAnnounce(
+              "Distill / Synthesize to Common Knowledge requires an authorized contribution.",
+            )
+          }
+          type="button"
+        >
+          Distill / Synthesize to Common Knowledge
+        </button>
+      </div>
+      <p className="agent-detail__muted">
+        Knowledge distinguishes RAG sources, few-shot examples, correction memory,
+        constitutional rules, and evaluation benchmarks.
+      </p>
+    </div>
+  );
+}
+
+function OpsTab({
+  view,
+  onAnnounce,
+}: Readonly<{
+  view: AgentDetailLandingView;
+  onAnnounce: (message: string) => void;
+}>): JSX.Element {
+  return (
+    <div className="agent-detail__ops">
+      <div className="agent-detail__ops-alert" role="status">
+        <span aria-hidden="true">!</span>
+        <p>{view.opsAlert}</p>
+      </div>
+
+      <ul className="agent-detail__ops-metrics">
+        {view.opsMetrics.map((metric) => (
+          <li key={metric.id}>
+            <strong>{metric.value}</strong>
+            <span>{metric.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <section className="agent-detail__ops-card">
+        <h3>Where used (this exact version)</h3>
+        <p>{view.opsWhereUsed}</p>
+        <div className="agent-detail__ops-actions">
+          <button
+            className="agent-detail__action agent-detail__action--primary"
+            onClick={() =>
+              onAnnounce(
+                "Safe Rollout All requires an authorized rollout action and approval workflow.",
+              )
+            }
+            type="button"
+          >
+            Safe Rollout All
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              onAnnounce("A/B v3.0 vs v2.9 requires an authorized rollout contract.")
+            }
+            type="button"
+          >
+            A/B v3.0 vs v2.9
+          </button>
+          <button
+            className="agent-detail__action"
+            onClick={() =>
+              onAnnounce("View Impact Analysis is local-preview only.")
+            }
+            type="button"
+          >
+            View Impact Analysis
+          </button>
+        </div>
+        <p className="agent-detail__muted">
+          Rollout is a separate server-governed action · approval workflow if shared
+          commons.
+        </p>
+      </section>
+    </div>
+  );
+}
