@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_API_PORTAL_LANDING } from "../lib/projections/api-portal-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { ApiPortalHome } from "./ApiPortalHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("api portal home matches ui_15 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<ApiPortalHome />);
+  const markup = renderToStaticMarkup(<ApiPortalHome view={getScreenParameters("apiPortal")} />);
 
   assert.match(markup, /Developer \/ API Portal/);
   assert.match(markup, /Programmatic access to Registry/);

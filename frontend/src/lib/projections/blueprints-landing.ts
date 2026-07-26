@@ -7,6 +7,8 @@
  * must not treat the safe stub as a blueprint family, and must not imply production activation.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 import { VIDEO_DOMAIN_MIGRATION_CLAIM } from "../migration/video-domain-migration";
 
 export type BlueprintGovernance = "official" | "team" | "personal" | "beta";
@@ -32,6 +34,8 @@ export interface BlueprintCard {
 }
 
 export interface BlueprintsLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -47,6 +51,24 @@ export interface BlueprintsLandingView {
 }
 
 export const LOCAL_BLUEPRINTS_LANDING: BlueprintsLandingView = {
+  labels: {
+    "search_blueprints": "Search blueprints",
+    "create_your_own_blueprint": "Create Your Own Blueprint",
+    "pattern": "Pattern",
+    "agents": "Agents",
+    "knowledge": "Knowledge",
+    "metrics": "Metrics",
+    "governance": "Governance",
+    "rating": "Rating",
+    "pinned_versions": "Pinned versions",
+    "pack_maturity_migration_safe": "Pack maturity (migration-safe)",
+    "va_compatible_preview_hints": "VA-compatible preview hints",
+    "featured": "Featured",
+    "blueprints_and_templates_gallery": "Blueprints and templates gallery",
+    "domain_filters": "Domain filters",
+    "sort_blueprints": "Sort blueprints",
+  },
+  eyebrow: "BLUEPRINTS & TEMPLATES",
   title: "Blueprints & Templates Gallery",
   description:
     "Swarm blueprint gallery (local presentation): pattern + agents + knowledge config. Deploy or customize only through authorized host actions.",

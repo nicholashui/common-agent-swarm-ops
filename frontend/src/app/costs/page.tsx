@@ -1,17 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { CostsHome } from "../../components/CostsHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Cost & Token Analytics (ui_19). Local presentation landing until
- * cost attribution projections and authorized budget actions connect.
- * No client-created budget authority.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function CostsPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("costs");
   return (
     <AppShell>
-      <CostsHome />
+      <CostsHome view={view} />
     </AppShell>
   );
 }
-
-export default CostsPage;

@@ -4,6 +4,8 @@
  * Role/org scope remain server-derived.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type ProfileSectionId =
   | "overview"
   | "account"
@@ -35,7 +37,14 @@ export interface ProfileTokenRow {
   readonly status: string;
 }
 
+export interface ProfileSectionItem {
+  readonly id: ProfileSectionId;
+  readonly label: string;
+}
+
 export interface ProfileLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly displayName: string;
   readonly handle: string;
   readonly initials: string;
@@ -43,6 +52,8 @@ export interface ProfileLandingView {
   readonly roleLabel: string;
   readonly workspaceLabel: string;
   readonly rankLabel: string;
+  readonly sections: readonly ProfileSectionItem[];
+  readonly defaultSectionId: ProfileSectionId;
   readonly impact: readonly ProfileImpactCard[];
   readonly activitySummary: string;
   readonly badges: readonly string[];
@@ -65,6 +76,38 @@ export interface ProfileLandingView {
 }
 
 export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
+  labels: {
+    "contribution_activity": "Contribution Activity",
+    "less": "Less",
+    "more": "More",
+    "badges_recognition": "Badges & Recognition",
+    "reputation_breakdown": "Reputation breakdown",
+    "my_contributions": "My Contributions",
+    "common": "Common",
+    "type": "Type",
+    "status": "Status",
+    "impact": "Impact",
+    "account": "Account",
+    "display_name": "Display name",
+    "handle": "Handle",
+    "role_server_derived": "Role (server-derived)",
+    "workspace_scope_server_derived": "Workspace scope (server-derived)",
+    "connected_sso_providers": "Connected SSO providers",
+    "security": "Security",
+    "personal_settings": "Personal Settings",
+    "api_token_manager": "API Token Manager",
+    "name": "Name",
+    "scopes": "Scopes",
+    "last_used": "Last used",
+    "actions": "Actions",
+    "revoke_requires_confirmation_and_an_authorized_t": "Revoke requires confirmation and an authorized token action.",
+    "user_profile_and_preferences": "User profile and preferences",
+    "profile_sections": "Profile sections",
+    "personal_impact": "Personal impact",
+    "personal_settings_2": "Personal settings",
+    "api_tokens": "API tokens",
+  },
+  eyebrow: "PROFILE & CONTRIBUTIONS",
   displayName: "Nicholas Hui",
   handle: "NH",
   initials: "NH",
@@ -72,6 +115,15 @@ export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
   roleLabel: "Owner",
   workspaceLabel: "Trading Lab",
   rankLabel: "Rank #12 globally · reputation 4,820 · member since 2025",
+  sections: [
+    { id: "overview", label: "Overview" },
+    { id: "account", label: "Account" },
+    { id: "security", label: "Security" },
+    { id: "usage", label: "Usage & Impact" },
+    { id: "preferences", label: "Preferences" },
+    { id: "tokens", label: "API Tokens" },
+  ],
+  defaultSectionId: "overview",
   impact: [
     {
       id: "commons",

@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_MONITORING_LANDING,
   type MonitoringLandingView,
   type MonitoringTabId,
   type MonitoringTraceNode,
 } from "../lib/projections/monitoring-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function MonitoringHome({
-  view = LOCAL_MONITORING_LANDING,
-}: Readonly<{ view?: MonitoringLandingView }>): JSX.Element {
+  view }: Readonly<{ view: MonitoringLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [tab, setTab] = useState<MonitoringTabId>("traces");
   const [search, setSearch] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
@@ -21,10 +21,10 @@ export function MonitoringHome({
   const announce = (message: string): void => setStatusMessage(message);
 
   return (
-    <section aria-label="Advanced monitoring" className="monitoring-home">
+    <section aria-label={L(labels, "advanced_monitoring")} className="monitoring-home">
       <header className="monitoring-home__header">
         <div>
-          <p className="eyebrow">MONITORING</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
           <p className="monitoring-home__live" role="status">
@@ -33,7 +33,7 @@ export function MonitoringHome({
           </p>
         </div>
         <label className="monitoring-home__search">
-          <span className="visually-hidden">Search traces and alerts</span>
+          <span className="visually-hidden">{L(labels, "search_traces_and_alerts")}</span>
           <input
             onChange={(event) => setSearch(event.target.value)}
             placeholder={view.searchPlaceholder}
@@ -46,7 +46,7 @@ export function MonitoringHome({
         aria-live="polite"
         className="monitoring-home__fleet"
         role="region"
-        aria-label="Live fleet cards"
+        aria-label={L(labels, "live_fleet_cards")}
       >
         {view.fleet.map((card) => (
           <article
@@ -67,8 +67,8 @@ export function MonitoringHome({
       ) : null}
 
       <div className="monitoring-home__body">
-        <aside aria-label="Monitoring filters" className="monitoring-home__filters">
-          <h2>Filters</h2>
+        <aside aria-label={L(labels, "monitoring_filters")} className="monitoring-home__filters">
+          <h2>{L(labels, "filters")}</h2>
           {view.filters.map((filter) => (
             <button className="monitoring-home__filter" key={filter.id} type="button">
               <span>{filter.label}</span>
@@ -80,7 +80,7 @@ export function MonitoringHome({
 
         <div className="monitoring-home__main">
           <div
-            aria-label="Monitoring tabs"
+            aria-label={L(labels, "monitoring_tabs")}
             className="monitoring-home__tabs"
             role="tablist"
           >
@@ -109,14 +109,14 @@ export function MonitoringHome({
               onSelect={setSelectedNodeId}
               onAnnounce={announce}
               search={search}
-            />
+             labels={labels} />
           ) : null}
           {tab === "alerts" ? (
-            <AlertsPanel view={view} onAnnounce={announce} />
+            <AlertsPanel view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
-          {tab === "metrics" ? <MetricsPanel view={view} /> : null}
+          {tab === "metrics" ? <MetricsPanel view={view}  labels={labels} /> : null}
           {tab === "anomalies" ? (
-            <AnomaliesPanel view={view} onAnnounce={announce} />
+            <AnomaliesPanel view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
         </div>
       </div>
@@ -132,12 +132,14 @@ function TracesPanel({
   onSelect,
   onAnnounce,
   search,
+  labels,
 }: Readonly<{
   view: MonitoringLandingView;
   selectedNodeId: string;
   onSelect: (id: string) => void;
   onAnnounce: (message: string) => void;
   search: string;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="monitoring-home__traces">
@@ -147,7 +149,7 @@ function TracesPanel({
             <h3>{view.traceTitle}</h3>
             <p>{view.traceMeta}</p>
           </div>
-          <span className="monitoring-home__timeline-scale">0s →</span>
+          <span className="monitoring-home__timeline-scale">{L(labels, "label_0s")}</span>
         </header>
         <ul className="monitoring-home__tree">
           {view.traceTree.map((node) => (
@@ -163,7 +165,7 @@ function TracesPanel({
         </ul>
       </div>
 
-      <aside aria-label="Selected span" className="monitoring-home__inspector">
+      <aside aria-label={L(labels, "selected_span")} className="monitoring-home__inspector">
         <h3>{view.selectedSpan.title}</h3>
         <p className="monitoring-home__span-metrics">
           {view.selectedSpan.metrics}
@@ -263,14 +265,16 @@ function TraceNode({
 function AlertsPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: MonitoringLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="monitoring-home__alerts">
       <div className="monitoring-home__section-head">
-        <h3>Alert Rules</h3>
+        <h3>{L(labels, "alert_rules")}</h3>
         <button
           className="monitoring-home__action monitoring-home__action--primary"
           onClick={() =>
@@ -285,10 +289,10 @@ function AlertsPanel({
         <table className="monitoring-home__table">
           <thead>
             <tr>
-              <th scope="col">Condition</th>
-              <th scope="col">Action</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "condition")}</th>
+              <th scope="col">{L(labels, "action")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -317,17 +321,21 @@ function AlertsPanel({
           </tbody>
         </table>
       </div>
-      <AnomaliesPanel view={view} onAnnounce={onAnnounce} compact />
+      <AnomaliesPanel view={view} onAnnounce={onAnnounce} compact  labels={labels} />
     </div>
   );
 }
 
 function MetricsPanel({
   view,
-}: Readonly<{ view: MonitoringLandingView }>): JSX.Element {
+  labels,
+}: Readonly<{
+  view: MonitoringLandingView;
+  labels: ScreenLabels;
+}>): JSX.Element {
   return (
     <div className="monitoring-home__metrics">
-      <h3>Metrics Explorer</h3>
+      <h3>{L(labels, "metrics_explorer")}</h3>
       <p className="monitoring-home__muted">{view.metricsTitle}</p>
       <ul className="monitoring-home__metric-bars">
         {view.metricBars.map((bar) => (
@@ -358,14 +366,16 @@ function AnomaliesPanel({
   view,
   onAnnounce,
   compact = false,
+  labels,
 }: Readonly<{
   view: MonitoringLandingView;
   onAnnounce: (message: string) => void;
   compact?: boolean;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className={compact ? "monitoring-home__anomalies monitoring-home__anomalies--compact" : "monitoring-home__anomalies"}>
-      <h3>Anomaly Feed</h3>
+      <h3>{L(labels, "anomaly_feed")}</h3>
       <ul>
         {view.anomalies.map((item) => (
           <li

@@ -4,15 +4,15 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_ONBOARDING_LANDING,
   type OnboardingLandingView,
 } from "../lib/projections/onboarding-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function OnboardingHome({
-  view = LOCAL_ONBOARDING_LANDING,
-}: Readonly<{ view?: OnboardingLandingView }>): JSX.Element {
-  const [stepIndex, setStepIndex] = useState(2); // SVG default: step 3 of 5
-  const [facet, setFacet] = useState(view.agentFilters[0] ?? "All (87)");
+  view }: Readonly<{ view: OnboardingLandingView }>): JSX.Element {
+  const labels = view.labels;
+  const [stepIndex, setStepIndex] = useState(view.defaultStepIndex);
+  const [facet, setFacet] = useState(view.agentFilters[0] ?? "");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<ReadonlySet<string>>(
     () =>
@@ -24,9 +24,7 @@ export function OnboardingHome({
   );
   const [helpQuery, setHelpQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
-  const [aiPrompt, setAiPrompt] = useState(
-    "How do I safely rollout a new common version?",
-  );
+  const [aiPrompt, setAiPrompt] = useState(view.defaultHelpPrompt ?? "");
 
   const announce = (message: string): void => setStatusMessage(message);
   const step = view.steps[stepIndex] ?? view.steps[0];
@@ -82,7 +80,7 @@ export function OnboardingHome({
   };
 
   return (
-    <section aria-label="Onboarding and help" className="onboarding-home">
+    <section aria-label={L(labels, "onboarding_and_help")} className="onboarding-home">
       <header className="onboarding-home__topbar">
         <Link className="onboarding-home__brand" href="/">
           common-agent-swarm-ops
@@ -93,7 +91,7 @@ export function OnboardingHome({
       </header>
 
       <div
-        aria-label="Tour progress"
+        aria-label={L(labels, "tour_progress")}
         className="onboarding-home__progress"
         role="list"
       >
@@ -126,7 +124,9 @@ export function OnboardingHome({
       <div className="onboarding-home__wizard">
         <header className="onboarding-home__wizard-head">
           <p className="eyebrow">
-            Step {stepNumber} of {view.steps.length}
+            {view.stepProgressTemplate
+              .replace("{step}", String(stepNumber))
+              .replace("{total}", String(view.steps.length))}
           </p>
           <h1>{stepIndex === 2 ? view.title : step?.title}</h1>
           <p className="lede">
@@ -147,7 +147,7 @@ export function OnboardingHome({
             onToggle={toggleAgent}
             onClear={clearAll}
             onAnnounce={announce}
-          />
+           labels={labels} />
         ) : (
           <GenericStepPanel
             view={view}
@@ -194,16 +194,16 @@ export function OnboardingHome({
       >
         <div className="onboarding-home__help-head">
           <div>
-            <h2 id="help-center-heading">Help Center</h2>
+            <h2 id="help-center-heading">{L(labels, "help_center")}</h2>
             <p className="onboarding-home__muted">
               Searchable docs · bilingual-ready · contextual guidance
             </p>
           </div>
           <label className="onboarding-home__search">
-            <span className="visually-hidden">Search help</span>
+            <span className="visually-hidden">{L(labels, "search_help")}</span>
             <input
               onChange={(event) => setHelpQuery(event.target.value)}
-              placeholder="Search docs…"
+              placeholder={L(labels, "search_docs")}
               value={helpQuery}
             />
           </label>
@@ -236,8 +236,8 @@ export function OnboardingHome({
         </div>
 
         <div className="onboarding-home__split">
-          <section className="onboarding-home__panel" aria-label="AI help">
-            <h3>AI Help Chat</h3>
+          <section className="onboarding-home__panel" aria-label={L(labels, "ai_help")}>
+            <h3>{L(labels, "ai_help_chat")}</h3>
             <p className="onboarding-home__muted">
               Contextual help over docs + commons knowledge (authorized assist).
             </p>
@@ -263,8 +263,8 @@ export function OnboardingHome({
             </button>
           </section>
 
-          <section className="onboarding-home__panel" aria-label="Sample projects">
-            <h3>Sample Guided Projects</h3>
+          <section className="onboarding-home__panel" aria-label={L(labels, "sample_projects")}>
+            <h3>{L(labels, "sample_guided_projects")}</h3>
             <ul className="onboarding-home__samples">
               {view.sampleProjects.map((project) => (
                 <li key={project.id}>
@@ -284,8 +284,8 @@ export function OnboardingHome({
           </section>
         </div>
 
-        <section className="onboarding-home__panel" aria-label="Core concepts">
-          <h3>What you are learning</h3>
+        <section className="onboarding-home__panel" aria-label={L(labels, "core_concepts")}>
+          <h3>{L(labels, "what_you_are_learning")}</h3>
           <ul className="onboarding-home__concepts">
             {view.tourConcepts.map((concept) => (
               <li key={concept}>{concept}</li>
@@ -296,8 +296,8 @@ export function OnboardingHome({
           </p>
         </section>
 
-        <section className="onboarding-home__panel" aria-label="Feedback">
-          <h3>Feedback &amp; Contribution</h3>
+        <section className="onboarding-home__panel" aria-label={L(labels, "feedback")}>
+          <h3>{L(labels, "feedback_contribution")}</h3>
           <div className="onboarding-home__actions">
             <button
               className="onboarding-home__action"
@@ -342,6 +342,7 @@ function SelectAgentsPanel({
   onToggle,
   onClear,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: OnboardingLandingView;
   agents: OnboardingLandingView["agents"];
@@ -354,20 +355,21 @@ function SelectAgentsPanel({
   onToggle: (id: string) => void;
   onClear: () => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="onboarding-home__select">
       <label className="onboarding-home__search onboarding-home__search--wide">
-        <span className="visually-hidden">Search commons</span>
+        <span className="visually-hidden">{L(labels, "search_commons")}</span>
         <input
           onChange={(event) => onQuery(event.target.value)}
-          placeholder="Search or describe what you need…"
+          placeholder={L(labels, "search_or_describe_what_you_need")}
           value={query}
         />
       </label>
 
       <div
-        aria-label="Agent domain filters"
+        aria-label={L(labels, "agent_domain_filters")}
         className="onboarding-home__facets"
         role="group"
       >
@@ -430,8 +432,8 @@ function SelectAgentsPanel({
         </button>
       </div>
 
-      <aside className="onboarding-home__pattern" aria-label="Recommended pattern">
-        <p className="eyebrow">Recommended Pattern for your selections</p>
+      <aside className="onboarding-home__pattern" aria-label={L(labels, "recommended_pattern")}>
+        <p className="eyebrow">{view.recommendedPattern.eyebrow}</p>
         <h3>{view.recommendedPattern.name}</h3>
         <p>{view.recommendedPattern.detail}</p>
         <div className="onboarding-home__actions">

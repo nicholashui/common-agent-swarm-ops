@@ -1,7 +1,10 @@
 /**
  * Local dashboard landing fixture for ui_02_dashboard.md / ui_02_dashboard.svg.
  * Presentation-only until generated /api/v1 projections replace it.
+ * All chrome strings live in `labels` — components must not hardcode copy.
  */
+
+import type { ScreenLabels } from "./screen-labels";
 
 export type DashboardStatusTone =
   | "running"
@@ -99,6 +102,9 @@ export interface DashboardPinnedItem {
 export interface DashboardLandingView {
   readonly title: string;
   readonly description: string;
+  readonly eyebrow: string;
+  readonly commonHealthSectionTitle: string;
+  readonly quickActionsSectionTitle: string;
   readonly freshnessLabel: string;
   readonly asOf: string;
   readonly stale: boolean;
@@ -112,15 +118,46 @@ export interface DashboardLandingView {
   readonly controlPlane: DashboardControlPlaneHealth;
   readonly pinned: readonly DashboardPinnedItem[];
   readonly footerNote: string;
+  readonly labels: ScreenLabels;
 }
 
 export const LOCAL_DASHBOARD_LANDING: DashboardLandingView = {
   title: "Common Health & Fleet Ops",
   description:
     "Operating on a living, collectively improving commons foundation.",
+  eyebrow: "DASHBOARD",
+  commonHealthSectionTitle: "Common Health",
+  quickActionsSectionTitle: "Quick Actions",
   freshnessLabel: "Local preview · SSE not connected",
   asOf: "local",
   stale: false,
+  labels: {
+    runningNow: "Running Now",
+    openCanvas: "Open canvas",
+    emptyFleet: "No swarms running. Start one from Common Patterns.",
+    startFromPatterns: "Start from Common Patterns →",
+    recentActivity: "Recent Activity",
+    viewAll: "View all →",
+    colTime: "Time",
+    colSwarmPattern: "Swarm · Pattern",
+    colCommons: "Commons",
+    colStatus: "Status",
+    colAction: "Action",
+    insightsTitle: "Common Impact Insights",
+    controlPlaneTitle: "Control-Plane Health & Freshness",
+    apiHealthLabel: "API / Projection Health",
+    delayedEventLabel: "Delayed-event warning",
+    backlogLabel: "Queue / Run Backlog",
+    approvalLabel: "Approval expiry alert",
+    sseLabel: "SSE Transport",
+    asOfPrefix: "as_of",
+    affectedLabel: "Affected swarms",
+    viewAffected: "View affected →",
+    pinnedTitle: "Pinned / Favorites",
+    pause: "Pause",
+    viewCanvas: "View Canvas",
+    progressMetaTemplate: "{progress} · elapsed {elapsed} · {costRate}",
+  },
   commonHealth: [
     {
       id: "agents-active",

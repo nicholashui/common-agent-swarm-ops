@@ -4,14 +4,14 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_API_PORTAL_LANDING,
   type ApiPortalLandingView,
   type ApiPortalNavId,
 } from "../lib/projections/api-portal-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function ApiPortalHome({
-  view = LOCAL_API_PORTAL_LANDING,
-}: Readonly<{ view?: ApiPortalLandingView }>): JSX.Element {
+  view }: Readonly<{ view: ApiPortalLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [nav, setNav] = useState<ApiPortalNavId>("docs");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(view.selectedEndpointId);
@@ -64,15 +64,15 @@ const run = await client.swarms.run("trading-alpha", {
 // run.runId, run.eventsUrl`;
 
   return (
-    <section aria-label="Developer API portal" className="api-portal">
+    <section aria-label={L(labels, "developer_api_portal")} className="api-portal">
       <header className="api-portal__header">
         <div>
-          <p className="eyebrow">DEVELOPER / API PORTAL</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <label className="api-portal__search">
-          <span className="visually-hidden">Search endpoints and SDK</span>
+          <span className="visually-hidden">{L(labels, "search_endpoints_and_sdk")}</span>
           <input
             onChange={(event) => setQuery(event.target.value)}
             placeholder={view.searchPlaceholder}
@@ -88,7 +88,7 @@ const run = await client.swarms.run("trading-alpha", {
       ) : null}
 
       <div className="api-portal__body">
-        <nav aria-label="API portal sections" className="api-portal__nav">
+        <nav aria-label={L(labels, "api_portal_sections")} className="api-portal__nav">
           {view.nav.map((item) => (
             <button
               aria-current={nav === item.id ? "page" : undefined}
@@ -105,10 +105,10 @@ const run = await client.swarms.run("trading-alpha", {
             </button>
           ))}
           <label className="api-portal__endpoint-filter">
-            <span className="visually-hidden">Filter endpoints</span>
+            <span className="visually-hidden">{L(labels, "filter_endpoints")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Filter endpoints…"
+              placeholder={L(labels, "filter_endpoints_2")}
               value={query}
             />
           </label>
@@ -162,16 +162,16 @@ const run = await client.swarms.run("trading-alpha", {
               onSampleTab={setSampleTab}
               onAnnounce={announce}
               showSdk={nav === "sdks"}
-            />
+             labels={labels} />
           ) : null}
           {nav === "tokens" ? (
-            <TokensPanel view={view} onAnnounce={announce} />
+            <TokensPanel view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
           {nav === "webhooks" ? (
-            <WebhooksPanel view={view} onAnnounce={announce} />
+            <WebhooksPanel view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
           {nav === "extensibility" ? (
-            <ExtensibilityPanel view={view} onAnnounce={announce} />
+            <ExtensibilityPanel view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
         </div>
       </div>
@@ -189,6 +189,7 @@ function DocsPanel({
   onSampleTab,
   onAnnounce,
   showSdk,
+  labels,
 }: Readonly<{
   view: ApiPortalLandingView;
   selected: ApiPortalLandingView["endpoints"][number] | undefined;
@@ -197,11 +198,12 @@ function DocsPanel({
   onSampleTab: (tab: "curl" | "python" | "typescript") => void;
   onAnnounce: (message: string) => void;
   showSdk: boolean;
+  labels: ScreenLabels;
 }>): JSX.Element {
   if (!selected) {
     return (
       <div className="api-portal__empty panel">
-        <p>No endpoints match the current filter.</p>
+        <p>{L(labels, "no_endpoints_match_the_current_filter")}</p>
       </div>
     );
   }
@@ -210,8 +212,8 @@ function DocsPanel({
     <div className="api-portal__docs">
       {showSdk ? (
         <div className="api-portal__sdk-banner">
-          <strong>SDKs</strong>
-          <span>Python (common-lib) · TypeScript · curl samples</span>
+          <strong>{L(labels, "sdks")}</strong>
+          <span>{L(labels, "python_common_lib_typescript_curl_samples")}</span>
         </div>
       ) : null}
 
@@ -226,7 +228,7 @@ function DocsPanel({
       </header>
       <p>{selected.summary}</p>
 
-      <h3>Parameters</h3>
+      <h3>{L(labels, "parameters")}</h3>
       <ul className="api-portal__params">
         {selected.params.map((param) => (
           <li key={param}>
@@ -235,7 +237,7 @@ function DocsPanel({
         ))}
       </ul>
 
-      <div className="api-portal__sample-tabs" role="tablist" aria-label="Code samples">
+      <div className="api-portal__sample-tabs" role="tablist" aria-label={L(labels, "code_samples")}>
         {(["curl", "python", "typescript"] as const).map((tab) => (
           <button
             aria-selected={sampleTab === tab}
@@ -256,7 +258,7 @@ function DocsPanel({
 
       <div className="api-portal__code-block">
         <div className="api-portal__code-head">
-          <span>Request</span>
+          <span>{L(labels, "request")}</span>
           <button
             className="api-portal__linkish"
             onClick={() =>
@@ -274,7 +276,7 @@ function DocsPanel({
 
       <div className="api-portal__code-block">
         <div className="api-portal__code-head">
-          <span>Response</span>
+          <span>{L(labels, "response")}</span>
         </div>
         <pre>{view.sampleResponse}</pre>
       </div>
@@ -314,14 +316,16 @@ function DocsPanel({
 function TokensPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ApiPortalLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="api-portal__tokens">
       <div className="api-portal__section-head">
-        <h2>API Keys &amp; Scopes</h2>
+        <h2>{L(labels, "api_keys_scopes")}</h2>
         <button
           className="api-portal__action api-portal__action--primary"
           onClick={() =>
@@ -356,7 +360,7 @@ function TokensPanel({
           </li>
         ))}
       </ul>
-      <h3>Rate Limit &amp; Usage</h3>
+      <h3>{L(labels, "rate_limit_usage")}</h3>
       <ul className="api-portal__usage">
         {view.usage.map((item) => (
           <li key={item.label}>
@@ -367,7 +371,7 @@ function TokensPanel({
       </ul>
       <p className="api-portal__muted">
         Keys shown once at creation · scopes bound server-side. Also manage from{" "}
-        <Link href="/profile">Profile → API Tokens</Link>.
+        <Link href="/profile">{L(labels, "profile_api_tokens")}</Link>.
       </p>
     </div>
   );
@@ -376,14 +380,16 @@ function TokensPanel({
 function WebhooksPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ApiPortalLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="api-portal__webhooks">
       <div className="api-portal__section-head">
-        <h2>Webhooks</h2>
+        <h2>{L(labels, "webhooks")}</h2>
         <button
           className="api-portal__action api-portal__action--primary"
           onClick={() =>
@@ -428,7 +434,7 @@ function WebhooksPanel({
           </li>
         ))}
       </ul>
-      <h3>Recent deliveries</h3>
+      <h3>{L(labels, "recent_deliveries")}</h3>
       <ul className="api-portal__deliveries">
         {view.deliveries.map((item) => (
           <li key={item.id}>
@@ -439,7 +445,7 @@ function WebhooksPanel({
         ))}
       </ul>
       <div className="api-portal__secret">
-        <h3>Signing secret</h3>
+        <h3>{L(labels, "signing_secret")}</h3>
         <code>{view.signingSecretMasked}</code>
         <p className="api-portal__muted">
           Verify signatures · payloads redacted · retries w/ backoff.
@@ -452,18 +458,20 @@ function WebhooksPanel({
 function ExtensibilityPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ApiPortalLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="api-portal__extensibility">
-      <h2>Extensibility</h2>
+      <h2>{L(labels, "extensibility")}</h2>
       <p>
         Guides for custom nodes/tools, runtime adapters (Moltbot, LangGraph,
         etc.), and contribution process for new commons.
       </p>
-      <h3>Published schemas &amp; examples</h3>
+      <h3>{L(labels, "published_schemas_examples")}</h3>
       <ul className="api-portal__schemas">
         {view.schemas.map((schema) => (
           <li key={schema}>{schema}</li>

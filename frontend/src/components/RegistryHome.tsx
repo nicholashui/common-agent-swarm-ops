@@ -4,17 +4,17 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_REGISTRY_LANDING,
   type RegistryAgentCard,
   type RegistryLandingView,
   type RegistryPatternCard,
   type RegistryViewMode,
 } from "../lib/projections/registry-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { SpecialsCatalog } from "./SpecialsCatalog";
 
 export function RegistryHome({
-  view = LOCAL_REGISTRY_LANDING,
-}: Readonly<{ view?: RegistryLandingView }>): JSX.Element {
+  view }: Readonly<{ view: RegistryLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [mode, setMode] = useState<RegistryViewMode>("cards");
   const [search, setSearch] = useState("");
   const [activeFacets, setActiveFacets] = useState<ReadonlySet<string>>(
@@ -37,20 +37,19 @@ export function RegistryHome({
   const filteredAgents = useMemo(() => {
     const q = search.trim().toLowerCase();
     return view.agents.filter((agent) => {
-      if (activeFacets.has("Success rate > 90%")) {
+      if (activeFacets.has(view.successRateFacet)) {
         const rate = Number.parseFloat(agent.success);
         if (!(rate > 90)) return false;
       }
-      if (activeFacets.has("Used in my swarms")) {
+      if (activeFacets.has(view.usedInSwarmsFacet)) {
         if (!/of yours/.test(agent.usage)) return false;
       }
-      if (activeFacets.has("High Verification")) {
+      if (activeFacets.has(view.highVerificationFacet)) {
         if (!agent.badges.some((badge) => /High Verify/i.test(badge))) {
           return false;
         }
       }
-      const domainFacets = ["Trading", "Content", "Education", "Distributed"];
-      const selectedDomains = domainFacets.filter((domain) =>
+      const selectedDomains = view.domainFacets.filter((domain) =>
         activeFacets.has(domain),
       );
       if (selectedDomains.length > 0) {
@@ -66,13 +65,13 @@ export function RegistryHome({
         agent.badges.some((badge) => badge.toLowerCase().includes(q))
       );
     });
-  }, [activeFacets, search, view.agents]);
+  }, [activeFacets, search, view]);
 
   return (
-    <section aria-label="Common registry hub" className="registry-home">
+    <section aria-label={L(labels, "common_registry_hub")} className="registry-home">
       <header className="registry-home__header">
         <div>
-          <p className="eyebrow">REGISTRY HUB</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.subtitle}</p>
           <p className="registry-home__workspace">{view.workspaceLabel}</p>
@@ -81,7 +80,7 @@ export function RegistryHome({
           <button
             className="registry-home__action"
             onClick={() =>
-              announce("My Contributions & Forks require an authorized projection.")
+              announce(L(labels, "my_contributions_forks_require_an_authorized_pro"))
             }
             type="button"
           >
@@ -91,7 +90,7 @@ export function RegistryHome({
             className="registry-home__action"
             onClick={() => {
               setReviewOpen(true);
-              announce("Pending proposals shown from local fixture.");
+              announce(L(labels, "pending_proposals_shown_from_local_fixture"));
             }}
             type="button"
           >
@@ -105,7 +104,7 @@ export function RegistryHome({
 
       <div className="registry-home__toolbar">
         <label className="registry-home__search">
-          <span className="visually-hidden">Search registry</span>
+          <span className="visually-hidden">{L(labels, "search_registry")}</span>
           <input
             onChange={(event) => setSearch(event.target.value)}
             placeholder={view.searchPlaceholder}
@@ -113,7 +112,7 @@ export function RegistryHome({
           />
         </label>
         <div
-          aria-label="View mode"
+          aria-label={L(labels, "view_mode")}
           className="registry-home__modes"
           role="group"
         >
@@ -142,7 +141,7 @@ export function RegistryHome({
       </div>
 
       <div
-        aria-label="Registry facets"
+        aria-label={L(labels, "registry_facets")}
         className="registry-home__facets"
         role="group"
       >
@@ -182,12 +181,12 @@ export function RegistryHome({
                     agent={agent}
                     key={agent.id}
                     onAnnounce={announce}
-                  />
+                   labels={labels} />
                 ))}
               </div>
             ) : null}
             {mode === "table" ? (
-              <AgentTable agents={filteredAgents} onAnnounce={announce} />
+              <AgentTable agents={filteredAgents} onAnnounce={announce}  labels={labels} />
             ) : null}
             {mode === "graph" ? (
               <div className="registry-home__graph-placeholder panel">
@@ -199,7 +198,7 @@ export function RegistryHome({
             ) : null}
             {filteredAgents.length === 0 ? (
               <div className="registry-home__empty panel">
-                <p>No commons match the current search or facets.</p>
+                <p>{L(labels, "no_commons_match_the_current_search_or_facets")}</p>
               </div>
             ) : null}
           </section>
@@ -227,7 +226,7 @@ export function RegistryHome({
             className="registry-home__proposals-section"
           >
             <div className="registry-home__section-head">
-              <h2 id="proposals-heading">Pending Proposals</h2>
+              <h2 id="proposals-heading">{L(labels, "pending_proposals")}</h2>
               <button
                 className="registry-home__linkish"
                 onClick={() => setReviewOpen((open) => !open)}
@@ -265,13 +264,13 @@ export function RegistryHome({
 
             {reviewOpen ? (
               <div
-                aria-label="Proposal review"
+                aria-label={L(labels, "proposal_review")}
                 className="registry-home__review"
               >
                 <h3>{view.reviewTitle}</h3>
                 <div className="registry-home__review-grid">
                   <section className="registry-home__diff">
-                    <h4>Spec Diff (redacted)</h4>
+                    <h4>{L(labels, "spec_diff_redacted")}</h4>
                     <pre>
                       {view.reviewDiffLines.map((line) => (
                         <span
@@ -291,7 +290,7 @@ export function RegistryHome({
                     </pre>
                   </section>
                   <section className="registry-home__impact">
-                    <h4>Impact Analysis</h4>
+                    <h4>{L(labels, "impact_analysis")}</h4>
                     <dl>
                       {view.impactRows.map((row) => (
                         <div key={row.label}>
@@ -343,8 +342,8 @@ export function RegistryHome({
           </section>
         </div>
 
-        <aside aria-label="Registry stats" className="registry-home__sidebar">
-          <h2>Registry Stats</h2>
+        <aside aria-label={L(labels, "registry_stats_2")} className="registry-home__sidebar">
+          <h2>{L(labels, "registry_stats")}</h2>
           <ul className="registry-home__stats">
             {view.stats.map((stat) => (
               <li key={stat.id}>
@@ -354,7 +353,7 @@ export function RegistryHome({
             ))}
           </ul>
           <section className="registry-home__your-impact">
-            <h3>Your Impact</h3>
+            <h3>{L(labels, "your_impact")}</h3>
             <p>{view.yourImpact}</p>
             <Link className="registry-home__linkish" href="/evaluations">
               Full Eval Dashboard →
@@ -366,7 +365,7 @@ export function RegistryHome({
         </aside>
       </div>
 
-      <SpecialsCatalog />
+      <SpecialsCatalog view={view.specials} />
 
       <p className="registry-home__footer">{view.footerNote}</p>
     </section>
@@ -376,9 +375,11 @@ export function RegistryHome({
 function AgentCard({
   agent,
   onAnnounce,
+  labels,
 }: Readonly<{
   agent: RegistryAgentCard;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <article className="registry-home__agent-card">
@@ -389,7 +390,7 @@ function AgentCard({
         <div>
           <div className="registry-home__agent-title-row">
             <h3>{agent.name}</h3>
-            {agent.isNew ? <span className="registry-home__new">New</span> : null}
+            {agent.isNew ? <span className="registry-home__new">{L(labels, "new")}</span> : null}
           </div>
           <span className="registry-home__version">{agent.versionLabel}</span>
         </div>
@@ -397,15 +398,15 @@ function AgentCard({
       <p>{agent.description}</p>
       <dl className="registry-home__metrics">
         <div>
-          <dt>Success</dt>
+          <dt>{L(labels, "success")}</dt>
           <dd>{agent.success}</dd>
         </div>
         <div>
-          <dt>Avg tok</dt>
+          <dt>{L(labels, "avg_tok")}</dt>
           <dd>{agent.avgTokens}</dd>
         </div>
         <div>
-          <dt>Latency</dt>
+          <dt>{L(labels, "latency")}</dt>
           <dd>{agent.latency}</dd>
         </div>
       </dl>
@@ -459,20 +460,22 @@ function AgentCard({
 function AgentTable({
   agents,
   onAnnounce,
+  labels,
 }: Readonly<{
   agents: readonly RegistryAgentCard[];
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="registry-home__table-wrap">
       <table className="registry-home__table">
         <thead>
           <tr>
-            <th scope="col">Agent</th>
-            <th scope="col">Version</th>
-            <th scope="col">Success</th>
-            <th scope="col">Usage</th>
-            <th scope="col">Actions</th>
+            <th scope="col">{L(labels, "agent")}</th>
+            <th scope="col">{L(labels, "version")}</th>
+            <th scope="col">{L(labels, "success")}</th>
+            <th scope="col">{L(labels, "usage")}</th>
+            <th scope="col">{L(labels, "actions")}</th>
           </tr>
         </thead>
         <tbody>

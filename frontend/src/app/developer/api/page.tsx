@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../../components/AppShell";
 import { ApiPortalHome } from "../../../components/ApiPortalHome";
+import { useScreenParameters } from "../../../lib/projections/use-screen-parameters";
 
 /**
- * Developer / API Portal (ui_15). Local presentation landing until
- * generated OpenAPI, token service, and webhook projections connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function DeveloperApiPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("apiPortal");
   return (
     <AppShell>
-      <ApiPortalHome />
+      <ApiPortalHome view={view} />
     </AppShell>
   );
 }
-
-export default DeveloperApiPage;

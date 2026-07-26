@@ -4,26 +4,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_MOBILE_LANDING,
   type MobileLandingView,
   type MobileTabId,
 } from "../lib/projections/mobile-landing";
-
-const TABS: readonly {
-  readonly id: MobileTabId;
-  readonly label: string;
-  readonly href?: string;
-}[] = [
-  { id: "home", label: "Home" },
-  { id: "activity", label: "Activity" },
-  { id: "compose", label: "Compose", href: "/composer" },
-  { id: "registry", label: "Registry" },
-  { id: "more", label: "More" },
-];
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function MobileHome({
-  view = LOCAL_MOBILE_LANDING,
-}: Readonly<{ view?: MobileLandingView }>): JSX.Element {
+  view }: Readonly<{ view: MobileLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [tab, setTab] = useState<MobileTabId>("home");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [sheet, setSheet] = useState<string | undefined>();
@@ -32,14 +20,14 @@ export function MobileHome({
   const announce = (message: string): void => setStatusMessage(message);
 
   return (
-    <section aria-label="Mobile companion" className="mobile-home">
+    <section aria-label={L(labels, "mobile_companion")} className="mobile-home">
       <p className="mobile-home__intro lede">
         Mobile / PWA companion views for on-the-go monitoring, approvals, and
         quick actions. Desktop canvas editing is intentionally out of scope
         here.
       </p>
 
-      <div className="mobile-home__device" aria-label="Phone preview">
+      <div className="mobile-home__device" aria-label={L(labels, "phone_preview")}>
         <header className="mobile-home__status-bar">
           <span>{view.timeLabel}</span>
           <span className="mobile-home__brand">{view.brand}</span>
@@ -54,14 +42,14 @@ export function MobileHome({
             </p>
           </div>
           <Link
-            aria-label="Notifications, 3 unread"
+            aria-label={L(labels, "notifications_3_unread")}
             className="mobile-home__bell"
             href="/notifications"
           >
             3
           </Link>
           <Link
-            aria-label="Profile"
+            aria-label={L(labels, "profile")}
             className="mobile-home__avatar"
             href="/profile"
           >
@@ -81,10 +69,10 @@ export function MobileHome({
               view={view}
               onAnnounce={announce}
               onOpenSheet={setSheet}
-            />
+             labels={labels} />
           ) : null}
           {tab === "activity" ? (
-            <ActivityTab view={view} onAnnounce={announce} />
+            <ActivityTab view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
           {tab === "registry" ? (
             <RegistryTab
@@ -92,14 +80,14 @@ export function MobileHome({
               query={registryQuery}
               onQuery={setRegistryQuery}
               onAnnounce={announce}
-            />
+             labels={labels} />
           ) : null}
           {tab === "more" ? (
-            <MoreTab view={view} onAnnounce={announce} />
+            <MoreTab view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
           {tab === "compose" ? (
             <div className="mobile-home__panel">
-              <p>Compose opens the full composer for guided creation.</p>
+              <p>{L(labels, "compose_opens_the_full_composer_for_guided_creat")}</p>
               <Link
                 className="mobile-home__btn mobile-home__btn--primary"
                 href="/composer"
@@ -112,7 +100,7 @@ export function MobileHome({
 
         {sheet ? (
           <div
-            aria-label="Action sheet"
+            aria-label={L(labels, "action_sheet")}
             className="mobile-home__sheet"
             role="dialog"
           >
@@ -127,8 +115,8 @@ export function MobileHome({
           </div>
         ) : null}
 
-        <nav aria-label="Mobile bottom navigation" className="mobile-home__nav">
-          {TABS.map((entry) => {
+        <nav aria-label={L(labels, "mobile_bottom_navigation")} className="mobile-home__nav">
+          {view.tabs.map((entry) => {
             if (entry.href && entry.id === "compose") {
               return (
                 <Link
@@ -171,10 +159,12 @@ function HomeTab({
   view,
   onAnnounce,
   onOpenSheet,
+  labels,
 }: Readonly<{
   view: MobileLandingView;
   onAnnounce: (message: string) => void;
   onOpenSheet: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="mobile-home__stack">
@@ -189,7 +179,7 @@ function HomeTab({
 
       <section aria-labelledby="mobile-swarms-heading">
         <div className="mobile-home__section-head">
-          <h2 id="mobile-swarms-heading">Your Swarms</h2>
+          <h2 id="mobile-swarms-heading">{L(labels, "your_swarms")}</h2>
           <Link className="mobile-home__linkish" href="/activity">
             See all →
           </Link>
@@ -223,7 +213,7 @@ function HomeTab({
       </section>
 
       <section aria-labelledby="mobile-notes-heading">
-        <h2 id="mobile-notes-heading">Notifications</h2>
+        <h2 id="mobile-notes-heading">{L(labels, "notifications")}</h2>
         <ul className="mobile-home__cards">
           {view.notifications.map((item) => (
             <li key={item.id}>
@@ -283,7 +273,7 @@ function HomeTab({
       </section>
 
       <section aria-labelledby="mobile-quick-heading">
-        <h2 id="mobile-quick-heading">Quick Actions</h2>
+        <h2 id="mobile-quick-heading">{L(labels, "quick_actions")}</h2>
         <div className="mobile-home__actions">
           <Link
             className="mobile-home__btn mobile-home__btn--primary"
@@ -303,14 +293,16 @@ function HomeTab({
 function ActivityTab({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: MobileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="mobile-home__stack">
       <div className="mobile-home__section-head">
-        <h2>Activity Feed</h2>
+        <h2>{L(labels, "activity_feed")}</h2>
         <button
           className="mobile-home__linkish"
           onClick={() =>
@@ -371,11 +363,13 @@ function RegistryTab({
   query,
   onQuery,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: MobileLandingView;
   query: string;
   onQuery: (value: string) => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   const hits = view.registryHits.filter((hit) => {
     const q = query.trim().toLowerCase();
@@ -388,12 +382,12 @@ function RegistryTab({
 
   return (
     <div className="mobile-home__stack">
-      <h2>Registry Quick Search</h2>
+      <h2>{L(labels, "registry_quick_search")}</h2>
       <label className="mobile-home__search">
-        <span className="visually-hidden">Search commons</span>
+        <span className="visually-hidden">{L(labels, "search_commons")}</span>
         <input
           onChange={(event) => onQuery(event.target.value)}
-          placeholder="Search commons…"
+          placeholder={L(labels, "search_commons_2")}
           value={query}
         />
       </label>
@@ -443,32 +437,34 @@ function RegistryTab({
 function MoreTab({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: MobileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="mobile-home__stack">
-      <h2>More</h2>
+      <h2>{L(labels, "more")}</h2>
       <ul className="mobile-home__more-links">
         <li>
-          <Link href="/profile">Profile</Link>
+          <Link href="/profile">{L(labels, "profile")}</Link>
         </li>
         <li>
-          <Link href="/notifications">Notifications</Link>
+          <Link href="/notifications">{L(labels, "notifications")}</Link>
         </li>
         <li>
-          <Link href="/operations">Monitoring</Link>
+          <Link href="/operations">{L(labels, "monitoring")}</Link>
         </li>
         <li>
-          <Link href="/settings">Settings</Link>
+          <Link href="/settings">{L(labels, "settings")}</Link>
         </li>
         <li>
-          <Link href="/onboarding">Help &amp; Onboarding</Link>
+          <Link href="/onboarding">{L(labels, "help_onboarding")}</Link>
         </li>
       </ul>
       <div className="mobile-home__panel">
-        <h3>PWA</h3>
+        <h3>{L(labels, "pwa")}</h3>
         <p className="mobile-home__meta">{view.offlineNote}</p>
         <button
           className="mobile-home__btn"

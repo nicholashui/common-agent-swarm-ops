@@ -7,12 +7,15 @@ import { fileURLToPath } from "node:url";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { LoginScreen } from "./LoginScreen";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("login screen matches ui_01_login structure and identity-only boundary", () => {
-  const markup = renderToStaticMarkup(<LoginScreen />);
+  const markup = renderToStaticMarkup(
+    <LoginScreen view={getScreenParameters("login")} />,
+  );
 
   assert.match(markup, /common-agent-swarm-ops/);
   assert.match(markup, /Reusable agent swarms/);

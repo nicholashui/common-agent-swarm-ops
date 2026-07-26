@@ -11,12 +11,13 @@ import {
   LOCAL_COMPOSER_LANDING,
   buildLocalAssistantReply,
 } from "../lib/projections/composer-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { ComposerHome } from "./ComposerHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("composer home matches ui_03 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<ComposerHome />);
+  const markup = renderToStaticMarkup(<ComposerHome view={getScreenParameters("composer")} />);
 
   assert.match(markup, /Swarm Composer/);
   assert.match(markup, /pattern-first, NL-driven/);

@@ -3,14 +3,14 @@
 import React, { useMemo, useState } from "react";
 
 import {
-  LOCAL_SPECIALS_LANDING,
   type SpecialsLandingView,
 } from "../lib/projections/specials-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { SafeContent } from "./projection/SafeContent";
 
 export function SpecialsCatalog({
-  view = LOCAL_SPECIALS_LANDING,
-}: Readonly<{ view?: SpecialsLandingView }>): JSX.Element {
+  view }: Readonly<{ view: SpecialsLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [query, setQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
@@ -26,18 +26,18 @@ export function SpecialsCatalog({
   }, [query, view.agents]);
 
   return (
-    <section aria-label="Special agents pack catalog" className="specials-catalog">
+    <section aria-label={L(labels, "special_agents_pack_catalog")} className="specials-catalog">
       <header className="specials-catalog__header">
         <div>
-          <p className="eyebrow">SPECIALS PACK · DRAFT</p>
+          <p className="eyebrow">{L(labels, "specials_pack_draft")}</p>
           <h2>{view.title}</h2>
           <p className="lede">{view.subtitle}</p>
         </div>
         <label className="specials-catalog__search">
-          <span className="visually-hidden">Search special agents</span>
+          <span className="visually-hidden">{L(labels, "search_special_agents")}</span>
           <input
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search specials by id or title…"
+            placeholder={L(labels, "search_specials_by_id_or_title")}
             value={query}
           />
         </label>
@@ -61,7 +61,7 @@ export function SpecialsCatalog({
             <li className="specials-catalog__card" key={agent.agentId}>
               <div className="specials-catalog__card-head">
                 <h3>{agent.title}</h3>
-                <span className="specials-catalog__pill">draft · non-active</span>
+                <span className="specials-catalog__pill">{L(labels, "draft_non_active")}</span>
               </div>
               <p className="specials-catalog__id">
                 <code>{agent.agentId}</code>

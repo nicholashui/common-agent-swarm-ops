@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_KNOWLEDGE_LANDING } from "../lib/projections/knowledge-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { KnowledgeHome } from "./KnowledgeHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("knowledge home matches ui_10 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<KnowledgeHome />);
+  const markup = renderToStaticMarkup(<KnowledgeHome view={getScreenParameters("knowledge")} />);
 
   assert.match(markup, /Knowledge Management Hub/);
   assert.match(markup, /Common \+ business-scoped RAG sources/);

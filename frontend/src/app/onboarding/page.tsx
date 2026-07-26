@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { OnboardingHome } from "../../components/OnboardingHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Onboarding, Help & Documentation (ui_16). Local presentation landing until
- * tour progress preferences and docs CMS connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function OnboardingPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("onboarding");
   return (
     <AppShell>
-      <OnboardingHome />
+      <OnboardingHome view={view} />
     </AppShell>
   );
 }
-
-export default OnboardingPage;

@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_PROFILE_LANDING } from "../lib/projections/profile-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { ProfileHome } from "./ProfileHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("profile home matches ui_13 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<ProfileHome />);
+  const markup = renderToStaticMarkup(<ProfileHome view={getScreenParameters("profile")} />);
 
   assert.match(markup, /PROFILE &amp; CONTRIBUTIONS|Profile/);
   assert.match(markup, /Nicholas Hui/);

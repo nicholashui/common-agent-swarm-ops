@@ -4,6 +4,8 @@
  * VA production semantics labeled as adapter/reference, not deployed endpoints.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type ApiPortalNavId =
   | "docs"
   | "sdks"
@@ -43,6 +45,8 @@ export interface ApiDeliveryRow {
 }
 
 export interface ApiPortalLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -63,6 +67,29 @@ export interface ApiPortalLandingView {
 }
 
 export const LOCAL_API_PORTAL_LANDING: ApiPortalLandingView = {
+  labels: {
+    "search_endpoints_and_sdk": "Search endpoints and SDK",
+    "filter_endpoints": "Filter endpoints",
+    "no_endpoints_match_the_current_filter": "No endpoints match the current filter.",
+    "sdks": "SDKs",
+    "python_common_lib_typescript_curl_samples": "Python (common-lib) · TypeScript · curl samples",
+    "parameters": "Parameters",
+    "request": "Request",
+    "response": "Response",
+    "api_keys_scopes": "API Keys & Scopes",
+    "rate_limit_usage": "Rate Limit & Usage",
+    "profile_api_tokens": "Profile → API Tokens",
+    "webhooks": "Webhooks",
+    "recent_deliveries": "Recent deliveries",
+    "signing_secret": "Signing secret",
+    "extensibility": "Extensibility",
+    "published_schemas_examples": "Published schemas & examples",
+    "filter_endpoints_2": "Filter endpoints…",
+    "developer_api_portal": "Developer API portal",
+    "api_portal_sections": "API portal sections",
+    "code_samples": "Code samples",
+  },
+  eyebrow: "DEVELOPER / API PORTAL",
   title: "Developer / API Portal",
   description:
     "Programmatic access to Registry, swarm runs & ops · OpenAPI-driven docs.",

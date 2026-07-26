@@ -4,14 +4,14 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_COLLABORATION_LANDING,
   type CollaborationLandingView,
   type CollaborationSharedItem,
 } from "../lib/projections/collaboration-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function CollaborationHome({
-  view = LOCAL_COLLABORATION_LANDING,
-}: Readonly<{ view?: CollaborationLandingView }>): JSX.Element {
+  view }: Readonly<{ view: CollaborationLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [tab, setTab] = useState(view.tabs[0] ?? "Shared with me");
   const [query, setQuery] = useState("");
   const [shareOpen, setShareOpen] = useState(true);
@@ -32,16 +32,16 @@ export function CollaborationHome({
   }, [query, view.sharedItems]);
 
   return (
-    <section aria-label="Collaboration and sharing hub" className="collab-home">
+    <section aria-label={L(labels, "collaboration_and_sharing_hub")} className="collab-home">
       <header className="collab-home__header">
         <div>
-          <p className="eyebrow">COLLABORATION</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <div className="collab-home__header-actions">
           <label className="collab-home__search">
-            <span className="visually-hidden">Search shared items</span>
+            <span className="visually-hidden">{L(labels, "search_shared_items")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
               placeholder={view.searchPlaceholder}
@@ -70,7 +70,7 @@ export function CollaborationHome({
       ) : null}
 
       <div
-        aria-label="Share lists"
+        aria-label={L(labels, "share_lists")}
         className="collab-home__tabs"
         role="tablist"
       >
@@ -108,13 +108,13 @@ export function CollaborationHome({
               ))}
             </ul>
             {items.length === 0 ? (
-              <p className="collab-home__muted">No shared items match the search.</p>
+              <p className="collab-home__muted">{L(labels, "no_shared_items_match_the_search")}</p>
             ) : null}
           </section>
 
           {shareOpen ? (
             <section
-              aria-label="Share modal"
+              aria-label={L(labels, "share_modal")}
               className="collab-home__share-modal"
             >
               <div className="collab-home__section-head">
@@ -128,10 +128,10 @@ export function CollaborationHome({
                 </button>
               </div>
               <label className="collab-home__search collab-home__search--wide">
-                <span className="visually-hidden">Add people or teams</span>
+                <span className="visually-hidden">{L(labels, "add_people_or_teams")}</span>
                 <input
                   onChange={(event) => setPeopleQuery(event.target.value)}
-                  placeholder="Add people or teams…"
+                  placeholder={L(labels, "add_people_or_teams_2")}
                   value={peopleQuery}
                 />
               </label>
@@ -149,7 +149,7 @@ export function CollaborationHome({
                 ))}
               </ul>
               <div className="collab-home__link-box">
-                <p>Link sharing</p>
+                <p>{L(labels, "link_sharing")}</p>
                 <code>{view.shareModal.link}</code>
                 <button
                   className="collab-home__action"
@@ -164,7 +164,7 @@ export function CollaborationHome({
                 </button>
               </div>
               <p className="collab-home__muted">{view.shareModal.note}</p>
-              <div className="collab-home__perm-toggles" role="group" aria-label="Permission levels">
+              <div className="collab-home__perm-toggles" role="group" aria-label={L(labels, "permission_levels")}>
                 {["View", "Comment", "Edit"].map((level) => (
                   <label key={level}>
                     <input defaultChecked={level !== "Edit"} type="checkbox" />
@@ -179,7 +179,7 @@ export function CollaborationHome({
             aria-labelledby="contribute-heading"
             className="collab-home__panel"
           >
-            <h2 id="contribute-heading">Contribute Back to Commons</h2>
+            <h2 id="contribute-heading">{L(labels, "contribute_back_to_commons")}</h2>
             <p className="collab-home__muted">
               Turn your custom agents &amp; verified improvements into shared
               commons.
@@ -217,7 +217,7 @@ export function CollaborationHome({
 
         <aside className="collab-home__sidebar">
           <section className="collab-home__panel" aria-labelledby="coedit-heading">
-            <h2 id="coedit-heading">Live Co-Editing</h2>
+            <h2 id="coedit-heading">{L(labels, "live_co_editing")}</h2>
             <p className="collab-home__muted">
               Real-time collaboration on swarm canvases (presence only in this
               preview — CRDT/Yjs deferred).
@@ -260,7 +260,7 @@ export function CollaborationHome({
           </section>
 
           <section className="collab-home__panel" aria-labelledby="team-heading">
-            <h2 id="team-heading">Team Activity</h2>
+            <h2 id="team-heading">{L(labels, "team_activity")}</h2>
             <ul className="collab-home__activity">
               {view.teamActivity.map((item) => (
                 <li key={item.id}>
@@ -277,7 +277,7 @@ export function CollaborationHome({
           </section>
 
           <section className="collab-home__panel" aria-labelledby="queue-heading">
-            <h2 id="queue-heading">Proposal Review Workflows</h2>
+            <h2 id="queue-heading">{L(labels, "proposal_review_workflows")}</h2>
             <ul className="collab-home__queue">
               {view.proposalQueue.map((item) => (
                 <li key={item.id}>

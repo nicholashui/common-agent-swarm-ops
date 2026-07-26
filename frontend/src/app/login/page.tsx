@@ -1,7 +1,12 @@
+"use client";
+
 import { LoginScreen } from "../../components/LoginScreen";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
-function LoginPage(): JSX.Element {
-  return <LoginScreen />;
+/**
+ * Login copy is loaded from stored screen parameters (not hardcoded in the page).
+ */
+export default function LoginPage(): JSX.Element {
+  const view = useScreenParameters("login");
+  return <LoginScreen view={view} />;
 }
-
-export default LoginPage;

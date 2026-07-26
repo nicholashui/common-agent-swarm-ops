@@ -1,12 +1,18 @@
+"use client";
+
 import { AppShell } from "../components/AppShell";
 import { DashboardHome } from "../components/DashboardHome";
+import { useScreenParameters } from "../lib/projections/use-screen-parameters";
 
-function HomePage(): JSX.Element {
+/**
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
+ */
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("dashboard");
   return (
     <AppShell>
-      <DashboardHome />
+      <DashboardHome view={view} />
     </AppShell>
   );
 }
-
-export default HomePage;

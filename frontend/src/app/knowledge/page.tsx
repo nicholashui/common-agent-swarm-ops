@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { KnowledgeHome } from "../../components/KnowledgeHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Knowledge Management Hub (ui_10). Local presentation landing until
- * knowledge projections, sync jobs, and contribution governance connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function KnowledgePage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("knowledge");
   return (
     <AppShell>
-      <KnowledgeHome />
+      <KnowledgeHome view={view} />
     </AppShell>
   );
 }
-
-export default KnowledgePage;

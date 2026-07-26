@@ -11,12 +11,13 @@ import {
   LOCAL_SETTINGS_LANDING,
   SETTINGS_NAV,
 } from "../lib/projections/settings-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { SettingsHome } from "./SettingsHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("settings home matches ui_08 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<SettingsHome />);
+  const markup = renderToStaticMarkup(<SettingsHome view={getScreenParameters("settings")} />);
 
   assert.match(markup, /Global Settings &amp; Configuration/);
   assert.match(markup, /Self-hosted control center/);

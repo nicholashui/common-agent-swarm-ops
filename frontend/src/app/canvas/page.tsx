@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { CanvasHome } from "../../components/CanvasHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Non-inventing Swarm Canvas menu entry (ui_04).
- * Does not fabricate a swarm identifier; local graph landing is safe to render.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function LegacyCanvasPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("canvas");
   return (
     <AppShell>
-      <CanvasHome />
+      <CanvasHome view={view} />
     </AppShell>
   );
 }
-
-export default LegacyCanvasPage;

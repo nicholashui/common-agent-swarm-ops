@@ -4,13 +4,13 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_EVAL_LANDING,
   type EvalLandingView,
 } from "../lib/projections/eval-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function EvalHome({
-  view = LOCAL_EVAL_LANDING,
-}: Readonly<{ view?: EvalLandingView }>): JSX.Element {
+  view }: Readonly<{ view: EvalLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<ReadonlySet<string>>(
     () => new Set(["p4"]),
@@ -41,15 +41,15 @@ export function EvalHome({
   };
 
   return (
-    <section aria-label="Eval and self-improvement dashboard" className="eval-home">
+    <section aria-label={L(labels, "eval_and_self_improvement_dashboard")} className="eval-home">
       <header className="eval-home__header">
         <div>
-          <p className="eyebrow">EVAL</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <label className="eval-home__search">
-          <span className="visually-hidden">Search commons and proposals</span>
+          <span className="visually-hidden">{L(labels, "search_commons_and_proposals")}</span>
           <input
             onChange={(event) => setQuery(event.target.value)}
             placeholder={view.searchPlaceholder}
@@ -59,7 +59,7 @@ export function EvalHome({
       </header>
 
       <div
-        aria-label="Eval scorecards"
+        aria-label={L(labels, "eval_scorecards")}
         className="eval-home__scorecards"
         role="region"
       >
@@ -90,7 +90,7 @@ export function EvalHome({
           aria-labelledby="trends-heading"
           className="eval-home__trends"
         >
-          <h2 id="trends-heading">Score Trends (L1 / L2 / L3)</h2>
+          <h2 id="trends-heading">{L(labels, "score_trends_l1_l2_l3")}</h2>
           <ul className="eval-home__trend-legend">
             {view.trendLabels.map((label) => (
               <li key={label}>{label}</li>
@@ -104,14 +104,14 @@ export function EvalHome({
             <i style={{ height: "78%" }} />
             <i style={{ height: "94%" }} />
           </div>
-          <p className="eval-home__muted">↑ L1 validation · L2/L3 never masked by average</p>
+          <p className="eval-home__muted">{L(labels, "l1_validation_l2_l3_never_masked_by_average")}</p>
         </section>
 
         <section
           aria-labelledby="insights-heading"
           className="eval-home__insights"
         >
-          <h2 id="insights-heading">Meta-Critic Insights</h2>
+          <h2 id="insights-heading">{L(labels, "meta_critic_insights")}</h2>
           <ul>
             {view.insights.map((insight) => (
               <li key={insight.id}>
@@ -129,7 +129,7 @@ export function EvalHome({
           className="eval-home__proposals"
         >
           <div className="eval-home__section-head">
-            <h2 id="proposals-heading">Proposal Queue</h2>
+            <h2 id="proposals-heading">{L(labels, "proposal_queue")}</h2>
             <Link className="eval-home__linkish" href="/registry">
               Open Registry Hub →
             </Link>
@@ -139,14 +139,14 @@ export function EvalHome({
               <thead>
                 <tr>
                   <th scope="col">
-                    <span className="visually-hidden">Select</span>
+                    <span className="visually-hidden">{L(labels, "select")}</span>
                   </th>
-                  <th scope="col">Target common</th>
-                  <th scope="col">Expected impact</th>
-                  <th scope="col">Supporting traces</th>
-                  <th scope="col">L1 / L2 / L3</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Actions</th>
+                  <th scope="col">{L(labels, "target_common")}</th>
+                  <th scope="col">{L(labels, "expected_impact")}</th>
+                  <th scope="col">{L(labels, "supporting_traces")}</th>
+                  <th scope="col">{L(labels, "l1_l2_l3")}</th>
+                  <th scope="col">{L(labels, "status")}</th>
+                  <th scope="col">{L(labels, "actions")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -210,8 +210,8 @@ export function EvalHome({
           </div>
 
           {reviewOpen ? (
-            <div className="eval-home__review" aria-label="Proposal review">
-              <h3>Proposal Review — Diff + Impact</h3>
+            <div className="eval-home__review" aria-label={L(labels, "proposal_review")}>
+              <h3>{L(labels, "proposal_review_diff_impact")}</h3>
               <pre className="eval-home__diff">
                 {`- max_iterations: 3
 + max_iterations: 5
@@ -249,7 +249,7 @@ export function EvalHome({
             aria-labelledby="campaign-heading"
             className="eval-home__campaign"
           >
-            <h2 id="campaign-heading">Campaign Launcher</h2>
+            <h2 id="campaign-heading">{L(labels, "campaign_launcher")}</h2>
             <p>{view.campaignNote}</p>
             <p className="eval-home__muted">
               {selectedIds.size} underperforming commons selected
@@ -271,8 +271,8 @@ export function EvalHome({
             aria-labelledby="history-heading"
             className="eval-home__history"
           >
-            <h2 id="history-heading">Improvement History &amp; A/B Results</h2>
-            <h3>Merged proposals (before → after)</h3>
+            <h2 id="history-heading">{L(labels, "improvement_history_a_b_results")}</h2>
+            <h3>{L(labels, "merged_proposals_before_after")}</h3>
             <ul>
               {view.history.map((item) => (
                 <li key={item.id}>
@@ -282,7 +282,7 @@ export function EvalHome({
                 </li>
               ))}
             </ul>
-            <h3>A/B Experiments</h3>
+            <h3>{L(labels, "a_b_experiments")}</h3>
             <ul>
               {view.experiments.map((item) => (
                 <li key={item.id}>

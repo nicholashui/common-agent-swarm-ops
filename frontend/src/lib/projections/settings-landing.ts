@@ -4,6 +4,8 @@
  * Secrets values are never included in this fixture.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type SettingsSectionId =
   | "providers"
   | "secrets"
@@ -67,6 +69,8 @@ export interface SettingsMemberRow {
 }
 
 export interface SettingsLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -103,6 +107,20 @@ export const SETTINGS_NAV: readonly SettingsNavItem[] = [
 ];
 
 export const LOCAL_SETTINGS_LANDING: SettingsLandingView = {
+  labels: {
+    "search_across_settings": "Search across settings",
+    "name": "Name",
+    "scope": "Scope",
+    "last_rotated": "Last rotated",
+    "status": "Status",
+    "actions": "Actions",
+    "workspaces_access_control": "Workspaces & Access Control",
+    "member": "Member",
+    "role": "Role",
+    "global_settings": "Global settings",
+    "settings_sections": "Settings sections",
+  },
+  eyebrow: "SETTINGS",
   title: "Global Settings & Configuration",
   description:
     "Self-hosted control center · policy-approved defaults · impact-aware changes.",

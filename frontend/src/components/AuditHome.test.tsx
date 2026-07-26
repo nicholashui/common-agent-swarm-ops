@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_AUDIT_LANDING } from "../lib/projections/audit-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { AuditHome } from "./AuditHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("audit home matches ui_14 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<AuditHome />);
+  const markup = renderToStaticMarkup(<AuditHome view={getScreenParameters("audit")} />);
 
   assert.match(markup, /Governance &amp; Audit Trail/);
   assert.match(markup, /Tamper-evident, filterable, exportable/);

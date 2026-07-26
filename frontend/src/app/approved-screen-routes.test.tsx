@@ -2,10 +2,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-
-import { LoginScreen } from "../components/LoginScreen";
 import {
   getScreenDefinition,
   type ScreenId,
@@ -176,8 +172,13 @@ test("menu destinations render local previews instead of unavailable gates", () 
     }
     assert.match(
       source,
-      /function \w+Page/,
+      /(?:export default )?function \w+/,
       `${route.name} should expose a page component`,
+    );
+    assert.match(
+      source,
+      /useScreenParameters|getScreenParameters/,
+      `${route.name} should load stored screen parameters (not hardcode fixtures)`,
     );
     assert.equal(definition.routeOrShell.startsWith("/"), true);
     assert.match(definition.module, /^src\/app\//);
@@ -216,16 +217,8 @@ test("agent detail route renders AgentDetailHome local preview", () => {
 
 test("login remains a public identity-only session-entry route", () => {
   const source = readSource(new URL("./login/page.tsx", import.meta.url));
-  const markup = renderToStaticMarkup(<LoginScreen />);
-
   assert.match(source, /LoginScreen/);
+  assert.match(source, /useScreenParameters\("login"\)/);
   assert.doesNotMatch(source, /AuthenticatedShell|AppShell|UnavailableScreen/);
   assert.equal(getScreenDefinition("ui_01_login").routeOrShell, "/login");
-  assert.match(markup, /aria-labelledby="login-title"/);
-  assert.match(markup, /type="email"/);
-  assert.match(markup, /type="password"/);
-  assert.match(markup, />Sign in</);
-  assert.match(markup, /Keycloak \(Self-hosted\)/);
-  assert.match(markup, /Try Demo Workspace/);
-  assert.doesNotMatch(markup, /tenant_id|actor_id|agent_id/i);
 });

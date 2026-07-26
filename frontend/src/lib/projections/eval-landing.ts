@@ -4,6 +4,8 @@
  * Passing eval does not publish versions or authorize rollout.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export interface EvalScorecard {
   readonly id: string;
   readonly label: string;
@@ -36,6 +38,8 @@ export interface EvalAbExperiment {
 }
 
 export interface EvalLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -56,6 +60,29 @@ export interface EvalLandingView {
 }
 
 export const LOCAL_EVAL_LANDING: EvalLandingView = {
+  labels: {
+    "search_commons_and_proposals": "Search commons and proposals",
+    "score_trends_l1_l2_l3": "Score Trends (L1 / L2 / L3)",
+    "l1_validation_l2_l3_never_masked_by_average": "↑ L1 validation · L2/L3 never masked by average",
+    "meta_critic_insights": "Meta-Critic Insights",
+    "proposal_queue": "Proposal Queue",
+    "select": "Select",
+    "target_common": "Target common",
+    "expected_impact": "Expected impact",
+    "supporting_traces": "Supporting traces",
+    "l1_l2_l3": "L1 / L2 / L3",
+    "status": "Status",
+    "actions": "Actions",
+    "proposal_review_diff_impact": "Proposal Review — Diff + Impact",
+    "campaign_launcher": "Campaign Launcher",
+    "improvement_history_a_b_results": "Improvement History & A/B Results",
+    "merged_proposals_before_after": "Merged proposals (before → after)",
+    "a_b_experiments": "A/B Experiments",
+    "eval_and_self_improvement_dashboard": "Eval and self-improvement dashboard",
+    "eval_scorecards": "Eval scorecards",
+    "proposal_review": "Proposal review",
+  },
+  eyebrow: "EVAL",
   title: "Eval & Self-Improvement Dashboard",
   description:
     "Evidence-based L1/L2/L3 quality · improvement campaigns · meta-critic insights.",

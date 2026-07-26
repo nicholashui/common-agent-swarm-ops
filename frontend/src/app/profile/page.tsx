@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { ProfileHome } from "../../components/ProfileHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * User Profile & Preferences (ui_13). Local presentation landing — no
- * credentials, no other users' artifacts, server-derived role only.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function ProfilePage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("profile");
   return (
     <AppShell>
-      <ProfileHome />
+      <ProfileHome view={view} />
     </AppShell>
   );
 }
-
-export default ProfilePage;

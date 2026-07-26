@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { BlueprintsHome } from "../../components/BlueprintsHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Blueprints & Templates Gallery (ui_20). Local presentation landing until
- * blueprint projections and authorized deploy/publish actions connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function BlueprintsPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("blueprints");
   return (
     <AppShell>
-      <BlueprintsHome />
+      <BlueprintsHome view={view} />
     </AppShell>
   );
 }
-
-export default BlueprintsPage;

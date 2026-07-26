@@ -1,11 +1,22 @@
 # Handoff
 
 **As of:** 2026-07-26  
-**State:** Five-doc functional alignment report + surgical updates (backend/frontend/adoption/migration/specials).
+**State:** Frontend screens load from stored screen parameters (no component/page hardcoded fixtures).
 
 ## Latest work
 
-### Five-doc redesign alignment (current)
+### Screen parameters (no hardcode)
+
+- `lib/projections/screen-parameters.ts` — central store for all landing views
+- `useScreenParameters` + page bindings pass `view={...}` into every `*Home`
+- Homes **require** `view` prop; no `view = LOCAL_*` defaults
+- Chrome copy moved into `view.labels` via `L()` / `Lfmt()` (`screen-labels.ts`)
+- Login copy in `login-landing.ts`; specials/registry/profile chrome stored
+- Scripts: `scripts/dehardcode-homes.mjs`, `scripts/check-label-keys.mjs`
+- Guard tests: `frontend-hardcode-scan.test.ts`, `no-hardcoded-screen-defaults.test.ts`, `screen-parameters.test.ts`
+
+
+### Five-doc redesign alignment (prior)
 
 Reviewed and updated function against:
 

@@ -4,16 +4,16 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_CANVAS_LANDING,
   type CanvasLandingView,
   type CanvasNodeStatus,
   type CanvasPaletteTab,
   type CanvasViewMode,
 } from "../lib/projections/canvas-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function CanvasHome({
-  view = LOCAL_CANVAS_LANDING,
-}: Readonly<{ view?: CanvasLandingView }>): JSX.Element {
+  view }: Readonly<{ view: CanvasLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [mode, setMode] = useState<CanvasViewMode>(view.viewMode);
   const [paletteTab, setPaletteTab] = useState<CanvasPaletteTab>("common");
@@ -61,7 +61,7 @@ export function CanvasHome({
 
   return (
     <section
-      aria-label="Swarm canvas"
+      aria-label={L(labels, "swarm_canvas")}
       className={
         focusMode ? "canvas-home canvas-home--focus" : "canvas-home"
       }
@@ -69,9 +69,9 @@ export function CanvasHome({
       <header className="canvas-home__toolbar">
         <div className="canvas-home__toolbar-left">
           <label className="canvas-home__name">
-            <span className="visually-hidden">Swarm name</span>
+            <span className="visually-hidden">{L(labels, "swarm_name")}</span>
             <input
-              aria-label="Swarm name"
+              aria-label={L(labels, "swarm_name")}
               onChange={(event) => setSwarmName(event.target.value)}
               value={swarmName}
             />
@@ -80,7 +80,7 @@ export function CanvasHome({
             {view.patternBadge}
           </Link>
         </div>
-        <div aria-label="View mode" className="canvas-home__modes" role="group">
+        <div aria-label={L(labels, "view_mode")} className="canvas-home__modes" role="group">
           {(["design", "run", "compare"] as const).map((entry) => (
             <button
               aria-pressed={mode === entry}
@@ -133,7 +133,7 @@ export function CanvasHome({
           </div>
           <button
             className="canvas-home__ghost"
-            onClick={() => announce("Auto layout is local-only feedback.")}
+            onClick={() => announce(L(labels, "auto_layout_is_local_only_feedback"))}
             type="button"
           >
             Layout
@@ -148,7 +148,7 @@ export function CanvasHome({
           <button
             className="canvas-home__ghost"
             onClick={() =>
-              announce("Export requires an authorized export action.")
+              announce(L(labels, "export_requires_an_authorized_export_action"))
             }
             type="button"
           >
@@ -169,7 +169,7 @@ export function CanvasHome({
           <button
             className="canvas-home__ab"
             onClick={() =>
-              announce("A/B Test requires an authorized rollout contract.")
+              announce(L(labels, "a_b_test_requires_an_authorized_rollout_contract"))
             }
             type="button"
           >
@@ -185,9 +185,9 @@ export function CanvasHome({
       ) : null}
 
       <div className="canvas-home__body">
-        <aside aria-label="Node palette" className="canvas-home__palette">
+        <aside aria-label={L(labels, "node_palette")} className="canvas-home__palette">
           <div
-            aria-label="Palette tabs"
+            aria-label={L(labels, "palette_tabs")}
             className="canvas-home__tabs"
             role="tablist"
           >
@@ -215,7 +215,7 @@ export function CanvasHome({
             ))}
           </div>
           <label className="canvas-home__ai-suggest">
-            <span className="visually-hidden">AI suggest node</span>
+            <span className="visually-hidden">{L(labels, "ai_suggest_node")}</span>
             <input
               onKeyDown={(event) => {
                 if (event.key === "Enter") {
@@ -224,14 +224,14 @@ export function CanvasHome({
                   );
                 }
               }}
-              placeholder="✧ AI Suggest Node…"
+              placeholder={L(labels, "ai_suggest_node_2")}
             />
           </label>
           <label className="canvas-home__search">
-            <span className="visually-hidden">Search common agents</span>
+            <span className="visually-hidden">{L(labels, "search_common_agents")}</span>
             <input
               onChange={(event) => setPaletteQuery(event.target.value)}
-              placeholder="Search Common Agents…"
+              placeholder={L(labels, "search_common_agents_2")}
               value={paletteQuery}
             />
           </label>
@@ -267,7 +267,7 @@ export function CanvasHome({
         </aside>
 
         <div className="canvas-home__main">
-          <div aria-label="Swarm graph canvas" className="canvas-home__board">
+          <div aria-label={L(labels, "swarm_graph_canvas")} className="canvas-home__board">
             {view.groups.map((group) => {
               const groupNodes = view.nodes.filter(
                 (node) => node.groupId === group.id,
@@ -314,7 +314,7 @@ export function CanvasHome({
                             node={node}
                             selected={node.id === selectedId}
                             onSelect={setSelectedId}
-                          />
+                           labels={labels} />
                         ))}
                       </div>
                       {group.cycleLabel ? (
@@ -339,15 +339,15 @@ export function CanvasHome({
                     node={node}
                     selected={node.id === selectedId}
                     onSelect={setSelectedId}
-                  />
+                   labels={labels} />
                 ))}
             </div>
 
             <section
-              aria-label="Graph relationship semantics"
+              aria-label={L(labels, "graph_relationship_semantics")}
               className="canvas-home__edges"
             >
-              <h3>Edges</h3>
+              <h3>{L(labels, "edges")}</h3>
               <ul>
                 {view.edges.map((edge) => (
                   <li data-edge-line-style={edge.style} key={edge.id}>
@@ -406,7 +406,7 @@ export function CanvasHome({
             <button
               className="canvas-home__cancel"
               onClick={() =>
-                announce("Cancel requires an authorized cancel action.")
+                announce(L(labels, "cancel_requires_an_authorized_cancel_action"))
               }
               type="button"
             >
@@ -422,8 +422,8 @@ export function CanvasHome({
           </div>
 
           {logsOpen ? (
-            <section aria-label="Streaming logs" className="canvas-home__logs">
-              <h3>Streaming logs</h3>
+            <section aria-label={L(labels, "streaming_logs")} className="canvas-home__logs">
+              <h3>{L(labels, "streaming_logs")}</h3>
               <p className="canvas-home__muted">
                 Local preview · live node logs appear when run SSE is authorized.
               </p>
@@ -431,10 +431,10 @@ export function CanvasHome({
           ) : null}
         </div>
 
-        <aside aria-label="Canvas inspector" className="canvas-home__inspector">
+        <aside aria-label={L(labels, "canvas_inspector")} className="canvas-home__inspector">
           {selected === undefined ? (
             <>
-              <p className="eyebrow">SWARM SETTINGS</p>
+              <p className="eyebrow">{view.settingsEyebrow}</p>
               <h2>{swarmName}</h2>
               <p className="canvas-home__muted">{view.patternBadge}</p>
               <p className="canvas-home__muted">{view.commonsSummary}</p>
@@ -452,7 +452,12 @@ export function CanvasHome({
             </>
           ) : (
             <>
-              <p className="eyebrow">SELECTED · {selected.kind.toUpperCase()}</p>
+              <p className="eyebrow">
+                {view.selectedEyebrowTemplate.replace(
+                  "{kind}",
+                  selected.kind.toUpperCase(),
+                )}
+              </p>
               <h2>{selected.label}</h2>
               <div className="canvas-home__inspector-badges">
                 <span className="canvas-home__version-pill">
@@ -471,18 +476,18 @@ export function CanvasHome({
 
               {selected.aggregateEval ? (
                 <div className="canvas-home__aggregate">
-                  <p>Aggregate eval (all swarms)</p>
+                  <p>{L(labels, "aggregate_eval_all_swarms")}</p>
                   <dl>
                     <div>
-                      <dt>Runs</dt>
+                      <dt>{L(labels, "runs")}</dt>
                       <dd>{selected.aggregateEval.runs}</dd>
                     </div>
                     <div>
-                      <dt>Success</dt>
+                      <dt>{L(labels, "success")}</dt>
                       <dd>{selected.aggregateEval.success}</dd>
                     </div>
                     <div>
-                      <dt>Avg tok</dt>
+                      <dt>{L(labels, "avg_tok")}</dt>
                       <dd>{selected.aggregateEval.avgTokens}</dd>
                     </div>
                   </dl>
@@ -491,7 +496,7 @@ export function CanvasHome({
 
               {selected.improvementHistory?.length ? (
                 <div className="canvas-home__history">
-                  <p>Improvement history</p>
+                  <p>{L(labels, "improvement_history")}</p>
                   {selected.improvementHistory.map((item) => (
                     <article key={item.title}>
                       <strong>{item.title}</strong>
@@ -517,7 +522,7 @@ export function CanvasHome({
                 <button
                   className="canvas-home__ghost"
                   onClick={() =>
-                    announce("Pin version requires an authorized pin action.")
+                    announce(L(labels, "pin_version_requires_an_authorized_pin_action"))
                   }
                   type="button"
                 >
@@ -544,7 +549,7 @@ export function CanvasHome({
 
               {selected.liveInspector?.length ? (
                 <div className="canvas-home__live">
-                  <p>Live Inspector</p>
+                  <p>{L(labels, "live_inspector")}</p>
                   <pre>
                     {selected.liveInspector.map((line) => (
                       <span key={line}>
@@ -557,7 +562,7 @@ export function CanvasHome({
               ) : null}
 
               <div
-                aria-label="Inspector tabs"
+                aria-label={L(labels, "inspector_tabs")}
                 className="canvas-home__inspector-tabs"
                 role="tablist"
               >
@@ -589,10 +594,10 @@ export function CanvasHome({
           )}
 
           <section
-            aria-label="Returned graph validation"
+            aria-label={L(labels, "returned_graph_validation")}
             className="canvas-home__validation"
           >
-            <h3>Returned validation</h3>
+            <h3>{L(labels, "returned_validation")}</h3>
             <ul>
               {view.validation.map((item) => (
                 <li key={item.category}>
@@ -627,10 +632,12 @@ function GraphNodeCard({
   node,
   selected,
   onSelect,
+  labels,
 }: Readonly<{
   node: CanvasLandingView["nodes"][number];
   selected: boolean;
   onSelect: (id: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <button
@@ -657,7 +664,7 @@ function GraphNodeCard({
         </span>
       ) : null}
       {node.linked ? (
-        <span className="canvas-home__node-link">🔗 Registry-linked</span>
+        <span className="canvas-home__node-link">{L(labels, "registry_linked")}</span>
       ) : (
         <span className="canvas-home__node-link canvas-home__node-link--fork">
           Custom — contribute back?

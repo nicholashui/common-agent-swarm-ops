@@ -12,6 +12,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { SpecialsCatalog } from "../../components/SpecialsCatalog";
+import { getScreenParameters } from "../projections/screen-parameters";
 import {
   SPECIAL_AGENT_CATALOG,
   SPECIAL_AGENT_CATALOG_COUNT,
@@ -105,7 +106,9 @@ test("every specials redesign doc maps to one pack agent and source record", asy
 });
 
 test("SpecialsCatalog UI presents draft/non-active and never production activation", (): void => {
-  const markup = renderToStaticMarkup(<SpecialsCatalog />);
+  const markup = renderToStaticMarkup(
+    <SpecialsCatalog view={getScreenParameters("specials")} />,
+  );
   assert.match(markup, /Special Agents Pack/);
   assert.match(markup, /19/);
   assert.match(markup, /specials\.aesthetics-agent/);

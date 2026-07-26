@@ -4,6 +4,8 @@
  * External URLs are untrusted refs; promotion requires explicit verification.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type KnowledgeDetailTab = "sources" | "search" | "config" | "contributions" | "analytics";
 
 export type KnowledgeBindingKind =
@@ -57,6 +59,8 @@ export interface KnowledgeSyncJob {
 }
 
 export interface KnowledgeLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -75,6 +79,33 @@ export interface KnowledgeLandingView {
 }
 
 export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
+  labels: {
+    "search_collections": "Search collections",
+    "no_collections_match_the_current_filters": "No collections match the current filters.",
+    "chunks": "Chunks",
+    "scope": "Scope",
+    "sync_jobs": "Sync Jobs",
+    "source": "Source",
+    "type": "Type",
+    "status": "Status",
+    "license_kind": "License / kind",
+    "actions": "Actions",
+    "search_test": "Search Test",
+    "retrieval_trace_redacted": "Retrieval trace (redacted)",
+    "chunking_indexing_config": "Chunking & indexing config",
+    "contribution_queue_verified_runs": "Contribution Queue (verified runs)",
+    "analytics": "Analytics",
+    "collections": "Collections",
+    "sources_in_detail": "Sources in detail",
+    "pending_contributions": "Pending contributions",
+    "knowledge_management_hub": "Knowledge management hub",
+    "knowledge_facets": "Knowledge facets",
+    "collection_detail_tabs": "Collection detail tabs",
+    "sync_jobs_2": "Sync jobs",
+    "upload_area": "Upload area",
+    "redacted_retrieval_trace": "Redacted retrieval trace",
+  },
+  eyebrow: "KNOWLEDGE",
   title: "Knowledge Management Hub",
   description:
     "Common + business-scoped RAG sources · seamless contribution from verified runs.",

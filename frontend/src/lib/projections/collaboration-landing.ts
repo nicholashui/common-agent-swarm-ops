@@ -4,6 +4,8 @@
  * Sharing permissions and co-edit sessions require authorized actions.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type CollaborationShareKind = "swarm" | "agent" | "pattern";
 
 export interface CollaborationSharedItem {
@@ -46,6 +48,8 @@ export interface CollaborationActivityItem {
 }
 
 export interface CollaborationLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -72,6 +76,22 @@ export interface CollaborationLandingView {
 }
 
 export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
+  labels: {
+    "search_shared_items": "Search shared items",
+    "no_shared_items_match_the_search": "No shared items match the search.",
+    "add_people_or_teams": "Add people or teams",
+    "link_sharing": "Link sharing",
+    "contribute_back_to_commons": "Contribute Back to Commons",
+    "live_co_editing": "Live Co-Editing",
+    "team_activity": "Team Activity",
+    "proposal_review_workflows": "Proposal Review Workflows",
+    "add_people_or_teams_2": "Add people or teams…",
+    "collaboration_and_sharing_hub": "Collaboration and sharing hub",
+    "share_lists": "Share lists",
+    "share_modal": "Share modal",
+    "permission_levels": "Permission levels",
+  },
+  eyebrow: "COLLABORATION",
   title: "Collaboration & Sharing Hub",
   description:
     "Share swarms, contribute back to commons, manage team workflows & live co-editing.",

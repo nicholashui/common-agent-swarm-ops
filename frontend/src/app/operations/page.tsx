@@ -1,27 +1,26 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { ApprovalGateScreen } from "../../components/ApprovalRolloutScreens";
 import { MonitoringHome } from "../../components/MonitoringHome";
-import {
-  LOCAL_APPROVAL_PROJECTION,
-  LOCAL_PREVIEW_HANDLERS,
-} from "../../lib/projections/local-preview";
+import { LOCAL_PREVIEW_HANDLERS } from "../../lib/projections/local-preview";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Operations surface: ui_09 monitoring landing plus approvals/rollouts
- * projection (menu shares /operations until a dedicated approvals route exists).
+ * Operations surface: monitoring + approvals from stored screen parameters.
  */
-function OperationsPage(): JSX.Element {
+export default function OperationsPage(): JSX.Element {
+  const monitoring = useScreenParameters("monitoring");
+  const approval = useScreenParameters("approval");
   return (
     <AppShell>
       <div className="responsive-stack">
-        <MonitoringHome />
+        <MonitoringHome view={monitoring} />
         <ApprovalGateScreen
-          projection={LOCAL_APPROVAL_PROJECTION}
+          projection={approval}
           {...LOCAL_PREVIEW_HANDLERS}
         />
       </div>
     </AppShell>
   );
 }
-
-export default OperationsPage;

@@ -3,6 +3,8 @@
  * Presentation-only until generated activity projections and live WS connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type ActivityViewMode = "board" | "table" | "timeline";
 
 export type ActivityCardStatus =
@@ -81,6 +83,8 @@ export interface ActivityRolloutCard {
 }
 
 export interface ActivityLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly workspaceLabel: string;
@@ -101,6 +105,32 @@ export interface ActivityLandingView {
 }
 
 export const LOCAL_ACTIVITY_LANDING: ActivityLandingView = {
+  labels: {
+    "search_activity": "Search activity",
+    "ops_intelligence": "Ops Intelligence",
+    "rollout_opportunities_anomalies": "Rollout Opportunities & Anomalies",
+    "collective_improvement_impact": "Collective Improvement Impact",
+    "no_activity_yet_start_a_swarm_from_common_patter": "No activity yet — start a swarm from Common Patterns.",
+    "no_activity_matches_the_current_filters": "No activity matches the current filters.",
+    "select": "Select",
+    "timestamp": "Timestamp",
+    "swarm_business": "Swarm · Business",
+    "pattern": "Pattern",
+    "agent_version": "Agent · Version",
+    "status": "Status",
+    "duration_tokens_cost": "Duration / Tokens / Cost",
+    "lifecycle_checkpoint": "Lifecycle · Checkpoint",
+    "actions": "Actions",
+    "activity_and_ops_intelligence": "Activity and ops intelligence",
+    "view_mode": "View mode",
+    "activity_filters": "Activity filters",
+    "bulk_actions": "Bulk actions",
+    "ops_intelligence_2": "Ops intelligence",
+    "activity_board": "Activity board",
+    "activity_table": "Activity table",
+    "activity_timeline": "Activity timeline",
+  },
+  eyebrow: "ACTIVITY",
   title: "Activity & Ops Intelligence",
   description:
     "Filterable fleet history with common-version impact, board/table/timeline views, and rollout intelligence.",

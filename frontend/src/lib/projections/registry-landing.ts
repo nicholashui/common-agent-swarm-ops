@@ -3,6 +3,11 @@
  * Presentation-only until generated commons registry projections connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
+import type { SpecialsLandingView } from "./specials-landing";
+import { LOCAL_SPECIALS_LANDING } from "./specials-landing";
+
 export type RegistryViewMode = "cards" | "table" | "graph";
 
 export interface RegistryAgentCard {
@@ -39,11 +44,18 @@ export interface RegistryProposal {
 }
 
 export interface RegistryLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly subtitle: string;
   readonly workspaceLabel: string;
   readonly searchPlaceholder: string;
   readonly facets: readonly string[];
+  /** Facets treated as domain filters (subset of `facets`). */
+  readonly domainFacets: readonly string[];
+  readonly successRateFacet: string;
+  readonly usedInSwarmsFacet: string;
+  readonly highVerificationFacet: string;
   readonly agents: readonly RegistryAgentCard[];
   readonly patterns: readonly RegistryPatternCard[];
   readonly stats: readonly { readonly id: string; readonly label: string; readonly value: string }[];
@@ -57,9 +69,36 @@ export interface RegistryLandingView {
   }[];
   readonly impactDomains: string;
   readonly footerNote: string;
+  /** Specials pack catalog parameters (stored; not hardcoded in the component). */
+  readonly specials: SpecialsLandingView;
 }
 
 export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
+  labels: {
+    "search_registry": "Search registry",
+    "no_commons_match_the_current_search_or_facets": "No commons match the current search or facets.",
+    "pending_proposals": "Pending Proposals",
+    "spec_diff_redacted": "Spec Diff (redacted)",
+    "impact_analysis": "Impact Analysis",
+    "registry_stats": "Registry Stats",
+    "your_impact": "Your Impact",
+    "new": "New",
+    "success": "Success",
+    "avg_tok": "Avg tok",
+    "latency": "Latency",
+    "agent": "Agent",
+    "version": "Version",
+    "usage": "Usage",
+    "actions": "Actions",
+    "my_contributions_forks_require_an_authorized_pro": "My Contributions & Forks require an authorized projection.",
+    "pending_proposals_shown_from_local_fixture": "Pending proposals shown from local fixture.",
+    "common_registry_hub": "Common registry hub",
+    "view_mode": "View mode",
+    "registry_facets": "Registry facets",
+    "proposal_review": "Proposal review",
+    "registry_stats_2": "Registry stats",
+  },
+  eyebrow: "REGISTRY HUB",
   title: "Common Registry",
   subtitle:
     "Battle-tested, versioned, collectively improved agents & swarm patterns.",
@@ -74,6 +113,10 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     "Used in my swarms",
     "High Verification",
   ],
+  domainFacets: ["Trading", "Content", "Education", "Distributed"],
+  successRateFacet: "Success rate > 90%",
+  usedInSwarmsFacet: "Used in my swarms",
+  highVerificationFacet: "High Verification",
   agents: [
     {
       id: "market-sentiment",
@@ -190,4 +233,5 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     "Domains: Trading (34) · Content (22) · Education (18) · Other (13)",
   footerNote:
     "Local preview registry · redacted metrics and diffs only · Instantiate / Propose / Merge require authorized action references. VA taxonomy is a domain facet; generic registry taxonomy remains primary.",
+  specials: LOCAL_SPECIALS_LANDING,
 };

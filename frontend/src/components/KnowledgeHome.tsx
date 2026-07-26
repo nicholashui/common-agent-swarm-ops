@@ -3,14 +3,14 @@
 import React, { useMemo, useState } from "react";
 
 import {
-  LOCAL_KNOWLEDGE_LANDING,
   type KnowledgeDetailTab,
   type KnowledgeLandingView,
 } from "../lib/projections/knowledge-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function KnowledgeHome({
-  view = LOCAL_KNOWLEDGE_LANDING,
-}: Readonly<{ view?: KnowledgeLandingView }>): JSX.Element {
+  view }: Readonly<{ view: KnowledgeLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [query, setQuery] = useState("");
   const [facet, setFacet] = useState("All types");
   const [selectedId, setSelectedId] = useState(view.selectedCollectionId);
@@ -41,16 +41,16 @@ export function KnowledgeHome({
     view.collections[0];
 
   return (
-    <section aria-label="Knowledge management hub" className="knowledge-home">
+    <section aria-label={L(labels, "knowledge_management_hub")} className="knowledge-home">
       <header className="knowledge-home__header">
         <div>
-          <p className="eyebrow">KNOWLEDGE</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <div className="knowledge-home__header-actions">
           <label className="knowledge-home__search">
-            <span className="visually-hidden">Search collections</span>
+            <span className="visually-hidden">{L(labels, "search_collections")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
               placeholder={view.searchPlaceholder}
@@ -83,7 +83,7 @@ export function KnowledgeHome({
       </header>
 
       <div
-        aria-label="Knowledge facets"
+        aria-label={L(labels, "knowledge_facets")}
         className="knowledge-home__facets"
         role="group"
       >
@@ -118,7 +118,7 @@ export function KnowledgeHome({
             </h2>
             {collections.length === 0 ? (
               <div className="knowledge-home__empty panel">
-                <p>No collections match the current filters.</p>
+                <p>{L(labels, "no_collections_match_the_current_filters")}</p>
               </div>
             ) : (
               <div className="knowledge-home__grid">
@@ -144,11 +144,11 @@ export function KnowledgeHome({
                     </div>
                     <dl className="knowledge-home__stats">
                       <div>
-                        <dt>Chunks</dt>
+                        <dt>{L(labels, "chunks")}</dt>
                         <dd>{collection.chunks}</dd>
                       </div>
                       <div>
-                        <dt>Scope</dt>
+                        <dt>{L(labels, "scope")}</dt>
                         <dd>{collection.scope}</dd>
                       </div>
                     </dl>
@@ -179,7 +179,7 @@ export function KnowledgeHome({
               </header>
 
               <div
-                aria-label="Collection detail tabs"
+                aria-label={L(labels, "collection_detail_tabs")}
                 className="knowledge-home__tabs"
                 role="tablist"
               >
@@ -210,7 +210,7 @@ export function KnowledgeHome({
               </div>
 
               {detailTab === "sources" ? (
-                <SourcesPanel view={view} onAnnounce={announce} />
+                <SourcesPanel view={view} onAnnounce={announce}  labels={labels} />
               ) : null}
               {detailTab === "search" ? (
                 <SearchPanel
@@ -218,21 +218,21 @@ export function KnowledgeHome({
                   query={searchTest}
                   onQuery={setSearchTest}
                   onAnnounce={announce}
-                />
+                 labels={labels} />
               ) : null}
-              {detailTab === "config" ? <ConfigPanel view={view} /> : null}
+              {detailTab === "config" ? <ConfigPanel view={view}  labels={labels} /> : null}
               {detailTab === "contributions" ? (
-                <ContributionsPanel view={view} onAnnounce={announce} />
+                <ContributionsPanel view={view} onAnnounce={announce}  labels={labels} />
               ) : null}
               {detailTab === "analytics" ? (
-                <AnalyticsPanel view={view} />
+                <AnalyticsPanel view={view} labels={labels} />
               ) : null}
             </section>
           ) : null}
         </div>
 
-        <aside aria-label="Sync jobs" className="knowledge-home__sidebar">
-          <h2>Sync Jobs</h2>
+        <aside aria-label={L(labels, "sync_jobs_2")} className="knowledge-home__sidebar">
+          <h2>{L(labels, "sync_jobs")}</h2>
           <ul className="knowledge-home__jobs">
             {view.syncJobs.map((job) => (
               <li key={job.id}>
@@ -256,9 +256,11 @@ export function KnowledgeHome({
 function SourcesPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: KnowledgeLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="knowledge-home__panel">
@@ -266,12 +268,12 @@ function SourcesPanel({
         <table className="knowledge-home__table">
           <thead>
             <tr>
-              <th scope="col">Source</th>
-              <th scope="col">Type</th>
-              <th scope="col">Status</th>
-              <th scope="col">Chunks</th>
-              <th scope="col">License / kind</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "source")}</th>
+              <th scope="col">{L(labels, "type")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "chunks")}</th>
+              <th scope="col">{L(labels, "license_kind")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -329,7 +331,7 @@ function SourcesPanel({
           </tbody>
         </table>
       </div>
-      <div className="knowledge-home__drop" role="region" aria-label="Upload area">
+      <div className="knowledge-home__drop" role="region" aria-label={L(labels, "upload_area")}>
         <p>
           Drag &amp; drop files · or paste text · or &quot;Sync from Git&quot;
         </p>
@@ -347,15 +349,17 @@ function SearchPanel({
   query,
   onQuery,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: KnowledgeLandingView;
   query: string;
   onQuery: (value: string) => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="knowledge-home__panel">
-      <h3>Search Test</h3>
+      <h3>{L(labels, "search_test")}</h3>
       <form
         className="knowledge-home__search-test"
         onSubmit={(event) => {
@@ -412,8 +416,8 @@ function SearchPanel({
           </li>
         ))}
       </ul>
-      <section aria-label="Redacted retrieval trace" className="knowledge-home__trace">
-        <h4>Retrieval trace (redacted)</h4>
+      <section aria-label={L(labels, "redacted_retrieval_trace")} className="knowledge-home__trace">
+        <h4>{L(labels, "retrieval_trace_redacted")}</h4>
         <ul>
           {view.retrievalTrace.map((line) => (
             <li key={line}>{line}</li>
@@ -426,10 +430,14 @@ function SearchPanel({
 
 function ConfigPanel({
   view,
-}: Readonly<{ view: KnowledgeLandingView }>): JSX.Element {
+  labels,
+}: Readonly<{
+  view: KnowledgeLandingView;
+  labels: ScreenLabels;
+}>): JSX.Element {
   return (
     <div className="knowledge-home__panel">
-      <h3>Chunking &amp; indexing config</h3>
+      <h3>{L(labels, "chunking_indexing_config")}</h3>
       <dl className="knowledge-home__config">
         {view.chunkingConfig.map((item) => (
           <div key={item.label}>
@@ -450,13 +458,15 @@ function ConfigPanel({
 function ContributionsPanel({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: KnowledgeLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="knowledge-home__panel">
-      <h3>Contribution Queue (verified runs)</h3>
+      <h3>{L(labels, "contribution_queue_verified_runs")}</h3>
       <ul className="knowledge-home__contributions">
         {view.contributions.map((item) => (
           <li key={item.id}>
@@ -485,25 +495,26 @@ function ContributionsPanel({
 
 function AnalyticsPanel({
   view,
-}: Readonly<{ view: KnowledgeLandingView }>): JSX.Element {
+  labels,
+}: Readonly<{ view: KnowledgeLandingView; labels: ScreenLabels }>): JSX.Element {
   return (
     <div className="knowledge-home__panel">
-      <h3>Analytics</h3>
+      <h3>{L(labels, "analytics")}</h3>
       <p className="knowledge-home__muted">
         Query patterns and agent usage analytics appear when authorized metrics
         projections are available. Local preview only.
       </p>
       <ul className="knowledge-home__analytics">
         <li>
-          <strong>Collections</strong>
+          <strong>{L(labels, "collections")}</strong>
           <span>{view.collections.length}</span>
         </li>
         <li>
-          <strong>Sources in detail</strong>
+          <strong>{L(labels, "sources_in_detail")}</strong>
           <span>{view.sources.length}</span>
         </li>
         <li>
-          <strong>Pending contributions</strong>
+          <strong>{L(labels, "pending_contributions")}</strong>
           <span>{view.contributions.length}</span>
         </li>
       </ul>

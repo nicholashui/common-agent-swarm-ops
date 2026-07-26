@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_CANVAS_LANDING } from "../lib/projections/canvas-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { CanvasHome } from "./CanvasHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("canvas home matches ui_04 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<CanvasHome />);
+  const markup = renderToStaticMarkup(<CanvasHome view={getScreenParameters("canvas")} />);
 
   assert.match(markup, /TradingResearch α/);
   assert.match(markup, /Parallel Indep\. \+ Verify v1\.4/);

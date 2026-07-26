@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_DASHBOARD_LANDING } from "../lib/projections/dashboard-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { DashboardHome } from "./DashboardHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("dashboard home matches ui_02_dashboard structure from md and svg", () => {
-  const markup = renderToStaticMarkup(<DashboardHome />);
+  const markup = renderToStaticMarkup(<DashboardHome view={getScreenParameters("dashboard")} />);
 
   assert.match(markup, /Common Health &amp; Fleet Ops/);
   assert.match(markup, /Common Health/);

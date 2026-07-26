@@ -3,6 +3,8 @@
  * Presentation-only until live graph projections and run SSE connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type CanvasViewMode = "design" | "run" | "compare";
 export type CanvasPaletteTab = "common" | "custom" | "patterns";
 export type CanvasNodeKind =
@@ -72,6 +74,10 @@ export interface CanvasInspectorTab {
 }
 
 export interface CanvasLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
+  readonly settingsEyebrow: string;
+  readonly selectedEyebrowTemplate: string;
   readonly swarmName: string;
   readonly patternBadge: string;
   readonly commonsSummary: string;
@@ -104,6 +110,40 @@ export interface CanvasLandingView {
 }
 
 export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
+  labels: {
+    swarm_canvas: "Swarm canvas",
+    swarm_name: "Swarm name",
+    view_mode: "View mode",
+    auto_layout_is_local_only_feedback: "Auto layout is local-only feedback.",
+    export_requires_an_authorized_export_action: "Export requires an authorized export action.",
+    a_b_test_requires_an_authorized_rollout_contract: "A/B Test requires an authorized rollout contract.",
+    node_palette: "Node palette",
+    palette_tabs: "Palette tabs",
+    ai_suggest_node: "AI Suggest Node",
+    ai_suggest_node_2: "AI Suggest Node",
+    search_common_agents: "Search common agents",
+    search_common_agents_2: "Search common agents",
+    swarm_graph_canvas: "Swarm graph canvas",
+    graph_relationship_semantics: "Graph relationship semantics",
+    edges: "Edges",
+    cancel_requires_an_authorized_cancel_action: "Cancel requires an authorized cancel action.",
+    streaming_logs: "Streaming logs",
+    canvas_inspector: "Canvas inspector",
+    aggregate_eval_all_swarms: "Aggregate eval (all swarms)",
+    runs: "Runs",
+    success: "Success",
+    avg_tok: "Avg tok",
+    improvement_history: "Improvement history",
+    pin_version_requires_an_authorized_pin_action: "Pin version requires an authorized pin action.",
+    live_inspector: "Live Inspector",
+    inspector_tabs: "Inspector tabs",
+    returned_graph_validation: "Returned graph validation",
+    returned_validation: "Returned validation",
+    registry_linked: "Registry-linked",
+  },
+  eyebrow: "SWARM CANVAS",
+  settingsEyebrow: "SWARM SETTINGS",
+  selectedEyebrowTemplate: "SELECTED · {kind}",
   swarmName: "TradingResearch α",
   patternBadge: "Based on: Parallel Indep. + Verify v1.4",
   commonsSummary: "12/14 on latest common · 2 forks",

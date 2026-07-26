@@ -12,17 +12,17 @@ import React, {
 import Link from "next/link";
 
 import {
-  LOCAL_COMPOSER_LANDING,
   buildLocalAssistantReply,
   type ComposerChatMessage,
   type ComposerGraphStyle,
   type ComposerLandingView,
   type ComposerPatternCard,
 } from "../lib/projections/composer-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function ComposerHome({
-  view = LOCAL_COMPOSER_LANDING,
-}: Readonly<{ view?: ComposerLandingView }>): JSX.Element {
+  view }: Readonly<{ view: ComposerLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [goal, setGoal] = useState("");
   const [activeFilter, setActiveFilter] = useState(view.activeFilter);
@@ -71,7 +71,7 @@ export function ComposerHome({
 
   const applyChip = (chip: string): void => {
     setGoal(chip);
-    setStatusMessage(`Goal chip applied: ${chip}`);
+    setStatusMessage(L(labels, "goal_chip_applied_chip"));
   };
 
   const selectPattern = (patternId: string): void => {
@@ -124,7 +124,7 @@ export function ComposerHome({
     event?.preventDefault();
     const trimmed = goal.trim();
     if (trimmed.length === 0) {
-      setStatusMessage("Enter a goal before sending.");
+      setStatusMessage(L(labels, "enter_a_goal_before_sending"));
       return;
     }
     const userMessage: ComposerChatMessage = {
@@ -148,13 +148,13 @@ export function ComposerHome({
   };
 
   return (
-    <section aria-label="Swarm composer" className="composer-home">
+    <section aria-label={L(labels, "swarm_composer")} className="composer-home">
       <header className="composer-home__toolbar">
         <div className="composer-home__toolbar-main">
           <label className="composer-home__name">
-            <span className="visually-hidden">Swarm name</span>
+            <span className="visually-hidden">{L(labels, "swarm_name")}</span>
             <input
-              aria-label="Swarm name"
+              aria-label={L(labels, "swarm_name")}
               onChange={(event) => setSwarmName(event.target.value)}
               value={swarmName}
             />
@@ -164,7 +164,7 @@ export function ComposerHome({
           <button
             className="composer-home__ghost"
             onClick={() =>
-              setStatusMessage("Save Draft requires an authorized compose contract.")
+              setStatusMessage(L(labels, "save_draft_requires_an_authorized_compose_contra"))
             }
             type="button"
           >
@@ -173,13 +173,13 @@ export function ComposerHome({
           <button
             className="composer-home__ghost"
             onClick={() =>
-              setStatusMessage("Load Template requires an authorized template projection.")
+              setStatusMessage(L(labels, "load_template_requires_an_authorized_template_pr"))
             }
             type="button"
           >
             Load Template
           </button>
-          <Link aria-label="Close composer" className="composer-home__close" href="/">
+          <Link aria-label={L(labels, "close_composer")} className="composer-home__close" href="/">
             ✕
           </Link>
         </div>
@@ -197,7 +197,7 @@ export function ComposerHome({
       ) : null}
 
       <div className="composer-home__layout">
-        <section aria-label="Chat composer" className="composer-home__chat panel">
+        <section aria-label={L(labels, "chat_composer")} className="composer-home__chat panel">
           <div className="composer-home__architect">
             <button
               aria-controls={architectPanelId}
@@ -214,7 +214,7 @@ export function ComposerHome({
                 {architectOpen ? (
                   <span id={architectPanelId}>{view.architectSubtitle}</span>
                 ) : (
-                  <span>Show system context</span>
+                  <span>{L(labels, "show_system_context")}</span>
                 )}
               </span>
               <span aria-hidden="true">{architectOpen ? "⌃" : "⌄"}</span>
@@ -320,7 +320,7 @@ export function ComposerHome({
             <button
               className="composer-home__ghost"
               onClick={() =>
-                setStatusMessage("Regenerate requires the composer recommend stream.")
+                setStatusMessage(L(labels, "regenerate_requires_the_composer_recommend_strea"))
               }
               type="button"
             >
@@ -343,7 +343,7 @@ export function ComposerHome({
           </div>
 
           <div
-            aria-label="Goal examples"
+            aria-label={L(labels, "goal_examples")}
             className="composer-home__chips"
             role="group"
           >
@@ -372,7 +372,7 @@ export function ComposerHome({
             />
             <div className="composer-home__input-tools">
               <label className="composer-home__attach">
-                <span className="visually-hidden">Attach requirements file</span>
+                <span className="visually-hidden">{L(labels, "attach_requirements_file")}</span>
                 <input
                   accept=".md,.pdf,text/markdown,application/pdf"
                   onChange={() =>
@@ -385,7 +385,7 @@ export function ComposerHome({
                 📎
               </label>
               <button
-                aria-label="Send goal"
+                aria-label={L(labels, "send_goal")}
                 className="composer-home__send"
                 type="submit"
               >
@@ -396,7 +396,7 @@ export function ComposerHome({
         </section>
 
         <aside
-          aria-label="Common Pattern Browser"
+          aria-label={L(labels, "common_pattern_browser")}
           className={
             patternsOpen
               ? "composer-home__browser composer-home__browser--open"
@@ -405,7 +405,7 @@ export function ComposerHome({
           id="composer-pattern-browser"
         >
           <div className="composer-home__browser-head">
-            <h2>Common Pattern Browser</h2>
+            <h2>{L(labels, "common_pattern_browser")}</h2>
             <button
               className="composer-home__browser-close"
               onClick={() => setPatternsOpen(false)}
@@ -415,15 +415,15 @@ export function ComposerHome({
             </button>
           </div>
           <label className="composer-home__search">
-            <span className="visually-hidden">Search patterns</span>
+            <span className="visually-hidden">{L(labels, "search_patterns")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search patterns…"
+              placeholder={L(labels, "search_patterns_2")}
               value={query}
             />
           </label>
           <div
-            aria-label="Pattern filters"
+            aria-label={L(labels, "pattern_filters")}
             className="composer-home__filters"
             role="group"
           >
@@ -456,6 +456,7 @@ export function ComposerHome({
                   onSelect={() => selectPattern(pattern.id)}
                   pattern={pattern}
                   selected={selectedPattern?.id === pattern.id}
+                  labels={labels}
                 />
               </li>
             ))}
@@ -466,22 +467,22 @@ export function ComposerHome({
               <p className="composer-home__preview-label">
                 Live Preview — {selectedPattern.name} v{selectedPattern.version}
               </p>
-              <MiniGraph style={selectedPattern.graphStyle} />
+              <MiniGraph style={selectedPattern.graphStyle}  labels={labels} />
               <dl className="composer-home__summary">
                 <div>
-                  <dt>Total agents / slots</dt>
+                  <dt>{L(labels, "total_agents_slots")}</dt>
                   <dd>{selectedPattern.previewSummary.totalSlots}</dd>
                 </div>
                 <div>
-                  <dt>Parallelism factor</dt>
+                  <dt>{L(labels, "parallelism_factor")}</dt>
                   <dd>{selectedPattern.previewSummary.parallelism}</dd>
                 </div>
                 <div>
-                  <dt>Est. cost/latency</dt>
+                  <dt>{L(labels, "est_cost_latency")}</dt>
                   <dd>{selectedPattern.previewSummary.estCostLatency}</dd>
                 </div>
                 <div>
-                  <dt>Verification coverage</dt>
+                  <dt>{L(labels, "verification_coverage")}</dt>
                   <dd className="composer-home__metrics">
                     {selectedPattern.previewSummary.verificationCoverage}
                   </dd>
@@ -532,11 +533,13 @@ function PatternCard({
   selected,
   onSelect,
   onInstantiate,
+  labels,
 }: Readonly<{
   pattern: ComposerPatternCard;
   selected: boolean;
   onSelect: () => void;
   onInstantiate: () => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <article
@@ -553,13 +556,13 @@ function PatternCard({
         type="button"
       >
         {pattern.recommended ? (
-          <span className="composer-home__badge">Recommended</span>
+          <span className="composer-home__badge">{L(labels, "recommended")}</span>
         ) : null}
         <strong>
           {pattern.name}
           <span className="composer-home__version">v{pattern.version}</span>
         </strong>
-        <MiniGraph style={pattern.graphStyle} />
+        <MiniGraph style={pattern.graphStyle}  labels={labels} />
         <span className="composer-home__when">{pattern.whenToUse}</span>
         <span className="composer-home__metrics">{pattern.metrics}</span>
       </button>
@@ -585,16 +588,20 @@ function PatternCard({
 
 function MiniGraph({
   style,
-}: Readonly<{ style: ComposerGraphStyle }>): JSX.Element {
+  labels,
+}: Readonly<{
+  style: ComposerGraphStyle;
+  labels: ScreenLabels;
+}>): JSX.Element {
   if (style === "verification_loop") {
     return (
       <div
         aria-hidden="true"
         className="composer-home__mini-graph composer-home__mini-graph--loop"
       >
-        <span>Agent</span>
+        <span>{L(labels, "agent")}</span>
         <i>→</i>
-        <span className="composer-home__mini-graph-verify">Verify</span>
+        <span className="composer-home__mini-graph-verify">{L(labels, "verify")}</span>
         <b>↺</b>
       </div>
     );
@@ -606,8 +613,8 @@ function MiniGraph({
         className="composer-home__mini-graph composer-home__mini-graph--router"
       >
         <em>◇</em>
-        <span>→ B1</span>
-        <span>→ B2</span>
+        <span>{L(labels, "b1")}</span>
+        <span>{L(labels, "b2")}</span>
       </div>
     );
   }
@@ -633,8 +640,8 @@ function MiniGraph({
       <span>B</span>
       <span>C</span>
       <i>→</i>
-      <span className="composer-home__mini-graph-verify">Verify</span>
-      <small>BIG ROWs → verifier cycle ↺</small>
+      <span className="composer-home__mini-graph-verify">{L(labels, "verify")}</span>
+      <small>{L(labels, "big_rows_verifier_cycle")}</small>
     </div>
   );
 }

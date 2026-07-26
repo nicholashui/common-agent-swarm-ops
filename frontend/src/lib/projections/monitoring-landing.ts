@@ -4,6 +4,8 @@
  * Redacted event summaries only — no host, queue, or raw traces.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type MonitoringTabId = "traces" | "alerts" | "metrics" | "anomalies";
 
 export interface MonitoringFleetCard {
@@ -48,6 +50,8 @@ export interface MonitoringMetricBar {
 }
 
 export interface MonitoringLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly liveLabel: string;
@@ -72,6 +76,25 @@ export interface MonitoringLandingView {
 }
 
 export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
+  labels: {
+    "search_traces_and_alerts": "Search traces and alerts",
+    "filters": "Filters",
+    "label_0s": "0s →",
+    "filtered": "(filtered)",
+    "alert_rules": "Alert Rules",
+    "condition": "Condition",
+    "action": "Action",
+    "status": "Status",
+    "actions": "Actions",
+    "metrics_explorer": "Metrics Explorer",
+    "anomaly_feed": "Anomaly Feed",
+    "advanced_monitoring": "Advanced monitoring",
+    "live_fleet_cards": "Live fleet cards",
+    "monitoring_filters": "Monitoring filters",
+    "monitoring_tabs": "Monitoring tabs",
+    "selected_span": "Selected span",
+  },
+  eyebrow: "MONITORING",
   title: "Advanced Monitoring, Tracing & Alerts",
   description:
     "Live fleet observability with common-version traces, alert rules, metrics, and anomaly feed.",

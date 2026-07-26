@@ -8,19 +8,20 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_ONBOARDING_LANDING } from "../lib/projections/onboarding-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { OnboardingHome } from "./OnboardingHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("onboarding home matches ui_16 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<OnboardingHome />);
+  const markup = renderToStaticMarkup(<OnboardingHome view={getScreenParameters("onboarding")} />);
 
   assert.match(markup, /common-agent-swarm-ops/);
   assert.match(markup, /Skip for now/);
   assert.match(markup, /Step 3 of 5/);
   assert.match(markup, /Select Your Common Agents/);
   assert.match(markup, /battle-tested commons from the Registry/);
-  assert.match(markup, /Search or describe what you need/);
+  assert.match(markup, /Search or describe what you need/i);
   assert.match(markup, /All \(87\)/);
   assert.match(markup, /Data &amp; ETL/);
   assert.match(markup, /Verification/);

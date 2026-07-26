@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_COSTS_LANDING } from "../lib/projections/costs-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { CostsHome } from "./CostsHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("costs home matches ui_19 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<CostsHome />);
+  const markup = renderToStaticMarkup(<CostsHome view={getScreenParameters("costs")} />);
 
   assert.match(markup, /Cost &amp; Token Analytics/);
   assert.match(markup, /Token usage, cost attribution/);

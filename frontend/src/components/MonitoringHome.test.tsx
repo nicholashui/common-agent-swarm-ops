@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_MONITORING_LANDING } from "../lib/projections/monitoring-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { MonitoringHome } from "./MonitoringHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("monitoring home matches ui_09 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<MonitoringHome />);
+  const markup = renderToStaticMarkup(<MonitoringHome view={getScreenParameters("monitoring")} />);
 
   assert.match(markup, /Advanced Monitoring, Tracing &amp; Alerts/);
   assert.match(markup, /SSE seq 4421/);

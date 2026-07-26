@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_NOTIFICATIONS_LANDING } from "../lib/projections/notifications-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { NotificationsHome } from "./NotificationsHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("notifications home matches ui_12 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<NotificationsHome />);
+  const markup = renderToStaticMarkup(<NotificationsHome view={getScreenParameters("notifications")} />);
 
   assert.match(markup, /Notifications Center/);
   assert.match(markup, /Actionable, centralized alerts/);

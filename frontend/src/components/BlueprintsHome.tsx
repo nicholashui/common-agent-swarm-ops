@@ -4,14 +4,14 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_BLUEPRINTS_LANDING,
   type BlueprintCard,
   type BlueprintsLandingView,
 } from "../lib/projections/blueprints-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function BlueprintsHome({
-  view = LOCAL_BLUEPRINTS_LANDING,
-}: Readonly<{ view?: BlueprintsLandingView }>): JSX.Element {
+  view }: Readonly<{ view: BlueprintsLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [query, setQuery] = useState("");
   const [facet, setFacet] = useState(view.filters[0] ?? "All (24)");
   const [sort, setSort] = useState(view.sorts[0] ?? "Most deployed");
@@ -68,10 +68,10 @@ export function BlueprintsHome({
     view.blueprints[0];
 
   return (
-    <section aria-label="Blueprints and templates gallery" className="blueprints-home">
+    <section aria-label={L(labels, "blueprints_and_templates_gallery")} className="blueprints-home">
       <header className="blueprints-home__header">
         <div>
-          <p className="eyebrow">BLUEPRINTS &amp; TEMPLATES</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
           <p className="blueprints-home__migration" role="note">
@@ -80,7 +80,7 @@ export function BlueprintsHome({
         </div>
         <div className="blueprints-home__header-actions">
           <label className="blueprints-home__search">
-            <span className="visually-hidden">Search blueprints</span>
+            <span className="visually-hidden">{L(labels, "search_blueprints")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
               placeholder={view.searchPlaceholder}
@@ -103,7 +103,7 @@ export function BlueprintsHome({
 
       <div className="blueprints-home__toolbar">
         <div
-          aria-label="Domain filters"
+          aria-label={L(labels, "domain_filters")}
           className="blueprints-home__facets"
           role="group"
         >
@@ -124,7 +124,7 @@ export function BlueprintsHome({
           ))}
         </div>
         <div
-          aria-label="Sort blueprints"
+          aria-label={L(labels, "sort_blueprints")}
           className="blueprints-home__sorts"
           role="group"
         >
@@ -161,7 +161,7 @@ export function BlueprintsHome({
               selected={selected?.id === bp.id}
               onSelect={() => setSelectedId(bp.id)}
               onAnnounce={announce}
-            />
+             labels={labels} />
           ))}
           {blueprints.length === 0 ? (
             <p className="blueprints-home__muted">
@@ -173,7 +173,7 @@ export function BlueprintsHome({
             aria-labelledby="create-blueprint-heading"
             className="blueprints-home__create"
           >
-            <h2 id="create-blueprint-heading">Create Your Own Blueprint</h2>
+            <h2 id="create-blueprint-heading">{L(labels, "create_your_own_blueprint")}</h2>
             <p>{view.createNote}</p>
             <div className="blueprints-home__actions">
               <button
@@ -224,33 +224,33 @@ export function BlueprintsHome({
             </div>
             <dl className="blueprints-home__meta-list">
               <div>
-                <dt>Pattern</dt>
+                <dt>{L(labels, "pattern")}</dt>
                 <dd>{selected.pattern}</dd>
               </div>
               <div>
-                <dt>Agents</dt>
+                <dt>{L(labels, "agents")}</dt>
                 <dd>{selected.agentCount}</dd>
               </div>
               <div>
-                <dt>Knowledge</dt>
+                <dt>{L(labels, "knowledge")}</dt>
                 <dd>{selected.knowledge}</dd>
               </div>
               <div>
-                <dt>Metrics</dt>
+                <dt>{L(labels, "metrics")}</dt>
                 <dd>{selected.metrics}</dd>
               </div>
               <div>
-                <dt>Governance</dt>
+                <dt>{L(labels, "governance")}</dt>
                 <dd>{selected.governance}</dd>
               </div>
               {selected.rating ? (
                 <div>
-                  <dt>Rating</dt>
+                  <dt>{L(labels, "rating")}</dt>
                   <dd>{selected.rating}</dd>
                 </div>
               ) : null}
             </dl>
-            <h3>Pinned versions</h3>
+            <h3>{L(labels, "pinned_versions")}</h3>
             <ul className="blueprints-home__pins">
               {selected.pins.map((pin) => (
                 <li key={pin}>{pin}</li>
@@ -269,11 +269,11 @@ export function BlueprintsHome({
             </button>
             {selected.maturityLabel ? (
               <>
-                <h3>Pack maturity (migration-safe)</h3>
+                <h3>{L(labels, "pack_maturity_migration_safe")}</h3>
                 <p className="blueprints-home__maturity">{selected.maturityLabel}</p>
               </>
             ) : null}
-            <h3>VA-compatible preview hints</h3>
+            <h3>{L(labels, "va_compatible_preview_hints")}</h3>
             <ul className="blueprints-home__hints">
               {selected.vaHints.map((hint) => (
                 <li key={hint}>{hint}</li>
@@ -334,11 +334,13 @@ function BlueprintCardView({
   selected,
   onSelect,
   onAnnounce,
+  labels,
 }: Readonly<{
   blueprint: BlueprintCard;
   selected: boolean;
   onSelect: () => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <article
@@ -358,7 +360,7 @@ function BlueprintCardView({
         type="button"
       >
         {blueprint.featured ? (
-          <span className="blueprints-home__featured-pill">Featured</span>
+          <span className="blueprints-home__featured-pill">{L(labels, "featured")}</span>
         ) : null}
         <span
           className={`blueprints-home__gov blueprints-home__gov--${blueprint.governance}`}

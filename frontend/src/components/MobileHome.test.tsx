@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_MOBILE_LANDING } from "../lib/projections/mobile-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { MobileHome } from "./MobileHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("mobile home matches ui_17 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<MobileHome />);
+  const markup = renderToStaticMarkup(<MobileHome view={getScreenParameters("mobile")} />);
 
   assert.match(markup, /9:41/);
   assert.match(markup, /caso/);

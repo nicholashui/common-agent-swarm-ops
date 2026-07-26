@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_REGISTRY_LANDING } from "../lib/projections/registry-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { RegistryHome } from "./RegistryHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("registry home matches ui_07 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<RegistryHome />);
+  const markup = renderToStaticMarkup(<RegistryHome view={getScreenParameters("registry")} />);
 
   assert.match(markup, /Common Registry/);
   assert.match(markup, /Battle-tested, versioned, collectively improved/);

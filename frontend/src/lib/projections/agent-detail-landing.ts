@@ -3,6 +3,8 @@
  * Presentation-only until generated registry agent projections connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type AgentDetailTabId =
   | "history"
   | "config"
@@ -47,6 +49,8 @@ export interface AgentDetailKnowledgeSource {
 }
 
 export interface AgentDetailLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly agentName: string;
   readonly versionBadge: string;
   readonly statusLabel: string;
@@ -81,6 +85,37 @@ export interface AgentDetailLandingView {
 }
 
 export const LOCAL_AGENT_DETAIL_LANDING: AgentDetailLandingView = {
+  labels: {
+    "timestamp": "Timestamp",
+    "swarm_pattern": "Swarm · Pattern",
+    "status": "Status",
+    "duration_tokens_cost": "Duration / Tokens / Cost",
+    "summary": "Summary",
+    "action": "Action",
+    "eval_harness": "Eval Harness",
+    "live_metrics": "Live Metrics",
+    "after_good_run": "After good run",
+    "search_knowledge": "Search knowledge",
+    "name": "Name",
+    "type": "Type",
+    "chunks": "Chunks",
+    "added": "Added",
+    "actions": "Actions",
+    "where_used_this_exact_version": "Where used (this exact version)",
+    "a_b_test_requires_an_authorized_rollout_contract": "A/B Test requires an authorized rollout contract.",
+    "fork_to_custom_requires_an_authorized_fork_actio": "Fork to Custom requires an authorized fork action.",
+    "playground_is_local_preview_only_until_authorize": "Playground is local-preview only until authorized.",
+    "test_this_common_agent_with_a_prompt": "Test this common agent with a prompt…",
+    "search_test_chunk_text_score_source": "Search test · chunk text, score, source…",
+    "common_agent_detail": "Common agent detail",
+    "quick_actions": "Quick actions",
+    "agent_detail_tabs": "Agent detail tabs",
+    "history_filters": "History filters",
+    "cross_swarm_usage": "Cross-swarm usage",
+    "playground_options": "Playground options",
+    "playground_panels": "Playground panels",
+  },
+  eyebrow: "COMMON AGENT DETAIL",
   agentName: "VerificationLoopAgent",
   versionBadge: "Common v3.0 · 31.2k · 97%",
   statusLabel: "Live",

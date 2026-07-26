@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_ACTIVITY_LANDING } from "../lib/projections/activity-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { ActivityHome } from "./ActivityHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("activity home matches ui_06 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<ActivityHome />);
+  const markup = renderToStaticMarkup(<ActivityHome view={getScreenParameters("activity")} />);
 
   assert.match(markup, /Activity &amp; Ops Intelligence/);
   assert.match(markup, /Trading Lab/);

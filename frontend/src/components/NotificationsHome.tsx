@@ -4,14 +4,14 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_NOTIFICATIONS_LANDING,
   type NotificationItem,
   type NotificationsLandingView,
 } from "../lib/projections/notifications-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function NotificationsHome({
-  view = LOCAL_NOTIFICATIONS_LANDING,
-}: Readonly<{ view?: NotificationsLandingView }>): JSX.Element {
+  view }: Readonly<{ view: NotificationsLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [filter, setFilter] = useState(view.filters[0] ?? "All (7)");
   const [query, setQuery] = useState("");
   const [readIds, setReadIds] = useState<ReadonlySet<string>>(() => new Set());
@@ -52,7 +52,7 @@ export function NotificationsHome({
 
   const markAllRead = (): void => {
     setReadIds(new Set(view.items.map((item) => item.id)));
-    announce("Mark all read requires an authorized preference action when synced.");
+    announce(L(labels, "mark_all_read_requires_an_authorized_preference_"));
   };
 
   const markRead = (id: string): void => {
@@ -60,10 +60,10 @@ export function NotificationsHome({
   };
 
   return (
-    <section aria-label="Notifications center" className="notifications-home">
+    <section aria-label={L(labels, "notifications_center")} className="notifications-home">
       <header className="notifications-home__header">
         <div>
-          <p className="eyebrow">NOTIFICATIONS</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>
             {view.title}
             <span className="notifications-home__badge" aria-label={`${unreadCount} unread`}>
@@ -74,10 +74,10 @@ export function NotificationsHome({
         </div>
         <div className="notifications-home__header-actions">
           <label className="notifications-home__search">
-            <span className="visually-hidden">Search notifications</span>
+            <span className="visually-hidden">{L(labels, "search_notifications")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search notifications…"
+              placeholder={L(labels, "search_notifications_2")}
               value={query}
             />
           </label>
@@ -95,7 +95,7 @@ export function NotificationsHome({
       </header>
 
       <div
-        aria-label="Notification filters"
+        aria-label={L(labels, "notification_filters")}
         className="notifications-home__filters"
         role="group"
       >
@@ -137,7 +137,7 @@ export function NotificationsHome({
                     isRead={readIds.has(item.id) || !item.unread}
                     onMarkRead={markRead}
                     onAnnounce={announce}
-                  />
+                   labels={labels} />
                 ))}
               </ul>
             </section>
@@ -156,7 +156,7 @@ export function NotificationsHome({
                     isRead={readIds.has(item.id) || !item.unread}
                     onMarkRead={markRead}
                     onAnnounce={announce}
-                  />
+                   labels={labels} />
                 ))}
               </ul>
             </section>
@@ -164,14 +164,14 @@ export function NotificationsHome({
 
           {items.length === 0 ? (
             <div className="notifications-home__empty panel">
-              <p>No notifications match the current filters.</p>
+              <p>{L(labels, "no_notifications_match_the_current_filters")}</p>
             </div>
           ) : null}
         </div>
 
-        <aside aria-label="Notification preferences" className="notifications-home__prefs">
-          <h2>Preferences</h2>
-          <h3>Notify me about</h3>
+        <aside aria-label={L(labels, "notification_preferences")} className="notifications-home__prefs">
+          <h2>{L(labels, "preferences")}</h2>
+          <h3>{L(labels, "notify_me_about")}</h3>
           <ul className="notifications-home__pref-list">
             {view.notifyAbout.map((item) => (
               <li key={item.id}>
@@ -196,7 +196,7 @@ export function NotificationsHome({
             ))}
           </ul>
 
-          <h3>Delivery channels</h3>
+          <h3>{L(labels, "delivery_channels")}</h3>
           <ul className="notifications-home__pref-list">
             {view.channels.map((item) => (
               <li key={item.id}>
@@ -222,14 +222,14 @@ export function NotificationsHome({
           </ul>
 
           <div className="notifications-home__quiet">
-            <h3>Quiet hours &amp; digest</h3>
+            <h3>{L(labels, "quiet_hours_digest")}</h3>
             <p>{view.quietHours}</p>
           </div>
 
           <button
             className="notifications-home__action"
             onClick={() =>
-              announce("Snooze type 24h requires an authorized preference action.")
+              announce(L(labels, "snooze_type_24h_requires_an_authorized_preferenc"))
             }
             type="button"
           >
@@ -252,11 +252,13 @@ function NotificationCard({
   isRead,
   onMarkRead,
   onAnnounce,
+  labels,
 }: Readonly<{
   item: NotificationItem;
   isRead: boolean;
   onMarkRead: (id: string) => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <li>
@@ -272,7 +274,7 @@ function NotificationCard({
             {item.kind}
           </span>
           {!isRead ? (
-            <span className="notifications-home__unread">Unread</span>
+            <span className="notifications-home__unread">{L(labels, "unread")}</span>
           ) : null}
         </div>
         <h3>{item.title}</h3>

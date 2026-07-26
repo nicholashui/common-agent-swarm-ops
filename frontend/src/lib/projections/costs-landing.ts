@@ -4,6 +4,8 @@
  * Optimizations cannot silently weaken L1/L2/L3, rights/provenance, or approvals.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export interface CostsKpi {
   readonly id: string;
   readonly label: string;
@@ -40,6 +42,8 @@ export interface CostsRecommendation {
 }
 
 export interface CostsLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly periodLabel: string;
@@ -74,6 +78,33 @@ export interface CostsLandingView {
 }
 
 export const LOCAL_COSTS_LANDING: CostsLandingView = {
+  labels: {
+    "search_costs": "Search costs",
+    "cost_trend": "Cost Trend",
+    "total_spend_jul_1": "↑ Total spend · Jul 1",
+    "cost_by_swarm": "Cost by Swarm",
+    "token_usage_by_agent": "Token Usage by Agent",
+    "agent": "Agent",
+    "common_version": "Common version",
+    "tokens": "Tokens",
+    "cost": "Cost",
+    "in_out_tools": "In / Out / Tools",
+    "budget_alerts": "Budget & Alerts",
+    "monthly_budget": "Monthly budget",
+    "spent": "Spent",
+    "remaining": "Remaining",
+    "utilization": "Utilization",
+    "alert_threshold": "Alert threshold",
+    "commons_savings_impact": "Commons Savings Impact",
+    "saved_this_month_by_using_commons": "Saved this month by using commons",
+    "token_efficiency_gain_from_commons": "Token efficiency gain from commons",
+    "if_all_custom_commons_equivalent": "If all custom → commons-equivalent",
+    "optimization_recommendations": "Optimization Recommendations",
+    "reports": "Reports",
+    "cost_and_token_analytics": "Cost and token analytics",
+    "cost_kpis": "Cost KPIs",
+  },
+  eyebrow: "COSTS",
   title: "Cost & Token Analytics",
   description:
     "Token usage, cost attribution, budget alerts & commons savings impact.",

@@ -4,6 +4,8 @@
  * Approvals use server-issued IDs — no embedded approval ops in payloads.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type MobileTabId =
   | "home"
   | "activity"
@@ -46,11 +48,19 @@ export interface MobileActivityItem {
   readonly lifecycle: string;
 }
 
+export interface MobileTabItem {
+  readonly id: MobileTabId;
+  readonly label: string;
+  readonly href?: string;
+}
+
 export interface MobileLandingView {
+  readonly labels: ScreenLabels;
   readonly brand: string;
   readonly workspaceLabel: string;
   readonly timeLabel: string;
   readonly liveSummary: string;
+  readonly tabs: readonly MobileTabItem[];
   readonly stats: readonly { readonly id: string; readonly label: string; readonly value: string }[];
   readonly runningSwarms: readonly MobileRunningSwarm[];
   readonly notifications: readonly MobileNotification[];
@@ -67,10 +77,38 @@ export interface MobileLandingView {
 }
 
 export const LOCAL_MOBILE_LANDING: MobileLandingView = {
+  labels: {
+    "compose_opens_the_full_composer_for_guided_creat": "Compose opens the full composer for guided creation.",
+    "your_swarms": "Your Swarms",
+    "notifications": "Notifications",
+    "quick_actions": "Quick Actions",
+    "activity_feed": "Activity Feed",
+    "registry_quick_search": "Registry Quick Search",
+    "search_commons": "Search commons",
+    "more": "More",
+    "profile": "Profile",
+    "monitoring": "Monitoring",
+    "settings": "Settings",
+    "help_onboarding": "Help & Onboarding",
+    "pwa": "PWA",
+    "search_commons_2": "Search commons…",
+    "mobile_companion": "Mobile companion",
+    "phone_preview": "Phone preview",
+    "notifications_3_unread": "Notifications, 3 unread",
+    "action_sheet": "Action sheet",
+    "mobile_bottom_navigation": "Mobile bottom navigation",
+  },
   brand: "caso",
   workspaceLabel: "Trading Lab",
   timeLabel: "9:41",
   liveSummary: "Live · 6 running · 92% success",
+  tabs: [
+    { id: "home", label: "Home" },
+    { id: "activity", label: "Activity" },
+    { id: "compose", label: "Compose", href: "/composer" },
+    { id: "registry", label: "Registry" },
+    { id: "more", label: "More" },
+  ],
   stats: [
     { id: "running", label: "Running", value: "6" },
     { id: "burn", label: "Cost burn", value: "$0.20/min" },

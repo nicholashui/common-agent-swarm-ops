@@ -4,38 +4,29 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_PROFILE_LANDING,
   type ProfileLandingView,
   type ProfileSectionId,
 } from "../lib/projections/profile-landing";
-
-const SECTIONS: readonly { readonly id: ProfileSectionId; readonly label: string }[] = [
-  { id: "overview", label: "Overview" },
-  { id: "account", label: "Account" },
-  { id: "security", label: "Security" },
-  { id: "usage", label: "Usage & Impact" },
-  { id: "preferences", label: "Preferences" },
-  { id: "tokens", label: "API Tokens" },
-];
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function ProfileHome({
-  view = LOCAL_PROFILE_LANDING,
-}: Readonly<{ view?: ProfileLandingView }>): JSX.Element {
-  const [section, setSection] = useState<ProfileSectionId>("overview");
+  view }: Readonly<{ view: ProfileLandingView }>): JSX.Element {
+  const labels = view.labels;
+  const [section, setSection] = useState<ProfileSectionId>(view.defaultSectionId);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [tokenRevealOnce, setTokenRevealOnce] = useState<string | undefined>();
 
   const announce = (message: string): void => setStatusMessage(message);
 
   return (
-    <section aria-label="User profile and preferences" className="profile-home">
+    <section aria-label={L(labels, "user_profile_and_preferences")} className="profile-home">
       <header className="profile-home__header">
         <div className="profile-home__identity">
           <span aria-hidden="true" className="profile-home__avatar">
             {view.initials}
           </span>
           <div>
-            <p className="eyebrow">PROFILE &amp; CONTRIBUTIONS</p>
+            <p className="eyebrow">{view.eyebrow}</p>
             <h1>{view.displayName}</h1>
             <div className="profile-home__badges-row">
               <span className="profile-home__pill profile-home__pill--violet">
@@ -57,11 +48,11 @@ export function ProfileHome({
       ) : null}
 
       <div
-        aria-label="Profile sections"
+        aria-label={L(labels, "profile_sections")}
         className="profile-home__tabs"
         role="tablist"
       >
-        {SECTIONS.map((entry) => (
+        {view.sections.map((entry) => (
           <button
             aria-selected={section === entry.id}
             className={
@@ -80,20 +71,21 @@ export function ProfileHome({
       </div>
 
       {section === "overview" || section === "usage" ? (
-        <OverviewSection view={view} onAnnounce={announce} />
+        <OverviewSection view={view} onAnnounce={announce}  labels={labels} />
       ) : null}
       {section === "account" ? (
-        <AccountSection view={view} onAnnounce={announce} />
+        <AccountSection view={view} onAnnounce={announce}  labels={labels} />
       ) : null}
       {section === "security" ? (
-        <SecuritySection view={view} onAnnounce={announce} />
+        <SecuritySection view={view} onAnnounce={announce}  labels={labels} />
       ) : null}
       {section === "preferences" ? (
-        <PreferencesSection view={view} onAnnounce={announce} />
+        <PreferencesSection view={view} onAnnounce={announce}  labels={labels} />
       ) : null}
       {section === "tokens" ? (
         <TokensSection
           view={view}
+          labels={labels}
           tokenRevealOnce={tokenRevealOnce}
           onCreate={() => {
             setTokenRevealOnce("casops_pat_•••••••••••••••• (shown once)");
@@ -102,7 +94,7 @@ export function ProfileHome({
             );
           }}
           onRevoke={() =>
-            announce("Revoke requires confirmation and an authorized token action.")
+            announce(L(labels, "revoke_requires_confirmation_and_an_authorized_t"))
           }
         />
       ) : null}
@@ -118,13 +110,15 @@ export function ProfileHome({
 function OverviewSection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ProfileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="profile-home__overview">
-      <div className="profile-home__impact" aria-label="Personal impact">
+      <div className="profile-home__impact" aria-label={L(labels, "personal_impact")}>
         {view.impact.map((card) => (
           <article key={card.id}>
             <p>{card.label}</p>
@@ -136,7 +130,7 @@ function OverviewSection({
 
       <div className="profile-home__split">
         <section aria-labelledby="activity-heading" className="profile-home__panel">
-          <h2 id="activity-heading">Contribution Activity</h2>
+          <h2 id="activity-heading">{L(labels, "contribution_activity")}</h2>
           <p className="profile-home__muted">
             Proposals, merges, verifications over the last year
           </p>
@@ -146,20 +140,20 @@ function OverviewSection({
             ))}
           </div>
           <div className="profile-home__heatmap-legend">
-            <span>Less</span>
-            <span>More</span>
+            <span>{L(labels, "less")}</span>
+            <span>{L(labels, "more")}</span>
           </div>
           <p className="profile-home__activity-summary">{view.activitySummary}</p>
         </section>
 
         <section aria-labelledby="badges-heading" className="profile-home__panel">
-          <h2 id="badges-heading">Badges &amp; Recognition</h2>
+          <h2 id="badges-heading">{L(labels, "badges_recognition")}</h2>
           <ul className="profile-home__badge-list">
             {view.badges.map((badge) => (
               <li key={badge}>{badge}</li>
             ))}
           </ul>
-          <h3>Reputation breakdown</h3>
+          <h3>{L(labels, "reputation_breakdown")}</h3>
           <dl className="profile-home__reputation">
             {view.reputation.map((row) => (
               <div key={row.label}>
@@ -176,7 +170,7 @@ function OverviewSection({
 
       <section aria-labelledby="contributions-heading" className="profile-home__panel">
         <div className="profile-home__section-head">
-          <h2 id="contributions-heading">My Contributions</h2>
+          <h2 id="contributions-heading">{L(labels, "my_contributions")}</h2>
           <button
             className="profile-home__action"
             onClick={() =>
@@ -196,10 +190,10 @@ function OverviewSection({
           <table className="profile-home__table">
             <thead>
               <tr>
-                <th scope="col">Common</th>
-                <th scope="col">Type</th>
-                <th scope="col">Status</th>
-                <th scope="col">Impact</th>
+                <th scope="col">{L(labels, "common")}</th>
+                <th scope="col">{L(labels, "type")}</th>
+                <th scope="col">{L(labels, "status")}</th>
+                <th scope="col">{L(labels, "impact")}</th>
               </tr>
             </thead>
             <tbody>
@@ -231,32 +225,34 @@ function OverviewSection({
 function AccountSection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ProfileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
-    <section className="profile-home__panel" aria-label="Account">
-      <h2>Account</h2>
+    <section className="profile-home__panel" aria-label={L(labels, "account")}>
+      <h2>{L(labels, "account")}</h2>
       <dl className="profile-home__prefs">
         <div>
-          <dt>Display name</dt>
+          <dt>{L(labels, "display_name")}</dt>
           <dd>{view.displayName}</dd>
         </div>
         <div>
-          <dt>Handle</dt>
+          <dt>{L(labels, "handle")}</dt>
           <dd>{view.handle}</dd>
         </div>
         <div>
-          <dt>Role (server-derived)</dt>
+          <dt>{L(labels, "role_server_derived")}</dt>
           <dd>{view.roleLabel}</dd>
         </div>
         <div>
-          <dt>Workspace scope (server-derived)</dt>
+          <dt>{L(labels, "workspace_scope_server_derived")}</dt>
           <dd>{view.workspaceLabel}</dd>
         </div>
       </dl>
-      <h3>Connected SSO providers</h3>
+      <h3>{L(labels, "connected_sso_providers")}</h3>
       <ul className="profile-home__sso">
         {view.ssoProviders.map((provider) => (
           <li key={provider.id}>
@@ -281,13 +277,15 @@ function AccountSection({
 function SecuritySection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ProfileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
-    <section className="profile-home__panel" aria-label="Security">
-      <h2>Security</h2>
+    <section className="profile-home__panel" aria-label={L(labels, "security")}>
+      <h2>{L(labels, "security")}</h2>
       <p className="profile-home__muted">
         Credentials and automation secrets are never displayed or managed as
         plaintext on this page. SSO and session controls use server-side flows.
@@ -327,13 +325,15 @@ function SecuritySection({
 function PreferencesSection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: ProfileLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
-    <section className="profile-home__panel" aria-label="Personal settings">
-      <h2>Personal Settings</h2>
+    <section className="profile-home__panel" aria-label={L(labels, "personal_settings_2")}>
+      <h2>{L(labels, "personal_settings")}</h2>
       <dl className="profile-home__prefs">
         {view.preferences.map((item) => (
           <div key={item.id}>
@@ -360,16 +360,18 @@ function TokensSection({
   tokenRevealOnce,
   onCreate,
   onRevoke,
+  labels,
 }: Readonly<{
   view: ProfileLandingView;
   tokenRevealOnce?: string;
   onCreate: () => void;
   onRevoke: () => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
-    <section className="profile-home__panel" aria-label="API tokens">
+    <section className="profile-home__panel" aria-label={L(labels, "api_tokens")}>
       <div className="profile-home__section-head">
-        <h2>API Token Manager</h2>
+        <h2>{L(labels, "api_token_manager")}</h2>
         <button
           className="profile-home__action profile-home__action--primary"
           onClick={onCreate}
@@ -391,11 +393,11 @@ function TokensSection({
         <table className="profile-home__table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Scopes</th>
-              <th scope="col">Last used</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "name")}</th>
+              <th scope="col">{L(labels, "scopes")}</th>
+              <th scope="col">{L(labels, "last_used")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>

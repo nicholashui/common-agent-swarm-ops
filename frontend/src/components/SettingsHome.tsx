@@ -3,14 +3,14 @@
 import React, { useMemo, useState } from "react";
 
 import {
-  LOCAL_SETTINGS_LANDING,
   type SettingsLandingView,
   type SettingsSectionId,
 } from "../lib/projections/settings-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function SettingsHome({
-  view = LOCAL_SETTINGS_LANDING,
-}: Readonly<{ view?: SettingsLandingView }>): JSX.Element {
+  view }: Readonly<{ view: SettingsLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [section, setSection] = useState<SettingsSectionId>("providers");
   const [query, setQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
@@ -30,15 +30,15 @@ export function SettingsHome({
     view.nav.find((item) => item.id === section)?.label ?? "Settings";
 
   return (
-    <section aria-label="Global settings" className="settings-home">
+    <section aria-label={L(labels, "global_settings")} className="settings-home">
       <header className="settings-home__header">
         <div>
-          <p className="eyebrow">SETTINGS</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <label className="settings-home__search">
-          <span className="visually-hidden">Search across settings</span>
+          <span className="visually-hidden">{L(labels, "search_across_settings")}</span>
           <input
             onChange={(event) => setQuery(event.target.value)}
             placeholder={view.searchPlaceholder}
@@ -54,7 +54,7 @@ export function SettingsHome({
       ) : null}
 
       <div className="settings-home__body">
-        <nav aria-label="Settings sections" className="settings-home__nav">
+        <nav aria-label={L(labels, "settings_sections")} className="settings-home__nav">
           {navItems.map((item) => (
             <button
               aria-current={section === item.id ? "page" : undefined}
@@ -79,7 +79,7 @@ export function SettingsHome({
             <ProvidersSection view={view} onAnnounce={announce} />
           ) : null}
           {section === "secrets" ? (
-            <SecretsSection view={view} onAnnounce={announce} />
+            <SecretsSection view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
           {section === "integrations" ? (
             <IntegrationsSection view={view} onAnnounce={announce} />
@@ -106,7 +106,7 @@ export function SettingsHome({
           ) : null}
           {section === "ui" ? <UiSection view={view} onAnnounce={announce} /> : null}
           {section === "workspaces" ? (
-            <WorkspacesSection view={view} onAnnounce={announce} />
+            <WorkspacesSection view={view} onAnnounce={announce}  labels={labels} />
           ) : null}
 
           <p className="settings-home__va" role="note">
@@ -193,9 +193,11 @@ function ProvidersSection({
 function SecretsSection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: SettingsLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="settings-home__section">
@@ -204,11 +206,11 @@ function SecretsSection({
         <table className="settings-home__table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Scope</th>
-              <th scope="col">Last rotated</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "name")}</th>
+              <th scope="col">{L(labels, "scope")}</th>
+              <th scope="col">{L(labels, "last_rotated")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -444,21 +446,23 @@ function UiSection({
 function WorkspacesSection({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: SettingsLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="settings-home__section">
-      <h3 className="settings-home__subsection">Workspaces &amp; Access Control</h3>
+      <h3 className="settings-home__subsection">{L(labels, "workspaces_access_control")}</h3>
       <div className="settings-home__table-wrap">
         <table className="settings-home__table">
           <thead>
             <tr>
-              <th scope="col">Member</th>
-              <th scope="col">Role</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "member")}</th>
+              <th scope="col">{L(labels, "role")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>

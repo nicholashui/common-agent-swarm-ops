@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { ActivityHome } from "../../components/ActivityHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Activity & Ops Intelligence (ui_06). Local presentation landing until
- * generated activity projections and authorized run actions connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function ActivityPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("activity");
   return (
     <AppShell>
-      <ActivityHome />
+      <ActivityHome view={view} />
     </AppShell>
   );
 }
-
-export default ActivityPage;

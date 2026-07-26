@@ -5,19 +5,20 @@ import Link from "next/link";
 
 import {
   AGENT_DETAIL_TABS,
-  LOCAL_AGENT_DETAIL_LANDING,
   type AgentDetailLandingView,
   type AgentDetailTabId,
   type AgentDetailUsageRow,
 } from "../lib/projections/agent-detail-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function AgentDetailHome({
-  view = LOCAL_AGENT_DETAIL_LANDING,
+  view,
   agentId,
 }: Readonly<{
-  view?: AgentDetailLandingView;
+  view: AgentDetailLandingView;
   agentId?: string;
 }>): JSX.Element {
+  const labels = view.labels;
   const [tab, setTab] = useState<AgentDetailTabId>("history");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [playgroundInput, setPlaygroundInput] = useState("");
@@ -26,7 +27,7 @@ export function AgentDetailHome({
   const announce = (message: string): void => setStatusMessage(message);
 
   return (
-    <section aria-label="Common agent detail" className="agent-detail">
+    <section aria-label={L(labels, "common_agent_detail")} className="agent-detail">
       <header className="agent-detail__header">
         <div className="agent-detail__header-main">
           <div className="agent-detail__identity">
@@ -34,7 +35,7 @@ export function AgentDetailHome({
               VL
             </span>
             <div>
-              <p className="eyebrow">COMMON AGENT DETAIL</p>
+              <p className="eyebrow">{view.eyebrow}</p>
               <h1>{view.agentName}</h1>
               <div className="agent-detail__badges">
                 <span className="agent-detail__version-pill">
@@ -63,7 +64,7 @@ export function AgentDetailHome({
           </ul>
         </div>
 
-        <div className="agent-detail__actions" role="group" aria-label="Quick actions">
+        <div className="agent-detail__actions" role="group" aria-label={L(labels, "quick_actions")}>
           <button
             className="agent-detail__action agent-detail__action--primary"
             onClick={() =>
@@ -78,7 +79,7 @@ export function AgentDetailHome({
           <button
             className="agent-detail__action"
             onClick={() =>
-              announce("A/B Test requires an authorized rollout contract.")
+              announce(L(labels, "a_b_test_requires_an_authorized_rollout_contract"))
             }
             type="button"
           >
@@ -87,7 +88,7 @@ export function AgentDetailHome({
           <button
             className="agent-detail__action"
             onClick={() =>
-              announce("Fork to Custom requires an authorized fork action.")
+              announce(L(labels, "fork_to_custom_requires_an_authorized_fork_actio"))
             }
             type="button"
           >
@@ -111,7 +112,7 @@ export function AgentDetailHome({
             className="agent-detail__action agent-detail__action--violet"
             onClick={() => {
               setTab("playground");
-              announce("Playground is local-preview only until authorized.");
+              announce(L(labels, "playground_is_local_preview_only_until_authorize"));
             }}
             type="button"
           >
@@ -127,7 +128,7 @@ export function AgentDetailHome({
       ) : null}
 
       <div
-        aria-label="Agent detail tabs"
+        aria-label={L(labels, "agent_detail_tabs")}
         className="agent-detail__tabs"
         role="tablist"
       >
@@ -153,6 +154,7 @@ export function AgentDetailHome({
         {tab === "history" ? (
           <HistoryTab
             view={view}
+            labels={labels}
             onReplay={() =>
               announce(
                 "Replay with latest common requires an authorized checkpoint action.",
@@ -172,7 +174,7 @@ export function AgentDetailHome({
             input={playgroundInput}
             onInput={setPlaygroundInput}
             onAnnounce={announce}
-          />
+           labels={labels} />
         ) : null}
         {tab === "knowledge" ? (
           <KnowledgeTab
@@ -180,9 +182,9 @@ export function AgentDetailHome({
             query={knowledgeQuery}
             onQuery={setKnowledgeQuery}
             onAnnounce={announce}
-          />
+           labels={labels} />
         ) : null}
-        {tab === "ops" ? <OpsTab view={view} onAnnounce={announce} /> : null}
+        {tab === "ops" ? <OpsTab view={view} onAnnounce={announce}  labels={labels} /> : null}
       </div>
 
       <p className="agent-detail__footer">{view.footerNote}</p>
@@ -193,9 +195,11 @@ export function AgentDetailHome({
 function HistoryTab({
   view,
   onReplay,
+  labels,
 }: Readonly<{
   view: AgentDetailLandingView;
   onReplay: () => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="agent-detail__history">
@@ -207,7 +211,7 @@ function HistoryTab({
       </div>
 
       <div
-        aria-label="History filters"
+        aria-label={L(labels, "history_filters")}
         className="agent-detail__filters"
         role="group"
       >
@@ -218,16 +222,16 @@ function HistoryTab({
         ))}
       </div>
 
-      <div className="agent-detail__table-wrap" role="region" aria-label="Cross-swarm usage">
+      <div className="agent-detail__table-wrap" role="region" aria-label={L(labels, "cross_swarm_usage")}>
         <table className="agent-detail__table">
           <thead>
             <tr>
-              <th scope="col">Timestamp</th>
-              <th scope="col">Swarm · Pattern</th>
-              <th scope="col">Status</th>
-              <th scope="col">Duration / Tokens / Cost</th>
-              <th scope="col">Summary</th>
-              <th scope="col">Action</th>
+              <th scope="col">{L(labels, "timestamp")}</th>
+              <th scope="col">{L(labels, "swarm_pattern")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "duration_tokens_cost")}</th>
+              <th scope="col">{L(labels, "summary")}</th>
+              <th scope="col">{L(labels, "action")}</th>
             </tr>
           </thead>
           <tbody>
@@ -353,16 +357,18 @@ function PlaygroundTab({
   input,
   onInput,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: AgentDetailLandingView;
   input: string;
   onInput: (value: string) => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="agent-detail__playground">
       <div className="agent-detail__chat">
-        <div className="agent-detail__chat-options" role="group" aria-label="Playground options">
+        <div className="agent-detail__chat-options" role="group" aria-label={L(labels, "playground_options")}>
           <button className="agent-detail__filter" type="button">
             Model override ▾
           </button>
@@ -411,7 +417,7 @@ function PlaygroundTab({
           <textarea
             id="agent-playground-input"
             onChange={(event) => onInput(event.target.value)}
-            placeholder="Test this common agent with a prompt…"
+            placeholder={L(labels, "test_this_common_agent_with_a_prompt")}
             rows={3}
             value={input}
           />
@@ -421,9 +427,9 @@ function PlaygroundTab({
         </form>
       </div>
 
-      <aside className="agent-detail__side-panels" aria-label="Playground panels">
+      <aside className="agent-detail__side-panels" aria-label={L(labels, "playground_panels")}>
         <section className="agent-detail__side-card">
-          <h3>Eval Harness</h3>
+          <h3>{L(labels, "eval_harness")}</h3>
           <ul>
             {view.evalScores.map((score) => (
               <li key={score.metric}>
@@ -443,13 +449,13 @@ function PlaygroundTab({
           </button>
         </section>
         <section className="agent-detail__side-card">
-          <h3>Live Metrics</h3>
+          <h3>{L(labels, "live_metrics")}</h3>
           <p className="agent-detail__muted">
             Tokens · cost · latency · tool usage appear when a playground run is authorized.
           </p>
         </section>
         <section className="agent-detail__side-card">
-          <h3>After good run</h3>
+          <h3>{L(labels, "after_good_run")}</h3>
           <button
             className="agent-detail__action"
             onClick={() =>
@@ -483,11 +489,13 @@ function KnowledgeTab({
   query,
   onQuery,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: AgentDetailLandingView;
   query: string;
   onQuery: (value: string) => void;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="agent-detail__knowledge">
@@ -501,7 +509,7 @@ function KnowledgeTab({
       </ul>
 
       <label className="agent-detail__search">
-        <span className="visually-hidden">Search knowledge</span>
+        <span className="visually-hidden">{L(labels, "search_knowledge")}</span>
         <input
           onChange={(event) => onQuery(event.target.value)}
           onKeyDown={(event) => {
@@ -511,7 +519,7 @@ function KnowledgeTab({
               );
             }
           }}
-          placeholder="Search test · chunk text, score, source…"
+          placeholder={L(labels, "search_test_chunk_text_score_source")}
           value={query}
         />
       </label>
@@ -520,12 +528,12 @@ function KnowledgeTab({
         <table className="agent-detail__table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Status</th>
-              <th scope="col">Chunks</th>
-              <th scope="col">Added</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{L(labels, "name")}</th>
+              <th scope="col">{L(labels, "type")}</th>
+              <th scope="col">{L(labels, "status")}</th>
+              <th scope="col">{L(labels, "chunks")}</th>
+              <th scope="col">{L(labels, "added")}</th>
+              <th scope="col">{L(labels, "actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -590,9 +598,11 @@ function KnowledgeTab({
 function OpsTab({
   view,
   onAnnounce,
+  labels,
 }: Readonly<{
   view: AgentDetailLandingView;
   onAnnounce: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
     <div className="agent-detail__ops">
@@ -611,7 +621,7 @@ function OpsTab({
       </ul>
 
       <section className="agent-detail__ops-card">
-        <h3>Where used (this exact version)</h3>
+        <h3>{L(labels, "where_used_this_exact_version")}</h3>
         <p>{view.opsWhereUsed}</p>
         <div className="agent-detail__ops-actions">
           <button

@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_COLLABORATION_LANDING } from "../lib/projections/collaboration-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { CollaborationHome } from "./CollaborationHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("collaboration home matches ui_18 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<CollaborationHome />);
+  const markup = renderToStaticMarkup(<CollaborationHome view={getScreenParameters("collaboration")} />);
 
   assert.match(markup, /Collaboration &amp; Sharing Hub/);
   assert.match(markup, /Share swarms, contribute back to commons/);

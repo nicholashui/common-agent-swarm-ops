@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_BLUEPRINTS_LANDING } from "../lib/projections/blueprints-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { BlueprintsHome } from "./BlueprintsHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("blueprints home matches ui_20 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<BlueprintsHome />);
+  const markup = renderToStaticMarkup(<BlueprintsHome view={getScreenParameters("blueprints")} />);
 
   assert.match(markup, /Blueprints &amp; Templates Gallery/);
   assert.match(markup, /Swarm blueprint gallery|local presentation/i);

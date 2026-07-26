@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { NotificationsHome } from "../../components/NotificationsHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Notifications Center (ui_12). Local presentation landing until
- * notification projections, preferences, and delivery channels connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function NotificationsPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("notifications");
   return (
     <AppShell>
-      <NotificationsHome />
+      <NotificationsHome view={view} />
     </AppShell>
   );
 }
-
-export default NotificationsPage;

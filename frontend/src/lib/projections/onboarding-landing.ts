@@ -3,6 +3,8 @@
  * Presentation-only until tour progress and docs CMS connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export interface OnboardingAgentCard {
   readonly id: string;
   readonly name: string;
@@ -36,23 +38,60 @@ export interface OnboardingSampleProject {
 }
 
 export interface OnboardingLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
+  /** Template with `{step}` and `{total}` placeholders. */
+  readonly stepProgressTemplate: string;
+  readonly defaultStepIndex: number;
   readonly title: string;
   readonly subtitle: string;
   readonly steps: readonly OnboardingStep[];
   readonly agentFilters: readonly string[];
   readonly agents: readonly OnboardingAgentCard[];
   readonly recommendedPattern: {
+    readonly eyebrow: string;
     readonly name: string;
     readonly detail: string;
   };
   readonly helpCategories: readonly OnboardingDocCategory[];
   readonly sampleProjects: readonly OnboardingSampleProject[];
   readonly tourConcepts: readonly string[];
+  readonly defaultHelpPrompt: string;
   readonly vaNote: string;
   readonly footerNote: string;
 }
 
 export const LOCAL_ONBOARDING_LANDING: OnboardingLandingView = {
+  labels: {
+    onboarding_and_help: "Onboarding and help",
+    tour_progress: "Tour progress",
+    help_center: "Help Center",
+    search_help: "Search help",
+    search_docs: "Search docs…",
+    ai_help: "AI help",
+    ai_help_chat: "AI Help Chat",
+    sample_projects: "Sample projects",
+    sample_guided_projects: "Sample Guided Projects",
+    core_concepts: "Core concepts",
+    what_you_are_learning: "What you are learning",
+    feedback: "Feedback",
+    feedback_contribution: "Feedback & Contribution",
+    search_commons: "Search commons",
+    search_or_describe_what_you_need: "Search or describe what you need…",
+    agent_domain_filters: "Agent domain filters",
+    recommended_pattern: "Recommended Pattern",
+    continue_tour: "Continue the tour with Next, or open a sample project below.",
+    use_this_pattern: "Use this pattern",
+    preview_only: "Preview only",
+    back: "Back",
+    next: "Next",
+    clear_all: "Clear all",
+    none_selected: "None selected",
+    commons_selected_suffix: "commons selected",
+  },
+  eyebrow: "ONBOARDING",
+  stepProgressTemplate: "Step {step} of {total}",
+  defaultStepIndex: 2,
   title: "Select Your Common Agents",
   subtitle:
     "Start with battle-tested commons from the Registry. You can always add more later.",
@@ -153,6 +192,7 @@ export const LOCAL_ONBOARDING_LANDING: OnboardingLandingView = {
     },
   ],
   recommendedPattern: {
+    eyebrow: "Recommended Pattern",
     name: "Parallel Independent + Verification Loop v1.4",
     detail:
       "Fits your selected commons · 94% success · 23% token saving. Will be pre-loaded in your first canvas.",
@@ -242,6 +282,7 @@ export const LOCAL_ONBOARDING_LANDING: OnboardingLandingView = {
     "Critique is directed evidence with severity and resolution",
     "Releases require quality and approval gates",
   ],
+  defaultHelpPrompt: "How do I safely rollout a new common version?",
   vaNote:
     "Domain-adapter onboarding may introduce VA roles, production phases, and templates without implying they are universal requirements for every swarm.",
   footerNote:

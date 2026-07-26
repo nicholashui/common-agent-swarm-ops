@@ -4,16 +4,16 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_ACTIVITY_LANDING,
   type ActivityCardStatus,
   type ActivityExecutionCard,
   type ActivityLandingView,
   type ActivityViewMode,
 } from "../lib/projections/activity-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function ActivityHome({
-  view = LOCAL_ACTIVITY_LANDING,
-}: Readonly<{ view?: ActivityLandingView }>): JSX.Element {
+  view }: Readonly<{ view: ActivityLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [mode, setMode] = useState<ActivityViewMode>("board");
   const [liveUpdate, setLiveUpdate] = useState(true);
   const [search, setSearch] = useState("");
@@ -76,17 +76,17 @@ export function ActivityHome({
   };
 
   return (
-    <section aria-label="Activity and ops intelligence" className="activity-home">
+    <section aria-label={L(labels, "activity_and_ops_intelligence")} className="activity-home">
       <header className="activity-home__header">
         <div>
-          <p className="eyebrow">ACTIVITY</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
           <p className="activity-home__workspace">{view.workspaceLabel}</p>
         </div>
         <div className="activity-home__header-controls">
           <label className="activity-home__search">
-            <span className="visually-hidden">Search activity</span>
+            <span className="visually-hidden">{L(labels, "search_activity")}</span>
             <input
               onChange={(event) => setSearch(event.target.value)}
               placeholder={view.searchPlaceholder}
@@ -97,7 +97,7 @@ export function ActivityHome({
             {view.dateRangeLabel} ▾
           </button>
           <div
-            aria-label="View mode"
+            aria-label={L(labels, "view_mode")}
             className="activity-home__modes"
             role="group"
           >
@@ -130,7 +130,7 @@ export function ActivityHome({
       </header>
 
       <div
-        aria-label="Activity filters"
+        aria-label={L(labels, "activity_filters")}
         className="activity-home__filters"
         role="group"
       >
@@ -177,7 +177,7 @@ export function ActivityHome({
             <BoardView
               columns={filteredColumns}
               onAction={announce}
-            />
+             labels={labels} />
           ) : null}
           {mode === "table" ? (
             <TableView
@@ -185,14 +185,14 @@ export function ActivityHome({
               selectedIds={selectedIds}
               onToggle={toggleSelected}
               onAction={announce}
-            />
+             labels={labels} />
           ) : null}
           {mode === "timeline" ? (
-            <TimelineView view={view} onAction={announce} />
+            <TimelineView view={view} onAction={announce}  labels={labels} />
           ) : null}
 
           {selectedIds.size > 0 ? (
-            <div className="activity-home__bulk" role="region" aria-label="Bulk actions">
+            <div className="activity-home__bulk" role="region" aria-label={L(labels, "bulk_actions")}>
               <span>{selectedIds.size} selected</span>
               {view.bulkActions.map((action) => (
                 <button
@@ -212,8 +212,8 @@ export function ActivityHome({
           ) : null}
         </div>
 
-        <aside aria-label="Ops intelligence" className="activity-home__insights">
-          <h2>Ops Intelligence</h2>
+        <aside aria-label={L(labels, "ops_intelligence_2")} className="activity-home__insights">
+          <h2>{L(labels, "ops_intelligence")}</h2>
           <ul className="activity-home__kpis">
             {view.kpis.map((kpi) => (
               <li key={kpi.id}>
@@ -235,7 +235,7 @@ export function ActivityHome({
             </div>
           </div>
 
-          <h3>Rollout Opportunities &amp; Anomalies</h3>
+          <h3>{L(labels, "rollout_opportunities_anomalies")}</h3>
           <ul className="activity-home__rollouts">
             {view.rolloutCards.map((card) => (
               <li
@@ -269,7 +269,7 @@ export function ActivityHome({
           </ul>
 
           <section className="activity-home__impact">
-            <h3>Collective Improvement Impact</h3>
+            <h3>{L(labels, "collective_improvement_impact")}</h3>
             <p>{view.collectiveImpact}</p>
             <div className="activity-home__bulk-inline">
               {view.bulkActions.map((action) => (
@@ -303,15 +303,17 @@ export function ActivityHome({
 function BoardView({
   columns,
   onAction,
+  labels,
 }: Readonly<{
   columns: ActivityLandingView["boardColumns"];
   onAction: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   const totalCards = columns.reduce((sum, column) => sum + column.cards.length, 0);
   if (totalCards === 0) {
     return (
       <div className="activity-home__empty panel">
-        <p>No activity yet — start a swarm from Common Patterns.</p>
+        <p>{L(labels, "no_activity_yet_start_a_swarm_from_common_patter")}</p>
         <Link className="activity-home__link" href="/composer">
           Start from Common Patterns →
         </Link>
@@ -320,7 +322,7 @@ function BoardView({
   }
 
   return (
-    <div className="activity-home__board" role="region" aria-label="Activity board">
+    <div className="activity-home__board" role="region" aria-label={L(labels, "activity_board")}>
       {columns.map((column) => (
         <section
           aria-label={column.title}
@@ -416,36 +418,38 @@ function TableView({
   selectedIds,
   onToggle,
   onAction,
+  labels,
 }: Readonly<{
   rows: ActivityLandingView["tableRows"];
   selectedIds: ReadonlySet<string>;
   onToggle: (id: string) => void;
   onAction: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   if (rows.length === 0) {
     return (
       <div className="activity-home__empty panel">
-        <p>No activity matches the current filters.</p>
+        <p>{L(labels, "no_activity_matches_the_current_filters")}</p>
       </div>
     );
   }
 
   return (
-    <div className="activity-home__table-wrap" role="region" aria-label="Activity table">
+    <div className="activity-home__table-wrap" role="region" aria-label={L(labels, "activity_table")}>
       <table className="activity-home__table">
         <thead>
           <tr>
             <th scope="col">
-              <span className="visually-hidden">Select</span>
+              <span className="visually-hidden">{L(labels, "select")}</span>
             </th>
-            <th scope="col">Timestamp</th>
-            <th scope="col">Swarm · Business</th>
-            <th scope="col">Pattern</th>
-            <th scope="col">Agent · Version</th>
-            <th scope="col">Status</th>
-            <th scope="col">Duration / Tokens / Cost</th>
-            <th scope="col">Lifecycle · Checkpoint</th>
-            <th scope="col">Actions</th>
+            <th scope="col">{L(labels, "timestamp")}</th>
+            <th scope="col">{L(labels, "swarm_business")}</th>
+            <th scope="col">{L(labels, "pattern")}</th>
+            <th scope="col">{L(labels, "agent_version")}</th>
+            <th scope="col">{L(labels, "status")}</th>
+            <th scope="col">{L(labels, "duration_tokens_cost")}</th>
+            <th scope="col">{L(labels, "lifecycle_checkpoint")}</th>
+            <th scope="col">{L(labels, "actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -511,12 +515,14 @@ function TableView({
 function TimelineView({
   view,
   onAction,
+  labels,
 }: Readonly<{
   view: ActivityLandingView;
   onAction: (message: string) => void;
+  labels: ScreenLabels;
 }>): JSX.Element {
   return (
-    <div className="activity-home__timeline" role="region" aria-label="Activity timeline">
+    <div className="activity-home__timeline" role="region" aria-label={L(labels, "activity_timeline")}>
       <p className="activity-home__timeline-note">
         Gantt-style lanes by subworkflow · bars show execution spans and common
         versions · click opens detail when authorized.

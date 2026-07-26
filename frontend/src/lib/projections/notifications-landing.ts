@@ -4,6 +4,8 @@
  * Payloads carry redacted summaries only — no secrets or approval ops.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type NotificationPriority = "high" | "normal" | "low";
 export type NotificationKind =
   | "gate"
@@ -46,6 +48,8 @@ export interface NotificationChannel {
 }
 
 export interface NotificationsLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly badgeCount: number;
@@ -59,6 +63,22 @@ export interface NotificationsLandingView {
 }
 
 export const LOCAL_NOTIFICATIONS_LANDING: NotificationsLandingView = {
+  labels: {
+    "search_notifications": "Search notifications",
+    "no_notifications_match_the_current_filters": "No notifications match the current filters.",
+    "preferences": "Preferences",
+    "notify_me_about": "Notify me about",
+    "delivery_channels": "Delivery channels",
+    "quiet_hours_digest": "Quiet hours & digest",
+    "unread": "Unread",
+    "mark_all_read_requires_an_authorized_preference_": "Mark all read requires an authorized preference action when synced.",
+    "snooze_type_24h_requires_an_authorized_preferenc": "Snooze type 24h requires an authorized preference action.",
+    "search_notifications_2": "Search notifications…",
+    "notifications_center": "Notifications center",
+    "notification_filters": "Notification filters",
+    "notification_preferences": "Notification preferences",
+  },
+  eyebrow: "NOTIFICATIONS",
   title: "Notifications Center",
   description:
     "Actionable, centralized alerts · redacted summaries with server-authorized deep links.",

@@ -2,21 +2,21 @@ import React from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_DASHBOARD_LANDING,
   type DashboardLandingView,
   type DashboardRecentRun,
   type DashboardRunningSwarm,
   type DashboardStatusTone,
 } from "../lib/projections/dashboard-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function DashboardHome({
-  view = LOCAL_DASHBOARD_LANDING,
-}: Readonly<{ view?: DashboardLandingView }>): JSX.Element {
+  view }: Readonly<{ view: DashboardLandingView }>): JSX.Element {
+  const labels = view.labels;
   return (
     <section aria-label="Dashboard projection" className="dashboard-home">
       <header className="dashboard-home__header">
         <div>
-          <p className="eyebrow">DASHBOARD</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
@@ -40,7 +40,7 @@ export function DashboardHome({
         className="dashboard-home__section"
       >
         <h2 className="dashboard-home__section-label" id="common-health-heading">
-          Common Health
+          {view.commonHealthSectionTitle}
         </h2>
         <div
           aria-live="polite"
@@ -82,7 +82,7 @@ export function DashboardHome({
         className="dashboard-home__section"
       >
         <h2 className="dashboard-home__section-label" id="quick-actions-heading">
-          Quick Actions
+          {view.quickActionsSectionTitle}
         </h2>
         <div className="dashboard-home__actions">
           {view.quickActions.map((action) => (
@@ -118,23 +118,23 @@ export function DashboardHome({
           <section aria-labelledby="running-heading">
             <div className="dashboard-home__section-head">
               <h3 className="dashboard-home__subsection" id="running-heading">
-                Running Now
+                {L(labels, "runningNow")}
               </h3>
               <Link className="dashboard-home__section-link" href="/canvas">
-                Open canvas
+                {L(labels, "openCanvas")}
               </Link>
             </div>
             {view.runningSwarms.length === 0 ? (
               <div className="dashboard-empty panel">
-                <p>No swarms running. Start one from Common Patterns.</p>
+                <p>{L(labels, "emptyFleet")}</p>
                 <Link className="dashboard-home__section-link" href="/composer">
-                  Start from Common Patterns →
+                  {L(labels, "startFromPatterns")}
                 </Link>
               </div>
             ) : (
               <ul aria-live="polite" className="dashboard-running">
                 {view.runningSwarms.map((swarm) => (
-                  <RunningSwarmCard key={swarm.id} swarm={swarm} />
+                  <RunningSwarmCard key={swarm.id} labels={labels} swarm={swarm} />
                 ))}
               </ul>
             )}
@@ -143,19 +143,19 @@ export function DashboardHome({
           <section aria-labelledby="recent-heading">
             <div className="dashboard-home__section-head">
               <h3 className="dashboard-home__subsection" id="recent-heading">
-                Recent Activity
+                {L(labels, "recentActivity")}
               </h3>
               <Link className="dashboard-home__section-link" href="/activity">
-                View all →
+                {L(labels, "viewAll")}
               </Link>
             </div>
             <div className="dashboard-recent panel">
               <div className="dashboard-recent__head" aria-hidden="true">
-                <span>Time</span>
-                <span>Swarm · Pattern</span>
-                <span>Commons</span>
-                <span>Status</span>
-                <span>Action</span>
+                <span>{L(labels, "colTime")}</span>
+                <span>{L(labels, "colSwarmPattern")}</span>
+                <span>{L(labels, "colCommons")}</span>
+                <span>{L(labels, "colStatus")}</span>
+                <span>{L(labels, "colAction")}</span>
               </div>
               <ul className="dashboard-recent__list">
                 {view.recentRuns.map((run) => (
@@ -173,7 +173,7 @@ export function DashboardHome({
       >
         <div>
           <h2 className="dashboard-home__fleet-title" id="insights-heading">
-            Common Impact Insights
+            {L(labels, "insightsTitle")}
           </h2>
           <p className="dashboard-home__section-intro">{view.insightsIntro}</p>
         </div>
@@ -222,34 +222,34 @@ export function DashboardHome({
         className="dashboard-home__section"
       >
         <h2 className="dashboard-home__fleet-title" id="control-plane-heading">
-          Control-Plane Health &amp; Freshness
+          {L(labels, "controlPlaneTitle")}
         </h2>
         <div className="dashboard-control panel">
           <div className="dashboard-control__cell">
-            <p className="dashboard-control__label">API / Projection Health</p>
+            <p className="dashboard-control__label">{L(labels, "apiHealthLabel")}</p>
             <p
               className={`dashboard-control__pill dashboard-control__pill--${view.controlPlane.apiHealthTone}`}
             >
               {view.controlPlane.apiHealthLabel}
             </p>
-            <p className="dashboard-control__label">Delayed-event warning</p>
+            <p className="dashboard-control__label">{L(labels, "delayedEventLabel")}</p>
             <p className="dashboard-control__value">
               {view.controlPlane.delayedEventWarning}
             </p>
           </div>
           <div className="dashboard-control__cell">
-            <p className="dashboard-control__label">Queue / Run Backlog</p>
+            <p className="dashboard-control__label">{L(labels, "backlogLabel")}</p>
             <p className="dashboard-control__metric">
               <strong>{view.controlPlane.backlogCount}</strong>
               <span>{view.controlPlane.backlogDetail}</span>
             </p>
-            <p className="dashboard-control__label">Approval expiry alert</p>
+            <p className="dashboard-control__label">{L(labels, "approvalLabel")}</p>
             <p className="dashboard-control__alert">
               {view.controlPlane.approvalExpiryAlert}
             </p>
           </div>
           <div className="dashboard-control__cell">
-            <p className="dashboard-control__label">SSE Transport</p>
+            <p className="dashboard-control__label">{L(labels, "sseLabel")}</p>
             <p className="dashboard-control__pill dashboard-control__pill--stale">
               {view.controlPlane.sseLabel}
             </p>
@@ -257,18 +257,18 @@ export function DashboardHome({
               {view.controlPlane.sseDetail}
             </p>
             <p className="dashboard-control__mono">
-              as_of {view.asOf} · {view.controlPlane.correlationId}
+              {L(labels, "asOfPrefix")} {view.asOf} · {view.controlPlane.correlationId}
             </p>
           </div>
           <div className="dashboard-control__cell">
-            <p className="dashboard-control__label">Affected swarms</p>
+            <p className="dashboard-control__label">{L(labels, "affectedLabel")}</p>
             <div className="dashboard-control__affected">
               <p>{view.controlPlane.affectedSummary}</p>
               <Link
                 className="dashboard-insight__button"
                 href={view.controlPlane.affectedHref}
               >
-                View affected →
+                {L(labels, "viewAffected")}
               </Link>
             </div>
           </div>
@@ -280,7 +280,7 @@ export function DashboardHome({
         className="dashboard-home__section"
       >
         <h2 className="dashboard-home__subsection" id="pinned-heading">
-          Pinned / Favorites
+          {L(labels, "pinnedTitle")}
         </h2>
         <ul className="dashboard-pinned">
           {view.pinned.map((item) => (
@@ -349,7 +349,8 @@ function StatusPill({
 
 function RunningSwarmCard({
   swarm,
-}: Readonly<{ swarm: DashboardRunningSwarm }>): JSX.Element {
+  labels,
+}: Readonly<{ swarm: DashboardRunningSwarm; labels: ScreenLabels }>): JSX.Element {
   return (
     <li className="dashboard-running__card panel">
       <div className="dashboard-running__topline">
@@ -358,7 +359,11 @@ function RunningSwarmCard({
       </div>
       <p className="dashboard-running__pattern">{swarm.pattern}</p>
       <p className="dashboard-running__progress">
-        {swarm.progressLabel} · elapsed {swarm.elapsed} · {swarm.costRate}
+        {Lfmt(labels, "progressMetaTemplate", {
+          progress: swarm.progressLabel,
+          elapsed: swarm.elapsed,
+          costRate: swarm.costRate,
+        })}
       </p>
       <div
         aria-label={`Progress ${swarm.progressPercent} percent`}
@@ -368,10 +373,10 @@ function RunningSwarmCard({
       </div>
       <div className="dashboard-running__actions">
         <Link className="dashboard-running__primary" href={swarm.canvasHref}>
-          View Canvas
+          {L(labels, "viewCanvas")}
         </Link>
         <button className="dashboard-running__secondary" disabled type="button">
-          Pause
+          {L(labels, "pause")}
         </button>
       </div>
     </li>

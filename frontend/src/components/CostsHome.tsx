@@ -4,13 +4,13 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
-  LOCAL_COSTS_LANDING,
   type CostsLandingView,
 } from "../lib/projections/costs-landing";
+import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 
 export function CostsHome({
-  view = LOCAL_COSTS_LANDING,
-}: Readonly<{ view?: CostsLandingView }>): JSX.Element {
+  view }: Readonly<{ view: CostsLandingView }>): JSX.Element {
+  const labels = view.labels;
   const [query, setQuery] = useState("");
   const [selectedSwarmId, setSelectedSwarmId] = useState<string | undefined>();
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
@@ -37,16 +37,16 @@ export function CostsHome({
   }, [query, view.agentUsage]);
 
   return (
-    <section aria-label="Cost and token analytics" className="costs-home">
+    <section aria-label={L(labels, "cost_and_token_analytics")} className="costs-home">
       <header className="costs-home__header">
         <div>
-          <p className="eyebrow">COSTS</p>
+          <p className="eyebrow">{view.eyebrow}</p>
           <h1>{view.title}</h1>
           <p className="lede">{view.description}</p>
         </div>
         <div className="costs-home__header-actions">
           <label className="costs-home__search">
-            <span className="visually-hidden">Search costs</span>
+            <span className="visually-hidden">{L(labels, "search_costs")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
               placeholder={view.searchPlaceholder}
@@ -70,7 +70,7 @@ export function CostsHome({
         </div>
       </header>
 
-      <div className="costs-home__kpis" aria-label="Cost KPIs">
+      <div className="costs-home__kpis" aria-label={L(labels, "cost_kpis")}>
         {view.kpis.map((kpi) => (
           <article
             className={`costs-home__kpi costs-home__kpi--${kpi.tone}`}
@@ -92,7 +92,7 @@ export function CostsHome({
       <div className="costs-home__body">
         <div className="costs-home__main">
           <section className="costs-home__panel" aria-labelledby="trend-heading">
-            <h2 id="trend-heading">Cost Trend</h2>
+            <h2 id="trend-heading">{L(labels, "cost_trend")}</h2>
             <p className="costs-home__muted">{view.trendNote}</p>
             <div className="costs-home__chart" aria-hidden="true">
               <i style={{ height: "42%" }} />
@@ -104,11 +104,11 @@ export function CostsHome({
               <i style={{ height: "70%" }} />
               <i style={{ height: "82%" }} />
             </div>
-            <p className="costs-home__muted">↑ Total spend · Jul 1</p>
+            <p className="costs-home__muted">{L(labels, "total_spend_jul_1")}</p>
           </section>
 
           <section className="costs-home__panel" aria-labelledby="swarm-heading">
-            <h2 id="swarm-heading">Cost by Swarm</h2>
+            <h2 id="swarm-heading">{L(labels, "cost_by_swarm")}</h2>
             <ul className="costs-home__bars">
               {swarms.map((row) => (
                 <li key={row.id}>
@@ -149,16 +149,16 @@ export function CostsHome({
           </section>
 
           <section className="costs-home__panel" aria-labelledby="agent-heading">
-            <h2 id="agent-heading">Token Usage by Agent</h2>
+            <h2 id="agent-heading">{L(labels, "token_usage_by_agent")}</h2>
             <div className="costs-home__table-wrap">
               <table className="costs-home__table">
                 <thead>
                   <tr>
-                    <th scope="col">Agent</th>
-                    <th scope="col">Common version</th>
-                    <th scope="col">Tokens</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">In / Out / Tools</th>
+                    <th scope="col">{L(labels, "agent")}</th>
+                    <th scope="col">{L(labels, "common_version")}</th>
+                    <th scope="col">{L(labels, "tokens")}</th>
+                    <th scope="col">{L(labels, "cost")}</th>
+                    <th scope="col">{L(labels, "in_out_tools")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -187,26 +187,26 @@ export function CostsHome({
 
         <aside className="costs-home__side">
           <section className="costs-home__panel" aria-labelledby="budget-heading">
-            <h2 id="budget-heading">Budget &amp; Alerts</h2>
+            <h2 id="budget-heading">{L(labels, "budget_alerts")}</h2>
             <dl className="costs-home__budget">
               <div>
-                <dt>Monthly budget</dt>
+                <dt>{L(labels, "monthly_budget")}</dt>
                 <dd>{view.budget.monthly}</dd>
               </div>
               <div>
-                <dt>Spent</dt>
+                <dt>{L(labels, "spent")}</dt>
                 <dd>{view.budget.spent}</dd>
               </div>
               <div>
-                <dt>Remaining</dt>
+                <dt>{L(labels, "remaining")}</dt>
                 <dd>{view.budget.remaining}</dd>
               </div>
               <div>
-                <dt>Utilization</dt>
+                <dt>{L(labels, "utilization")}</dt>
                 <dd>{view.budget.utilization}</dd>
               </div>
               <div>
-                <dt>Alert threshold</dt>
+                <dt>{L(labels, "alert_threshold")}</dt>
                 <dd>{view.budget.alertThreshold}</dd>
               </div>
             </dl>
@@ -225,19 +225,19 @@ export function CostsHome({
           </section>
 
           <section className="costs-home__panel" aria-labelledby="savings-heading">
-            <h2 id="savings-heading">Commons Savings Impact</h2>
+            <h2 id="savings-heading">{L(labels, "commons_savings_impact")}</h2>
             <ul className="costs-home__savings">
               <li>
                 <strong>{view.savings.savedThisMonth}</strong>
-                <span>Saved this month by using commons</span>
+                <span>{L(labels, "saved_this_month_by_using_commons")}</span>
               </li>
               <li>
                 <strong>{view.savings.efficiencyGain}</strong>
-                <span>Token efficiency gain from commons</span>
+                <span>{L(labels, "token_efficiency_gain_from_commons")}</span>
               </li>
               <li>
                 <strong>{view.savings.ifAllCommons}</strong>
-                <span>If all custom → commons-equivalent</span>
+                <span>{L(labels, "if_all_custom_commons_equivalent")}</span>
               </li>
             </ul>
             <p className="costs-home__muted">
@@ -277,7 +277,7 @@ export function CostsHome({
           </section>
 
           <section className="costs-home__panel" aria-labelledby="rec-heading">
-            <h2 id="rec-heading">Optimization Recommendations</h2>
+            <h2 id="rec-heading">{L(labels, "optimization_recommendations")}</h2>
             <ul className="costs-home__recs">
               {view.recommendations.map((rec) => (
                 <li key={rec.id}>
@@ -291,7 +291,7 @@ export function CostsHome({
           </section>
 
           <section className="costs-home__panel" aria-labelledby="reports-heading">
-            <h2 id="reports-heading">Reports</h2>
+            <h2 id="reports-heading">{L(labels, "reports")}</h2>
             <ul className="costs-home__reports">
               {view.reports.map((report) => (
                 <li key={report}>

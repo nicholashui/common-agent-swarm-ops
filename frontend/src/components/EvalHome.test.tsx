@@ -8,12 +8,13 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_EVAL_LANDING } from "../lib/projections/eval-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { EvalHome } from "./EvalHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("eval home matches ui_11 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<EvalHome />);
+  const markup = renderToStaticMarkup(<EvalHome view={getScreenParameters("eval")} />);
 
   assert.match(markup, /Eval &amp; Self-Improvement Dashboard/);
   assert.match(markup, /Evidence-based L1\/L2\/L3/);

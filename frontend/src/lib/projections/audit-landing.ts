@@ -4,6 +4,8 @@
  * no private tool parameters, no secret values.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type AuditActionType =
   | "rollout"
   | "approval"
@@ -35,6 +37,8 @@ export interface AuditLogRow {
 }
 
 export interface AuditLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly searchPlaceholder: string;
@@ -54,6 +58,37 @@ export interface AuditLandingView {
 }
 
 export const LOCAL_AUDIT_LANDING: AuditLandingView = {
+  labels: {
+    "search_audit_log": "Search audit log",
+    "filters": "Filters",
+    "time_range": "Time range",
+    "actor": "Actor",
+    "action_type": "Action type",
+    "correlation_id": "Correlation ID",
+    "pre_built_reports": "Pre-built reports",
+    "timestamp_utc": "Timestamp (UTC)",
+    "user_actor": "User / Actor",
+    "action": "Action",
+    "target": "Target",
+    "before_after_summary": "Before / After summary",
+    "status": "Status",
+    "event_detail": "EVENT DETAIL",
+    "timestamp": "Timestamp",
+    "reason_summary": "Reason / summary",
+    "prev_hash": "Prev hash",
+    "entry_hash": "Entry hash",
+    "graph_revision": "Graph revision",
+    "common_version": "Common version",
+    "context_redacted": "Context (redacted)",
+    "linked_context": "Linked context",
+    "b7f2c9d0": "b7f2c9d0…",
+    "governance_and_audit_trail": "Governance and audit trail",
+    "audit_filters": "Audit filters",
+    "audit_table": "Audit table",
+    "event_detail_2": "Event detail",
+    "redacted_diff": "Redacted diff",
+  },
+  eyebrow: "GOVERNANCE & AUDIT",
   title: "Governance & Audit Trail",
   description:
     "Tamper-evident, filterable, exportable · who did what, when, and why.",

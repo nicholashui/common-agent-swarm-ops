@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { MobileHome } from "../../components/MobileHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Mobile / PWA Companion (ui_17). Local presentation landing until
- * responsive shells, service worker, and push delivery connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function MobilePage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("mobile");
   return (
     <AppShell>
-      <MobileHome />
+      <MobileHome view={view} />
     </AppShell>
   );
 }
-
-export default MobilePage;

@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { SettingsHome } from "../../components/SettingsHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Global Settings (ui_08). Local presentation landing — no secret values,
- * no client authority to change live policy without authorized actions.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function SettingsPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("settings");
   return (
     <AppShell>
-      <SettingsHome />
+      <SettingsHome view={view} />
     </AppShell>
   );
 }
-
-export default SettingsPage;

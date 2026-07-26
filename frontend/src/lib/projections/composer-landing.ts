@@ -3,6 +3,8 @@
  * Presentation-only until composer recommendation contracts connect.
  */
 
+import type { ScreenLabels } from "./screen-labels";
+
 export type ComposerGraphStyle = "parallel_verify" | "verification_loop" | "dynamic_router" | "supervisor";
 
 export interface ComposerAgentSlot {
@@ -46,6 +48,8 @@ export interface ComposerChatMessage {
 }
 
 export interface ComposerLandingView {
+  readonly labels: ScreenLabels;
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
   readonly swarmName: string;
@@ -63,6 +67,36 @@ export interface ComposerLandingView {
 }
 
 export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
+  labels: {
+    "swarm_name": "Swarm name",
+    "show_system_context": "Show system context",
+    "attach_requirements_file": "Attach requirements file",
+    "common_pattern_browser": "Common Pattern Browser",
+    "search_patterns": "Search patterns",
+    "total_agents_slots": "Total agents / slots",
+    "parallelism_factor": "Parallelism factor",
+    "est_cost_latency": "Est. cost/latency",
+    "verification_coverage": "Verification coverage",
+    "recommended": "Recommended",
+    "agent": "Agent",
+    "verify": "Verify",
+    "b1": "→ B1",
+    "b2": "→ B2",
+    "big_rows_verifier_cycle": "BIG ROWs → verifier cycle ↺",
+    "goal_chip_applied_chip": "Goal chip applied: ${chip}",
+    "enter_a_goal_before_sending": "Enter a goal before sending.",
+    "save_draft_requires_an_authorized_compose_contra": "Save Draft requires an authorized compose contract.",
+    "load_template_requires_an_authorized_template_pr": "Load Template requires an authorized template projection.",
+    "regenerate_requires_the_composer_recommend_strea": "Regenerate requires the composer recommend stream.",
+    "search_patterns_2": "Search patterns…",
+    "swarm_composer": "Swarm composer",
+    "close_composer": "Close composer",
+    "chat_composer": "Chat composer",
+    "goal_examples": "Goal examples",
+    "send_goal": "Send goal",
+    "pattern_filters": "Pattern filters",
+  },
+  eyebrow: "SWARM COMPOSER",
   title: "Swarm Composer",
   description:
     "Turn goals into Common Pattern + Common Agent compositions — pattern-first, NL-driven.",

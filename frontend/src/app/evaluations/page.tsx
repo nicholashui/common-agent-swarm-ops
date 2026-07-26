@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { EvalHome } from "../../components/EvalHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Eval & Self-Improvement Dashboard (ui_11). Local presentation landing until
- * eval aggregates, proposal workflow, and campaign actions connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function EvaluationsPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("eval");
   return (
     <AppShell>
-      <EvalHome />
+      <EvalHome view={view} />
     </AppShell>
   );
 }
-
-export default EvaluationsPage;

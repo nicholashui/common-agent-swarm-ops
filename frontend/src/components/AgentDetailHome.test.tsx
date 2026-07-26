@@ -11,13 +11,14 @@ import {
   AGENT_DETAIL_TABS,
   LOCAL_AGENT_DETAIL_LANDING,
 } from "../lib/projections/agent-detail-landing";
+import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { AgentDetailHome } from "./AgentDetailHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
 test("agent detail home matches ui_05 md/svg structure", () => {
   const markup = renderToStaticMarkup(
-    <AgentDetailHome agentId="local-preview" />,
+    <AgentDetailHome agentId="local-preview" view={getScreenParameters("agentDetail")} />,
   );
 
   assert.match(markup, /VerificationLoopAgent/);

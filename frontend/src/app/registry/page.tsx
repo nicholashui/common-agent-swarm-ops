@@ -1,16 +1,18 @@
+"use client";
+
 import { AppShell } from "../../components/AppShell";
 import { RegistryHome } from "../../components/RegistryHome";
+import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 
 /**
- * Common Registry Hub (ui_07). Local presentation landing until generated
- * commons registry projections and governance actions connect.
+ * Screen parameters are read from the stored projection store (not hardcoded).
+ * Update via setScreenParameters / updateScreenParameters when live projections connect.
  */
-function RegistryPage(): JSX.Element {
+export default function Page(): JSX.Element {
+  const view = useScreenParameters("registry");
   return (
     <AppShell>
-      <RegistryHome />
+      <RegistryHome view={view} />
     </AppShell>
   );
 }
-
-export default RegistryPage;
