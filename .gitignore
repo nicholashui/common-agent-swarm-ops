@@ -1,6 +1,7 @@
 node_modules/
 external/sources/
 external/docs/
+.run/
 *.log
 .DS_Store
 

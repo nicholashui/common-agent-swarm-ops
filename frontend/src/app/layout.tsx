@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "common/swarm · Registry and operations",
-  description: "Reusable agent swarms, collective improvement, and production operations.",
+  title: "common-agent-swarm-ops",
+  description: "Common-first control plane for reusable agent swarms and production operations.",
 };
 
 function RootLayout({ children }: Readonly<{ children: ReactNode }>): ReactNode {

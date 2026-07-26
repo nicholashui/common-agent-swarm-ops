@@ -1,7 +1,16 @@
-import { UnavailableScreen } from "../../components/UnavailableScreen";
+import { AppShell } from "../../components/AppShell";
+import { Audit } from "../../components/OperationalScreens";
+import {
+  LOCAL_AUDIT_PROJECTION,
+  LOCAL_PREVIEW_HANDLERS,
+} from "../../lib/projections/local-preview";
 
 function AuditPage(): JSX.Element {
-  return <UnavailableScreen screenId="ui_14_audit" />;
+  return (
+    <AppShell>
+      <Audit projection={LOCAL_AUDIT_PROJECTION} {...LOCAL_PREVIEW_HANDLERS} />
+    </AppShell>
+  );
 }
 
 export default AuditPage;

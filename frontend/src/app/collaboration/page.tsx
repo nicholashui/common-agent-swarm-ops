@@ -1,7 +1,13 @@
-import { UnavailableScreen } from "../../components/UnavailableScreen";
+import { AppShell } from "../../components/AppShell";
+import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
+import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
 
 function CollaborationPage(): JSX.Element {
-  return <UnavailableScreen screenId="ui_18_collaboration" />;
+  return (
+    <AppShell>
+      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.collaboration} />
+    </AppShell>
+  );
 }
 
 export default CollaborationPage;
