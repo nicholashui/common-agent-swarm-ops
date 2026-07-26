@@ -3,22 +3,28 @@
 **As of:** 2026-07-26  
 **State:** ui_00_menu frontend implementation reviewed, corrected, and tested.
 
-## Latest work (ui_00_menu + destination unlock)
+## Latest work
 
-- Menu: `application-menu.ts` + `ShellNavigation.tsx` + light-rail CSS
-- All menu destinations unlocked with local previews (no UnavailableScreen gates)
-- Shared fixtures: `frontend/src/lib/projections/local-preview.ts`
-- Operational routes use real renderers; secondary routes use `LocalDestinationPreview`
-- Canvas: `/canvas` + `/swarms/[swarmId]/canvas` render `Canvas` (no invented swarm id)
-- Operations: Monitoring + ApprovalGate local stack
-- Tests: routes + menu + local-preview — pass; `tsc --noEmit` pass
+### ui_01_login + session entry (current)
+- Login UI per ui_01_login.md/svg + local session entry APIs under `frontend/src/app/api/auth/`
+- Local users: `demo@local`/`demo`, `ops@local`/`ops` (override via `CASOPS_LOCAL_AUTH_USERS`)
+- Demo mode: `/api/auth/demo` + dismissible banner + Exit Demo logout
+- Password reset request/confirm (dev token exposed only non-production)
+- OIDC start + **callback code exchange** for Keycloak/Google/GitHub (`oidc.ts`, `/api/auth/oidc/callback`)
+- Default redirect URI: `{origin}/api/auth/oidc/callback?provider=…` (override with env)
+- Login shows `?error=` from failed SSO; state cookie validated before session issue
+- Signed `frontend_session` httpOnly cookie; shell workspace labels from session
+- Tests: `local-auth.test.ts`, `oidc.test.ts`, `LoginScreen.test.tsx` — pass
+
+### ui_00_menu + destination unlock (prior)
+- Menu shell + all destinations local preview — committed `2fbf4d4`
 
 ## Resume here
 
-1. Dogfood full menu navigation in browser (`.\start_all.ps1`).
-2. Replace local previews with generated `/api/v1` projections as contracts land.
-3. Wire shell projection for live freshness / authorized VA / correlation copy.
-4. Unrelated WIP: `start_all.ps1` / `stop_all.ps1`, `.gitignore` `.run/`, bat helpers.
+1. Dogfood `/login` + menu in browser (`.\start_all.ps1`).
+2. Wire real session entry (Keycloak/OIDC) without accepting tenant/actor from browser.
+3. Replace local previews with `/api/v1` projections as contracts land.
+4. Unrelated untracked: `callgrok.bat`, `check_all_ui.bat`, `run_grok.bat`.
 
 ## Do not forget
 

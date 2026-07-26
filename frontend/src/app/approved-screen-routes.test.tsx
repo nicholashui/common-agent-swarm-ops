@@ -222,7 +222,10 @@ test("login remains a public identity-only session-entry route", () => {
   assert.doesNotMatch(source, /AuthenticatedShell|AppShell|UnavailableScreen/);
   assert.equal(getScreenDefinition("ui_01_login").routeOrShell, "/login");
   assert.match(markup, /aria-labelledby="login-title"/);
-  assert.match(markup, /<label>Email<input type="email"/);
-  assert.match(markup, /<label>Password<input type="password"/);
-  assert.match(markup, />Sign in<\/button>/);
+  assert.match(markup, /type="email"/);
+  assert.match(markup, /type="password"/);
+  assert.match(markup, />Sign in</);
+  assert.match(markup, /Keycloak \(Self-hosted\)/);
+  assert.match(markup, /Try Demo Workspace/);
+  assert.doesNotMatch(markup, /tenant_id|actor_id|agent_id/i);
 });
