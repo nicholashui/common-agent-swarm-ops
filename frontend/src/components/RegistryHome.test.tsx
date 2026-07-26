@@ -17,6 +17,9 @@ test("registry home matches ui_07 md/svg structure", () => {
 
   assert.match(markup, /Common Registry/);
   assert.match(markup, /Battle-tested, versioned, collectively improved/);
+  assert.match(markup, /Special Agents Pack/);
+  assert.match(markup, /specials\.aesthetics-agent/);
+  assert.match(markup, /draft · non-active/);
   assert.match(markup, /Trading Lab/);
   assert.match(markup, /Search agents, patterns, or describe what you need/);
   assert.match(markup, /My Contributions/);

@@ -101,6 +101,11 @@ interface ScopeEntry<TProjection> {
 /**
  * Owns snapshot-first, sequence-guarded live state for each authorized scope.
  * The loader, decoder, and subscription factory are generated-contract adapters.
+ *
+ * Pair with `createAuthorizedSseSubscriptionFactory` (`sse-subscription.ts`) so
+ * reconnects resume via Last-Event-ID / last_event_id on `/api/v1/events/stream`.
+ * On sequence gap, schema mismatch, or replay failure this controller discards
+ * incremental state, reloads the REST snapshot, and resubscribes.
  */
 export class LiveProjectionController<TProjection, TEvent>
   implements ProjectionStateStore, AbortableSseSubscription {

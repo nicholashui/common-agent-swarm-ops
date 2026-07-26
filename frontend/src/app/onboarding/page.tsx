@@ -1,11 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { OnboardingHome } from "../../components/OnboardingHome";
 
+/**
+ * Onboarding, Help & Documentation (ui_16). Local presentation landing until
+ * tour progress preferences and docs CMS connect.
+ */
 function OnboardingPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.onboarding} />
+      <OnboardingHome />
     </AppShell>
   );
 }

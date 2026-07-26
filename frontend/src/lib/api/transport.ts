@@ -19,6 +19,15 @@ export interface PublicApiTransportOptions {
   readonly readRetryLimit?: number;
 }
 
+/** Optional per-request headers allowed by the browser Public API transport. */
+export interface PublicApiRequestOptions {
+  /**
+   * Extra request headers. Mutations should pass a stable `Idempotency-Key`
+   * for each pending user intent (backend_redesign / frontend_redesign 8.2).
+   */
+  readonly headers?: Readonly<Record<string, string>>;
+}
+
 type JsonRecord = Record<string, unknown>;
 
 /** The sole browser transport for generated same-origin Public API operations. */
@@ -35,24 +44,41 @@ export class PublicApiTransport implements GeneratedOperationExecutor {
     operationId: TId,
     request: GeneratedOperationRequest<TId>,
   ): Promise<GeneratedOperationResult<GeneratedOperationData<TId>>> {
+    return this.executeWithOptions(operationId, request, {});
+  }
+
+  /** Same as {@link execute}, with optional correlation/idempotency headers. */
+  public async executeWithOptions<TId extends GeneratedOperationId>(
+    operationId: TId,
+    request: GeneratedOperationRequest<TId>,
+    options: PublicApiRequestOptions,
+  ): Promise<GeneratedOperationResult<GeneratedOperationData<TId>>> {
     const generatedRequest = buildGeneratedRequest(operationId, request);
     assertSameOriginVersionedPath(generatedRequest.path);
+    const headers = sanitizeRequestHeaders(options.headers);
     const retryLimit = generatedRequest.method === "GET" ? this.readRetryLimit : 0;
     for (let attempt = 0; attempt <= retryLimit; attempt += 1) {
-      const outcome = await this.perform<GeneratedOperationData<TId>>(generatedRequest);
+      const outcome = await this.perform<GeneratedOperationData<TId>>(generatedRequest, headers);
       if (outcome.ok || !outcome.retryable || attempt === retryLimit) return outcome;
     }
     return invalidResponse();
   }
 
-  private async perform<TData>(request: { readonly method: string; readonly path: string; readonly body?: unknown }): Promise<GeneratedOperationResult<TData>> {
+  private async perform<TData>(
+    request: { readonly method: string; readonly path: string; readonly body?: unknown },
+    extraHeaders: Readonly<Record<string, string>>,
+  ): Promise<GeneratedOperationResult<TData>> {
     let response: Response;
     try {
       response = await this.fetchImpl(request.path, {
         method: request.method,
         credentials: "include",
         cache: "no-store",
-        headers: { Accept: "application/json", ...(request.body === undefined ? {} : { "Content-Type": "application/json" }) },
+        headers: {
+          Accept: "application/json",
+          ...(request.body === undefined ? {} : { "Content-Type": "application/json" }),
+          ...extraHeaders,
+        },
         ...(request.body === undefined ? {} : { body: JSON.stringify(request.body) }),
       });
     } catch {
@@ -62,6 +88,19 @@ export class PublicApiTransport implements GeneratedOperationExecutor {
     if (response.ok) return parseSuccess<TData>(payload);
     return parseError(payload, response.headers.get("Retry-After"));
   }
+}
+
+const ALLOWED_REQUEST_HEADER = /^(Idempotency-Key|X-Correlation-Id)$/i;
+
+function sanitizeRequestHeaders(headers: Readonly<Record<string, string>> | undefined): Readonly<Record<string, string>> {
+  if (headers === undefined) return {};
+  const sanitized: Record<string, string> = {};
+  for (const [key, value] of Object.entries(headers)) {
+    if (!ALLOWED_REQUEST_HEADER.test(key)) continue;
+    if (typeof value !== "string" || value.trim().length === 0 || value.length > 200) continue;
+    sanitized[key] = value.trim();
+  }
+  return sanitized;
 }
 
 function parseSuccess<TData>(payload: unknown): GeneratedOperationResult<TData> {

@@ -24,13 +24,17 @@ test("reads redacted graph state through the versioned Host API only", async () 
 
 test("submits only a selected approval decision without a client actor", async () => {
   let requestBody = "";
+  let requestHeaders: HeadersInit | undefined;
   const api = createOperatorApi({ fetchImpl: async (_input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
     requestBody = String(init?.body);
+    requestHeaders = init?.headers;
     return Response.json({ approval_id: "approval-1", run_id: "run-1", actor_id: "host-derived", selected_value: "denied", reason_is_valid: true, value_is_valid: true, resumed: false, gate_status: "paused", submitted_at: "2026-01-02T03:04:05Z", action_preview: preview });
   } });
-  const decision = await api.submitApprovalDecision("approval-1", "denied", "Needs review");
+  const decision = await api.submitApprovalDecision("approval-1", "denied", "Needs review", { idempotencyKey: "decision-key-1" });
   assert.deepEqual(JSON.parse(requestBody), { selected_value: "denied", reason: "Needs review" });
   assert.equal(decision.actor_id, "host-derived");
+  const headers = requestHeaders as Record<string, string>;
+  assert.equal(headers["Idempotency-Key"], "decision-key-1");
 });
 
 test("reports typed Host errors with a safe correction control", async () => {
@@ -93,4 +97,21 @@ test("E1 operator contract keeps redacted projections on same-origin versioned r
     "/api/v1/approvals/approval-1/decision",
   ]);
   assert.equal(calls[3]?.body, JSON.stringify({ selected_value: "approved", reason: "Reviewed locally." }));
+});
+
+test("legacy operator mutations always send Idempotency-Key on /api/v1 only", async () => {
+  const headersSeen: Array<Record<string, string>> = [];
+  const api = createOperatorApi({ fetchImpl: async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    assert.equal(String(input), "/api/v1/approvals/approval-1/decision");
+    headersSeen.push({ ...(init?.headers as Record<string, string>) });
+    return Response.json({
+      approval_id: "approval-1", run_id: "run-1", actor_id: "host-derived", selected_value: "approved",
+      reason_is_valid: true, value_is_valid: true, resumed: true, gate_status: "resumed",
+      submitted_at: "2026-01-02T03:04:05Z", action_preview: preview,
+    });
+  } });
+  await api.submitApprovalDecision("approval-1", "approved", "Reviewed.", { idempotencyKey: "stable-key" });
+  await api.submitApprovalDecision("approval-1", "approved", "Reviewed.");
+  assert.equal(headersSeen[0]?.["Idempotency-Key"], "stable-key");
+  assert.ok(typeof headersSeen[1]?.["Idempotency-Key"] === "string" && headersSeen[1]["Idempotency-Key"].length > 0);
 });

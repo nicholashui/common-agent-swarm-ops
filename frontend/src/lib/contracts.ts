@@ -85,11 +85,28 @@ export interface FetchLike {
   (input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
 }
 
+/**
+ * Legacy operator façade over `/api/v1` only.
+ *
+ * Prefer the generated Public API client (`lib/api/client`) and
+ * `CommandCoordinator` for new screens. This module remains for the legacy
+ * OperatorConsole path and must not introduce unversioned routes or client-derived
+ * actor/tenant authority.
+ */
 export interface OperatorApi {
   getRun(runId: string): Promise<RunProjection>;
   getGraphState(runId: string): Promise<GraphState>;
   getApprovalGate(approvalId: string): Promise<ApprovalGate>;
-  submitApprovalDecision(approvalId: string, value: ApprovalValue, reason: string): Promise<ApprovalDecision>;
+  /**
+   * Submits an approval decision with a stable Idempotency-Key for the pending
+   * user intent. When omitted, a new key is minted for this call only.
+   */
+  submitApprovalDecision(
+    approvalId: string,
+    value: ApprovalValue,
+    reason: string,
+    options?: { readonly idempotencyKey?: string },
+  ): Promise<ApprovalDecision>;
 }
 
 interface ClientOptions {
@@ -107,10 +124,37 @@ export function createOperatorApi(options: ClientOptions = {}): OperatorApi {
     getRun: (runId: string): Promise<RunProjection> => request(fetchImpl, "", runPath(runId), undefined, parseRunProjection),
     getGraphState: (runId: string): Promise<GraphState> => request(fetchImpl, "", `${runPath(runId)}/graph-state`, undefined, parseGraphState),
     getApprovalGate: (approvalId: string): Promise<ApprovalGate> => request(fetchImpl, "", approvalPath(approvalId), undefined, parseApprovalGate),
-    submitApprovalDecision: (approvalId: string, value: ApprovalValue, reason: string): Promise<ApprovalDecision> => request(
-      fetchImpl, "", `${approvalPath(approvalId)}/decision`, { method: "POST", body: JSON.stringify({ selected_value: value, reason }) }, parseApprovalDecision,
-    ),
+    submitApprovalDecision: (
+      approvalId: string,
+      value: ApprovalValue,
+      reason: string,
+      decisionOptions: { readonly idempotencyKey?: string } = {},
+    ): Promise<ApprovalDecision> => {
+      const idempotencyKey = normalizeIdempotencyKey(decisionOptions.idempotencyKey) ?? mintIdempotencyKey();
+      return request(
+        fetchImpl,
+        "",
+        `${approvalPath(approvalId)}/decision`,
+        {
+          method: "POST",
+          body: JSON.stringify({ selected_value: value, reason }),
+          headers: { "Idempotency-Key": idempotencyKey },
+        },
+        parseApprovalDecision,
+      );
+    },
   };
+}
+
+function normalizeIdempotencyKey(value: string | undefined): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed.length > 0 && trimmed.length <= 200 ? trimmed : undefined;
+}
+
+function mintIdempotencyKey(): string {
+  if (typeof globalThis.crypto?.randomUUID === "function") return globalThis.crypto.randomUUID();
+  return `legacy-command-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 }
 
 function unavailableLegacyRequest(): Promise<Response> {
@@ -129,11 +173,36 @@ export function operatorCorrection(error: unknown): string {
 }
 
 async function request<T>(fetchImpl: FetchLike, baseUrl: string, path: string, init: RequestInit | undefined, parser: JsonParser<T>): Promise<T> {
-  const response = await fetchImpl(apiUrl(baseUrl, path), { credentials: "include", headers: { Accept: "application/json", ...(init?.body ? { "Content-Type": "application/json" } : {}) }, ...init });
+  const initHeaders = init?.headers;
+  const extraHeaders = headersToRecord(initHeaders);
+  const response = await fetchImpl(apiUrl(baseUrl, path), {
+    credentials: "include",
+    ...init,
+    headers: {
+      Accept: "application/json",
+      ...(init?.body ? { "Content-Type": "application/json" } : {}),
+      ...extraHeaders,
+    },
+  });
   const payload: unknown = await response.json().catch((): null => null);
   if (!response.ok) throw parseError(payload, response.status);
   try { return parser(payload); }
   catch (error: unknown) { throw clientError("invalid_response", response.status, error instanceof Error ? error.message : "The Host response was not usable."); }
+}
+
+function headersToRecord(headers: HeadersInit | undefined): Record<string, string> {
+  if (headers === undefined) return {};
+  if (headers instanceof Headers) {
+    const record: Record<string, string> = {};
+    headers.forEach((value, key) => {
+      record[key] = value;
+    });
+    return record;
+  }
+  if (Array.isArray(headers)) {
+    return Object.fromEntries(headers);
+  }
+  return { ...headers };
 }
 
 function parseRunProjection(value: unknown): RunProjection {

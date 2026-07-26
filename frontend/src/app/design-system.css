@@ -1,0 +1,302 @@
+/**
+ * Design system tokens & shared primitives from
+ * docs/frontend_redesign/common-style.html (UI Style Guide v2.1 light frame).
+ *
+ * Semantic surfaces: white base, stone-50 surface, stone-100 elevated, stone-200 border.
+ * Accents: indigo for Common registry, violet for patterns/routers, amber for custom forks.
+ * Status always uses text + color (+ optional pulse); never color alone.
+ */
+
+.app-shell:has(.menu-workspace),
+.login-page {
+  --ds-base-bg: #ffffff;
+  --ds-surface: #fafaf9;
+  --ds-elevated: #f5f5f4;
+  --ds-border: #e7e5e4;
+  --ds-text: #1c1917;
+  --ds-text-secondary: #78716c;
+  --ds-text-faint: #a8a29e;
+  --ds-common: #4f46e5;
+  --ds-common-hover: #4338ca;
+  --ds-common-surface: #eef2ff;
+  --ds-common-border: #c7d2fe;
+  --ds-pattern: #7c3aed;
+  --ds-pattern-surface: #f5f3ff;
+  --ds-pattern-border: #ddd6fe;
+  --ds-custom: #f59e0b;
+  --ds-custom-surface: #fffbeb;
+  --ds-success: #10b981;
+  --ds-success-surface: #ecfdf5;
+  --ds-success-border: #a7f3d0;
+  --ds-success-text: #047857;
+  --ds-error: #ef4444;
+  --ds-error-surface: #fef2f2;
+  --ds-error-border: #fecaca;
+  --ds-error-text: #dc2626;
+  --ds-warning: #f59e0b;
+  --ds-warning-surface: #fffbeb;
+  --ds-warning-border: #fcd34d;
+  --ds-warning-text: #92400e;
+  --ds-info: #3b82f6;
+  --ds-info-surface: #eff6ff;
+  --ds-info-border: #bfdbfe;
+  --ds-info-text: #1d4ed8;
+  --ds-cta: #1c1917;
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 12px;
+  --ds-radius-lg: 16px;
+  --ds-radius-pill: 999px;
+  --ds-font: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ds-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --ds-min-target: 44px;
+  font-family: var(--ds-font);
+  color: var(--ds-text);
+}
+
+.app-shell:has(.menu-workspace) {
+  background: var(--ds-surface);
+  color: var(--ds-text);
+}
+
+.app-shell:has(.menu-workspace) .app-main {
+  color: var(--ds-text);
+}
+
+.app-shell:has(.menu-workspace) .eyebrow {
+  color: var(--ds-common);
+  font-family: var(--ds-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.app-shell:has(.menu-workspace) .lede {
+  color: var(--ds-text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Common registry badge (indigo mono) ─────────────────── */
+.ds-common-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  min-height: 20px;
+  padding: 2px 8px;
+  color: #4338ca;
+  background: var(--ds-common-surface);
+  border: 1px solid var(--ds-common-border);
+  border-radius: 6px;
+  font-family: var(--ds-mono);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ds-common-badge__label {
+  color: var(--ds-common);
+  font-weight: 700;
+}
+
+.ds-common-badge__meta {
+  color: #a8a29e;
+  font-weight: 500;
+}
+
+/* ── Status pills: text + color (+ pulse); never color alone ─ */
+.ds-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  padding: 2px 10px;
+  border: 1px solid currentColor;
+  border-radius: var(--ds-radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ds-status__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.ds-status__dot--pulse {
+  animation: ds-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ds-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.ds-status--live,
+.ds-status--complete,
+.ds-status--success,
+.ds-status--done {
+  color: var(--ds-success-text);
+  background: var(--ds-success-surface);
+  border-color: var(--ds-success-border);
+}
+
+.ds-status--running {
+  color: var(--ds-info-text);
+  background: var(--ds-info-surface);
+  border-color: var(--ds-info-border);
+}
+
+.ds-status--queued {
+  color: #6d28d9;
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+}
+
+.ds-status--self_refine {
+  color: #7e22ce;
+  background: #faf5ff;
+  border-color: #e9d5ff;
+}
+
+.ds-status--delayed {
+  color: #a16207;
+  background: #fefce8;
+  border-color: #fde68a;
+}
+
+.ds-status--reconnecting {
+  color: #c2410c;
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.ds-status--degraded,
+.ds-status--failed,
+.ds-status--error {
+  color: var(--ds-error-text);
+  background: var(--ds-error-surface);
+  border-color: var(--ds-error-border);
+}
+
+.ds-status--recovery,
+.ds-status--blocked,
+.ds-status--manual_recovery_required {
+  color: var(--ds-warning-text);
+  background: var(--ds-warning-surface);
+  border-color: var(--ds-warning-border);
+}
+
+.ds-status--unavailable,
+.ds-status--stale,
+.ds-status--cancelled,
+.ds-status--idle {
+  color: var(--ds-text-secondary);
+  background: var(--ds-elevated);
+  border-color: var(--ds-border);
+}
+
+/* ── Surfaces & CTAs ─────────────────────────────────────── */
+.ds-panel {
+  padding: 16px 18px;
+  color: var(--ds-text);
+  background: var(--ds-base-bg);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: 0 1px 2px #1c19170a;
+}
+
+.ds-cta {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-radius: var(--ds-radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ds-cta--primary {
+  color: #fff;
+  background: var(--ds-cta);
+  border: 1px solid var(--ds-cta);
+}
+
+.ds-cta--common {
+  color: #fff;
+  background: var(--ds-common);
+  border: 1px solid var(--ds-common);
+}
+
+.ds-cta--secondary {
+  color: var(--ds-text-secondary);
+  background: var(--ds-base-bg);
+  border: 1px solid var(--ds-border);
+}
+
+.ds-cta--ghost {
+  color: var(--ds-common);
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+/* Freshness / projection truthfulness labels (req 8.4) */
+.ds-freshness {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--ds-success-border);
+  border-radius: var(--ds-radius-pill);
+  color: var(--ds-success-text);
+  background: var(--ds-success-surface);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ds-freshness--stale,
+.ds-freshness--delayed {
+  color: var(--ds-warning-text);
+  background: var(--ds-warning-surface);
+  border-color: var(--ds-warning-border);
+}
+
+.ds-freshness--reconnecting,
+.ds-freshness--degraded {
+  color: #c2410c;
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.ds-freshness--unavailable {
+  color: var(--ds-text-secondary);
+  background: var(--ds-elevated);
+  border-color: var(--ds-border);
+}
+
+.ds-freshness__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-status__dot--pulse {
+    animation: none;
+  }
+}

@@ -1,11 +1,15 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { CollaborationHome } from "../../components/CollaborationHome";
 
+/**
+ * Collaboration & Sharing (ui_18). Local presentation landing until
+ * sharing permissions, comments, and co-edit sessions connect.
+ * No peer execution channel.
+ */
 function CollaborationPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.collaboration} />
+      <CollaborationHome />
     </AppShell>
   );
 }

@@ -59,3 +59,30 @@ test("rejects responses that are not public data and correlation envelopes", asy
   const result = await client.request(RUN_OPERATION, { path: { run_id: "run-1" } });
   assert.deepEqual(result, { ok: false, code: "invalid_public_response", message: "The public API returned an unusable response.", retryable: false });
 });
+
+test("attaches Idempotency-Key on generated mutations and strips disallowed headers", async () => {
+  let requestedInit: RequestInit | undefined;
+  const client = createPublicApiClient({ fetchImpl: async (_input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    requestedInit = init;
+    return Response.json({ data: { approval_id: "approval-1", selected_value: "approved" }, meta: { correlation_id: "corr-idem" } });
+  } });
+
+  await client.request(
+    APPROVAL_OPERATION,
+    { path: { approval_id: "approval-1" }, body: { selected_value: "approved", reason: "Reviewed." } },
+    {
+      headers: {
+        "Idempotency-Key": "command-identity-1",
+        "X-Correlation-Id": "corr-client",
+        Authorization: "Bearer should-not-pass",
+        Cookie: "session=should-not-pass",
+      },
+    },
+  );
+
+  const headers = requestedInit?.headers as Record<string, string>;
+  assert.equal(headers["Idempotency-Key"], "command-identity-1");
+  assert.equal(headers["X-Correlation-Id"], "corr-client");
+  assert.equal(headers.Authorization, undefined);
+  assert.equal(headers.Cookie, undefined);
+});

@@ -1,0 +1,95 @@
+"use client";
+
+import React, { useMemo, useState } from "react";
+
+import {
+  LOCAL_SPECIALS_LANDING,
+  type SpecialsLandingView,
+} from "../lib/projections/specials-landing";
+import { SafeContent } from "./projection/SafeContent";
+
+export function SpecialsCatalog({
+  view = LOCAL_SPECIALS_LANDING,
+}: Readonly<{ view?: SpecialsLandingView }>): JSX.Element {
+  const [query, setQuery] = useState("");
+  const [statusMessage, setStatusMessage] = useState<string | undefined>();
+
+  const agents = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (q.length === 0) return view.agents;
+    return view.agents.filter(
+      (agent) =>
+        agent.title.toLowerCase().includes(q)
+        || agent.agentId.toLowerCase().includes(q)
+        || agent.summary.toLowerCase().includes(q),
+    );
+  }, [query, view.agents]);
+
+  return (
+    <section aria-label="Special agents pack catalog" className="specials-catalog">
+      <header className="specials-catalog__header">
+        <div>
+          <p className="eyebrow">SPECIALS PACK · DRAFT</p>
+          <h2>{view.title}</h2>
+          <p className="lede">{view.subtitle}</p>
+        </div>
+        <label className="specials-catalog__search">
+          <span className="visually-hidden">Search special agents</span>
+          <input
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search specials by id or title…"
+            value={query}
+          />
+        </label>
+      </header>
+
+      <p className="specials-catalog__disclaimer" role="note">
+        {view.disclaimer}
+      </p>
+
+      {statusMessage ? (
+        <p aria-live="polite" className="specials-catalog__status" role="status">
+          {statusMessage}
+        </p>
+      ) : null}
+
+      {agents.length === 0 ? (
+        <p className="specials-catalog__empty">{view.emptyLabel}</p>
+      ) : (
+        <ul className="specials-catalog__list">
+          {agents.map((agent) => (
+            <li className="specials-catalog__card" key={agent.agentId}>
+              <div className="specials-catalog__card-head">
+                <h3>{agent.title}</h3>
+                <span className="specials-catalog__pill">draft · non-active</span>
+              </div>
+              <p className="specials-catalog__id">
+                <code>{agent.agentId}</code>
+              </p>
+              <SafeContent content={agent.summary} />
+              <p className="specials-catalog__meta">
+                provider: {agent.provider} · tools: {agent.allowedTools.length} · network:{" "}
+                {agent.networkAccess ? "on" : "off"} · production activation requested:{" "}
+                {agent.productionActivationRequested ? "yes" : "no"}
+              </p>
+              <p className="specials-catalog__source">
+                Provenance: <code>{agent.sourcePath}</code>
+              </p>
+              <button
+                className="specials-catalog__action"
+                onClick={() =>
+                  setStatusMessage(
+                    `${agent.agentId} remains draft/non-active. Activate requires separate host approval gates — not available from this catalog.`,
+                  )
+                }
+                type="button"
+              >
+                Inspect activation policy
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}

@@ -1,11 +1,15 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { CostsHome } from "../../components/CostsHome";
 
+/**
+ * Cost & Token Analytics (ui_19). Local presentation landing until
+ * cost attribution projections and authorized budget actions connect.
+ * No client-created budget authority.
+ */
 function CostsPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.costs} />
+      <CostsHome />
     </AppShell>
   );
 }

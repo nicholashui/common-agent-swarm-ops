@@ -10,6 +10,7 @@ import {
   type RegistryPatternCard,
   type RegistryViewMode,
 } from "../lib/projections/registry-landing";
+import { SpecialsCatalog } from "./SpecialsCatalog";
 
 export function RegistryHome({
   view = LOCAL_REGISTRY_LANDING,
@@ -364,6 +365,8 @@ export function RegistryHome({
           </section>
         </aside>
       </div>
+
+      <SpecialsCatalog />
 
       <p className="registry-home__footer">{view.footerNote}</p>
     </section>

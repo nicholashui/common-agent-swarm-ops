@@ -1,11 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { BlueprintsHome } from "../../components/BlueprintsHome";
 
+/**
+ * Blueprints & Templates Gallery (ui_20). Local presentation landing until
+ * blueprint projections and authorized deploy/publish actions connect.
+ */
 function BlueprintsPage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.blueprints} />
+      <BlueprintsHome />
     </AppShell>
   );
 }

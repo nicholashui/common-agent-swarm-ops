@@ -1,11 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { LocalDestinationPreview } from "../../components/LocalDestinationPreview";
-import { LOCAL_DESTINATION_COPY } from "../../lib/projections/local-preview";
+import { MobileHome } from "../../components/MobileHome";
 
+/**
+ * Mobile / PWA Companion (ui_17). Local presentation landing until
+ * responsive shells, service worker, and push delivery connect.
+ */
 function MobilePage(): JSX.Element {
   return (
     <AppShell>
-      <LocalDestinationPreview copy={LOCAL_DESTINATION_COPY.mobile} />
+      <MobileHome />
     </AppShell>
   );
 }

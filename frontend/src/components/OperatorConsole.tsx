@@ -30,6 +30,8 @@ export function OperatorConsole(): JSX.Element {
   const [decision, setDecision] = useState<ApprovalDecision | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  /** Stable identity for the pending approval decision intent (frontend_redesign 8.2). */
+  const [decisionIdempotencyKey, setDecisionIdempotencyKey] = useState<string | null>(null);
 
   async function inspectRun(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
@@ -43,7 +45,7 @@ export function OperatorConsole(): JSX.Element {
 
   async function loadGate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    setBusy(true); setError(null);
+    setBusy(true); setError(null); setDecisionIdempotencyKey(null);
     try { setGate(await api.getApprovalGate(approvalId)); }
     catch (caught: unknown) { setError(operatorCorrection(caught)); }
     finally { setBusy(false); }
@@ -51,10 +53,21 @@ export function OperatorConsole(): JSX.Element {
 
   async function decide(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
+    if (busy) return;
     setBusy(true); setError(null);
-    try { setDecision(await api.submitApprovalDecision(approvalId, value, reason)); }
-    catch (caught: unknown) { setError(operatorCorrection(caught)); }
-    finally { setBusy(false); }
+    const idempotencyKey = decisionIdempotencyKey
+      ?? (typeof globalThis.crypto?.randomUUID === "function"
+        ? globalThis.crypto.randomUUID()
+        : `decision-${Date.now().toString(36)}`);
+    setDecisionIdempotencyKey(idempotencyKey);
+    try {
+      setDecision(await api.submitApprovalDecision(approvalId, value, reason, { idempotencyKey }));
+      setDecisionIdempotencyKey(null);
+    } catch (caught: unknown) {
+      setError(operatorCorrection(caught));
+    } finally {
+      setBusy(false);
+    }
   }
 
   return <>
