@@ -1,8 +1,5 @@
-"use client";
-
 import { AppShell } from "../../../../components/AppShell";
-import { CanvasHome } from "../../../../components/CanvasHome";
-import { useScreenParameters } from "../../../../lib/projections/use-screen-parameters";
+import { BoundSwarmCanvasHome } from "../../../../components/screen/BoundScreenHome";
 
 interface SwarmCanvasPageProps {
   readonly params: {
@@ -11,15 +8,13 @@ interface SwarmCanvasPageProps {
 }
 
 /**
- * Canvas reads stored canvas parameters. swarmId is reserved for authorized
- * projection scope when live graph contracts connect.
+ * Canvas binds the opaque swarmId route parameter and stored canvas projection
+ * below the server-rendered authenticated shell.
  */
 export default function SwarmCanvasPage({ params }: SwarmCanvasPageProps): JSX.Element {
-  void params;
-  const view = useScreenParameters("canvas");
   return (
     <AppShell>
-      <CanvasHome view={view} />
+      <BoundSwarmCanvasHome swarmId={params.swarmId} />
     </AppShell>
   );
 }

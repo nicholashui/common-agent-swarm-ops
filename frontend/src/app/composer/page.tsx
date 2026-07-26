@@ -1,18 +1,14 @@
-"use client";
-
 import { AppShell } from "../../components/AppShell";
-import { ComposerHome } from "../../components/ComposerHome";
-import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
+import { BoundScreenHome } from "../../components/screen/BoundScreenHome";
 
 /**
- * Screen parameters are read from the stored projection store (not hardcoded).
- * Update via setScreenParameters / updateScreenParameters when live projections connect.
+ * ComposerHome reads stored parameters through useScreenParameters below the
+ * server-rendered authenticated shell.
  */
 export default function Page(): JSX.Element {
-  const view = useScreenParameters("composer");
   return (
     <AppShell>
-      <ComposerHome view={view} />
+      <BoundScreenHome screen="composer" />
     </AppShell>
   );
 }

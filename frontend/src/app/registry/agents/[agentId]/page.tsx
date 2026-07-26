@@ -1,8 +1,5 @@
-"use client";
-
 import { AppShell } from "../../../../components/AppShell";
-import { AgentDetailHome } from "../../../../components/AgentDetailHome";
-import { useScreenParameters } from "../../../../lib/projections/use-screen-parameters";
+import { BoundAgentDetailHome } from "../../../../components/screen/BoundScreenHome";
 
 interface AgentDetailPageProps {
   readonly params: {
@@ -11,14 +8,13 @@ interface AgentDetailPageProps {
 }
 
 /**
- * Agent detail reads stored agentDetail parameters (not hardcoded fixtures).
- * agentId is reserved for future authorized projection scope.
+ * Agent detail binds the opaque route parameter and stored agentDetail
+ * projection below the server-rendered authenticated shell.
  */
 export default function AgentDetailPage({ params }: AgentDetailPageProps): JSX.Element {
-  const view = useScreenParameters("agentDetail");
   return (
     <AppShell>
-      <AgentDetailHome agentId={params.agentId} view={view} />
+      <BoundAgentDetailHome agentId={params.agentId} />
     </AppShell>
   );
 }
