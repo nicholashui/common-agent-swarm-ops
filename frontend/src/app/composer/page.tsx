@@ -1,8 +1,12 @@
 import { AppShell } from "../../components/AppShell";
-import { Composer } from "../../components/Composer";
+import { ComposerHome } from "../../components/ComposerHome";
 
 function ComposerPage(): JSX.Element {
-  return <AppShell><Composer /></AppShell>;
+  return (
+    <AppShell>
+      <ComposerHome />
+    </AppShell>
+  );
 }
 
 export default ComposerPage;

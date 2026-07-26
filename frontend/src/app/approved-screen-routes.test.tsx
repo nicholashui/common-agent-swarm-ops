@@ -31,7 +31,7 @@ const UNLOCKED_ROUTE_CASES: readonly UnlockedRouteCase[] = [
     name: "composer",
     source: new URL("./composer/page.tsx", import.meta.url),
     screenId: "ui_03_swarm_composer",
-    mustMatch: /Composer/,
+    mustMatch: /ComposerHome/,
     mustNotMatch: /UnavailableScreen/,
   },
   {
