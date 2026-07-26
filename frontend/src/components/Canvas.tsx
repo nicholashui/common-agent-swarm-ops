@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 
+export { CanvasHome } from "./CanvasHome";
+
 import type { CommandIntent } from "../lib/commands/CommandCoordinator";
 import type { GeneratedJsonObject } from "../lib/api/client";
 import {

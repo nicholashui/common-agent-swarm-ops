@@ -1,15 +1,14 @@
 import { AppShell } from "../../components/AppShell";
-import { Canvas } from "../../components/Canvas";
+import { CanvasHome } from "../../components/CanvasHome";
 
 /**
- * Non-inventing Swarm Canvas menu entry. Does not fabricate a swarm identifier.
- * Uses the canvas component's built-in local default projection until a
- * server-authorized swarm projection is connected.
+ * Non-inventing Swarm Canvas menu entry (ui_04).
+ * Does not fabricate a swarm identifier; local graph landing is safe to render.
  */
 function LegacyCanvasPage(): JSX.Element {
   return (
     <AppShell>
-      <Canvas />
+      <CanvasHome />
     </AppShell>
   );
 }

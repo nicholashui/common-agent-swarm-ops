@@ -38,7 +38,7 @@ const UNLOCKED_ROUTE_CASES: readonly UnlockedRouteCase[] = [
     name: "legacy canvas",
     source: new URL("./canvas/page.tsx", import.meta.url),
     screenId: "ui_04_canvas",
-    mustMatch: /Canvas/,
+    mustMatch: /CanvasHome/,
     mustNotMatch: /UnavailableScreen|redirect\(/,
   },
   {
@@ -191,7 +191,7 @@ test("canonical canvas route renders canvas while preserving the opaque resource
 
   assert.match(source, /params/);
   assert.match(source, /swarmId/);
-  assert.match(source, /components\/Canvas|Canvas/);
+  assert.match(source, /CanvasHome/);
   assert.doesNotMatch(source, /UnavailableScreen/);
   assert.equal(
     getScreenDefinition("ui_04_canvas").routeOrShell,

@@ -1,5 +1,5 @@
 import { AppShell } from "../../../../components/AppShell";
-import { Canvas } from "../../../../components/Canvas";
+import { CanvasHome } from "../../../../components/CanvasHome";
 
 interface SwarmCanvasPageProps {
   readonly params: {
@@ -8,14 +8,14 @@ interface SwarmCanvasPageProps {
 }
 
 /**
- * Canonical canvas route. The opaque swarmId is reserved for the future
- * authorized projection lookup; local default canvas is safe to render meanwhile.
+ * Canonical canvas route. Opaque swarmId is reserved for authorized projection
+ * lookup; local canvas landing remains safe until that endpoint is connected.
  */
 function SwarmCanvasPage({ params }: SwarmCanvasPageProps): JSX.Element {
   void params;
   return (
     <AppShell>
-      <Canvas />
+      <CanvasHome />
     </AppShell>
   );
 }
