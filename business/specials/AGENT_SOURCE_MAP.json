@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "specials",
+  "destination_commit": "5460c4b4a33c15286f9fd84b1bc764d755f5bab0",
+  "policy": "self_contained_agents_no_corpus_required",
+  "entries": [
+    {
+      "common_agent_id": "specials.aesthetics-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.aesthetics-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/aesthetics_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.aesthetics-agent` distilled from redesign doc `docs/special_agents_redesign/agents/aesthetics_agent.md` as untrusted design provenance only. Unique to `specials.aesthetics-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.agent-loop-creator",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.agent-loop-creator/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/agent_loop_creator.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.agent-loop-creator` distilled from redesign doc `docs/special_agents_redesign/agents/agent_loop_creator.md` as untrusted design provenance only. Unique to `specials.agent-loop-creator`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.agentic-rag-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.agentic-rag-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/agentic_rag_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.agentic-rag-agent` distilled from redesign doc `docs/special_agents_redesign/agents/agentic_rag_agent.md` as untrusted design provenance only. Unique to `specials.agentic-rag-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.autotelic-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.autotelic-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/autotelic_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.autotelic-agent` distilled from redesign doc `docs/special_agents_redesign/agents/autotelic_agent.md` as untrusted design provenance only. Unique to `specials.autotelic-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.complex-problem-solution-process-model",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.complex-problem-solution-process-model/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/complex_problem_solution_process_model.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.complex-problem-solution-process-model` distilled from redesign doc `docs/special_agents_redesign/agents/complex_problem_solution_process_model.md` as untrusted design provenance only. Unique to `specials.complex-problem-solution-process-model`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.controller-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.controller-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/controller_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.controller-agent` distilled from redesign doc `docs/special_agents_redesign/agents/controller_agent.md` as untrusted design provenance only. Unique to `specials.controller-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.general-creative-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.general-creative-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/general_creative_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.general-creative-agent` distilled from redesign doc `docs/special_agents_redesign/agents/general_creative_agent.md` as untrusted design provenance only. Unique to `specials.general-creative-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.intent-analysis-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.intent-analysis-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/intent_analysis_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.intent-analysis-agent` distilled from redesign doc `docs/special_agents_redesign/agents/intent_analysis_agent.md` as untrusted design provenance only. Unique to `specials.intent-analysis-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.knowledge-router-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.knowledge-router-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/knowledge_router_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.knowledge-router-agent` distilled from redesign doc `docs/special_agents_redesign/agents/knowledge_router_agent.md` as untrusted design provenance only. Unique to `specials.knowledge-router-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.llm-usage",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.llm-usage/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/llm_usage.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.llm-usage` distilled from redesign doc `docs/special_agents_redesign/agents/llm_usage.md` as untrusted design provenance only. Unique to `specials.llm-usage`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.optimization-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.optimization-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/optimization_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.optimization-agent` distilled from redesign doc `docs/special_agents_redesign/agents/optimization_agent.md` as untrusted design provenance only. Unique to `specials.optimization-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.planner-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.planner-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/planner_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.planner-agent` distilled from redesign doc `docs/special_agents_redesign/agents/planner_agent.md` as untrusted design provenance only. Unique to `specials.planner-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.podcast-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.podcast-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/podcast_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.podcast-agent` distilled from redesign doc `docs/special_agents_redesign/agents/podcast_agent.md` as untrusted design provenance only. Unique to `specials.podcast-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.psychological-profile-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.psychological-profile-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/psychological_profile_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.psychological-profile-agent` distilled from redesign doc `docs/special_agents_redesign/agents/psychological_profile_agent.md` as untrusted design provenance only. Unique to `specials.psychological-profile-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.psychological-recommendation-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.psychological-recommendation-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/psychological_recommendation_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.psychological-recommendation-agent` distilled from redesign doc `docs/special_agents_redesign/agents/psychological_recommendation_agent.md` as untrusted design provenance only. Unique to `specials.psychological-recommendation-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.research-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.research-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/research_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.research-agent` distilled from redesign doc `docs/special_agents_redesign/agents/research_agent.md` as untrusted design provenance only. Unique to `specials.research-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.screenwriter-strategic-goal-achievement-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.screenwriter-strategic-goal-achievement-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/screenwriter_strategic_goal_achievement_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.screenwriter-strategic-goal-achievement-agent` distilled from redesign doc `docs/special_agents_redesign/agents/screenwriter_strategic_goal_achievement_agent.md` as untrusted design provenance only. Unique to `specials.screenwriter-strategic-goal-achievement-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.strategic-goal-achievement-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.strategic-goal-achievement-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/strategic_goal_achievement_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.strategic-goal-achievement-agent` distilled from redesign doc `docs/special_agents_redesign/agents/strategic_goal_achievement_agent.md` as untrusted design provenance only. Unique to `specials.strategic-goal-achievement-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    },
+    {
+      "common_agent_id": "specials.techology-advisor-agent",
+      "mapping_status": "related",
+      "source_agent_ids": [],
+      "source_documents": [
+        "manifest.json",
+        "agents/specials.techology-advisor-agent/agent_spec.json"
+      ],
+      "design_source_path_historical": "docs/special_agents_redesign/agents/techology_advisor_agent.md",
+      "rationale": "Human-reviewed self-contained specials folder for `specials.techology-advisor-agent` distilled from redesign doc `docs/special_agents_redesign/agents/techology_advisor_agent.md` as untrusted design provenance only. Unique to `specials.techology-advisor-agent`.",
+      "reviewed_by": "specials-self-contained-reviewer",
+      "reviewed_at": "2026-07-26T18:00:00Z"
+    }
+  ]
+}

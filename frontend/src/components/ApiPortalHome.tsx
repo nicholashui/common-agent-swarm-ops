@@ -8,9 +8,17 @@ import {
   type ApiPortalNavId,
 } from "../lib/projections/api-portal-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function ApiPortalHome({
-  view }: Readonly<{ view: ApiPortalLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: ApiPortalLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [nav, setNav] = useState<ApiPortalNavId>("docs");
   const [query, setQuery] = useState("");
@@ -20,7 +28,14 @@ export function ApiPortalHome({
   );
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const endpoints = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -81,9 +96,9 @@ const run = await client.swarms.run("trading-alpha", {
         </label>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="api-portal__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

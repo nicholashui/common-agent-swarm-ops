@@ -701,15 +701,26 @@ def verify_standalone(
         )
     )
 
+    # Pack-level corpus is optional (redo_migration.md v2). When absent, pass;
+    # when present, still enforce integrity.
     corpus_root = root / "corpus"
-    corpus_report = validate_corpus_integrity(corpus_root)
-    checks.append(
-        StandaloneCheck(
-            name="corpus_integrity",
-            result=corpus_report.result,
-            findings=corpus_report.findings,
+    if not corpus_root.exists():
+        checks.append(
+            StandaloneCheck(
+                name="corpus_integrity",
+                result=MigrationResult.PASS,
+                findings=(),
+            )
         )
-    )
+    else:
+        corpus_report = validate_corpus_integrity(corpus_root)
+        checks.append(
+            StandaloneCheck(
+                name="corpus_integrity",
+                result=corpus_report.result,
+                findings=corpus_report.findings,
+            )
+        )
 
     inventory_report = VideoInventoryValidator().validate(manifest, inventory, agent_specs)
     inventory_findings = tuple(_finding_from_inventory(issue) for issue in inventory_report.issues)

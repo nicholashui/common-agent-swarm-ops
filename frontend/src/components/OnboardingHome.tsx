@@ -7,9 +7,17 @@ import {
   type OnboardingLandingView,
 } from "../lib/projections/onboarding-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function OnboardingHome({
-  view }: Readonly<{ view: OnboardingLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: OnboardingLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [stepIndex, setStepIndex] = useState(view.defaultStepIndex);
   const [facet, setFacet] = useState(view.agentFilters[0] ?? "");
@@ -26,7 +34,14 @@ export function OnboardingHome({
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [aiPrompt, setAiPrompt] = useState(view.defaultHelpPrompt ?? "");
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
   const step = view.steps[stepIndex] ?? view.steps[0];
   const stepNumber = stepIndex + 1;
 
@@ -115,9 +130,9 @@ export function OnboardingHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="onboarding-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

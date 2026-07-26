@@ -8,9 +8,19 @@ import {
   type DashboardStatusTone,
 } from "../lib/projections/dashboard-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import type { ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function DashboardHome({
-  view }: Readonly<{ view: DashboardLandingView }>): JSX.Element {
+  view,
+  onAction: _onAction,
+  onPause,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: DashboardLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  onPause?: (swarmId: string) => void;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   return (
     <section aria-label="Dashboard projection" className="dashboard-home">
@@ -34,6 +44,11 @@ export function DashboardHome({
           <span className="dashboard-home__as-of"> · as_of {view.asOf}</span>
         </p>
       </header>
+      {externalStatus ? (
+        <p aria-live="polite" className="dashboard-home__status" role="status">
+          {externalStatus}
+        </p>
+      ) : null}
 
       <section
         aria-labelledby="common-health-heading"
@@ -134,7 +149,7 @@ export function DashboardHome({
             ) : (
               <ul aria-live="polite" className="dashboard-running">
                 {view.runningSwarms.map((swarm) => (
-                  <RunningSwarmCard key={swarm.id} labels={labels} swarm={swarm} />
+                  <RunningSwarmCard key={swarm.id} labels={labels} swarm={swarm} onPause={onPause} />
                 ))}
               </ul>
             )}
@@ -350,12 +365,21 @@ function StatusPill({
 function RunningSwarmCard({
   swarm,
   labels,
-}: Readonly<{ swarm: DashboardRunningSwarm; labels: ScreenLabels }>): JSX.Element {
+  onPause,
+}: Readonly<{
+  swarm: DashboardRunningSwarm;
+  labels: ScreenLabels;
+  onPause?: (swarmId: string) => void;
+}>): JSX.Element {
+  const [paused, setPaused] = React.useState(false);
   return (
     <li className="dashboard-running__card panel">
       <div className="dashboard-running__topline">
         <strong>{swarm.name}</strong>
-        <StatusPill label={swarm.statusLabel} tone={swarm.status} />
+        <StatusPill
+          label={paused ? "Paused" : swarm.statusLabel}
+          tone={paused ? "paused" : swarm.status}
+        />
       </div>
       <p className="dashboard-running__pattern">{swarm.pattern}</p>
       <p className="dashboard-running__progress">
@@ -375,8 +399,15 @@ function RunningSwarmCard({
         <Link className="dashboard-running__primary" href={swarm.canvasHref}>
           {L(labels, "viewCanvas")}
         </Link>
-        <button className="dashboard-running__secondary" disabled type="button">
-          {L(labels, "pause")}
+        <button
+          className="dashboard-running__secondary"
+          onClick={() => {
+            setPaused((value) => !value);
+            onPause?.(swarm.id);
+          }}
+          type="button"
+        >
+          {paused ? "Resume" : L(labels, "pause")}
         </button>
       </div>
     </li>

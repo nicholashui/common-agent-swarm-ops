@@ -75,6 +75,8 @@ export interface KnowledgeLandingView {
   readonly chunkingConfig: readonly { readonly label: string; readonly value: string }[];
   readonly retrievalTrace: readonly string[];
   readonly governanceNote: string;
+  /** Latest real retrieval status from /api/v1/memory/retrieve. */
+  readonly searchResultNote: string;
   readonly footerNote: string;
 }
 
@@ -246,6 +248,7 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
   ],
   governanceNote:
     "Item can't be promoted to Common solely because retrieved/generated — verification state explicit. Contributions retain opt-in, artifact provenance, verification state, and approval outcome.",
+  searchResultNote: "No live retrieval yet — run Search Test against the Host memory API.",
   footerNote:
     "Local preview knowledge hub · server-defined type/size/ownership/retention shown before submit · client checks aren't authorization. Distinguishes RAG, few-shot, correction memory, constitutional rules, continuity, and benchmarks.",
 };

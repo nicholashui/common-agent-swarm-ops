@@ -1,12 +1,18 @@
 /**
  * Local Common Registry Hub fixture for ui_07_registry_hub.md / .svg.
- * Presentation-only until generated commons registry projections connect.
+ * Agent cards are generated from pack self-contained folders
+ * (business/video/agents + business/specials/agents) via pack-agents.generated.ts.
  */
 
 import type { ScreenLabels } from "./screen-labels";
 
 import type { SpecialsLandingView } from "./specials-landing";
 import { LOCAL_SPECIALS_LANDING } from "./specials-landing";
+import {
+  PACK_AGENT_COUNTS,
+  PACK_AGENTS,
+  type PackAgentRecord,
+} from "./pack-agents.generated";
 
 export type RegistryViewMode = "cards" | "table" | "graph";
 
@@ -101,72 +107,38 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
   eyebrow: "REGISTRY HUB",
   title: "Common Registry",
   subtitle:
-    "Battle-tested, versioned, collectively improved agents & swarm patterns.",
-  workspaceLabel: "Trading Lab",
-  searchPlaceholder: "Search agents, patterns, or describe what you need…",
+    `All pack agents from self-contained folders (${PACK_AGENT_COUNTS.total}: `
+    + `${PACK_AGENT_COUNTS.video} video · ${PACK_AGENT_COUNTS.specials} specials). `
+    + "Open a card to view full agent settings.",
+  workspaceLabel: "Pack catalog · offline settings",
+  searchPlaceholder: "Search agent id, name, pack, role…",
   facets: [
-    "Trading",
-    "Content",
-    "Education",
-    "Distributed",
-    "Success rate > 90%",
-    "Used in my swarms",
-    "High Verification",
+    "video",
+    "specials",
+    "draft",
+    "registered",
+    "self-contained",
+    "no-network",
   ],
-  domainFacets: ["Trading", "Content", "Education", "Distributed"],
-  successRateFacet: "Success rate > 90%",
-  usedInSwarmsFacet: "Used in my swarms",
-  highVerificationFacet: "High Verification",
-  agents: [
-    {
-      id: "market-sentiment",
-      name: "MarketSentimentAgent",
-      versionLabel: "Common v2.3 · 12.4k · 94%",
-      description:
-        "Specialized for trading sentiment analysis — standardized I/O.",
-      success: "94%",
-      avgTokens: "720",
-      latency: "1.4s",
-      usage: "Used in 1,248 swarms · 23 of yours · +8% efficiency ↑",
-      badges: ["High Verify", "Moltbot Compat", "Recently Improved"],
-      domains: ["Trading"],
-      category: "analysis / sentiment",
-      architecture: "parallel worker",
-      critiqueCompat: "accepts_critique_from: VerifierNode",
-    },
-    {
-      id: "content-director",
-      name: "ContentDirectorAgent",
-      versionLabel: "Common v1.8 · 8.7k · 91%",
-      description: "Creative strategy for cinematic / YouTube pipelines.",
-      success: "91%",
-      avgTokens: "980",
-      latency: "2.1s",
-      usage: "Used in 640 swarms · 5 of yours · +5% quality ↑",
-      badges: ["Creative", "Bilingual EN/繁"],
-      domains: ["Content"],
-      category: "creative direction",
-      architecture: "supervisor spoke",
-      critiqueCompat: "comments_on: SynthesisAgent",
-    },
-    {
-      id: "verification-loop",
-      name: "VerificationLoopAgent",
-      versionLabel: "Common v3.0 · 31.2k · 97%",
-      description:
-        "Output verification — iterative refine loop, top pass rate.",
-      success: "97%",
-      avgTokens: "640",
-      latency: "1.8s",
-      usage: "Used in 47 swarms · 8 of yours · +12% pass rate ↑",
-      badges: ["High Verify", "Parallel Opt."],
-      isNew: true,
-      domains: ["Trading", "Content", "Education"],
-      category: "quality / verification",
-      architecture: "self_refine + critique cycle",
-      critiqueCompat: "rubric: L1/L2/L3 · High Verification",
-    },
-  ],
+  domainFacets: ["video", "specials"],
+  successRateFacet: "registered",
+  usedInSwarmsFacet: "self-contained",
+  highVerificationFacet: "no-network",
+  agents: PACK_AGENTS.map((agent: PackAgentRecord): RegistryAgentCard => ({
+    id: agent.id,
+    name: agent.name,
+    versionLabel: agent.versionLabel,
+    description: agent.description,
+    success: agent.success,
+    avgTokens: agent.avgTokens,
+    latency: agent.latency,
+    usage: agent.usage,
+    badges: agent.badges,
+    domains: agent.domains,
+    category: agent.category,
+    architecture: agent.architecture,
+    critiqueCompat: agent.critiqueCompat,
+  })),
   patterns: [
     {
       id: "parallel-verify",
@@ -194,44 +166,29 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     },
   ],
   stats: [
-    { id: "total", label: "Total Commons", value: "214" },
-    { id: "versions", label: "Active versions", value: "1.8k" },
-    { id: "merged", label: "Merged /mo", value: "37" },
-    { id: "savings", label: "Eco savings", value: "$18k" },
+    { id: "total", label: "Total agents", value: String(PACK_AGENT_COUNTS.total) },
+    { id: "video", label: "Video pack", value: String(PACK_AGENT_COUNTS.video) },
+    { id: "specials", label: "Specials pack", value: String(PACK_AGENT_COUNTS.specials) },
+    { id: "self", label: "Self-contained", value: String(PACK_AGENT_COUNTS.total) },
   ],
   yourImpact:
-    "4 improvements helped · $412 saved in your swarms",
-  proposals: [
-    {
-      id: "p1",
-      title: "CommonReportAgent → v3.0",
-      detail: "meta-critic · 2.1k traces · +18% ↓ hallucination",
-      primary: true,
-    },
-    {
-      id: "p2",
-      title: "CommonMarketPredictor → v2.5",
-      detail: "by @you · awaiting review · affects 19 swarms",
-    },
-  ],
-  reviewTitle: "Proposal Review — Diff + Impact Analysis",
+    "Every listed agent has a self-contained folder (SPEC.md + agent_spec.json + sources). No demo agents.",
+  /** Demo proposal queue removed — registry is pack catalog only. */
+  proposals: [],
+  reviewTitle: "Proposal Review — empty (no demo proposals)",
   reviewDiffLines: [
-    "- max_iterations: 3",
-    "+ max_iterations: 5",
-    "+ verification_step: structured_rubric",
-    "  eval_rubric: CommonVerificationRubric v1.2",
-    "  # redacted diff · evidence refs only",
-    '  meta-critic: "added verifier reduced',
-    '  hallucinations 18% across 2.1k runs"',
+    "# No demo proposal diffs.",
+    "# Registry agents come only from business/video + business/specials packs.",
   ],
   impactRows: [
-    { label: "Affected swarms", value: "87" },
-    { label: "Est. success Δ", value: "+4.2%" },
-    { label: "Est. savings /mo", value: "$1.1k" },
+    { label: "Video pack agents", value: String(PACK_AGENT_COUNTS.video) },
+    { label: "Specials pack agents", value: String(PACK_AGENT_COUNTS.specials) },
+    { label: "Total in UI", value: String(PACK_AGENT_COUNTS.total) },
   ],
-  impactDomains:
-    "Domains: Trading (34) · Content (22) · Education (18) · Other (13)",
+  impactDomains: "Packs: video · specials (no demo domains)",
   footerNote:
-    "Local preview registry · redacted metrics and diffs only · Instantiate / Propose / Merge require authorized action references. VA taxonomy is a domain facet; generic registry taxonomy remains primary.",
+    "Registry lists all checked-in pack agents only (114 video + 19 specials). "
+    + "Demo MarketSentiment / ContentDirector / VerificationLoop cards are removed. "
+    + "Detail shows agent_spec settings. Regenerate: python scripts/business/export_pack_agents_for_ui.py",
   specials: LOCAL_SPECIALS_LANDING,
 };

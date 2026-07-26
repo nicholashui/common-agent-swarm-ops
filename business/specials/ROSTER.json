@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "specials",
+  "entries": [
+    {
+      "agent_id": "specials.aesthetics-agent"
+    },
+    {
+      "agent_id": "specials.agent-loop-creator"
+    },
+    {
+      "agent_id": "specials.agentic-rag-agent"
+    },
+    {
+      "agent_id": "specials.autotelic-agent"
+    },
+    {
+      "agent_id": "specials.complex-problem-solution-process-model"
+    },
+    {
+      "agent_id": "specials.controller-agent"
+    },
+    {
+      "agent_id": "specials.general-creative-agent"
+    },
+    {
+      "agent_id": "specials.intent-analysis-agent"
+    },
+    {
+      "agent_id": "specials.knowledge-router-agent"
+    },
+    {
+      "agent_id": "specials.llm-usage"
+    },
+    {
+      "agent_id": "specials.optimization-agent"
+    },
+    {
+      "agent_id": "specials.planner-agent"
+    },
+    {
+      "agent_id": "specials.podcast-agent"
+    },
+    {
+      "agent_id": "specials.psychological-profile-agent"
+    },
+    {
+      "agent_id": "specials.psychological-recommendation-agent"
+    },
+    {
+      "agent_id": "specials.research-agent"
+    },
+    {
+      "agent_id": "specials.screenwriter-strategic-goal-achievement-agent"
+    },
+    {
+      "agent_id": "specials.strategic-goal-achievement-agent"
+    },
+    {
+      "agent_id": "specials.techology-advisor-agent"
+    }
+  ]
+}

@@ -9,16 +9,31 @@ import {
   type MonitoringTraceNode,
 } from "../lib/projections/monitoring-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function MonitoringHome({
-  view }: Readonly<{ view: MonitoringLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: MonitoringLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [tab, setTab] = useState<MonitoringTabId>("traces");
   const [search, setSearch] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [selectedNodeId, setSelectedNodeId] = useState("pred");
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   return (
     <section aria-label={L(labels, "advanced_monitoring")} className="monitoring-home">
@@ -60,9 +75,9 @@ export function MonitoringHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="monitoring-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

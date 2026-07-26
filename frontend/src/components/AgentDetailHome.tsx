@@ -10,13 +10,18 @@ import {
   type AgentDetailUsageRow,
 } from "../lib/projections/agent-detail-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function AgentDetailHome({
   view,
   agentId,
+  onAction,
+  statusMessage: externalStatus,
 }: Readonly<{
   view: AgentDetailLandingView;
   agentId?: string;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
   const [tab, setTab] = useState<AgentDetailTabId>("history");
@@ -24,7 +29,14 @@ export function AgentDetailHome({
   const [playgroundInput, setPlaygroundInput] = useState("");
   const [knowledgeQuery, setKnowledgeQuery] = useState("");
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   return (
     <section aria-label={L(labels, "common_agent_detail")} className="agent-detail">
@@ -121,9 +133,9 @@ export function AgentDetailHome({
         </div>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="agent-detail__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

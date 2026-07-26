@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Link from "next/link";
 
 import {
   type SpecialsLandingView,
@@ -75,17 +76,25 @@ export function SpecialsCatalog({
               <p className="specials-catalog__source">
                 Provenance: <code>{agent.sourcePath}</code>
               </p>
-              <button
-                className="specials-catalog__action"
-                onClick={() =>
-                  setStatusMessage(
-                    `${agent.agentId} remains draft/non-active. Activate requires separate host approval gates — not available from this catalog.`,
-                  )
-                }
-                type="button"
-              >
-                Inspect activation policy
-              </button>
+              <div className="specials-catalog__actions">
+                <Link
+                  className="specials-catalog__action specials-catalog__action--primary"
+                  href={`/registry/agents/${encodeURIComponent(agent.agentId)}`}
+                >
+                  View agent settings
+                </Link>
+                <button
+                  className="specials-catalog__action"
+                  onClick={() =>
+                    setStatusMessage(
+                      `${agent.agentId} remains draft/non-active. Activate requires separate host approval gates — not available from this catalog.`,
+                    )
+                  }
+                  type="button"
+                >
+                  Inspect activation policy
+                </button>
+              </div>
             </li>
           ))}
         </ul>

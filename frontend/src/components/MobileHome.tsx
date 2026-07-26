@@ -8,16 +8,31 @@ import {
   type MobileTabId,
 } from "../lib/projections/mobile-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function MobileHome({
-  view }: Readonly<{ view: MobileLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: MobileLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [tab, setTab] = useState<MobileTabId>("home");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [sheet, setSheet] = useState<string | undefined>();
   const [registryQuery, setRegistryQuery] = useState("");
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   return (
     <section aria-label={L(labels, "mobile_companion")} className="mobile-home">
@@ -57,9 +72,9 @@ export function MobileHome({
           </Link>
         </div>
 
-        {statusMessage ? (
+        {feedback ? (
           <p aria-live="polite" className="mobile-home__status" role="status">
-            {statusMessage}
+            {feedback}
           </p>
         ) : null}
 

@@ -7,9 +7,19 @@ import {
   type KnowledgeLandingView,
 } from "../lib/projections/knowledge-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function KnowledgeHome({
-  view }: Readonly<{ view: KnowledgeLandingView }>): JSX.Element {
+  view,
+  onSearch,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: KnowledgeLandingView;
+  onSearch?: (query: string) => void | Promise<void>;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [query, setQuery] = useState("");
   const [facet, setFacet] = useState("All types");
@@ -18,7 +28,14 @@ export function KnowledgeHome({
   const [searchTest, setSearchTest] = useState(view.searchQuery);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage ?? view.searchResultNote;
 
   const collections = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -104,9 +121,9 @@ export function KnowledgeHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="knowledge-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -218,7 +235,9 @@ export function KnowledgeHome({
                   query={searchTest}
                   onQuery={setSearchTest}
                   onAnnounce={announce}
-                 labels={labels} />
+                  onSearch={onSearch}
+                  labels={labels}
+                />
               ) : null}
               {detailTab === "config" ? <ConfigPanel view={view}  labels={labels} /> : null}
               {detailTab === "contributions" ? (
@@ -349,12 +368,14 @@ function SearchPanel({
   query,
   onQuery,
   onAnnounce,
+  onSearch,
   labels,
 }: Readonly<{
   view: KnowledgeLandingView;
   query: string;
   onQuery: (value: string) => void;
   onAnnounce: (message: string) => void;
+  onSearch?: (query: string) => void | Promise<void>;
   labels: ScreenLabels;
 }>): JSX.Element {
   return (
@@ -364,6 +385,10 @@ function SearchPanel({
         className="knowledge-home__search-test"
         onSubmit={(event) => {
           event.preventDefault();
+          if (onSearch) {
+            void onSearch(query);
+            return;
+          }
           onAnnounce(
             "Hybrid search test requires an authorized retrieval endpoint.",
           );

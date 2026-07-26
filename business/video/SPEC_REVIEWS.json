@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "reviews": [
+    {
+      "agent_id": "video.orchestrator",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.compliance_agent",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.rights_consent_agent",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.legal_reviewer",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.privacy_reviewer",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.safety_reviewer",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.provenance_agent",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.release_manager",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.human_review_coordinator",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    },
+    {
+      "agent_id": "video.judge_agent",
+      "reviewer": "migration-reviewer-common",
+      "result": "pass",
+      "reviewed_at": "2026-07-26T12:00:00Z",
+      "notes": "Critical role review for self-contained agent migration."
+    }
+  ]
+}

@@ -8,9 +8,17 @@ import {
   type CollaborationSharedItem,
 } from "../lib/projections/collaboration-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function CollaborationHome({
-  view }: Readonly<{ view: CollaborationLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: CollaborationLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [tab, setTab] = useState(view.tabs[0] ?? "Shared with me");
   const [query, setQuery] = useState("");
@@ -18,7 +26,14 @@ export function CollaborationHome({
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [peopleQuery, setPeopleQuery] = useState("");
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -63,9 +78,9 @@ export function CollaborationHome({
         </div>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="collab-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -333,7 +348,7 @@ function SharedItemRow({
             return (
               <Link
                 className="collab-home__action collab-home__action--primary"
-                href={item.kind === "agent" ? "/registry/agents/local-preview" : "/canvas"}
+                href={item.kind === "agent" ? "/registry/agents/video.orchestrator" : "/canvas"}
                 key={action}
               >
                 {action}

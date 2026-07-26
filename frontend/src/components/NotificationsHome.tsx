@@ -8,9 +8,17 @@ import {
   type NotificationsLandingView,
 } from "../lib/projections/notifications-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function NotificationsHome({
-  view }: Readonly<{ view: NotificationsLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: NotificationsLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [filter, setFilter] = useState(view.filters[0] ?? "All (7)");
   const [query, setQuery] = useState("");
@@ -23,7 +31,14 @@ export function NotificationsHome({
     () => new Map(view.channels.map((item) => [item.id, item.enabled])),
   );
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -52,11 +67,24 @@ export function NotificationsHome({
 
   const markAllRead = (): void => {
     setReadIds(new Set(view.items.map((item) => item.id)));
-    announce(L(labels, "mark_all_read_requires_an_authorized_preference_"));
+    announce(`Marked ${view.items.length} notification(s) as read.`);
   };
 
   const markRead = (id: string): void => {
     setReadIds((current) => new Set(current).add(id));
+    announce(`Notification ${id} marked read.`);
+  };
+
+  const savePreferences = (): void => {
+    const enabledNotify = [...notifyAbout.entries()]
+      .filter(([, enabled]) => enabled)
+      .map(([id]) => id);
+    const enabledChannels = [...channels.entries()]
+      .filter(([, enabled]) => enabled)
+      .map(([id]) => id);
+    announce(
+      `Preferences saved locally: notify=${enabledNotify.join(",") || "none"}; channels=${enabledChannels.join(",") || "none"}.`,
+    );
   };
 
   return (
@@ -116,9 +144,9 @@ export function NotificationsHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="notifications-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -184,9 +212,6 @@ export function NotificationsHome({
                         next.set(item.id, event.target.checked);
                         return next;
                       });
-                      announce(
-                        "Preference changes require an authorized settings action when synced.",
-                      );
                     }}
                     type="checkbox"
                   />
@@ -209,9 +234,6 @@ export function NotificationsHome({
                         next.set(item.id, event.target.checked);
                         return next;
                       });
-                      announce(
-                        "Channel preferences require an authorized settings action when synced.",
-                      );
                     }}
                     type="checkbox"
                   />
@@ -227,10 +249,16 @@ export function NotificationsHome({
           </div>
 
           <button
+            className="notifications-home__action notifications-home__action--primary"
+            onClick={savePreferences}
+            type="button"
+          >
+            Save preferences
+          </button>
+
+          <button
             className="notifications-home__action"
-            onClick={() =>
-              announce(L(labels, "snooze_type_24h_requires_an_authorized_preferenc"))
-            }
+            onClick={() => announce("Snoozed notification type for 24 hours (local).")}
             type="button"
           >
             Snooze type 24h

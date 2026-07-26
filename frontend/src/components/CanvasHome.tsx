@@ -10,9 +10,17 @@ import {
   type CanvasViewMode,
 } from "../lib/projections/canvas-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function CanvasHome({
-  view }: Readonly<{ view: CanvasLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: CanvasLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [mode, setMode] = useState<CanvasViewMode>(view.viewMode);
@@ -44,7 +52,14 @@ export function CanvasHome({
     });
   }, [paletteQuery, paletteTab, view.palette]);
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const toggleGroup = (groupId: string): void => {
     setExpandedGroups((current) => {
@@ -133,7 +148,16 @@ export function CanvasHome({
           </div>
           <button
             className="canvas-home__ghost"
-            onClick={() => announce(L(labels, "auto_layout_is_local_only_feedback"))}
+            onClick={() => {
+              if (onAction) {
+                void onAction({
+                  kind: "local.layout",
+                  detail: L(labels, "auto_layout_is_local_only_feedback"),
+                });
+                return;
+              }
+              announce(L(labels, "auto_layout_is_local_only_feedback"));
+            }}
             type="button"
           >
             Layout
@@ -158,6 +182,14 @@ export function CanvasHome({
             className="canvas-home__run"
             onClick={() => {
               setMode("run");
+              if (onAction) {
+                void onAction({
+                  kind: "canvas.run",
+                  workflowId: view.swarmName.replace(/\s+/g, "-").toLowerCase() || "default",
+                  version: "1",
+                });
+                return;
+              }
               announce(
                 "Run command requires an authorized graph action reference.",
               );
@@ -178,9 +210,9 @@ export function CanvasHome({
         </div>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="canvas-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -541,7 +573,7 @@ export function CanvasHome({
                 </button>
                 <Link
                   className="canvas-home__ghost"
-                  href="/registry/agents/local-preview"
+                  href="/registry/agents/video.orchestrator"
                 >
                   Open Detail (nn_ui_05) →
                 </Link>

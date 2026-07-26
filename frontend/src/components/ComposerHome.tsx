@@ -19,9 +19,17 @@ import {
   type ComposerPatternCard,
 } from "../lib/projections/composer-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function ComposerHome({
-  view }: Readonly<{ view: ComposerLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: ComposerLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [goal, setGoal] = useState("");
@@ -32,6 +40,14 @@ export function ComposerHome({
   );
   const [query, setQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const feedback = externalStatus ?? statusMessage;
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
   const [architectOpen, setArchitectOpen] = useState(true);
   const [patternsOpen, setPatternsOpen] = useState(false);
   const [messages, setMessages] = useState<readonly ComposerChatMessage[]>(
@@ -71,7 +87,7 @@ export function ComposerHome({
 
   const applyChip = (chip: string): void => {
     setGoal(chip);
-    setStatusMessage(L(labels, "goal_chip_applied_chip"));
+    announce(L(labels, "goal_chip_applied_chip"));
   };
 
   const selectPattern = (patternId: string): void => {
@@ -124,7 +140,7 @@ export function ComposerHome({
     event?.preventDefault();
     const trimmed = goal.trim();
     if (trimmed.length === 0) {
-      setStatusMessage(L(labels, "enter_a_goal_before_sending"));
+      announce(L(labels, "enter_a_goal_before_sending"));
       return;
     }
     const userMessage: ComposerChatMessage = {
@@ -163,18 +179,14 @@ export function ComposerHome({
         <div className="composer-home__toolbar-actions">
           <button
             className="composer-home__ghost"
-            onClick={() =>
-              setStatusMessage(L(labels, "save_draft_requires_an_authorized_compose_contra"))
-            }
+            onClick={() => announce(L(labels, "save_draft_requires_an_authorized_compose_contra"))}
             type="button"
           >
             Save Draft
           </button>
           <button
             className="composer-home__ghost"
-            onClick={() =>
-              setStatusMessage(L(labels, "load_template_requires_an_authorized_template_pr"))
-            }
+            onClick={() => announce(L(labels, "load_template_requires_an_authorized_template_pr"))}
             type="button"
           >
             Load Template
@@ -190,9 +202,9 @@ export function ComposerHome({
         <p>{view.description}</p>
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p className="composer-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -320,7 +332,7 @@ export function ComposerHome({
             <button
               className="composer-home__ghost"
               onClick={() =>
-                setStatusMessage(L(labels, "regenerate_requires_the_composer_recommend_strea"))
+                announce(L(labels, "regenerate_requires_the_composer_recommend_strea"))
               }
               type="button"
             >

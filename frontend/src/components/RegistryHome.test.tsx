@@ -7,81 +7,82 @@ import { fileURLToPath } from "node:url";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import { PACK_AGENT_COUNTS } from "../lib/projections/pack-agents.generated";
 import { LOCAL_REGISTRY_LANDING } from "../lib/projections/registry-landing";
 import { getScreenParameters } from "../lib/projections/screen-parameters";
 import { RegistryHome } from "./RegistryHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
-test("registry home matches ui_07 md/svg structure", () => {
+test("registry home lists all pack agents and specials catalog", () => {
   const markup = renderToStaticMarkup(<RegistryHome view={getScreenParameters("registry")} />);
 
   assert.match(markup, /Common Registry/);
-  assert.match(markup, /Battle-tested, versioned, collectively improved/);
+  assert.match(markup, /All pack agents from self-contained folders \(133:/);
+  assert.match(markup, /114 video/);
+  assert.match(markup, /19 specials/);
   assert.match(markup, /Special Agents Pack/);
   assert.match(markup, /specials\.aesthetics-agent/);
   assert.match(markup, /draft · non-active/);
-  assert.match(markup, /Trading Lab/);
-  assert.match(markup, /Search agents, patterns, or describe what you need/);
+  assert.match(markup, /Pack catalog/);
+  assert.match(markup, /Search agent id, name, pack, role/);
   assert.match(markup, /My Contributions/);
   assert.match(markup, /Pending Proposals/);
   assert.match(markup, /Suggest New/);
-  assert.match(markup, /Trading/);
-  assert.match(markup, /Content/);
-  assert.match(markup, /Education/);
-  assert.match(markup, /Distributed/);
-  assert.match(markup, /Success rate &gt; 90%/);
-  assert.match(markup, /Used in my swarms/);
-  assert.match(markup, /High Verification/);
+  assert.match(markup, />video</);
+  assert.match(markup, />specials</);
   assert.match(markup, />Cards</);
   assert.match(markup, />Table</);
   assert.match(markup, /Graph viz/);
   assert.match(markup, /Common Agents/);
-  assert.match(markup, /MarketSentimentAgent/);
-  assert.match(markup, /ContentDirectorAgent/);
-  assert.match(markup, /VerificationLoopAgent/);
-  assert.match(markup, /Common v3\.0/);
+  assert.match(markup, /video\.orchestrator|Orchestrator/);
   assert.match(markup, /Add to Swarm/);
   assert.match(markup, /Propose/);
   assert.match(markup, /Detail/);
   assert.match(markup, /Core Common Swarm Patterns/);
-  assert.match(markup, /BIG ROWs/);
-  assert.match(markup, /Self-refine until quality passes/);
-  assert.match(markup, /LLM router picks next node/);
-  assert.match(markup, /Instantiate in Canvas/);
   assert.match(markup, /Registry Stats/);
-  assert.match(markup, /Total Commons/);
-  assert.match(markup, /Your Impact/);
-  assert.match(markup, /\$412/);
-  assert.match(markup, /CommonReportAgent/);
-  assert.match(markup, /meta-critic/);
-  assert.match(markup, /Review &amp; Merge/);
-  assert.match(markup, /Proposal Review/);
-  assert.match(markup, /Spec Diff \(redacted\)/);
-  assert.match(markup, /max_iterations/);
-  assert.match(markup, /Impact Analysis/);
-  assert.match(markup, /Approve &amp; Merge/);
-  assert.match(markup, /Request Changes/);
-  assert.match(markup, /Reject/);
+  assert.match(markup, /Total agents/);
+  assert.match(markup, /self-contained/);
+  assert.match(markup, /View agent settings/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
 });
 
-test("registry landing fixture covers agents, patterns, proposals, impact", () => {
-  assert.equal(LOCAL_REGISTRY_LANDING.agents.length, 3);
+test("registry landing covers all pack agents, patterns, proposals", () => {
+  assert.equal(LOCAL_REGISTRY_LANDING.agents.length, PACK_AGENT_COUNTS.total);
+  assert.equal(LOCAL_REGISTRY_LANDING.agents.length, 133);
+  assert.equal(PACK_AGENT_COUNTS.video, 114);
+  assert.equal(PACK_AGENT_COUNTS.specials, 19);
   assert.equal(LOCAL_REGISTRY_LANDING.patterns.length, 3);
   assert.equal(LOCAL_REGISTRY_LANDING.stats.length, 4);
-  assert.equal(LOCAL_REGISTRY_LANDING.proposals.length, 2);
+  assert.equal(LOCAL_REGISTRY_LANDING.proposals.length, 0);
   assert.ok(
-    LOCAL_REGISTRY_LANDING.agents.some((agent) => agent.isNew),
+    LOCAL_REGISTRY_LANDING.agents.every(
+      (agent) => agent.category && agent.architecture && agent.id.includes("."),
+    ),
+  );
+  assert.ok(
+    LOCAL_REGISTRY_LANDING.agents.some((agent) => agent.id.startsWith("video.")),
+  );
+  assert.ok(
+    LOCAL_REGISTRY_LANDING.agents.some((agent) => agent.id.startsWith("specials.")),
+  );
+  assert.equal(
+    LOCAL_REGISTRY_LANDING.agents.filter((a) => a.id.startsWith("video.")).length,
+    114,
+  );
+  assert.equal(
+    LOCAL_REGISTRY_LANDING.agents.filter((a) => a.id.startsWith("specials.")).length,
+    19,
   );
   assert.ok(
     LOCAL_REGISTRY_LANDING.agents.every(
-      (agent) => agent.category && agent.architecture,
+      (agent) =>
+        !/market-sentiment|content-director|verification-loop/i.test(agent.id),
     ),
   );
   assert.ok(
     LOCAL_REGISTRY_LANDING.reviewDiffLines.some((line) =>
-      line.includes("verification_step"),
+      line.includes("No demo proposal"),
     ),
   );
 });

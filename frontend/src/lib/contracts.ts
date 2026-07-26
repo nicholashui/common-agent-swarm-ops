@@ -119,7 +119,7 @@ type JsonParser<T> = (value: unknown) => T;
 const API_PREFIX = "/api/v1/";
 
 export function createOperatorApi(options: ClientOptions = {}): OperatorApi {
-  const fetchImpl = options.fetchImpl ?? unavailableLegacyRequest;
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
   return {
     getRun: (runId: string): Promise<RunProjection> => request(fetchImpl, "", runPath(runId), undefined, parseRunProjection),
     getGraphState: (runId: string): Promise<GraphState> => request(fetchImpl, "", `${runPath(runId)}/graph-state`, undefined, parseGraphState),

@@ -7,9 +7,17 @@ import {
   type EvalLandingView,
 } from "../lib/projections/eval-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function EvalHome({
-  view }: Readonly<{ view: EvalLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: EvalLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<ReadonlySet<string>>(
@@ -18,7 +26,14 @@ export function EvalHome({
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [reviewOpen, setReviewOpen] = useState(false);
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const proposals = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -79,9 +94,9 @@ export function EvalHome({
         {view.layerNote}
       </p>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="eval-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -256,11 +271,15 @@ export function EvalHome({
             </p>
             <button
               className="eval-home__action eval-home__action--primary"
-              onClick={() =>
+              onClick={() => {
+                if (onAction) {
+                  void onAction({ kind: "eval.run_campaign" });
+                  return;
+                }
                 announce(
                   "Run Batch Eval Campaign requires an authorized eval action. Results feed proposals only.",
-                )
-              }
+                );
+              }}
               type="button"
             >
               Run Batch Eval Campaign

@@ -1,9 +1,10 @@
 /**
  * Local Common Agent detail fixture for ui_05_agent_detail.md / .svg.
- * Presentation-only until generated registry agent projections connect.
+ * Prefer pack-backed settings via buildAgentDetailView(agentId) from self-contained packs.
  */
 
 import type { ScreenLabels } from "./screen-labels";
+import { getPackAgent, type PackAgentRecord } from "./pack-agents.generated";
 
 export type AgentDetailTabId =
   | "history"
@@ -84,281 +85,203 @@ export interface AgentDetailLandingView {
   readonly footerNote: string;
 }
 
-export const LOCAL_AGENT_DETAIL_LANDING: AgentDetailLandingView = {
-  labels: {
-    "timestamp": "Timestamp",
-    "swarm_pattern": "Swarm · Pattern",
-    "status": "Status",
-    "duration_tokens_cost": "Duration / Tokens / Cost",
-    "summary": "Summary",
-    "action": "Action",
-    "eval_harness": "Eval Harness",
-    "live_metrics": "Live Metrics",
-    "after_good_run": "After good run",
-    "search_knowledge": "Search knowledge",
-    "name": "Name",
-    "type": "Type",
-    "chunks": "Chunks",
-    "added": "Added",
-    "actions": "Actions",
-    "where_used_this_exact_version": "Where used (this exact version)",
-    "a_b_test_requires_an_authorized_rollout_contract": "A/B Test requires an authorized rollout contract.",
-    "fork_to_custom_requires_an_authorized_fork_actio": "Fork to Custom requires an authorized fork action.",
-    "playground_is_local_preview_only_until_authorize": "Playground is local-preview only until authorized.",
-    "test_this_common_agent_with_a_prompt": "Test this common agent with a prompt…",
-    "search_test_chunk_text_score_source": "Search test · chunk text, score, source…",
-    "common_agent_detail": "Common agent detail",
-    "quick_actions": "Quick actions",
-    "agent_detail_tabs": "Agent detail tabs",
-    "history_filters": "History filters",
-    "cross_swarm_usage": "Cross-swarm usage",
-    "playground_options": "Playground options",
-    "playground_panels": "Playground panels",
-  },
-  eyebrow: "COMMON AGENT DETAIL",
-  agentName: "VerificationLoopAgent",
-  versionBadge: "Common v3.0 · 31.2k · 97%",
-  statusLabel: "Live",
-  velocityLabel: "improvement velocity +12%/mo",
-  headerStats: [
-    {
-      id: "runs",
-      label: "Runs",
-      value: "31.2k",
-      detail: "47 swarms",
-    },
-    {
-      id: "success",
-      label: "Success",
-      value: "97%",
-      detail: "global 91%",
-    },
-    {
-      id: "tokens",
-      label: "Avg tokens",
-      value: "640",
-      detail: "redacted cost band",
-    },
-  ],
-  insightStrip:
-    "Used in 47 active swarms globally · Your business: 8 swarms · Success in your usage: 96% (global 91%)",
-  yourUsageNote: "View full cross-swarm impact →",
-  historyFilters: [
-    "All swarms",
-    "Version",
-    "Last 7 days",
-    "Status",
-    "Has error?",
-  ],
-  usageRows: [
-    {
-      id: "u1",
-      timestamp: "04:12 · 2m",
-      swarm: "TradingResearch α",
-      pattern: "Parallel + Verify v1.4",
-      status: "Success",
-      statusTone: "success",
-      duration: "12s",
-      tokens: "612",
-      cost: "$0.02",
-      summary: "Verified market report · groundedness 0.94",
-    },
-    {
-      id: "u2",
-      timestamp: "03:44 · 8m",
-      swarm: "ContentPipeline β",
-      pattern: "Verification Loop v2.1",
-      status: "Self-refine",
-      statusTone: "self_refine",
-      duration: "41s",
-      tokens: "1.1k",
-      cost: "$0.05",
-      summary: "Iteration 2/5 · citation re-check",
-    },
-    {
-      id: "u3",
-      timestamp: "02:10 · 1h",
-      swarm: "DSE Tutor Fleet",
-      pattern: "Supervisor + Verify",
-      status: "Success",
-      statusTone: "success",
-      duration: "9s",
-      tokens: "480",
-      cost: "$0.01",
-      summary: "Assessment gate passed · L2 quality",
-    },
-    {
-      id: "u4",
-      timestamp: "01:02 · 3h",
-      swarm: "RiskReview γ",
-      pattern: "Dynamic Router",
-      status: "Running",
-      statusTone: "running",
-      duration: "—",
-      tokens: "streaming",
-      cost: "—",
-      summary: "Graph rev r-19 · task waiting_for_critique",
-    },
-    {
-      id: "u5",
-      timestamp: "00:20 · 4h",
-      swarm: "ResearchDesk δ",
-      pattern: "Parallel + Verify v1.4",
-      status: "Error",
-      statusTone: "error",
-      duration: "18s",
-      tokens: "702",
-      cost: "$0.03",
-      summary: "Blocked: missing approval · gate g-44",
-    },
-    {
-      id: "u6",
-      timestamp: "Yest · 22h",
-      swarm: "OpsBrief ε",
-      pattern: "Map/Reduce + Verify",
-      status: "Success",
-      statusTone: "success",
-      duration: "22s",
-      tokens: "890",
-      cost: "$0.04",
-      summary: "Pinned Common v3.0 · audit ref local-preview",
-    },
-  ],
-  paginationLabel: "Server-side pagination · 31,204 runs · showing 6",
-  versions: [
-    { id: "v28", label: "v2.8", state: "past", delta: "−2% tokens" },
-    { id: "v29", label: "v2.9", state: "past", delta: "+3% pass" },
-    {
-      id: "v30",
-      label: "v3.0 (current)",
-      state: "current",
-      delta: "+12% pass",
-    },
-    {
-      id: "v31",
-      label: "v3.1 proposal",
-      state: "proposal",
-      delta: "pending",
-    },
-  ],
-  currentVersionNote: "v3.0 change · added structured verification step",
-  metaCriticNote:
-    'Meta-critic: "reduced hallucinations 18% across 2.1k runs" · improved token efficiency +7%.',
-  evidenceNote: "redacted diff · evidence refs only · corr b7f2c9d0",
-  configSummaries: [
-    {
-      id: "identity",
-      title: "Core Identity",
-      lines: [
-        "Canonical name: VerificationLoopAgent",
-        "Category: quality / verification",
-        "Architecture: self_refine + critique cycle",
-        "In-scope: groundedness, citation checks, L2 quality",
-        "Out-of-scope: final release authority",
-        "Escalation: GateKeeper · human approval when blocked",
-      ],
-    },
-    {
-      id: "runtime",
-      title: "Runtime Limits & Policy",
-      lines: [
-        "Iteration cap: 5",
-        "Retry: 2 · timeout: 90s",
-        "Cost band: redacted",
-        "Concurrency: 1 per task",
-        "Model fallback: policy returned by projection",
-        "Approval authority: server-gated only",
-      ],
-    },
-    {
-      id: "tools-io",
-      title: "Tools · Schema · Relationships",
-      lines: [
-        "Tools: retrieve (purpose: evidence) · audit required",
-        "I/O schema refs: agent.verifier.in/out v3",
-        "accepts_critique_from: MetaCritic, HumanReviewer",
-        "comments_on: SynthesisAgent, ReportAgent",
-        "Rubric: L1 structure · L2 groundedness · L3 judge when required",
-        "Config tab renders redacted role/policy/schema summaries — never raw prompts, tools, or credentials.",
-      ],
-    },
-  ],
-  playgroundMessages: [
-    {
-      id: "p1",
-      role: "system",
-      text: "Isolated playground · inject pattern context optional · no live agent authority.",
-    },
-    {
-      id: "p2",
-      role: "user",
-      text: "Verify this market brief for groundedness and missing citations.",
-    },
-    {
-      id: "p3",
-      role: "assistant",
-      text: "Self-refine iter 1/5 · groundedness 0.82 · requesting citation re-check.",
-    },
-  ],
-  evalScores: [
-    { metric: "Task success", score: "0.94" },
-    { metric: "Groundedness", score: "0.91" },
-    { metric: "Efficiency", score: "0.88" },
-    { metric: "L2 quality", score: "pass" },
-  ],
-  knowledgeStats: [
-    { id: "chunks", label: "Chunks", value: "1.4k" },
-    { id: "indexed", label: "Last indexed", value: "2h ago" },
-    { id: "embedding", label: "Embedding", value: "policy-bound" },
-    { id: "contrib", label: "Contributions", value: "128 verified" },
-  ],
-  knowledgeSources: [
-    {
-      id: "k1",
-      name: "Verified failure patterns",
-      type: "correction memory",
-      status: "indexed",
-      chunks: "420",
-      added: "via verified runs",
-    },
-    {
-      id: "k2",
-      name: "Citation rubric examples",
-      type: "few-shot",
-      status: "indexed",
-      chunks: "96",
-      added: "training guide",
-    },
-    {
-      id: "k3",
-      name: "Constitutional quality rules",
-      type: "constitutional",
-      status: "active",
-      chunks: "24",
-      added: "commons",
-    },
-    {
-      id: "k4",
-      name: "Eval benchmarks pack",
-      type: "benchmark",
-      status: "ready",
-      chunks: "60",
-      added: "harness",
-    },
-  ],
-  opsAlert:
-    "v3.0 active in 47 swarms. Canary recommended — roll out to 5 swarms first to validate metrics.",
-  opsWhereUsed:
-    "TradingResearch α · ContentPipeline β · DSE Tutor Fleet · +44 more",
-  opsMetrics: [
-    { id: "active", label: "Active swarms", value: "47" },
-    { id: "canary", label: "Canary eligible", value: "5" },
-    { id: "risk", label: "Risk flags", value: "3" },
-    { id: "delta", label: "Est. latency delta", value: "0.4%" },
-  ],
-  footerNote:
-    "Local preview agent detail · redacted projections only · Propose / Rollout / Playground runs require authorized action references.",
+const AGENT_DETAIL_LABELS: ScreenLabels = {
+  "timestamp": "Timestamp",
+  "swarm_pattern": "Swarm · Pattern",
+  "status": "Status",
+  "duration_tokens_cost": "Duration / Tokens / Cost",
+  "summary": "Summary",
+  "action": "Action",
+  "eval_harness": "Eval Harness",
+  "live_metrics": "Live Metrics",
+  "after_good_run": "After good run",
+  "search_knowledge": "Search knowledge",
+  "name": "Name",
+  "type": "Type",
+  "chunks": "Chunks",
+  "added": "Added",
+  "actions": "Actions",
+  "where_used_this_exact_version": "Where used (this exact version)",
+  "a_b_test_requires_an_authorized_rollout_contract": "A/B Test requires an authorized rollout contract.",
+  "fork_to_custom_requires_an_authorized_fork_actio": "Fork to Custom requires an authorized fork action.",
+  "playground_is_local_preview_only_until_authorize": "Playground is local-preview only until authorized.",
+  "test_this_common_agent_with_a_prompt": "Test this common agent with a prompt…",
+  "search_test_chunk_text_score_source": "Search test · chunk text, score, source…",
+  "common_agent_detail": "Common agent detail",
+  "quick_actions": "Quick actions",
+  "agent_detail_tabs": "Agent detail tabs",
+  "history_filters": "History filters",
+  "cross_swarm_usage": "Cross-swarm usage",
+  "playground_options": "Playground options",
+  "playground_panels": "Playground panels",
 };
+
+/** Build agent detail projection from a pack self-contained agent record. */
+export function buildAgentDetailView(
+  agent: PackAgentRecord,
+  agentId?: string,
+): AgentDetailLandingView {
+  const id = agentId ?? agent.id;
+  return {
+    labels: AGENT_DETAIL_LABELS,
+    eyebrow: `${agent.pack.toUpperCase()} AGENT DETAIL`,
+    agentName: agent.name,
+    versionBadge: agent.versionLabel,
+    statusLabel: agent.status,
+    velocityLabel: agent.productionActivationRequested
+      ? "activation requested (host gate required)"
+      : "non-active · fail-closed",
+    headerStats: [
+      {
+        id: "pack",
+        label: "Pack",
+        value: agent.pack,
+        detail: agent.folderPath,
+      },
+      {
+        id: "status",
+        label: "Status",
+        value: agent.status,
+        detail: agent.networkAccess ? "network on" : "network off",
+      },
+      {
+        id: "tools",
+        label: "Allowed tools",
+        value: String(agent.allowedTools.length),
+        detail: agent.provider || "local",
+      },
+    ],
+    insightStrip: agent.specExcerpt || agent.description,
+    yourUsageNote: "Open full SPEC.md in pack folder →",
+    historyFilters: ["Self-contained", "Config", "Provenance"],
+    usageRows: [
+      {
+        id: "settings",
+        timestamp: "settings",
+        swarm: agent.folderPath,
+        pattern: agent.pack,
+        status: agent.status,
+        statusTone: agent.status === "draft" ? "self_refine" : "success",
+        duration: "—",
+        tokens: agent.avgTokens,
+        cost: "—",
+        summary: agent.role || agent.description.slice(0, 160),
+      },
+    ],
+    paginationLabel: `Agent id: ${id}`,
+    versions: [
+      {
+        id: "current",
+        label: agent.versionLabel,
+        state: "current",
+        delta: agent.hasSpecMd ? "SPEC.md present" : "SPEC.md missing",
+      },
+    ],
+    currentVersionNote:
+      `Self-contained folder: ${agent.folderPath}. `
+      + `SPEC.md=${agent.hasSpecMd ? "yes" : "no"} · README=${agent.hasReadme ? "yes" : "no"} · sources=${agent.hasSources ? "yes" : "no"}.`,
+    metaCriticNote:
+      "Settings below are projected from pack agent_spec.json (read-only in browser).",
+    evidenceNote:
+      "Design provenance lives under agents/<id>/sources/. Production activation remains host-gated.",
+    configSummaries: agent.configSummaries.map((section) => ({
+      id: section.id,
+      title: section.title,
+      lines: [...section.lines],
+    })),
+    playgroundMessages: [
+      {
+        id: "sys",
+        role: "system",
+        text:
+          "Playground is presentation-only. Runtime execution requires authorized host actions.",
+      },
+    ],
+    evalScores: [
+      { metric: "self-contained", score: agent.hasSpecMd && agent.hasSources ? "pass" : "gap" },
+      { metric: "network_access", score: agent.networkAccess ? "on" : "off" },
+      {
+        metric: "production_activation_requested",
+        score: agent.productionActivationRequested ? "yes" : "no",
+      },
+    ],
+    knowledgeStats: [
+      { id: "prompt", label: "Prompt ref", value: agent.promptReference || "—" },
+      { id: "rubric", label: "Rubric ref", value: agent.rubricReference || "—" },
+    ],
+    knowledgeSources: [
+      {
+        id: "folder",
+        name: agent.folderPath,
+        type: "pack-folder",
+        status: "local",
+        chunks: agent.hasSpecMd ? "SPEC.md" : "—",
+        added: "checked-in",
+      },
+    ],
+    opsAlert: agent.productionActivationRequested
+      ? "Activation requested flag is set in config — host must still approve."
+      : "No production activation requested (fail-closed).",
+    opsWhereUsed: `Pack catalog · ${agent.pack}`,
+    opsMetrics: [
+      { id: "tools", label: "Tools", value: String(agent.allowedTools.length) },
+      { id: "provider", label: "Provider", value: agent.provider || "—" },
+    ],
+    footerNote:
+      "Agent settings projected from self-contained pack folders. Browser is non-authority; mutations require host action refs.",
+  };
+}
+
+/**
+ * Default agent detail is pack-backed (no demo VerificationLoop / MarketSentiment fixtures).
+ * Prefers video.orchestrator; falls back to first exported pack agent.
+ */
+function defaultPackAgentDetail(): AgentDetailLandingView {
+  const preferred =
+    getPackAgent("video.orchestrator")
+    ?? getPackAgent("specials.research-agent");
+  if (preferred) return buildAgentDetailView(preferred, preferred.id);
+  // Empty-shell only if export is missing (should not happen in-repo).
+  return {
+    labels: AGENT_DETAIL_LABELS,
+    eyebrow: "PACK AGENT DETAIL",
+    agentName: "Pack agent unavailable",
+    versionBadge: "export missing",
+    statusLabel: "error",
+    velocityLabel: "run export_pack_agents_for_ui.py",
+    headerStats: [],
+    insightStrip: "Regenerate frontend/src/lib/projections/pack-agents.generated.ts",
+    yourUsageNote: "—",
+    historyFilters: [],
+    usageRows: [],
+    paginationLabel: "0 agents",
+    versions: [],
+    currentVersionNote: "Pack agent export is empty.",
+    metaCriticNote: "—",
+    evidenceNote: "—",
+    configSummaries: [],
+    playgroundMessages: [],
+    evalScores: [],
+    knowledgeStats: [],
+    knowledgeSources: [],
+    opsAlert: "No pack agents loaded.",
+    opsWhereUsed: "—",
+    opsMetrics: [],
+    footerNote: "No demo agents are registered in the UI catalog.",
+  };
+}
+
+/** Resolve detail view for a route agentId from the full pack catalog (133). */
+export function resolveAgentDetailView(agentId: string | undefined): AgentDetailLandingView {
+  if (agentId) {
+    const packAgent = getPackAgent(agentId);
+    if (packAgent) return buildAgentDetailView(packAgent, agentId);
+  }
+  return LOCAL_AGENT_DETAIL_LANDING;
+}
+
+/** Pack-backed default (no demo registered agents). */
+export const LOCAL_AGENT_DETAIL_LANDING: AgentDetailLandingView = defaultPackAgentDetail();
 
 export const AGENT_DETAIL_TABS: readonly {
   readonly id: AgentDetailTabId;

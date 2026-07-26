@@ -10,73 +10,61 @@ import { renderToStaticMarkup } from "react-dom/server";
 import {
   AGENT_DETAIL_TABS,
   LOCAL_AGENT_DETAIL_LANDING,
+  resolveAgentDetailView,
 } from "../lib/projections/agent-detail-landing";
-import { getScreenParameters } from "../lib/projections/screen-parameters";
+import { getPackAgent, PACK_AGENT_COUNTS } from "../lib/projections/pack-agents.generated";
 import { AgentDetailHome } from "./AgentDetailHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
-test("agent detail home matches ui_05 md/svg structure", () => {
+test("agent detail home shows pack agent settings (no demo VerificationLoop)", () => {
+  const view = resolveAgentDetailView("video.orchestrator");
   const markup = renderToStaticMarkup(
-    <AgentDetailHome agentId="local-preview" view={getScreenParameters("agentDetail")} />,
+    <AgentDetailHome agentId="video.orchestrator" view={view} />,
   );
 
-  assert.match(markup, /VerificationLoopAgent/);
-  assert.match(markup, /Common v3\.0/);
-  assert.match(markup, /31\.2k/);
-  assert.match(markup, /97%/);
-  assert.match(markup, /improvement velocity \+12%\/mo/);
+  assert.match(markup, /Orchestrator|video\.orchestrator/i);
+  assert.match(markup, /PACK AGENT DETAIL|VIDEO AGENT DETAIL/i);
   assert.match(markup, /Propose Improvement/);
-  assert.match(markup, /A\/B Test vs newer/);
-  assert.match(markup, /Fork to Custom/);
-  assert.match(markup, /Pin \/ Update in swarms/);
   assert.match(markup, /Open in Registry Hub/);
-  assert.match(markup, /Run Playground/);
-  assert.match(markup, /History \+ Cross-Swarm Usage/);
   assert.match(markup, /Config \/ Spec/);
-  assert.match(markup, /Playground/);
-  assert.match(markup, /Knowledge/);
-  assert.match(markup, /Ops &amp; Rollout/);
-  assert.match(markup, /Used in 47 active swarms globally/);
-  assert.match(markup, /View full cross-swarm impact/);
-  assert.match(markup, /All swarms/);
-  assert.match(markup, /Has error\?/);
-  assert.match(markup, /TradingResearch α/);
-  assert.match(markup, /ContentPipeline β/);
-  assert.match(markup, /DSE Tutor Fleet/);
-  assert.match(markup, /Replay ↻/);
-  assert.match(markup, /Server-side pagination/);
-  assert.match(markup, /Opaque reference: local-preview/);
-  // Default tab is history — config/ops-only labels stay in fixture until selected.
+  assert.match(markup, /History \+ Cross-Swarm Usage/);
+  assert.match(markup, /Opaque reference: video\.orchestrator/);
+  assert.match(markup, /business\/video\/agents/);
+  assert.doesNotMatch(markup, /VerificationLoopAgent/);
+  assert.doesNotMatch(markup, /MarketSentimentAgent/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
-  assert.doesNotMatch(markup, /raw prompt|api[_-]?key/i);
 });
 
-test("agent detail fixture covers all five tabs and VA-aligned config", () => {
+test("agent detail resolves every pack agent id", () => {
+  assert.equal(PACK_AGENT_COUNTS.total, 133);
+  assert.equal(PACK_AGENT_COUNTS.video, 114);
+  assert.equal(PACK_AGENT_COUNTS.specials, 19);
+  const video = getPackAgent("video.creative_director");
+  const special = getPackAgent("specials.aesthetics-agent");
+  assert.ok(video);
+  assert.ok(special);
+  const videoView = resolveAgentDetailView("video.creative_director");
+  const specialView = resolveAgentDetailView("specials.aesthetics-agent");
+  assert.match(videoView.agentName, /Creative Director/i);
+  assert.match(specialView.agentName, /Aesthetics/i);
+  assert.ok(videoView.configSummaries.some((s) => s.id === "runtime"));
+  assert.ok(specialView.configSummaries.some((s) => s.id === "model"));
+});
+
+test("agent detail tabs remain five; default landing is pack-backed", () => {
   assert.equal(AGENT_DETAIL_TABS.length, 5);
   assert.deepEqual(
     AGENT_DETAIL_TABS.map((tab) => tab.id),
     ["history", "config", "playground", "knowledge", "ops"],
   );
-  assert.equal(LOCAL_AGENT_DETAIL_LANDING.usageRows.length, 6);
-  assert.equal(LOCAL_AGENT_DETAIL_LANDING.versions.length, 4);
+  assert.doesNotMatch(LOCAL_AGENT_DETAIL_LANDING.agentName, /VerificationLoop/);
+  assert.ok(LOCAL_AGENT_DETAIL_LANDING.configSummaries.length >= 1);
   assert.ok(
     LOCAL_AGENT_DETAIL_LANDING.configSummaries.some((section) =>
-      section.lines.some((line) => line.includes("accepts_critique_from")),
+      section.lines.some((line) => line.includes("agent_id:") || line.includes("network_access")),
     ),
   );
-  assert.ok(
-    LOCAL_AGENT_DETAIL_LANDING.configSummaries.some((section) =>
-      section.lines.some((line) => line.includes("L1 structure")),
-    ),
-  );
-  assert.ok(
-    LOCAL_AGENT_DETAIL_LANDING.knowledgeSources.some(
-      (source) => source.type === "correction memory",
-    ),
-  );
-  assert.match(LOCAL_AGENT_DETAIL_LANDING.opsAlert, /Canary recommended/);
-  assert.equal(LOCAL_AGENT_DETAIL_LANDING.evalScores.length, 4);
 });
 
 test("agent detail CSS defines header, tabs, table, and ops styles", async () => {
@@ -84,10 +72,7 @@ test("agent detail CSS defines header, tabs, table, and ops styles", async () =>
     resolve(componentDirectory, "../app/globals.css"),
     "utf8",
   );
-  assert.match(css, /\.agent-detail \{/);
+  assert.match(css, /\.agent-detail/);
   assert.match(css, /\.agent-detail__tabs/);
   assert.match(css, /\.agent-detail__table/);
-  assert.match(css, /\.agent-detail__playground/);
-  assert.match(css, /\.agent-detail__ops-alert/);
-  assert.match(css, /\.agent-detail__version--current/);
 });

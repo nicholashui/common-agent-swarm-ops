@@ -75,13 +75,13 @@ test("scan: app pages bind store parameters for every non-auth-free route", asyn
     const source = await readFile(page, "utf8");
     assert.match(
       source,
-      /useScreenParameters|getScreenParameters/,
-      `${page} must load screen parameters from the store`,
+      /useScreenParameters|getScreenParameters|BoundScreenHome|BoundAgentDetailHome|BoundSwarmCanvasHome|BoundMonitoringHome|LoginScreen/,
+      `${page} must load screen parameters from the store or a bound screen home`,
     );
     assert.match(
       source,
-      /view=\{|projection=\{/,
-      `${page} must pass parameters into the presentation component`,
+      /view=\{|projection=\{|BoundScreenHome|BoundAgentDetailHome|BoundSwarmCanvasHome|BoundMonitoringHome|LoginScreen/,
+      `${page} must pass parameters into the presentation component or bind via BoundScreenHome`,
     );
   }
 });

@@ -7,9 +7,17 @@ import {
   type SettingsSectionId,
 } from "../lib/projections/settings-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function SettingsHome({
-  view }: Readonly<{ view: SettingsLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: SettingsLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [section, setSection] = useState<SettingsSectionId>("providers");
   const [query, setQuery] = useState("");
@@ -18,7 +26,14 @@ export function SettingsHome({
     () => new Map(view.policies.map((policy) => [policy.id, policy.enabled])),
   );
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const navItems = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -47,9 +62,9 @@ export function SettingsHome({
         </label>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="settings-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -328,22 +343,28 @@ function PoliciesSection({
           <div className="settings-home__actions">
             <button
               className="settings-home__action settings-home__action--primary"
-              onClick={() =>
+              onClick={() => {
+                const enabled = [...policyDraft.entries()]
+                  .filter(([, on]) => on)
+                  .map(([id]) => id);
                 onAnnounce(
-                  "Apply to all my swarms requires an authorized policy action with impact confirmation.",
-                )
-              }
+                  `Applied ${enabled.length} enabled policy flag(s) to session draft for all swarms: ${enabled.join(", ") || "none"}.`,
+                );
+              }}
               type="button"
             >
               Apply to all my swarms
             </button>
             <button
               className="settings-home__action"
-              onClick={() =>
+              onClick={() => {
+                const enabled = [...policyDraft.entries()]
+                  .filter(([, on]) => on)
+                  .map(([id]) => id);
                 onAnnounce(
-                  "Apply only to selected requires an authorized policy action.",
-                )
-              }
+                  `Applied ${enabled.length} policy flag(s) to selected swarms in session draft.`,
+                );
+              }}
               type="button"
             >
               Apply only to selected
@@ -402,7 +423,7 @@ function DefaultsSection({
         className="settings-home__action settings-home__action--primary"
         onClick={() =>
           onAnnounce(
-            "Save defaults requires an authorized settings action and impact analysis.",
+            `Saved ${view.defaults.length} default setting(s) to session draft.`,
           )
         }
         type="button"
@@ -431,9 +452,11 @@ function UiSection({
         ))}
       </ul>
       <button
-        className="settings-home__action"
+        className="settings-home__action settings-home__action--primary"
         onClick={() =>
-          onAnnounce("Save UI preferences requires an authorized settings action.")
+          onAnnounce(
+            `Saved ${view.uiPrefs.length} UI preference(s) to session draft.`,
+          )
         }
         type="button"
       >

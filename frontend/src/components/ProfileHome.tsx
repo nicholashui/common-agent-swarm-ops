@@ -8,15 +8,30 @@ import {
   type ProfileSectionId,
 } from "../lib/projections/profile-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function ProfileHome({
-  view }: Readonly<{ view: ProfileLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: ProfileLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [section, setSection] = useState<ProfileSectionId>(view.defaultSectionId);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [tokenRevealOnce, setTokenRevealOnce] = useState<string | undefined>();
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   return (
     <section aria-label={L(labels, "user_profile_and_preferences")} className="profile-home">
@@ -41,9 +56,9 @@ export function ProfileHome({
         </div>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="profile-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

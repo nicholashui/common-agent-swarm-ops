@@ -7,16 +7,31 @@ import {
   type CostsLandingView,
 } from "../lib/projections/costs-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function CostsHome({
-  view }: Readonly<{ view: CostsLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: CostsLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [query, setQuery] = useState("");
   const [selectedSwarmId, setSelectedSwarmId] = useState<string | undefined>();
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [simEnabled, setSimEnabled] = useState(true);
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const swarms = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -83,9 +98,9 @@ export function CostsHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="costs-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

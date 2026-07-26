@@ -11,9 +11,17 @@ import {
 } from "../lib/projections/registry-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { SpecialsCatalog } from "./SpecialsCatalog";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function RegistryHome({
-  view }: Readonly<{ view: RegistryLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: RegistryLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [mode, setMode] = useState<RegistryViewMode>("cards");
   const [search, setSearch] = useState("");
@@ -23,7 +31,14 @@ export function RegistryHome({
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [reviewOpen, setReviewOpen] = useState(true);
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const toggleFacet = (facet: string): void => {
     setActiveFacets((current) => {
@@ -37,32 +52,24 @@ export function RegistryHome({
   const filteredAgents = useMemo(() => {
     const q = search.trim().toLowerCase();
     return view.agents.filter((agent) => {
-      if (activeFacets.has(view.successRateFacet)) {
-        const rate = Number.parseFloat(agent.success);
-        if (!(rate > 90)) return false;
-      }
-      if (activeFacets.has(view.usedInSwarmsFacet)) {
-        if (!/of yours/.test(agent.usage)) return false;
-      }
-      if (activeFacets.has(view.highVerificationFacet)) {
-        if (!agent.badges.some((badge) => /High Verify/i.test(badge))) {
-          return false;
-        }
-      }
-      const selectedDomains = view.domainFacets.filter((domain) =>
-        activeFacets.has(domain),
-      );
-      if (selectedDomains.length > 0) {
-        if (!selectedDomains.some((domain) => agent.domains.includes(domain))) {
+      // Facets are badge/domain tags (pack: video|specials, status, self-contained, …).
+      for (const facet of activeFacets) {
+        const f = facet.toLowerCase();
+        const matchesBadge = agent.badges.some((badge) => badge.toLowerCase() === f);
+        const matchesDomain = agent.domains.some((domain) => domain.toLowerCase() === f);
+        const matchesCategory = (agent.category ?? "").toLowerCase() === f;
+        if (!matchesBadge && !matchesDomain && !matchesCategory) {
           return false;
         }
       }
       if (q.length === 0) return true;
       return (
+        agent.id.toLowerCase().includes(q) ||
         agent.name.toLowerCase().includes(q) ||
         agent.description.toLowerCase().includes(q) ||
         agent.versionLabel.toLowerCase().includes(q) ||
-        agent.badges.some((badge) => badge.toLowerCase().includes(q))
+        agent.badges.some((badge) => badge.toLowerCase().includes(q)) ||
+        (agent.category ?? "").toLowerCase().includes(q)
       );
     });
   }, [activeFacets, search, view]);
@@ -162,9 +169,9 @@ export function RegistryHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="registry-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

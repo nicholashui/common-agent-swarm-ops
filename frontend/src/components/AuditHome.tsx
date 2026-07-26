@@ -8,16 +8,31 @@ import {
   type AuditLogRow,
 } from "../lib/projections/audit-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function AuditHome({
-  view }: Readonly<{ view: AuditLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: AuditLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [query, setQuery] = useState("");
   const [actionFilter, setActionFilter] = useState<string | undefined>();
   const [selectedId, setSelectedId] = useState(view.rows[0]?.id);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -87,9 +102,9 @@ export function AuditHome({
         </div>
       </header>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="audit-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 

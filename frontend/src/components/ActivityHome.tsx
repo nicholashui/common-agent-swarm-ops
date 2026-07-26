@@ -10,9 +10,17 @@ import {
   type ActivityViewMode,
 } from "../lib/projections/activity-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function ActivityHome({
-  view }: Readonly<{ view: ActivityLandingView }>): JSX.Element {
+  view,
+  onAction,
+  statusMessage: externalStatus,
+}: Readonly<{
+  view: ActivityLandingView;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
+}>): JSX.Element {
   const labels = view.labels;
   const [mode, setMode] = useState<ActivityViewMode>("board");
   const [liveUpdate, setLiveUpdate] = useState(true);
@@ -24,7 +32,14 @@ export function ActivityHome({
     () => new Set(),
   );
 
-  const announce = (message: string): void => setStatusMessage(message);
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const filteredColumns = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -159,9 +174,9 @@ export function ActivityHome({
         ))}
       </div>
 
-      {statusMessage ? (
+      {feedback ? (
         <p aria-live="polite" className="activity-home__status" role="status">
-          {statusMessage}
+          {feedback}
         </p>
       ) : null}
 
@@ -386,7 +401,7 @@ function ExecutionCard({
             return (
               <Link
                 className="activity-home__linkish"
-                href="/registry/agents/local-preview"
+                href="/registry/agents/video.orchestrator"
                 key={action}
               >
                 {action}
