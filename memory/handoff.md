@@ -21,10 +21,11 @@
 
 ## Resume here
 
-1. Dogfood `/login` + menu in browser (`.\start_all.ps1`).
-2. Wire real session entry (Keycloak/OIDC) without accepting tenant/actor from browser.
+1. Dogfood `/login` → demo/sign-in → dashboard landing in browser.
+2. Next redesign screens after ui_02: composer (ui_03), canvas (ui_04), etc.
 3. Replace local previews with `/api/v1` projections as contracts land.
-4. Unrelated untracked: `callgrok.bat`, `check_all_ui.bat`, `run_grok.bat`.
+4. Configure real OIDC env when IdP is available.
+5. Unrelated untracked: `callgrok.bat`, `check_all_ui.bat`, `run_grok.bat`.
 
 ## Do not forget
 

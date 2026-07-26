@@ -1,7 +1,17 @@
 /**
- * Local dashboard landing fixture for ui_02_dashboard.
- * Values are presentation-only until generated /api/v1 projections replace them.
+ * Local dashboard landing fixture for ui_02_dashboard.md / ui_02_dashboard.svg.
+ * Presentation-only until generated /api/v1 projections replace it.
  */
+
+export type DashboardStatusTone =
+  | "running"
+  | "live"
+  | "success"
+  | "complete"
+  | "paused"
+  | "self_refining"
+  | "error"
+  | "failed";
 
 export interface DashboardStatCard {
   readonly id: string;
@@ -10,6 +20,8 @@ export interface DashboardStatCard {
   readonly detail: string;
   readonly trend: string;
   readonly tone: "indigo" | "green" | "violet" | "amber";
+  readonly sparkline: readonly number[];
+  readonly href?: string;
 }
 
 export interface DashboardQuickAction {
@@ -24,8 +36,10 @@ export interface DashboardRunningSwarm {
   readonly id: string;
   readonly name: string;
   readonly pattern: string;
-  readonly status: "running" | "paused" | "success" | "error";
+  readonly status: DashboardStatusTone;
+  readonly statusLabel: string;
   readonly progressLabel: string;
+  readonly progressPercent: number;
   readonly elapsed: string;
   readonly costRate: string;
   readonly commonsOnLatest: string;
@@ -36,10 +50,14 @@ export interface DashboardRecentRun {
   readonly id: string;
   readonly time: string;
   readonly swarm: string;
+  readonly pattern: string;
   readonly commons: string;
-  readonly status: "running" | "paused" | "success" | "error";
+  readonly status: DashboardStatusTone;
+  readonly statusLabel: string;
   readonly duration: string;
   readonly cost: string;
+  readonly actionLabel: string;
+  readonly actionHref: string;
 }
 
 export interface DashboardImpactInsight {
@@ -47,8 +65,35 @@ export interface DashboardImpactInsight {
   readonly title: string;
   readonly body: string;
   readonly tone: "opportunity" | "positive";
+  readonly badge?: string;
   readonly primaryActionLabel: string;
+  readonly primaryActionHref: string;
   readonly secondaryActionLabel: string;
+  readonly secondaryActionHref: string;
+  readonly tertiaryActionLabel?: string;
+  readonly tertiaryActionHref?: string;
+}
+
+export interface DashboardControlPlaneHealth {
+  readonly apiHealthLabel: string;
+  readonly apiHealthTone: "healthy" | "degraded" | "stale";
+  readonly delayedEventWarning: string;
+  readonly backlogCount: string;
+  readonly backlogDetail: string;
+  readonly approvalExpiryAlert: string;
+  readonly sseLabel: string;
+  readonly sseDetail: string;
+  readonly correlationId: string;
+  readonly affectedSummary: string;
+  readonly affectedHref: string;
+}
+
+export interface DashboardPinnedItem {
+  readonly id: string;
+  readonly name: string;
+  readonly kindLabel: string;
+  readonly kindTone: "common" | "pattern" | "swarm";
+  readonly href: string;
 }
 
 export interface DashboardLandingView {
@@ -59,9 +104,13 @@ export interface DashboardLandingView {
   readonly stale: boolean;
   readonly commonHealth: readonly DashboardStatCard[];
   readonly quickActions: readonly DashboardQuickAction[];
+  readonly fleetSectionTitle: string;
   readonly runningSwarms: readonly DashboardRunningSwarm[];
   readonly recentRuns: readonly DashboardRecentRun[];
+  readonly insightsIntro: string;
   readonly insights: readonly DashboardImpactInsight[];
+  readonly controlPlane: DashboardControlPlaneHealth;
+  readonly pinned: readonly DashboardPinnedItem[];
   readonly footerNote: string;
 }
 
@@ -69,7 +118,7 @@ export const LOCAL_DASHBOARD_LANDING: DashboardLandingView = {
   title: "Common Health & Fleet Ops",
   description:
     "Operating on a living, collectively improving commons foundation.",
-  freshnessLabel: "Local preview · projection not connected",
+  freshnessLabel: "Local preview · SSE not connected",
   asOf: "local",
   stale: false,
   commonHealth: [
@@ -80,6 +129,7 @@ export const LOCAL_DASHBOARD_LANDING: DashboardLandingView = {
       detail: "versions · 142 swarms",
       trend: "↑ 4 new improvements this week",
       tone: "indigo",
+      sparkline: [40, 48, 45, 58, 54, 68, 62, 78, 74, 87],
     },
     {
       id: "success-rate",
@@ -88,14 +138,17 @@ export const LOCAL_DASHBOARD_LANDING: DashboardLandingView = {
       detail: "↑ 1.2%",
       trend: "Rolling 7-day aggregate",
       tone: "green",
+      sparkline: [82, 84, 83, 86, 85, 88, 87, 90, 89, 91],
     },
     {
       id: "proposals",
       label: "Pending Improvement Proposals",
       value: "3",
       detail: "2 from meta-critic · 1 awaiting merge",
-      trend: "Review in Registry",
+      trend: "Review →",
       tone: "violet",
+      sparkline: [1, 1, 2, 2, 2, 3, 3, 3, 3, 3],
+      href: "/registry",
     },
     {
       id: "fleet-health",
@@ -104,114 +157,185 @@ export const LOCAL_DASHBOARD_LANDING: DashboardLandingView = {
       detail: "12 swarms on latest commons",
       trend: "Avg success of active swarms",
       tone: "green",
+      sparkline: [88, 89, 90, 90, 91, 92, 92, 93, 94, 94],
     },
     {
       id: "savings",
       label: "Est. Monthly Savings",
-      value: "$128",
-      detail: "from token efficiency gains",
+      value: "$412",
+      detail: "from commons token efficiency",
       trend: "Commons reuse vs custom forks",
       tone: "amber",
+      sparkline: [180, 210, 240, 260, 290, 320, 350, 370, 390, 412],
     },
   ],
   quickActions: [
     {
       id: "registry",
       label: "Explore Common Registry Hub",
-      description: "Discover versioned agents, provenance, and aggregate metrics.",
+      description: "Discover versioned agents & patterns  →",
       href: "/registry",
       primary: true,
     },
     {
       id: "compose",
-      label: "Compose New Swarm",
-      description: "Start from common patterns with guided composition.",
+      label: "Compose from Common Patterns",
+      description: "Parallel · verification loop · router  →",
       href: "/composer",
     },
     {
       id: "proposals",
       label: "Review Improvement Proposals",
-      description: "Inspect pending commons upgrades and evidence.",
+      description: "3 pending for commons you use  →",
       href: "/evaluations",
     },
-    {
-      id: "activity",
-      label: "Open Activity",
-      description: "Task lifecycle, recovery, and correlation timeline.",
-      href: "/activity",
-    },
   ],
+  fleetSectionTitle: "Your Swarms Fleet Ops",
   runningSwarms: [
     {
-      id: "run-market",
-      name: "Daily market brief",
-      pattern: "Parallel + verification v1.4",
+      id: "run-trading",
+      name: "TradingResearch α",
+      pattern: "Parallel Indep. + Verify v1.4",
       status: "running",
-      progressLabel: "3/5 agents on latest common",
-      elapsed: "12m 08s",
-      costRate: "$0.04/min",
-      commonsOnLatest: "6 linked",
+      statusLabel: "Running",
+      progressLabel: "8/8 on latest common",
+      progressPercent: 68,
+      elapsed: "12m",
+      costRate: "$0.14/min",
+      commonsOnLatest: "8/8 latest",
       canvasHref: "/canvas",
     },
     {
-      id: "run-research",
-      name: "Research digest",
-      pattern: "Supervisor + specialists v2.0",
-      status: "running",
-      progressLabel: "5/8 agents on latest common",
-      elapsed: "4m 41s",
+      id: "run-content",
+      name: "ContentPipeline β",
+      pattern: "Hierarchical Supervisor v2.0",
+      status: "live",
+      statusLabel: "Live",
+      progressLabel: "5/5 on latest common",
+      progressPercent: 41,
+      elapsed: "4m",
       costRate: "$0.06/min",
-      commonsOnLatest: "8 linked",
+      commonsOnLatest: "5/5 latest",
       canvasHref: "/canvas",
     },
   ],
   recentRuns: [
     {
       id: "recent-1",
-      time: "local · 08:12",
-      swarm: "Daily market brief",
-      commons: "6 commons",
-      status: "success",
+      time: "2m",
+      swarm: "TradingResearch α",
+      pattern: "Parallel + Verify v1.4",
+      commons: "7 · v2.1",
+      status: "complete",
+      statusLabel: "Complete",
       duration: "4m 12s",
       cost: "$0.38",
+      actionLabel: "Replay ↻",
+      actionHref: "/activity",
     },
     {
       id: "recent-2",
-      time: "local · 07:55",
-      swarm: "Research digest",
-      commons: "8 commons",
-      status: "running",
+      time: "8m",
+      swarm: "ContentPipeline β",
+      pattern: "Hierarchical v2.0",
+      commons: "5 · v1.8",
+      status: "self_refining",
+      statusLabel: "Self-Refining",
       duration: "12m 08s",
       cost: "$0.71",
+      actionLabel: "Replay ↻",
+      actionHref: "/activity",
     },
     {
       id: "recent-3",
-      time: "local · 07:20",
-      swarm: "DSE lesson planner",
-      commons: "4 commons",
-      status: "paused",
+      time: "1h",
+      swarm: "DSE Tutor Fleet",
+      pattern: "Verification Loop v1.2",
+      commons: "4 · v1.2",
+      status: "complete",
+      statusLabel: "Complete",
       duration: "2m 47s",
       cost: "$0.19",
+      actionLabel: "Replay ↻",
+      actionHref: "/activity",
+    },
+    {
+      id: "recent-4",
+      time: "3h",
+      swarm: "LegacyModernizer",
+      pattern: "Map-Reduce + Verifier v1.1",
+      commons: "3 · v2.0",
+      status: "failed",
+      statusLabel: "Failed",
+      duration: "9m 02s",
+      cost: "$0.52",
+      actionLabel: "Debug →",
+      actionHref: "/operations",
     },
   ],
+  insightsIntro:
+    "AI-generated from Ops service & meta-critic aggregate analysis.",
   insights: [
     {
       id: "insight-1",
-      title: "Commons upgrade opportunity",
-      body: "Updating CommonReportAgent v2.1 → v2.2 would improve 19 of your active swarms (+15% latency, -$47/mo est.). Local preview only until rollout projection is connected.",
+      title: "Rollout Opportunity",
+      body: "Updating CommonReportAgent v2.1 → v2.2 improves 19 active swarms by +15% latency, saves ~$47/mo.",
       tone: "opportunity",
-      primaryActionLabel: "Open approvals",
-      secondaryActionLabel: "View evaluations",
+      badge: "19 swarms",
+      primaryActionLabel: "Approve Rollout",
+      primaryActionHref: "/operations",
+      secondaryActionLabel: "A/B Test First",
+      secondaryActionHref: "/operations",
+      tertiaryActionLabel: "View Diff",
+      tertiaryActionHref: "/evaluations",
     },
     {
       id: "insight-2",
-      title: "Collective impact",
-      body: "Your usage data helped improve 4 common agents this month — view collective impact in the registry once live projections are available.",
+      title: "Collective Intelligence",
+      body: "Your usage data helped improve 4 common agents this month across the ecosystem.",
       tone: "positive",
-      primaryActionLabel: "Open registry",
+      primaryActionLabel: "View collective impact →",
+      primaryActionHref: "/registry",
       secondaryActionLabel: "Open activity",
+      secondaryActionHref: "/activity",
+    },
+  ],
+  controlPlane: {
+    apiHealthLabel: "Healthy",
+    apiHealthTone: "healthy",
+    delayedEventWarning: "0 · queue nominal",
+    backlogCount: "14",
+    backlogDetail: "queued runs",
+    approvalExpiryAlert: "1 approval expires in 8m",
+    sseLabel: "Local preview · not connected",
+    sseDetail: "Last-Event-ID not validated · REST snapshot only",
+    correlationId: "corr local-preview",
+    affectedSummary: "3 swarms in degraded projection",
+    affectedHref: "/operations",
+  },
+  pinned: [
+    {
+      id: "pin-1",
+      name: "VerificationLoopAgent",
+      kindLabel: "Common v3.0",
+      kindTone: "common",
+      href: "/registry",
+    },
+    {
+      id: "pin-2",
+      name: "Parallel Indep. v1.4",
+      kindLabel: "Pattern",
+      kindTone: "pattern",
+      href: "/blueprints",
+    },
+    {
+      id: "pin-3",
+      name: "TradingResearch α",
+      kindLabel: "Swarm",
+      kindTone: "swarm",
+      href: "/canvas",
     },
   ],
   footerNote:
-    "Last synced commons: local preview · Contribute to the commons by running & verifying swarms.",
+    "Last synced commons: local preview · Contribute to the commons by running & verifying swarms · Redacted projections only — no host names or secrets shown.",
 };
