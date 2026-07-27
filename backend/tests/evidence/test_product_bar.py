@@ -151,7 +151,9 @@ def test_all_twenty_two_property_contracts_are_present_and_linked(number: int) -
 
 
 def test_public_surface_is_v1_only_and_adapters_are_deterministic_local_stubs() -> None:
-    """The Host exposes no unversioned control plane and registers no live adapters."""
+    """The Host exposes only versioned /api/v1 routes and broker-local adapters."""
+    from app.adapters.media_live import LiveMediaAdapter
+
     application = create_app()
     with TestClient(application) as client:
         assert all(
@@ -163,11 +165,23 @@ def test_public_surface_is_v1_only_and_adapters_are_deterministic_local_stubs() 
 
     adapters = default_local_adapters()
     assert adapters
-    assert all(isinstance(adapter, DeterministicLocalAdapter) for adapter in adapters)
+    # Core stubs remain DeterministicLocalAdapter; production media adapters are
+    # host-owned LiveMediaAdapter instances that stay local_only and fail closed
+    # without credentials (no silent live network success).
+    assert all(
+        isinstance(adapter, (DeterministicLocalAdapter, LiveMediaAdapter)) for adapter in adapters
+    )
     assert all(
         adapter.local_only and adapter.version == LOCAL_ADAPTER_VERSION for adapter in adapters
     )
-    assert {adapter.adapter_id for adapter in adapters} >= {"media.stub", "crm.lookup"}
+    assert {adapter.adapter_id for adapter in adapters} >= {
+        "media.stub",
+        "crm.lookup",
+        "media.sora",
+        "media.veo",
+        "media.runway",
+        "media.elevenlabs",
+    }
 
 
 def test_all_unsafe_operations_are_rejected_without_permitting_production_work() -> None:

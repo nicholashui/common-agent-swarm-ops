@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty OperationalAnnouncer — operational status transition announcer
+ * @role Announce resource state changes for assistive tech without sensitive payloads.
+ * @controls None (visually optional; polite live region).
+ * @must Announce only on transition key change.
+ * @mustnot Embed credentials, raw traces, or provider internals.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2; Req 8.4
+ */
 import React, { useEffect, useRef, useState } from "react";
 
 export interface OperationalAnnouncement {

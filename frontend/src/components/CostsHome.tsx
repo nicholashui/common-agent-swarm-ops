@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty CostsHome — cost projection filters (ui_19)
+ * @role Present cost metrics/filters from projection only.
+ * @controls Cost filters, range selectors, refresh via onAction when allowed.
+ * @must Treat numbers as redacted projection data, not billing authority.
+ * @mustnot Adjust billing or invent spend without host contracts.
+ * @redesign docs/frontend_redesign/ui_19_costs.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -7,7 +15,16 @@ import {
   type CostsLandingView,
 } from "../lib/projections/costs-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const COST_PERIODS = [
+  "Last 24 hours",
+  "Last 7 days",
+  "Last 30 days",
+  "This month",
+  "All time",
+] as const;
 
 export function CostsHome({
   view,
@@ -23,6 +40,9 @@ export function CostsHome({
   const [selectedSwarmId, setSelectedSwarmId] = useState<string | undefined>();
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [simEnabled, setSimEnabled] = useState(true);
+  const [period, setPeriod] = useState(
+    () => view.periodLabel || COST_PERIODS[1],
+  );
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -68,8 +88,23 @@ export function CostsHome({
               value={query}
             />
           </label>
-          <button className="costs-home__chip" type="button">
-            {view.periodLabel} ▾
+          <button
+            aria-label={`Cost period: ${period}. Click to cycle.`}
+            className="costs-home__chip"
+            onClick={() => {
+              const options = view.periodLabel
+                ? [
+                    view.periodLabel,
+                    ...COST_PERIODS.filter((p) => p !== view.periodLabel),
+                  ]
+                : [...COST_PERIODS];
+              const next = cycleOption(options, period);
+              setPeriod(next);
+              announce(`Cost period set to ${next} (local presentation filter).`);
+            }}
+            type="button"
+          >
+            {period} ▾
           </button>
           <button
             className="costs-home__action costs-home__action--primary"

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty SpecialsCatalog — specials pack catalog panel
+ * @role List draft/non-active specials agents; local search; never production-activate.
+ * @controls Search input; in-app links; announce-only buttons fail-closed if governed.
+ * @must Show disclaimer/draft status; SafeContent for untrusted summary text.
+ * @mustnot Activate specials or claim production readiness.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.5; ui_07_registry_hub.md embed
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

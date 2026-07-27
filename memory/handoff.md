@@ -1,9 +1,18 @@
 # Handoff
 
 **As of:** 2026-07-27  
-**State:** Migration COMPLETE + **production media host path** enabled (Sora/Veo/Runway/ElevenLabs adapters; env credentials; DNA production_ready).
+**State:** VA study `*.md` (no `_hk`/`_zh`) all in corpus; capability index + phased plan published. Runtime partial vs full study prose.
 
 ## Latest work
+
+### VA study/*.md capability lock + plan (2026-07-27)
+
+- All **37** study markdowns (exclude locale) exact in `business/video/corpus/study/`
+- Index: `business/video/STUDY_CAPABILITY_INDEX.json`
+- Status: `docs/va_study_implementation_status.md`
+- Plan (one-by-one phases 0–7): `docs/va_study_implementation_plan.md`
+- Script: `scripts/business/sync_va_study_md.py --write`
+- Knowledge seeds linked to key study docs
 
 ### Production / live media activation (2026-07-27)
 

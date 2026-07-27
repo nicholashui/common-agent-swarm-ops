@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ShellNavigation — application menu navigation chrome
+ * @role Render resolved application menu groups/links for in-app routing only.
+ * @controls Nav links, optional mobile menu toggle; no mutate authority.
+ * @must Use projection/menu config; highlight active path without inventing routes.
+ * @mustnot Expose external untrusted destinations or privileged menu items not projected.
+ * @redesign docs/frontend_redesign/ui_00_menu.md
+ */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, {

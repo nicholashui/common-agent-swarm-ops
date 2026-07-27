@@ -18,8 +18,10 @@ from tests.fakes.broker import InMemoryAuditRepository, authorized_context
 def test_default_local_adapters_cover_every_required_local_operation() -> None:
     """Every required capability has a unique fixed-version local adapter."""
     adapters = default_local_adapters()
+    adapter_ids = tuple(adapter.adapter_id for adapter in adapters)
 
-    assert tuple(adapter.adapter_id for adapter in adapters) == (
+    # Core deterministic stubs remain present and ordered first.
+    assert adapter_ids[:7] == (
         "contract.parse",
         "policy.lookup",
         "crm.lookup",
@@ -28,8 +30,16 @@ def test_default_local_adapters_cover_every_required_local_operation() -> None:
         "audit.log",
         "media.stub",
     )
+    # Host-owned production media adapters are registered; they fail closed without credentials.
+    assert {
+        "media.sora",
+        "media.veo",
+        "media.runway",
+        "media.elevenlabs",
+    } <= set(adapter_ids)
     assert all(adapter.version == LOCAL_ADAPTER_VERSION for adapter in adapters)
     assert all(adapter.local_only for adapter in adapters)
+    assert len(adapter_ids) == len(set(adapter_ids))
 
 
 def test_adapter_execution_is_rejected_outside_the_host_tool_broker() -> None:

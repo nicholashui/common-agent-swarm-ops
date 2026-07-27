@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty CanvasHome — swarm canvas projection (ui_04)
+ * @role Present nodes/palette/layout; run and inspect via host topology APIs through onAction.
+ * @controls Run, node inspect, layout/view mode controls.
+ * @must Require host run/topology contracts; disable unauthorized run controls.
+ * @mustnot Invent graph edges or execute remote tools from the browser.
+ * @redesign docs/frontend_redesign/ui_04_canvas.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -10,6 +18,7 @@ import {
   type CanvasViewMode,
 } from "../lib/projections/canvas-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { clampZoom } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function CanvasHome({
@@ -37,6 +46,8 @@ export function CanvasHome({
     CanvasLandingView["inspectorTabs"][number]["id"]
   >("task");
   const [focusMode, setFocusMode] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [aiSuggest, setAiSuggest] = useState("");
 
   const selected = view.nodes.find((node) => node.id === selectedId);
 
@@ -249,14 +260,19 @@ export function CanvasHome({
           <label className="canvas-home__ai-suggest">
             <span className="visually-hidden">{L(labels, "ai_suggest_node")}</span>
             <input
+              aria-label={L(labels, "ai_suggest_node_2")}
+              onChange={(event) => setAiSuggest(event.target.value)}
               onKeyDown={(event) => {
                 if (event.key === "Enter") {
                   announce(
-                    "AI Suggest Node requires an authorized assist action.",
+                    aiSuggest.trim().length === 0
+                      ? "Enter a node suggestion before submitting."
+                      : "AI Suggest Node requires an authorized assist action.",
                   );
                 }
               }}
               placeholder={L(labels, "ai_suggest_node_2")}
+              value={aiSuggest}
             />
           </label>
           <label className="canvas-home__search">
@@ -299,7 +315,11 @@ export function CanvasHome({
         </aside>
 
         <div className="canvas-home__main">
-          <div aria-label={L(labels, "swarm_graph_canvas")} className="canvas-home__board">
+          <div
+            aria-label={L(labels, "swarm_graph_canvas")}
+            className="canvas-home__board"
+            style={{ transform: `scale(${zoom})`, transformOrigin: "center top" }}
+          >
             {view.groups.map((group) => {
               const groupNodes = view.nodes.filter(
                 (node) => node.groupId === group.id,
@@ -400,9 +420,43 @@ export function CanvasHome({
                 <i />
               </div>
               <div className="canvas-home__zoom">
-                <button type="button">+</button>
-                <button type="button">−</button>
-                <button type="button">⤢</button>
+                <button
+                  aria-label="Zoom in"
+                  onClick={() => {
+                    const next = clampZoom(zoom + 0.1);
+                    setZoom(next);
+                    announce(`Canvas zoom ${Math.round(next * 100)}% (local).`);
+                  }}
+                  type="button"
+                >
+                  +
+                </button>
+                <button
+                  aria-label="Zoom out"
+                  onClick={() => {
+                    const next = clampZoom(zoom - 0.1);
+                    setZoom(next);
+                    announce(`Canvas zoom ${Math.round(next * 100)}% (local).`);
+                  }}
+                  type="button"
+                >
+                  −
+                </button>
+                <button
+                  aria-label={focusMode ? "Exit focus mode" : "Enter focus mode"}
+                  aria-pressed={focusMode}
+                  onClick={() => {
+                    setFocusMode((open) => !open);
+                    announce(
+                      focusMode
+                        ? "Focus mode off (local)."
+                        : "Focus mode on (local).",
+                    );
+                  }}
+                  type="button"
+                >
+                  ⤢
+                </button>
               </div>
             </div>
           </div>

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty RegistryHome — registry hub projection (ui_07)
+ * @role Search/facet agent & pattern cards; embed specials; propose via host intents.
+ * @controls Search, facets, cards, proposal actions, specials panel.
+ * @must Keep demo proposals fail-closed; specials never activate production.
+ * @mustnot Invent registry mutations without action refs.
+ * @redesign docs/frontend_redesign/ui_07_registry_hub.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

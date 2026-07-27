@@ -49,6 +49,13 @@ export type BoundScreenKey =
   | "settings";
 
 /**
+ * @duty BoundScreenHome — screen binder
+ * @role Map serializable screen keys to Homes; inject projections + onAction bridge.
+ * @controls None of its own; hosts Home, InteractionStatusBar, optional OperationsConsole.
+ * @must Always pass real onAction; never leave primary actions as permanent dead stubs.
+ * @mustnot Invent action references; pass component types from server pages.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.1
+ *
  * Binds a serializable screen key to its client-side projection hook and
  * presentation home. Server pages must not pass component functions as props.
  * Every bound home receives the real action bridge (API + session + fail-closed).

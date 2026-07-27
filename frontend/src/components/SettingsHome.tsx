@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty SettingsHome — workspace settings projection (ui_08)
+ * @role Present preference sections; persist only local or host-authorized prefs.
+ * @controls Section nav, preference fields, save intents via onAction.
+ * @must Never store credentials or production activation toggles.
+ * @mustnot Enable live media/production from client prefs alone.
+ * @redesign docs/frontend_redesign/ui_08_settings.md
+ */
 import React, { useMemo, useState } from "react";
 
 import {

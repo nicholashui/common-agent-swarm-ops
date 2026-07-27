@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ApiPortalHome — API portal projection (ui_15)
+ * @role Present portal links and try-it flows only when host-authorized.
+ * @controls Portal nav, try-it actions, docs links from projection.
+ * @must Fail-closed when try-it contracts are missing.
+ * @mustnot Store API keys in browser or invent portal credentials.
+ * @redesign docs/frontend_redesign/ui_15_api_portal.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

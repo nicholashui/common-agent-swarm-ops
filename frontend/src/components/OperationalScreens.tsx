@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty OperationalScreens — legacy named screen exports
+ * @role Map Dashboard/Registry/Activity/… names to projection-driven presentational screens.
+ * @controls Delegated ActionControl, filters, evidence/reference via projection handlers.
+ * @must Prefer *Home + BoundScreenHome for app routes; keep exports for tests/compat.
+ * @mustnot Invent projections or actions outside generated screen views.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.4
+ */
 import React from "react";
 
 import type { GeneratedActionReference, GeneratedJsonObject } from "../lib/api/client";

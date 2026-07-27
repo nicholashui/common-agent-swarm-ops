@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty AccessibleDialog — accessible modal host
+ * @role Focus trap, restore focus, labelled dialog for proposals/approvals/confirmations.
+ * @controls Close (IconControl); primary actions supplied by parent with authorized handlers only.
+ * @must Trap focus while open; restore invoker focus on close; Escape closes.
+ * @mustnot Invent host mutations inside the dialog chrome.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2; ui_07 proposal modal
+ */
 import React, { useEffect, useId, useRef, type KeyboardEvent, type ReactNode } from "react";
 
 import { IconControl } from "./IconControl";

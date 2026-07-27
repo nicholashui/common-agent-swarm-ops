@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty OperatorConsole — presentational operator inspection forms
+ * @role Controlled forms for run/graph inspection and approval decision via OperatorApi.
+ * @controls Run/approval inputs, decision select, reason textarea, submit buttons.
+ * @must Use createOperatorApi (same-origin /api/v1); surface operatorCorrection messages.
+ * @mustnot Store credentials; invent approvals without host response.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.4
+ */
 import { FormEvent, useMemo, useState } from "react";
 
 import {

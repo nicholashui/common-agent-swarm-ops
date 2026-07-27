@@ -1,3 +1,11 @@
+/**
+ * @duty DashboardHome — fleet landing projection (ui_02)
+ * @role Present dashboard health, running swarms, recent runs; wire pause/refresh via onAction.
+ * @controls Pause (session/host intent), refresh/nav links, status live region.
+ * @must Treat projections as non-authoritative; route mutations through screen actions.
+ * @mustnot Fabricate fleet health or enable production activation from the browser.
+ * @redesign docs/frontend_redesign/ui_02_dashboard.md
+ */
 import React from "react";
 import Link from "next/link";
 
@@ -12,7 +20,7 @@ import type { ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function DashboardHome({
   view,
-  onAction: _onAction,
+  onAction,
   onPause,
   statusMessage: externalStatus,
 }: Readonly<{
@@ -22,6 +30,15 @@ export function DashboardHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const handlePause = (swarmId: string): void => {
+    if (onPause) {
+      onPause(swarmId);
+      return;
+    }
+    if (onAction) {
+      void onAction({ kind: "local.pause_swarm", swarmId });
+    }
+  };
   return (
     <section aria-label="Dashboard projection" className="dashboard-home">
       <header className="dashboard-home__header">
@@ -149,7 +166,7 @@ export function DashboardHome({
             ) : (
               <ul aria-live="polite" className="dashboard-running">
                 {view.runningSwarms.map((swarm) => (
-                  <RunningSwarmCard key={swarm.id} labels={labels} swarm={swarm} onPause={onPause} />
+                  <RunningSwarmCard key={swarm.id} labels={labels} swarm={swarm} onPause={handlePause} />
                 ))}
               </ul>
             )}

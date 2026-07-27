@@ -66,6 +66,8 @@ export function classifyAnnounce(message: string): ScreenUiAction {
     return { kind: "local.layout", detail: m };
   }
   if (/marked?\s+.*read|mark all read/i.test(m)) {
+    // Prefer structured `local.mark_read` from Homes when ids are known;
+    // free-text announce remains honest feedback.
     return { kind: "feedback", message: m };
   }
   if (/preferences saved locally|saved locally/i.test(m)) {

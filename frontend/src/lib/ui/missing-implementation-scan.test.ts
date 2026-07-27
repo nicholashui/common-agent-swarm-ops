@@ -125,3 +125,52 @@ test("scan: screen-actions module is the single fail-closed path", async () => {
   assert.match(actions, /eval\.run_campaign/);
   assert.match(actions, /canvas\.run/);
 });
+
+test("scan: no dead buttons in component sources (every button has a handler path)", async () => {
+  async function walk(dir: string): Promise<string[]> {
+    const entries = await readdir(dir, { withFileTypes: true });
+    const out: string[] = [];
+    for (const entry of entries) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        out.push(...(await walk(full)));
+        continue;
+      }
+      if (
+        entry.name.endsWith(".tsx") &&
+        !entry.name.includes(".test.") &&
+        !entry.name.includes(".property.")
+      ) {
+        out.push(full);
+      }
+    }
+    return out;
+  }
+
+  const files = await walk(join(srcRoot, "components"));
+  const dead: string[] = [];
+  for (const file of files) {
+    const source = await readFile(file, "utf8");
+    const parts = source.split(/<button\b/);
+    for (let i = 1; i < parts.length; i += 1) {
+      const close = parts[i]!.indexOf(">");
+      const attrs = close >= 0 ? parts[i]!.slice(0, close) : parts[i]!.slice(0, 200);
+      // Handler via onClick/submit/disabled expression, or prop spread for primitives.
+      if (
+        /onClick|type="submit"|formAction|\bdisabled\b|\{\.\.\.buttonProps\}|\{\.\.\.props\}/.test(
+          attrs,
+        )
+      ) {
+        continue;
+      }
+      // IconControl-style: onClick destructured and reapplied on next lines after attrs
+      // is still detected via explicit onClick= on the opening tag after our fix.
+      dead.push(`${file}: ${attrs.replace(/\s+/g, " ").trim().slice(0, 120)}`);
+    }
+  }
+  assert.equal(
+    dead.length,
+    0,
+    `dead buttons (no onClick/submit/disabled path):\n${dead.join("\n")}`,
+  );
+});

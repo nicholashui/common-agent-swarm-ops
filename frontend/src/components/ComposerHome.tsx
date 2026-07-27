@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ComposerHome — swarm composer projection (ui_03)
+ * @role Compose/pin/draft swarm graph intents via projection + onAction bridge.
+ * @controls Compose form controls, pin/draft actions, governed stubs fail-closed.
+ * @must Route mutations through screen actions; show host feedback only.
+ * @mustnot Invent topology or run authority in the browser.
+ * @redesign docs/frontend_redesign/ui_03_swarm_composer.md
+ */
 import React, {
   useEffect,
   useId,

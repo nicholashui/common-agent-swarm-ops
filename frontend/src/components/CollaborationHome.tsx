@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty CollaborationHome — collaboration list projection (ui_18)
+ * @role List shared collaboration items; actions only when host-authorized.
+ * @controls List/search, open item, collab actions via onAction.
+ * @must Not invent share ACLs or external invite authority in browser.
+ * @mustnot Leak privileged collaborator payloads beyond projection.
+ * @redesign docs/frontend_redesign/ui_18_collaboration.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

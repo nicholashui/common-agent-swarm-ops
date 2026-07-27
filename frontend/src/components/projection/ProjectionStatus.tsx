@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ProjectionStatus — freshness / recovery strip
+ * @role Show live/stale/degraded/unavailable labels; expose only refresh/reconnect actions.
+ * @controls ActionControl for recovery actions; ReferenceLink for alert targets.
+ * @must Filter actions via isProjectionRecoveryAction; show as_of/freshness text.
+ * @mustnot Claim live state when stale; invent recovery without action refs.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3; Req 8.3–8.4
+ */
 import React from "react";
 
 import type { GeneratedActionReference } from "../../lib/api/client";

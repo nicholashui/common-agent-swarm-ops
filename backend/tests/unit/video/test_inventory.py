@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from app.video.inventory import EXPECTED_VIDEO_AGENT_COUNT, VideoInventoryValidator
 
 
@@ -80,7 +82,14 @@ def test_active_video_agent_configuration_is_rejected() -> None:
     assert any(issue.code == "invalid_lifecycle_status" for issue in report.issues)
 
 
-def test_agent_spec_production_activation_request_is_rejected() -> None:
+def test_agent_spec_production_activation_request_is_rejected(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Without the pack production profile, activation requests remain invalid."""
+    monkeypatch.setattr(
+        "app.video.media_production.load_production_profile",
+        lambda video_root=None: {"enabled": False},
+    )
     manifest = _load_asset("manifest.json")
     inventory = _load_asset("inventory.json")
     agent_specs = _load_agent_specs()

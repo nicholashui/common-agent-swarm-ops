@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty EvalHome — evaluation campaign projection (ui_11)
+ * @role Present eval campaigns/results; run campaign intent via onAction when eligible.
+ * @controls Campaign list, run campaign, filters/nav.
+ * @must Fail-closed when run campaign action is missing or ineligible.
+ * @mustnot Invent campaign results or host eval authority.
+ * @redesign docs/frontend_redesign/ui_11_eval.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

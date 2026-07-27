@@ -1,5 +1,16 @@
 "use client";
 
+/**
+ * @duty DomainPackExtensionSlot — domain-neutral pack UI extension slot
+ * @role Host optional pack UI extensions by slotId from server manifests only.
+ * @controls None required; children/metadata via SafeContent (inert).
+ * @must Filter extensionsForSlot; no domain hard-coding in shell.
+ * @mustnot Execute pack metadata as code or invent pack authority.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.5; adoption pack slots
+ *
+ * Renders domain pack UI extensions for a named host slot without hard-coding
+ * any domain (adoption_redesign: host supplies slots; packs supply metadata).
+ */
 import React from "react";
 
 import {
@@ -15,10 +26,6 @@ export interface DomainPackExtensionSlotProps {
   readonly emptyLabel?: string;
 }
 
-/**
- * Renders domain pack UI extensions for a named host slot without hard-coding
- * any domain (adoption_redesign: host supplies slots; packs supply metadata).
- */
 export function DomainPackExtensionSlot({
   slotId,
   extensions,

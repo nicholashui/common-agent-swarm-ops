@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty OnboardingHome — onboarding steps projection (ui_16)
+ * @role Guide continue/next steps from projection; no host authority inventions.
+ * @controls Step navigation, continue, optional skip when projection allows.
+ * @must Keep progress presentation-only or session-scoped unless host persists.
+ * @mustnot Skip host gates or claim production readiness from onboarding alone.
+ * @redesign docs/frontend_redesign/ui_16_onboarding.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

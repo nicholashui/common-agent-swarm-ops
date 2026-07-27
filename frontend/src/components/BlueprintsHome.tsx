@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty BlueprintsHome — blueprint gallery projection (ui_20)
+ * @role Gallery of blueprint cards; instantiate only via host intents when eligible.
+ * @controls Search/filter, gallery cards, instantiate actions via onAction.
+ * @must Note pack_spine is not blueprint realization; fail-closed without contract.
+ * @mustnot Realize blueprints or claim pack authority in the browser.
+ * @redesign docs/frontend_redesign/ui_20_blueprints.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 

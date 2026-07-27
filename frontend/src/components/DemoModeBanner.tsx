@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty DemoModeBanner — non-authority / demo session banner
+ * @role Announce demo/local preview mode so fixtures are not treated as production.
+ * @controls Exit Demo button → same-origin logout then /login (session only).
+ * @must State demo/local preview; disable button while busy; surface safe error text.
+ * @mustnot Claim production activation, live media success, or host authority.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.1
+ */
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 

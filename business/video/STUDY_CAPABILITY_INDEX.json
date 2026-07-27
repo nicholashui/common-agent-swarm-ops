@@ -1,0 +1,695 @@
+{
+  "generated_at": "2026-07-27T03:00:49Z",
+  "va_study_root": "C:\\Project\\va-agent-swarm\\study",
+  "exclude": [
+    "*_hk.md",
+    "*_zh.md"
+  ],
+  "count": 37,
+  "copied": 0,
+  "entries": [
+    {
+      "study_path": "aesthetics_agent_functional_specification.md",
+      "va_bytes": 31053,
+      "corpus_path": "business/video/corpus/study/aesthetics_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "7d5b36b2dbc4e70664e9213d5a89d057935e54a1c3f6ab8cbb639fee5ab0f8d1",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/aesthetics_agent/",
+        "business/specials/agents/specials.aesthetics-agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/aesthetics_agent/",
+        "business/specials/agents/specials.aesthetics-agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "agent_loop.md",
+      "va_bytes": 10477,
+      "corpus_path": "business/video/corpus/study/agent_loop.md",
+      "corpus_status": "exact",
+      "sha256": "19ab8cfe72bd585e0bc972c24db43a1382e4f59152b6a72218c5bb7015c5ec2c",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "v1 design retained; pack skill points at v3 lineage",
+      "common_artifacts": [
+        "business/video/special_skills/agent_loop_v3/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/agent_loop_v3/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "agent_loop_v2.md",
+      "va_bytes": 36862,
+      "corpus_path": "business/video/corpus/study/agent_loop_v2.md",
+      "corpus_status": "exact",
+      "sha256": "41d7fa8fc82cd11e3b80973db76f070237c8e800f8629741a27880ff981dfa17",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "Superseded by v3 skill packaging",
+      "common_artifacts": [
+        "business/video/special_skills/agent_loop_v3/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/agent_loop_v3/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "agent_loop_v3.md",
+      "va_bytes": 52978,
+      "corpus_path": "business/video/corpus/study/agent_loop_v3.md",
+      "corpus_status": "exact",
+      "sha256": "f0fcb85210fa5fa9827e23f4a2505d2d24caab8df6dabb7f1ea2f007529aa0ea",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "Skill data + specials agents; not full autonomous loop runtime",
+      "common_artifacts": [
+        "business/video/special_skills/agent_loop_v3/",
+        "business/specials/agents/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/agent_loop_v3/",
+        "business/specials/agents/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "agentic_rag_functional_specification.md",
+      "va_bytes": 15816,
+      "corpus_path": "business/video/corpus/study/agentic_rag_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "7478e9fe106a7f750c76f90eeb45f44f46946facd2516e88bb3cb52e71cfb829",
+      "domain": "special_skill",
+      "runtime_level": "partial_runtime",
+      "notes": "Memory retrieve API exists; full agentic RAG stack partial",
+      "common_artifacts": [
+        "business/video/special_skills/agentic_rag/",
+        "backend/app/memory/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/agentic_rag/",
+        "backend/app/memory/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "agents.md",
+      "va_bytes": 74726,
+      "corpus_path": "business/video/corpus/study/agents.md",
+      "corpus_status": "exact",
+      "sha256": "bbf2c637ae61a2f07303068eb7f0c25aafc0cd960495e030eda9c468db82bff7",
+      "domain": "roster",
+      "runtime_level": "operational_pack",
+      "notes": "114 VA-style agent folders + SPECs",
+      "common_artifacts": [
+        "business/video/agents/*",
+        "business/video/inventory.json",
+        "business/video/ROSTER.json"
+      ],
+      "artifacts_found": [
+        "business/video/agents/*",
+        "business/video/inventory.json",
+        "business/video/ROSTER.json"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ai_agent_video_production_workflow.md",
+      "va_bytes": 66515,
+      "corpus_path": "business/video/corpus/study/ai_agent_video_production_workflow.md",
+      "corpus_status": "exact",
+      "sha256": "5bf4112146003febf39439b1549eea3a355ff0919a96ef04d84c66db45bef7f4",
+      "domain": "workflow",
+      "runtime_level": "partial_runtime",
+      "notes": "A–J DNA + e2e/LQR; not full critique mesh / all tools from doc",
+      "common_artifacts": [
+        "business/video/workflows/wf_video_arch_*.dna.json",
+        "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+        "business/video/WORKFLOW_ROLE_MAP.json",
+        "business/video/process_coverage.json"
+      ],
+      "artifacts_found": [
+        "business/video/workflows/wf_video_arch_*.dna.json",
+        "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+        "business/video/WORKFLOW_ROLE_MAP.json",
+        "business/video/process_coverage.json"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "coding_agent_functional_specification.md",
+      "va_bytes": 98732,
+      "corpus_path": "business/video/corpus/study/coding_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "f3cea4a31abde1170afd1c2e743166b5a961220cf585d1f9107ae9e48c060b5d",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/coding_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/coding_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "complex_problem_solution_process_model.md",
+      "va_bytes": 22728,
+      "corpus_path": "business/video/corpus/study/complex_problem_solution_process_model.md",
+      "corpus_status": "exact",
+      "sha256": "89a4c10cd30206f2de051ba022946ebce8ef850d57f07c8af4d6cc592b7d014e",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/complex_problem_solution_process_model/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/complex_problem_solution_process_model/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "general_creative_agent_functional_specification.md",
+      "va_bytes": 13803,
+      "corpus_path": "business/video/corpus/study/general_creative_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "35e61afc7c4cfdd5b14ae86ad7ae3baf79d964ede95147932448bac4cdd3c17a",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/general_creative_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/general_creative_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "general_creative_agent_technical_specification.md",
+      "va_bytes": 9826,
+      "corpus_path": "business/video/corpus/study/general_creative_agent_technical_specification.md",
+      "corpus_status": "exact",
+      "sha256": "b17e1f31e12accddd408fe73e4620cad1891c967f5bed408c85cc55a92d4c266",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/general_creative_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/general_creative_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "human_video_production_workflow.md",
+      "va_bytes": 67074,
+      "corpus_path": "business/video/corpus/study/human_video_production_workflow.md",
+      "corpus_status": "exact",
+      "sha256": "c875c6a64313615e1221891eb31a639ff1596b620f87e0f1e209437b3159bfbc",
+      "domain": "workflow",
+      "runtime_level": "design_plus_graphs",
+      "notes": "Human crew mapping informs agent roster and process maps",
+      "common_artifacts": [
+        "business/video/workflows/*",
+        "business/video/docs/process-maps.md"
+      ],
+      "artifacts_found": [
+        "business/video/workflows/*",
+        "business/video/docs/process-maps.md"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "intent_analysis_agent_functional_specification.md",
+      "va_bytes": 13053,
+      "corpus_path": "business/video/corpus/study/intent_analysis_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "f0c895b3438bfe511c44876f2ceeb8126d09e9114fa094d0e19f0e1d955d5bf7",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/intent_analysis_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/intent_analysis_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "knowledge_router_agent.md",
+      "va_bytes": 18950,
+      "corpus_path": "business/video/corpus/study/knowledge_router_agent.md",
+      "corpus_status": "exact",
+      "sha256": "688ef2556e2e072dddebe5d990cd0f6bb8c7386d194a319a80f7f95981e35e21",
+      "domain": "special_skill",
+      "runtime_level": "partial_runtime",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/knowledge_router_agent/",
+        "backend/app/memory/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/knowledge_router_agent/",
+        "backend/app/memory/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "lifes_quiet_redemption_agent_workflow.md",
+      "va_bytes": 48059,
+      "corpus_path": "business/video/corpus/study/lifes_quiet_redemption_agent_workflow.md",
+      "corpus_status": "exact",
+      "sha256": "ae44c47e09834eb327dee2470e8f4d831ea7f496e03a7ebeb6d4a0413981a9c5",
+      "domain": "workflow_lqr",
+      "runtime_level": "partial_runtime",
+      "notes": "LQR overview DNA + eval fixtures; not full 14-shot MCTS loop",
+      "common_artifacts": [
+        "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+        "business/video/evals/golden/video-lqr-consistency.json"
+      ],
+      "artifacts_found": [
+        "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+        "business/video/evals/golden/video-lqr-consistency.json"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "llm_usage_functional_specification.md",
+      "va_bytes": 7276,
+      "corpus_path": "business/video/corpus/study/llm_usage_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "6bac2d5882382f1a85920b5854879cf295edb86fa5a48cfdbcd43c72c6fb97fd",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/llm_usage/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/llm_usage/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "optimization_agent_functional_specification.md",
+      "va_bytes": 9182,
+      "corpus_path": "business/video/corpus/study/optimization_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "5735afb03877a793c9b958a594778e777d15c467b62828f2cedf95c81f41efbd",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/optimization_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/optimization_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "optimization_agent_technical_specification.md",
+      "va_bytes": 8434,
+      "corpus_path": "business/video/corpus/study/optimization_agent_technical_specification.md",
+      "corpus_status": "exact",
+      "sha256": "37ffbc9917276eb52e1055a5b24632f35074bab1a03327268e5c78d8a8ea2fe8",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/optimization_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/optimization_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "podcast_agent_functional_specifcation.md",
+      "va_bytes": 80109,
+      "corpus_path": "business/video/corpus/study/podcast_agent_functional_specifcation.md",
+      "corpus_status": "exact",
+      "sha256": "f8a76576bd0b39c7a6aa4935532040d2c451b783804195f4149e1e38be761dd6",
+      "domain": "special_skill",
+      "runtime_level": "partial_runtime",
+      "notes": "ElevenLabs media path available when production env configured",
+      "common_artifacts": [
+        "business/video/special_skills/podcast_agent/",
+        "business/video/agents/video.voiceover/",
+        "backend/app/adapters/media_live.py"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/podcast_agent/",
+        "business/video/agents/video.voiceover/",
+        "backend/app/adapters/media_live.py"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "psychological_profile_agent_functional_specifications.md",
+      "va_bytes": 46216,
+      "corpus_path": "business/video/corpus/study/psychological_profile_agent_functional_specifications.md",
+      "corpus_status": "exact",
+      "sha256": "f1fa518cee669e11195bf6fcc62a63d2befa84c3d8c06a08afc22fecde9c495b",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/psychological_profile_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/psychological_profile_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "psychological_recommendation_agent_functional_specification.md",
+      "va_bytes": 177226,
+      "corpus_path": "business/video/corpus/study/psychological_recommendation_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "8739ebcf75af6e2300b57ea9ef968dcdfdb3d96db8780dd1f6cc3c9408dbac0c",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "Paired with profile skill data",
+      "common_artifacts": [
+        "business/video/special_skills/psychological_profile_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/psychological_profile_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "research_agent_functional_specification.md",
+      "va_bytes": 46967,
+      "corpus_path": "business/video/corpus/study/research_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "4371283b47a6b822c2f7cc196420c00ce4ff58c318cc8aac1b09f0a69fc3d2f2",
+      "domain": "special_skill",
+      "runtime_level": "partial_runtime",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/research_agent/",
+        "business/video/agents/video.webresearch/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/research_agent/",
+        "business/video/agents/video.webresearch/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "research_agent_technical_specification.md",
+      "va_bytes": 43548,
+      "corpus_path": "business/video/corpus/study/research_agent_technical_specification.md",
+      "corpus_status": "exact",
+      "sha256": "8a6d6bbe8283aaa8f7b19cd1c65a1f169c0b1f2c27634878bcf73034b7a80618",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/research_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/research_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "screenwriter_strategic_goal_achievement_agent_functional_specification.md",
+      "va_bytes": 62968,
+      "corpus_path": "business/video/corpus/study/screenwriter_strategic_goal_achievement_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "0bea9dd2492e477790853d437dbf68899f98c4128db7ae597ccef23d9af35680",
+      "domain": "special_skill",
+      "runtime_level": "partial_runtime",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/screenwriter_strategic_goal_achievement_agent/",
+        "business/video/agents/video.screenwriter/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/screenwriter_strategic_goal_achievement_agent/",
+        "business/video/agents/video.screenwriter/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "strategic_goal_achievement_agent_functional_specification.md",
+      "va_bytes": 72896,
+      "corpus_path": "business/video/corpus/study/strategic_goal_achievement_agent_functional_specification.md",
+      "corpus_status": "exact",
+      "sha256": "3c2d1bcc4fa2462c2c728074671cdb8afac9abad1d4da7cab378aee1b681c01d",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/screenwriter_strategic_goal_achievement_agent/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/screenwriter_strategic_goal_achievement_agent/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "system_build_plan.md",
+      "va_bytes": 93067,
+      "corpus_path": "business/video/corpus/study/system_build_plan.md",
+      "corpus_status": "exact",
+      "sha256": "741efd2bdfec9997555338f15953748cafdc59d861b2a5b0df54b798bbc819be",
+      "domain": "build",
+      "runtime_level": "design_plus_host",
+      "notes": "Host migration complete; production profile exists",
+      "common_artifacts": [
+        "docs/migration_redesign/migration_redesign.md",
+        "MIGRATION_COMPLETE.md",
+        "business/video/production/"
+      ],
+      "artifacts_found": [
+        "docs/migration_redesign/migration_redesign.md",
+        "MIGRATION_COMPLETE.md",
+        "business/video/production/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "SYSTEM_REFERENCE.md",
+      "va_bytes": 42432,
+      "corpus_path": "business/video/corpus/study/SYSTEM_REFERENCE.md",
+      "corpus_status": "exact",
+      "sha256": "b0ede689ac548eeadaedfef9b2427a63117d9c83b60b3fab0af27258ba7fd9a1",
+      "domain": "architecture",
+      "runtime_level": "host_architecture",
+      "notes": "Common host implements orchestration spine; not identical CrewAI topology",
+      "common_artifacts": [
+        "backend/app/",
+        "business/video/workflows/pack_spine.json"
+      ],
+      "artifacts_found": [
+        "backend/app/",
+        "business/video/workflows/pack_spine.json"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "thinking_model.md",
+      "va_bytes": 10676,
+      "corpus_path": "business/video/corpus/study/thinking_model.md",
+      "corpus_status": "exact",
+      "sha256": "4226b7e1eff21ad6305d8cfe6a12c229a1e801fdb5e0d8bf6c3c6406a73a7e18",
+      "domain": "special_skill",
+      "runtime_level": "data_skill",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/special_skills/thinking_model/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/thinking_model/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/agent_management_ui.md",
+      "va_bytes": 48937,
+      "corpus_path": "business/video/corpus/study/ui/agent_management_ui.md",
+      "corpus_status": "exact",
+      "sha256": "6143fb57b7ac151164bb7c4898b690383decb56ab30e7a34ffd03bc1798faa95",
+      "domain": "ui",
+      "runtime_level": "partial_ui",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/components/RegistryHome.tsx",
+        "frontend/src/components/AgentDetailHome.tsx"
+      ],
+      "artifacts_found": [
+        "frontend/src/components/RegistryHome.tsx",
+        "frontend/src/components/AgentDetailHome.tsx"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/architecture_communication.md",
+      "va_bytes": 27077,
+      "corpus_path": "business/video/corpus/study/ui/architecture_communication.md",
+      "corpus_status": "exact",
+      "sha256": "eb72e03156660ecc16b3e7243421e737e2f7824b15fc56a1951e777a470d2a03",
+      "domain": "ui",
+      "runtime_level": "partial_ui",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/",
+        "docs/"
+      ],
+      "artifacts_found": [
+        "frontend/src/",
+        "docs/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/backend_agent_management.md",
+      "va_bytes": 28711,
+      "corpus_path": "business/video/corpus/study/ui/backend_agent_management.md",
+      "corpus_status": "exact",
+      "sha256": "2161198d2525d0a6b74807f708597f11b8243541493e519b92c4f7c45c888991",
+      "domain": "ui_backend",
+      "runtime_level": "partial_runtime",
+      "notes": "",
+      "common_artifacts": [
+        "backend/app/api/",
+        "frontend/src/lib/api/"
+      ],
+      "artifacts_found": [
+        "backend/app/api/",
+        "frontend/src/lib/api/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/production_scale_discovery.md",
+      "va_bytes": 40894,
+      "corpus_path": "business/video/corpus/study/ui/production_scale_discovery.md",
+      "corpus_status": "exact",
+      "sha256": "16621d10f8552caecef58d340a5cd4cb48ad5b82b6c3291f1650be06724cdb16",
+      "domain": "ui",
+      "runtime_level": "partial_ui",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/components/RegistryHome.tsx"
+      ],
+      "artifacts_found": [
+        "frontend/src/components/RegistryHome.tsx"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/project_creation_flow.md",
+      "va_bytes": 40388,
+      "corpus_path": "business/video/corpus/study/ui/project_creation_flow.md",
+      "corpus_status": "exact",
+      "sha256": "b0be12d31f839da7b4bc416ca5c4a6bce016f6e842bbcce0ecdf3af2fe277da5",
+      "domain": "ui",
+      "runtime_level": "partial_ui",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/components/ComposerHome.tsx",
+        "frontend/src/components/CanvasHome.tsx"
+      ],
+      "artifacts_found": [
+        "frontend/src/components/ComposerHome.tsx",
+        "frontend/src/components/CanvasHome.tsx"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/RETHINK_100_IMPROVEMENTS.md",
+      "va_bytes": 14440,
+      "corpus_path": "business/video/corpus/study/ui/RETHINK_100_IMPROVEMENTS.md",
+      "corpus_status": "exact",
+      "sha256": "ae6db5db065f5ee5661b230592efc1c23ab2e41047782068014bbf5aaed6a60a",
+      "domain": "ui_design",
+      "runtime_level": "design_only",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/",
+        "docs/frontend_redesign/"
+      ],
+      "artifacts_found": [
+        "frontend/src/",
+        "docs/frontend_redesign/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/ui_design.md",
+      "va_bytes": 94381,
+      "corpus_path": "business/video/corpus/study/ui/ui_design.md",
+      "corpus_status": "exact",
+      "sha256": "3f2f47180889928f05b3d91f96c7a91d40e2aa04715b3242b6b9b10b52f218b1",
+      "domain": "ui",
+      "runtime_level": "partial_ui",
+      "notes": "",
+      "common_artifacts": [
+        "frontend/src/",
+        "docs/frontend_redesign/"
+      ],
+      "artifacts_found": [
+        "frontend/src/",
+        "docs/frontend_redesign/"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "ui/video_remake_enhancement.md",
+      "va_bytes": 37544,
+      "corpus_path": "business/video/corpus/study/ui/video_remake_enhancement.md",
+      "corpus_status": "exact",
+      "sha256": "c627240ca15f11adebe5236dfe41da41cbdbe92c00577cf2bcb44577f8939c01",
+      "domain": "ui_workflow",
+      "runtime_level": "partial_runtime",
+      "notes": "",
+      "common_artifacts": [
+        "business/video/workflows/",
+        "frontend/src/components/BlueprintsHome.tsx"
+      ],
+      "artifacts_found": [
+        "business/video/workflows/",
+        "frontend/src/components/BlueprintsHome.tsx"
+      ],
+      "artifacts_missing": []
+    },
+    {
+      "study_path": "video_generation_techology_should_learn_now.md",
+      "va_bytes": 6188,
+      "corpus_path": "business/video/corpus/study/video_generation_techology_should_learn_now.md",
+      "corpus_status": "exact",
+      "sha256": "a2362925897486b836b1b30519be8f75e733734371b198e1036db2ba5c27133c",
+      "domain": "media",
+      "runtime_level": "partial_runtime",
+      "notes": "Sora/Veo/Runway/ElevenLabs host path; Kling/DCC not fully wired",
+      "common_artifacts": [
+        "business/video/special_skills/video_generation_techology_should_learn_now/",
+        "backend/app/adapters/media_live.py",
+        "business/video/production/"
+      ],
+      "artifacts_found": [
+        "business/video/special_skills/video_generation_techology_should_learn_now/",
+        "backend/app/adapters/media_live.py",
+        "business/video/production/"
+      ],
+      "artifacts_missing": []
+    }
+  ]
+}

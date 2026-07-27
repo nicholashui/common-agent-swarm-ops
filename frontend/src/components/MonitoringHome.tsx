@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty MonitoringHome — run monitoring projection (ui_09)
+ * @role Inspect runs/traces/freshness from projection; inspect intents via onAction.
+ * @controls Tabs, inspect run, freshness indicators.
+ * @must Show stale/degraded honestly; recovery only when projection allows.
+ * @mustnot Fabricate infrastructure health from unauthorized probes.
+ * @redesign docs/frontend_redesign/ui_09_monitoring.md
+ */
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -9,7 +17,15 @@ import {
   type MonitoringTraceNode,
 } from "../lib/projections/monitoring-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const MONITORING_FILTER_CYCLES: Readonly<Record<string, readonly string[]>> = {
+  environment: ["All envs", "demo", "local", "staging"],
+  severity: ["All severities", "info", "warn", "error", "critical"],
+  window: ["Last 15m", "Last 1h", "Last 24h", "Last 7d"],
+  service: ["All services", "control-plane", "worker", "gateway"],
+};
 
 export function MonitoringHome({
   view,
@@ -25,6 +41,9 @@ export function MonitoringHome({
   const [search, setSearch] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [selectedNodeId, setSelectedNodeId] = useState("pred");
+  const [filterValues, setFilterValues] = useState<ReadonlyMap<string, string>>(
+    () => new Map(view.filters.map((filter) => [filter.id, filter.value])),
+  );
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -84,12 +103,43 @@ export function MonitoringHome({
       <div className="monitoring-home__body">
         <aside aria-label={L(labels, "monitoring_filters")} className="monitoring-home__filters">
           <h2>{L(labels, "filters")}</h2>
-          {view.filters.map((filter) => (
-            <button className="monitoring-home__filter" key={filter.id} type="button">
-              <span>{filter.label}</span>
-              <strong>{filter.value} ▾</strong>
-            </button>
-          ))}
+          {view.filters.map((filter) => {
+            const current = filterValues.get(filter.id) ?? filter.value;
+            return (
+              <button
+                aria-label={`${filter.label}: ${current}. Click to cycle.`}
+                className="monitoring-home__filter"
+                key={filter.id}
+                onClick={() => {
+                  const options =
+                    MONITORING_FILTER_CYCLES[filter.id] ??
+                    Array.from(
+                      new Set([
+                        filter.value,
+                        "All",
+                        "demo",
+                        "local",
+                        "Last 1h",
+                        "Last 24h",
+                      ]),
+                    );
+                  const next = cycleOption(options, current);
+                  setFilterValues((prev) => {
+                    const map = new Map(prev);
+                    map.set(filter.id, next);
+                    return map;
+                  });
+                  announce(
+                    `Monitoring filter “${filter.label}” set to ${next} (local).`,
+                  );
+                }}
+                type="button"
+              >
+                <span>{filter.label}</span>
+                <strong>{current} ▾</strong>
+              </button>
+            );
+          })}
           <p className="monitoring-home__muted">{view.eventTypesNote}</p>
         </aside>
 

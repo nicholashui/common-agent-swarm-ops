@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty AuditHome — audit log projection (ui_14)
+ * @role Search/filter audit projections; open evidence via opaque refs only.
+ * @controls Search/filters, audit rows, evidence/nav links.
+ * @must Render redacted projections; no raw privileged payloads.
+ * @mustnot Fabricate audit events or bypass host audit ACL.
+ * @redesign docs/frontend_redesign/ui_14_audit.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -8,7 +16,15 @@ import {
   type AuditLogRow,
 } from "../lib/projections/audit-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const AUDIT_TIME_RANGES = [
+  "Last 24 hours",
+  "Last 7 days",
+  "Last 30 days",
+  "All time",
+] as const;
 
 export function AuditHome({
   view,
@@ -24,6 +40,16 @@ export function AuditHome({
   const [actionFilter, setActionFilter] = useState<string | undefined>();
   const [selectedId, setSelectedId] = useState(view.rows[0]?.id);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const [timeRange, setTimeRange] = useState(
+    () => view.timeRangeLabel || AUDIT_TIME_RANGES[0],
+  );
+  const actorOptions = useMemo(() => {
+    const actors = Array.from(new Set(view.rows.map((row) => row.actor)));
+    return [view.actorFilterLabel || "All actors", ...actors];
+  }, [view.actorFilterLabel, view.rows]);
+  const [actorFilter, setActorFilter] = useState(
+    () => view.actorFilterLabel || "All actors",
+  );
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -36,6 +62,12 @@ export function AuditHome({
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
+    const actorToken = actorFilter.replace(/▾/g, "").trim().toLowerCase();
+    const allActors =
+      actorToken.length === 0 ||
+      /^all\b/i.test(actorToken) ||
+      actorFilter === view.actorFilterLabel;
+
     return view.rows.filter((row) => {
       if (actionFilter) {
         const needle = actionFilter.toLowerCase();
@@ -46,6 +78,9 @@ export function AuditHome({
           return false;
         }
       }
+      if (!allActors && !row.actor.toLowerCase().includes(actorToken)) {
+        return false;
+      }
       if (q.length === 0) return true;
       return (
         row.actor.toLowerCase().includes(q) ||
@@ -55,7 +90,7 @@ export function AuditHome({
         row.summary.toLowerCase().includes(q)
       );
     });
-  }, [actionFilter, query, view.rows]);
+  }, [actionFilter, actorFilter, query, view.actorFilterLabel, view.rows]);
 
   const selected =
     rows.find((row) => row.id === selectedId) ?? rows[0] ?? view.rows[0];
@@ -111,13 +146,37 @@ export function AuditHome({
       <div className="audit-home__body">
         <aside aria-label={L(labels, "audit_filters")} className="audit-home__filters">
           <h2>{L(labels, "filters")}</h2>
-          <button className="audit-home__filter" type="button">
+          <button
+            aria-label={`Time range: ${timeRange}. Click to cycle.`}
+            className="audit-home__filter"
+            onClick={() => {
+              const options = view.timeRangeLabel
+                ? [
+                    view.timeRangeLabel,
+                    ...AUDIT_TIME_RANGES.filter((r) => r !== view.timeRangeLabel),
+                  ]
+                : [...AUDIT_TIME_RANGES];
+              const next = cycleOption(options, timeRange);
+              setTimeRange(next);
+              announce(`Audit time range set to ${next} (local filter).`);
+            }}
+            type="button"
+          >
             <span>{L(labels, "time_range")}</span>
-            <strong>{view.timeRangeLabel} ▾</strong>
+            <strong>{timeRange} ▾</strong>
           </button>
-          <button className="audit-home__filter" type="button">
+          <button
+            aria-label={`Actor filter: ${actorFilter}. Click to cycle.`}
+            className="audit-home__filter"
+            onClick={() => {
+              const next = cycleOption(actorOptions, actorFilter);
+              setActorFilter(next);
+              announce(`Audit actor filter set to ${next} (local filter).`);
+            }}
+            type="button"
+          >
             <span>{L(labels, "actor")}</span>
-            <strong>{view.actorFilterLabel} ▾</strong>
+            <strong>{actorFilter} ▾</strong>
           </button>
           <div className="audit-home__action-types" role="group" aria-label={L(labels, "action_type")}>
             <p>{L(labels, "action_type")}</p>

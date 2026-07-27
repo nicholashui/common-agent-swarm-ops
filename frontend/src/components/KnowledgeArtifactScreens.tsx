@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty KnowledgeArtifactScreens — knowledge & artifact projection host
+ * @role Compose knowledge/artifact/VA projections with SafeContent and IngestionForm.
+ * @controls Delegated: ingestion fields, ActionControl, evidence/reference links.
+ * @must Keep untrusted content inert; ingest only via authorized contract when present.
+ * @mustnot Client-fetch import URLs or render privileged raw payloads.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.4; ui_10_knowledge.md
+ */
 import React from "react";
 
 import type { GeneratedActionReference, GeneratedJsonObject, GeneratedJsonValue } from "../lib/api/client";

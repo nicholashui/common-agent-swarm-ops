@@ -35,6 +35,14 @@ function hasRequiredCapability(
 }
 
 /**
+ * @duty ScreenBoundary — fail-soft capability gate + error surface
+ * @role Keep shell visible; block data region until generated capability exists;
+ *       show safe unavailable copy and recovery ActionControl only from projection.
+ * @controls Optional recovery ActionControl (server action ref only).
+ * @must Not render privileged screen data without capability; use polite live region.
+ * @mustnot Leak stack traces, tokens, or provider payloads.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.1
+ *
  * Keeps authenticated shell context visible, but never renders an approved
  * screen's data region before its generated capability is returned.
  */

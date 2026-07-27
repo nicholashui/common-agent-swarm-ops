@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty EvidenceLink — opaque evidence control
+ * @role Present server-returned evidence identity; optional select invokes host handler.
+ * @controls Span (read-only) or button when onSelect provided.
+ * @must Use data-evidence-reference-id from projection only.
+ * @mustnot Embed raw traces, credentials, or object-store paths.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3
+ */
 import React from "react";
 
 import type { EvidenceReferenceView, GeneratedEvidenceReference } from "../../lib/projections/ProjectionMapper";

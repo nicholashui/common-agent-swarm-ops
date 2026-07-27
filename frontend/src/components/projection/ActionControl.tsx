@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ActionControl — eligible server action button
+ * @role Invoke only a mapped, server-returned action reference when eligible.
+ * @controls One button with data-action-reference-id; disabled when ineligible/stale/pending.
+ * @must Disable freshness-critical/irreversible actions while projection is stale.
+ * @mustnot Invent action IDs or bypass eligibility.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3; Req 8.2
+ */
 import React from "react";
 
 import type { GeneratedActionReference } from "../../lib/api/client";

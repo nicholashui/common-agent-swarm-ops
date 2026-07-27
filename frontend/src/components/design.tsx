@@ -1,3 +1,11 @@
+/**
+ * @duty design primitives — presentation-only UI atoms
+ * @role StatusBadge, VersionPill, PageHeader, MetricCard, EmptyState for screen chrome.
+ * @controls Optional actions slot on PageHeader (caller-owned eligibility).
+ * @must Pair status text with visual tone; no business authorization.
+ * @mustnot Encode host authority or credentials.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2; common-style.html
+ */
 import React, { type ReactNode } from "react";
 
 import type { RunStatus } from "../lib/demo-data";

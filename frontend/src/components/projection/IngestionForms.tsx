@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty IngestionForms — safe artifact/knowledge ingress UI
+ * @role Collect untrusted content/import reference; submit only via authorized generated contract.
+ * @controls Content field, optional URL field, submit; disabled without contract.
+ * @must Mark client checks non-authoritative; show async ingest states from projection.
+ * @mustnot Browser-fetch untrusted URLs; treat client validation as security.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3; Req 8.5; ui_10_knowledge.md
+ */
 import React from "react";
 
 import type { GeneratedJsonObject, GeneratedJsonValue, GeneratedOperationId } from "../../lib/api/client";

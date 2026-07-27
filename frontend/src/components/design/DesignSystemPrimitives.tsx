@@ -1,4 +1,11 @@
 /**
+ * @duty DesignSystemPrimitives — redesign visual system atoms
+ * @role DesignStatusPill / DesignCommonBadge aligned to common-style.html.
+ * @controls None (spans/pills only).
+ * @must Pair status text with color; never status by color alone.
+ * @mustnot Encode authorization or live provider claims.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2; common-style.html
+ *
  * Shared visual primitives aligned to docs/frontend_redesign/common-style.html.
  * Status always pairs text label with color; Common badge uses indigo mono treatment.
  */

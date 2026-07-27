@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ApprovalRolloutScreens — approval gate & rollout projections
+ * @role Render ApprovalGateScreen / RolloutCampaignScreen / ApprovalsScreen from projections.
+ * @controls ActionControl for approve/deny/rollout only when enabled and not stale.
+ * @must Disable irreversible controls while stale/pending; show evidence revision.
+ * @mustnot Submit decisions without server action references.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.4
+ */
 import React from "react";
 
 import type { GeneratedActionReference, GeneratedJsonObject, GeneratedJsonValue } from "../lib/api/client";

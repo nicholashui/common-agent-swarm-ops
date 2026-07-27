@@ -1,3 +1,11 @@
+/**
+ * @duty AuthenticatedShell — host chrome for authorized workspace
+ * @role Provide navigation, workspace label, demo banner, and outlet for bound screens.
+ * @controls Shell navigation only; screen content supplies its own actions.
+ * @must Reflect server/session signals; never fabricate tenancy or health probes.
+ * @mustnot Enable production activation or store API secrets.
+ * @redesign docs/frontend_redesign/ui_00_menu.md; component_duty_catalog.md §3.1
+ */
 import type { ReactNode } from "react";
 
 import { SessionBoundary } from "../lib/session/SessionBoundary";

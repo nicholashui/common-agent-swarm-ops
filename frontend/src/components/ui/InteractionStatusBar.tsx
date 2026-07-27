@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty InteractionStatusBar — action feedback live region
+ * @role Display InteractionStatus (busy/success/error/info) with optional correlation id.
+ * @controls None (display-only).
+ * @must Use aria-live; role=alert for errors.
+ * @mustnot Show tokens, secrets, or raw provider payloads.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2
+ */
 import type { InteractionStatus } from "../../lib/ui/interaction-runtime";
 
 export function InteractionStatusBar({

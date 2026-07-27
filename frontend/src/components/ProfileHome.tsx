@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ProfileHome — operator profile projection (ui_13)
+ * @role Display/edit profile fields via projection; mutations only through onAction.
+ * @controls Section nav, profile fields, save intents when authorized.
+ * @must Not store secrets; prefer host-authorized profile updates.
+ * @mustnot Invent identity or privilege claims client-side.
+ * @redesign docs/frontend_redesign/ui_13_profile.md
+ */
 import React, { useState } from "react";
 import Link from "next/link";
 

@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty MobileHome — compact ops projection (ui_17)
+ * @role Present mobile-density ops labels/actions from projection.
+ * @controls Compact tabs, primary ops actions via onAction.
+ * @must Obey same eligibility rules as desktop Homes.
+ * @mustnot Relax fail-closed rules for smaller viewports.
+ * @redesign docs/frontend_redesign/ui_17_mobile.md
+ */
 import React, { useState } from "react";
 import Link from "next/link";
 

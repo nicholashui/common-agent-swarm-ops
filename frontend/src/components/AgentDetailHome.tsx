@@ -1,6 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+/**
+ * @duty AgentDetailHome — agent detail projection (ui_05)
+ * @role Present agent tabs, propose/open-registry intents from projection.
+ * @controls Tabs, propose/registry actions via onAction when eligible.
+ * @must Require host action refs for mutations; fail-closed on missing contracts.
+ * @mustnot Mutate agent registry without server eligibility.
+ * @redesign docs/frontend_redesign/ui_05_agent_detail.md
+ */
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
 import {
@@ -10,7 +18,15 @@ import {
   type AgentDetailUsageRow,
 } from "../lib/projections/agent-detail-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const PLAYGROUND_MODELS = [
+  "Model override: default",
+  "Model override: balanced",
+  "Model override: high-quality",
+  "Model override: low-latency",
+] as const;
 
 export function AgentDetailHome({
   view,
@@ -167,6 +183,7 @@ export function AgentDetailHome({
           <HistoryTab
             view={view}
             labels={labels}
+            onAnnounce={announce}
             onReplay={() =>
               announce(
                 "Replay with latest common requires an authorized checkpoint action.",
@@ -207,17 +224,45 @@ export function AgentDetailHome({
 function HistoryTab({
   view,
   onReplay,
+  onAnnounce,
   labels,
 }: Readonly<{
   view: AgentDetailLandingView;
   onReplay: () => void;
+  onAnnounce: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
+  const [activeFilter, setActiveFilter] = useState<string | undefined>();
+
+  const rows = useMemo(() => {
+    if (!activeFilter) return view.usageRows;
+    const token = activeFilter.replace(/▾/g, "").trim().toLowerCase();
+    if (token.length === 0 || /^all\b/i.test(token)) return view.usageRows;
+    return view.usageRows.filter((row) => {
+      const hay = [
+        row.swarm,
+        row.pattern,
+        row.status,
+        row.summary,
+        row.duration,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(token) || token.split(/\s+/).some((t) => t.length > 2 && hay.includes(t));
+    });
+  }, [activeFilter, view.usageRows]);
+
   return (
     <div className="agent-detail__history">
       <div className="agent-detail__insight" role="status">
         <p>{view.insightStrip}</p>
-        <button className="agent-detail__linkish" type="button">
+        <button
+          className="agent-detail__linkish"
+          onClick={() =>
+            onAnnounce(`Usage note: ${view.yourUsageNote} (session display only).`)
+          }
+          type="button"
+        >
           {view.yourUsageNote}
         </button>
       </div>
@@ -228,7 +273,26 @@ function HistoryTab({
         role="group"
       >
         {view.historyFilters.map((filter) => (
-          <button className="agent-detail__filter" key={filter} type="button">
+          <button
+            aria-pressed={activeFilter === filter}
+            className={
+              activeFilter === filter
+                ? "agent-detail__filter agent-detail__filter--active"
+                : "agent-detail__filter"
+            }
+            key={filter}
+            onClick={() => {
+              setActiveFilter((current) =>
+                current === filter ? undefined : filter,
+              );
+              onAnnounce(
+                activeFilter === filter
+                  ? `History filter “${filter}” cleared (local).`
+                  : `History filter “${filter}” applied (local).`,
+              );
+            }}
+            type="button"
+          >
             {filter} ▾
           </button>
         ))}
@@ -247,13 +311,17 @@ function HistoryTab({
             </tr>
           </thead>
           <tbody>
-            {view.usageRows.map((row) => (
+            {rows.map((row) => (
               <UsageRow key={row.id} onReplay={onReplay} row={row} />
             ))}
           </tbody>
         </table>
       </div>
-      <p className="agent-detail__pagination">{view.paginationLabel}</p>
+      <p className="agent-detail__pagination">
+        {rows.length === view.usageRows.length
+          ? view.paginationLabel
+          : `Showing ${rows.length} of ${view.usageRows.length} (local filter)`}
+      </p>
     </div>
   );
 }
@@ -377,18 +445,54 @@ function PlaygroundTab({
   onAnnounce: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
+  const [modelLabel, setModelLabel] = useState<string>(PLAYGROUND_MODELS[0]);
+  const [enableTools, setEnableTools] = useState(true);
+  const [stream, setStream] = useState(true);
+
   return (
     <div className="agent-detail__playground">
       <div className="agent-detail__chat">
         <div className="agent-detail__chat-options" role="group" aria-label={L(labels, "playground_options")}>
-          <button className="agent-detail__filter" type="button">
-            Model override ▾
+          <button
+            className="agent-detail__filter"
+            onClick={() => {
+              const next = cycleOption([...PLAYGROUND_MODELS], modelLabel);
+              setModelLabel(next);
+              onAnnounce(`${next} (local session only — not a host model change).`);
+            }}
+            type="button"
+          >
+            {modelLabel} ▾
           </button>
           <label className="agent-detail__check">
-            <input defaultChecked type="checkbox" /> Enable Tools
+            <input
+              checked={enableTools}
+              onChange={(event) => {
+                setEnableTools(event.target.checked);
+                onAnnounce(
+                  event.target.checked
+                    ? "Tools enabled for local playground preview."
+                    : "Tools disabled for local playground preview.",
+                );
+              }}
+              type="checkbox"
+            />{" "}
+            Enable Tools
           </label>
           <label className="agent-detail__check">
-            <input defaultChecked type="checkbox" /> Stream
+            <input
+              checked={stream}
+              onChange={(event) => {
+                setStream(event.target.checked);
+                onAnnounce(
+                  event.target.checked
+                    ? "Streaming preview on (local)."
+                    : "Streaming preview off (local).",
+                );
+              }}
+              type="checkbox"
+            />{" "}
+            Stream
           </label>
           <button
             className="agent-detail__filter"

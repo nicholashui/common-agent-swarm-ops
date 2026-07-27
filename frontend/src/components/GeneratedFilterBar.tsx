@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty GeneratedFilterBar — projection-driven filters
+ * @role Render filter selects from server-defined GeneratedFilterView options only.
+ * @controls One select per filter; disabled until onFilterChange is provided.
+ * @must Pass through original generated filter/option objects on change.
+ * @mustnot Invent filter dimensions not in the projection schema.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.2
+ */
 import React from "react";
 
 import type { GeneratedJsonObject } from "../lib/api/client";

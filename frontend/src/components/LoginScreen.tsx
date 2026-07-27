@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty LoginScreen — authentication entry projection
+ * @role Collect local credentials for host-authorized login; never invent session authority in the browser.
+ * @controls Email/password inputs, submit, locale preference (session-only), recovery links from projection.
+ * @must Submit only through authorized login intent; keep credentials out of durable client storage.
+ * @mustnot Store secrets, claim production activation, or bypass host session gates.
+ * @redesign docs/frontend_redesign/ui_01_login.md; Req 8.x
+ */
 import React, { useEffect, useId, useState, type FormEvent } from "react";
 import Link from "next/link";
 

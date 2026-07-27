@@ -7,6 +7,8 @@ from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
 
+from unittest.mock import patch
+
 from hypothesis import example, given, settings, strategies as st
 
 from app.video.inventory import EXPECTED_VIDEO_AGENT_COUNT, VideoInventoryValidator
@@ -151,19 +153,31 @@ def test_video_inventory_is_an_exact_configuration_only_bijection(
 
     **Validates: Requirements 9.1**
     """
-    manifest, inventory, agent_specs = _mutate_case(case)
+    # Activation rejection cases require the pack production profile off; when the
+    # profile is enabled, production_activation_requested is a valid pack field.
+    # Use unittest.mock (not pytest fixtures) so Hypothesis health checks stay clean.
+    profile_patch = patch(
+        "app.video.media_production.load_production_profile",
+        lambda video_root=None: {"enabled": False},
+    )
+    if case.kind == "activation":
+        profile_patch.start()
+    try:
+        manifest, inventory, agent_specs = _mutate_case(case)
+        report = VideoInventoryValidator().validate(manifest, inventory, agent_specs)
 
-    report = VideoInventoryValidator().validate(manifest, inventory, agent_specs)
+        if case.kind == "valid":
+            assert report.is_valid
+            assert len(report.manifest_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
+            assert len(report.inventory_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
+            assert len(report.agent_spec_ids) == EXPECTED_VIDEO_AGENT_COUNT
+            assert set(report.manifest_agent_ids) == set(report.inventory_agent_ids)
+            assert set(report.manifest_agent_ids) == set(report.agent_spec_ids)
+            return
 
-    if case.kind == "valid":
-        assert report.is_valid
-        assert len(report.manifest_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
-        assert len(report.inventory_agent_ids) == EXPECTED_VIDEO_AGENT_COUNT
-        assert len(report.agent_spec_ids) == EXPECTED_VIDEO_AGENT_COUNT
-        assert set(report.manifest_agent_ids) == set(report.inventory_agent_ids)
-        assert set(report.manifest_agent_ids) == set(report.agent_spec_ids)
-        return
-
-    assert not report.is_valid
-    issue_codes = {issue.code for issue in report.issues}
-    assert _expected_issue_codes(case) <= issue_codes
+        assert not report.is_valid
+        issue_codes = {issue.code for issue in report.issues}
+        assert _expected_issue_codes(case) <= issue_codes
+    finally:
+        if case.kind == "activation":
+            profile_patch.stop()

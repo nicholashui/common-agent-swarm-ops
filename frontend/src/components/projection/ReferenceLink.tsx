@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ReferenceLink — opaque resource reference button
+ * @role Expose only server-returned opaque references for host resolve handlers.
+ * @controls One button with data-opaque-reference-id.
+ * @must Call onResolve with projection source only; never construct URLs/IDs client-side.
+ * @mustnot Navigate to untrusted destinations from opaque ids alone.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3
+ */
 import React from "react";
 
 import type { GeneratedOpaqueReference, OpaqueReferenceView } from "../../lib/projections/ProjectionMapper";

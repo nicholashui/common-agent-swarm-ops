@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty ActivityHome — activity timeline projection (ui_06)
+ * @role Present execution cards/timelines with local filters; inspect via onAction.
+ * @controls Filters, timeline cards, inspect/nav links.
+ * @must Filter presentation-only until authorized query contract exists.
+ * @mustnot Invent run status or bypass host inspect gates.
+ * @redesign docs/frontend_redesign/ui_06_activity.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -10,7 +18,15 @@ import {
   type ActivityViewMode,
 } from "../lib/projections/activity-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption, matchesAnyChip, toggleChip } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const ACTIVITY_DATE_RANGES = [
+  "Last 24 hours",
+  "Last 7 days",
+  "Last 30 days",
+  "All time",
+] as const;
 
 export function ActivityHome({
   view,
@@ -29,6 +45,12 @@ export function ActivityHome({
   const [contributedOnly, setContributedOnly] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [selectedIds, setSelectedIds] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
+  const [dateRange, setDateRange] = useState(
+    () => view.dateRangeLabel || ACTIVITY_DATE_RANGES[0],
+  );
+  const [activeChips, setActiveChips] = useState<ReadonlySet<string>>(
     () => new Set(),
   );
 
@@ -55,31 +77,37 @@ export function ActivityHome({
         ) {
           return false;
         }
+        const haystack = [
+          card.agentName,
+          card.versionLabel,
+          card.meta,
+          card.teaser ?? "",
+          column.title,
+          card.statusLabel,
+        ].join(" ");
+        if (!matchesAnyChip(haystack, activeChips)) return false;
         if (q.length === 0) return true;
-        return (
-          card.agentName.toLowerCase().includes(q) ||
-          card.versionLabel.toLowerCase().includes(q) ||
-          card.meta.toLowerCase().includes(q) ||
-          (card.teaser?.toLowerCase().includes(q) ?? false) ||
-          column.title.toLowerCase().includes(q)
-        );
+        return haystack.toLowerCase().includes(q);
       }),
     }));
-  }, [outdatedOnly, contributedOnly, search, view.boardColumns]);
+  }, [outdatedOnly, contributedOnly, search, view.boardColumns, activeChips]);
 
   const filteredTableRows = useMemo(() => {
     const q = search.trim().toLowerCase();
     return view.tableRows.filter((row) => {
+      const haystack = [
+        row.swarm,
+        row.agent,
+        row.version,
+        row.id,
+        row.error ?? "",
+        row.statusLabel,
+      ].join(" ");
+      if (!matchesAnyChip(haystack, activeChips)) return false;
       if (q.length === 0) return true;
-      return (
-        row.swarm.toLowerCase().includes(q) ||
-        row.agent.toLowerCase().includes(q) ||
-        row.version.toLowerCase().includes(q) ||
-        row.id.toLowerCase().includes(q) ||
-        (row.error?.toLowerCase().includes(q) ?? false)
-      );
+      return haystack.toLowerCase().includes(q);
     });
-  }, [search, view.tableRows]);
+  }, [search, view.tableRows, activeChips]);
 
   const toggleSelected = (id: string): void => {
     setSelectedIds((current) => {
@@ -108,8 +136,22 @@ export function ActivityHome({
               value={search}
             />
           </label>
-          <button className="activity-home__chip" type="button">
-            {view.dateRangeLabel} ▾
+          <button
+            aria-label={`Date range: ${dateRange}. Click to cycle.`}
+            className="activity-home__chip"
+            onClick={() => {
+              const next = cycleOption(
+                view.dateRangeLabel
+                  ? [view.dateRangeLabel, ...ACTIVITY_DATE_RANGES.filter((r) => r !== view.dateRangeLabel)]
+                  : [...ACTIVITY_DATE_RANGES],
+                dateRange,
+              );
+              setDateRange(next);
+              announce(`Activity date range set to ${next} (local filter).`);
+            }}
+            type="button"
+          >
+            {dateRange} ▾
           </button>
           <div
             aria-label={L(labels, "view_mode")}
@@ -150,7 +192,24 @@ export function ActivityHome({
         role="group"
       >
         {view.filterChips.map((chip) => (
-          <button className="activity-home__chip" key={chip} type="button">
+          <button
+            aria-pressed={activeChips.has(chip)}
+            className={
+              activeChips.has(chip)
+                ? "activity-home__chip activity-home__chip--active"
+                : "activity-home__chip"
+            }
+            key={chip}
+            onClick={() => {
+              setActiveChips((current) => toggleChip(current, chip));
+              announce(
+                activeChips.has(chip)
+                  ? `Filter “${chip}” cleared (local).`
+                  : `Filter “${chip}” applied (local).`,
+              );
+            }}
+            type="button"
+          >
             {chip} ▾
           </button>
         ))}

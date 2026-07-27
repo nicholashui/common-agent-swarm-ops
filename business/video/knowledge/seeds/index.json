@@ -13,27 +13,82 @@
       }
     },
     {
-      "seed_path": "docs/process-maps.md",
+      "seed_path": "corpus/study/ai_agent_video_production_workflow.md",
+      "consumer_ref": "agents/video.orchestrator/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/corpus/study/ai_agent_video_production_workflow.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "corpus/study/agents.md",
+      "consumer_ref": "agents/video.orchestrator/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/corpus/study/agents.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "corpus/study/human_video_production_workflow.md",
       "consumer_ref": "agents/video.planner/SPEC.md",
       "review_status": "pass",
       "provenance": {
         "repository": "common-agent-swarm-ops",
         "commit": "local-pack",
-        "path": "business/video/docs/process-maps.md",
+        "path": "business/video/corpus/study/human_video_production_workflow.md",
         "license_status": "internal-pack-data"
       }
     },
     {
-      "seed_path": "docs/deep-spec-modules.md",
-      "consumer_ref": "agents/video.creativedirector/SPEC.md",
+      "seed_path": "corpus/study/SYSTEM_REFERENCE.md",
+      "consumer_ref": "agents/video.orchestrator/SPEC.md",
       "review_status": "pass",
       "provenance": {
         "repository": "common-agent-swarm-ops",
         "commit": "local-pack",
-        "path": "business/video/docs/deep-spec-modules.md",
+        "path": "business/video/corpus/study/SYSTEM_REFERENCE.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "corpus/study/system_build_plan.md",
+      "consumer_ref": "agents/video.producer/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/corpus/study/system_build_plan.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "corpus/study/lifes_quiet_redemption_agent_workflow.md",
+      "consumer_ref": "agents/video.aiqaconsistency/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/corpus/study/lifes_quiet_redemption_agent_workflow.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "corpus/study/video_generation_techology_should_learn_now.md",
+      "consumer_ref": "agents/video.promptengineer/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/corpus/study/video_generation_techology_should_learn_now.md",
         "license_status": "internal-pack-data"
       }
     }
   ],
-  "note": "Inert knowledge seeds with local consumers; non-activating."
+  "note": "Inert study knowledge seeds linked to local agents; non-activating."
 }

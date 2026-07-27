@@ -546,6 +546,8 @@ The browser consumes only versioned, redacted control-plane REST and event contr
 
 The shared interface surface comprises `CommonAgentVersionSpec`, `CommonSwarmPatternVersion`, `SwarmInstance`, `SwarmTaskProjection`, `ArtifactProjection`, `CritiqueProjection`, `QualityGateStatus`, `ApprovalProjection`, and redacted event envelopes as defined by the mapping document. UI actions carry opaque server-issued resource IDs and idempotency context; they never carry tool credentials, approval operations, or raw privileged input.
 
+**Component duty catalog (2026-07-27):** every `frontend/src/components` module (including binders, projection controls, operations consoles, specials, and primitives not named in `ui_00`–`ui_20`) has a duty and control ownership definition in [`component_duty_catalog.md`](./component_duty_catalog.md). Screen Homes remain owned by `ui_00`–`ui_20`; shared infrastructure duties are owned by that catalog. Buttons/inputs follow the catalog’s control coverage rules (server-authorized intents only; local session UX allowed).
+
 ## Data Models
 
 Common Agents and Patterns are immutable semantic versions. Swarm Instances are revisioned graphs containing pinned versions or explicit fork provenance. Runs preserve graph revision, task lifecycle, checkpoints, artifact lineage, critique/gate evidence, costs, and quality results. Artifacts retain parent lineage, technical requirements, rights/consent, continuity, QC, targets, and provenance references.

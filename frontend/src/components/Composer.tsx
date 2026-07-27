@@ -1,5 +1,12 @@
 "use client";
 
+/**
+ * @duty Composer — legacy composer screen + export alias
+ * @role Presentational/legacy composer path; prefer ComposerHome for routes.
+ * @controls Pattern/graph controls mapped from projection; commands via intents.
+ * @mustnot Bypass host command coordinator or invent action refs.
+ * @redesign docs/frontend_redesign/ui_03_swarm_composer.md
+ */
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -47,6 +54,11 @@ export function Composer({
   const [selectedPatternId, setSelectedPatternId] = useState<string | undefined>(
     composer.patterns[0]?.id,
   );
+  const [swarmName, setSwarmName] = useState("Untitled swarm");
+  const [goal, setGoal] = useState(
+    "Build a daily market intelligence swarm with evidence verification.",
+  );
+  const [statusNote, setStatusNote] = useState<string | undefined>();
   const selectedPattern = composer.patterns.find(
     (pattern) => pattern.id === selectedPatternId,
   );
@@ -57,10 +69,27 @@ export function Composer({
         <div>
           <p className="eyebrow">NEW SWARM DRAFT</p>
           <h1>Swarm composer</h1>
-          <input aria-label="Swarm name" defaultValue="Untitled swarm" />
+          <input
+            aria-label="Swarm name"
+            onChange={(event): void => setSwarmName(event.target.value)}
+            value={swarmName}
+          />
+          {statusNote ? (
+            <p aria-live="polite" role="status">
+              {statusNote}
+            </p>
+          ) : null}
         </div>
         <div className="button-row">
-          <button className="button button--secondary" type="button">
+          <button
+            className="button button--secondary"
+            onClick={(): void => {
+              setStatusNote(
+                `Draft “${swarmName}” saved locally (session only). Host persistence requires an authorized compose action.`,
+              );
+            }}
+            type="button"
+          >
             Save draft
           </button>
           <Link className="button button--ghost" href="/">
@@ -91,9 +120,34 @@ export function Composer({
           <label className="composer-input">
             <textarea
               aria-label="Describe your swarm goal"
-              defaultValue="Build a daily market intelligence swarm with evidence verification."
+              onChange={(event): void => setGoal(event.target.value)}
+              value={goal}
             />
-            <button className="button button--primary" type="button">
+            <button
+              className="button button--primary"
+              onClick={(): void => {
+                const trimmed = goal.trim();
+                if (trimmed.length === 0) {
+                  setStatusNote("Enter a swarm goal before sending.");
+                  return;
+                }
+                if (onCommandIntent !== undefined && selectedPattern?.instantiationAction) {
+                  const intent = createGraphCommandIntent(
+                    selectedPattern.instantiationAction,
+                    undefined,
+                  );
+                  if (intent !== undefined) {
+                    void onCommandIntent(intent);
+                    setStatusNote(`Sent compose intent for “${swarmName}”.`);
+                    return;
+                  }
+                }
+                setStatusNote(
+                  `Compose send for “${swarmName}” requires an authorized compose action reference. Goal kept locally.`,
+                );
+              }}
+              type="button"
+            >
               Send <span>↑</span>
             </button>
           </label>

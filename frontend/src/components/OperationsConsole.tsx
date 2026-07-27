@@ -1,15 +1,22 @@
 "use client";
 
+/**
+ * @duty OperationsConsole — live control-plane operator panel
+ * @role Inspect runs, load approvals, submit decisions, refresh context via /api/v1 runtime.
+ * @controls Refresh button; run id input + inspect; approval id, decision select, reason textarea, submit.
+ * @must Use interaction runtime (idempotent decisions); show InteractionStatusBar.
+ * @mustnot Store API keys; approve without host gate/action path.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.4
+ *
+ * Real operations surface: live operator API console plus context refresh.
+ * Uses browser fetch to /api/v1 (proxied when BACKEND_API_ORIGIN is set).
+ */
 import { FormEvent, useState } from "react";
 
 import { useInteractionRuntime } from "../lib/ui/interaction-runtime";
 import { InteractionStatusBar } from "./ui/InteractionStatusBar";
 import { OperatorConsole } from "./OperatorConsole";
 
-/**
- * Real operations surface: live operator API console plus context refresh.
- * Uses browser fetch to /api/v1 (proxied when BACKEND_API_ORIGIN is set).
- */
 export function OperationsConsole(): JSX.Element {
   const runtime = useInteractionRuntime();
   const [runId, setRunId] = useState("");

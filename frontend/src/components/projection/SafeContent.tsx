@@ -1,3 +1,11 @@
+/**
+ * @duty SafeContent / ExternalNavigationControl — inert content + gated external nav
+ * @role Render untrusted values as text only; external nav only via allowed-action contract.
+ * @controls Optional ExternalNavigationControl button when contract present.
+ * @must No HTML/URL/event/media escape hatches on SafeContent.
+ * @mustnot dangerouslySetInnerHTML; auto-navigate to import URLs.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.3; Req 8.5–8.6
+ */
 import React from "react";
 
 import type { GeneratedActionReference, GeneratedJsonObject, GeneratedJsonValue } from "../../lib/api/client";

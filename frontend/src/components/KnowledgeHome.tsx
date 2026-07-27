@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty KnowledgeHome — knowledge search projection (ui_10)
+ * @role Search/browse knowledge projections; ingestion via subcomponents when contract exists.
+ * @controls Search, detail tabs, delegated ingestion controls.
+ * @must Keep client validation non-authoritative; no browser-fetch of untrusted import URLs.
+ * @mustnot Treat local checks as security boundary for ingestion.
+ * @redesign docs/frontend_redesign/ui_10_knowledge.md; Req 8.5
+ */
 import React, { useMemo, useState } from "react";
 
 import {

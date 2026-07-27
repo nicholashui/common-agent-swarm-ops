@@ -1,5 +1,13 @@
 "use client";
 
+/**
+ * @duty NotificationsHome — notifications projection (ui_12)
+ * @role List notifications; mark-read is session/local or host-authorized only.
+ * @controls List filters, mark read, open deep links in-app.
+ * @must Not invent notification authority or privileged payloads.
+ * @mustnot Auto-open external untrusted destinations.
+ * @redesign docs/frontend_redesign/ui_12_notifications.md
+ */
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -8,7 +16,15 @@ import {
   type NotificationsLandingView,
 } from "../lib/projections/notifications-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+const GROUP_BY_OPTIONS = [
+  "Group by: time",
+  "Group by: kind",
+  "Group by: priority",
+  "Group by: none",
+] as const;
 
 export function NotificationsHome({
   view,
@@ -24,6 +40,7 @@ export function NotificationsHome({
   const [query, setQuery] = useState("");
   const [readIds, setReadIds] = useState<ReadonlySet<string>>(() => new Set());
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+  const [groupBy, setGroupBy] = useState<string>(GROUP_BY_OPTIONS[0]);
   const [notifyAbout, setNotifyAbout] = useState(
     () => new Map(view.notifyAbout.map((item) => [item.id, item.enabled])),
   );
@@ -42,7 +59,7 @@ export function NotificationsHome({
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return view.items.filter((item) => {
+    const filtered = view.items.filter((item) => {
       if (filter.startsWith("Proposals") && item.kind !== "proposal") return false;
       if (filter.startsWith("Rollouts") && item.kind !== "rollout" && item.kind !== "common") {
         return false;
@@ -56,22 +73,44 @@ export function NotificationsHome({
         item.meta.toLowerCase().includes(q)
       );
     });
-  }, [filter, query, view.items]);
+    if (groupBy.includes("kind")) {
+      return [...filtered].sort((a, b) => a.kind.localeCompare(b.kind));
+    }
+    if (groupBy.includes("priority")) {
+      return [...filtered].sort((a, b) => {
+        const score = (item: NotificationItem): number =>
+          item.group === "today-high" ? 0 : item.unread ? 1 : 2;
+        return score(a) - score(b);
+      });
+    }
+    return filtered;
+  }, [filter, groupBy, query, view.items]);
 
   const highPriority = items.filter((item) => item.group === "today-high");
   const earlier = items.filter((item) => item.group === "earlier");
+  const flatGroups =
+    groupBy.includes("none") || groupBy.includes("kind") || groupBy.includes("priority");
 
   const unreadCount = view.items.filter(
     (item) => item.unread && !readIds.has(item.id),
   ).length;
 
   const markAllRead = (): void => {
-    setReadIds(new Set(view.items.map((item) => item.id)));
-    announce(`Marked ${view.items.length} notification(s) as read.`);
+    const ids = view.items.map((item) => item.id);
+    setReadIds(new Set(ids));
+    if (onAction) {
+      void onAction({ kind: "local.mark_read", ids });
+      return;
+    }
+    announce(`Marked ${ids.length} notification(s) as read.`);
   };
 
   const markRead = (id: string): void => {
     setReadIds((current) => new Set(current).add(id));
+    if (onAction) {
+      void onAction({ kind: "local.mark_read", ids: [id] });
+      return;
+    }
     announce(`Notification ${id} marked read.`);
   };
 
@@ -82,9 +121,16 @@ export function NotificationsHome({
     const enabledChannels = [...channels.entries()]
       .filter(([, enabled]) => enabled)
       .map(([id]) => id);
-    announce(
-      `Preferences saved locally: notify=${enabledNotify.join(",") || "none"}; channels=${enabledChannels.join(",") || "none"}.`,
-    );
+    const summary = `Preferences saved locally: notify=${enabledNotify.join(",") || "none"}; channels=${enabledChannels.join(",") || "none"}.`;
+    if (onAction) {
+      void onAction({
+        kind: "local.save_prefs",
+        screen: "notifications",
+        summary,
+      });
+      return;
+    }
+    announce(summary);
   };
 
   return (
@@ -116,8 +162,17 @@ export function NotificationsHome({
           >
             Mark all read
           </button>
-          <button className="notifications-home__action" type="button">
-            Group by ▾
+          <button
+            aria-label={`${groupBy}. Click to cycle grouping.`}
+            className="notifications-home__action"
+            onClick={() => {
+              const next = cycleOption([...GROUP_BY_OPTIONS], groupBy);
+              setGroupBy(next);
+              announce(`${next} (local presentation).`);
+            }}
+            type="button"
+          >
+            {groupBy} ▾
           </button>
         </div>
       </header>
@@ -152,7 +207,27 @@ export function NotificationsHome({
 
       <div className="notifications-home__body">
         <div className="notifications-home__main">
-          {highPriority.length > 0 ? (
+          {flatGroups ? (
+            <section aria-labelledby="flat-list-heading">
+              <h2 className="notifications-home__section-label" id="flat-list-heading">
+                {groupBy}
+              </h2>
+              <ul className="notifications-home__list">
+                {items.map((item) => (
+                  <NotificationCard
+                    key={item.id}
+                    item={item}
+                    isRead={readIds.has(item.id) || !item.unread}
+                    onMarkRead={markRead}
+                    onAnnounce={announce}
+                    labels={labels}
+                  />
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          {!flatGroups && highPriority.length > 0 ? (
             <section aria-labelledby="high-priority-heading">
               <h2 className="notifications-home__section-label" id="high-priority-heading">
                 Today · High priority
@@ -171,7 +246,7 @@ export function NotificationsHome({
             </section>
           ) : null}
 
-          {earlier.length > 0 ? (
+          {!flatGroups && earlier.length > 0 ? (
             <section aria-labelledby="earlier-heading">
               <h2 className="notifications-home__section-label" id="earlier-heading">
                 Earlier today

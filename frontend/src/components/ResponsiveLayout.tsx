@@ -1,3 +1,12 @@
+/**
+ * @duty ResponsiveLayout primitives — layout only
+ * @role Provide ResponsiveStack / ResponsiveSplit / ResponsiveActionGroup without
+ *       defining business authority or mutating action eligibility.
+ * @controls None (wrappers only).
+ * @must Preserve children and caller-supplied controls.
+ * @mustnot Gate authorization or invent actions.
+ * @redesign docs/frontend_redesign/component_duty_catalog.md §3.1; ui_17_mobile.md
+ */
 import React, { type ReactNode } from "react";
 
 export interface ResponsiveStackProps {
