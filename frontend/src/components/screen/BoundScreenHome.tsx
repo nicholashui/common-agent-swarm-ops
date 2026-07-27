@@ -1,33 +1,19 @@
 "use client";
 
-import type { ReactNode } from "react";
+/**
+ * @duty BoundScreenHome — screen binder with code-split Homes
+ * Each Home is next/dynamic so a route only downloads the active screen chunk
+ * instead of one 6MB+ all-homes client graph.
+ */
+import type { ComponentType, ReactNode } from "react";
+import dynamic from "next/dynamic";
 
-import { AgentDetailHome } from "../AgentDetailHome";
-import { ActivityHome } from "../ActivityHome";
-import { ApprovalGateScreen } from "../ApprovalRolloutScreens";
-import { ApiPortalHome } from "../ApiPortalHome";
-import { AuditHome } from "../AuditHome";
-import { BlueprintsHome } from "../BlueprintsHome";
-import { CanvasHome } from "../CanvasHome";
-import { CollaborationHome } from "../CollaborationHome";
-import { ComposerHome } from "../ComposerHome";
-import { CostsHome } from "../CostsHome";
-import { DashboardHome } from "../DashboardHome";
-import { EvalHome } from "../EvalHome";
-import { KnowledgeHome } from "../KnowledgeHome";
-import { MonitoringHome } from "../MonitoringHome";
-import { MobileHome } from "../MobileHome";
-import { NotificationsHome } from "../NotificationsHome";
-import { OnboardingHome } from "../OnboardingHome";
-import { ProfileHome } from "../ProfileHome";
-import { RegistryHome } from "../RegistryHome";
-import { SettingsHome } from "../SettingsHome";
 import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 import { resolveAgentDetailView } from "../../lib/projections/agent-detail-landing";
 import { useInteractionRuntime } from "../../lib/ui/interaction-runtime";
 import { useScreenActionBridge } from "../../lib/ui/use-screen-action";
 import { InteractionStatusBar } from "../ui/InteractionStatusBar";
-import { OperationsConsole } from "../OperationsConsole";
+import type { ScreenUiAction } from "../../lib/ui/screen-actions";
 
 export type BoundScreenKey =
   | "activity"
@@ -48,19 +34,89 @@ export type BoundScreenKey =
   | "registry"
   | "settings";
 
-/**
- * @duty BoundScreenHome — screen binder
- * @role Map serializable screen keys to Homes; inject projections + onAction bridge.
- * @controls None of its own; hosts Home, InteractionStatusBar, optional OperationsConsole.
- * @must Always pass real onAction; never leave primary actions as permanent dead stubs.
- * @mustnot Invent action references; pass component types from server pages.
- * @redesign docs/frontend_redesign/component_duty_catalog.md §3.1
- *
- * Binds a serializable screen key to its client-side projection hook and
- * presentation home. Server pages must not pass component functions as props.
- * Every bound home receives the real action bridge (API + session + fail-closed).
- */
-export function BoundScreenHome({ screen }: Readonly<{ screen: BoundScreenKey }>): JSX.Element {
+function LoadingHome(): JSX.Element {
+  return (
+    <p aria-busy="true" className="bound-screen-loading" role="status">
+      Loading screen…
+    </p>
+  );
+}
+
+function lazyHome<P extends object>(
+  loader: () => Promise<{ [key: string]: ComponentType<P> }>,
+  exportName: string,
+): ComponentType<P> {
+  return dynamic(
+    () =>
+      loader().then((mod) => {
+        const Comp = mod[exportName] as ComponentType<P>;
+        return { default: Comp };
+      }),
+    { ssr: true, loading: () => <LoadingHome /> },
+  );
+}
+
+const ActivityHome = lazyHome(
+  () => import("../ActivityHome"),
+  "ActivityHome",
+);
+const ApprovalGateScreen = lazyHome(
+  () => import("../ApprovalRolloutScreens"),
+  "ApprovalGateScreen",
+);
+const ApiPortalHome = lazyHome(
+  () => import("../ApiPortalHome"),
+  "ApiPortalHome",
+);
+const AuditHome = lazyHome(() => import("../AuditHome"), "AuditHome");
+const BlueprintsHome = lazyHome(
+  () => import("../BlueprintsHome"),
+  "BlueprintsHome",
+);
+const CanvasHome = lazyHome(() => import("../CanvasHome"), "CanvasHome");
+const CollaborationHome = lazyHome(
+  () => import("../CollaborationHome"),
+  "CollaborationHome",
+);
+const ComposerHome = lazyHome(() => import("../ComposerHome"), "ComposerHome");
+const CostsHome = lazyHome(() => import("../CostsHome"), "CostsHome");
+const DashboardHome = lazyHome(
+  () => import("../DashboardHome"),
+  "DashboardHome",
+);
+const EvalHome = lazyHome(() => import("../EvalHome"), "EvalHome");
+const KnowledgeHome = lazyHome(
+  () => import("../KnowledgeHome"),
+  "KnowledgeHome",
+);
+const MonitoringHome = lazyHome(
+  () => import("../MonitoringHome"),
+  "MonitoringHome",
+);
+const MobileHome = lazyHome(() => import("../MobileHome"), "MobileHome");
+const NotificationsHome = lazyHome(
+  () => import("../NotificationsHome"),
+  "NotificationsHome",
+);
+const OnboardingHome = lazyHome(
+  () => import("../OnboardingHome"),
+  "OnboardingHome",
+);
+const ProfileHome = lazyHome(() => import("../ProfileHome"), "ProfileHome");
+const RegistryHome = lazyHome(() => import("../RegistryHome"), "RegistryHome");
+const SettingsHome = lazyHome(() => import("../SettingsHome"), "SettingsHome");
+const AgentDetailHome = lazyHome(
+  () => import("../AgentDetailHome"),
+  "AgentDetailHome",
+);
+const OperationsConsole = lazyHome(
+  () => import("../OperationsConsole"),
+  "OperationsConsole",
+);
+
+export function BoundScreenHome({
+  screen,
+}: Readonly<{ screen: BoundScreenKey }>): JSX.Element {
   switch (screen) {
     case "activity":
       return <BoundActivityHome />;
@@ -93,7 +149,7 @@ export function BoundScreenHome({ screen }: Readonly<{ screen: BoundScreenKey }>
     case "profile":
       return <BoundProfileHome />;
     case "registry":
-      return <BoundRegistryHome />;
+      return <BoundRegistryHomeLegacy />;
     case "settings":
       return <BoundSettingsHome />;
   }
@@ -265,7 +321,9 @@ function BoundKnowledgeHome(): JSX.Element {
       <KnowledgeHome
         view={view}
         statusMessage={bridge.statusMessage}
-        onSearch={(query) => void bridge.onAction({ kind: "knowledge.search", query })}
+        onSearch={(query) =>
+          void bridge.onAction({ kind: "knowledge.search", query })
+        }
         onAction={bridge.onAction}
       />
     </BoundShell>
@@ -328,7 +386,7 @@ function BoundProfileHome(): JSX.Element {
   );
 }
 
-function BoundRegistryHome(): JSX.Element {
+function BoundRegistryHomeLegacy(): JSX.Element {
   const view = useScreenParameters("registry");
   const bridge = useScreenActionBridge();
   return (
@@ -356,8 +414,10 @@ function BoundSettingsHome(): JSX.Element {
   );
 }
 
-/** Binds the route parameter and pack-backed agent settings on the client. */
-export function BoundAgentDetailHome({ agentId }: Readonly<{ agentId: string }>): JSX.Element {
+/** Pack agent detail — loads AgentDetailHome + pack catalog only on this route. */
+export function BoundAgentDetailHome({
+  agentId,
+}: Readonly<{ agentId: string }>): JSX.Element {
   const bridge = useScreenActionBridge();
   const view = resolveAgentDetailView(agentId);
   return (
@@ -365,15 +425,16 @@ export function BoundAgentDetailHome({ agentId }: Readonly<{ agentId: string }>)
       <AgentDetailHome
         agentId={agentId}
         view={view}
-        onAction={bridge.onAction}
+        onAction={bridge.onAction as (action: ScreenUiAction) => void}
         statusMessage={bridge.statusMessage}
       />
     </BoundShell>
   );
 }
 
-/** Binds stored canvas parameters for the canonical swarm canvas route. */
-export function BoundSwarmCanvasHome({ swarmId }: Readonly<{ swarmId: string }>): JSX.Element {
+export function BoundSwarmCanvasHome({
+  swarmId,
+}: Readonly<{ swarmId: string }>): JSX.Element {
   void swarmId;
   const view = useScreenParameters("canvas");
   const bridge = useScreenActionBridge();
@@ -432,8 +493,12 @@ export function BoundMonitoringHome(): JSX.Element {
             `Action “${id || kind || "unknown"}” invoked. Load a live approval id in Operations Console to submit governed decisions.`,
           );
         }}
-        onEvidence={() => runtime.setInfo("Evidence reference selected (opaque id only).")}
-        onReference={() => runtime.setInfo("Reference resolved for display only.")}
+        onEvidence={() =>
+          runtime.setInfo("Evidence reference selected (opaque id only).")
+        }
+        onReference={() =>
+          runtime.setInfo("Reference resolved for display only.")
+        }
       />
     </div>
   );

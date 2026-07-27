@@ -35,7 +35,9 @@ test("registry home lists all pack agents and specials catalog", () => {
   assert.match(markup, />Table</);
   assert.match(markup, /Graph viz/);
   assert.match(markup, /Common Agents/);
-  assert.match(markup, /video\.orchestrator|Orchestrator/);
+  // Progressive window: first page of cards may not include every id (e.g. orchestrator).
+  assert.match(markup, /Showing <strong>133<\/strong> of 133/);
+  assert.match(markup, /Show more \(36 of 133\)/);
   assert.match(markup, /Add to Swarm/);
   assert.match(markup, /Propose/);
   assert.match(markup, /Detail/);
@@ -45,6 +47,12 @@ test("registry home lists all pack agents and specials catalog", () => {
   assert.match(markup, /self-contained/);
   assert.match(markup, /View agent settings/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
+  // Catalog still contains orchestrator even if not in the first window.
+  assert.ok(
+    LOCAL_REGISTRY_LANDING.agents.some(
+      (a) => /orchestrator/i.test(a.id) || /orchestrator/i.test(a.name),
+    ),
+  );
 });
 
 test("registry landing covers all pack agents, patterns, proposals", () => {
@@ -98,4 +106,18 @@ test("registry CSS defines hub grid, cards, review, and sidebar", async () => {
   assert.match(css, /\.registry-home__review/);
   assert.match(css, /\.registry-home__sidebar/);
   assert.match(css, /\.registry-home__diff-add/);
+  assert.match(css, /\.registry-home__result-meta/);
+  assert.match(css, /\.registry-home__graph-canvas/);
+});
+
+test("registry home exposes interactive search and mode controls", () => {
+  const markup = renderToStaticMarkup(
+    <RegistryHome view={getScreenParameters("registry")} />,
+  );
+  assert.match(markup, /name="registry-search"/);
+  assert.match(markup, /type="search"/);
+  assert.match(markup, /Showing <strong>133<\/strong> of 133/);
+  assert.match(markup, /data-registry-view="cards"/);
+  assert.match(markup, /aria-pressed="true"[^>]*>Cards/);
+  assert.match(markup, /registry-home__facet/);
 });

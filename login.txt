@@ -1,0 +1,35 @@
+Done: login required + Admin account for Nicholas Hui
+
+1. Must login
+AuthenticatedShell (used by every AppShell screen) now redirects anonymous users:
+
+if (sessionSignal.state !== "authenticated") {
+  redirect("/login");
+}
+
+So /, /registry, /canvas, etc. require a signed session cookie.  
+/login stays public.
+
+2. Admin account created (local built-in)
+
+┌──────────────────┬──────────────────────┐
+│ Field            │ Value                │
+├──────────────────┼──────────────────────┤
+│ Role / workspace │ Admin · Nicholas Hui │
+├──────────────────┼──────────────────────┤
+│ Email (login id) │ nicholas.hui@local   │
+├──────────────────┼──────────────────────┤
+│ Password         │ NicholasAdmin1!      │
+└──────────────────┴──────────────────────┘
+
+Login form uses email, so use the email above (display name is stored as workspace label Admin · Nicholas Hui).
+
+Also still available: demo@local / demo, ops@local / ops.
+
+How to sign in
+1. Open http://127.0.0.1:3001/login (or any screen → redirect to login)  
+2. Email: nicholas.hui@local  
+3. Password: NicholasAdmin1!  
+4. Sign in → dashboard  
+
+Hints on the login screen were updated to show this account.

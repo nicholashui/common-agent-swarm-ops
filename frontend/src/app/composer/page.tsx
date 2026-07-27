@@ -1,14 +1,13 @@
 import { AppShell } from "../../components/AppShell";
-import { BoundScreenHome } from "../../components/screen/BoundScreenHome";
+import { BoundComposerHome } from "../../components/screen/BoundComposerHome";
 
 /**
- * ComposerHome reads stored parameters through useScreenParameters below the
- * server-rendered authenticated shell.
+ * Slim composer entry — BoundComposerHome only (avoids multi-home client graph).
  */
 export default function Page(): JSX.Element {
   return (
     <AppShell>
-      <BoundScreenHome screen="composer" />
+      <BoundComposerHome />
     </AppShell>
   );
 }

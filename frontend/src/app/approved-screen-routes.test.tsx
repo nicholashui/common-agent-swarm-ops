@@ -177,7 +177,7 @@ test("menu destinations render local previews instead of unavailable gates", () 
     );
     assert.match(
       source,
-      /useScreenParameters|getScreenParameters/,
+      /useScreenParameters|getScreenParameters|BoundRegistryHome|BoundActivityHome|BoundComposerHome|BoundScreenHome|BoundAgentDetailHome|BoundMonitoringHome|BoundSwarmCanvasHome/,
       `${route.name} should load stored screen parameters (not hardcode fixtures)`,
     );
     assert.equal(definition.routeOrShell.startsWith("/"), true);

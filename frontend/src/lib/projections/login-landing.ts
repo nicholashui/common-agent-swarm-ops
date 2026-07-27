@@ -99,7 +99,8 @@ export const LOCAL_LOGIN_LANDING: LoginLandingView = {
       resetNewPassword: "New password",
       resetConfirm: "Update password",
       resetClose: "Close",
-      localHints: "Local users: demo@local / demo · ops@local / ops",
+      localHints:
+        "Local users: nicholas.hui@local / NicholasAdmin1! (Admin · Nicholas Hui) · demo@local / demo · ops@local / ops",
     },
     "zh-Hant": {
       productName: "common-agent-swarm-ops",
@@ -142,7 +143,8 @@ export const LOCAL_LOGIN_LANDING: LoginLandingView = {
       resetNewPassword: "新密碼",
       resetConfirm: "更新密碼",
       resetClose: "關閉",
-      localHints: "本機帳號：demo@local / demo · ops@local / ops",
+      localHints:
+        "本機帳號：nicholas.hui@local / NicholasAdmin1!（Admin · Nicholas Hui）· demo@local / demo · ops@local / ops",
     },
   },
 };

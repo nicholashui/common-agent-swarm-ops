@@ -9,10 +9,9 @@ import type { ScreenLabels } from "./screen-labels";
 import type { SpecialsLandingView } from "./specials-landing";
 import { LOCAL_SPECIALS_LANDING } from "./specials-landing";
 import {
-  PACK_AGENT_COUNTS,
-  PACK_AGENTS,
-  type PackAgentRecord,
-} from "./pack-agents.generated";
+  PACK_AGENT_CATALOG,
+  PACK_AGENT_CATALOG_COUNTS,
+} from "./pack-agents-catalog.generated";
 import { PACK_PROCESS_CATALOG } from "./pack-process.generated";
 
 export type RegistryViewMode = "cards" | "table" | "graph";
@@ -108,8 +107,8 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
   eyebrow: "REGISTRY HUB",
   title: "Common Registry",
   subtitle:
-    `All pack agents from self-contained folders (${PACK_AGENT_COUNTS.total}: `
-    + `${PACK_AGENT_COUNTS.video} video · ${PACK_AGENT_COUNTS.specials} specials). `
+    `All pack agents from self-contained folders (${PACK_AGENT_CATALOG_COUNTS.total}: `
+    + `${PACK_AGENT_CATALOG_COUNTS.video} video · ${PACK_AGENT_CATALOG_COUNTS.specials} specials). `
     + "Open a card to view full agent settings.",
   workspaceLabel: "Pack catalog · offline settings",
   searchPlaceholder: "Search agent id, name, pack, role…",
@@ -125,21 +124,23 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
   successRateFacet: "registered",
   usedInSwarmsFacet: "self-contained",
   highVerificationFacet: "no-network",
-  agents: PACK_AGENTS.map((agent: PackAgentRecord): RegistryAgentCard => ({
-    id: agent.id,
-    name: agent.name,
-    versionLabel: agent.versionLabel,
-    description: agent.description,
-    success: agent.success,
-    avgTokens: agent.avgTokens,
-    latency: agent.latency,
-    usage: agent.usage,
-    badges: agent.badges,
-    domains: agent.domains,
-    category: agent.category,
-    architecture: agent.architecture,
-    critiqueCompat: agent.critiqueCompat,
-  })),
+  agents: PACK_AGENT_CATALOG.map(
+    (agent): RegistryAgentCard => ({
+      id: agent.id,
+      name: agent.name,
+      versionLabel: agent.versionLabel,
+      description: agent.description,
+      success: agent.success,
+      avgTokens: agent.avgTokens,
+      latency: agent.latency,
+      usage: agent.usage,
+      badges: agent.badges,
+      domains: agent.domains,
+      category: agent.category,
+      architecture: agent.architecture,
+      critiqueCompat: agent.critiqueCompat,
+    }),
+  ),
   patterns: [
     {
       id: "parallel-verify",
@@ -167,9 +168,21 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     },
   ],
   stats: [
-    { id: "total", label: "Total agents", value: String(PACK_AGENT_COUNTS.total) },
-    { id: "video", label: "Video pack", value: String(PACK_AGENT_COUNTS.video) },
-    { id: "specials", label: "Specials pack", value: String(PACK_AGENT_COUNTS.specials) },
+    {
+      id: "total",
+      label: "Total agents",
+      value: String(PACK_AGENT_CATALOG_COUNTS.total),
+    },
+    {
+      id: "video",
+      label: "Video pack",
+      value: String(PACK_AGENT_CATALOG_COUNTS.video),
+    },
+    {
+      id: "specials",
+      label: "Specials pack",
+      value: String(PACK_AGENT_CATALOG_COUNTS.specials),
+    },
     {
       id: "processes",
       label: "Host process rows",
@@ -187,13 +200,13 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     "# Registry agents come only from business/video + business/specials packs.",
   ],
   impactRows: [
-    { label: "Video pack agents", value: String(PACK_AGENT_COUNTS.video) },
-    { label: "Specials pack agents", value: String(PACK_AGENT_COUNTS.specials) },
+    { label: "Video pack agents", value: String(PACK_AGENT_CATALOG_COUNTS.video) },
+    { label: "Specials pack agents", value: String(PACK_AGENT_CATALOG_COUNTS.specials) },
     { label: "Host process rows", value: String(PACK_PROCESS_CATALOG.hostProcessCount) },
     { label: "Design process rows", value: String(PACK_PROCESS_CATALOG.designProcessCount) },
     { label: "DNA workflows", value: String(PACK_PROCESS_CATALOG.dnaWorkflowCount) },
     { label: "Eval artifacts", value: String(PACK_PROCESS_CATALOG.evalArtifactCount) },
-    { label: "Total agents in UI", value: String(PACK_AGENT_COUNTS.total) },
+    { label: "Total agents in UI", value: String(PACK_AGENT_CATALOG_COUNTS.total) },
   ],
   impactDomains: "Packs: video · specials (no demo domains)",
   footerNote:

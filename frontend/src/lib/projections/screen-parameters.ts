@@ -14,10 +14,8 @@ import {
   LOCAL_ACTIVITY_LANDING,
   type ActivityLandingView,
 } from "./activity-landing";
-import {
-  LOCAL_AGENT_DETAIL_LANDING,
-  type AgentDetailLandingView,
-} from "./agent-detail-landing";
+import type { AgentDetailLandingView } from "./agent-detail-landing";
+import { AGENT_DETAIL_PARAMETER_STUB } from "./agent-detail-stub";
 import {
   LOCAL_API_PORTAL_LANDING,
   type ApiPortalLandingView,
@@ -147,10 +145,15 @@ export interface ScreenParameterMap {
 }
 
 /** Immutable snapshot of default stored parameters (projection modules). */
+/**
+ * Defaults for the parameter store.
+ * agentDetail uses a lightweight stub so the shared store does not pull the
+ * full pack agent catalog into every BoundScreenHome client graph (perf).
+ */
 export const SCREEN_PARAMETER_DEFAULTS: ScreenParameterMap = Object.freeze({
   dashboard: LOCAL_DASHBOARD_LANDING,
   activity: LOCAL_ACTIVITY_LANDING,
-  agentDetail: LOCAL_AGENT_DETAIL_LANDING,
+  agentDetail: AGENT_DETAIL_PARAMETER_STUB,
   apiPortal: LOCAL_API_PORTAL_LANDING,
   audit: LOCAL_AUDIT_LANDING,
   blueprints: LOCAL_BLUEPRINTS_LANDING,

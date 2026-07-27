@@ -1,14 +1,13 @@
 import { AppShell } from "../../components/AppShell";
-import { BoundScreenHome } from "../../components/screen/BoundScreenHome";
+import { BoundActivityHome } from "../../components/screen/BoundActivityHome";
 
 /**
- * ActivityHome reads stored parameters through useScreenParameters below the
- * server-rendered authenticated shell.
+ * Slim activity entry — BoundActivityHome only (avoids multi-home client graph).
  */
 export default function Page(): JSX.Element {
   return (
     <AppShell>
-      <BoundScreenHome screen="activity" />
+      <BoundActivityHome />
     </AppShell>
   );
 }

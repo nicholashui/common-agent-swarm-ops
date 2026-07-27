@@ -1,14 +1,15 @@
 import { AppShell } from "../../components/AppShell";
-import { BoundScreenHome } from "../../components/screen/BoundScreenHome";
+import { BoundRegistryHome } from "../../components/screen/BoundRegistryHome";
 
 /**
- * RegistryHome reads stored parameters through useScreenParameters below the
- * server-rendered authenticated shell.
+ * Registry uses BoundRegistryHome (getScreenParameters("registry") inside)
+ * rather than BoundScreenHome, so the client graph stays small enough for
+ * search / facets / Cards|Table|Graph to hydrate and work.
  */
 export default function Page(): JSX.Element {
   return (
     <AppShell>
-      <BoundScreenHome screen="registry" />
+      <BoundRegistryHome />
     </AppShell>
   );
 }

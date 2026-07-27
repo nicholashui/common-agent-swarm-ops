@@ -35,7 +35,14 @@ export interface PasswordResetRecord {
   readonly exp: number;
 }
 
+/**
+ * Built-in local accounts (dev / offline session entry).
+ * Format: [email, password, workspaceLabel]
+ * - Admin: Nicholas Hui (primary operator account)
+ * - demo / ops retained for existing fixtures and demo entry
+ */
 const DEFAULT_LOCAL_USERS: ReadonlyArray<readonly [string, string, string]> = [
+  ["nicholas.hui@local", "NicholasAdmin1!", "Admin · Nicholas Hui"],
   ["demo@local", "demo", "Demo workspace"],
   ["ops@local", "ops", "Local ops workspace"],
 ];

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\media_production.py
+# hypothesis_version: 6.151.12
+
+[60.0, 200, 300, '1', '1.0', '127.0.0.1', '2024-11-06', 'Accept', 'Authorization', 'Content-Type', 'ELEVENLABS_API_KEY', 'GEMINI_API_KEY', 'GOOGLE_API_KEY', 'OPENAI_API_KEY', 'POST', 'RUNWAY_API_KEY', 'User-Agent', 'X-Runway-Version', 'application/json', 'artifact_uri', 'business', 'contents', 'data', 'duration', 'elevenlabs', 'enabled', 'error', 'gen3a_turbo', 'http', 'https', 'localhost', 'media.elevenlabs', 'media.runway', 'media.sora', 'media.stub', 'media.veo', 'model', 'model_id', 'on', 'parts', 'production', 'profile.json', 'prompt', 'promptText', 'replace', 'runway', 'schema_version', 'seconds', 'sora', 'sora-2', 'text', 'true', 'unreadable_profile', 'url', 'utf-8', 'veo', 'veo-2', 'video', 'x-goog-api-key', 'xi-api-key', 'yes']

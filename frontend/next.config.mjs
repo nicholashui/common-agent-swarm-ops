@@ -8,8 +8,31 @@ function backendApiDestination(path) {
   return `${origin.origin}${path}`;
 }
 
+// Production CSP: no 'unsafe-eval' (criterion 4 / security policy).
+// Development may allow 'unsafe-eval' only for Next.js Fast Refresh hydration.
+const scriptSrc =
+  process.env.NODE_ENV === "production"
+    ? "script-src 'self' 'unsafe-inline'"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+
 const SECURITY_HEADERS = [
-  ["Content-Security-Policy", "default-src 'self'; base-uri 'self'; connect-src 'self'; frame-ancestors 'none'; frame-src 'none'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; form-action 'self'; upgrade-insecure-requests"],
+  [
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "connect-src 'self'",
+      "frame-ancestors 'none'",
+      "frame-src 'none'",
+      "object-src 'none'",
+      scriptSrc,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data:",
+      "font-src 'self'",
+      "form-action 'self'",
+      "upgrade-insecure-requests",
+    ].join("; "),
+  ],
   ["Referrer-Policy", "no-referrer"],
   ["Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload"],
   ["X-Content-Type-Options", "nosniff"],

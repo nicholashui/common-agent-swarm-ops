@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="120" viewBox="0 0 320 120" role="img" aria-label="Help placeholder">
+  <rect width="320" height="120" rx="12" fill="#eef2ff"/>
+  <rect x="24" y="28" width="180" height="12" rx="6" fill="#c7d2fe"/>
+  <rect x="24" y="52" width="140" height="10" rx="5" fill="#a5b4fc"/>
+  <circle cx="260" cy="60" r="28" fill="#4f46e5"/>
+  <text x="260" y="66" text-anchor="middle" fill="#fff" font-size="22" font-family="sans-serif">?</text>
+</svg>

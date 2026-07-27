@@ -14,7 +14,7 @@
   Backend listen port. Defaults to 8000.
 
 .PARAMETER FrontendPort
-  Frontend listen port. Defaults to 3000.
+  Frontend listen port. Defaults to 3001.
 
 .PARAMETER PidFile
   State file written for stop_all.ps1. Defaults to .run\servers.json.
@@ -29,7 +29,7 @@ param(
   [int]$BackendPort = 8000,
 
   [ValidateRange(1, 65535)]
-  [int]$FrontendPort = 3000,
+  [int]$FrontendPort = 3001,
 
   [string]$PidFile = ""
 )

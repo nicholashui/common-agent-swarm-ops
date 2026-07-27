@@ -53,7 +53,7 @@ Persistence target: Postgres primary; graph checkpoint migrations present. In-me
 
 ## Local run
 
-- Backend `127.0.0.1:8000`, frontend `127.0.0.1:3000`.
+- Backend `127.0.0.1:8000`, frontend `127.0.0.1:3001`.
 - WIP: `start_all.ps1` / `stop_all.ps1` write PIDs to `.run/servers.json` (`.run/` ignored in WIP).
 
 ## Uncommitted work (as of study)

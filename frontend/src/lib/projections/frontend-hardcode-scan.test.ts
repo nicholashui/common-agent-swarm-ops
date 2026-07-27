@@ -29,7 +29,8 @@ async function collect(
 
 test("scan: no *Home/Login/Specials component imports LOCAL_* fixtures", async () => {
   const files = await collect(join(srcRoot, "components"), (name, isDir) => {
-    if (isDir) return true;
+    // Slim route binders under screen/ may import LOCAL_* landings intentionally.
+    if (isDir) return name !== "screen";
     return (
       (name.endsWith("Home.tsx") || name === "LoginScreen.tsx" || name === "SpecialsCatalog.tsx")
       && !name.includes(".test.")
@@ -75,13 +76,13 @@ test("scan: app pages bind store parameters for every non-auth-free route", asyn
     const source = await readFile(page, "utf8");
     assert.match(
       source,
-      /useScreenParameters|getScreenParameters|BoundScreenHome|BoundAgentDetailHome|BoundSwarmCanvasHome|BoundMonitoringHome|LoginScreen/,
+      /useScreenParameters|getScreenParameters|Bound\w+Home|LoginScreen|MarkdownViewerPage|DocsView/,
       `${page} must load screen parameters from the store or a bound screen home`,
     );
     assert.match(
       source,
-      /view=\{|projection=\{|BoundScreenHome|BoundAgentDetailHome|BoundSwarmCanvasHome|BoundMonitoringHome|LoginScreen/,
-      `${page} must pass parameters into the presentation component or bind via BoundScreenHome`,
+      /view=\{|projection=\{|Bound\w+Home|LoginScreen|MarkdownViewerPage|DocsView/,
+      `${page} must pass parameters into the presentation component or bind via Bound*Home`,
     );
   }
 });

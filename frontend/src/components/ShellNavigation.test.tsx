@@ -46,6 +46,9 @@ test("shell navigation renders ui_00_menu product chrome and IA groups", () => {
   assert.match(markup, /aria-current="page"/);
   assert.match(markup, /href="\/composer"/);
   assert.match(markup, /href="\/canvas"/);
+  assert.match(markup, /Open full document page/);
+  assert.match(markup, /Open help panel|Close help panel|Toggle help panel/);
+  assert.match(markup, /workspace-topbar/);
 });
 
 test("shell navigation shows authorized VA and correlation when returned", () => {

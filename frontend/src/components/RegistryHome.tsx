@@ -3,7 +3,7 @@
 /**
  * @duty RegistryHome — registry hub projection (ui_07)
  * @role Search/facet agent & pattern cards; embed specials; propose via host intents.
- * @controls Search, facets, cards, proposal actions, specials panel.
+ * @controls Search, facets, cards/table/graph modes, proposal actions, specials panel.
  * @must Keep demo proposals fail-closed; specials never activate production.
  * @mustnot Invent registry mutations without action refs.
  * @redesign docs/frontend_redesign/ui_07_registry_hub.md
@@ -18,6 +18,12 @@ import {
   type RegistryViewMode,
 } from "../lib/projections/registry-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import {
+  REGISTRY_VIEW_MODES,
+  filterRegistryAgents,
+  filterRegistryPatterns,
+  toggleFacetSelection,
+} from "../lib/ui/registry-filters";
 import { SpecialsCatalog } from "./SpecialsCatalog";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
@@ -38,6 +44,9 @@ export function RegistryHome({
   );
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [reviewOpen, setReviewOpen] = useState(true);
+  const [selectedGraphId, setSelectedGraphId] = useState<string | undefined>();
+  /** Progressive list window — keeps first paint light when catalog is large. */
+  const [visibleLimit, setVisibleLimit] = useState(36);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -48,39 +57,61 @@ export function RegistryHome({
   };
   const feedback = externalStatus ?? statusMessage;
 
-  const toggleFacet = (facet: string): void => {
+  const filteredAgents = useMemo(
+    () =>
+      filterRegistryAgents(
+        view.agents,
+        search,
+        activeFacets,
+        view.domainFacets,
+      ),
+    [activeFacets, search, view.agents, view.domainFacets],
+  );
+
+  const filteredPatterns = useMemo(
+    () => filterRegistryPatterns(view.patterns, search),
+    [search, view.patterns],
+  );
+
+  const visibleAgents = useMemo(
+    () => filteredAgents.slice(0, visibleLimit),
+    [filteredAgents, visibleLimit],
+  );
+
+  // Reset window when filters change so search feels instant on small result sets.
+  React.useEffect(() => {
+    setVisibleLimit(36);
+  }, [search, activeFacets]);
+
+  const onToggleFacet = (facet: string): void => {
     setActiveFacets((current) => {
-      const next = new Set(current);
-      if (next.has(facet)) next.delete(facet);
-      else next.add(facet);
+      const next = toggleFacetSelection(current, facet);
+      const applied = next.has(facet);
+      setStatusMessage(
+        applied
+          ? `Facet “${facet}” on · ${filterRegistryAgents(view.agents, search, next, view.domainFacets).length} agents`
+          : `Facet “${facet}” off · ${filterRegistryAgents(view.agents, search, next, view.domainFacets).length} agents`,
+      );
       return next;
     });
   };
 
-  const filteredAgents = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return view.agents.filter((agent) => {
-      // Facets are badge or pack tags (video|specials, status, folder-local layout, …).
-      for (const facet of activeFacets) {
-        const f = facet.toLowerCase();
-        const matchesBadge = agent.badges.some((badge) => badge.toLowerCase() === f);
-        const matchesDomain = agent.domains.some((domain) => domain.toLowerCase() === f);
-        const matchesCategory = (agent.category ?? "").toLowerCase() === f;
-        if (!matchesBadge && !matchesDomain && !matchesCategory) {
-          return false;
-        }
-      }
-      if (q.length === 0) return true;
-      return (
-        agent.id.toLowerCase().includes(q) ||
-        agent.name.toLowerCase().includes(q) ||
-        agent.description.toLowerCase().includes(q) ||
-        agent.versionLabel.toLowerCase().includes(q) ||
-        agent.badges.some((badge) => badge.toLowerCase().includes(q)) ||
-        (agent.category ?? "").toLowerCase().includes(q)
-      );
-    });
-  }, [activeFacets, search, view]);
+  const onModeChange = (next: RegistryViewMode): void => {
+    setMode(next);
+    setStatusMessage(
+      next === "graph"
+        ? `Graph viz · ${filteredAgents.length} agents (local layout)`
+        : next === "table"
+          ? `Table view · ${filteredAgents.length} agents`
+          : `Cards view · ${filteredAgents.length} agents`,
+    );
+  };
+
+  const clearFilters = (): void => {
+    setSearch("");
+    setActiveFacets(new Set());
+    setStatusMessage(`Filters cleared · ${view.agents.length} agents`);
+  };
 
   return (
     <section aria-label={L(labels, "common_registry_hub")} className="registry-home">
@@ -121,8 +152,26 @@ export function RegistryHome({
         <label className="registry-home__search">
           <span className="visually-hidden">{L(labels, "search_registry")}</span>
           <input
-            onChange={(event) => setSearch(event.target.value)}
+            aria-controls="registry-agent-results"
+            autoComplete="off"
+            name="registry-search"
+            onChange={(event) => {
+              const value = event.target.value;
+              setSearch(value);
+              const count = filterRegistryAgents(
+                view.agents,
+                value,
+                activeFacets,
+                view.domainFacets,
+              ).length;
+              setStatusMessage(
+                value.trim().length === 0
+                  ? `Search cleared · ${count} agents`
+                  : `Search “${value.trim()}” · ${count} agents`,
+              );
+            }}
             placeholder={view.searchPlaceholder}
+            type="search"
             value={search}
           />
         </label>
@@ -131,28 +180,31 @@ export function RegistryHome({
           className="registry-home__modes"
           role="group"
         >
-          {(
-            [
-              ["cards", "Cards"],
-              ["table", "Table"],
-              ["graph", "Graph viz"],
-            ] as const
-          ).map(([id, label]) => (
+          {REGISTRY_VIEW_MODES.map((entry) => (
             <button
-              aria-pressed={mode === id}
+              aria-pressed={mode === entry.id}
               className={
-                mode === id
+                mode === entry.id
                   ? "registry-home__mode registry-home__mode--active"
                   : "registry-home__mode"
               }
-              key={id}
-              onClick={() => setMode(id)}
+              key={entry.id}
+              onClick={() => onModeChange(entry.id)}
               type="button"
             >
-              {label}
+              {entry.label}
             </button>
           ))}
         </div>
+        {search.trim().length > 0 || activeFacets.size > 0 ? (
+          <button
+            className="registry-home__action"
+            onClick={clearFilters}
+            type="button"
+          >
+            Clear filters
+          </button>
+        ) : null}
       </div>
 
       <div
@@ -169,13 +221,28 @@ export function RegistryHome({
                 : "registry-home__facet"
             }
             key={facet}
-            onClick={() => toggleFacet(facet)}
+            onClick={() => onToggleFacet(facet)}
             type="button"
           >
             {facet}
           </button>
         ))}
       </div>
+
+      <p
+        aria-live="polite"
+        className="registry-home__result-meta"
+        id="registry-agent-results"
+        role="status"
+      >
+        Showing <strong>{filteredAgents.length}</strong> of {view.agents.length}{" "}
+        agents
+        {activeFacets.size > 0
+          ? ` · facets: ${[...activeFacets].join(", ")}`
+          : ""}
+        {search.trim().length > 0 ? ` · query: “${search.trim()}”` : ""}
+        {` · view: ${mode}`}
+      </p>
 
       {feedback ? (
         <p aria-live="polite" className="registry-home__status" role="status">
@@ -190,30 +257,57 @@ export function RegistryHome({
               Common Agents
             </h2>
             {mode === "cards" ? (
-              <div className="registry-home__agent-grid">
-                {filteredAgents.map((agent) => (
+              <div className="registry-home__agent-grid" data-registry-view="cards">
+                {visibleAgents.map((agent) => (
                   <AgentCard
                     agent={agent}
                     key={agent.id}
+                    labels={labels}
                     onAnnounce={announce}
-                   labels={labels} />
+                  />
                 ))}
               </div>
             ) : null}
             {mode === "table" ? (
-              <AgentTable agents={filteredAgents} onAnnounce={announce}  labels={labels} />
+              <div data-registry-view="table">
+                <AgentTable
+                  agents={visibleAgents}
+                  labels={labels}
+                  onAnnounce={announce}
+                />
+              </div>
             ) : null}
             {mode === "graph" ? (
-              <div className="registry-home__graph-placeholder panel">
-                <p>
-                  Graph viz is reserved for future knowledge/usage graph
-                  projections. Cards and table remain primary discovery views.
-                </p>
+              <RegistryGraph
+                agents={filteredAgents}
+                labels={labels}
+                onSelect={setSelectedGraphId}
+                selectedId={selectedGraphId}
+              />
+            ) : null}
+            {filteredAgents.length > visibleLimit && mode !== "graph" ? (
+              <div className="registry-home__more">
+                <button
+                  className="registry-home__action registry-home__action--primary"
+                  onClick={() =>
+                    setVisibleLimit((n) => Math.min(n + 36, filteredAgents.length))
+                  }
+                  type="button"
+                >
+                  Show more ({visibleLimit} of {filteredAgents.length})
+                </button>
               </div>
             ) : null}
             {filteredAgents.length === 0 ? (
               <div className="registry-home__empty panel">
                 <p>{L(labels, "no_commons_match_the_current_search_or_facets")}</p>
+                <button
+                  className="registry-home__action registry-home__action--primary"
+                  onClick={clearFilters}
+                  type="button"
+                >
+                  Clear filters
+                </button>
               </div>
             ) : null}
           </section>
@@ -226,7 +320,7 @@ export function RegistryHome({
               Core Common Swarm Patterns
             </h2>
             <div className="registry-home__pattern-grid">
-              {view.patterns.map((pattern) => (
+              {filteredPatterns.map((pattern) => (
                 <PatternCard
                   key={pattern.id}
                   onAnnounce={announce}
@@ -234,6 +328,11 @@ export function RegistryHome({
                 />
               ))}
             </div>
+            {filteredPatterns.length === 0 ? (
+              <p className="registry-home__empty panel">
+                No patterns match the current search.
+              </p>
+            ) : null}
           </section>
 
           <section
@@ -367,6 +466,9 @@ export function RegistryHome({
               </li>
             ))}
           </ul>
+          <p className="registry-home__sidebar-filter">
+            Filtered view: <strong>{filteredAgents.length}</strong>
+          </p>
           <section className="registry-home__your-impact">
             <h3>{L(labels, "your_impact")}</h3>
             <p>{view.yourImpact}</p>
@@ -463,7 +565,7 @@ function AgentCard({
         </button>
         <Link
           className="registry-home__action"
-          href={`/registry/agents/${agent.id}`}
+          href={`/registry/agents/${encodeURIComponent(agent.id)}`}
         >
           Detail
         </Link>
@@ -498,6 +600,7 @@ function AgentTable({
             <tr key={agent.id}>
               <td>
                 <strong>{agent.name}</strong>
+                <span className="registry-home__muted">{agent.id}</span>
                 <span className="registry-home__muted">{agent.description}</span>
               </td>
               <td>
@@ -519,7 +622,7 @@ function AgentTable({
                 </button>
                 <Link
                   className="registry-home__linkish"
-                  href={`/registry/agents/${agent.id}`}
+                  href={`/registry/agents/${encodeURIComponent(agent.id)}`}
                 >
                   Detail
                 </Link>
@@ -528,6 +631,73 @@ function AgentTable({
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function RegistryGraph({
+  agents,
+  selectedId,
+  onSelect,
+  labels,
+}: Readonly<{
+  agents: readonly RegistryAgentCard[];
+  selectedId?: string;
+  onSelect: (id: string) => void;
+  labels: ScreenLabels;
+}>): JSX.Element {
+  const nodes = agents.slice(0, 48);
+  const selected =
+    nodes.find((agent) => agent.id === selectedId) ?? nodes[0];
+
+  return (
+    <div className="registry-home__graph panel" data-registry-view="graph">
+      <p className="registry-home__graph-note">
+        Local graph layout of up to 48 matching agents (not a host topology run).
+        Select a node to inspect pack identity.
+      </p>
+      <div
+        aria-label={L(labels, "common_registry_hub")}
+        className="registry-home__graph-canvas"
+        role="list"
+      >
+        {nodes.map((agent) => (
+          <button
+            aria-pressed={selected?.id === agent.id}
+            className={
+              selected?.id === agent.id
+                ? "registry-home__graph-node registry-home__graph-node--selected"
+                : "registry-home__graph-node"
+            }
+            key={agent.id}
+            onClick={() => onSelect(agent.id)}
+            role="listitem"
+            title={agent.id}
+            type="button"
+          >
+            <strong>{agent.name}</strong>
+            <span>{agent.category ?? agent.badges[0] ?? "agent"}</span>
+          </button>
+        ))}
+      </div>
+      {selected ? (
+        <div className="registry-home__graph-detail">
+          <h3>{selected.name}</h3>
+          <p>
+            <code>{selected.id}</code>
+          </p>
+          <p>{selected.description}</p>
+          <Link
+            className="registry-home__action registry-home__action--primary"
+            href={`/registry/agents/${encodeURIComponent(selected.id)}`}
+          >
+            Open detail
+          </Link>
+        </div>
+      ) : null}
+      {nodes.length === 0 ? (
+        <p className="registry-home__empty">No agents to layout for this filter.</p>
+      ) : null}
     </div>
   );
 }

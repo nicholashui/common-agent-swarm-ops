@@ -25,6 +25,14 @@ import {
   type ResolvedMenuGroup,
   resolveApplicationMenu,
 } from "../lib/navigation/application-menu";
+import { buildFullPageDocsHref } from "../lib/help/route-docs";
+import {
+  HELP_PANEL_DEFAULT_WIDTH,
+  RightHelpPanel,
+  clampHelpPanelWidth,
+  readStoredHelpPanelWidth,
+  writeStoredHelpPanelWidth,
+} from "./help/RightHelpPanel";
 
 const MENU_ICON_PATHS: Readonly<Record<MenuIconName, readonly string[]>> = {
   activity: ["M5 5h14v11H5z", "M8 9h8", "M8 13h5"],
@@ -176,6 +184,10 @@ export function ApplicationMenuView({
   const [collapsedGroups, setCollapsedGroups] = useState<ReadonlySet<string>>(
     () => new Set(),
   );
+  /** Workspace-owned help drawer state (help_spec.md). */
+  const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [rightPanelWidth, setRightPanelWidth] = useState(HELP_PANEL_DEFAULT_WIDTH);
+  const [rightPanelDragging, setRightPanelDragging] = useState(false);
   const baseId = useId();
 
   const projection = menuProjection ?? DEFAULT_PROJECTION;
@@ -186,6 +198,23 @@ export function ApplicationMenuView({
 
   useEffect(() => {
     setIsCompact(readCollapsedPreference());
+    setRightPanelWidth(readStoredHelpPanelWidth());
+  }, []);
+
+  useEffect(() => {
+    writeStoredHelpPanelWidth(rightPanelWidth);
+  }, [rightPanelWidth]);
+
+  // Close mobile left drawer when viewport returns to desktop.
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const media = window.matchMedia("(min-width: 961px)");
+    const onChange = (): void => {
+      if (media.matches) setIsMenuOpen(false);
+    };
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
   }, []);
 
   useEffect(() => {
@@ -408,9 +437,59 @@ export function ApplicationMenuView({
             </button>
           </footer>
         </aside>
-        <main className="app-main menu-main" id="main-content">
-          {children}
-        </main>
+        <div
+          className={
+            rightPanelOpen
+              ? "menu-workspace-main menu-workspace-main--help-open"
+              : "menu-workspace-main"
+          }
+        >
+          <header className="workspace-topbar" aria-label="Workspace actions">
+            <div className="workspace-topbar__spacer" />
+            <div className="workspace-topbar__actions">
+              <Link
+                aria-label="Open full document page"
+                className="workspace-topbar__icon"
+                href={buildFullPageDocsHref(pathname, "userguide")}
+                title="Open document page"
+              >
+                <MenuIcon name="knowledge" />
+                <span className="visually-hidden">Documents</span>
+              </Link>
+              <button
+                aria-label={
+                  rightPanelOpen ? "Close help panel" : "Open help panel"
+                }
+                aria-pressed={rightPanelOpen}
+                className={
+                  rightPanelOpen
+                    ? "workspace-topbar__icon workspace-topbar__icon--pressed"
+                    : "workspace-topbar__icon"
+                }
+                onClick={() => setRightPanelOpen((open) => !open)}
+                title="Toggle help panel"
+                type="button"
+              >
+                <MenuIcon name="help" />
+                <span className="visually-hidden">Help</span>
+              </button>
+            </div>
+          </header>
+          <main className="app-main menu-main" id="main-content">
+            {children}
+          </main>
+          <RightHelpPanel
+            dragging={rightPanelDragging}
+            onClose={() => setRightPanelOpen(false)}
+            onDraggingChange={setRightPanelDragging}
+            onWidthChange={(width) =>
+              setRightPanelWidth(clampHelpPanelWidth(width))
+            }
+            open={rightPanelOpen}
+            pathname={pathname}
+            width={rightPanelWidth}
+          />
+        </div>
       </div>
       <div
         aria-atomic="true"

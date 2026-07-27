@@ -52,20 +52,23 @@ test("app pages bind screens through useScreenParameters or explicit stored view
   const landingPages = pages.filter((path) => !path.includes(`${join("login")}${join("")}`) && !path.endsWith(join("login", "page.tsx")));
   for (const page of landingPages) {
     if (page.endsWith(join("login", "page.tsx"))) continue;
+    // Full-page markdown viewer is not a projection landing.
+    if (page.includes(`${join("docs")}${join("view")}`)) continue;
     const source = await readFile(page, "utf8");
     // Login is auth UI, not a projection landing.
     if (source.includes("LoginScreen")) continue;
+    if (source.includes("MarkdownViewerPage") || source.includes("DocsView")) continue;
     const usesStore = /useScreenParameters|getScreenParameters/.test(source);
-    const usesBound = /BoundScreenHome/.test(source);
+    const usesBound = /Bound\w+Home/.test(source);
     const passesView = /view=\{/.test(source) || /projection=\{/.test(source);
     assert.ok(
       usesStore || usesBound,
-      `${page} must read screen parameters from the store`,
+      `${page} must read screen parameters from the store or a Bound*Home`,
     );
-    // BoundScreenHome wires stored parameters + view props inside the client binder.
+    // Bound*Home wires stored parameters + view props inside the client binder.
     assert.ok(
       usesBound || passesView,
-      `${page} must pass view/projection into the home component or use BoundScreenHome`,
+      `${page} must pass view/projection into the home component or use Bound*Home`,
     );
     assert.doesNotMatch(
       source,

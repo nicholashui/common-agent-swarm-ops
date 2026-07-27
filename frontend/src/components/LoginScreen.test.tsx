@@ -32,6 +32,7 @@ test("login screen matches ui_01_login structure and identity-only boundary", ()
   assert.match(markup, />Google</);
   assert.match(markup, />GitHub</);
   assert.match(markup, /Try Demo Workspace/);
+  assert.match(markup, /nicholas\.hui@local \/ NicholasAdmin1!/);
   assert.match(markup, /demo@local \/ demo/);
   assert.match(markup, /Docs/);
   assert.match(markup, /Demo available · No credit card/);

@@ -14,10 +14,15 @@ import {
 
 test("verifies built-in local users and rejects invalid passwords", () => {
   clearLocalAuthStateForTests();
+  assert.equal(
+    verifyLocalPassword("nicholas.hui@local", "NicholasAdmin1!")?.workspaceLabel,
+    "Admin · Nicholas Hui",
+  );
   assert.equal(verifyLocalPassword("demo@local", "demo")?.email, "demo@local");
   assert.equal(verifyLocalPassword("ops@local", "ops")?.workspaceLabel, "Local ops workspace");
   assert.equal(verifyLocalPassword("demo@local", "wrong"), null);
   assert.equal(verifyLocalPassword("missing@local", "demo"), null);
+  assert.equal(verifyLocalPassword("nicholas.hui@local", "wrong"), null);
 });
 
 test("encodes signed session cookies and rejects tampering or expiry", () => {

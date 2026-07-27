@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\adapters\media_live.py
+# hypothesis_version: 6.151.12
+
+['1.0.0', 'duration', 'duration_seconds', 'model', 'prompt', 'script', 'text', 'utf-8', 'voice_id']

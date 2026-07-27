@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\adapters\local.py
+# hypothesis_version: 6.151.12
+
+['1.0.0', 'audit.log', 'audit_event_recorded', 'billing.preview', 'contract.parse', 'contract_parsed', 'crm.lookup', 'crm_record_resolved', 'email.preview', 'media.stub', 'policy.lookup', 'policy_resolved', 'stub_media_created']

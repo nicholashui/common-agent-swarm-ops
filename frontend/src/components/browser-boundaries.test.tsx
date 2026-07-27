@@ -133,9 +133,25 @@ test("uses same-origin generated requests and enforces the production browser se
   assert.equal(requestedPath, "/api/v1/workflow-runs/run-1");
 
   const config = await readFile(new URL("../../next.config.mjs", import.meta.url), "utf8");
-  assert.match(config, /default-src 'self'; base-uri 'self'; connect-src 'self'; frame-ancestors 'none'; frame-src 'none'; object-src 'none';/);
-  assert.match(config, /script-src 'self' 'unsafe-inline';/);
-  assert.doesNotMatch(config, /unsafe-eval/);
+  // CSP is assembled as discrete directives (see next.config.mjs).
+  assert.match(config, /default-src 'self'/);
+  assert.match(config, /base-uri 'self'/);
+  assert.match(config, /connect-src 'self'/);
+  assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /frame-src 'none'/);
+  assert.match(config, /object-src 'none'/);
+  // Production script-src must stay strict (no unsafe-eval).
+  assert.match(
+    config,
+    /NODE_ENV === "production"\s*\r?\n\s*\?\s*"script-src 'self' 'unsafe-inline'"/,
+  );
+  assert.doesNotMatch(
+    config,
+    /NODE_ENV === "production"\s*\r?\n\s*\?\s*"script-src[^"]*unsafe-eval/,
+  );
+  // Production ternary arm is exactly script-src without unsafe-eval.
+  assert.match(config, /\?\s*"script-src 'self' 'unsafe-inline'"/);
+  assert.doesNotMatch(config, /\?\s*"script-src 'self' 'unsafe-inline' 'unsafe-eval'"/);
   assert.match(config, /Referrer-Policy", "no-referrer/);
   assert.match(config, /Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload/);
   assert.match(config, /X-Content-Type-Options", "nosniff/);
