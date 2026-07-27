@@ -1,0 +1,1041 @@
+{
+  "video.director": {
+    "va_id": 1,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.producer": {
+    "va_id": 2,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.screenwriter": {
+    "va_id": 3,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/screenwriter_strategic_goal_achievement_agent_functional_specification.md"
+    ]
+  },
+  "video.showrunner": {
+    "va_id": 4,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/screenwriter_strategic_goal_achievement_agent_functional_specification.md"
+    ]
+  },
+  "video.casting": {
+    "va_id": 5,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.cinematographer": {
+    "va_id": 6,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.cameraoperator": {
+    "va_id": 7,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.dronepilot": {
+    "va_id": 8,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.editor": {
+    "va_id": 9,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.colorist": {
+    "va_id": 10,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.vfxsupervisor": {
+    "va_id": 11,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.animator_2d": {
+    "va_id": 12,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.motiongraphics": {
+    "va_id": 13,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.storyboard": {
+    "va_id": 14,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.conceptartist": {
+    "va_id": 15,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.productiondesign": {
+    "va_id": 16,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.costumedesign": {
+    "va_id": 17,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.mua_makeup": {
+    "va_id": 18,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.sounddesign": {
+    "va_id": 19,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.composer": {
+    "va_id": 20,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.voiceover": {
+    "va_id": 21,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.soundmixer": {
+    "va_id": 22,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.choreography": {
+    "va_id": 23,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.musicvideodirector": {
+    "va_id": 24,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.comedywriter": {
+    "va_id": 25,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.talent": {
+    "va_id": 26,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.ugccreator": {
+    "va_id": 27,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.socialmediastrategist": {
+    "va_id": 28,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.copywriter": {
+    "va_id": 29,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.creativedirector": {
+    "va_id": 30,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.performancemarketer": {
+    "va_id": 31,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.instructionaldesign": {
+    "va_id": 32,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.sme": {
+    "va_id": 33,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.factchecker": {
+    "va_id": 34,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.medicalillustrator": {
+    "va_id": 35,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.journalist": {
+    "va_id": 36,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.compliance": {
+    "va_id": 37,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.finance": {
+    "va_id": 38,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.foodstylist": {
+    "va_id": 39,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.travelcine": {
+    "va_id": 40,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.childrensauthor": {
+    "va_id": 41,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.audiobooknarrator": {
+    "va_id": 42,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.signlanguageinterpreter": {
+    "va_id": 43,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.localizationqa": {
+    "va_id": 44,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.realestatephoto": {
+    "va_id": 45,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.promptengineer": {
+    "va_id": 46,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.avatardesign": {
+    "va_id": 47,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.voiceclone": {
+    "va_id": 48,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.aiqaconsistency": {
+    "va_id": 49,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/aesthetics_agent_functional_specification.md"
+    ]
+  },
+  "video.personalizationengineer": {
+    "va_id": 50,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.trailereditor": {
+    "va_id": 51,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.sportsanalyst": {
+    "va_id": 52,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.orchestrator": {
+    "va_id": 53,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "plan/planner_agent_v2.1.md"
+    ]
+  },
+  "video.planner": {
+    "va_id": 54,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "plan/planner_agent_v2.1.md"
+    ]
+  },
+  "video.router": {
+    "va_id": 55,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "plan/planner_agent_v2.1.md"
+    ]
+  },
+  "video.judge": {
+    "va_id": 56,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "plan/planner_agent_v2.1.md"
+    ]
+  },
+  "video.gatekeeper": {
+    "va_id": 57,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.memory": {
+    "va_id": 58,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.ideation": {
+    "va_id": 59,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.narrativearc": {
+    "va_id": 60,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.styletransfer": {
+    "va_id": 61,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.worldbuilding": {
+    "va_id": 62,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.moodboard": {
+    "va_id": 63,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.novelty": {
+    "va_id": 64,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.emotionalarc": {
+    "va_id": 65,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.webresearch": {
+    "va_id": 66,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/research_agent_functional_specification.md",
+      "study/research_agent_technical_specification.md"
+    ]
+  },
+  "video.archiveresearch": {
+    "va_id": 67,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/research_agent_functional_specification.md",
+      "study/research_agent_technical_specification.md"
+    ]
+  },
+  "video.trendintelligence": {
+    "va_id": 68,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.competitorintelligence": {
+    "va_id": 69,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.citation": {
+    "va_id": 70,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.interviewsynthesis": {
+    "va_id": 71,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.benchmarkresearch": {
+    "va_id": 72,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md",
+      "study/research_agent_functional_specification.md",
+      "study/research_agent_technical_specification.md"
+    ]
+  },
+  "video.promptoptimizer": {
+    "va_id": 73,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.costoptimizer": {
+    "va_id": 74,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.latencyoptimizer": {
+    "va_id": 75,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.retentionoptimizer": {
+    "va_id": 76,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.roasoptimizer": {
+    "va_id": 77,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.accessibilityoptimizer": {
+    "va_id": 78,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.evaluationharness": {
+    "va_id": 79,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.safetyredteam": {
+    "va_id": 80,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.analyst": {
+    "va_id": 81,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.audiencesim": {
+    "va_id": 82,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.accessibility": {
+    "va_id": 83,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.brand": {
+    "va_id": 84,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.brandstrategist": {
+    "va_id": 85,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.marketing": {
+    "va_id": 86,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.seo": {
+    "va_id": 87,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.community": {
+    "va_id": 88,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.templatedesign": {
+    "va_id": 89,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.ux": {
+    "va_id": 90,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.trustsafety": {
+    "va_id": 91,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.crm": {
+    "va_id": 92,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.legal": {
+    "va_id": 93,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.festivalstrategist": {
+    "va_id": 94,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.critic": {
+    "va_id": 95,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.lms": {
+    "va_id": 96,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.learnersim": {
+    "va_id": 97,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.continuity": {
+    "va_id": 98,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.lipsync": {
+    "va_id": 99,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.musicsupervisor": {
+    "va_id": 100,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.labela_r": {
+    "va_id": 101,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.labeldigital": {
+    "va_id": 102,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.deepfakedetection": {
+    "va_id": 103,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.comms": {
+    "va_id": 104,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.archiveproducer": {
+    "va_id": 105,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.standardseditor": {
+    "va_id": 106,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.ethics": {
+    "va_id": 107,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.channelmanager": {
+    "va_id": 108,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.corrections": {
+    "va_id": 109,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.mpa": {
+    "va_id": 110,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.sales": {
+    "va_id": 111,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.distributor": {
+    "va_id": 112,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.awardsstrategist": {
+    "va_id": 113,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  },
+  "video.archivemaster": {
+    "va_id": 114,
+    "related_corpus": [
+      "study/agents.md",
+      "study/SYSTEM_REFERENCE.md",
+      "study/ai_agent_video_production_workflow.md",
+      "study/agent_loop_v3.md"
+    ]
+  }
+}

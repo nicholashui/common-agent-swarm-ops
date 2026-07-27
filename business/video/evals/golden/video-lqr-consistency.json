@@ -1,0 +1,34 @@
+{
+  "id": "golden_video_lqr_consistency_v1",
+  "workflow_id": "wf_video_arch_a_viral_hook_v1",
+  "target": "wf_video_arch_a_viral_hook_v1",
+  "domain": "video",
+  "description": "Wave 3 LQR/consistency golden — structural QC gate + consistency rubrics for sandbox fitness",
+  "input": {
+    "hook_concept": "consistency check sample for short-form hook",
+    "platform": "short_form",
+    "lqr_mode": "consistency"
+  },
+  "expected": {
+    "status_in": ["completed"],
+    "requires_human_gate_step": "publish_hook",
+    "human_gate_on": ["publish_hook"],
+    "min_steps": 6,
+    "must_not": ["direct_production_mutation_without_approval"]
+  },
+  "rubrics": {
+    "lqr": "look-quality-review proxy via video_qc_stub and gated publish",
+    "consistency": "character/style/message consistency across hook frames",
+    "aesthetics": "hook clarity and pacing proxy",
+    "psychological_alignment": "curiosity without deception"
+  },
+  "provenance": {
+    "source_refs": [
+      "improvements.md#wave-3",
+      "planning/improvement/wave-3/requirements.md",
+      "va-agent-swarm LQR process family"
+    ],
+    "captured_by": "wave-3-sdd",
+    "recorded_at": "2026-07-12"
+  }
+}

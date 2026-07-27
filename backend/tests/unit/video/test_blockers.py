@@ -108,9 +108,9 @@ def test_pack_spine_configuration_is_data_only_and_declares_only_stub_media() ->
         agent_ids=frozenset(
             {
                 "video.orchestrator",
-                "video.generative_media_operator",
+                "video.promptengineer",
                 COMPLIANCE_AGENT_ID,
-                "video.delivery_packager",
+                "video.ux",
             }
         ),
         tool_ids=frozenset({"media.stub"}),

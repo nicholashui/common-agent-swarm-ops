@@ -13,6 +13,7 @@ import {
   PACK_AGENTS,
   type PackAgentRecord,
 } from "./pack-agents.generated";
+import { PACK_PROCESS_CATALOG } from "./pack-process.generated";
 
 export type RegistryViewMode = "cards" | "table" | "graph";
 
@@ -169,10 +170,15 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     { id: "total", label: "Total agents", value: String(PACK_AGENT_COUNTS.total) },
     { id: "video", label: "Video pack", value: String(PACK_AGENT_COUNTS.video) },
     { id: "specials", label: "Specials pack", value: String(PACK_AGENT_COUNTS.specials) },
-    { id: "self", label: "Self-contained", value: String(PACK_AGENT_COUNTS.total) },
+    {
+      id: "processes",
+      label: "Host process rows",
+      value: String(PACK_PROCESS_CATALOG.hostProcessCount),
+    },
   ],
   yourImpact:
-    "Every listed agent has a self-contained folder (SPEC.md + agent_spec.json + sources). No demo agents.",
+    "Every listed agent has a self-contained folder (SPEC.md + agent_spec.json + sources/excerpts + study). "
+    + "No demo agents. Process index and DNA are cataloged; production activation remains off.",
   /** Demo proposal queue removed — registry is pack catalog only. */
   proposals: [],
   reviewTitle: "Proposal Review — empty (no demo proposals)",
@@ -183,12 +189,17 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
   impactRows: [
     { label: "Video pack agents", value: String(PACK_AGENT_COUNTS.video) },
     { label: "Specials pack agents", value: String(PACK_AGENT_COUNTS.specials) },
-    { label: "Total in UI", value: String(PACK_AGENT_COUNTS.total) },
+    { label: "Host process rows", value: String(PACK_PROCESS_CATALOG.hostProcessCount) },
+    { label: "Design process rows", value: String(PACK_PROCESS_CATALOG.designProcessCount) },
+    { label: "DNA workflows", value: String(PACK_PROCESS_CATALOG.dnaWorkflowCount) },
+    { label: "Eval artifacts", value: String(PACK_PROCESS_CATALOG.evalArtifactCount) },
+    { label: "Total agents in UI", value: String(PACK_AGENT_COUNTS.total) },
   ],
   impactDomains: "Packs: video · specials (no demo domains)",
   footerNote:
     "Registry lists all checked-in pack agents only (114 video + 19 specials). "
-    + "Demo MarketSentiment / ContentDirector / VerificationLoop cards are removed. "
-    + "Detail shows agent_spec settings. Regenerate: python scripts/business/export_pack_agents_for_ui.py",
+    + `Host processes ${PACK_PROCESS_CATALOG.hostProcessCount} · design catalog ${PACK_PROCESS_CATALOG.designProcessCount} · `
+    + `DNA ${PACK_PROCESS_CATALOG.dnaWorkflowCount} · safe baseline ${PACK_PROCESS_CATALOG.safeBaseline} (non-active; activation off). `
+    + "Regenerate: export_pack_agents_for_ui.py + export_pack_process_for_ui.py",
   specials: LOCAL_SPECIALS_LANDING,
 };

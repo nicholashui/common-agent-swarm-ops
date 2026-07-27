@@ -1,0 +1,156 @@
+{
+  "id": "wf_video_arch_h_ai_avatar_v1",
+  "name": "Archetype H \u2014 AI Avatar",
+  "domain": "video",
+  "objective": "Thin vertical archetype H on orchestration spine (N3).",
+  "owner": "video.orchestrator",
+  "version": "1.0.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": [
+    "brief"
+  ],
+  "preconditions": [
+    "brief is non-empty"
+  ],
+  "steps": [
+    {
+      "id": "orchestrate",
+      "state": "execution",
+      "next": [
+        "plan"
+      ],
+      "agent": "video.orchestrator",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "plan",
+      "state": "execution",
+      "next": [
+        "specialize_0"
+      ],
+      "agent": "video.planner",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "specialize_0",
+      "state": "execution",
+      "next": [
+        "specialize_1"
+      ],
+      "agent": "video.avatardesign",
+      "tools": [
+        "video_media_gen_stub"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "specialize_1",
+      "state": "execution",
+      "next": [
+        "specialize_2"
+      ],
+      "agent": "video.voiceclone",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "specialize_2",
+      "state": "execution",
+      "next": [
+        "qc"
+      ],
+      "agent": "video.promptengineer",
+      "tools": [
+        "video_media_gen_stub"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "qc",
+      "state": "execution",
+      "next": [
+        "package"
+      ],
+      "agent": "video.aiqaconsistency",
+      "tools": [
+        "video_qc_stub"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "package",
+      "state": "critical_gate",
+      "next": [
+        "complete"
+      ],
+      "agent": "video.producer",
+      "tools": [
+        "video_package_stub"
+      ],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": [
+    "organization_memory"
+  ],
+  "memory_writes": [
+    "event_log",
+    "lessons_learned"
+  ],
+  "guardrails": {
+    "human_approval_required_if": [
+      "step.irreversible == true"
+    ]
+  },
+  "verification": {
+    "required_checks": [
+      "qc_pass",
+      "package_approved"
+    ]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": [
+      "unpublish_stub",
+      "notify_producer"
+    ]
+  },
+  "fitness_metrics": [
+    "quality",
+    "cycle_time"
+  ],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "va-agent-swarm/study/workflows/H-ai-avatar.svg",
+      "improvements.md#wave-5",
+      "planning/improvement/wave-5/"
+    ],
+    "captured_by": "wave-5-n3",
+    "recorded_at": "2026-07-12T00:00:00Z",
+    "depth": "thin_stub_n3"
+  }
+}

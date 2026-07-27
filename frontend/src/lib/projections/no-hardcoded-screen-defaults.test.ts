@@ -62,9 +62,10 @@ test("app pages bind screens through useScreenParameters or explicit stored view
       usesStore || usesBound,
       `${page} must read screen parameters from the store`,
     );
+    // BoundScreenHome wires stored parameters + view props inside the client binder.
     assert.ok(
-      passesView,
-      `${page} must pass view/projection into the home component`,
+      usesBound || passesView,
+      `${page} must pass view/projection into the home component or use BoundScreenHome`,
     );
     assert.doesNotMatch(
       source,

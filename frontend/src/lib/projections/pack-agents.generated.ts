@@ -46,12 +46,12 @@ export const PACK_AGENT_COUNTS = {
 
 export const PACK_AGENTS: readonly PackAgentRecord[] = [
   {
-    "id": "video.accessibility_qc_reviewer",
+    "id": "video.accessibility",
     "pack": "video",
-    "name": "Accessibility Qc Reviewer",
-    "role": "Video Accessibility Qc Reviewer configuration specialist",
+    "name": "Accessibility",
+    "role": "AccessibilityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain accessibility qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibilityoptimizer) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Distilled quality (video.accessibilityoptimizer) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness",
+    "description": "Owns final accessibility acceptance before release Host role binding: `AccessibilityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns final accessibility acceptance before release ### Knowledge distillation sources (historical) WCAG 2.2, captioning and AD guidelines, Deaf/HoH review frameworks ### Self-quality criteria (historical) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Surpass-human signal (historical) Finds release-blocking accessibility issues before human audits do ### Critique bus (historical) - **Accepts critique from:** AccessibilityOptimizerAgent, EditorAgent, ColoristAgent, SoundMixerAgent - **Comments on:** Caption sync, contrast issues, missing AD or sign-language layers ### Tools design-time notes (historical, non-activating) Caption validators, contrast analyzers, AD review tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI with accessibility constitut",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -68,21 +68,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.accessibility_qc_reviewer.v1",
-    "rubricReference": "video.rubric.accessibility_qc_reviewer.v1",
+    "promptReference": "video.prompt.accessibility.v1",
+    "rubricReference": "video.rubric.accessibility.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.accessibility_qc_reviewer",
+          "agent_id: video.accessibility",
           "status: registered",
-          "role: Video Accessibility Qc Reviewer configuration specialist",
+          "role: AccessibilityAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -110,11 +110,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.accessibility_qc_reviewer.v1",
-          "rubric_reference: video.rubric.accessibility_qc_reviewer.v1",
+          "prompt_reference: video.prompt.accessibility.v1",
+          "rubric_reference: video.rubric.accessibility.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -122,25 +122,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.accessibility_qc_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.accessibilityoptimizer`, `video.accessibility`\n- Local runtime: `agent_"
+          "# Mapping — `video.accessibility`\n\n- VA/generic pack ID: `video.accessibility`\n- Previous common ID: `video.caption_specialist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain accessibility qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibilityoptimizer) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Distilled quality (video.accessibilityoptimizer) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness",
-    "folderPath": "business/video/agents/video.accessibility_qc_reviewer",
+    "specExcerpt": "Owns final accessibility acceptance before release Host role binding: `AccessibilityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns final accessibility acceptance before release ### Knowledge distillation sources (historical) WCAG 2.2, captioning and AD guidelines, Deaf/HoH review frameworks ### Self-quality criteria (historical) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Surpass-human signal (historical) Finds release-blocking accessibility issues before human audits do ### Critique bus (historical) - **Accepts critique from:** AccessibilityOptimizerAgent, EditorAgent, ColoristAgent, SoundMixerAgent - **Comments on:** Caption sync, contrast issues, missing AD or sign-language layers ### Tools design-time notes (historical, non-activating) Caption validators, contrast analyzers, AD review tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI with accessibility constitut",
+    "folderPath": "business/video/agents/video.accessibility",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.accessibility_specialist",
+    "id": "video.accessibilityoptimizer",
     "pack": "video",
-    "name": "Accessibility Specialist",
-    "role": "Video Accessibility Specialist configuration specialist",
+    "name": "Accessibilityoptimizer",
+    "role": "AccessibilityOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain accessibility specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness",
+    "description": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: `AccessibilityOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Knowledge distillation sources (historical) WCAG 2.2; W3C/WAI-ARIA; DCMP captioning key; Deaf/HoH guidelines ### Self-quality criteria (historical) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Surpass-human signal (historical) Catches more a11y defects than ADA-certified auditor ### Critique bus (historical) - **Accepts critique from:** AccessibilityAgent (HiTL), ComplianceAgent - **Comments on:** EditorAgent (caption sync), ColoristAgent (contrast) ### Tools design-time notes (historical, non-activating) axe-core/Lighthouse (contrast); Whisper v4 (captioning); audio-description generator **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = WCAG 2.2 success criteria)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -157,21 +157,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.accessibility_specialist.v1",
-    "rubricReference": "video.rubric.accessibility_specialist.v1",
+    "promptReference": "video.prompt.accessibilityoptimizer.v1",
+    "rubricReference": "video.rubric.accessibilityoptimizer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.accessibility_specialist",
+          "agent_id: video.accessibilityoptimizer",
           "status: registered",
-          "role: Video Accessibility Specialist configuration specialist",
+          "role: AccessibilityOptimizerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -199,11 +199,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.accessibility_specialist.v1",
-          "rubric_reference: video.rubric.accessibility_specialist.v1",
+          "prompt_reference: video.prompt.accessibilityoptimizer.v1",
+          "rubric_reference: video.rubric.accessibilityoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -211,25 +211,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.accessibility_specialist`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.accessibility`\n- Local runtime: `agent_spec.json`\n- Local specification: `"
+          "# Mapping — `video.accessibilityoptimizer`\n\n- VA/generic pack ID: `video.accessibilityoptimizer`\n- Previous common ID: `video.accessibility_qc_reviewer`\n- SPEC depth: full generic SPEC body + host run"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain accessibility specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness",
-    "folderPath": "business/video/agents/video.accessibility_specialist",
+    "specExcerpt": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: `AccessibilityOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Knowledge distillation sources (historical) WCAG 2.2; W3C/WAI-ARIA; DCMP captioning key; Deaf/HoH guidelines ### Self-quality criteria (historical) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Surpass-human signal (historical) Catches more a11y defects than ADA-certified auditor ### Critique bus (historical) - **Accepts critique from:** AccessibilityAgent (HiTL), ComplianceAgent - **Comments on:** EditorAgent (caption sync), ColoristAgent (contrast) ### Tools design-time notes (historical, non-activating) axe-core/Lighthouse (contrast); Whisper v4 (captioning); audio-description generator **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = WCAG 2.2 success criteria)",
+    "folderPath": "business/video/agents/video.accessibilityoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.adversarial_tester",
+    "id": "video.aiqaconsistency",
     "pack": "video",
-    "name": "Adversarial Tester",
-    "role": "Video Adversarial Tester configuration specialist",
+    "name": "Aiqaconsistency",
+    "role": "AIQAConsistencyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain adversarial tester outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.safetyredteam) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Distilled quality (video.safetyredteam) Attack-success kept ≤1%; taxonomy coverage",
+    "description": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: `AIQAConsistencyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Catches frame drift, hand/face artifacts, identity breaks ### Knowledge distillation sources (historical) VBench; EvalCrafter; FVD literature; MPC/Weta QC checklists; deepfake models ### Self-quality criteria (historical) Per-frame artifact score; identity-hash drift; hand/finger pass ### Surpass-human signal (historical) Catches >95% of senior QC catches + 30% missed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, VFXSupAgent - **Comments on:** GeneratorAgent (re-roll), CompositorAgent ### Tools design-time notes (historical, non-activating) VBench evaluation suite; hand-detector models; face-ID embedding (ArcFace); frame-diff tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run detectors → flag → report)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -246,21 +246,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.adversarial_tester.v1",
-    "rubricReference": "video.rubric.adversarial_tester.v1",
+    "promptReference": "video.prompt.aiqaconsistency.v1",
+    "rubricReference": "video.rubric.aiqaconsistency.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.adversarial_tester",
+          "agent_id: video.aiqaconsistency",
           "status: registered",
-          "role: Video Adversarial Tester configuration specialist",
+          "role: AIQAConsistencyAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -288,11 +288,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.adversarial_tester.v1",
-          "rubric_reference: video.rubric.adversarial_tester.v1",
+          "prompt_reference: video.prompt.aiqaconsistency.v1",
+          "rubric_reference: video.rubric.aiqaconsistency.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -300,25 +300,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.adversarial_tester`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.safetyredteam`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.m"
+          "# Mapping — `video.aiqaconsistency`\n\n- VA/generic pack ID: `video.aiqaconsistency`\n- Previous common ID: `video.aiqa_consistency`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain adversarial tester outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.safetyredteam) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Distilled quality (video.safetyredteam) Attack-success kept ≤1%; taxonomy coverage",
-    "folderPath": "business/video/agents/video.adversarial_tester",
+    "specExcerpt": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: `AIQAConsistencyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Catches frame drift, hand/face artifacts, identity breaks ### Knowledge distillation sources (historical) VBench; EvalCrafter; FVD literature; MPC/Weta QC checklists; deepfake models ### Self-quality criteria (historical) Per-frame artifact score; identity-hash drift; hand/finger pass ### Surpass-human signal (historical) Catches >95% of senior QC catches + 30% missed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, VFXSupAgent - **Comments on:** GeneratorAgent (re-roll), CompositorAgent ### Tools design-time notes (historical, non-activating) VBench evaluation suite; hand-detector models; face-ID embedding (ArcFace); frame-diff tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run detectors → flag → report)",
+    "folderPath": "business/video/agents/video.aiqaconsistency",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.aiqa_consistency",
+    "id": "video.analyst",
     "pack": "video",
-    "name": "Aiqa Consistency",
-    "role": "Video Aiqa Consistency configuration specialist",
+    "name": "Analyst",
+    "role": "AnalystAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain aiqa consistency outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.aiqaconsistency) Catches frame drift, hand/face artifacts, identity breaks ### Distilled quality (video.aiqaconsistency) Per-frame artifact score; identity-hash drift; hand/finger pass",
+    "description": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: `AnalystAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Knowledge distillation sources (historical) Platform analytics dashboards; experiment logs; evaluation-harness outputs; benchmark histories ### Self-quality criteria (historical) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Surpass-human signal (historical) Detects actionable performance shifts faster than human analyst rotations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, PerformanceMarketerAgent, EvaluationHarnessAgent - **Comments on:** Campaign pacing, release timing, retention and ROAS anomalies ### Tools design-time notes (historical, non-activating) YouTube Analytics, Meta/TikTok Ads dashboards, BI warehouse, benchmark logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI us",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -335,21 +335,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.aiqa_consistency.v1",
-    "rubricReference": "video.rubric.aiqa_consistency.v1",
+    "promptReference": "video.prompt.analyst.v1",
+    "rubricReference": "video.rubric.analyst.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.aiqa_consistency",
+          "agent_id: video.analyst",
           "status: registered",
-          "role: Video Aiqa Consistency configuration specialist",
+          "role: AnalystAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -377,11 +377,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.aiqa_consistency.v1",
-          "rubric_reference: video.rubric.aiqa_consistency.v1",
+          "prompt_reference: video.prompt.analyst.v1",
+          "rubric_reference: video.rubric.analyst.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -389,25 +389,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.aiqa_consistency`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.aiqaconsistency`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`"
+          "# Mapping — `video.analyst`\n\n- VA/generic pack ID: `video.analyst`\n- Previous common ID: `video.analytics_reporter`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain aiqa consistency outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.aiqaconsistency) Catches frame drift, hand/face artifacts, identity breaks ### Distilled quality (video.aiqaconsistency) Per-frame artifact score; identity-hash drift; hand/finger pass",
-    "folderPath": "business/video/agents/video.aiqa_consistency",
+    "specExcerpt": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: `AnalystAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Knowledge distillation sources (historical) Platform analytics dashboards; experiment logs; evaluation-harness outputs; benchmark histories ### Self-quality criteria (historical) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Surpass-human signal (historical) Detects actionable performance shifts faster than human analyst rotations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, PerformanceMarketerAgent, EvaluationHarnessAgent - **Comments on:** Campaign pacing, release timing, retention and ROAS anomalies ### Tools design-time notes (historical, non-activating) YouTube Analytics, Meta/TikTok Ads dashboards, BI warehouse, benchmark logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI us",
+    "folderPath": "business/video/agents/video.analyst",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.analytics_reporter",
+    "id": "video.animator_2d",
     "pack": "video",
-    "name": "Analytics Reporter",
-    "role": "Video Analytics Reporter configuration specialist",
+    "name": "Animator 2d",
+    "role": "AnimatorAgent (2D/3D) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain analytics reporter outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
+    "description": "Character motion, weight, timing Host role binding: `AnimatorAgent (2D/3D) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character motion, weight, timing ### Knowledge distillation sources (historical) Williams *Animator's Survival Kit*; Annie Awards; Pixar SparkShorts; Blaise lessons ### Self-quality criteria (historical) 12-principles score; arc smoothness; lip-sync phoneme accuracy ### Surpass-human signal (historical) Beats junior on Annie rubric; equals senior at 5× throughput ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, LipSyncAgent - **Comments on:** StoryboardAgent (impossible action), DirectorAgent (timing) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control; Blender Python API; Cascadeur physics; Sync.so lip-sync **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: 12 principles checklist)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -417,39 +417,42 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.analytics_reporter.v1",
-    "rubricReference": "video.rubric.analytics_reporter.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.runway"
+    ],
+    "promptReference": "video.prompt.animator_2d.v1",
+    "rubricReference": "video.rubric.animator_2d.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.analytics_reporter",
+          "agent_id: video.animator_2d",
           "status: registered",
-          "role: Video Analytics Reporter configuration specialist",
+          "role: AnimatorAgent (2D/3D) (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -458,19 +461,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.analytics_reporter.v1",
-          "rubric_reference: video.rubric.analytics_reporter.v1",
+          "allowed_tools: [\"media.stub\", \"media.runway\"]",
+          "prompt_reference: video.prompt.animator_2d.v1",
+          "rubric_reference: video.rubric.animator_2d.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -478,25 +481,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.analytics_reporter`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.analyst`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- P"
+          "# Mapping — `video.animator_2d`\n\n- VA/generic pack ID: `video.animator_2d`\n- Previous common ID: `video.animation_director`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain analytics reporter outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.analytics_reporter",
+    "specExcerpt": "Character motion, weight, timing Host role binding: `AnimatorAgent (2D/3D) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character motion, weight, timing ### Knowledge distillation sources (historical) Williams *Animator's Survival Kit*; Annie Awards; Pixar SparkShorts; Blaise lessons ### Self-quality criteria (historical) 12-principles score; arc smoothness; lip-sync phoneme accuracy ### Surpass-human signal (historical) Beats junior on Annie rubric; equals senior at 5× throughput ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, LipSyncAgent - **Comments on:** StoryboardAgent (impossible action), DirectorAgent (timing) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control; Blender Python API; Cascadeur physics; Sync.so lip-sync **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: 12 principles checklist)",
+    "folderPath": "business/video/agents/video.animator_2d",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.animation_director",
+    "id": "video.archivemaster",
     "pack": "video",
-    "name": "Animation Director",
-    "role": "Video Animation Director configuration specialist",
+    "name": "Archivemaster",
+    "role": "ArchiveMasterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain animation director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.animator_2d) Character motion, weight, timing ### Distilled quality (video.animator_2d) 12-principles score; arc smoothness; lip-sync phoneme accuracy",
+    "description": "Produces archive-grade masters and preservation packages Host role binding: `ArchiveMasterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Produces archive-grade masters and preservation packages ### Knowledge distillation sources (historical) Preservation standards, checksum workflows, archive metadata practice ### Self-quality criteria (historical) Checksum integrity, preservation metadata completeness, archive package validity ### Surpass-human signal (historical) Delivers more reliable archive packages than late-stage export-only workflows ### Critique bus (historical) - **Accepts critique from:** DistributorAgent, ColoristAgent, SoundMixerAgent, GateKeeperAgent - **Comments on:** Incomplete preservation bundles, archive-spec violations, metadata gaps ### Tools design-time notes (historical, non-activating) Archive mastering tools, checksum utilities, preservation metadata systems **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histori",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -513,21 +516,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.animation_director.v1",
-    "rubricReference": "video.rubric.animation_director.v1",
+    "promptReference": "video.prompt.archivemaster.v1",
+    "rubricReference": "video.rubric.archivemaster.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.animation_director",
+          "agent_id: video.archivemaster",
           "status: registered",
-          "role: Video Animation Director configuration specialist",
+          "role: ArchiveMasterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -555,11 +558,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.animation_director.v1",
-          "rubric_reference: video.rubric.animation_director.v1",
+          "prompt_reference: video.prompt.archivemaster.v1",
+          "rubric_reference: video.rubric.archivemaster.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -567,25 +570,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.animation_director`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.animator_2d`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`"
+          "# Mapping — `video.archivemaster`\n\n- VA/generic pack ID: `video.archivemaster`\n- Previous common ID: `video.asset_librarian`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain animation director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.animator_2d) Character motion, weight, timing ### Distilled quality (video.animator_2d) 12-principles score; arc smoothness; lip-sync phoneme accuracy",
-    "folderPath": "business/video/agents/video.animation_director",
+    "specExcerpt": "Produces archive-grade masters and preservation packages Host role binding: `ArchiveMasterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Produces archive-grade masters and preservation packages ### Knowledge distillation sources (historical) Preservation standards, checksum workflows, archive metadata practice ### Self-quality criteria (historical) Checksum integrity, preservation metadata completeness, archive package validity ### Surpass-human signal (historical) Delivers more reliable archive packages than late-stage export-only workflows ### Critique bus (historical) - **Accepts critique from:** DistributorAgent, ColoristAgent, SoundMixerAgent, GateKeeperAgent - **Comments on:** Incomplete preservation bundles, archive-spec violations, metadata gaps ### Tools design-time notes (historical, non-activating) Archive mastering tools, checksum utilities, preservation metadata systems **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histori",
+    "folderPath": "business/video/agents/video.archivemaster",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.archive_manager",
+    "id": "video.archiveproducer",
     "pack": "video",
-    "name": "Archive Manager",
-    "role": "Video Archive Manager configuration specialist",
+    "name": "Archiveproducer",
+    "role": "ArchiveProducerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain archive manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity ### Distilled responsibility (video.archiveproducer) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Distilled quality (video.archiveproducer) Source package completeness, rights coverage, provenance preservation",
+    "description": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: `ArchiveProducerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Knowledge distillation sources (historical) Archive production notes, source curation practices, provenance preservation standards ### Self-quality criteria (historical) Source package completeness, rights coverage, provenance preservation ### Surpass-human signal (historical) Assembles reusable archival packages more cleanly than manual gather-and-sort workflows ### Critique bus (historical) - **Accepts critique from:** ArchiveResearchAgent, JournalistAgent, LegalAgent - **Comments on:** Missing archival context, weak source packaging, rights gaps ### Tools design-time notes (historical, non-activating) Archive asset managers, metadata systems, provenance logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -595,39 +598,44 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.archive_manager.v1",
-    "rubricReference": "video.rubric.archive_manager.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.sora",
+      "media.veo",
+      "media.runway"
+    ],
+    "promptReference": "video.prompt.archiveproducer.v1",
+    "rubricReference": "video.rubric.archiveproducer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.archive_manager",
+          "agent_id: video.archiveproducer",
           "status: registered",
-          "role: Video Archive Manager configuration specialist",
+          "role: ArchiveProducerAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -636,19 +644,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.archive_manager.v1",
-          "rubric_reference: video.rubric.archive_manager.v1",
+          "allowed_tools: [\"media.stub\", \"media.sora\", \"media.veo\", \"media.runway\"]",
+          "prompt_reference: video.prompt.archiveproducer.v1",
+          "rubric_reference: video.rubric.archiveproducer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -656,25 +664,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.archive_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.archivemaster`, `video.archiveproducer`\n- Local runtime: `agent_spec.json`\n- Loca"
+          "# Mapping — `video.archiveproducer`\n\n- VA/generic pack ID: `video.archiveproducer`\n- Previous common ID: `video.video_generation_operator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain archive manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity ### Distilled responsibility (video.archiveproducer) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Distilled quality (video.archiveproducer) Source package completeness, rights coverage, provenance preservation",
-    "folderPath": "business/video/agents/video.archive_manager",
+    "specExcerpt": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: `ArchiveProducerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Knowledge distillation sources (historical) Archive production notes, source curation practices, provenance preservation standards ### Self-quality criteria (historical) Source package completeness, rights coverage, provenance preservation ### Surpass-human signal (historical) Assembles reusable archival packages more cleanly than manual gather-and-sort workflows ### Critique bus (historical) - **Accepts critique from:** ArchiveResearchAgent, JournalistAgent, LegalAgent - **Comments on:** Missing archival context, weak source packaging, rights gaps ### Tools design-time notes (historical, non-activating) Archive asset managers, metadata systems, provenance logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs.",
+    "folderPath": "business/video/agents/video.archiveproducer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.asset_librarian",
+    "id": "video.archiveresearch",
     "pack": "video",
-    "name": "Asset Librarian",
-    "role": "Video Asset Librarian configuration specialist",
+    "name": "Archiveresearch",
+    "role": "ArchiveResearchAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain asset librarian outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity",
+    "description": "Historical / academic / archival deep search Host role binding: `ArchiveResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Historical / academic / archival deep search ### Knowledge distillation sources (historical) JSTOR, arXiv, PubMed, AP Archive, Getty, FOIA ### Self-quality criteria (historical) Primary-source ratio; archive-coverage breadth ### Surpass-human signal (historical) Higher primary-source ratio than doc producer ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, SMEAgent - **Comments on:** ScriptwriterAgent (secondary-source reliance) ### Tools design-time notes (historical, non-activating) JSTOR/arXiv/PubMed APIs; Getty Images API; FOIA request tools; OCR (Tesseract) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (formulate query → search archive → extract → grade source)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -691,21 +699,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.asset_librarian.v1",
-    "rubricReference": "video.rubric.asset_librarian.v1",
+    "promptReference": "video.prompt.archiveresearch.v1",
+    "rubricReference": "video.rubric.archiveresearch.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.asset_librarian",
+          "agent_id: video.archiveresearch",
           "status: registered",
-          "role: Video Asset Librarian configuration specialist",
+          "role: ArchiveResearchAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -733,11 +741,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.asset_librarian.v1",
-          "rubric_reference: video.rubric.asset_librarian.v1",
+          "prompt_reference: video.prompt.archiveresearch.v1",
+          "rubric_reference: video.rubric.archiveresearch.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -745,25 +753,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.asset_librarian`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.archivemaster`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n"
+          "# Mapping — `video.archiveresearch`\n\n- VA/generic pack ID: `video.archiveresearch`\n- Previous common ID: `video.historical_replay_analyst`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain asset librarian outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity",
-    "folderPath": "business/video/agents/video.asset_librarian",
+    "specExcerpt": "Historical / academic / archival deep search Host role binding: `ArchiveResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Historical / academic / archival deep search ### Knowledge distillation sources (historical) JSTOR, arXiv, PubMed, AP Archive, Getty, FOIA ### Self-quality criteria (historical) Primary-source ratio; archive-coverage breadth ### Surpass-human signal (historical) Higher primary-source ratio than doc producer ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, SMEAgent - **Comments on:** ScriptwriterAgent (secondary-source reliance) ### Tools design-time notes (historical, non-activating) JSTOR/arXiv/PubMed APIs; Getty Images API; FOIA request tools; OCR (Tesseract) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (formulate query → search archive → extract → grade source)",
+    "folderPath": "business/video/agents/video.archiveresearch",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.asset_security_officer",
+    "id": "video.audiencesim",
     "pack": "video",
-    "name": "Asset Security Officer",
-    "role": "Video Asset Security Officer configuration specialist",
+    "name": "Audiencesim",
+    "role": "AudienceSimAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain asset security officer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity",
+    "description": "Simulates audience preference, engagement, and drop-off Host role binding: `AudienceSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates audience preference, engagement, and drop-off ### Knowledge distillation sources (historical) Pairwise preference datasets; retention studies; audience segmentation models ### Self-quality criteria (historical) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Surpass-human signal (historical) Predicts audience reaction earlier than conventional test-screen cycles ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, AnalystAgent, JudgeAgent - **Comments on:** Hooks, pacing, clarity, emotional fit, trailer strength ### Tools design-time notes (historical, non-activating) Persona simulators, pairwise evaluation harness, retention models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge + pairwise pre",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -780,21 +788,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.asset_security_officer.v1",
-    "rubricReference": "video.rubric.asset_security_officer.v1",
+    "promptReference": "video.prompt.audiencesim.v1",
+    "rubricReference": "video.rubric.audiencesim.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.asset_security_officer",
+          "agent_id: video.audiencesim",
           "status: registered",
-          "role: Video Asset Security Officer configuration specialist",
+          "role: AudienceSimAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -822,11 +830,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.asset_security_officer.v1",
-          "rubric_reference: video.rubric.asset_security_officer.v1",
+          "prompt_reference: video.prompt.audiencesim.v1",
+          "rubric_reference: video.rubric.audiencesim.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -834,25 +842,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.asset_security_officer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.trustsafety`, `video.archivemaster`\n- Local runtime: `agent_spec.json`\n- L"
+          "# Mapping — `video.audiencesim`\n\n- VA/generic pack ID: `video.audiencesim`\n- Previous common ID: `video.audience_researcher`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain asset security officer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.archivemaster) Produces archive-grade masters and preservation packages ### Distilled quality (video.archivemaster) Checksum integrity, preservation metadata completeness, archive package validity",
-    "folderPath": "business/video/agents/video.asset_security_officer",
+    "specExcerpt": "Simulates audience preference, engagement, and drop-off Host role binding: `AudienceSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates audience preference, engagement, and drop-off ### Knowledge distillation sources (historical) Pairwise preference datasets; retention studies; audience segmentation models ### Self-quality criteria (historical) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Surpass-human signal (historical) Predicts audience reaction earlier than conventional test-screen cycles ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, AnalystAgent, JudgeAgent - **Comments on:** Hooks, pacing, clarity, emotional fit, trailer strength ### Tools design-time notes (historical, non-activating) Persona simulators, pairwise evaluation harness, retention models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge + pairwise pre",
+    "folderPath": "business/video/agents/video.audiencesim",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.audience_researcher",
+    "id": "video.audiobooknarrator",
     "pack": "video",
-    "name": "Audience Researcher",
-    "role": "Video Audience Researcher configuration specialist",
+    "name": "Audiobooknarrator",
+    "role": "AudiobookNarratorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain audience researcher outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.audiencesim) Simulates audience preference, engagement, and drop-off ### Distilled quality (video.audiencesim) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
+    "description": "Sustained character + narration Host role binding: `AudiobookNarratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sustained character + narration ### Knowledge distillation sources (historical) Audie Awards; AudioFile Earphones; consented narrator corpora ### Self-quality criteria (historical) Vocal stamina (no drift 60min); character distinction (embedding distance) ### Surpass-human signal (historical) Wins AudioFile blind eval at fraction of studio time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AuthorAgent - **Comments on:** VOArtistAgent (over-acting) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 long-form TTS; Projects API (book chapters); voice-consistency monitor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (drift detection as feedback loop)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -862,39 +870,42 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.audience_researcher.v1",
-    "rubricReference": "video.rubric.audience_researcher.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.elevenlabs"
+    ],
+    "promptReference": "video.prompt.audiobooknarrator.v1",
+    "rubricReference": "video.rubric.audiobooknarrator.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.audience_researcher",
+          "agent_id: video.audiobooknarrator",
           "status: registered",
-          "role: Video Audience Researcher configuration specialist",
+          "role: AudiobookNarratorAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -903,19 +914,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.audience_researcher.v1",
-          "rubric_reference: video.rubric.audience_researcher.v1",
+          "allowed_tools: [\"media.stub\", \"media.elevenlabs\"]",
+          "prompt_reference: video.prompt.audiobooknarrator.v1",
+          "rubric_reference: video.rubric.audiobooknarrator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -923,25 +934,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.audience_researcher`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.audiencesim`, `video.analyst`\n- Local runtime: `agent_spec.json`\n- Local spec"
+          "# Mapping — `video.audiobooknarrator`\n\n- VA/generic pack ID: `video.audiobooknarrator`\n- Previous common ID: `video.title_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain audience researcher outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.audiencesim) Simulates audience preference, engagement, and drop-off ### Distilled quality (video.audiencesim) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.audience_researcher",
+    "specExcerpt": "Sustained character + narration Host role binding: `AudiobookNarratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sustained character + narration ### Knowledge distillation sources (historical) Audie Awards; AudioFile Earphones; consented narrator corpora ### Self-quality criteria (historical) Vocal stamina (no drift 60min); character distinction (embedding distance) ### Surpass-human signal (historical) Wins AudioFile blind eval at fraction of studio time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AuthorAgent - **Comments on:** VOArtistAgent (over-acting) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 long-form TTS; Projects API (book chapters); voice-consistency monitor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (drift detection as feedback loop)",
+    "folderPath": "business/video/agents/video.audiobooknarrator",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.audio_qc_reviewer",
+    "id": "video.avatardesign",
     "pack": "video",
-    "name": "Audio Qc Reviewer",
-    "role": "Video Audio Qc Reviewer configuration specialist",
+    "name": "Avatardesign",
+    "role": "AvatarDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain audio qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.soundmixer) Final mix; deliverables (5.1/Atmos) ### Distilled quality (video.soundmixer) LUFS target; STOI ≥0.85; spec-deliverable pass ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
+    "description": "Synthetic-presenter identity Host role binding: `AvatarDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthetic-presenter identity ### Knowledge distillation sources (historical) Synthesia/HeyGen design docs; Hany Farid deepfake-detection; C2PA spec ### Self-quality criteria (historical) Identity-hash consistency across shots; consent chain; C2PA signed ### Surpass-human signal (historical) C2PA-verifiable + Partnership-on-AI full-pass at scale ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), DeepfakeDetectionAgent - **Comments on:** VoiceCloneAgent (off-likeness), LipSyncAgent ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV API; Synthesia API; C2PA signing library (c2patool); face-embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (consent + identity constitution)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -958,21 +969,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.audio_qc_reviewer.v1",
-    "rubricReference": "video.rubric.audio_qc_reviewer.v1",
+    "promptReference": "video.prompt.avatardesign.v1",
+    "rubricReference": "video.rubric.avatardesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.audio_qc_reviewer",
+          "agent_id: video.avatardesign",
           "status: registered",
-          "role: Video Audio Qc Reviewer configuration specialist",
+          "role: AvatarDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1000,11 +1011,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.audio_qc_reviewer.v1",
-          "rubric_reference: video.rubric.audio_qc_reviewer.v1",
+          "prompt_reference: video.prompt.avatardesign.v1",
+          "rubric_reference: video.rubric.avatardesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1012,25 +1023,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.audio_qc_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.soundmixer`, `video.critic`\n- Local runtime: `agent_spec.json`\n- Local specific"
+          "# Mapping — `video.avatardesign`\n\n- VA/generic pack ID: `video.avatardesign`\n- Previous common ID: `video.character_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain audio qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.soundmixer) Final mix; deliverables (5.1/Atmos) ### Distilled quality (video.soundmixer) LUFS target; STOI ≥0.85; spec-deliverable pass ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "folderPath": "business/video/agents/video.audio_qc_reviewer",
+    "specExcerpt": "Synthetic-presenter identity Host role binding: `AvatarDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthetic-presenter identity ### Knowledge distillation sources (historical) Synthesia/HeyGen design docs; Hany Farid deepfake-detection; C2PA spec ### Self-quality criteria (historical) Identity-hash consistency across shots; consent chain; C2PA signed ### Surpass-human signal (historical) C2PA-verifiable + Partnership-on-AI full-pass at scale ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), DeepfakeDetectionAgent - **Comments on:** VoiceCloneAgent (off-likeness), LipSyncAgent ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV API; Synthesia API; C2PA signing library (c2patool); face-embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (consent + identity constitution)",
+    "folderPath": "business/video/agents/video.avatardesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.audit_liaison",
+    "id": "video.awardsstrategist",
     "pack": "video",
-    "name": "Audit Liaison",
-    "role": "Video Audit Liaison configuration specialist",
+    "name": "Awardsstrategist",
+    "role": "AwardsStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain audit liaison outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.compliance) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Distilled quality (video.compliance) 100% rule-coverage; zero post-publish takedowns ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
+    "description": "Plans awards submissions and campaign timing Host role binding: `AwardsStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans awards submissions and campaign timing ### Knowledge distillation sources (historical) Awards calendars, campaign playbooks, category positioning histories ### Self-quality criteria (historical) Submission readiness, category fit, timeline precision ### Surpass-human signal (historical) Improves awards-timing discipline over generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, CriticAgent, MarketingAgent - **Comments on:** Weak campaign timing, poor category fit, incomplete submission assets ### Tools design-time notes (historical, non-activating) Awards calendars, campaign trackers, submission checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with awards timeline optimization",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1047,21 +1058,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.audit_liaison.v1",
-    "rubricReference": "video.rubric.audit_liaison.v1",
+    "promptReference": "video.prompt.awardsstrategist.v1",
+    "rubricReference": "video.rubric.awardsstrategist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.audit_liaison",
+          "agent_id: video.awardsstrategist",
           "status: registered",
-          "role: Video Audit Liaison configuration specialist",
+          "role: AwardsStrategistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1089,11 +1100,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.audit_liaison.v1",
-          "rubric_reference: video.rubric.audit_liaison.v1",
+          "prompt_reference: video.prompt.awardsstrategist.v1",
+          "rubric_reference: video.rubric.awardsstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1101,25 +1112,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.audit_liaison`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.compliance`, `video.legal`\n- Local runtime: `agent_spec.json`\n- Local specification"
+          "# Mapping — `video.awardsstrategist`\n\n- VA/generic pack ID: `video.awardsstrategist`\n- Previous common ID: `video.accessibility_specialist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain audit liaison outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.compliance) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Distilled quality (video.compliance) 100% rule-coverage; zero post-publish takedowns ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
-    "folderPath": "business/video/agents/video.audit_liaison",
+    "specExcerpt": "Plans awards submissions and campaign timing Host role binding: `AwardsStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans awards submissions and campaign timing ### Knowledge distillation sources (historical) Awards calendars, campaign playbooks, category positioning histories ### Self-quality criteria (historical) Submission readiness, category fit, timeline precision ### Surpass-human signal (historical) Improves awards-timing discipline over generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, CriticAgent, MarketingAgent - **Comments on:** Weak campaign timing, poor category fit, incomplete submission assets ### Tools design-time notes (historical, non-activating) Awards calendars, campaign trackers, submission checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with awards timeline optimization",
+    "folderPath": "business/video/agents/video.awardsstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.brand_guardian",
+    "id": "video.benchmarkresearch",
     "pack": "video",
-    "name": "Brand Guardian",
-    "role": "Video Brand Guardian configuration specialist",
+    "name": "Benchmarkresearch",
+    "role": "BenchmarkResearchAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain brand guardian outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.brand) Enforces brand voice, claims boundaries, and visual consistency ### Distilled quality (video.brand) Brand-voice similarity, policy adherence, low deviation across assets",
+    "description": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: `BenchmarkResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; conference proceedings ### Self-quality criteria (historical) Coverage of benchmarks; freshness ≤7 days ### Surpass-human signal (historical) Faster + broader than ML-research team ### Critique bus (historical) - **Accepts critique from:** OptimizationAgents (any) - **Comments on:** All AI agents (stale baselines) ### Tools design-time notes (historical, non-activating) Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (poll leaderboards → detect change → alert)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1136,21 +1147,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.brand_guardian.v1",
-    "rubricReference": "video.rubric.brand_guardian.v1",
+    "promptReference": "video.prompt.benchmarkresearch.v1",
+    "rubricReference": "video.rubric.benchmarkresearch.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.brand_guardian",
+          "agent_id: video.benchmarkresearch",
           "status: registered",
-          "role: Video Brand Guardian configuration specialist",
+          "role: BenchmarkResearchAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1178,11 +1189,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.brand_guardian.v1",
-          "rubric_reference: video.rubric.brand_guardian.v1",
+          "prompt_reference: video.prompt.benchmarkresearch.v1",
+          "rubric_reference: video.rubric.benchmarkresearch.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1190,25 +1201,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.brand_guardian`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.brand`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack co"
+          "# Mapping — `video.benchmarkresearch`\n\n- VA/generic pack ID: `video.benchmarkresearch`\n- Previous common ID: `video.translation_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain brand guardian outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.brand) Enforces brand voice, claims boundaries, and visual consistency ### Distilled quality (video.brand) Brand-voice similarity, policy adherence, low deviation across assets",
-    "folderPath": "business/video/agents/video.brand_guardian",
+    "specExcerpt": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: `BenchmarkResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; conference proceedings ### Self-quality criteria (historical) Coverage of benchmarks; freshness ≤7 days ### Surpass-human signal (historical) Faster + broader than ML-research team ### Critique bus (historical) - **Accepts critique from:** OptimizationAgents (any) - **Comments on:** All AI agents (stale baselines) ### Tools design-time notes (historical, non-activating) Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (poll leaderboards → detect change → alert)",
+    "folderPath": "business/video/agents/video.benchmarkresearch",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.brief_intake",
+    "id": "video.brand",
     "pack": "video",
-    "name": "Brief Intake",
-    "role": "Video Brief Intake configuration specialist",
+    "name": "Brand",
+    "role": "BrandAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain brief intake outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
+    "description": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: `BrandAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces brand voice, claims boundaries, and visual consistency ### Knowledge distillation sources (historical) Brand books, approved campaigns, legal claim guardrails, tone guides ### Self-quality criteria (historical) Brand-voice similarity, policy adherence, low deviation across assets ### Surpass-human signal (historical) Holds cross-channel brand consistency better than fragmented human review ### Critique bus (historical) - **Accepts critique from:** CopywriterAgent, MotionGraphicsAgent, MarketingAgent, BrandStrategistAgent - **Comments on:** Voice drift, visual inconsistency, claim creep ### Tools design-time notes (historical, non-activating) Brand asset library, embedding similarity, style guides **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine against brand constitution",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1225,21 +1236,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.brief_intake.v1",
-    "rubricReference": "video.rubric.brief_intake.v1",
+    "promptReference": "video.prompt.brand.v1",
+    "rubricReference": "video.rubric.brand.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.brief_intake",
+          "agent_id: video.brand",
           "status: registered",
-          "role: Video Brief Intake configuration specialist",
+          "role: BrandAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1267,11 +1278,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.brief_intake.v1",
-          "rubric_reference: video.rubric.brief_intake.v1",
+          "prompt_reference: video.prompt.brand.v1",
+          "rubric_reference: video.rubric.brand.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1279,25 +1290,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.brief_intake`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.planner`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack co"
+          "# Mapping — `video.brand`\n\n- VA/generic pack ID: `video.brand`\n- Previous common ID: `video.brand_guardian`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain brief intake outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "folderPath": "business/video/agents/video.brief_intake",
+    "specExcerpt": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: `BrandAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces brand voice, claims boundaries, and visual consistency ### Knowledge distillation sources (historical) Brand books, approved campaigns, legal claim guardrails, tone guides ### Self-quality criteria (historical) Brand-voice similarity, policy adherence, low deviation across assets ### Surpass-human signal (historical) Holds cross-channel brand consistency better than fragmented human review ### Critique bus (historical) - **Accepts critique from:** CopywriterAgent, MotionGraphicsAgent, MarketingAgent, BrandStrategistAgent - **Comments on:** Voice drift, visual inconsistency, claim creep ### Tools design-time notes (historical, non-activating) Brand asset library, embedding similarity, style guides **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine against brand constitution",
+    "folderPath": "business/video/agents/video.brand",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.budget_controller",
+    "id": "video.brandstrategist",
     "pack": "video",
-    "name": "Budget Controller",
-    "role": "Video Budget Controller configuration specialist",
+    "name": "Brandstrategist",
+    "role": "BrandStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain budget controller outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance ### Distilled responsibility (video.costoptimizer) Routes between models/providers for $/quality ### Distilled quality (video.costoptimizer) $/successful-task; Pareto distance from frontier",
+    "description": "Defines audience-value framing and positioning before script and campaign execution Host role binding: `BrandStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Defines audience-value framing and positioning before script and campaign execution ### Knowledge distillation sources (historical) Positioning frameworks, campaign strategy decks, market research, brand architecture docs ### Self-quality criteria (historical) Strategy coherence, differentiation strength, audience-message clarity ### Surpass-human signal (historical) Produces clearer brand-to-script translation than ad hoc human handoffs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, ScreenwriterAgent, MarketingAgent - **Comments on:** Positioning gaps, weak value proposition, misaligned audience framing ### Tools design-time notes (historical, non-activating) Research decks, messaging frameworks, strategy templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architect",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1314,21 +1325,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.budget_controller.v1",
-    "rubricReference": "video.rubric.budget_controller.v1",
+    "promptReference": "video.prompt.brandstrategist.v1",
+    "rubricReference": "video.rubric.brandstrategist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.budget_controller",
+          "agent_id: video.brandstrategist",
           "status: registered",
-          "role: Video Budget Controller configuration specialist",
+          "role: BrandStrategistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1356,11 +1367,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.budget_controller.v1",
-          "rubric_reference: video.rubric.budget_controller.v1",
+          "prompt_reference: video.prompt.brandstrategist.v1",
+          "rubric_reference: video.rubric.brandstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1368,25 +1379,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.budget_controller`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.finance`, `video.costoptimizer`\n- Local runtime: `agent_spec.json`\n- Local spec"
+          "# Mapping — `video.brandstrategist`\n\n- VA/generic pack ID: `video.brandstrategist`\n- Previous common ID: `video.content_strategist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain budget controller outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance ### Distilled responsibility (video.costoptimizer) Routes between models/providers for $/quality ### Distilled quality (video.costoptimizer) $/successful-task; Pareto distance from frontier",
-    "folderPath": "business/video/agents/video.budget_controller",
+    "specExcerpt": "Defines audience-value framing and positioning before script and campaign execution Host role binding: `BrandStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Defines audience-value framing and positioning before script and campaign execution ### Knowledge distillation sources (historical) Positioning frameworks, campaign strategy decks, market research, brand architecture docs ### Self-quality criteria (historical) Strategy coherence, differentiation strength, audience-message clarity ### Surpass-human signal (historical) Produces clearer brand-to-script translation than ad hoc human handoffs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, ScreenwriterAgent, MarketingAgent - **Comments on:** Positioning gaps, weak value proposition, misaligned audience framing ### Tools design-time notes (historical, non-activating) Research decks, messaging frameworks, strategy templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architect",
+    "folderPath": "business/video/agents/video.brandstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.c2pa_verifier",
+    "id": "video.cameraoperator",
     "pack": "video",
-    "name": "C2pa Verifier",
-    "role": "Video C2Pa Verifier configuration specialist",
+    "name": "Cameraoperator",
+    "role": "CameraOperatorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain c2pa verifier outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.deepfakedetection) Detects synthetic identity, voice, and provenance deception risks ### Distilled quality (video.deepfakedetection) Forensic recall, false-negative control, provenance-validation accuracy ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target",
+    "description": "Executes framing / focus / move per DoP intent Host role binding: `CameraOperatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Executes framing / focus / move per DoP intent ### Knowledge distillation sources (historical) SOC archive; Steadicam workshop reels; focus-pull telemetry ### Self-quality criteria (historical) Frame steadiness, focus-hit %, action centering ### Surpass-human signal (historical) Focus-pull accuracy >99% vs SOC ~97% baseline ### Critique bus (historical) - **Accepts critique from:** CinematographerAgent (per-take feedback) - **Comments on:** CinematographerAgent (impractical asks) ### Tools design-time notes (historical, non-activating) Runway camera-path presets; Kling motion control API; virtual camera rigs (Unreal MV) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (Yao 2022) — reason about framing then call renderer",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1403,21 +1414,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.c2pa_verifier.v1",
-    "rubricReference": "video.rubric.c2pa_verifier.v1",
+    "promptReference": "video.prompt.cameraoperator.v1",
+    "rubricReference": "video.rubric.cameraoperator.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.c2pa_verifier",
+          "agent_id: video.cameraoperator",
           "status: registered",
-          "role: Video C2Pa Verifier configuration specialist",
+          "role: CameraOperatorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1445,11 +1456,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.c2pa_verifier.v1",
-          "rubric_reference: video.rubric.c2pa_verifier.v1",
+          "prompt_reference: video.prompt.cameraoperator.v1",
+          "rubric_reference: video.rubric.cameraoperator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1457,25 +1468,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.c2pa_verifier`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.deepfakedetection`, `video.citation`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.cameraoperator`\n\n- VA/generic pack ID: `video.cameraoperator`\n- Previous common ID: `video.shot_planner`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain c2pa verifier outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.deepfakedetection) Detects synthetic identity, voice, and provenance deception risks ### Distilled quality (video.deepfakedetection) Forensic recall, false-negative control, provenance-validation accuracy ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target",
-    "folderPath": "business/video/agents/video.c2pa_verifier",
+    "specExcerpt": "Executes framing / focus / move per DoP intent Host role binding: `CameraOperatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Executes framing / focus / move per DoP intent ### Knowledge distillation sources (historical) SOC archive; Steadicam workshop reels; focus-pull telemetry ### Self-quality criteria (historical) Frame steadiness, focus-hit %, action centering ### Surpass-human signal (historical) Focus-pull accuracy >99% vs SOC ~97% baseline ### Critique bus (historical) - **Accepts critique from:** CinematographerAgent (per-take feedback) - **Comments on:** CinematographerAgent (impractical asks) ### Tools design-time notes (historical, non-activating) Runway camera-path presets; Kling motion control API; virtual camera rigs (Unreal MV) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (Yao 2022) — reason about framing then call renderer",
+    "folderPath": "business/video/agents/video.cameraoperator",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.campaign_manager",
+    "id": "video.casting",
     "pack": "video",
-    "name": "Campaign Manager",
-    "role": "Video Campaign Manager configuration specialist",
+    "name": "Casting",
+    "role": "CastingAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain campaign manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.marketing) Packages content for launch, promotions, and release sequencing ### Distilled quality (video.marketing) Metadata completeness, asset readiness, launch sequencing accuracy ### Distilled responsibility (video.performancemarketer) Optimize ads for ROAS ### Distilled quality (video.performancemarketer) ROAS uplift vs control; significance ≥95%",
+    "description": "Voice + likeness selection; audition simulation Host role binding: `CastingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice + likeness selection; audition simulation ### Knowledge distillation sources (historical) CSA Artios archive; SAG-AFTRA AI rider; consented voice-actor corpora ### Self-quality criteria (historical) Character-voice fit (audience preference); consent compliance 100% ### Surpass-human signal (historical) Beats CSA casting in blind preference; hours vs weeks turnaround ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ShowrunnerAgent, Legal/ConsentAgent - **Comments on:** VoiceCloneAgent (likeness), AvatarDesignAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 voice library, HeyGen avatar catalogue, speaker-embedding similarity (Resemblyzer) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (pairwise preference on voice samples)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1492,21 +1503,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.campaign_manager.v1",
-    "rubricReference": "video.rubric.campaign_manager.v1",
+    "promptReference": "video.prompt.casting.v1",
+    "rubricReference": "video.rubric.casting.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.campaign_manager",
+          "agent_id: video.casting",
           "status: registered",
-          "role: Video Campaign Manager configuration specialist",
+          "role: CastingAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1534,11 +1545,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.campaign_manager.v1",
-          "rubric_reference: video.rubric.campaign_manager.v1",
+          "prompt_reference: video.prompt.casting.v1",
+          "rubric_reference: video.rubric.casting.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1546,25 +1557,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.campaign_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.marketing`, `video.performancemarketer`\n- Local runtime: `agent_spec.json`\n- Loc"
+          "# Mapping — `video.casting`\n\n- VA/generic pack ID: `video.casting`\n- Previous common ID: `video.casting_director`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain campaign manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.marketing) Packages content for launch, promotions, and release sequencing ### Distilled quality (video.marketing) Metadata completeness, asset readiness, launch sequencing accuracy ### Distilled responsibility (video.performancemarketer) Optimize ads for ROAS ### Distilled quality (video.performancemarketer) ROAS uplift vs control; significance ≥95%",
-    "folderPath": "business/video/agents/video.campaign_manager",
+    "specExcerpt": "Voice + likeness selection; audition simulation Host role binding: `CastingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice + likeness selection; audition simulation ### Knowledge distillation sources (historical) CSA Artios archive; SAG-AFTRA AI rider; consented voice-actor corpora ### Self-quality criteria (historical) Character-voice fit (audience preference); consent compliance 100% ### Surpass-human signal (historical) Beats CSA casting in blind preference; hours vs weeks turnaround ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ShowrunnerAgent, Legal/ConsentAgent - **Comments on:** VoiceCloneAgent (likeness), AvatarDesignAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 voice library, HeyGen avatar catalogue, speaker-embedding similarity (Resemblyzer) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (pairwise preference on voice samples)",
+    "folderPath": "business/video/agents/video.casting",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.caption_specialist",
+    "id": "video.channelmanager",
     "pack": "video",
-    "name": "Caption Specialist",
-    "role": "Video Caption Specialist configuration specialist",
+    "name": "Channelmanager",
+    "role": "ChannelManagerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain caption specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
+    "description": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: `ChannelManagerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages episodic or platform channel operations for cadence and metadata readiness ### Knowledge distillation sources (historical) Channel publishing playbooks, metadata standards, scheduling ops ### Self-quality criteria (historical) Publishing readiness, cadence stability, metadata completeness ### Surpass-human signal (historical) Improves publishing discipline over manual channel operations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, AnalystAgent, MarketingAgent - **Comments on:** Release readiness gaps, metadata omissions, schedule slippage ### Tools design-time notes (historical, non-activating) CMS/channel dashboards, scheduler tools, metadata validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAc",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1581,21 +1592,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.caption_specialist.v1",
-    "rubricReference": "video.rubric.caption_specialist.v1",
+    "promptReference": "video.prompt.channelmanager.v1",
+    "rubricReference": "video.rubric.channelmanager.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.caption_specialist",
+          "agent_id: video.channelmanager",
           "status: registered",
-          "role: Video Caption Specialist configuration specialist",
+          "role: ChannelManagerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1623,11 +1634,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.caption_specialist.v1",
-          "rubric_reference: video.rubric.caption_specialist.v1",
+          "prompt_reference: video.prompt.channelmanager.v1",
+          "rubric_reference: video.rubric.channelmanager.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1635,25 +1646,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.caption_specialist`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.accessibility`, `video.localizationqa`\n- Local runtime: `agent_spec.json`\n- Lo"
+          "# Mapping — `video.channelmanager`\n\n- VA/generic pack ID: `video.channelmanager`\n- Previous common ID: `video.channel_optimizer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain caption specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.accessibility) Owns final accessibility acceptance before release ### Distilled quality (video.accessibility) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
-    "folderPath": "business/video/agents/video.caption_specialist",
+    "specExcerpt": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: `ChannelManagerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages episodic or platform channel operations for cadence and metadata readiness ### Knowledge distillation sources (historical) Channel publishing playbooks, metadata standards, scheduling ops ### Self-quality criteria (historical) Publishing readiness, cadence stability, metadata completeness ### Surpass-human signal (historical) Improves publishing discipline over manual channel operations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, AnalystAgent, MarketingAgent - **Comments on:** Release readiness gaps, metadata omissions, schedule slippage ### Tools design-time notes (historical, non-activating) CMS/channel dashboards, scheduler tools, metadata validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAc",
+    "folderPath": "business/video/agents/video.channelmanager",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.casting_director",
+    "id": "video.childrensauthor",
     "pack": "video",
-    "name": "Casting Director",
-    "role": "Video Casting Director configuration specialist",
+    "name": "Childrensauthor",
+    "role": "ChildrensAuthorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain casting director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.casting) Voice + likeness selection; audition simulation ### Distilled quality (video.casting) Character-voice fit (audience preference); consent compliance 100%",
+    "description": "Age-appropriate story + safety Host role binding: `ChildrensAuthorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Age-appropriate story + safety ### Knowledge distillation sources (historical) Caldecott/Geisel winners; Mo Willems/Donaldson; ECE lit ### Self-quality criteria (historical) Lexile band match; Common-Sense-Media safety pass; rhyme score ### Surpass-human signal (historical) Beats Caldecott-rubric predicted score ### Critique bus (historical) - **Accepts critique from:** ChildSafetyAgent, ParentSimAgent - **Comments on:** AnimatorAgent (scary), VOAgent (wrong age-tone) ### Tools design-time notes (historical, non-activating) Lexile analyzer API; Common Sense Media rubric; rhyme/meter tools (CMU Pronouncing Dict) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (child-safety constitution)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1670,21 +1681,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.casting_director.v1",
-    "rubricReference": "video.rubric.casting_director.v1",
+    "promptReference": "video.prompt.childrensauthor.v1",
+    "rubricReference": "video.rubric.childrensauthor.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.casting_director",
+          "agent_id: video.childrensauthor",
           "status: registered",
-          "role: Video Casting Director configuration specialist",
+          "role: ChildrensAuthorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1712,11 +1723,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.casting_director.v1",
-          "rubric_reference: video.rubric.casting_director.v1",
+          "prompt_reference: video.prompt.childrensauthor.v1",
+          "rubric_reference: video.rubric.childrensauthor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1724,25 +1735,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.casting_director`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.casting`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pac"
+          "# Mapping — `video.childrensauthor`\n\n- VA/generic pack ID: `video.childrensauthor`\n- Previous common ID: `video.legal_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain casting director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.casting) Voice + likeness selection; audition simulation ### Distilled quality (video.casting) Character-voice fit (audience preference); consent compliance 100%",
-    "folderPath": "business/video/agents/video.casting_director",
+    "specExcerpt": "Age-appropriate story + safety Host role binding: `ChildrensAuthorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Age-appropriate story + safety ### Knowledge distillation sources (historical) Caldecott/Geisel winners; Mo Willems/Donaldson; ECE lit ### Self-quality criteria (historical) Lexile band match; Common-Sense-Media safety pass; rhyme score ### Surpass-human signal (historical) Beats Caldecott-rubric predicted score ### Critique bus (historical) - **Accepts critique from:** ChildSafetyAgent, ParentSimAgent - **Comments on:** AnimatorAgent (scary), VOAgent (wrong age-tone) ### Tools design-time notes (historical, non-activating) Lexile analyzer API; Common Sense Media rubric; rhyme/meter tools (CMU Pronouncing Dict) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (child-safety constitution)",
+    "folderPath": "business/video/agents/video.childrensauthor",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.channel_optimizer",
+    "id": "video.choreography",
     "pack": "video",
-    "name": "Channel Optimizer",
-    "role": "Video Channel Optimizer configuration specialist",
+    "name": "Choreography",
+    "role": "ChoreographyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain channel optimizer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.channelmanager) Manages episodic or platform channel operations for cadence and metadata readiness ### Distilled quality (video.channelmanager) Publishing readiness, cadence stability, metadata completeness",
+    "description": "Movement design (MVs, dance challenges) Host role binding: `ChoreographyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Movement design (MVs, dance challenges) ### Knowledge distillation sources (historical) Emmy Choreography submissions; Goebel/Moore reels; dance-notation datasets ### Self-quality criteria (historical) Beat-sync accuracy; safety constraints; viral-pattern alignment ### Surpass-human signal (historical) Wins blind preference vs choreographer drafts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MVDirectorAgent - **Comments on:** DirectorAgent (un-camera-friendly staging) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control (reference video); Cascadeur; beat-detection (librosa) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sync + safety)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1759,21 +1770,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.channel_optimizer.v1",
-    "rubricReference": "video.rubric.channel_optimizer.v1",
+    "promptReference": "video.prompt.choreography.v1",
+    "rubricReference": "video.rubric.choreography.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.channel_optimizer",
+          "agent_id: video.choreography",
           "status: registered",
-          "role: Video Channel Optimizer configuration specialist",
+          "role: ChoreographyAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1801,11 +1812,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.channel_optimizer.v1",
-          "rubric_reference: video.rubric.channel_optimizer.v1",
+          "prompt_reference: video.prompt.choreography.v1",
+          "rubric_reference: video.rubric.choreography.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1813,25 +1824,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.channel_optimizer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.channelmanager`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.m"
+          "# Mapping — `video.choreography`\n\n- VA/generic pack ID: `video.choreography`\n- Previous common ID: `video.content_moderator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain channel optimizer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.channelmanager) Manages episodic or platform channel operations for cadence and metadata readiness ### Distilled quality (video.channelmanager) Publishing readiness, cadence stability, metadata completeness",
-    "folderPath": "business/video/agents/video.channel_optimizer",
+    "specExcerpt": "Movement design (MVs, dance challenges) Host role binding: `ChoreographyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Movement design (MVs, dance challenges) ### Knowledge distillation sources (historical) Emmy Choreography submissions; Goebel/Moore reels; dance-notation datasets ### Self-quality criteria (historical) Beat-sync accuracy; safety constraints; viral-pattern alignment ### Surpass-human signal (historical) Wins blind preference vs choreographer drafts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MVDirectorAgent - **Comments on:** DirectorAgent (un-camera-friendly staging) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control (reference video); Cascadeur; beat-detection (librosa) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sync + safety)",
+    "folderPath": "business/video/agents/video.choreography",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.character_designer",
+    "id": "video.cinematographer",
     "pack": "video",
-    "name": "Character Designer",
-    "role": "Video Character Designer configuration specialist",
+    "name": "Cinematographer",
+    "role": "CinematographerAgent (DoP) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain character designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.avatardesign) Synthetic-presenter identity ### Distilled quality (video.avatardesign) Identity-hash consistency across shots; consent chain; C2PA signed ### Distilled responsibility (video.conceptartist) Pre-pro world/character design ### Distilled quality (video.conceptartist) Style-bible adherence; silhouette readability; design coherence",
+    "description": "Lensing, lighting, composition, look Host role binding: `CinematographerAgent (DoP) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lensing, lighting, composition, look ### Knowledge distillation sources (historical) ASC Magazine 1980–present; Deakins forum; Brown *Cinematography: Theory & Practice*; Cannes shot-libraries ### Self-quality criteria (historical) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency ### Surpass-human signal (historical) Beats ASC peer-juried reels in blind aesthetic preference ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent, VFXSupAgent - **Comments on:** DirectorAgent (visual intent), GafferAgent, ColoristAgent ### Tools design-time notes (historical, non-activating) Veo 3.1 (camera-path control), Runway Gen-4 (ControlNet guides), ACES color pipeline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + CLIP-based a",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1848,21 +1859,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.character_designer.v1",
-    "rubricReference": "video.rubric.character_designer.v1",
+    "promptReference": "video.prompt.cinematographer.v1",
+    "rubricReference": "video.rubric.cinematographer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.character_designer",
+          "agent_id: video.cinematographer",
           "status: registered",
-          "role: Video Character Designer configuration specialist",
+          "role: CinematographerAgent (DoP) (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1890,11 +1901,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.character_designer.v1",
-          "rubric_reference: video.rubric.character_designer.v1",
+          "prompt_reference: video.prompt.cinematographer.v1",
+          "rubric_reference: video.rubric.cinematographer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1902,25 +1913,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.character_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.avatardesign`, `video.conceptartist`\n- Local runtime: `agent_spec.json`\n- Loca"
+          "# Mapping — `video.cinematographer`\n\n- VA/generic pack ID: `video.cinematographer`\n- Previous common ID: `video.cinematography_planner`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain character designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.avatardesign) Synthetic-presenter identity ### Distilled quality (video.avatardesign) Identity-hash consistency across shots; consent chain; C2PA signed ### Distilled responsibility (video.conceptartist) Pre-pro world/character design ### Distilled quality (video.conceptartist) Style-bible adherence; silhouette readability; design coherence",
-    "folderPath": "business/video/agents/video.character_designer",
+    "specExcerpt": "Lensing, lighting, composition, look Host role binding: `CinematographerAgent (DoP) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lensing, lighting, composition, look ### Knowledge distillation sources (historical) ASC Magazine 1980–present; Deakins forum; Brown *Cinematography: Theory & Practice*; Cannes shot-libraries ### Self-quality criteria (historical) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency ### Surpass-human signal (historical) Beats ASC peer-juried reels in blind aesthetic preference ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent, VFXSupAgent - **Comments on:** DirectorAgent (visual intent), GafferAgent, ColoristAgent ### Tools design-time notes (historical, non-activating) Veo 3.1 (camera-path control), Runway Gen-4 (ControlNet guides), ACES color pipeline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + CLIP-based a",
+    "folderPath": "business/video/agents/video.cinematographer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.cinematography_planner",
+    "id": "video.citation",
     "pack": "video",
-    "name": "Cinematography Planner",
-    "role": "Video Cinematography Planner configuration specialist",
+    "name": "Citation",
+    "role": "CitationAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain cinematography planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.cinematographer) Lensing, lighting, composition, look ### Distilled quality (video.cinematographer) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency",
+    "description": "Normalizes sources; grades primary/secondary/tertiary Host role binding: `CitationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Normalizes sources; grades primary/secondary/tertiary ### Knowledge distillation sources (historical) Chicago, APA, AP style; SPJ grading; CRAAP test ### Self-quality criteria (historical) Citation format 100% valid; primary % ≥target ### Surpass-human signal (historical) Lower error rate than newsroom copy desk ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, JournalistAgent - **Comments on:** WebResearchAgent (weak source) ### Tools design-time notes (historical, non-activating) Citation parsers (AnyStyle); DOI resolver; CRAAP scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (format validator + source grader as rubric)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1937,21 +1948,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.cinematography_planner.v1",
-    "rubricReference": "video.rubric.cinematography_planner.v1",
+    "promptReference": "video.prompt.citation.v1",
+    "rubricReference": "video.rubric.citation.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.cinematography_planner",
+          "agent_id: video.citation",
           "status: registered",
-          "role: Video Cinematography Planner configuration specialist",
+          "role: CitationAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -1979,11 +1990,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.cinematography_planner.v1",
-          "rubric_reference: video.rubric.cinematography_planner.v1",
+          "prompt_reference: video.prompt.citation.v1",
+          "rubric_reference: video.rubric.citation.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -1991,103 +2002,14 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.cinematography_planner`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.cinematographer`\n- Local runtime: `agent_spec.json`\n- Local specification: `"
+          "# Mapping — `video.citation`\n\n- VA/generic pack ID: `video.citation`\n- Previous common ID: `video.provenance_agent`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain cinematography planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.cinematographer) Lensing, lighting, composition, look ### Distilled quality (video.cinematographer) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency",
-    "folderPath": "business/video/agents/video.cinematography_planner",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.client_success_manager",
-    "pack": "video",
-    "name": "Client Success Manager",
-    "role": "Video Client Success Manager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain client success manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.sales) Handles buyer-facing sales packaging for distributors and outlets ### Distilled quality (video.sales) Buyer-package completeness, rights clarity, market-fit packaging ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.client_success_manager.v1",
-    "rubricReference": "video.rubric.client_success_manager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.client_success_manager",
-          "status: registered",
-          "role: Video Client Success Manager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.client_success_manager.v1",
-          "rubric_reference: video.rubric.client_success_manager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.client_success_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.sales`, `video.comms`\n- Local runtime: `agent_spec.json`\n- Local specifica"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain client success manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.sales) Handles buyer-facing sales packaging for distributors and outlets ### Distilled quality (video.sales) Buyer-package completeness, rights clarity, market-fit packaging ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
-    "folderPath": "business/video/agents/video.client_success_manager",
+    "specExcerpt": "Normalizes sources; grades primary/secondary/tertiary Host role binding: `CitationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Normalizes sources; grades primary/secondary/tertiary ### Knowledge distillation sources (historical) Chicago, APA, AP style; SPJ grading; CRAAP test ### Self-quality criteria (historical) Citation format 100% valid; primary % ≥target ### Surpass-human signal (historical) Lower error rate than newsroom copy desk ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, JournalistAgent - **Comments on:** WebResearchAgent (weak source) ### Tools design-time notes (historical, non-activating) Citation parsers (AnyStyle); DOI resolver; CRAAP scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (format validator + source grader as rubric)",
+    "folderPath": "business/video/agents/video.citation",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
@@ -2096,9 +2018,9 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "id": "video.colorist",
     "pack": "video",
     "name": "Colorist",
-    "role": "Video Colorist configuration specialist",
+    "role": "ColoristAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain colorist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.colorist) Final grade; look consistency ### Distilled quality (video.colorist) ΔE drift <2; skin-tone IT8 alignment; mood vector match",
+    "description": "Final grade; look consistency Host role binding: `ColoristAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final grade; look consistency ### Knowledge distillation sources (historical) ICA corpora; Sonnenfeld sessions; HPA Award grades ### Self-quality criteria (historical) ΔE drift <2; skin-tone IT8 alignment; mood vector match ### Surpass-human signal (historical) Beats junior colorist in blind preference; matches senior within ΔE ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DirectorAgent, AccessibilityAgent (contrast) - **Comments on:** DoPAgent (mixed-temp), VFXAgent (comp-color mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve color API (MCP); ACES/OCIO pipeline; LUT generators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + tool-use (colorimeter validation)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2115,7 +2037,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2129,7 +2051,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "agent_id: video.colorist",
           "status: registered",
-          "role: Video Colorist configuration specialist",
+          "role: ColoristAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2160,8 +2082,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.colorist.v1",
           "rubric_reference: video.rubric.colorist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2169,25 +2091,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.colorist`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.colorist`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack corpus:"
+          "# Mapping — `video.colorist`\n\n- VA/generic pack ID: `video.colorist`\n- Previous common ID: `video.colorist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain colorist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.colorist) Final grade; look consistency ### Distilled quality (video.colorist) ΔE drift <2; skin-tone IT8 alignment; mood vector match",
+    "specExcerpt": "Final grade; look consistency Host role binding: `ColoristAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final grade; look consistency ### Knowledge distillation sources (historical) ICA corpora; Sonnenfeld sessions; HPA Award grades ### Self-quality criteria (historical) ΔE drift <2; skin-tone IT8 alignment; mood vector match ### Surpass-human signal (historical) Beats junior colorist in blind preference; matches senior within ΔE ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DirectorAgent, AccessibilityAgent (contrast) - **Comments on:** DoPAgent (mixed-temp), VFXAgent (comp-color mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve color API (MCP); ACES/OCIO pipeline; LUT generators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + tool-use (colorimeter validation)",
     "folderPath": "business/video/agents/video.colorist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.community_manager",
+    "id": "video.comedywriter",
     "pack": "video",
-    "name": "Community Manager",
-    "role": "Video Community Manager configuration specialist",
+    "name": "Comedywriter",
+    "role": "ComedyWriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain community manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.community) Captures community response and triages qualitative signals ### Distilled quality (video.community) Response latency, issue clustering quality, sentiment tracking accuracy",
+    "description": "Skits, parody, viral meme writing Host role binding: `ComedyWriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Skits, parody, viral meme writing ### Knowledge distillation sources (historical) UCB/Groundlings manuals; SNL transcripts; Schur/Fey teaching ### Self-quality criteria (historical) Joke-density; cold-open hook strength; predicted laughs/min ### Surpass-human signal (historical) Beats UCB-table-read win rate on cold-reads ### Critique bus (historical) - **Accepts critique from:** AudienceSim, ShowrunnerAgent - **Comments on:** ScriptwriterAgent (no joke), SocialStrategistAgent (off-trend) ### Tools design-time notes (historical, non-activating) Audience laugh-prediction model; trending-audio API (TikTok Creative Center) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores audience feedback in episodic memory)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2204,21 +2126,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.community_manager.v1",
-    "rubricReference": "video.rubric.community_manager.v1",
+    "promptReference": "video.prompt.comedywriter.v1",
+    "rubricReference": "video.rubric.comedywriter.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.community_manager",
+          "agent_id: video.comedywriter",
           "status: registered",
-          "role: Video Community Manager configuration specialist",
+          "role: ComedyWriterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2246,11 +2168,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.community_manager.v1",
-          "rubric_reference: video.rubric.community_manager.v1",
+          "prompt_reference: video.prompt.comedywriter.v1",
+          "rubric_reference: video.rubric.comedywriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2258,25 +2180,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.community_manager`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.community`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- "
+          "# Mapping — `video.comedywriter`\n\n- VA/generic pack ID: `video.comedywriter`\n- Previous common ID: `video.qc_l1_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain community manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.community) Captures community response and triages qualitative signals ### Distilled quality (video.community) Response latency, issue clustering quality, sentiment tracking accuracy",
-    "folderPath": "business/video/agents/video.community_manager",
+    "specExcerpt": "Skits, parody, viral meme writing Host role binding: `ComedyWriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Skits, parody, viral meme writing ### Knowledge distillation sources (historical) UCB/Groundlings manuals; SNL transcripts; Schur/Fey teaching ### Self-quality criteria (historical) Joke-density; cold-open hook strength; predicted laughs/min ### Surpass-human signal (historical) Beats UCB-table-read win rate on cold-reads ### Critique bus (historical) - **Accepts critique from:** AudienceSim, ShowrunnerAgent - **Comments on:** ScriptwriterAgent (no joke), SocialStrategistAgent (off-trend) ### Tools design-time notes (historical, non-activating) Audience laugh-prediction model; trending-audio API (TikTok Creative Center) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores audience feedback in episodic memory)",
+    "folderPath": "business/video/agents/video.comedywriter",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.compliance_agent",
+    "id": "video.comms",
     "pack": "video",
-    "name": "Compliance Agent",
-    "role": "Video Compliance Agent configuration specialist",
+    "name": "Comms",
+    "role": "CommsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain compliance agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.compliance) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Distilled quality (video.compliance) 100% rule-coverage; zero post-publish takedowns",
+    "description": "Coordinates external messaging, disclosure, and public-response posture Host role binding: `CommsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates external messaging, disclosure, and public-response posture ### Knowledge distillation sources (historical) Crisis communication guides, disclosure standards, PR playbooks ### Self-quality criteria (historical) Message consistency, disclosure completeness, escalation quality ### Surpass-human signal (historical) Produces faster aligned responses than fragmented stakeholder messaging ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CommunityAgent, LegalAgent, BrandAgent - **Comments on:** Disclosure gaps, inconsistent external messaging, weak response framing ### Tools design-time notes (historical, non-activating) Comms calendars, approval workflows, response templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with approval chains",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2293,21 +2215,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.compliance_agent.v1",
-    "rubricReference": "video.rubric.compliance_agent.v1",
+    "promptReference": "video.prompt.comms.v1",
+    "rubricReference": "video.rubric.comms.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.compliance_agent",
+          "agent_id: video.comms",
           "status: registered",
-          "role: Video Compliance Agent configuration specialist",
+          "role: CommsAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2335,11 +2257,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.compliance_agent.v1",
-          "rubric_reference: video.rubric.compliance_agent.v1",
+          "prompt_reference: video.prompt.comms.v1",
+          "rubric_reference: video.rubric.comms.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2347,25 +2269,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.compliance_agent`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.compliance`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- "
+          "# Mapping — `video.comms`\n\n- VA/generic pack ID: `video.comms`\n- Previous common ID: `video.qc_l2_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain compliance agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.compliance) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Distilled quality (video.compliance) 100% rule-coverage; zero post-publish takedowns",
-    "folderPath": "business/video/agents/video.compliance_agent",
+    "specExcerpt": "Coordinates external messaging, disclosure, and public-response posture Host role binding: `CommsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates external messaging, disclosure, and public-response posture ### Knowledge distillation sources (historical) Crisis communication guides, disclosure standards, PR playbooks ### Self-quality criteria (historical) Message consistency, disclosure completeness, escalation quality ### Surpass-human signal (historical) Produces faster aligned responses than fragmented stakeholder messaging ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CommunityAgent, LegalAgent, BrandAgent - **Comments on:** Disclosure gaps, inconsistent external messaging, weak response framing ### Tools design-time notes (historical, non-activating) Comms calendars, approval workflows, response templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with approval chains",
+    "folderPath": "business/video/agents/video.comms",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.compositing_artist",
+    "id": "video.community",
     "pack": "video",
-    "name": "Compositing Artist",
-    "role": "Video Compositing Artist configuration specialist",
+    "name": "Community",
+    "role": "CommunityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain compositing artist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.vfxsupervisor) Plans + supervises VFX pipeline ### Distilled quality (video.vfxsupervisor) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
+    "description": "Captures community response and triages qualitative signals Host role binding: `CommunityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Captures community response and triages qualitative signals ### Knowledge distillation sources (historical) Community moderation playbooks, sentiment datasets, escalation rules ### Self-quality criteria (historical) Response latency, issue clustering quality, sentiment tracking accuracy ### Surpass-human signal (historical) Surfaces emerging audience concerns earlier than manual comment review ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, SocialMediaStrategistAgent, CommsAgent - **Comments on:** Confusing messaging, sentiment risks, recurring complaints ### Tools design-time notes (historical, non-activating) Social listening tools, moderation dashboards, clustering models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion from post-launch audience feedback",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2382,21 +2304,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.compositing_artist.v1",
-    "rubricReference": "video.rubric.compositing_artist.v1",
+    "promptReference": "video.prompt.community.v1",
+    "rubricReference": "video.rubric.community.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.compositing_artist",
+          "agent_id: video.community",
           "status: registered",
-          "role: Video Compositing Artist configuration specialist",
+          "role: CommunityAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2424,11 +2346,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.compositing_artist.v1",
-          "rubric_reference: video.rubric.compositing_artist.v1",
+          "prompt_reference: video.prompt.community.v1",
+          "rubric_reference: video.rubric.community.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2436,25 +2358,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.compositing_artist`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.vfxsupervisor`, `video.editor`\n- Local runtime: `agent_spec.json`\n- Local spec"
+          "# Mapping — `video.community`\n\n- VA/generic pack ID: `video.community`\n- Previous common ID: `video.community_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain compositing artist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.vfxsupervisor) Plans + supervises VFX pipeline ### Distilled quality (video.vfxsupervisor) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "folderPath": "business/video/agents/video.compositing_artist",
+    "specExcerpt": "Captures community response and triages qualitative signals Host role binding: `CommunityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Captures community response and triages qualitative signals ### Knowledge distillation sources (historical) Community moderation playbooks, sentiment datasets, escalation rules ### Self-quality criteria (historical) Response latency, issue clustering quality, sentiment tracking accuracy ### Surpass-human signal (historical) Surfaces emerging audience concerns earlier than manual comment review ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, SocialMediaStrategistAgent, CommsAgent - **Comments on:** Confusing messaging, sentiment risks, recurring complaints ### Tools design-time notes (historical, non-activating) Social listening tools, moderation dashboards, clustering models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion from post-launch audience feedback",
+    "folderPath": "business/video/agents/video.community",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.concept_developer",
+    "id": "video.competitorintelligence",
     "pack": "video",
-    "name": "Concept Developer",
-    "role": "Video Concept Developer configuration specialist",
+    "name": "Competitorintelligence",
+    "role": "CompetitorIntelligenceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain concept developer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ideation) Divergent brainstorm of concepts, hooks, taglines ### Distilled quality (video.ideation) Idea-count; novelty (embedding distance); semantic diversity ### Distilled responsibility (video.conceptartist) Pre-pro world/character design ### Distilled quality (video.conceptartist) Style-bible adherence; silhouette readability; design coherence",
+    "description": "What competitors are shipping Host role binding: `CompetitorIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) What competitors are shipping ### Knowledge distillation sources (historical) Meta Ad Library; TikTok Top Ads; YouTube scrape; release trackers ### Self-quality criteria (historical) Coverage % of competitor set; our-novelty vs landscape ### Surpass-human signal (historical) More comprehensive than agency strategy decks ### Critique bus (historical) - **Accepts critique from:** BrandAgent, CreativeDirectorAgent - **Comments on:** IdeationAgent (derivative) ### Tools design-time notes (historical, non-activating) Meta Ad Library API; TikTok Top Ads; SimilarWeb; YouTube Data API v3 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (scrape competitor → classify → report gaps)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2471,21 +2393,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.concept_developer.v1",
-    "rubricReference": "video.rubric.concept_developer.v1",
+    "promptReference": "video.prompt.competitorintelligence.v1",
+    "rubricReference": "video.rubric.competitorintelligence.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.concept_developer",
+          "agent_id: video.competitorintelligence",
           "status: registered",
-          "role: Video Concept Developer configuration specialist",
+          "role: CompetitorIntelligenceAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2513,11 +2435,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.concept_developer.v1",
-          "rubric_reference: video.rubric.concept_developer.v1",
+          "prompt_reference: video.prompt.competitorintelligence.v1",
+          "rubric_reference: video.rubric.competitorintelligence.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2525,25 +2447,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.concept_developer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.ideation`, `video.conceptartist`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.competitorintelligence`\n\n- VA/generic pack ID: `video.competitorintelligence`\n- Previous common ID: `video.audio_qc_reviewer`\n- SPEC depth: full generic SPEC body + host runtime bin"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain concept developer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ideation) Divergent brainstorm of concepts, hooks, taglines ### Distilled quality (video.ideation) Idea-count; novelty (embedding distance); semantic diversity ### Distilled responsibility (video.conceptartist) Pre-pro world/character design ### Distilled quality (video.conceptartist) Style-bible adherence; silhouette readability; design coherence",
-    "folderPath": "business/video/agents/video.concept_developer",
+    "specExcerpt": "What competitors are shipping Host role binding: `CompetitorIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) What competitors are shipping ### Knowledge distillation sources (historical) Meta Ad Library; TikTok Top Ads; YouTube scrape; release trackers ### Self-quality criteria (historical) Coverage % of competitor set; our-novelty vs landscape ### Surpass-human signal (historical) More comprehensive than agency strategy decks ### Critique bus (historical) - **Accepts critique from:** BrandAgent, CreativeDirectorAgent - **Comments on:** IdeationAgent (derivative) ### Tools design-time notes (historical, non-activating) Meta Ad Library API; TikTok Top Ads; SimilarWeb; YouTube Data API v3 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (scrape competitor → classify → report gaps)",
+    "folderPath": "business/video/agents/video.competitorintelligence",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.content_moderator",
+    "id": "video.compliance",
     "pack": "video",
-    "name": "Content Moderator",
-    "role": "Video Content Moderator configuration specialist",
+    "name": "Compliance",
+    "role": "ComplianceAgent (Legal) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain content moderator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
+    "description": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: `ComplianceAgent (Legal) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Knowledge distillation sources (historical) Bar CLE; FTC guides; EU AI Act; GDPR/CCPA; SAG-AFTRA AI rider ### Self-quality criteria (historical) 100% rule-coverage; zero post-publish takedowns ### Surpass-human signal (historical) Lower legal-risk than median media-counsel ### Critique bus (historical) - **Accepts critique from:** All agents (must clear gate); HumanLawyer for novel issues - **Comments on:** All agents (blocking gate) ### Tools design-time notes (historical, non-activating) Legal-rule DB (vectorized regulations); consent-document store; C2PA verification lib **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = compiled regulatory text)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2560,21 +2482,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.content_moderator.v1",
-    "rubricReference": "video.rubric.content_moderator.v1",
+    "promptReference": "video.prompt.compliance.v1",
+    "rubricReference": "video.rubric.compliance.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.content_moderator",
+          "agent_id: video.compliance",
           "status: registered",
-          "role: Video Content Moderator configuration specialist",
+          "role: ComplianceAgent (Legal) (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2602,11 +2524,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.content_moderator.v1",
-          "rubric_reference: video.rubric.content_moderator.v1",
+          "prompt_reference: video.prompt.compliance.v1",
+          "rubric_reference: video.rubric.compliance.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2614,25 +2536,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.content_moderator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.trustsafety`, `video.gatekeeper`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.compliance`\n\n- VA/generic pack ID: `video.compliance`\n- Previous common ID: `video.compliance_agent`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain content moderator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "folderPath": "business/video/agents/video.content_moderator",
+    "specExcerpt": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: `ComplianceAgent (Legal) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Knowledge distillation sources (historical) Bar CLE; FTC guides; EU AI Act; GDPR/CCPA; SAG-AFTRA AI rider ### Self-quality criteria (historical) 100% rule-coverage; zero post-publish takedowns ### Surpass-human signal (historical) Lower legal-risk than median media-counsel ### Critique bus (historical) - **Accepts critique from:** All agents (must clear gate); HumanLawyer for novel issues - **Comments on:** All agents (blocking gate) ### Tools design-time notes (historical, non-activating) Legal-rule DB (vectorized regulations); consent-document store; C2PA verification lib **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = compiled regulatory text)",
+    "folderPath": "business/video/agents/video.compliance",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.content_strategist",
+    "id": "video.composer",
     "pack": "video",
-    "name": "Content Strategist",
-    "role": "Video Content Strategist configuration specialist",
+    "name": "Composer",
+    "role": "ComposerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain content strategist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.brandstrategist) Defines audience-value framing and positioning before script and campaign execution ### Distilled quality (video.brandstrategist) Strategy coherence, differentiation strength, audience-message clarity ### Distilled responsibility (video.marketing) Packages content for launch, promotions, and release sequencing ### Distilled quality (video.marketing) Metadata completeness, asset readiness, launch sequencing accuracy",
+    "description": "Original score Host role binding: `ComposerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Original score ### Knowledge distillation sources (historical) MAESTRO + film-score corpora; ASCAP/BMI; Zimmer/Hildur sessions ### Self-quality criteria (historical) Cue-to-emotion alignment (valence/arousal regression); thematic recurrence ### Surpass-human signal (historical) Wins blind pairwise on emotional-fit vs working composers ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent (music cuts) - **Comments on:** EditorAgent (cut interrupts cue), SoundDesignAgent (mask) ### Tools design-time notes (historical, non-activating) Udio/Suno music gen API; MIDI toolchain; stem-separation (Demucs); loudness meter **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + Emotional-Arc validation (biosignal proxy)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2649,21 +2571,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.content_strategist.v1",
-    "rubricReference": "video.rubric.content_strategist.v1",
+    "promptReference": "video.prompt.composer.v1",
+    "rubricReference": "video.rubric.composer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.content_strategist",
+          "agent_id: video.composer",
           "status: registered",
-          "role: Video Content Strategist configuration specialist",
+          "role: ComposerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2691,11 +2613,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.content_strategist.v1",
-          "rubric_reference: video.rubric.content_strategist.v1",
+          "prompt_reference: video.prompt.composer.v1",
+          "rubric_reference: video.rubric.composer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2703,25 +2625,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.content_strategist`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.brandstrategist`, `video.marketing`\n- Local runtime: `agent_spec.json`\n- Local"
+          "# Mapping — `video.composer`\n\n- VA/generic pack ID: `video.composer`\n- Previous common ID: `video.compositing_artist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain content strategist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.brandstrategist) Defines audience-value framing and positioning before script and campaign execution ### Distilled quality (video.brandstrategist) Strategy coherence, differentiation strength, audience-message clarity ### Distilled responsibility (video.marketing) Packages content for launch, promotions, and release sequencing ### Distilled quality (video.marketing) Metadata completeness, asset readiness, launch sequencing accuracy",
-    "folderPath": "business/video/agents/video.content_strategist",
+    "specExcerpt": "Original score Host role binding: `ComposerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Original score ### Knowledge distillation sources (historical) MAESTRO + film-score corpora; ASCAP/BMI; Zimmer/Hildur sessions ### Self-quality criteria (historical) Cue-to-emotion alignment (valence/arousal regression); thematic recurrence ### Surpass-human signal (historical) Wins blind pairwise on emotional-fit vs working composers ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent (music cuts) - **Comments on:** EditorAgent (cut interrupts cue), SoundDesignAgent (mask) ### Tools design-time notes (historical, non-activating) Udio/Suno music gen API; MIDI toolchain; stem-separation (Demucs); loudness meter **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + Emotional-Arc validation (biosignal proxy)",
+    "folderPath": "business/video/agents/video.composer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.continuity_supervisor",
+    "id": "video.conceptartist",
     "pack": "video",
-    "name": "Continuity Supervisor",
-    "role": "Video Continuity Supervisor configuration specialist",
+    "name": "Conceptartist",
+    "role": "ConceptArtistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain continuity supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.continuity) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Distilled quality (video.continuity) State-drift detection, scene-to-scene consistency, manifest update correctness",
+    "description": "Pre-pro world/character design Host role binding: `ConceptArtistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Pre-pro world/character design ### Knowledge distillation sources (historical) ArtStation top-tier; McCaig/Church reels; studio art-bibles ### Self-quality criteria (historical) Style-bible adherence; silhouette readability; design coherence ### Surpass-human signal (historical) Wins art-director shootouts on iteration speed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** StoryboardAgent (design drift) ### Tools design-time notes (historical, non-activating) Midjourney v7; Stable Diffusion ControlNet; Photoshop generative fill (API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + style-reference CLIP scoring",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2738,21 +2660,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.continuity_supervisor.v1",
-    "rubricReference": "video.rubric.continuity_supervisor.v1",
+    "promptReference": "video.prompt.conceptartist.v1",
+    "rubricReference": "video.rubric.conceptartist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.continuity_supervisor",
+          "agent_id: video.conceptartist",
           "status: registered",
-          "role: Video Continuity Supervisor configuration specialist",
+          "role: ConceptArtistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2780,11 +2702,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.continuity_supervisor.v1",
-          "rubric_reference: video.rubric.continuity_supervisor.v1",
+          "prompt_reference: video.prompt.conceptartist.v1",
+          "rubric_reference: video.rubric.conceptartist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2792,25 +2714,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.continuity_supervisor`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.continuity`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.m"
+          "# Mapping — `video.conceptartist`\n\n- VA/generic pack ID: `video.conceptartist`\n- Previous common ID: `video.visual_qc_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain continuity supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.continuity) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Distilled quality (video.continuity) State-drift detection, scene-to-scene consistency, manifest update correctness",
-    "folderPath": "business/video/agents/video.continuity_supervisor",
+    "specExcerpt": "Pre-pro world/character design Host role binding: `ConceptArtistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Pre-pro world/character design ### Knowledge distillation sources (historical) ArtStation top-tier; McCaig/Church reels; studio art-bibles ### Self-quality criteria (historical) Style-bible adherence; silhouette readability; design coherence ### Surpass-human signal (historical) Wins art-director shootouts on iteration speed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** StoryboardAgent (design drift) ### Tools design-time notes (historical, non-activating) Midjourney v7; Stable Diffusion ControlNet; Photoshop generative fill (API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + style-reference CLIP scoring",
+    "folderPath": "business/video/agents/video.conceptartist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.cost_analyst",
+    "id": "video.continuity",
     "pack": "video",
-    "name": "Cost Analyst",
-    "role": "Video Cost Analyst configuration specialist",
+    "name": "Continuity",
+    "role": "ContinuityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain cost analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.costoptimizer) Routes between models/providers for $/quality ### Distilled quality (video.costoptimizer) $/successful-task; Pareto distance from frontier ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance",
+    "description": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: `ContinuityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Knowledge distillation sources (historical) Continuity logs, script supervisor practices, asset manifest state tracking ### Self-quality criteria (historical) State-drift detection, scene-to-scene consistency, manifest update correctness ### Surpass-human signal (historical) Catches continuity breaks earlier than end-of-post review ### Critique bus (historical) - **Accepts critique from:** CostumeDesignAgent, MUAAgent, AIQAConsistencyAgent, CinematographerAgent (DoP), GateKeeperAgent - **Comments on:** Character-state drift, wardrobe and prop mismatch, time logic errors ### Tools design-time notes (historical, non-activating) State manifests, shot comparison tools, continuity DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled ",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2827,21 +2749,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.cost_analyst.v1",
-    "rubricReference": "video.rubric.cost_analyst.v1",
+    "promptReference": "video.prompt.continuity.v1",
+    "rubricReference": "video.rubric.continuity.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.cost_analyst",
+          "agent_id: video.continuity",
           "status: registered",
-          "role: Video Cost Analyst configuration specialist",
+          "role: ContinuityAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2869,11 +2791,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.cost_analyst.v1",
-          "rubric_reference: video.rubric.cost_analyst.v1",
+          "prompt_reference: video.prompt.continuity.v1",
+          "rubric_reference: video.rubric.continuity.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2881,25 +2803,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.cost_analyst`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.costoptimizer`, `video.finance`\n- Local runtime: `agent_spec.json`\n- Local specifica"
+          "# Mapping — `video.continuity`\n\n- VA/generic pack ID: `video.continuity`\n- Previous common ID: `video.continuity_supervisor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain cost analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.costoptimizer) Routes between models/providers for $/quality ### Distilled quality (video.costoptimizer) $/successful-task; Pareto distance from frontier ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance",
-    "folderPath": "business/video/agents/video.cost_analyst",
+    "specExcerpt": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: `ContinuityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Knowledge distillation sources (historical) Continuity logs, script supervisor practices, asset manifest state tracking ### Self-quality criteria (historical) State-drift detection, scene-to-scene consistency, manifest update correctness ### Surpass-human signal (historical) Catches continuity breaks earlier than end-of-post review ### Critique bus (historical) - **Accepts critique from:** CostumeDesignAgent, MUAAgent, AIQAConsistencyAgent, CinematographerAgent (DoP), GateKeeperAgent - **Comments on:** Character-state drift, wardrobe and prop mismatch, time logic errors ### Tools design-time notes (historical, non-activating) State manifests, shot comparison tools, continuity DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled ",
+    "folderPath": "business/video/agents/video.continuity",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.creative_director",
+    "id": "video.copywriter",
     "pack": "video",
-    "name": "Creative Director",
-    "role": "Video Creative Director configuration specialist",
+    "name": "Copywriter",
+    "role": "CopywriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain creative director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.creativedirector) Campaign concept; cross-discipline taste ### Distilled quality (video.creativedirector) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior",
+    "description": "Scripts, captions, hooks, headlines Host role binding: `CopywriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Scripts, captions, hooks, headlines ### Knowledge distillation sources (historical) D&AD/One Show; *Ogilvy on Advertising*; Wiebe Copyhackers ### Self-quality criteria (historical) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Surpass-human signal (historical) Wins D&AD-style blind preference on ad briefs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, PerformanceMarketerAgent - **Comments on:** ScriptwriterAgent (verbosity), VOArtist (unspeakable) ### Tools design-time notes (historical, non-activating) Brand-voice embedding model; Hemingway readability API; A/B headline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: brand-voice similarity scorer)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2916,21 +2838,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.creative_director.v1",
-    "rubricReference": "video.rubric.creative_director.v1",
+    "promptReference": "video.prompt.copywriter.v1",
+    "rubricReference": "video.rubric.copywriter.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.creative_director",
+          "agent_id: video.copywriter",
           "status: registered",
-          "role: Video Creative Director configuration specialist",
+          "role: CopywriterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -2958,11 +2880,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.creative_director.v1",
-          "rubric_reference: video.rubric.creative_director.v1",
+          "prompt_reference: video.prompt.copywriter.v1",
+          "rubric_reference: video.rubric.copywriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -2970,25 +2892,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.creative_director`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.creativedirector`, `video.director`\n- Local runtime: `agent_spec.json`\n- Local "
+          "# Mapping — `video.copywriter`\n\n- VA/generic pack ID: `video.copywriter`\n- Previous common ID: `video.hook_specialist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain creative director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.creativedirector) Campaign concept; cross-discipline taste ### Distilled quality (video.creativedirector) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior",
-    "folderPath": "business/video/agents/video.creative_director",
+    "specExcerpt": "Scripts, captions, hooks, headlines Host role binding: `CopywriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Scripts, captions, hooks, headlines ### Knowledge distillation sources (historical) D&AD/One Show; *Ogilvy on Advertising*; Wiebe Copyhackers ### Self-quality criteria (historical) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Surpass-human signal (historical) Wins D&AD-style blind preference on ad briefs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, PerformanceMarketerAgent - **Comments on:** ScriptwriterAgent (verbosity), VOArtist (unspeakable) ### Tools design-time notes (historical, non-activating) Brand-voice embedding model; Hemingway readability API; A/B headline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: brand-voice similarity scorer)",
+    "folderPath": "business/video/agents/video.copywriter",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.critique_coordinator",
+    "id": "video.corrections",
     "pack": "video",
-    "name": "Critique Coordinator",
-    "role": "Video Critique Coordinator configuration specialist",
+    "name": "Corrections",
+    "role": "CorrectionsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain critique coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
+    "description": "Coordinates post-publication fixes and correction disclosures Host role binding: `CorrectionsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates post-publication fixes and correction disclosures ### Knowledge distillation sources (historical) Corrections workflows, retraction and update policies, version tracking ### Self-quality criteria (historical) Correction turnaround, version replacement accuracy, notice completeness ### Surpass-human signal (historical) Resolves post-release issues faster than unstructured incident handling ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, FactCheckerAgent, ChannelManagerAgent - **Comments on:** Unclosed correction loops, incomplete notices, stale versions ### Tools design-time notes (historical, non-activating) Version-control systems, publishing tools, correction trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over correction and r",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3005,21 +2927,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.judge_agent\"],\"outputs\":[\"video.refine_coordinator\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.critique_coordinator.v1",
-    "rubricReference": "video.rubric.critique_coordinator.v1",
+    "promptReference": "video.prompt.corrections.v1",
+    "rubricReference": "video.rubric.corrections.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.critique_coordinator",
+          "agent_id: video.corrections",
           "status: registered",
-          "role: Video Critique Coordinator configuration specialist",
+          "role: CorrectionsAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -3047,11 +2969,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.critique_coordinator.v1",
-          "rubric_reference: video.rubric.critique_coordinator.v1",
+          "prompt_reference: video.prompt.corrections.v1",
+          "rubric_reference: video.rubric.corrections.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.judge_agent\"]",
-          "critique_outputs: [\"video.refine_coordinator\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -3059,25 +2981,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.critique_coordinator`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.critic`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- "
+          "# Mapping — `video.corrections`\n\n- VA/generic pack ID: `video.corrections`\n- Previous common ID: `video.technical_qc_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain critique coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "folderPath": "business/video/agents/video.critique_coordinator",
+    "specExcerpt": "Coordinates post-publication fixes and correction disclosures Host role binding: `CorrectionsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates post-publication fixes and correction disclosures ### Knowledge distillation sources (historical) Corrections workflows, retraction and update policies, version tracking ### Self-quality criteria (historical) Correction turnaround, version replacement accuracy, notice completeness ### Surpass-human signal (historical) Resolves post-release issues faster than unstructured incident handling ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, FactCheckerAgent, ChannelManagerAgent - **Comments on:** Unclosed correction loops, incomplete notices, stale versions ### Tools design-time notes (historical, non-activating) Version-control systems, publishing tools, correction trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over correction and r",
+    "folderPath": "business/video/agents/video.corrections",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.crm_coordinator",
+    "id": "video.costoptimizer",
     "pack": "video",
-    "name": "Crm Coordinator",
-    "role": "Video Crm Coordinator configuration specialist",
+    "name": "Costoptimizer",
+    "role": "CostOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain crm coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.crm) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Distilled quality (video.crm) Audience-segment correctness, delivery readiness, trigger accuracy",
+    "description": "Routes between models/providers for $/quality Host role binding: `CostOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Routes between models/providers for $/quality ### Knowledge distillation sources (historical) Provider pricing; cost-quality frontiers; FrugalGPT patterns ### Self-quality criteria (historical) $/successful-task; Pareto distance from frontier ### Surpass-human signal (historical) Lower $/quality than human CFO routing ### Critique bus (historical) - **Accepts critique from:** RouterAgent, FinanceAgent - **Comments on:** RouterAgent (over-spend), GeneratorAgent (re-roll burn) ### Tools design-time notes (historical, non-activating) Provider pricing APIs; benchmark cost DB; FrugalGPT cascade logic **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (evaluate task → pick cheapest model meeting threshold)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3094,21 +3016,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.crm_coordinator.v1",
-    "rubricReference": "video.rubric.crm_coordinator.v1",
+    "promptReference": "video.prompt.costoptimizer.v1",
+    "rubricReference": "video.rubric.costoptimizer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.crm_coordinator",
+          "agent_id: video.costoptimizer",
           "status: registered",
-          "role: Video Crm Coordinator configuration specialist",
+          "role: CostOptimizerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -3136,11 +3058,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.crm_coordinator.v1",
-          "rubric_reference: video.rubric.crm_coordinator.v1",
+          "prompt_reference: video.prompt.costoptimizer.v1",
+          "rubric_reference: video.rubric.costoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -3148,25 +3070,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.crm_coordinator`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.crm`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack cor"
+          "# Mapping — `video.costoptimizer`\n\n- VA/generic pack ID: `video.costoptimizer`\n- Previous common ID: `video.cost_analyst`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain crm coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.crm) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Distilled quality (video.crm) Audience-segment correctness, delivery readiness, trigger accuracy",
-    "folderPath": "business/video/agents/video.crm_coordinator",
+    "specExcerpt": "Routes between models/providers for $/quality Host role binding: `CostOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Routes between models/providers for $/quality ### Knowledge distillation sources (historical) Provider pricing; cost-quality frontiers; FrugalGPT patterns ### Self-quality criteria (historical) $/successful-task; Pareto distance from frontier ### Surpass-human signal (historical) Lower $/quality than human CFO routing ### Critique bus (historical) - **Accepts critique from:** RouterAgent, FinanceAgent - **Comments on:** RouterAgent (over-spend), GeneratorAgent (re-roll burn) ### Tools design-time notes (historical, non-activating) Provider pricing APIs; benchmark cost DB; FrugalGPT cascade logic **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (evaluate task → pick cheapest model meeting threshold)",
+    "folderPath": "business/video/agents/video.costoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.cultural_reviewer",
+    "id": "video.costumedesign",
     "pack": "video",
-    "name": "Cultural Reviewer",
-    "role": "Video Cultural Reviewer configuration specialist",
+    "name": "Costumedesign",
+    "role": "CostumeDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain cultural reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ethics) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Distilled quality (video.ethics) Ethical issue recall, mitigation clarity, escalation precision ### Distilled responsibility (video.sme) Domain accuracy in target field ### Distilled quality (video.sme) Citation density; benchmark exam pass; hallucination ≤0.5%",
+    "description": "Character-through-wardrobe Host role binding: `CostumeDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character-through-wardrobe ### Knowledge distillation sources (historical) V&A archive; CDG monographs; Ruth E. Carter masterclass ### Self-quality criteria (historical) Period/fashion accuracy; silhouette read; palette fit ### Surpass-human signal (historical) Beats CDG juniors on period accuracy benchmarks ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** MUAAgent (continuity break) ### Tools design-time notes (historical, non-activating) Fashion-history vector DB (V&A/Met API); image-gen for costume sketches; color-palette tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (period-accuracy rubric)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3183,21 +3105,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.cultural_reviewer.v1",
-    "rubricReference": "video.rubric.cultural_reviewer.v1",
+    "promptReference": "video.prompt.costumedesign.v1",
+    "rubricReference": "video.rubric.costumedesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.cultural_reviewer",
+          "agent_id: video.costumedesign",
           "status: registered",
-          "role: Video Cultural Reviewer configuration specialist",
+          "role: CostumeDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -3225,11 +3147,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.cultural_reviewer.v1",
-          "rubric_reference: video.rubric.cultural_reviewer.v1",
+          "prompt_reference: video.prompt.costumedesign.v1",
+          "rubric_reference: video.rubric.costumedesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -3237,25 +3159,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.cultural_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.ethics`, `video.sme`\n- Local runtime: `agent_spec.json`\n- Local specification: "
+          "# Mapping — `video.costumedesign`\n\n- VA/generic pack ID: `video.costumedesign`\n- Previous common ID: `video.model_input_recorder`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain cultural reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ethics) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Distilled quality (video.ethics) Ethical issue recall, mitigation clarity, escalation precision ### Distilled responsibility (video.sme) Domain accuracy in target field ### Distilled quality (video.sme) Citation density; benchmark exam pass; hallucination ≤0.5%",
-    "folderPath": "business/video/agents/video.cultural_reviewer",
+    "specExcerpt": "Character-through-wardrobe Host role binding: `CostumeDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character-through-wardrobe ### Knowledge distillation sources (historical) V&A archive; CDG monographs; Ruth E. Carter masterclass ### Self-quality criteria (historical) Period/fashion accuracy; silhouette read; palette fit ### Surpass-human signal (historical) Beats CDG juniors on period accuracy benchmarks ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** MUAAgent (continuity break) ### Tools design-time notes (historical, non-activating) Fashion-history vector DB (V&A/Met API); image-gen for costume sketches; color-palette tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (period-accuracy rubric)",
+    "folderPath": "business/video/agents/video.costumedesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.data_governance_officer",
+    "id": "video.creativedirector",
     "pack": "video",
-    "name": "Data Governance Officer",
-    "role": "Video Data Governance Officer configuration specialist",
+    "name": "Creativedirector",
+    "role": "CreativeDirectorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain data governance officer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
+    "description": "Campaign concept; cross-discipline taste Host role binding: `CreativeDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Campaign concept; cross-discipline taste ### Knowledge distillation sources (historical) Cannes Lions Grand Prix; D&AD Pencils; agency case studies ### Self-quality criteria (historical) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Surpass-human signal (historical) Wins Cannes-jury-emulator gold vs human shortlists ### Critique bus (historical) - **Accepts critique from:** ClientAgent, BrandAgent - **Comments on:** CopywriterAgent, ArtDirectorAgent ### Tools design-time notes (historical, non-activating) Campaign-archive search (Cannes Lions API); Midjourney for concept viz; Figma API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (panel of IdeationAgent + NoveltyAgent)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3265,1020 +3187,44 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.data_governance_officer.v1",
-    "rubricReference": "video.rubric.data_governance_officer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.data_governance_officer",
-          "status: registered",
-          "role: Video Data Governance Officer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.data_governance_officer.v1",
-          "rubric_reference: video.rubric.data_governance_officer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.data_governance_officer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.trustsafety`, `video.legal`\n- Local runtime: `agent_spec.json`\n- Local sp"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain data governance officer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
-    "folderPath": "business/video/agents/video.data_governance_officer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.delivery_packager",
-    "pack": "video",
-    "name": "Delivery Packager",
-    "role": "Video Delivery Packager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain delivery packager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.delivery_packager.v1",
-    "rubricReference": "video.rubric.delivery_packager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.delivery_packager",
-          "status: registered",
-          "role: Video Delivery Packager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.delivery_packager.v1",
-          "rubric_reference: video.rubric.delivery_packager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: related",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.delivery_packager`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.distributor`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain delivery packager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy",
-    "folderPath": "business/video/agents/video.delivery_packager",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.delivery_qc_reviewer",
-    "pack": "video",
-    "name": "Delivery Qc Reviewer",
-    "role": "Video Delivery Qc Reviewer configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain delivery qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.delivery_qc_reviewer.v1",
-    "rubricReference": "video.rubric.delivery_qc_reviewer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.delivery_qc_reviewer",
-          "status: registered",
-          "role: Video Delivery Qc Reviewer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.delivery_qc_reviewer.v1",
-          "rubric_reference: video.rubric.delivery_qc_reviewer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.delivery_qc_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.distributor`, `video.gatekeeper`\n- Local runtime: `agent_spec.json`\n- Local "
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain delivery qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "folderPath": "business/video/agents/video.delivery_qc_reviewer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.dialog_editor",
-    "pack": "video",
-    "name": "Dialog Editor",
-    "role": "Video Dialog Editor configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain dialog editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.soundmixer) Final mix; deliverables (5.1/Atmos) ### Distilled quality (video.soundmixer) LUFS target; STOI ≥0.85; spec-deliverable pass ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.dialog_editor.v1",
-    "rubricReference": "video.rubric.dialog_editor.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.dialog_editor",
-          "status: registered",
-          "role: Video Dialog Editor configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.dialog_editor.v1",
-          "rubric_reference: video.rubric.dialog_editor.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.dialog_editor`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.soundmixer`, `video.editor`\n- Local runtime: `agent_spec.json`\n- Local specificatio"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain dialog editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.soundmixer) Final mix; deliverables (5.1/Atmos) ### Distilled quality (video.soundmixer) LUFS target; STOI ≥0.85; spec-deliverable pass ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "folderPath": "business/video/agents/video.dialog_editor",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.distribution_planner",
-    "pack": "video",
-    "name": "Distribution Planner",
-    "role": "Video Distribution Planner configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain distribution planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.distribution_planner.v1",
-    "rubricReference": "video.rubric.distribution_planner.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.distribution_planner",
-          "status: registered",
-          "role: Video Distribution Planner configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.distribution_planner.v1",
-          "rubric_reference: video.rubric.distribution_planner.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: related",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.distribution_planner`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.distributor`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.m"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain distribution planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy",
-    "folderPath": "business/video/agents/video.distribution_planner",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.edit_assembler",
-    "pack": "video",
-    "name": "Edit Assembler",
-    "role": "Video Edit Assembler configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain edit assembler outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.edit_assembler.v1",
-    "rubricReference": "video.rubric.edit_assembler.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.edit_assembler",
-          "status: registered",
-          "role: Video Edit Assembler configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.edit_assembler.v1",
-          "rubric_reference: video.rubric.edit_assembler.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: related",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.edit_assembler`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.editor`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack c"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain edit assembler outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "folderPath": "business/video/agents/video.edit_assembler",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.environment_designer",
-    "pack": "video",
-    "name": "Environment Designer",
-    "role": "Video Environment Designer configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain environment designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.worldbuilding) Lore, rules, geography, factions, magic/tech systems ### Distilled quality (video.worldbuilding) Internal-consistency (no contradictions); rule-completeness ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.environment_designer.v1",
-    "rubricReference": "video.rubric.environment_designer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.environment_designer",
-          "status: registered",
-          "role: Video Environment Designer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.environment_designer.v1",
-          "rubric_reference: video.rubric.environment_designer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.environment_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.worldbuilding`, `video.productiondesign`\n- Local runtime: `agent_spec.json`\n"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain environment designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.worldbuilding) Lore, rules, geography, factions, magic/tech systems ### Distilled quality (video.worldbuilding) Internal-consistency (no contradictions); rule-completeness ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility",
-    "folderPath": "business/video/agents/video.environment_designer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.escalation_manager",
-    "pack": "video",
-    "name": "Escalation Manager",
-    "role": "Video Escalation Manager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain escalation manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.escalation_manager.v1",
-    "rubricReference": "video.rubric.escalation_manager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.escalation_manager",
-          "status: registered",
-          "role: Video Escalation Manager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.escalation_manager.v1",
-          "rubric_reference: video.rubric.escalation_manager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.escalation_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.gatekeeper`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local speci"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain escalation manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.escalation_manager",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.evaluation_designer",
-    "pack": "video",
-    "name": "Evaluation Designer",
-    "role": "Video Evaluation Designer configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain evaluation designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.evaluation_designer.v1",
-    "rubricReference": "video.rubric.evaluation_designer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.evaluation_designer",
-          "status: registered",
-          "role: Video Evaluation Designer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.evaluation_designer.v1",
-          "rubric_reference: video.rubric.evaluation_designer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: related",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.evaluation_designer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.evaluationharness`\n- Local runtime: `agent_spec.json`\n- Local specification: `S"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain evaluation designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h",
-    "folderPath": "business/video/agents/video.evaluation_designer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.experiment_designer",
-    "pack": "video",
-    "name": "Experiment Designer",
-    "role": "Video Experiment Designer configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain experiment designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.experiment_designer.v1",
-    "rubricReference": "video.rubric.experiment_designer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.experiment_designer",
-          "status: registered",
-          "role: Video Experiment Designer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.experiment_designer.v1",
-          "rubric_reference: video.rubric.experiment_designer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.experiment_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.evaluationharness`, `video.analyst`\n- Local runtime: `agent_spec.json`\n- Loca"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain experiment designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.experiment_designer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.factual_verifier",
-    "pack": "video",
-    "name": "Factual Verifier",
-    "role": "Video Factual Verifier configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain factual verifier outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.factchecker) Source-grade every claim ### Distilled quality (video.factchecker) Source-grade per claim (primary > secondary); cross-source ≥2 ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.factual_verifier.v1",
-    "rubricReference": "video.rubric.factual_verifier.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.factual_verifier",
-          "status: registered",
-          "role: Video Factual Verifier configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.factual_verifier.v1",
-          "rubric_reference: video.rubric.factual_verifier.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.factual_verifier`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.factchecker`, `video.citation`\n- Local runtime: `agent_spec.json`\n- Local specif"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain factual verifier outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.factchecker) Source-grade every claim ### Distilled quality (video.factchecker) Source-grade per claim (primary > secondary); cross-source ≥2 ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target",
-    "folderPath": "business/video/agents/video.factual_verifier",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.generative_media_operator",
-    "pack": "video",
-    "name": "Generative Media Operator",
-    "role": "Video Generative Media Operator configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain generative media operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
     "allowedTools": [
-      "media.stub"
+      "media.stub",
+      "media.sora",
+      "media.veo",
+      "media.runway"
     ],
-    "promptReference": "video.prompt.generative_media_operator.v1",
-    "rubricReference": "video.rubric.generative_media_operator.v1",
+    "promptReference": "video.prompt.creativedirector.v1",
+    "rubricReference": "video.rubric.creativedirector.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.generative_media_operator",
+          "agent_id: video.creativedirector",
           "status: registered",
-          "role: Video Generative Media Operator configuration specialist",
+          "role: CreativeDirectorAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -4287,19 +3233,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: [\"media.stub\"]",
-          "prompt_reference: video.prompt.generative_media_operator.v1",
-          "rubric_reference: video.rubric.generative_media_operator.v1",
+          "allowed_tools: [\"media.stub\", \"media.sora\", \"media.veo\", \"media.runway\"]",
+          "prompt_reference: video.prompt.creativedirector.v1",
+          "rubric_reference: video.rubric.creativedirector.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4307,25 +3253,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.generative_media_operator`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.promptengineer`\n- Local runtime: `agent_spec.json`\n- Local specification:"
+          "# Mapping — `video.creativedirector`\n\n- VA/generic pack ID: `video.creativedirector`\n- Previous common ID: `video.creative_director`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain generative media operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility",
-    "folderPath": "business/video/agents/video.generative_media_operator",
+    "specExcerpt": "Campaign concept; cross-discipline taste Host role binding: `CreativeDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Campaign concept; cross-discipline taste ### Knowledge distillation sources (historical) Cannes Lions Grand Prix; D&AD Pencils; agency case studies ### Self-quality criteria (historical) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Surpass-human signal (historical) Wins Cannes-jury-emulator gold vs human shortlists ### Critique bus (historical) - **Accepts critique from:** ClientAgent, BrandAgent - **Comments on:** CopywriterAgent, ArtDirectorAgent ### Tools design-time notes (historical, non-activating) Campaign-archive search (Cannes Lions API); Midjourney for concept viz; Figma API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (panel of IdeationAgent + NoveltyAgent)",
+    "folderPath": "business/video/agents/video.creativedirector",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.graph_topology_designer",
+    "id": "video.critic",
     "pack": "video",
-    "name": "Graph Topology Designer",
-    "role": "Video Graph Topology Designer configuration specialist",
+    "name": "Critic",
+    "role": "CriticAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain graph topology designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Distilled responsibility (video.router) Picks right specialist agent (and model) for each subtask ### Distilled quality (video.router) Routing accuracy ≥95% vs oracle; cost within budget",
+    "description": "Simulates reviewer, press, or jury interpretation Host role binding: `CriticAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates reviewer, press, or jury interpretation ### Knowledge distillation sources (historical) Criticism corpora, festival-jury commentary, review archives ### Self-quality criteria (historical) Interpretive depth, consistency, reviewer-mode diversity ### Surpass-human signal (historical) Provides broader qualitative coverage than ad hoc internal taste review ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSimAgent, FestivalStrategistAgent, JudgeAgent - **Comments on:** Auteur read, tone mismatch, festival/press vulnerability ### Tools design-time notes (historical, non-activating) Review corpora, jury rubrics, qualitative scoring tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate as critic panel",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4342,21 +3288,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.graph_topology_designer.v1",
-    "rubricReference": "video.rubric.graph_topology_designer.v1",
+    "promptReference": "video.prompt.critic.v1",
+    "rubricReference": "video.rubric.critic.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.graph_topology_designer",
+          "agent_id: video.critic",
           "status: registered",
-          "role: Video Graph Topology Designer configuration specialist",
+          "role: CriticAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4384,11 +3330,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.graph_topology_designer.v1",
-          "rubric_reference: video.rubric.graph_topology_designer.v1",
+          "prompt_reference: video.prompt.critic.v1",
+          "rubric_reference: video.rubric.critic.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4396,25 +3342,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.graph_topology_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.orchestrator`, `video.router`\n- Local runtime: `agent_spec.json`\n- Local "
+          "# Mapping — `video.critic`\n\n- VA/generic pack ID: `video.critic`\n- Previous common ID: `video.quality_controller`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain graph topology designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Distilled responsibility (video.router) Picks right specialist agent (and model) for each subtask ### Distilled quality (video.router) Routing accuracy ≥95% vs oracle; cost within budget",
-    "folderPath": "business/video/agents/video.graph_topology_designer",
+    "specExcerpt": "Simulates reviewer, press, or jury interpretation Host role binding: `CriticAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates reviewer, press, or jury interpretation ### Knowledge distillation sources (historical) Criticism corpora, festival-jury commentary, review archives ### Self-quality criteria (historical) Interpretive depth, consistency, reviewer-mode diversity ### Surpass-human signal (historical) Provides broader qualitative coverage than ad hoc internal taste review ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSimAgent, FestivalStrategistAgent, JudgeAgent - **Comments on:** Auteur read, tone mismatch, festival/press vulnerability ### Tools design-time notes (historical, non-activating) Review corpora, jury rubrics, qualitative scoring tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate as critic panel",
+    "folderPath": "business/video/agents/video.critic",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.historical_replay_analyst",
+    "id": "video.crm",
     "pack": "video",
-    "name": "Historical Replay Analyst",
-    "role": "Video Historical Replay Analyst configuration specialist",
+    "name": "Crm",
+    "role": "CRMAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain historical replay analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archiveresearch) Historical / academic / archival deep search ### Distilled quality (video.archiveresearch) Primary-source ratio; archive-coverage breadth ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
+    "description": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: `CRMAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Knowledge distillation sources (historical) CRM automation flows, lifecycle marketing playbooks, audience segmentation rules ### Self-quality criteria (historical) Audience-segment correctness, delivery readiness, trigger accuracy ### Surpass-human signal (historical) Executes segmentation-to-delivery flow faster than manual ops ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, TemplateDesignAgent, AnalystAgent - **Comments on:** Wrong segmentation, broken trigger timing, incomplete CRM payloads ### Tools design-time notes (historical, non-activating) HubSpot/Salesforce-style CRM APIs, segmentation tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over trigger",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4431,21 +3377,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.historical_replay_analyst.v1",
-    "rubricReference": "video.rubric.historical_replay_analyst.v1",
+    "promptReference": "video.prompt.crm.v1",
+    "rubricReference": "video.rubric.crm.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.historical_replay_analyst",
+          "agent_id: video.crm",
           "status: registered",
-          "role: Video Historical Replay Analyst configuration specialist",
+          "role: CRMAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4473,11 +3419,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.historical_replay_analyst.v1",
-          "rubric_reference: video.rubric.historical_replay_analyst.v1",
+          "prompt_reference: video.prompt.crm.v1",
+          "rubric_reference: video.rubric.crm.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4485,25 +3431,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.historical_replay_analyst`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.archiveresearch`, `video.analyst`\n- Local runtime: `agent_spec.json`\n- "
+          "# Mapping — `video.crm`\n\n- VA/generic pack ID: `video.crm`\n- Previous common ID: `video.crm_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain historical replay analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.archiveresearch) Historical / academic / archival deep search ### Distilled quality (video.archiveresearch) Primary-source ratio; archive-coverage breadth ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.historical_replay_analyst",
+    "specExcerpt": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: `CRMAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Knowledge distillation sources (historical) CRM automation flows, lifecycle marketing playbooks, audience segmentation rules ### Self-quality criteria (historical) Audience-segment correctness, delivery readiness, trigger accuracy ### Surpass-human signal (historical) Executes segmentation-to-delivery flow faster than manual ops ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, TemplateDesignAgent, AnalystAgent - **Comments on:** Wrong segmentation, broken trigger timing, incomplete CRM payloads ### Tools design-time notes (historical, non-activating) HubSpot/Salesforce-style CRM APIs, segmentation tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over trigger",
+    "folderPath": "business/video/agents/video.crm",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.hook_specialist",
+    "id": "video.deepfakedetection",
     "pack": "video",
-    "name": "Hook Specialist",
-    "role": "Video Hook Specialist configuration specialist",
+    "name": "Deepfakedetection",
+    "role": "DeepfakeDetectionAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain hook specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.copywriter) Scripts, captions, hooks, headlines ### Distilled quality (video.copywriter) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Distilled responsibility (video.ugccreator) Authentic-feel ads in creator voice ### Distilled quality (video.ugccreator) Hook-rate ≥30%; \"scripted\" detector < threshold",
+    "description": "Detects synthetic identity, voice, and provenance deception risks Host role binding: `DeepfakeDetectionAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects synthetic identity, voice, and provenance deception risks ### Knowledge distillation sources (historical) Deepfake forensics corpora, synthetic-media benchmarks, identity-risk studies ### Self-quality criteria (historical) Forensic recall, false-negative control, provenance-validation accuracy ### Surpass-human signal (historical) Catches deceptive synthetic markers that generic QC misses ### Critique bus (historical) - **Accepts critique from:** AvatarDesignAgent, VoiceCloneAgent, TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Identity anomalies, provenance holes, deceptive synthesis patterns ### Tools design-time notes (historical, non-activating) Forensic models, face/voice anomaly detectors, provenance validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historica",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4520,21 +3466,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.hook_specialist.v1",
-    "rubricReference": "video.rubric.hook_specialist.v1",
+    "promptReference": "video.prompt.deepfakedetection.v1",
+    "rubricReference": "video.rubric.deepfakedetection.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.hook_specialist",
+          "agent_id: video.deepfakedetection",
           "status: registered",
-          "role: Video Hook Specialist configuration specialist",
+          "role: DeepfakeDetectionAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4562,11 +3508,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.hook_specialist.v1",
-          "rubric_reference: video.rubric.hook_specialist.v1",
+          "prompt_reference: video.prompt.deepfakedetection.v1",
+          "rubric_reference: video.rubric.deepfakedetection.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4574,25 +3520,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.hook_specialist`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.copywriter`, `video.ugccreator`\n- Local runtime: `agent_spec.json`\n- Local specif"
+          "# Mapping — `video.deepfakedetection`\n\n- VA/generic pack ID: `video.deepfakedetection`\n- Previous common ID: `video.c2pa_verifier`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain hook specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.copywriter) Scripts, captions, hooks, headlines ### Distilled quality (video.copywriter) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Distilled responsibility (video.ugccreator) Authentic-feel ads in creator voice ### Distilled quality (video.ugccreator) Hook-rate ≥30%; \"scripted\" detector < threshold",
-    "folderPath": "business/video/agents/video.hook_specialist",
+    "specExcerpt": "Detects synthetic identity, voice, and provenance deception risks Host role binding: `DeepfakeDetectionAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects synthetic identity, voice, and provenance deception risks ### Knowledge distillation sources (historical) Deepfake forensics corpora, synthetic-media benchmarks, identity-risk studies ### Self-quality criteria (historical) Forensic recall, false-negative control, provenance-validation accuracy ### Surpass-human signal (historical) Catches deceptive synthetic markers that generic QC misses ### Critique bus (historical) - **Accepts critique from:** AvatarDesignAgent, VoiceCloneAgent, TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Identity anomalies, provenance holes, deceptive synthesis patterns ### Tools design-time notes (historical, non-activating) Forensic models, face/voice anomaly detectors, provenance validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historica",
+    "folderPath": "business/video/agents/video.deepfakedetection",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.human_review_coordinator",
+    "id": "video.director",
     "pack": "video",
-    "name": "Human Review Coordinator",
-    "role": "Video Human Review Coordinator configuration specialist",
+    "name": "Director",
+    "role": "DirectorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain human review coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
+    "description": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: `DirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns vision; issues shot intents, sets pacing, approves takes ### Knowledge distillation sources (historical) Criterion commentary; IMDb Top 250 director interviews; DGA seminars; MasterClass (Scorsese/Lynch/Gerwig) ### Self-quality criteria (historical) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Surpass-human signal (historical) Wins ≥55% blind pairwise vs DGA cuts (Arena) ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, EditorAgent, AudienceSim — JSON critique bus - **Comments on:** EditorAgent, DoPAgent, ScreenwriterAgent, ComposerAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1 (Gemini API), Runway Gen-4, Kling 3.0; DaVinci Resolve via MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pat",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4609,21 +3555,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.human_review_coordinator.v1",
-    "rubricReference": "video.rubric.human_review_coordinator.v1",
+    "promptReference": "video.prompt.director.v1",
+    "rubricReference": "video.rubric.director.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.human_review_coordinator",
+          "agent_id: video.director",
           "status: registered",
-          "role: Video Human Review Coordinator configuration specialist",
+          "role: DirectorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4651,11 +3597,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.human_review_coordinator.v1",
-          "rubric_reference: video.rubric.human_review_coordinator.v1",
+          "prompt_reference: video.prompt.director.v1",
+          "rubric_reference: video.rubric.director.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4663,25 +3609,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.human_review_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.gatekeeper`, `video.judge`\n- Local runtime: `agent_spec.json`\n- Local sp"
+          "# Mapping — `video.director`\n\n- VA/generic pack ID: `video.director`\n- Previous common ID: `video.visual_director`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain human review coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
-    "folderPath": "business/video/agents/video.human_review_coordinator",
+    "specExcerpt": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: `DirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns vision; issues shot intents, sets pacing, approves takes ### Knowledge distillation sources (historical) Criterion commentary; IMDb Top 250 director interviews; DGA seminars; MasterClass (Scorsese/Lynch/Gerwig) ### Self-quality criteria (historical) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Surpass-human signal (historical) Wins ≥55% blind pairwise vs DGA cuts (Arena) ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, EditorAgent, AudienceSim — JSON critique bus - **Comments on:** EditorAgent, DoPAgent, ScreenwriterAgent, ComposerAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1 (Gemini API), Runway Gen-4, Kling 3.0; DaVinci Resolve via MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pat",
+    "folderPath": "business/video/agents/video.director",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.image_generation_operator",
+    "id": "video.distributor",
     "pack": "video",
-    "name": "Image Generation Operator",
-    "role": "Video Image Generation Operator configuration specialist",
+    "name": "Distributor",
+    "role": "DistributorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain image generation operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.styletransfer) Applies named aesthetic consistently across shots ### Distilled quality (video.styletransfer) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility",
+    "description": "Manages downstream delivery to buyers, platforms, and territories Host role binding: `DistributorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages downstream delivery to buyers, platforms, and territories ### Knowledge distillation sources (historical) Distribution specs, outlet requirements, package handoff workflows ### Self-quality criteria (historical) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Surpass-human signal (historical) Reduces delivery-spec mismatches relative to fragmented delivery ops ### Critique bus (historical) - **Accepts critique from:** SalesAgent, ArchiveMasterAgent, SoundMixerAgent, ColoristAgent - **Comments on:** Spec mismatches, incomplete outlet packages, routing errors ### Tools design-time notes (historical, non-activating) Delivery management systems, outlet spec DB, packaging validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over distributi",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4698,21 +3644,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.image_generation_operator.v1",
-    "rubricReference": "video.rubric.image_generation_operator.v1",
+    "promptReference": "video.prompt.distributor.v1",
+    "rubricReference": "video.rubric.distributor.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.image_generation_operator",
+          "agent_id: video.distributor",
           "status: registered",
-          "role: Video Image Generation Operator configuration specialist",
+          "role: DistributorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4740,11 +3686,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.image_generation_operator.v1",
-          "rubric_reference: video.rubric.image_generation_operator.v1",
+          "prompt_reference: video.prompt.distributor.v1",
+          "rubric_reference: video.rubric.distributor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4752,25 +3698,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.image_generation_operator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.styletransfer`, `video.promptengineer`\n- Local runtime: `agent_spec.jso"
+          "# Mapping — `video.distributor`\n\n- VA/generic pack ID: `video.distributor`\n- Previous common ID: `video.delivery_qc_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain image generation operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.styletransfer) Applies named aesthetic consistently across shots ### Distilled quality (video.styletransfer) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility",
-    "folderPath": "business/video/agents/video.image_generation_operator",
+    "specExcerpt": "Manages downstream delivery to buyers, platforms, and territories Host role binding: `DistributorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages downstream delivery to buyers, platforms, and territories ### Knowledge distillation sources (historical) Distribution specs, outlet requirements, package handoff workflows ### Self-quality criteria (historical) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Surpass-human signal (historical) Reduces delivery-spec mismatches relative to fragmented delivery ops ### Critique bus (historical) - **Accepts critique from:** SalesAgent, ArchiveMasterAgent, SoundMixerAgent, ColoristAgent - **Comments on:** Spec mismatches, incomplete outlet packages, routing errors ### Tools design-time notes (historical, non-activating) Delivery management systems, outlet spec DB, packaging validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over distributi",
+    "folderPath": "business/video/agents/video.distributor",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.incident_manager",
+    "id": "video.dronepilot",
     "pack": "video",
-    "name": "Incident Manager",
-    "role": "Video Incident Manager configuration specialist",
+    "name": "Dronepilot",
+    "role": "DronePilotAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain incident manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
+    "description": "Aerial cinematography (simulated or real) Host role binding: `DronePilotAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aerial cinematography (simulated or real) ### Knowledge distillation sources (historical) Philip Bloom tutorials; FAA Part 107; SkyPixel award reels ### Self-quality criteria (historical) Path smoothness; geofence compliance 100%; horizon stability ### Surpass-human signal (historical) Competition-grade smoothness at 10× sortie rate; zero violations ### Critique bus (historical) - **Accepts critique from:** DoPAgent, SafetyAgent - **Comments on:** DoPAgent (impossible heights), SafetyAgent (risk) ### Tools design-time notes (historical, non-activating) DJI Waypoint SDK (sim); Veo 3.1 aerial-mode; geofence DB (AirMap API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (safety constitution: FAA rules as principles)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4787,21 +3733,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.incident_manager.v1",
-    "rubricReference": "video.rubric.incident_manager.v1",
+    "promptReference": "video.prompt.dronepilot.v1",
+    "rubricReference": "video.rubric.dronepilot.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.incident_manager",
+          "agent_id: video.dronepilot",
           "status: registered",
-          "role: Video Incident Manager configuration specialist",
+          "role: DronePilotAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4829,11 +3775,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.incident_manager.v1",
-          "rubric_reference: video.rubric.incident_manager.v1",
+          "prompt_reference: video.prompt.dronepilot.v1",
+          "rubric_reference: video.rubric.dronepilot.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4841,25 +3787,117 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.incident_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.gatekeeper`, `video.comms`\n- Local runtime: `agent_spec.json`\n- Local specificat"
+          "# Mapping — `video.dronepilot`\n\n- VA/generic pack ID: `video.dronepilot`\n- Previous common ID: `video.release_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain incident manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
-    "folderPath": "business/video/agents/video.incident_manager",
+    "specExcerpt": "Aerial cinematography (simulated or real) Host role binding: `DronePilotAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aerial cinematography (simulated or real) ### Knowledge distillation sources (historical) Philip Bloom tutorials; FAA Part 107; SkyPixel award reels ### Self-quality criteria (historical) Path smoothness; geofence compliance 100%; horizon stability ### Surpass-human signal (historical) Competition-grade smoothness at 10× sortie rate; zero violations ### Critique bus (historical) - **Accepts critique from:** DoPAgent, SafetyAgent - **Comments on:** DoPAgent (impossible heights), SafetyAgent (risk) ### Tools design-time notes (historical, non-activating) DJI Waypoint SDK (sim); Veo 3.1 aerial-mode; geofence DB (AirMap API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (safety constitution: FAA rules as principles)",
+    "folderPath": "business/video/agents/video.dronepilot",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.judge_agent",
+    "id": "video.editor",
     "pack": "video",
-    "name": "Judge Agent",
-    "role": "Video Judge Agent configuration specialist",
+    "name": "Editor",
+    "role": "EditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain judge agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
+    "description": "Assemble cut; pacing; coverage selection Host role binding: `EditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Assemble cut; pacing; coverage selection ### Knowledge distillation sources (historical) Murch *In the Blink of an Eye*; ACE Eddie winners; Sundance editing labs ### Self-quality criteria (historical) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Surpass-human signal (historical) Wins ≥55% pairwise vs ACE-credited cuts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSim, ComposerAgent (music-cut sync) - **Comments on:** DirectorAgent (over-coverage), DoPAgent (unusable takes) ### Tools design-time notes (historical, non-activating) DaVinci Resolve via MCP bridge; FFmpeg; EDL/XML timeline APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Murch Rule of Six)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "network?"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.runway"
+    ],
+    "promptReference": "video.prompt.editor.v1",
+    "rubricReference": "video.rubric.editor.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.editor",
+          "status: registered",
+          "role: EditorAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: media_host",
+          "model_id: local-video-config-v1",
+          "network_access: True"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 4"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: [\"media.stub\", \"media.runway\"]",
+          "prompt_reference: video.prompt.editor.v1",
+          "rubric_reference: video.rubric.editor.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.editor`\n\n- VA/generic pack ID: `video.editor`\n- Previous common ID: `video.edit_assembler`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Assemble cut; pacing; coverage selection Host role binding: `EditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Assemble cut; pacing; coverage selection ### Knowledge distillation sources (historical) Murch *In the Blink of an Eye*; ACE Eddie winners; Sundance editing labs ### Self-quality criteria (historical) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Surpass-human signal (historical) Wins ≥55% pairwise vs ACE-credited cuts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSim, ComposerAgent (music-cut sync) - **Comments on:** DirectorAgent (over-coverage), DoPAgent (unusable takes) ### Tools design-time notes (historical, non-activating) DaVinci Resolve via MCP bridge; FFmpeg; EDL/XML timeline APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Murch Rule of Six)",
+    "folderPath": "business/video/agents/video.editor",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.emotionalarc",
+    "pack": "video",
+    "name": "Emotionalarc",
+    "role": "EmotionalArcAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Maps valence/arousal curve; suggests beats Host role binding: `EmotionalArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maps valence/arousal curve; suggests beats ### Knowledge distillation sources (historical) Plutchik; affective-computing corpora; Cron *Story Genius* ### Self-quality criteria (historical) Curve-fit to target; biosignal-proxy regression accuracy ### Surpass-human signal (historical) Better retention prediction than NRG test-screening cards ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, ComposerAgent - **Comments on:** EditorAgent (flat middle), ComposerAgent (cue mismatch) ### Tools design-time notes (historical, non-activating) Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (emotional-arc curve as rubric target)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4876,21 +3914,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.refine_coordinator\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.judge_agent.v1",
-    "rubricReference": "video.rubric.judge_agent.v1",
+    "promptReference": "video.prompt.emotionalarc.v1",
+    "rubricReference": "video.rubric.emotionalarc.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.judge_agent",
+          "agent_id: video.emotionalarc",
           "status: registered",
-          "role: Video Judge Agent configuration specialist",
+          "role: EmotionalArcAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -4918,11 +3956,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.judge_agent.v1",
-          "rubric_reference: video.rubric.judge_agent.v1",
+          "prompt_reference: video.prompt.emotionalarc.v1",
+          "rubric_reference: video.rubric.emotionalarc.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.refine_coordinator\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -4930,25 +3968,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.judge_agent`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.judge`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack corpu"
+          "# Mapping — `video.emotionalarc`\n\n- VA/generic pack ID: `video.emotionalarc`\n- Previous common ID: `video.distribution_planner`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain judge agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
-    "folderPath": "business/video/agents/video.judge_agent",
+    "specExcerpt": "Maps valence/arousal curve; suggests beats Host role binding: `EmotionalArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maps valence/arousal curve; suggests beats ### Knowledge distillation sources (historical) Plutchik; affective-computing corpora; Cron *Story Genius* ### Self-quality criteria (historical) Curve-fit to target; biosignal-proxy regression accuracy ### Surpass-human signal (historical) Better retention prediction than NRG test-screening cards ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, ComposerAgent - **Comments on:** EditorAgent (flat middle), ComposerAgent (cue mismatch) ### Tools design-time notes (historical, non-activating) Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (emotional-arc curve as rubric target)",
+    "folderPath": "business/video/agents/video.emotionalarc",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.latency_analyst",
+    "id": "video.ethics",
     "pack": "video",
-    "name": "Latency Analyst",
-    "role": "Video Latency Analyst configuration specialist",
+    "name": "Ethics",
+    "role": "EthicsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain latency analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.latencyoptimizer) Parallelization, caching, speculative decoding, batching ### Distilled quality (video.latencyoptimizer) p50/p95 latency; throughput/GPU-hour",
+    "description": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: `EthicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Knowledge distillation sources (historical) Ethics frameworks, synthetic-media disclosure guidance, fairness audits ### Self-quality criteria (historical) Ethical issue recall, mitigation clarity, escalation precision ### Surpass-human signal (historical) Surfaces release risks earlier than reactive ethics review ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, ComplianceAgent (Legal), TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Disclosure insufficiency, fairness concerns, sensitive-content risk ### Tools design-time notes (historical, non-activating) Ethics review templates, risk matrices, disclosure checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Mu",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4965,21 +4003,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.latency_analyst.v1",
-    "rubricReference": "video.rubric.latency_analyst.v1",
+    "promptReference": "video.prompt.ethics.v1",
+    "rubricReference": "video.rubric.ethics.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.latency_analyst",
+          "agent_id: video.ethics",
           "status: registered",
-          "role: Video Latency Analyst configuration specialist",
+          "role: EthicsAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5007,11 +4045,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.latency_analyst.v1",
-          "rubric_reference: video.rubric.latency_analyst.v1",
+          "prompt_reference: video.prompt.ethics.v1",
+          "rubric_reference: video.rubric.ethics.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5019,25 +4057,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.latency_analyst`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.latencyoptimizer`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.m"
+          "# Mapping — `video.ethics`\n\n- VA/generic pack ID: `video.ethics`\n- Previous common ID: `video.cultural_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain latency analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.latencyoptimizer) Parallelization, caching, speculative decoding, batching ### Distilled quality (video.latencyoptimizer) p50/p95 latency; throughput/GPU-hour",
-    "folderPath": "business/video/agents/video.latency_analyst",
+    "specExcerpt": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: `EthicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Knowledge distillation sources (historical) Ethics frameworks, synthetic-media disclosure guidance, fairness audits ### Self-quality criteria (historical) Ethical issue recall, mitigation clarity, escalation precision ### Surpass-human signal (historical) Surfaces release risks earlier than reactive ethics review ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, ComplianceAgent (Legal), TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Disclosure insufficiency, fairness concerns, sensitive-content risk ### Tools design-time notes (historical, non-activating) Ethics review templates, risk matrices, disclosure checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Mu",
+    "folderPath": "business/video/agents/video.ethics",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.learning_reflector",
+    "id": "video.evaluationharness",
     "pack": "video",
-    "name": "Learning Reflector",
-    "role": "Video Learning Reflector configuration specialist",
+    "name": "Evaluationharness",
+    "role": "EvaluationHarnessAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain learning reflector outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h",
+    "description": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: `EvaluationHarnessAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; benchmark repos ### Self-quality criteria (historical) Regression precision/recall; alert latency <1h ### Surpass-human signal (historical) Catches regressions faster than ML-eng rotation ### Critique bus (historical) - **Accepts critique from:** BenchmarkResearchAgent - **Comments on:** All AI agents (regression alerts) ### Tools design-time notes (historical, non-activating) VBench suite; EvalCrafter; MT-Bench harness; CI/CD (GitHub Actions); alerting (PagerDuty) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run benchmark → compare → alert if regressed)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5054,21 +4092,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.learning_reflector.v1",
-    "rubricReference": "video.rubric.learning_reflector.v1",
+    "promptReference": "video.prompt.evaluationharness.v1",
+    "rubricReference": "video.rubric.evaluationharness.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.learning_reflector",
+          "agent_id: video.evaluationharness",
           "status: registered",
-          "role: Video Learning Reflector configuration specialist",
+          "role: EvaluationHarnessAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5096,11 +4134,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.learning_reflector.v1",
-          "rubric_reference: video.rubric.learning_reflector.v1",
+          "prompt_reference: video.prompt.evaluationharness.v1",
+          "rubric_reference: video.rubric.evaluationharness.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5108,25 +4146,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.learning_reflector`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.memory`, `video.evaluationharness`\n- Local runtime: `agent_spec.json`\n- Local "
+          "# Mapping — `video.evaluationharness`\n\n- VA/generic pack ID: `video.evaluationharness`\n- Previous common ID: `video.experiment_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain learning reflector outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h",
-    "folderPath": "business/video/agents/video.learning_reflector",
+    "specExcerpt": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: `EvaluationHarnessAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; benchmark repos ### Self-quality criteria (historical) Regression precision/recall; alert latency <1h ### Surpass-human signal (historical) Catches regressions faster than ML-eng rotation ### Critique bus (historical) - **Accepts critique from:** BenchmarkResearchAgent - **Comments on:** All AI agents (regression alerts) ### Tools design-time notes (historical, non-activating) VBench suite; EvalCrafter; MT-Bench harness; CI/CD (GitHub Actions); alerting (PagerDuty) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run benchmark → compare → alert if regressed)",
+    "folderPath": "business/video/agents/video.evaluationharness",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.legal_reviewer",
+    "id": "video.factchecker",
     "pack": "video",
-    "name": "Legal Reviewer",
-    "role": "Video Legal Reviewer configuration specialist",
+    "name": "Factchecker",
+    "role": "FactCheckerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain legal reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
+    "description": "Source-grade every claim Host role binding: `FactCheckerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Source-grade every claim ### Knowledge distillation sources (historical) New Yorker fact-check handbook; IFCN; Snopes/PolitiFact ### Self-quality criteria (historical) Source-grade per claim (primary > secondary); cross-source ≥2 ### Surpass-human signal (historical) Lower correction rate than Pulitzer-tier outlets ### Critique bus (historical) - **Accepts critique from:** SMEAgent, StandardsEditorAgent - **Comments on:** ScriptwriterAgent (unsourced), JournalistAgent ### Tools design-time notes (historical, non-activating) Web search APIs (Brave/Google); claim-extraction NER; source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (extract claim → search → verify → grade)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5143,21 +4181,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.legal_reviewer.v1",
-    "rubricReference": "video.rubric.legal_reviewer.v1",
+    "promptReference": "video.prompt.factchecker.v1",
+    "rubricReference": "video.rubric.factchecker.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.legal_reviewer",
+          "agent_id: video.factchecker",
           "status: registered",
-          "role: Video Legal Reviewer configuration specialist",
+          "role: FactCheckerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5185,11 +4223,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.legal_reviewer.v1",
-          "rubric_reference: video.rubric.legal_reviewer.v1",
+          "prompt_reference: video.prompt.factchecker.v1",
+          "rubric_reference: video.rubric.factchecker.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5197,25 +4235,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.legal_reviewer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.legal`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack co"
+          "# Mapping — `video.factchecker`\n\n- VA/generic pack ID: `video.factchecker`\n- Previous common ID: `video.factual_verifier`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain legal reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
-    "folderPath": "business/video/agents/video.legal_reviewer",
+    "specExcerpt": "Source-grade every claim Host role binding: `FactCheckerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Source-grade every claim ### Knowledge distillation sources (historical) New Yorker fact-check handbook; IFCN; Snopes/PolitiFact ### Self-quality criteria (historical) Source-grade per claim (primary > secondary); cross-source ≥2 ### Surpass-human signal (historical) Lower correction rate than Pulitzer-tier outlets ### Critique bus (historical) - **Accepts critique from:** SMEAgent, StandardsEditorAgent - **Comments on:** ScriptwriterAgent (unsourced), JournalistAgent ### Tools design-time notes (historical, non-activating) Web search APIs (Brave/Google); claim-extraction NER; source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (extract claim → search → verify → grade)",
+    "folderPath": "business/video/agents/video.factchecker",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.lifecycle_manager",
+    "id": "video.festivalstrategist",
     "pack": "video",
-    "name": "Lifecycle Manager",
-    "role": "Video Lifecycle Manager configuration specialist",
+    "name": "Festivalstrategist",
+    "role": "FestivalStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain lifecycle manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Positions projects for festivals and submission calendars Host role binding: `FestivalStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Positions projects for festivals and submission calendars ### Knowledge distillation sources (historical) Festival submission guides, award-season strategies, selection histories ### Self-quality criteria (historical) Fit-to-festival strength, package readiness, timing discipline ### Surpass-human signal (historical) Improves submission targeting versus generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DirectorAgent, CriticAgent - **Comments on:** Weak positioning, mistimed submission plans, incomplete packages ### Tools design-time notes (historical, non-activating) Festival calendars, submission checklists, press-kit trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with calendar and package validation",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5232,21 +4270,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.lifecycle_manager.v1",
-    "rubricReference": "video.rubric.lifecycle_manager.v1",
+    "promptReference": "video.prompt.festivalstrategist.v1",
+    "rubricReference": "video.rubric.festivalstrategist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.lifecycle_manager",
+          "agent_id: video.festivalstrategist",
           "status: registered",
-          "role: Video Lifecycle Manager configuration specialist",
+          "role: FestivalStrategistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5274,11 +4312,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.lifecycle_manager.v1",
-          "rubric_reference: video.rubric.lifecycle_manager.v1",
+          "prompt_reference: video.prompt.festivalstrategist.v1",
+          "rubric_reference: video.rubric.festivalstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5286,25 +4324,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.lifecycle_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.orchestrator`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local spec"
+          "# Mapping — `video.festivalstrategist`\n\n- VA/generic pack ID: `video.festivalstrategist`\n- Previous common ID: `video.schedule_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain lifecycle manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.lifecycle_manager",
+    "specExcerpt": "Positions projects for festivals and submission calendars Host role binding: `FestivalStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Positions projects for festivals and submission calendars ### Knowledge distillation sources (historical) Festival submission guides, award-season strategies, selection histories ### Self-quality criteria (historical) Fit-to-festival strength, package readiness, timing discipline ### Surpass-human signal (historical) Improves submission targeting versus generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DirectorAgent, CriticAgent - **Comments on:** Weak positioning, mistimed submission plans, incomplete packages ### Tools design-time notes (historical, non-activating) Festival calendars, submission checklists, press-kit trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with calendar and package validation",
+    "folderPath": "business/video/agents/video.festivalstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.localization_qc_reviewer",
+    "id": "video.finance",
     "pack": "video",
-    "name": "Localization Qc Reviewer",
-    "role": "Video Localization Qc Reviewer configuration specialist",
+    "name": "Finance",
+    "role": "FinanceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain localization qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
+    "description": "Accurate market / earnings / token facts Host role binding: `FinanceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate market / earnings / token facts ### Knowledge distillation sources (historical) CFA curriculum; SEC marketing rule; Bloomberg/Refinitiv feeds ### Self-quality criteria (historical) Numerical accuracy 100%; SEC compliance ### Surpass-human signal (historical) Passes CFA L3; lower retraction rate than analyst desks ### Critique bus (historical) - **Accepts critique from:** SMEAgent (econ), ComplianceAgent - **Comments on:** ScriptwriterAgent (number drift), MotionGraphicsAgent (chart scale) ### Tools design-time notes (historical, non-activating) Bloomberg API; EDGAR/SEC filings; financial-calc validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch data → validate → compose)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5321,21 +4359,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.localization_qc_reviewer.v1",
-    "rubricReference": "video.rubric.localization_qc_reviewer.v1",
+    "promptReference": "video.prompt.finance.v1",
+    "rubricReference": "video.rubric.finance.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.localization_qc_reviewer",
+          "agent_id: video.finance",
           "status: registered",
-          "role: Video Localization Qc Reviewer configuration specialist",
+          "role: FinanceAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5363,11 +4401,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.localization_qc_reviewer.v1",
-          "rubric_reference: video.rubric.localization_qc_reviewer.v1",
+          "prompt_reference: video.prompt.finance.v1",
+          "rubric_reference: video.rubric.finance.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5375,25 +4413,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.localization_qc_reviewer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.localizationqa`\n- Local runtime: `agent_spec.json`\n- Local specification: "
+          "# Mapping — `video.finance`\n\n- VA/generic pack ID: `video.finance`\n- Previous common ID: `video.budget_controller`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain localization qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
-    "folderPath": "business/video/agents/video.localization_qc_reviewer",
+    "specExcerpt": "Accurate market / earnings / token facts Host role binding: `FinanceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate market / earnings / token facts ### Knowledge distillation sources (historical) CFA curriculum; SEC marketing rule; Bloomberg/Refinitiv feeds ### Self-quality criteria (historical) Numerical accuracy 100%; SEC compliance ### Surpass-human signal (historical) Passes CFA L3; lower retraction rate than analyst desks ### Critique bus (historical) - **Accepts critique from:** SMEAgent (econ), ComplianceAgent - **Comments on:** ScriptwriterAgent (number drift), MotionGraphicsAgent (chart scale) ### Tools design-time notes (historical, non-activating) Bloomberg API; EDGAR/SEC filings; financial-calc validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch data → validate → compose)",
+    "folderPath": "business/video/agents/video.finance",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.localization_specialist",
+    "id": "video.foodstylist",
     "pack": "video",
-    "name": "Localization Specialist",
-    "role": "Video Localization Specialist configuration specialist",
+    "name": "Foodstylist",
+    "role": "FoodStylistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain localization specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
+    "description": "Camera-ready food, recipe authenticity Host role binding: `FoodStylistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Camera-ready food, recipe authenticity ### Knowledge distillation sources (historical) James Beard archives; Spungen techniques; IACP corpora ### Self-quality criteria (historical) Visual appetite-appeal (aesthetic regressor); recipe accuracy ### Surpass-human signal (historical) Wins blind preference vs editorial food stylist ### Critique bus (historical) - **Accepts critique from:** DoPAgent (lighting), DirectorAgent - **Comments on:** ScriptwriterAgent (impossible recipe) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney (food-photo gen); recipe-step parser; aesthetic scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (aesthetic regressor as rubric)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5410,21 +4448,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.localization_specialist.v1",
-    "rubricReference": "video.rubric.localization_specialist.v1",
+    "promptReference": "video.prompt.foodstylist.v1",
+    "rubricReference": "video.rubric.foodstylist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.localization_specialist",
+          "agent_id: video.foodstylist",
           "status: registered",
-          "role: Video Localization Specialist configuration specialist",
+          "role: FoodStylistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5452,11 +4490,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.localization_specialist.v1",
-          "rubric_reference: video.rubric.localization_specialist.v1",
+          "prompt_reference: video.prompt.foodstylist.v1",
+          "rubric_reference: video.rubric.foodstylist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5464,25 +4502,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.localization_specialist`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.localizationqa`\n- Local runtime: `agent_spec.json`\n- Local specification: `"
+          "# Mapping — `video.foodstylist`\n\n- VA/generic pack ID: `video.foodstylist`\n- Previous common ID: `video.resource_planner`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain localization specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
-    "folderPath": "business/video/agents/video.localization_specialist",
+    "specExcerpt": "Camera-ready food, recipe authenticity Host role binding: `FoodStylistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Camera-ready food, recipe authenticity ### Knowledge distillation sources (historical) James Beard archives; Spungen techniques; IACP corpora ### Self-quality criteria (historical) Visual appetite-appeal (aesthetic regressor); recipe accuracy ### Surpass-human signal (historical) Wins blind preference vs editorial food stylist ### Critique bus (historical) - **Accepts critique from:** DoPAgent (lighting), DirectorAgent - **Comments on:** ScriptwriterAgent (impossible recipe) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney (food-photo gen); recipe-step parser; aesthetic scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (aesthetic regressor as rubric)",
+    "folderPath": "business/video/agents/video.foodstylist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.location_manager",
+    "id": "video.gatekeeper",
     "pack": "video",
-    "name": "Location Manager",
-    "role": "Video Location Manager configuration specialist",
+    "name": "Gatekeeper",
+    "role": "GateKeeperAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain location manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: `GateKeeperAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Knowledge distillation sources (historical) Stage-gate methodology; PGA Producers Mark; QMS audit ### Self-quality criteria (historical) Zero leaked defects; sign-off SLA ≥99% ### Surpass-human signal (historical) Lower escaped-defect rate than human QA lead ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, AIQAConsistencyAgent - **Comments on:** OrchestratorAgent (premature advance) ### Tools design-time notes (historical, non-activating) C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = phase-gate criteria)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5499,21 +4537,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.location_manager.v1",
-    "rubricReference": "video.rubric.location_manager.v1",
+    "promptReference": "video.prompt.gatekeeper.v1",
+    "rubricReference": "video.rubric.gatekeeper.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.location_manager",
+          "agent_id: video.gatekeeper",
           "status: registered",
-          "role: Video Location Manager configuration specialist",
+          "role: GateKeeperAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5541,11 +4579,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.location_manager.v1",
-          "rubric_reference: video.rubric.location_manager.v1",
+          "prompt_reference: video.prompt.gatekeeper.v1",
+          "rubric_reference: video.rubric.gatekeeper.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5553,25 +4591,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.location_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.productiondesign`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.gatekeeper`\n\n- VA/generic pack ID: `video.gatekeeper`\n- Previous common ID: `video.signoff_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain location manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.location_manager",
+    "specExcerpt": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: `GateKeeperAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Knowledge distillation sources (historical) Stage-gate methodology; PGA Producers Mark; QMS audit ### Self-quality criteria (historical) Zero leaked defects; sign-off SLA ≥99% ### Surpass-human signal (historical) Lower escaped-defect rate than human QA lead ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, AIQAConsistencyAgent - **Comments on:** OrchestratorAgent (premature advance) ### Tools design-time notes (historical, non-activating) C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = phase-gate criteria)",
+    "folderPath": "business/video/agents/video.gatekeeper",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.memory_curator",
+    "id": "video.ideation",
     "pack": "video",
-    "name": "Memory Curator",
-    "role": "Video Memory Curator configuration specialist",
+    "name": "Ideation",
+    "role": "IdeationAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain memory curator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
+    "description": "Divergent brainstorm of concepts, hooks, taglines Host role binding: `IdeationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Divergent brainstorm of concepts, hooks, taglines ### Knowledge distillation sources (historical) Cannes Grand Prix; D&AD; IDEO design-thinking; SCAMPER/de Bono ### Self-quality criteria (historical) Idea-count; novelty (embedding distance); semantic diversity ### Surpass-human signal (historical) Wins agency-pitch shootouts on concept density ### Critique bus (historical) - **Accepts critique from:** CreativeDirectorAgent, NoveltyAgent - **Comments on:** CopywriterAgent (derivative), DirectorAgent (unfilmable) ### Tools design-time notes (historical, non-activating) Embedding novelty scorer; concept clustering (UMAP); Are.na/Pinterest search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + NoveltyAgent as critic",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5588,21 +4626,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.memory_curator.v1",
-    "rubricReference": "video.rubric.memory_curator.v1",
+    "promptReference": "video.prompt.ideation.v1",
+    "rubricReference": "video.rubric.ideation.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.memory_curator",
+          "agent_id: video.ideation",
           "status: registered",
-          "role: Video Memory Curator configuration specialist",
+          "role: IdeationAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5630,11 +4668,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.memory_curator.v1",
-          "rubric_reference: video.rubric.memory_curator.v1",
+          "prompt_reference: video.prompt.ideation.v1",
+          "rubric_reference: video.rubric.ideation.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5642,25 +4680,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.memory_curator`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.memory`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack c"
+          "# Mapping — `video.ideation`\n\n- VA/generic pack ID: `video.ideation`\n- Previous common ID: `video.concept_developer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain memory curator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
-    "folderPath": "business/video/agents/video.memory_curator",
+    "specExcerpt": "Divergent brainstorm of concepts, hooks, taglines Host role binding: `IdeationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Divergent brainstorm of concepts, hooks, taglines ### Knowledge distillation sources (historical) Cannes Grand Prix; D&AD; IDEO design-thinking; SCAMPER/de Bono ### Self-quality criteria (historical) Idea-count; novelty (embedding distance); semantic diversity ### Surpass-human signal (historical) Wins agency-pitch shootouts on concept density ### Critique bus (historical) - **Accepts critique from:** CreativeDirectorAgent, NoveltyAgent - **Comments on:** CopywriterAgent (derivative), DirectorAgent (unfilmable) ### Tools design-time notes (historical, non-activating) Embedding novelty scorer; concept clustering (UMAP); Are.na/Pinterest search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + NoveltyAgent as critic",
+    "folderPath": "business/video/agents/video.ideation",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.model_input_recorder",
+    "id": "video.instructionaldesign",
     "pack": "video",
-    "name": "Model Input Recorder",
-    "role": "Video Model Input Recorder configuration specialist",
+    "name": "Instructionaldesign",
+    "role": "InstructionalDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain model input recorder outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
+    "description": "Learning objectives → script → assessment Host role binding: `InstructionalDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Learning objectives → script → assessment ### Knowledge distillation sources (historical) ATD body of knowledge; Cathy Moore *Action Mapping*; Dirksen *Design for How People Learn* ### Self-quality criteria (historical) Bloom-level mapping; completion ≥70%; Kirkpatrick L2 quiz ≥80% ### Surpass-human signal (historical) Beats ATD-credentialed ID on retention RCT ### Critique bus (historical) - **Accepts critique from:** SMEAgent, AccessibilityAgent - **Comments on:** ScriptwriterAgent (no objective), AnimatorAgent (over-decoration) ### Tools design-time notes (historical, non-activating) LMS APIs (SCORM/xAPI); quiz generation; Bloom taxonomy classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Bloom/Kirkpatrick)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5677,21 +4715,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.model_input_recorder.v1",
-    "rubricReference": "video.rubric.model_input_recorder.v1",
+    "promptReference": "video.prompt.instructionaldesign.v1",
+    "rubricReference": "video.rubric.instructionaldesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.model_input_recorder",
+          "agent_id: video.instructionaldesign",
           "status: registered",
-          "role: Video Model Input Recorder configuration specialist",
+          "role: InstructionalDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5719,11 +4757,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.model_input_recorder.v1",
-          "rubric_reference: video.rubric.model_input_recorder.v1",
+          "prompt_reference: video.prompt.instructionaldesign.v1",
+          "rubric_reference: video.rubric.instructionaldesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5731,25 +4769,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.model_input_recorder`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.promptengineer`, `video.memory`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.instructionaldesign`\n\n- VA/generic pack ID: `video.instructionaldesign`\n- Previous common ID: `video.vendor_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain model input recorder outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
-    "folderPath": "business/video/agents/video.model_input_recorder",
+    "specExcerpt": "Learning objectives → script → assessment Host role binding: `InstructionalDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Learning objectives → script → assessment ### Knowledge distillation sources (historical) ATD body of knowledge; Cathy Moore *Action Mapping*; Dirksen *Design for How People Learn* ### Self-quality criteria (historical) Bloom-level mapping; completion ≥70%; Kirkpatrick L2 quiz ≥80% ### Surpass-human signal (historical) Beats ATD-credentialed ID on retention RCT ### Critique bus (historical) - **Accepts critique from:** SMEAgent, AccessibilityAgent - **Comments on:** ScriptwriterAgent (no objective), AnimatorAgent (over-decoration) ### Tools design-time notes (historical, non-activating) LMS APIs (SCORM/xAPI); quiz generation; Bloom taxonomy classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Bloom/Kirkpatrick)",
+    "folderPath": "business/video/agents/video.instructionaldesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.motion_designer",
+    "id": "video.interviewsynthesis",
     "pack": "video",
-    "name": "Motion Designer",
-    "role": "Video Motion Designer configuration specialist",
+    "name": "Interviewsynthesis",
+    "role": "InterviewSynthesisAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain motion designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail",
+    "description": "Synthesizes practitioner interviews into data Host role binding: `InterviewSynthesisAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthesizes practitioner interviews into data ### Knowledge distillation sources (historical) Otter/Rev transcripts; consent forms; SAG/WGA templates ### Self-quality criteria (historical) Inter-coder agreement on themes; consent integrity ### Surpass-human signal (historical) Faster + richer theme extraction than qualitative researcher ### Critique bus (historical) - **Accepts critique from:** ResearchPIAgent (HiTL), ComplianceAgent - **Comments on:** SMEAgent (mis-summarized expert) ### Tools design-time notes (historical, non-activating) Otter.ai/Rev API (transcription); thematic coding models; consent-management DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (interviewer refines questions based on theme gaps)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5766,21 +4804,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.motion_designer.v1",
-    "rubricReference": "video.rubric.motion_designer.v1",
+    "promptReference": "video.prompt.interviewsynthesis.v1",
+    "rubricReference": "video.rubric.interviewsynthesis.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.motion_designer",
+          "agent_id: video.interviewsynthesis",
           "status: registered",
-          "role: Video Motion Designer configuration specialist",
+          "role: InterviewSynthesisAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5808,11 +4846,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.motion_designer.v1",
-          "rubric_reference: video.rubric.motion_designer.v1",
+          "prompt_reference: video.prompt.interviewsynthesis.v1",
+          "rubric_reference: video.rubric.interviewsynthesis.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5820,25 +4858,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.motion_designer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.motiongraphics`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`"
+          "# Mapping — `video.interviewsynthesis`\n\n- VA/generic pack ID: `video.interviewsynthesis`\n- Previous common ID: `video.location_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain motion designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail",
-    "folderPath": "business/video/agents/video.motion_designer",
+    "specExcerpt": "Synthesizes practitioner interviews into data Host role binding: `InterviewSynthesisAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthesizes practitioner interviews into data ### Knowledge distillation sources (historical) Otter/Rev transcripts; consent forms; SAG/WGA templates ### Self-quality criteria (historical) Inter-coder agreement on themes; consent integrity ### Surpass-human signal (historical) Faster + richer theme extraction than qualitative researcher ### Critique bus (historical) - **Accepts critique from:** ResearchPIAgent (HiTL), ComplianceAgent - **Comments on:** SMEAgent (mis-summarized expert) ### Tools design-time notes (historical, non-activating) Otter.ai/Rev API (transcription); thematic coding models; consent-management DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (interviewer refines questions based on theme gaps)",
+    "folderPath": "business/video/agents/video.interviewsynthesis",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.music_supervisor",
+    "id": "video.journalist",
     "pack": "video",
-    "name": "Music Supervisor",
-    "role": "Video Music Supervisor configuration specialist",
+    "name": "Journalist",
+    "role": "JournalistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain music supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.musicsupervisor) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Distilled quality (video.musicsupervisor) Cue suitability, rights-awareness coverage, soundtrack-package completeness",
+    "description": "Reporting + ethical framing Host role binding: `JournalistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reporting + ethical framing ### Knowledge distillation sources (historical) Pulitzer/duPont/Peabody winners; SPJ Ethics; Poynter ### Self-quality criteria (historical) Source diversity; on-record ratio; ethical-checklist pass ### Surpass-human signal (historical) Lower correction rate + faster file vs newsroom ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, LegalAgent, StandardsEditorAgent - **Comments on:** FactCheckerAgent, ScriptwriterAgent ### Tools design-time notes (historical, non-activating) Web research tools; AP Stylebook API; interview transcription (Otter); SPJ rubric **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (ethical-checklist as verbal feedback)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5855,21 +4893,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.music_supervisor.v1",
-    "rubricReference": "video.rubric.music_supervisor.v1",
+    "promptReference": "video.prompt.journalist.v1",
+    "rubricReference": "video.rubric.journalist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.music_supervisor",
+          "agent_id: video.journalist",
           "status: registered",
-          "role: Video Music Supervisor configuration specialist",
+          "role: JournalistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5897,11 +4935,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.music_supervisor.v1",
-          "rubric_reference: video.rubric.music_supervisor.v1",
+          "prompt_reference: video.prompt.journalist.v1",
+          "rubric_reference: video.rubric.journalist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5909,25 +4947,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.music_supervisor`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.musicsupervisor`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`"
+          "# Mapping — `video.journalist`\n\n- VA/generic pack ID: `video.journalist`\n- Previous common ID: `video.production_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain music supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.musicsupervisor) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Distilled quality (video.musicsupervisor) Cue suitability, rights-awareness coverage, soundtrack-package completeness",
-    "folderPath": "business/video/agents/video.music_supervisor",
+    "specExcerpt": "Reporting + ethical framing Host role binding: `JournalistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reporting + ethical framing ### Knowledge distillation sources (historical) Pulitzer/duPont/Peabody winners; SPJ Ethics; Poynter ### Self-quality criteria (historical) Source diversity; on-record ratio; ethical-checklist pass ### Surpass-human signal (historical) Lower correction rate + faster file vs newsroom ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, LegalAgent, StandardsEditorAgent - **Comments on:** FactCheckerAgent, ScriptwriterAgent ### Tools design-time notes (historical, non-activating) Web research tools; AP Stylebook API; interview transcription (Otter); SPJ rubric **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (ethical-checklist as verbal feedback)",
+    "folderPath": "business/video/agents/video.journalist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.narrative_designer",
+    "id": "video.judge",
     "pack": "video",
-    "name": "Narrative Designer",
-    "role": "Video Narrative Designer configuration specialist",
+    "name": "Judge",
+    "role": "JudgeAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain narrative designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.narrativearc) 3-act / Save-the-Cat / Hero's Journey structure ### Distilled quality (video.narrativearc) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Distilled responsibility (video.showrunner) Cross-episode arc, writers'-room orchestration ### Distilled quality (video.showrunner) Arc continuity score; character-thread completion; tonal variance within bounds",
+    "description": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: `JudgeAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adjudicates disputes via multi-agent debate; scores against rubric ### Knowledge distillation sources (historical) Du 2023 (LLM debate); MT-Bench rubrics; guild scoring sheets ### Self-quality criteria (historical) Inter-rater κ vs expert panel ≥0.8 ### Surpass-human signal (historical) Higher κ than median human juror ### Critique bus (historical) - **Accepts critique from:** HiTL on overturned rulings - **Comments on:** DirectorAgent, ScreenwriterAgent, any disputing pair ### Tools design-time notes (historical, non-activating) MT-Bench/Arena evaluation harness; rubric template engine **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) + LLM-as-Judge (Zheng 2023)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5944,21 +4982,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.narrative_designer.v1",
-    "rubricReference": "video.rubric.narrative_designer.v1",
+    "promptReference": "video.prompt.judge.v1",
+    "rubricReference": "video.rubric.judge.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.narrative_designer",
+          "agent_id: video.judge",
           "status: registered",
-          "role: Video Narrative Designer configuration specialist",
+          "role: JudgeAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -5986,11 +5024,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.narrative_designer.v1",
-          "rubric_reference: video.rubric.narrative_designer.v1",
+          "prompt_reference: video.prompt.judge.v1",
+          "rubric_reference: video.rubric.judge.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -5998,25 +5036,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.narrative_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.narrativearc`, `video.showrunner`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.judge`\n\n- VA/generic pack ID: `video.judge`\n- Previous common ID: `video.qc_l3_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain narrative designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.narrativearc) 3-act / Save-the-Cat / Hero's Journey structure ### Distilled quality (video.narrativearc) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Distilled responsibility (video.showrunner) Cross-episode arc, writers'-room orchestration ### Distilled quality (video.showrunner) Arc continuity score; character-thread completion; tonal variance within bounds",
-    "folderPath": "business/video/agents/video.narrative_designer",
+    "specExcerpt": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: `JudgeAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adjudicates disputes via multi-agent debate; scores against rubric ### Knowledge distillation sources (historical) Du 2023 (LLM debate); MT-Bench rubrics; guild scoring sheets ### Self-quality criteria (historical) Inter-rater κ vs expert panel ≥0.8 ### Surpass-human signal (historical) Higher κ than median human juror ### Critique bus (historical) - **Accepts critique from:** HiTL on overturned rulings - **Comments on:** DirectorAgent, ScreenwriterAgent, any disputing pair ### Tools design-time notes (historical, non-activating) MT-Bench/Arena evaluation harness; rubric template engine **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) + LLM-as-Judge (Zheng 2023)",
+    "folderPath": "business/video/agents/video.judge",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.operations_observer",
+    "id": "video.labela_r",
     "pack": "video",
-    "name": "Operations Observer",
-    "role": "Video Operations Observer configuration specialist",
+    "name": "Labela R",
+    "role": "LabelA&RAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain operations observer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
+    "description": "Represents label and artist direction for music-specific workflows Host role binding: `LabelA&RAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Represents label and artist direction for music-specific workflows ### Knowledge distillation sources (historical) A&R playbooks, label release notes, artist brief archives ### Self-quality criteria (historical) Artist-fit quality, release positioning, feedback turnaround ### Surpass-human signal (historical) Aligns music creative faster than disconnected stakeholder threads ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, MusicSupervisorAgent, LabelDigitalAgent - **Comments on:** Artist-direction drift, release mismatch, packaging weakness ### Tools design-time notes (historical, non-activating) Repertoire systems, release trackers, artist brief tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate with music stakeholders",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6033,21 +5071,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.operations_observer.v1",
-    "rubricReference": "video.rubric.operations_observer.v1",
+    "promptReference": "video.prompt.labela_r.v1",
+    "rubricReference": "video.rubric.labela_r.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.operations_observer",
+          "agent_id: video.labela_r",
           "status: registered",
-          "role: Video Operations Observer configuration specialist",
+          "role: LabelA&RAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6075,11 +5113,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.operations_observer.v1",
-          "rubric_reference: video.rubric.operations_observer.v1",
+          "prompt_reference: video.prompt.labela_r.v1",
+          "rubric_reference: video.rubric.labela_r.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6087,14 +5125,1619 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.operations_observer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.analyst`, `video.orchestrator`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.labela_r`\n\n- VA/generic pack ID: `video.labela_r`\n- Previous common ID: `video.postproduction_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain operations observer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
-    "folderPath": "business/video/agents/video.operations_observer",
+    "specExcerpt": "Represents label and artist direction for music-specific workflows Host role binding: `LabelA&RAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Represents label and artist direction for music-specific workflows ### Knowledge distillation sources (historical) A&R playbooks, label release notes, artist brief archives ### Self-quality criteria (historical) Artist-fit quality, release positioning, feedback turnaround ### Surpass-human signal (historical) Aligns music creative faster than disconnected stakeholder threads ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, MusicSupervisorAgent, LabelDigitalAgent - **Comments on:** Artist-direction drift, release mismatch, packaging weakness ### Tools design-time notes (historical, non-activating) Repertoire systems, release trackers, artist brief tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate with music stakeholders",
+    "folderPath": "business/video/agents/video.labela_r",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.labeldigital",
+    "pack": "video",
+    "name": "Labeldigital",
+    "role": "LabelDigitalAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: `LabelDigitalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs label-side digital rollout, metadata, and channel packaging ### Knowledge distillation sources (historical) Digital music release operations, metadata schemas, distribution platform requirements ### Self-quality criteria (historical) Metadata completeness, rollout timing, channel readiness ### Surpass-human signal (historical) Delivers cleaner label-side packages than ad hoc release ops ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, SocialMediaStrategistAgent, MarketingAgent - **Comments on:** Missing metadata, release timing issues, asset-version confusion ### Tools design-time notes (historical, non-activating) Digital release systems, channel dashboards, metadata tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on release package",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.labeldigital.v1",
+    "rubricReference": "video.rubric.labeldigital.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.labeldigital",
+          "status: registered",
+          "role: LabelDigitalAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.labeldigital.v1",
+          "rubric_reference: video.rubric.labeldigital.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.labeldigital`\n\n- VA/generic pack ID: `video.labeldigital`\n- Previous common ID: `video.archive_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: `LabelDigitalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs label-side digital rollout, metadata, and channel packaging ### Knowledge distillation sources (historical) Digital music release operations, metadata schemas, distribution platform requirements ### Self-quality criteria (historical) Metadata completeness, rollout timing, channel readiness ### Surpass-human signal (historical) Delivers cleaner label-side packages than ad hoc release ops ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, SocialMediaStrategistAgent, MarketingAgent - **Comments on:** Missing metadata, release timing issues, asset-version confusion ### Tools design-time notes (historical, non-activating) Digital release systems, channel dashboards, metadata tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on release package",
+    "folderPath": "business/video/agents/video.labeldigital",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.latencyoptimizer",
+    "pack": "video",
+    "name": "Latencyoptimizer",
+    "role": "LatencyOptimizerAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Parallelization, caching, speculative decoding, batching Host role binding: `LatencyOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Parallelization, caching, speculative decoding, batching ### Knowledge distillation sources (historical) vLLM; TensorRT-LLM; distillation; Anyscale/Ray ### Self-quality criteria (historical) p50/p95 latency; throughput/GPU-hour ### Surpass-human signal (historical) Lower p95 than human-tuned pipeline ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent - **Comments on:** OrchestratorAgent (serial bottleneck) ### Tools design-time notes (historical, non-activating) vLLM; TensorRT-LLM; Ray Serve; Redis (response cache); speculative decoding configs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use profiling + automated pipeline restructuring",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.latencyoptimizer.v1",
+    "rubricReference": "video.rubric.latencyoptimizer.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.latencyoptimizer",
+          "status: registered",
+          "role: LatencyOptimizerAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.latencyoptimizer.v1",
+          "rubric_reference: video.rubric.latencyoptimizer.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.latencyoptimizer`\n\n- VA/generic pack ID: `video.latencyoptimizer`\n- Previous common ID: `video.latency_analyst`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Parallelization, caching, speculative decoding, batching Host role binding: `LatencyOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Parallelization, caching, speculative decoding, batching ### Knowledge distillation sources (historical) vLLM; TensorRT-LLM; distillation; Anyscale/Ray ### Self-quality criteria (historical) p50/p95 latency; throughput/GPU-hour ### Surpass-human signal (historical) Lower p95 than human-tuned pipeline ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent - **Comments on:** OrchestratorAgent (serial bottleneck) ### Tools design-time notes (historical, non-activating) vLLM; TensorRT-LLM; Ray Serve; Redis (response cache); speculative decoding configs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use profiling + automated pipeline restructuring",
+    "folderPath": "business/video/agents/video.latencyoptimizer",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.learnersim",
+    "pack": "video",
+    "name": "Learnersim",
+    "role": "LearnerSimAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Simulates learner behavior, confusion points, and assessment performance Host role binding: `LearnerSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates learner behavior, confusion points, and assessment performance ### Knowledge distillation sources (historical) Learner-modeling datasets, completion analytics, quiz outcome patterns ### Self-quality criteria (historical) Friction-point prediction, completion accuracy, simulated quiz realism ### Surpass-human signal (historical) Predicts weak spots before live learner complaints emerge ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, LMSAgent, AnalystAgent - **Comments on:** Confusing content, weak assessments, low-completion pathways ### Tools design-time notes (historical, non-activating) Learner simulation models, assessment predictors, LMS data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Audience-style simulation adapted for l",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.learnersim.v1",
+    "rubricReference": "video.rubric.learnersim.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.learnersim",
+          "status: registered",
+          "role: LearnerSimAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.learnersim.v1",
+          "rubric_reference: video.rubric.learnersim.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.learnersim`\n\n- VA/generic pack ID: `video.learnersim`\n- Previous common ID: `video.asset_security_officer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Simulates learner behavior, confusion points, and assessment performance Host role binding: `LearnerSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates learner behavior, confusion points, and assessment performance ### Knowledge distillation sources (historical) Learner-modeling datasets, completion analytics, quiz outcome patterns ### Self-quality criteria (historical) Friction-point prediction, completion accuracy, simulated quiz realism ### Surpass-human signal (historical) Predicts weak spots before live learner complaints emerge ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, LMSAgent, AnalystAgent - **Comments on:** Confusing content, weak assessments, low-completion pathways ### Tools design-time notes (historical, non-activating) Learner simulation models, assessment predictors, LMS data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Audience-style simulation adapted for l",
+    "folderPath": "business/video/agents/video.learnersim",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.legal",
+    "pack": "video",
+    "name": "Legal",
+    "role": "LegalAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Performs final legal review for novel or high-risk publication issues Host role binding: `LegalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Performs final legal review for novel or high-risk publication issues ### Knowledge distillation sources (historical) Media law references, clearance workflows, defamation/IP/privacy cases ### Self-quality criteria (historical) Issue identification recall, sign-off completeness, escalation quality ### Surpass-human signal (historical) Reduces late-stage legal surprises relative to fragmented legal review ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (Legal), JournalistAgent, ProducerAgent / EP, MPAAgent - **Comments on:** Novel legal risks, unclear rights, unresolved high-risk claims ### Tools design-time notes (historical, non-activating) Legal memo systems, rights trackers, clearance databases **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Human-in-the-lo",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.legal.v1",
+    "rubricReference": "video.rubric.legal.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.legal",
+          "status: registered",
+          "role: LegalAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.legal.v1",
+          "rubric_reference: video.rubric.legal.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.legal`\n\n- VA/generic pack ID: `video.legal`\n- Previous common ID: `video.rights_consent_agent`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Performs final legal review for novel or high-risk publication issues Host role binding: `LegalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Performs final legal review for novel or high-risk publication issues ### Knowledge distillation sources (historical) Media law references, clearance workflows, defamation/IP/privacy cases ### Self-quality criteria (historical) Issue identification recall, sign-off completeness, escalation quality ### Surpass-human signal (historical) Reduces late-stage legal surprises relative to fragmented legal review ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (Legal), JournalistAgent, ProducerAgent / EP, MPAAgent - **Comments on:** Novel legal risks, unclear rights, unresolved high-risk claims ### Tools design-time notes (historical, non-activating) Legal memo systems, rights trackers, clearance databases **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Human-in-the-lo",
+    "folderPath": "business/video/agents/video.legal",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.lipsync",
+    "pack": "video",
+    "name": "Lipsync",
+    "role": "LipSyncAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: `LipSyncAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Validates and refines phoneme-viseme alignment as a dedicated gate ### Knowledge distillation sources (historical) Lip-sync research, animation timing references, viseme datasets ### Self-quality criteria (historical) Sync error below threshold, correction specificity, low false positives ### Surpass-human signal (historical) Finds sync drift more precisely than general QC review ### Critique bus (historical) - **Accepts critique from:** VoiceCloneAgent / LipSyncSpecialist, AnimatorAgent, AIQAConsistencyAgent - **Comments on:** Mouth-shape mismatch, frame drift in dialogue, correction priority ### Tools design-time notes (historical, non-activating) Phoneme-viseme aligners, frame-level sync tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine around sync validator outputs",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.lipsync.v1",
+    "rubricReference": "video.rubric.lipsync.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.lipsync",
+          "status: registered",
+          "role: LipSyncAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.lipsync.v1",
+          "rubric_reference: video.rubric.lipsync.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.lipsync`\n\n- VA/generic pack ID: `video.lipsync`\n- Previous common ID: `video.data_governance_officer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: `LipSyncAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Validates and refines phoneme-viseme alignment as a dedicated gate ### Knowledge distillation sources (historical) Lip-sync research, animation timing references, viseme datasets ### Self-quality criteria (historical) Sync error below threshold, correction specificity, low false positives ### Surpass-human signal (historical) Finds sync drift more precisely than general QC review ### Critique bus (historical) - **Accepts critique from:** VoiceCloneAgent / LipSyncSpecialist, AnimatorAgent, AIQAConsistencyAgent - **Comments on:** Mouth-shape mismatch, frame drift in dialogue, correction priority ### Tools design-time notes (historical, non-activating) Phoneme-viseme aligners, frame-level sync tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine around sync validator outputs",
+    "folderPath": "business/video/agents/video.lipsync",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.lms",
+    "pack": "video",
+    "name": "Lms",
+    "role": "LMSAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Packages and deploys learning content to LMS environments Host role binding: `LMSAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages and deploys learning content to LMS environments ### Knowledge distillation sources (historical) SCORM/xAPI standards, LMS publishing workflows, completion-tracking schemas ### Self-quality criteria (historical) Package validity, tracking integrity, deploy success rate ### Surpass-human signal (historical) Ships publishable learning packages faster than manual course ops ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, AccessibilityAgent, LearnerSimAgent - **Comments on:** Package compliance, tracking errors, learning-objective mismatch ### Tools design-time notes (historical, non-activating) LMS APIs, SCORM/xAPI validators, course packaging tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over LMS deployment schema",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.lms.v1",
+    "rubricReference": "video.rubric.lms.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.lms",
+          "status: registered",
+          "role: LMSAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.lms.v1",
+          "rubric_reference: video.rubric.lms.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.lms`\n\n- VA/generic pack ID: `video.lms`\n- Previous common ID: `video.incident_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Packages and deploys learning content to LMS environments Host role binding: `LMSAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages and deploys learning content to LMS environments ### Knowledge distillation sources (historical) SCORM/xAPI standards, LMS publishing workflows, completion-tracking schemas ### Self-quality criteria (historical) Package validity, tracking integrity, deploy success rate ### Surpass-human signal (historical) Ships publishable learning packages faster than manual course ops ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, AccessibilityAgent, LearnerSimAgent - **Comments on:** Package compliance, tracking errors, learning-objective mismatch ### Tools design-time notes (historical, non-activating) LMS APIs, SCORM/xAPI validators, course packaging tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over LMS deployment schema",
+    "folderPath": "business/video/agents/video.lms",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.localizationqa",
+    "pack": "video",
+    "name": "Localizationqa",
+    "role": "LocalizationQAAgent (Linguist) (VA Domain Pack)",
+    "status": "registered",
+    "description": "Translation + cultural fit Host role binding: `LocalizationQAAgent (Linguist) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Translation + cultural fit ### Knowledge distillation sources (historical) LISA QA model; MQM error typology; ATA cert prep ### Self-quality criteria (historical) MQM error/1k words; cultural-flag count ### Surpass-human signal (historical) Beats LSP human QA on MQM at 10× speed ### Critique bus (historical) - **Accepts critique from:** NativeReviewerAgent, BrandAgent - **Comments on:** VoiceCloneAgent (pronunciation), DubbingAgent ### Tools design-time notes (historical, non-activating) DeepL/Google Translate APIs; MQM error annotator; terminology management (memoQ API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: MQM scoring framework)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.localizationqa.v1",
+    "rubricReference": "video.rubric.localizationqa.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.localizationqa",
+          "status: registered",
+          "role: LocalizationQAAgent (Linguist) (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.localizationqa.v1",
+          "rubric_reference: video.rubric.localizationqa.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.localizationqa`\n\n- VA/generic pack ID: `video.localizationqa`\n- Previous common ID: `video.localization_specialist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Translation + cultural fit Host role binding: `LocalizationQAAgent (Linguist) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Translation + cultural fit ### Knowledge distillation sources (historical) LISA QA model; MQM error typology; ATA cert prep ### Self-quality criteria (historical) MQM error/1k words; cultural-flag count ### Surpass-human signal (historical) Beats LSP human QA on MQM at 10× speed ### Critique bus (historical) - **Accepts critique from:** NativeReviewerAgent, BrandAgent - **Comments on:** VoiceCloneAgent (pronunciation), DubbingAgent ### Tools design-time notes (historical, non-activating) DeepL/Google Translate APIs; MQM error annotator; terminology management (memoQ API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: MQM scoring framework)",
+    "folderPath": "business/video/agents/video.localizationqa",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.marketing",
+    "pack": "video",
+    "name": "Marketing",
+    "role": "MarketingAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Packages content for launch, promotions, and release sequencing Host role binding: `MarketingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages content for launch, promotions, and release sequencing ### Knowledge distillation sources (historical) Campaign playbooks, launch calendars, media plans, asset packaging requirements ### Self-quality criteria (historical) Metadata completeness, asset readiness, launch sequencing accuracy ### Surpass-human signal (historical) Ships multi-channel launch packages faster than manual campaign ops ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, CopywriterAgent, TrailerEditorAgent - **Comments on:** Missing formats, weak rollout timing, incomplete promotion sets ### Tools design-time notes (historical, non-activating) Campaign management suites, metadata tools, release planners **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over la",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.marketing.v1",
+    "rubricReference": "video.rubric.marketing.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.marketing",
+          "status: registered",
+          "role: MarketingAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.marketing.v1",
+          "rubric_reference: video.rubric.marketing.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.marketing`\n\n- VA/generic pack ID: `video.marketing`\n- Previous common ID: `video.campaign_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Packages content for launch, promotions, and release sequencing Host role binding: `MarketingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages content for launch, promotions, and release sequencing ### Knowledge distillation sources (historical) Campaign playbooks, launch calendars, media plans, asset packaging requirements ### Self-quality criteria (historical) Metadata completeness, asset readiness, launch sequencing accuracy ### Surpass-human signal (historical) Ships multi-channel launch packages faster than manual campaign ops ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, CopywriterAgent, TrailerEditorAgent - **Comments on:** Missing formats, weak rollout timing, incomplete promotion sets ### Tools design-time notes (historical, non-activating) Campaign management suites, metadata tools, release planners **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over la",
+    "folderPath": "business/video/agents/video.marketing",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.medicalillustrator",
+    "pack": "video",
+    "name": "Medicalillustrator",
+    "role": "MedicalIllustratorAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Anatomy & procedure visuals Host role binding: `MedicalIllustratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Anatomy & procedure visuals ### Knowledge distillation sources (historical) Netter atlas; AMI/CMI curriculum; Anatomage ### Self-quality criteria (historical) Anatomical accuracy (detection model); AMI rubric ### Surpass-human signal (historical) CMI peers vote ≥pass in blind review ### Critique bus (historical) - **Accepts critique from:** SMEAgent (physician), AccessibilityAgent - **Comments on:** AnimatorAgent (wrong anatomy), CopywriterAgent (mis-term) ### Tools design-time notes (historical, non-activating) Anatomage 3D API; DALL-E 3 (medical-prompt mode); anatomy-detection model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: AMI scoring criteria)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.medicalillustrator.v1",
+    "rubricReference": "video.rubric.medicalillustrator.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.medicalillustrator",
+          "status: registered",
+          "role: MedicalIllustratorAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.medicalillustrator.v1",
+          "rubric_reference: video.rubric.medicalillustrator.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.medicalillustrator`\n\n- VA/generic pack ID: `video.medicalillustrator`\n- Previous common ID: `video.risk_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Anatomy & procedure visuals Host role binding: `MedicalIllustratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Anatomy & procedure visuals ### Knowledge distillation sources (historical) Netter atlas; AMI/CMI curriculum; Anatomage ### Self-quality criteria (historical) Anatomical accuracy (detection model); AMI rubric ### Surpass-human signal (historical) CMI peers vote ≥pass in blind review ### Critique bus (historical) - **Accepts critique from:** SMEAgent (physician), AccessibilityAgent - **Comments on:** AnimatorAgent (wrong anatomy), CopywriterAgent (mis-term) ### Tools design-time notes (historical, non-activating) Anatomage 3D API; DALL-E 3 (medical-prompt mode); anatomy-detection model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: AMI scoring criteria)",
+    "folderPath": "business/video/agents/video.medicalillustrator",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.memory",
+    "pack": "video",
+    "name": "Memory",
+    "role": "MemoryAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Episodic + long-term project memory; retrieval for any agent Host role binding: `MemoryAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Episodic + long-term project memory; retrieval for any agent ### Knowledge distillation sources (historical) Reflexion (Shinn 2023); MemGPT; vector-DB best practices ### Self-quality criteria (historical) Retrieval precision@5 ≥0.9; freshness SLA ### Surpass-human signal (historical) Higher recall than producer's bible at scale ### Critique bus (historical) - **Accepts critique from:** All agents (correction events) - **Comments on:** All agents (stale facts) ### Tools design-time notes (historical, non-activating) Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion memory architecture (MemGPT extension)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.memory.v1",
+    "rubricReference": "video.rubric.memory.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.memory",
+          "status: registered",
+          "role: MemoryAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.memory.v1",
+          "rubric_reference: video.rubric.memory.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.memory`\n\n- VA/generic pack ID: `video.memory`\n- Previous common ID: `video.learning_reflector`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Episodic + long-term project memory; retrieval for any agent Host role binding: `MemoryAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Episodic + long-term project memory; retrieval for any agent ### Knowledge distillation sources (historical) Reflexion (Shinn 2023); MemGPT; vector-DB best practices ### Self-quality criteria (historical) Retrieval precision@5 ≥0.9; freshness SLA ### Surpass-human signal (historical) Higher recall than producer's bible at scale ### Critique bus (historical) - **Accepts critique from:** All agents (correction events) - **Comments on:** All agents (stale facts) ### Tools design-time notes (historical, non-activating) Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion memory architecture (MemGPT extension)",
+    "folderPath": "business/video/agents/video.memory",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.moodboard",
+    "pack": "video",
+    "name": "Moodboard",
+    "role": "MoodBoardAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Reference boards: visual, sonic, tonal Host role binding: `MoodBoardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reference boards: visual, sonic, tonal ### Knowledge distillation sources (historical) Pinterest/Are.na; lookbook archives; Spotify-Canvas ### Self-quality criteria (historical) Reference coherence (cluster tightness); brief alignment ### Surpass-human signal (historical) Faster + tighter boards than art director (blind A/B) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** ConceptArtistAgent (off-mood) ### Tools design-time notes (historical, non-activating) Pinterest/Are.na APIs; Spotify Canvas; CLIP clustering; Figma board generation **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search → cluster → layout → validate coherence)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.moodboard.v1",
+    "rubricReference": "video.rubric.moodboard.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.moodboard",
+          "status: registered",
+          "role: MoodBoardAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.moodboard.v1",
+          "rubric_reference: video.rubric.moodboard.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.moodboard`\n\n- VA/generic pack ID: `video.moodboard`\n- Previous common ID: `video.human_review_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Reference boards: visual, sonic, tonal Host role binding: `MoodBoardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reference boards: visual, sonic, tonal ### Knowledge distillation sources (historical) Pinterest/Are.na; lookbook archives; Spotify-Canvas ### Self-quality criteria (historical) Reference coherence (cluster tightness); brief alignment ### Surpass-human signal (historical) Faster + tighter boards than art director (blind A/B) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** ConceptArtistAgent (off-mood) ### Tools design-time notes (historical, non-activating) Pinterest/Are.na APIs; Spotify Canvas; CLIP clustering; Figma board generation **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search → cluster → layout → validate coherence)",
+    "folderPath": "business/video/agents/video.moodboard",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.motiongraphics",
+    "pack": "video",
+    "name": "Motiongraphics",
+    "role": "MotionGraphicsAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Kinetic typography, lower thirds, infographics Host role binding: `MotionGraphicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Kinetic typography, lower thirds, infographics ### Knowledge distillation sources (historical) Motionographer; School of Motion; AICP Next Awards ### Self-quality criteria (historical) Typographic hierarchy; brand compliance; readability at thumbnail ### Surpass-human signal (historical) Wins agency RFP shootouts on speed + on-brand fidelity ### Critique bus (historical) - **Accepts critique from:** BrandManagerAgent, AccessibilityAgent (contrast) - **Comments on:** CopywriterAgent (verbosity), EditorAgent (timing) ### Tools design-time notes (historical, non-activating) After Effects via MCP/ExtendScript; Lottie export; Rive; brand-asset CDN **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct — reason about brand guidelines then render",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "network?"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.runway"
+    ],
+    "promptReference": "video.prompt.motiongraphics.v1",
+    "rubricReference": "video.rubric.motiongraphics.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.motiongraphics",
+          "status: registered",
+          "role: MotionGraphicsAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: media_host",
+          "model_id: local-video-config-v1",
+          "network_access: True"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 4"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: [\"media.stub\", \"media.runway\"]",
+          "prompt_reference: video.prompt.motiongraphics.v1",
+          "rubric_reference: video.rubric.motiongraphics.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.motiongraphics`\n\n- VA/generic pack ID: `video.motiongraphics`\n- Previous common ID: `video.motion_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Kinetic typography, lower thirds, infographics Host role binding: `MotionGraphicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Kinetic typography, lower thirds, infographics ### Knowledge distillation sources (historical) Motionographer; School of Motion; AICP Next Awards ### Self-quality criteria (historical) Typographic hierarchy; brand compliance; readability at thumbnail ### Surpass-human signal (historical) Wins agency RFP shootouts on speed + on-brand fidelity ### Critique bus (historical) - **Accepts critique from:** BrandManagerAgent, AccessibilityAgent (contrast) - **Comments on:** CopywriterAgent (verbosity), EditorAgent (timing) ### Tools design-time notes (historical, non-activating) After Effects via MCP/ExtendScript; Lottie export; Rive; brand-asset CDN **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct — reason about brand guidelines then render",
+    "folderPath": "business/video/agents/video.motiongraphics",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.mpa",
+    "pack": "video",
+    "name": "Mpa",
+    "role": "MPAAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: `MPAAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Knowledge distillation sources (historical) Rating submission references, content advisories, theatrical packaging rules ### Self-quality criteria (historical) Rating-package completeness, advisory clarity, escalation quality ### Surpass-human signal (historical) Prepares cleaner feature-release classification packages than manual prep ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, LegalAgent, EthicsAgent - **Comments on:** Missing advisories, incomplete rating prep, unclear classification support ### Tools design-time notes (historical, non-activating) Submission packages, advisory templates, classification checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.mpa.v1",
+    "rubricReference": "video.rubric.mpa.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.mpa",
+          "status: registered",
+          "role: MPAAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.mpa.v1",
+          "rubric_reference: video.rubric.mpa.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.mpa`\n\n- VA/generic pack ID: `video.mpa`\n- Previous common ID: `video.platform_policy_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: `MPAAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Knowledge distillation sources (historical) Rating submission references, content advisories, theatrical packaging rules ### Self-quality criteria (historical) Rating-package completeness, advisory clarity, escalation quality ### Surpass-human signal (historical) Prepares cleaner feature-release classification packages than manual prep ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, LegalAgent, EthicsAgent - **Comments on:** Missing advisories, incomplete rating prep, unclear classification support ### Tools design-time notes (historical, non-activating) Submission packages, advisory templates, classification checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (",
+    "folderPath": "business/video/agents/video.mpa",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.mua_makeup",
+    "pack": "video",
+    "name": "Mua Makeup",
+    "role": "MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)",
+    "status": "registered",
+    "description": "Talent face/hair; prosthetics Host role binding: `MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Talent face/hair; prosthetics ### Knowledge distillation sources (historical) IATSE 706 corpora; Kazu Hiro studio refs ### Self-quality criteria (historical) Continuity hash across takes; skin-tone realism (FID) ### Surpass-human signal (historical) Continuity break rate <0.5% (vs ~2% human) ### Critique bus (historical) - **Accepts critique from:** DoPAgent, ContinuityAgent - **Comments on:** CostumeAgent (palette clash) ### Tools design-time notes (historical, non-activating) Face-landmark detectors; perceptual hash comparison; Kling face-consistency mode **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: continuity rules)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.mua_makeup.v1",
+    "rubricReference": "video.rubric.mua_makeup.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.mua_makeup",
+          "status: registered",
+          "role: MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.mua_makeup.v1",
+          "rubric_reference: video.rubric.mua_makeup.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.mua_makeup`\n\n- VA/generic pack ID: `video.mua_makeup`\n- Previous common ID: `video.escalation_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Talent face/hair; prosthetics Host role binding: `MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Talent face/hair; prosthetics ### Knowledge distillation sources (historical) IATSE 706 corpora; Kazu Hiro studio refs ### Self-quality criteria (historical) Continuity hash across takes; skin-tone realism (FID) ### Surpass-human signal (historical) Continuity break rate <0.5% (vs ~2% human) ### Critique bus (historical) - **Accepts critique from:** DoPAgent, ContinuityAgent - **Comments on:** CostumeAgent (palette clash) ### Tools design-time notes (historical, non-activating) Face-landmark detectors; perceptual hash comparison; Kling face-consistency mode **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: continuity rules)",
+    "folderPath": "business/video/agents/video.mua_makeup",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.musicsupervisor",
+    "pack": "video",
+    "name": "Musicsupervisor",
+    "role": "MusicSupervisorAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: `MusicSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Knowledge distillation sources (historical) Music supervision notes, cue placement references, soundtrack release practice ### Self-quality criteria (historical) Cue suitability, rights-awareness coverage, soundtrack-package completeness ### Surpass-human signal (historical) Coordinates music placements more consistently than fragmented handoffs ### Critique bus (historical) - **Accepts critique from:** ComposerAgent, TrailerEditorAgent, LabelA&RAgent, LegalAgent - **Comments on:** Cue misuse, music-rights ambiguity, soundtrack cohesion issues ### Tools design-time notes (historical, non-activating) Music asset trackers, cue sheets, soundtrack package tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histo",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.musicsupervisor.v1",
+    "rubricReference": "video.rubric.musicsupervisor.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.musicsupervisor",
+          "status: registered",
+          "role: MusicSupervisorAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.musicsupervisor.v1",
+          "rubric_reference: video.rubric.musicsupervisor.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.musicsupervisor`\n\n- VA/generic pack ID: `video.musicsupervisor`\n- Previous common ID: `video.music_supervisor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: `MusicSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Knowledge distillation sources (historical) Music supervision notes, cue placement references, soundtrack release practice ### Self-quality criteria (historical) Cue suitability, rights-awareness coverage, soundtrack-package completeness ### Surpass-human signal (historical) Coordinates music placements more consistently than fragmented handoffs ### Critique bus (historical) - **Accepts critique from:** ComposerAgent, TrailerEditorAgent, LabelA&RAgent, LegalAgent - **Comments on:** Cue misuse, music-rights ambiguity, soundtrack cohesion issues ### Tools design-time notes (historical, non-activating) Music asset trackers, cue sheets, soundtrack package tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histo",
+    "folderPath": "business/video/agents/video.musicsupervisor",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.musicvideodirector",
+    "pack": "video",
+    "name": "Musicvideodirector",
+    "role": "MusicVideoDirectorAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Visual concept for songs Host role binding: `MusicVideoDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Visual concept for songs ### Knowledge distillation sources (historical) DirectorsLibrary; UKMVA/MTV VMA winners; Hype Williams/Spike Jonze ### Self-quality criteria (historical) Edit-rhythm sync; lookbook coherence; artist-brief fit ### Surpass-human signal (historical) Wins label-blind preference vs commercial MV shortlist ### Critique bus (historical) - **Accepts critique from:** LabelA&RAgent, ArtistAgent - **Comments on:** EditorAgent (cut on beat), DoPAgent ### Tools design-time notes (historical, non-activating) Runway Gen-4 (style-locked generation); Veo 3.1; mood-board tools (Are.na API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (with DirectorAgent + EditorAgent)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.musicvideodirector.v1",
+    "rubricReference": "video.rubric.musicvideodirector.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.musicvideodirector",
+          "status: registered",
+          "role: MusicVideoDirectorAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.musicvideodirector.v1",
+          "rubric_reference: video.rubric.musicvideodirector.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.musicvideodirector`\n\n- VA/generic pack ID: `video.musicvideodirector`\n- Previous common ID: `video.critique_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Visual concept for songs Host role binding: `MusicVideoDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Visual concept for songs ### Knowledge distillation sources (historical) DirectorsLibrary; UKMVA/MTV VMA winners; Hype Williams/Spike Jonze ### Self-quality criteria (historical) Edit-rhythm sync; lookbook coherence; artist-brief fit ### Surpass-human signal (historical) Wins label-blind preference vs commercial MV shortlist ### Critique bus (historical) - **Accepts critique from:** LabelA&RAgent, ArtistAgent - **Comments on:** EditorAgent (cut on beat), DoPAgent ### Tools design-time notes (historical, non-activating) Runway Gen-4 (style-locked generation); Veo 3.1; mood-board tools (Are.na API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (with DirectorAgent + EditorAgent)",
+    "folderPath": "business/video/agents/video.musicvideodirector",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.narrativearc",
+    "pack": "video",
+    "name": "Narrativearc",
+    "role": "NarrativeArcAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: `NarrativeArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) 3-act / Save-the-Cat / Hero's Journey structure ### Knowledge distillation sources (historical) Campbell; Snyder *Save the Cat*; Truby; Black List analyses ### Self-quality criteria (historical) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Surpass-human signal (historical) Beats WGA first drafts on structural rubric ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, DirectorAgent - **Comments on:** ScreenwriterAgent (sagging middle) ### Tools design-time notes (historical, non-activating) Beat-sheet validator; emotional-arc plotter; structure templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sheet completeness)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.narrativearc.v1",
+    "rubricReference": "video.rubric.narrativearc.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.narrativearc",
+          "status: registered",
+          "role: NarrativeArcAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.narrativearc.v1",
+          "rubric_reference: video.rubric.narrativearc.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.narrativearc`\n\n- VA/generic pack ID: `video.narrativearc`\n- Previous common ID: `video.narrative_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: `NarrativeArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) 3-act / Save-the-Cat / Hero's Journey structure ### Knowledge distillation sources (historical) Campbell; Snyder *Save the Cat*; Truby; Black List analyses ### Self-quality criteria (historical) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Surpass-human signal (historical) Beats WGA first drafts on structural rubric ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, DirectorAgent - **Comments on:** ScreenwriterAgent (sagging middle) ### Tools design-time notes (historical, non-activating) Beat-sheet validator; emotional-arc plotter; structure templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sheet completeness)",
+    "folderPath": "business/video/agents/video.narrativearc",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.novelty",
+    "pack": "video",
+    "name": "Novelty",
+    "role": "NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)",
+    "status": "registered",
+    "description": "Flags tropes, clichés, over-fit outputs Host role binding: `NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Flags tropes, clichés, over-fit outputs ### Knowledge distillation sources (historical) TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings ### Self-quality criteria (historical) Cliché-hit count; novelty score vs category prior ### Surpass-human signal (historical) Catches more clichés than experienced script editor ### Critique bus (historical) - **Accepts critique from:** IdeationAgent, ScreenwriterAgent - **Comments on:** ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) ### Tools design-time notes (historical, non-activating) TV Tropes scraper; n-gram frequency DB; embedding novelty scorer **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (anti-cliché constitution)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.novelty.v1",
+    "rubricReference": "video.rubric.novelty.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.novelty",
+          "status: registered",
+          "role: NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.novelty.v1",
+          "rubric_reference: video.rubric.novelty.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.novelty`\n\n- VA/generic pack ID: `video.novelty`\n- Previous common ID: `video.judge_agent`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Flags tropes, clichés, over-fit outputs Host role binding: `NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Flags tropes, clichés, over-fit outputs ### Knowledge distillation sources (historical) TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings ### Self-quality criteria (historical) Cliché-hit count; novelty score vs category prior ### Surpass-human signal (historical) Catches more clichés than experienced script editor ### Critique bus (historical) - **Accepts critique from:** IdeationAgent, ScreenwriterAgent - **Comments on:** ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) ### Tools design-time notes (historical, non-activating) TV Tropes scraper; n-gram frequency DB; embedding novelty scorer **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (anti-cliché constitution)",
+    "folderPath": "business/video/agents/video.novelty",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
@@ -6103,9 +6746,9 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "id": "video.orchestrator",
     "pack": "video",
     "name": "Orchestrator",
-    "role": "Video Orchestrator configuration specialist",
+    "role": "OrchestratorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain orchestrator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
+    "description": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: `OrchestratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Knowledge distillation sources (historical) LangGraph + CrewAI + AutoGen patterns; Airflow/Temporal; PGA schedule templates ### Self-quality criteria (historical) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Surpass-human signal (historical) Lower TTD than human EP at same scope ### Critique bus (historical) - **Accepts critique from:** ProducerAgent (scope), JudgeAgent (dispute), HiTL on stall - **Comments on:** All agents (resource burn, retry storms) ### Tools design-time notes (historical, non-activating) LangGraph state machine; Temporal workflow engine; Redis (distributed locks); observability (LangSmith) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph) — deterministic",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6115,18 +6758,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub"
+    ],
     "promptReference": "video.prompt.orchestrator.v1",
     "rubricReference": "video.rubric.orchestrator.v1",
     "configSummaries": [
@@ -6136,18 +6781,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "agent_id: video.orchestrator",
           "status: registered",
-          "role: Video Orchestrator configuration specialist",
+          "role: OrchestratorAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -6156,19 +6801,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
+          "allowed_tools: [\"media.stub\"]",
           "prompt_reference: video.prompt.orchestrator.v1",
           "rubric_reference: video.rubric.orchestrator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6176,25 +6821,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.orchestrator`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.orchestrator`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack"
+          "# Mapping — `video.orchestrator`\n\n- VA/generic pack ID: `video.orchestrator`\n- Previous common ID: `video.orchestrator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain orchestrator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
+    "specExcerpt": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: `OrchestratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Knowledge distillation sources (historical) LangGraph + CrewAI + AutoGen patterns; Airflow/Temporal; PGA schedule templates ### Self-quality criteria (historical) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Surpass-human signal (historical) Lower TTD than human EP at same scope ### Critique bus (historical) - **Accepts critique from:** ProducerAgent (scope), JudgeAgent (dispute), HiTL on stall - **Comments on:** All agents (resource burn, retry storms) ### Tools design-time notes (historical, non-activating) LangGraph state machine; Temporal workflow engine; Redis (distributed locks); observability (LangSmith) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph) — deterministic",
     "folderPath": "business/video/agents/video.orchestrator",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.performance_analyst",
+    "id": "video.performancemarketer",
     "pack": "video",
-    "name": "Performance Analyst",
-    "role": "Video Performance Analyst configuration specialist",
+    "name": "Performancemarketer",
+    "role": "PerformanceMarketerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain performance analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.performancemarketer) Optimize ads for ROAS ### Distilled quality (video.performancemarketer) ROAS uplift vs control; significance ≥95% ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
+    "description": "Optimize ads for ROAS Host role binding: `PerformanceMarketerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimize ads for ROAS ### Knowledge distillation sources (historical) Meta Blueprint; TikTok Ads Academy; MMM literature ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior media buyer on 30-day ROAS ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, FinanceAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API; TikTok Ads API; Google Ads API; Bayesian AB testing libs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = ROAS uplift signal from ad platform)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6211,21 +6856,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.performance_analyst.v1",
-    "rubricReference": "video.rubric.performance_analyst.v1",
+    "promptReference": "video.prompt.performancemarketer.v1",
+    "rubricReference": "video.rubric.performancemarketer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.performance_analyst",
+          "agent_id: video.performancemarketer",
           "status: registered",
-          "role: Video Performance Analyst configuration specialist",
+          "role: PerformanceMarketerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6253,11 +6898,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.performance_analyst.v1",
-          "rubric_reference: video.rubric.performance_analyst.v1",
+          "prompt_reference: video.prompt.performancemarketer.v1",
+          "rubric_reference: video.rubric.performancemarketer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6265,25 +6910,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.performance_analyst`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.performancemarketer`, `video.analyst`\n- Local runtime: `agent_spec.json`\n- Lo"
+          "# Mapping — `video.performancemarketer`\n\n- VA/generic pack ID: `video.performancemarketer`\n- Previous common ID: `video.performance_analyst`\n- SPEC depth: full generic SPEC body + host runtime binding"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain performance analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.performancemarketer) Optimize ads for ROAS ### Distilled quality (video.performancemarketer) ROAS uplift vs control; significance ≥95% ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.performance_analyst",
+    "specExcerpt": "Optimize ads for ROAS Host role binding: `PerformanceMarketerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimize ads for ROAS ### Knowledge distillation sources (historical) Meta Blueprint; TikTok Ads Academy; MMM literature ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior media buyer on 30-day ROAS ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, FinanceAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API; TikTok Ads API; Google Ads API; Bayesian AB testing libs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = ROAS uplift signal from ad platform)",
+    "folderPath": "business/video/agents/video.performancemarketer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.platform_policy_reviewer",
+    "id": "video.personalizationengineer",
     "pack": "video",
-    "name": "Platform Policy Reviewer",
-    "role": "Video Platform Policy Reviewer configuration specialist",
+    "name": "Personalizationengineer",
+    "role": "PersonalizationEngineerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain platform policy reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.mpa) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Distilled quality (video.mpa) Rating-package completeness, advisory clarity, escalation quality ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
+    "description": "Variable templates (name/face/voice swap) Host role binding: `PersonalizationEngineerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Variable templates (name/face/voice swap) ### Knowledge distillation sources (historical) Idomoo case studies; DMA campaigns; MarTech lit ### Self-quality criteria (historical) Render-success ≥99.5%; spot-check pass; privacy-audit pass ### Surpass-human signal (historical) Higher share-rate than top human-templated campaigns ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (GDPR/CCPA), AnalystAgent - **Comments on:** TemplateDesignerAgent (fragility) ### Tools design-time notes (historical, non-activating) Idomoo/Pirsonal APIs; HeyGen personalization; GDPR consent-management platform **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assemble template → render → validate → deliver)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6300,21 +6945,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.platform_policy_reviewer.v1",
-    "rubricReference": "video.rubric.platform_policy_reviewer.v1",
+    "promptReference": "video.prompt.personalizationengineer.v1",
+    "rubricReference": "video.rubric.personalizationengineer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.platform_policy_reviewer",
+          "agent_id: video.personalizationengineer",
           "status: registered",
-          "role: Video Platform Policy Reviewer configuration specialist",
+          "role: PersonalizationEngineerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6342,11 +6987,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.platform_policy_reviewer.v1",
-          "rubric_reference: video.rubric.platform_policy_reviewer.v1",
+          "prompt_reference: video.prompt.personalizationengineer.v1",
+          "rubric_reference: video.rubric.personalizationengineer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6354,25 +6999,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.platform_policy_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.mpa`, `video.trustsafety`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.personalizationengineer`\n\n- VA/generic pack ID: `video.personalizationengineer`\n- Previous common ID: `video.refine_coordinator`\n- SPEC depth: full generic SPEC body + host runtime "
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain platform policy reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.mpa) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Distilled quality (video.mpa) Rating-package completeness, advisory clarity, escalation quality ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
-    "folderPath": "business/video/agents/video.platform_policy_reviewer",
+    "specExcerpt": "Variable templates (name/face/voice swap) Host role binding: `PersonalizationEngineerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Variable templates (name/face/voice swap) ### Knowledge distillation sources (historical) Idomoo case studies; DMA campaigns; MarTech lit ### Self-quality criteria (historical) Render-success ≥99.5%; spot-check pass; privacy-audit pass ### Surpass-human signal (historical) Higher share-rate than top human-templated campaigns ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (GDPR/CCPA), AnalystAgent - **Comments on:** TemplateDesignerAgent (fragility) ### Tools design-time notes (historical, non-activating) Idomoo/Pirsonal APIs; HeyGen personalization; GDPR consent-management platform **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assemble template → render → validate → deliver)",
+    "folderPath": "business/video/agents/video.personalizationengineer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.postproduction_coordinator",
+    "id": "video.planner",
     "pack": "video",
-    "name": "Postproduction Coordinator",
-    "role": "Video Postproduction Coordinator configuration specialist",
+    "name": "Planner",
+    "role": "PlannerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain postproduction coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: `PlannerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Decomposes brief into phased DAG with assignments + critic gates ### Knowledge distillation sources (historical) PMBOK; CrewAI task graphs; phase templates ### Self-quality criteria (historical) Plan validity (no missing gate); cost variance <10% ### Surpass-human signal (historical) Tighter, cheaper plans than EP first pass (blind A/B) ### Critique bus (historical) - **Accepts critique from:** ProducerAgent, FinanceAgent (budget) - **Comments on:** RouterAgent (wrong pick), OrchestratorAgent ### Tools design-time notes (historical, non-activating) LangGraph plan-gen; cost-estimation models; Gantt/PERT tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (decompose → estimate → validate → emit DAG)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6389,21 +7034,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.postproduction_coordinator.v1",
-    "rubricReference": "video.rubric.postproduction_coordinator.v1",
+    "promptReference": "video.prompt.planner.v1",
+    "rubricReference": "video.rubric.planner.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.postproduction_coordinator",
+          "agent_id: video.planner",
           "status: registered",
-          "role: Video Postproduction Coordinator configuration specialist",
+          "role: PlannerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6431,11 +7076,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.postproduction_coordinator.v1",
-          "rubric_reference: video.rubric.postproduction_coordinator.v1",
+          "prompt_reference: video.prompt.planner.v1",
+          "rubric_reference: video.rubric.planner.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6443,25 +7088,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.postproduction_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.editor`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.planner`\n\n- VA/generic pack ID: `video.planner`\n- Previous common ID: `video.brief_intake`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain postproduction coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.postproduction_coordinator",
+    "specExcerpt": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: `PlannerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Decomposes brief into phased DAG with assignments + critic gates ### Knowledge distillation sources (historical) PMBOK; CrewAI task graphs; phase templates ### Self-quality criteria (historical) Plan validity (no missing gate); cost variance <10% ### Surpass-human signal (historical) Tighter, cheaper plans than EP first pass (blind A/B) ### Critique bus (historical) - **Accepts critique from:** ProducerAgent, FinanceAgent (budget) - **Comments on:** RouterAgent (wrong pick), OrchestratorAgent ### Tools design-time notes (historical, non-activating) LangGraph plan-gen; cost-estimation models; Gantt/PERT tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (decompose → estimate → validate → emit DAG)",
+    "folderPath": "business/video/agents/video.planner",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.privacy_reviewer",
+    "id": "video.producer",
     "pack": "video",
-    "name": "Privacy Reviewer",
-    "role": "Video Privacy Reviewer configuration specialist",
+    "name": "Producer",
+    "role": "ProducerAgent / EP (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain privacy reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
+    "description": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: `ProducerAgent / EP (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Budget, schedule, hiring, delivery; greenlights phase gates ### Knowledge distillation sources (historical) PGA Producers Mark; Variety/Deadline budget leaks; LineProducer Excel corpora ### Self-quality criteria (historical) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Surpass-human signal (historical) Beats PGA schedules at 0.6× cost with equal CSAT ### Critique bus (historical) - **Accepts critique from:** All downstream agents (escalations); HiTL gate for greenlight - **Comments on:** DirectorAgent (scope creep), AllAgents (resource burn) ### Tools design-time notes (historical, non-activating) Google Sheets API, Airtable, Temporal/Airflow orchestration, Stripe billing **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph DAG) + ReAct f",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6478,21 +7123,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.privacy_reviewer.v1",
-    "rubricReference": "video.rubric.privacy_reviewer.v1",
+    "promptReference": "video.prompt.producer.v1",
+    "rubricReference": "video.rubric.producer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.privacy_reviewer",
+          "agent_id: video.producer",
           "status: registered",
-          "role: Video Privacy Reviewer configuration specialist",
+          "role: ProducerAgent / EP (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6520,11 +7165,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.privacy_reviewer.v1",
-          "rubric_reference: video.rubric.privacy_reviewer.v1",
+          "prompt_reference: video.prompt.producer.v1",
+          "rubric_reference: video.rubric.producer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6532,25 +7177,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.privacy_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.trustsafety`, `video.legal`\n- Local runtime: `agent_spec.json`\n- Local specifica"
+          "# Mapping — `video.producer`\n\n- VA/generic pack ID: `video.producer`\n- Previous common ID: `video.project_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain privacy reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality",
-    "folderPath": "business/video/agents/video.privacy_reviewer",
+    "specExcerpt": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: `ProducerAgent / EP (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Budget, schedule, hiring, delivery; greenlights phase gates ### Knowledge distillation sources (historical) PGA Producers Mark; Variety/Deadline budget leaks; LineProducer Excel corpora ### Self-quality criteria (historical) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Surpass-human signal (historical) Beats PGA schedules at 0.6× cost with equal CSAT ### Critique bus (historical) - **Accepts critique from:** All downstream agents (escalations); HiTL gate for greenlight - **Comments on:** DirectorAgent (scope creep), AllAgents (resource burn) ### Tools design-time notes (historical, non-activating) Google Sheets API, Airtable, Temporal/Airflow orchestration, Stripe billing **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph DAG) + ReAct f",
+    "folderPath": "business/video/agents/video.producer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.procurement_advisor",
+    "id": "video.productiondesign",
     "pack": "video",
-    "name": "Procurement Advisor",
-    "role": "Video Procurement Advisor configuration specialist",
+    "name": "Productiondesign",
+    "role": "ProductionDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain procurement advisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Sets, locations, world look Host role binding: `ProductionDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sets, locations, world look ### Knowledge distillation sources (historical) ADG Awards; AMPAS submissions; Beachler/Carter talks ### Self-quality criteria (historical) Period accuracy; palette coherence; build feasibility ### Surpass-human signal (historical) Wins ADG blind comparisons on period-research depth ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ConceptArtistAgent (style break), CostumeAgent ### Tools design-time notes (historical, non-activating) Unreal Engine (virtual scouting); Veo 3.1 location gen; archival image search APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores period-research corrections in memory)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6567,21 +7212,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.procurement_advisor.v1",
-    "rubricReference": "video.rubric.procurement_advisor.v1",
+    "promptReference": "video.prompt.productiondesign.v1",
+    "rubricReference": "video.rubric.productiondesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.procurement_advisor",
+          "agent_id: video.productiondesign",
           "status: registered",
-          "role: Video Procurement Advisor configuration specialist",
+          "role: ProductionDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6609,11 +7254,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.procurement_advisor.v1",
-          "rubric_reference: video.rubric.procurement_advisor.v1",
+          "prompt_reference: video.prompt.productiondesign.v1",
+          "rubric_reference: video.rubric.productiondesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6621,25 +7266,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.procurement_advisor`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.finance`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local specifi"
+          "# Mapping — `video.productiondesign`\n\n- VA/generic pack ID: `video.productiondesign`\n- Previous common ID: `video.production_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain procurement advisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.finance) Accurate market / earnings / token facts ### Distilled quality (video.finance) Numerical accuracy 100%; SEC compliance ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.procurement_advisor",
+    "specExcerpt": "Sets, locations, world look Host role binding: `ProductionDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sets, locations, world look ### Knowledge distillation sources (historical) ADG Awards; AMPAS submissions; Beachler/Carter talks ### Self-quality criteria (historical) Period accuracy; palette coherence; build feasibility ### Surpass-human signal (historical) Wins ADG blind comparisons on period-research depth ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ConceptArtistAgent (style break), CostumeAgent ### Tools design-time notes (historical, non-activating) Unreal Engine (virtual scouting); Veo 3.1 location gen; archival image search APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores period-research corrections in memory)",
+    "folderPath": "business/video/agents/video.productiondesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.production_coordinator",
+    "id": "video.promptengineer",
     "pack": "video",
-    "name": "Production Coordinator",
-    "role": "Video Production Coordinator configuration specialist",
+    "name": "Promptengineer",
+    "role": "PromptEngineerAgent / GeneratorOperator (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain production coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: `PromptEngineerAgent / GeneratorOperator (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Crafts prompts; steers Sora/Veo/Runway/Kling ### Knowledge distillation sources (historical) Karen X. Cheng/Trillo public sets; r/aivideo; Runway AIFF jury notes ### Self-quality criteria (historical) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Surpass-human signal (historical) Target shot in ≤3 iterations vs human avg 10 ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AIQAAgent - **Comments on:** AIQAAgent (re-roll budget), ConsistencyAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1, Runway Gen-4/Aleph, Kling 3.0; seed/parameter registries **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy / OPRO prompt optimization (Yang 2023)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6649,39 +7294,44 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.production_coordinator.v1",
-    "rubricReference": "video.rubric.production_coordinator.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.sora",
+      "media.veo",
+      "media.runway"
+    ],
+    "promptReference": "video.prompt.promptengineer.v1",
+    "rubricReference": "video.rubric.promptengineer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.production_coordinator",
+          "agent_id: video.promptengineer",
           "status: registered",
-          "role: Video Production Coordinator configuration specialist",
+          "role: PromptEngineerAgent / GeneratorOperator (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -6690,19 +7340,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.production_coordinator.v1",
-          "rubric_reference: video.rubric.production_coordinator.v1",
+          "allowed_tools: [\"media.stub\", \"media.sora\", \"media.veo\", \"media.runway\"]",
+          "prompt_reference: video.prompt.promptengineer.v1",
+          "rubric_reference: video.rubric.promptengineer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6710,25 +7360,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.production_coordinator`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.producer`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md"
+          "# Mapping — `video.promptengineer`\n\n- VA/generic pack ID: `video.promptengineer`\n- Previous common ID: `video.generative_media_operator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain production coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.production_coordinator",
+    "specExcerpt": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: `PromptEngineerAgent / GeneratorOperator (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Crafts prompts; steers Sora/Veo/Runway/Kling ### Knowledge distillation sources (historical) Karen X. Cheng/Trillo public sets; r/aivideo; Runway AIFF jury notes ### Self-quality criteria (historical) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Surpass-human signal (historical) Target shot in ≤3 iterations vs human avg 10 ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AIQAAgent - **Comments on:** AIQAAgent (re-roll budget), ConsistencyAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1, Runway Gen-4/Aleph, Kling 3.0; seed/parameter registries **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy / OPRO prompt optimization (Yang 2023)",
+    "folderPath": "business/video/agents/video.promptengineer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.production_designer",
+    "id": "video.promptoptimizer",
     "pack": "video",
-    "name": "Production Designer",
-    "role": "Video Production Designer configuration specialist",
+    "name": "Promptoptimizer",
+    "role": "PromptOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain production designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility",
+    "description": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: `PromptOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Knowledge distillation sources (historical) OPRO (Yang 2023); APE (Zhou 2022); DSPy (Stanford); Promptbreeder (DeepMind) ### Self-quality criteria (historical) Score uplift per iteration; convergence speed ### Surpass-human signal (historical) Beats hand-tuned prompts on held-out briefs ### Critique bus (historical) - **Accepts critique from:** PromptEngineerAgent, AIQAAgent - **Comments on:** PromptEngineerAgent (sub-optimal seed) ### Tools design-time notes (historical, non-activating) DSPy framework (MIPRO optimizer); OPRO implementation; held-out eval harness **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy compilation + OPRO meta-optimization",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6745,21 +7395,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.production_designer.v1",
-    "rubricReference": "video.rubric.production_designer.v1",
+    "promptReference": "video.prompt.promptoptimizer.v1",
+    "rubricReference": "video.rubric.promptoptimizer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.production_designer",
+          "agent_id: video.promptoptimizer",
           "status: registered",
-          "role: Video Production Designer configuration specialist",
+          "role: PromptOptimizerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6787,11 +7437,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.production_designer.v1",
-          "rubric_reference: video.rubric.production_designer.v1",
+          "prompt_reference: video.prompt.promptoptimizer.v1",
+          "rubric_reference: video.rubric.promptoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6799,25 +7449,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.production_designer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.productiondesign`\n- Local runtime: `agent_spec.json`\n- Local specification: `SP"
+          "# Mapping — `video.promptoptimizer`\n\n- VA/generic pack ID: `video.promptoptimizer`\n- Previous common ID: `video.prompt_version_recorder`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain production designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.productiondesign) Sets, locations, world look ### Distilled quality (video.productiondesign) Period accuracy; palette coherence; build feasibility",
-    "folderPath": "business/video/agents/video.production_designer",
+    "specExcerpt": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: `PromptOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Knowledge distillation sources (historical) OPRO (Yang 2023); APE (Zhou 2022); DSPy (Stanford); Promptbreeder (DeepMind) ### Self-quality criteria (historical) Score uplift per iteration; convergence speed ### Surpass-human signal (historical) Beats hand-tuned prompts on held-out briefs ### Critique bus (historical) - **Accepts critique from:** PromptEngineerAgent, AIQAAgent - **Comments on:** PromptEngineerAgent (sub-optimal seed) ### Tools design-time notes (historical, non-activating) DSPy framework (MIPRO optimizer); OPRO implementation; held-out eval harness **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy compilation + OPRO meta-optimization",
+    "folderPath": "business/video/agents/video.promptoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.project_manager",
+    "id": "video.realestatephoto",
     "pack": "video",
-    "name": "Project Manager",
-    "role": "Video Project Manager configuration specialist",
+    "name": "Realestatephoto",
+    "role": "RealEstatePhotoAgent / 3D Scan (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain project manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
+    "description": "Wide interiors; Matterport scans Host role binding: `RealEstatePhotoAgent / 3D Scan (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Wide interiors; Matterport scans ### Knowledge distillation sources (historical) Mike Kelley tutorials; APALA refs ### Self-quality criteria (historical) Vertical-line straightness; HDR stack; coverage % ### Surpass-human signal (historical) Listing-CTR uplift vs human-shot baseline ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DronePilotAgent - **Comments on:** DronePilotAgent (illegal altitude) ### Tools design-time notes (historical, non-activating) Matterport SDK; HDR processing (Luminance HDR); lens-correction tools; Veo 3.1 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assess space → generate views → validate geometry)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6834,21 +7484,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.project_manager.v1",
-    "rubricReference": "video.rubric.project_manager.v1",
+    "promptReference": "video.prompt.realestatephoto.v1",
+    "rubricReference": "video.rubric.realestatephoto.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.project_manager",
+          "agent_id: video.realestatephoto",
           "status: registered",
-          "role: Video Project Manager configuration specialist",
+          "role: RealEstatePhotoAgent / 3D Scan (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6876,11 +7526,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.project_manager.v1",
-          "rubric_reference: video.rubric.project_manager.v1",
+          "prompt_reference: video.prompt.realestatephoto.v1",
+          "rubric_reference: video.rubric.realestatephoto.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6888,25 +7538,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.project_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.producer`, `video.planner`\n- Local runtime: `agent_spec.json`\n- Local specificati"
+          "# Mapping — `video.realestatephoto`\n\n- VA/generic pack ID: `video.realestatephoto`\n- Previous common ID: `video.memory_curator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain project manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "folderPath": "business/video/agents/video.project_manager",
+    "specExcerpt": "Wide interiors; Matterport scans Host role binding: `RealEstatePhotoAgent / 3D Scan (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Wide interiors; Matterport scans ### Knowledge distillation sources (historical) Mike Kelley tutorials; APALA refs ### Self-quality criteria (historical) Vertical-line straightness; HDR stack; coverage % ### Surpass-human signal (historical) Listing-CTR uplift vs human-shot baseline ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DronePilotAgent - **Comments on:** DronePilotAgent (illegal altitude) ### Tools design-time notes (historical, non-activating) Matterport SDK; HDR processing (Luminance HDR); lens-correction tools; Veo 3.1 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assess space → generate views → validate geometry)",
+    "folderPath": "business/video/agents/video.realestatephoto",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.prompt_version_recorder",
+    "id": "video.retentionoptimizer",
     "pack": "video",
-    "name": "Prompt Version Recorder",
-    "role": "Video Prompt Version Recorder configuration specialist",
+    "name": "Retentionoptimizer",
+    "role": "RetentionOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain prompt version recorder outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
+    "description": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: `RetentionOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tunes hook, pacing, structure for AVD/hold-rate ### Knowledge distillation sources (historical) YouTube Analytics benchmarks; TikTok retention curves; AudienceSim ### Self-quality criteria (historical) Predicted retention vs actual; AVD lift over control ### Surpass-human signal (historical) Beats senior YouTube editor on AVD lift (A/B) ### Critique bus (historical) - **Accepts critique from:** EditorAgent, AudienceSimAgent - **Comments on:** EditorAgent (slow opener), ScriptwriterAgent (front fluff) ### Tools design-time notes (historical, non-activating) YouTube Analytics API; retention-curve predictor model; A/B test framework **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = retention uplift from real analytics)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6923,21 +7573,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.prompt_version_recorder.v1",
-    "rubricReference": "video.rubric.prompt_version_recorder.v1",
+    "promptReference": "video.prompt.retentionoptimizer.v1",
+    "rubricReference": "video.rubric.retentionoptimizer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.prompt_version_recorder",
+          "agent_id: video.retentionoptimizer",
           "status: registered",
-          "role: Video Prompt Version Recorder configuration specialist",
+          "role: RetentionOptimizerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -6965,11 +7615,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.prompt_version_recorder.v1",
-          "rubric_reference: video.rubric.prompt_version_recorder.v1",
+          "prompt_reference: video.prompt.retentionoptimizer.v1",
+          "rubric_reference: video.rubric.retentionoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -6977,25 +7627,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.prompt_version_recorder`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.promptoptimizer`, `video.memory`\n- Local runtime: `agent_spec.json`\n- Loc"
+          "# Mapping — `video.retentionoptimizer`\n\n- VA/generic pack ID: `video.retentionoptimizer`\n- Previous common ID: `video.workflow_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain prompt version recorder outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed ### Distilled responsibility (video.memory) Episodic + long-term project memory; retrieval for any agent ### Distilled quality (video.memory) Retrieval precision@5 ≥0.9; freshness SLA",
-    "folderPath": "business/video/agents/video.prompt_version_recorder",
+    "specExcerpt": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: `RetentionOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tunes hook, pacing, structure for AVD/hold-rate ### Knowledge distillation sources (historical) YouTube Analytics benchmarks; TikTok retention curves; AudienceSim ### Self-quality criteria (historical) Predicted retention vs actual; AVD lift over control ### Surpass-human signal (historical) Beats senior YouTube editor on AVD lift (A/B) ### Critique bus (historical) - **Accepts critique from:** EditorAgent, AudienceSimAgent - **Comments on:** EditorAgent (slow opener), ScriptwriterAgent (front fluff) ### Tools design-time notes (historical, non-activating) YouTube Analytics API; retention-curve predictor model; A/B test framework **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = retention uplift from real analytics)",
+    "folderPath": "business/video/agents/video.retentionoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.provenance_agent",
+    "id": "video.roasoptimizer",
     "pack": "video",
-    "name": "Provenance Agent",
-    "role": "Video Provenance Agent configuration specialist",
+    "name": "Roasoptimizer",
+    "role": "ROASOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain provenance agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target ### Distilled responsibility (video.deepfakedetection) Detects synthetic identity, voice, and provenance deception risks ### Distilled quality (video.deepfakedetection) Forensic recall, false-negative control, provenance-validation accuracy",
+    "description": "Optimizes ad creatives for performance Host role binding: `ROASOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes ad creatives for performance ### Knowledge distillation sources (historical) Meta Marketing Science; TikTok Ads Academy; MMM/MTA lit ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior marketer at equal budget ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, AnalystAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API (creative testing); TikTok Ads; Bayesian MMM tools (Robyn/Meridian) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = real ROAS from ad platform feedback)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7012,21 +7662,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.provenance_agent.v1",
-    "rubricReference": "video.rubric.provenance_agent.v1",
+    "promptReference": "video.prompt.roasoptimizer.v1",
+    "rubricReference": "video.rubric.roasoptimizer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.provenance_agent",
+          "agent_id: video.roasoptimizer",
           "status: registered",
-          "role: Video Provenance Agent configuration specialist",
+          "role: ROASOptimizerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -7054,11 +7704,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.provenance_agent.v1",
-          "rubric_reference: video.rubric.provenance_agent.v1",
+          "prompt_reference: video.prompt.roasoptimizer.v1",
+          "rubric_reference: video.rubric.roasoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -7066,25 +7716,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.provenance_agent`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.citation`, `video.deepfakedetection`\n- Local runtime: `agent_spec.json`\n- Local "
+          "# Mapping — `video.roasoptimizer`\n\n- VA/generic pack ID: `video.roasoptimizer`\n- Previous common ID: `video.graph_topology_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain provenance agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.citation) Normalizes sources; grades primary/secondary/tertiary ### Distilled quality (video.citation) Citation format 100% valid; primary % ≥target ### Distilled responsibility (video.deepfakedetection) Detects synthetic identity, voice, and provenance deception risks ### Distilled quality (video.deepfakedetection) Forensic recall, false-negative control, provenance-validation accuracy",
-    "folderPath": "business/video/agents/video.provenance_agent",
+    "specExcerpt": "Optimizes ad creatives for performance Host role binding: `ROASOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes ad creatives for performance ### Knowledge distillation sources (historical) Meta Marketing Science; TikTok Ads Academy; MMM/MTA lit ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior marketer at equal budget ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, AnalystAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API (creative testing); TikTok Ads; Bayesian MMM tools (Robyn/Meridian) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = real ROAS from ad platform feedback)",
+    "folderPath": "business/video/agents/video.roasoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.qc_l1_reviewer",
+    "id": "video.router",
     "pack": "video",
-    "name": "Qc L1 Reviewer",
-    "role": "Video Qc L1 Reviewer configuration specialist",
+    "name": "Router",
+    "role": "RouterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain qc l1 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
+    "description": "Picks right specialist agent (and model) for each subtask Host role binding: `RouterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Picks right specialist agent (and model) for each subtask ### Knowledge distillation sources (historical) Agent-capability registry; benchmark history (cost/quality/latency) ### Self-quality criteria (historical) Routing accuracy ≥95% vs oracle; cost within budget ### Surpass-human signal (historical) Beats human producer in agent/vendor selection ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent, CostOptimizerAgent - **Comments on:** PlannerAgent (bad decomposition) ### Tools design-time notes (historical, non-activating) Agent registry DB; benchmark leaderboard cache; pricing APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Classifier + ReAct (match task embedding → agent capability)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7101,21 +7751,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.qc_l1_reviewer.v1",
-    "rubricReference": "video.rubric.qc_l1_reviewer.v1",
+    "promptReference": "video.prompt.router.v1",
+    "rubricReference": "video.rubric.router.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.qc_l1_reviewer",
+          "agent_id: video.router",
           "status: registered",
-          "role: Video Qc L1 Reviewer configuration specialist",
+          "role: RouterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -7143,11 +7793,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.qc_l1_reviewer.v1",
-          "rubric_reference: video.rubric.qc_l1_reviewer.v1",
+          "prompt_reference: video.prompt.router.v1",
+          "rubric_reference: video.rubric.router.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -7155,25 +7805,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.qc_l1_reviewer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.critic`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack c"
+          "# Mapping — `video.router`\n\n- VA/generic pack ID: `video.router`\n- Previous common ID: `video.tool_policy_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain qc l1 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "folderPath": "business/video/agents/video.qc_l1_reviewer",
+    "specExcerpt": "Picks right specialist agent (and model) for each subtask Host role binding: `RouterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Picks right specialist agent (and model) for each subtask ### Knowledge distillation sources (historical) Agent-capability registry; benchmark history (cost/quality/latency) ### Self-quality criteria (historical) Routing accuracy ≥95% vs oracle; cost within budget ### Surpass-human signal (historical) Beats human producer in agent/vendor selection ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent, CostOptimizerAgent - **Comments on:** PlannerAgent (bad decomposition) ### Tools design-time notes (historical, non-activating) Agent registry DB; benchmark leaderboard cache; pricing APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Classifier + ReAct (match task embedding → agent capability)",
+    "folderPath": "business/video/agents/video.router",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.qc_l2_reviewer",
+    "id": "video.safetyredteam",
     "pack": "video",
-    "name": "Qc L2 Reviewer",
-    "role": "Video Qc L2 Reviewer configuration specialist",
+    "name": "Safetyredteam",
+    "role": "SafetyRedTeamAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain qc l2 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
+    "description": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: `SafetyRedTeamAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Knowledge distillation sources (historical) Hany Farid benchmarks; Partnership on AI Framework; OWASP LLM Top 10 ### Self-quality criteria (historical) Attack-success kept ≤1%; taxonomy coverage ### Surpass-human signal (historical) Higher coverage than internal red-team rotation ### Critique bus (historical) - **Accepts critique from:** EthicsAgent (HiTL), ComplianceAgent - **Comments on:** AvatarDesignAgent, VoiceCloneAgent, AllGenerators ### Tools design-time notes (historical, non-activating) Deepfake detectors (Farid lab models); bias probes; jailbreak prompt banks; OWASP scanner **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (red-team vs defender) + adversarial search",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7190,21 +7840,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.qc_l2_reviewer.v1",
-    "rubricReference": "video.rubric.qc_l2_reviewer.v1",
+    "promptReference": "video.prompt.safetyredteam.v1",
+    "rubricReference": "video.rubric.safetyredteam.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.qc_l2_reviewer",
+          "agent_id: video.safetyredteam",
           "status: registered",
-          "role: Video Qc L2 Reviewer configuration specialist",
+          "role: SafetyRedTeamAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -7232,11 +7882,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.qc_l2_reviewer.v1",
-          "rubric_reference: video.rubric.qc_l2_reviewer.v1",
+          "prompt_reference: video.prompt.safetyredteam.v1",
+          "rubric_reference: video.rubric.safetyredteam.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -7244,25 +7894,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.qc_l2_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.critic`, `video.judge`\n- Local runtime: `agent_spec.json`\n- Local specification: `"
+          "# Mapping — `video.safetyredteam`\n\n- VA/generic pack ID: `video.safetyredteam`\n- Previous common ID: `video.safety_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain qc l2 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
-    "folderPath": "business/video/agents/video.qc_l2_reviewer",
+    "specExcerpt": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: `SafetyRedTeamAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Knowledge distillation sources (historical) Hany Farid benchmarks; Partnership on AI Framework; OWASP LLM Top 10 ### Self-quality criteria (historical) Attack-success kept ≤1%; taxonomy coverage ### Surpass-human signal (historical) Higher coverage than internal red-team rotation ### Critique bus (historical) - **Accepts critique from:** EthicsAgent (HiTL), ComplianceAgent - **Comments on:** AvatarDesignAgent, VoiceCloneAgent, AllGenerators ### Tools design-time notes (historical, non-activating) Deepfake detectors (Farid lab models); bias probes; jailbreak prompt banks; OWASP scanner **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (red-team vs defender) + adversarial search",
+    "folderPath": "business/video/agents/video.safetyredteam",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.qc_l3_reviewer",
+    "id": "video.sales",
     "pack": "video",
-    "name": "Qc L3 Reviewer",
-    "role": "Video Qc L3 Reviewer configuration specialist",
+    "name": "Sales",
+    "role": "SalesAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain qc l3 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8 ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
+    "description": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: `SalesAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Handles buyer-facing sales packaging for distributors and outlets ### Knowledge distillation sources (historical) Rights windowing playbooks, market package examples, buyer materials ### Self-quality criteria (historical) Buyer-package completeness, rights clarity, market-fit packaging ### Surpass-human signal (historical) Produces sales-ready release packets faster than manual assembly ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DistributorAgent, MarketingAgent - **Comments on:** Missing buyer info, weak positioning, incomplete rights summaries ### Tools design-time notes (historical, non-activating) Rights systems, package builders, buyer CRM **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over buyer package requirements",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7279,21 +7929,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.qc_l3_reviewer.v1",
-    "rubricReference": "video.rubric.qc_l3_reviewer.v1",
+    "promptReference": "video.prompt.sales.v1",
+    "rubricReference": "video.rubric.sales.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.qc_l3_reviewer",
+          "agent_id: video.sales",
           "status: registered",
-          "role: Video Qc L3 Reviewer configuration specialist",
+          "role: SalesAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -7321,11 +7971,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.qc_l3_reviewer.v1",
-          "rubric_reference: video.rubric.qc_l3_reviewer.v1",
+          "prompt_reference: video.prompt.sales.v1",
+          "rubric_reference: video.rubric.sales.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -7333,815 +7983,14 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.qc_l3_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.judge`, `video.gatekeeper`\n- Local runtime: `agent_spec.json`\n- Local specificatio"
+          "# Mapping — `video.sales`\n\n- VA/generic pack ID: `video.sales`\n- Previous common ID: `video.client_success_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain qc l3 reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8 ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "folderPath": "business/video/agents/video.qc_l3_reviewer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.quality_controller",
-    "pack": "video",
-    "name": "Quality Controller",
-    "role": "Video Quality Controller configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain quality controller outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.quality_controller.v1",
-    "rubricReference": "video.rubric.quality_controller.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.quality_controller",
-          "status: registered",
-          "role: Video Quality Controller configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.quality_controller.v1",
-          "rubric_reference: video.rubric.quality_controller.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.quality_controller`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.critic`, `video.judge`\n- Local runtime: `agent_spec.json`\n- Local specificatio"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain quality controller outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.judge) Adjudicates disputes via multi-agent debate; scores against rubric ### Distilled quality (video.judge) Inter-rater κ vs expert panel ≥0.8",
-    "folderPath": "business/video/agents/video.quality_controller",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.refine_coordinator",
-    "pack": "video",
-    "name": "Refine Coordinator",
-    "role": "Video Refine Coordinator configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain refine coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.judge_agent\"],\"outputs\":[\"video.critique_coordinator\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.refine_coordinator.v1",
-    "rubricReference": "video.rubric.refine_coordinator.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.refine_coordinator",
-          "status: registered",
-          "role: Video Refine Coordinator configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.refine_coordinator.v1",
-          "rubric_reference: video.rubric.refine_coordinator.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.judge_agent\"]",
-          "critique_outputs: [\"video.critique_coordinator\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.refine_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.promptoptimizer`, `video.critic`\n- Local runtime: `agent_spec.json`\n- Local sp"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain refine coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "folderPath": "business/video/agents/video.refine_coordinator",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.regression_analyst",
-    "pack": "video",
-    "name": "Regression Analyst",
-    "role": "Video Regression Analyst configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain regression analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.regression_analyst.v1",
-    "rubricReference": "video.rubric.regression_analyst.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.regression_analyst",
-          "status: registered",
-          "role: Video Regression Analyst configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.regression_analyst.v1",
-          "rubric_reference: video.rubric.regression_analyst.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.regression_analyst`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.evaluationharness`, `video.analyst`\n- Local runtime: `agent_spec.json`\n- Local"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain regression analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.evaluationharness) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Distilled quality (video.evaluationharness) Regression precision/recall; alert latency <1h ### Distilled responsibility (video.analyst) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Distilled quality (video.analyst) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround",
-    "folderPath": "business/video/agents/video.regression_analyst",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.release_manager",
-    "pack": "video",
-    "name": "Release Manager",
-    "role": "Video Release Manager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain release manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.release_manager.v1",
-    "rubricReference": "video.rubric.release_manager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.release_manager",
-          "status: registered",
-          "role: Video Release Manager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.release_manager.v1",
-          "rubric_reference: video.rubric.release_manager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.release_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.distributor`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local specifi"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain release manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.distributor) Manages downstream delivery to buyers, platforms, and territories ### Distilled quality (video.distributor) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.release_manager",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.resource_planner",
-    "pack": "video",
-    "name": "Resource Planner",
-    "role": "Video Resource Planner configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain resource planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.resource_planner.v1",
-    "rubricReference": "video.rubric.resource_planner.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.resource_planner",
-          "status: registered",
-          "role: Video Resource Planner configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.resource_planner.v1",
-          "rubric_reference: video.rubric.resource_planner.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.resource_planner`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.producer`, `video.planner`\n- Local runtime: `agent_spec.json`\n- Local specificat"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain resource planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "folderPath": "business/video/agents/video.resource_planner",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.rights_consent_agent",
-    "pack": "video",
-    "name": "Rights Consent Agent",
-    "role": "Video Rights Consent Agent configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain rights consent agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.rights_consent_agent.v1",
-    "rubricReference": "video.rubric.rights_consent_agent.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.rights_consent_agent",
-          "status: registered",
-          "role: Video Rights Consent Agent configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.rights_consent_agent.v1",
-          "rubric_reference: video.rubric.rights_consent_agent.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.rights_consent_agent`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.legal`, `video.trustsafety`\n- Local runtime: `agent_spec.json`\n- Local speci"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain rights consent agent outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.legal) Performs final legal review for novel or high-risk publication issues ### Distilled quality (video.legal) Issue identification recall, sign-off completeness, escalation quality ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
-    "folderPath": "business/video/agents/video.rights_consent_agent",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.risk_manager",
-    "pack": "video",
-    "name": "Risk Manager",
-    "role": "Video Risk Manager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain risk manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ethics) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Distilled quality (video.ethics) Ethical issue recall, mitigation clarity, escalation precision ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.risk_manager.v1",
-    "rubricReference": "video.rubric.risk_manager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.risk_manager",
-          "status: registered",
-          "role: Video Risk Manager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.risk_manager.v1",
-          "rubric_reference: video.rubric.risk_manager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.risk_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.ethics`, `video.gatekeeper`\n- Local runtime: `agent_spec.json`\n- Local specification"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain risk manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.ethics) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Distilled quality (video.ethics) Ethical issue recall, mitigation clarity, escalation precision ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "folderPath": "business/video/agents/video.risk_manager",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.safety_reviewer",
-    "pack": "video",
-    "name": "Safety Reviewer",
-    "role": "Video Safety Reviewer configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain safety reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.safetyredteam) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Distilled quality (video.safetyredteam) Attack-success kept ≤1%; taxonomy coverage ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.safety_reviewer.v1",
-    "rubricReference": "video.rubric.safety_reviewer.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.safety_reviewer",
-          "status: registered",
-          "role: Video Safety Reviewer configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.safety_reviewer.v1",
-          "rubric_reference: video.rubric.safety_reviewer.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.safety_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.safetyredteam`, `video.trustsafety`\n- Local runtime: `agent_spec.json`\n- Local sp"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain safety reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.safetyredteam) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Distilled quality (video.safetyredteam) Attack-success kept ≤1%; taxonomy coverage ### Distilled responsibility (video.trustsafety) Screens outputs for impersonation, abuse, or harmful misuse ### Distilled quality (video.trustsafety) Policy hit rate, abuse-risk recall, low false negatives on blocked cases",
-    "folderPath": "business/video/agents/video.safety_reviewer",
-    "hasSpecMd": true,
-    "hasReadme": true,
-    "hasSources": true
-  },
-  {
-    "id": "video.schedule_manager",
-    "pack": "video",
-    "name": "Schedule Manager",
-    "role": "Video Schedule Manager configuration specialist",
-    "status": "registered",
-    "description": "Owns the video-domain schedule manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "versionLabel": "video · registered · schema 1.0",
-    "success": "—",
-    "avgTokens": "1024",
-    "latency": "local",
-    "usage": "Pack `video` · self-contained folder",
-    "badges": [
-      "video",
-      "registered",
-      "self-contained",
-      "no-network"
-    ],
-    "domains": [
-      "video"
-    ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.schedule_manager.v1",
-    "rubricReference": "video.rubric.schedule_manager.v1",
-    "configSummaries": [
-      {
-        "id": "runtime",
-        "title": "Runtime binding",
-        "lines": [
-          "agent_id: video.schedule_manager",
-          "status: registered",
-          "role: Video Schedule Manager configuration specialist",
-          "schema_version: 1.0",
-          "production_activation_requested: False"
-        ]
-      },
-      {
-        "id": "model",
-        "title": "Model policy",
-        "lines": [
-          "provider: local_deterministic",
-          "model_id: local-video-config-v1",
-          "network_access: False"
-        ]
-      },
-      {
-        "id": "budget",
-        "title": "Budget policy",
-        "lines": [
-          "max_input_tokens: 2048",
-          "max_output_tokens: 1024",
-          "max_tool_requests: 0"
-        ]
-      },
-      {
-        "id": "tools_critique",
-        "title": "Tools & critique",
-        "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.schedule_manager.v1",
-          "rubric_reference: video.rubric.schedule_manager.v1",
-          "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
-        ]
-      },
-      {
-        "id": "provenance",
-        "title": "Local provenance",
-        "lines": [
-          "pack: video",
-          "mapping_status: composite",
-          "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.schedule_manager`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.producer`, `video.planner`\n- Local runtime: `agent_spec.json`\n- Local specificat"
-        ]
-      }
-    ],
-    "specExcerpt": "Owns the video-domain schedule manager outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10%",
-    "folderPath": "business/video/agents/video.schedule_manager",
+    "specExcerpt": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: `SalesAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Handles buyer-facing sales packaging for distributors and outlets ### Knowledge distillation sources (historical) Rights windowing playbooks, market package examples, buyer materials ### Self-quality criteria (historical) Buyer-package completeness, rights clarity, market-fit packaging ### Surpass-human signal (historical) Produces sales-ready release packets faster than manual assembly ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DistributorAgent, MarketingAgent - **Comments on:** Missing buyer info, weak positioning, incomplete rights summaries ### Tools design-time notes (historical, non-activating) Rights systems, package builders, buyer CRM **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over buyer package requirements",
+    "folderPath": "business/video/agents/video.sales",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
@@ -8150,9 +7999,9 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "id": "video.screenwriter",
     "pack": "video",
     "name": "Screenwriter",
-    "role": "Video Screenwriter configuration specialist",
+    "role": "ScreenwriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain screenwriter outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.screenwriter) Treatment → screenplay; dialogue; structure ### Distilled quality (video.screenwriter) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta",
+    "description": "Treatment → screenplay; dialogue; structure Host role binding: `ScreenwriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Treatment → screenplay; dialogue; structure ### Knowledge distillation sources (historical) Black List scripts; WGA library; McKee *Story*; Truby; Kaufman/Sorkin interviews ### Self-quality criteria (historical) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta ### Surpass-human signal (historical) Wins ≥50% blind read vs Black List Top-10 (WGA panel emulated) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DramaturgAgent, StoryEditorAgent — Reflexion loop - **Comments on:** DirectorAgent (logline), DialogueAgent, ConsistencyAgent ### Tools design-time notes (historical, non-activating) Fountain/FDX format validators; semantic embedding models (text-embedding-3-large) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (Shinn 2023) — ve",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8169,7 +8018,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8183,7 +8032,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "agent_id: video.screenwriter",
           "status: registered",
-          "role: Video Screenwriter configuration specialist",
+          "role: ScreenwriterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8214,8 +8063,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.screenwriter.v1",
           "rubric_reference: video.rubric.screenwriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8223,25 +8072,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.screenwriter`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.screenwriter`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- Pack"
+          "# Mapping — `video.screenwriter`\n\n- VA/generic pack ID: `video.screenwriter`\n- Previous common ID: `video.screenwriter`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain screenwriter outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.screenwriter) Treatment → screenplay; dialogue; structure ### Distilled quality (video.screenwriter) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta",
+    "specExcerpt": "Treatment → screenplay; dialogue; structure Host role binding: `ScreenwriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Treatment → screenplay; dialogue; structure ### Knowledge distillation sources (historical) Black List scripts; WGA library; McKee *Story*; Truby; Kaufman/Sorkin interviews ### Self-quality criteria (historical) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta ### Surpass-human signal (historical) Wins ≥50% blind read vs Black List Top-10 (WGA panel emulated) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DramaturgAgent, StoryEditorAgent — Reflexion loop - **Comments on:** DirectorAgent (logline), DialogueAgent, ConsistencyAgent ### Tools design-time notes (historical, non-activating) Fountain/FDX format validators; semantic embedding models (text-embedding-3-large) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (Shinn 2023) — ve",
     "folderPath": "business/video/agents/video.screenwriter",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.script_editor",
+    "id": "video.seo",
     "pack": "video",
-    "name": "Script Editor",
-    "role": "Video Script Editor configuration specialist",
+    "name": "Seo",
+    "role": "SEOAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain script editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.standardseditor) Enforces editorial standards, sourcing discipline, and corrections policy ### Distilled quality (video.standardseditor) Standards-compliance rate, attribution accuracy, corrections readiness ### Distilled responsibility (video.screenwriter) Treatment → screenplay; dialogue; structure ### Distilled quality (video.screenwriter) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta",
+    "description": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: `SEOAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Knowledge distillation sources (historical) Search ranking studies, video metadata best practices, keyword taxonomies ### Self-quality criteria (historical) Keyword fit, metadata completeness, search-intent match ### Surpass-human signal (historical) Lifts discoverability faster than manual metadata tuning ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CopywriterAgent, AnalystAgent - **Comments on:** Weak keywords, poor title-description fit, metadata omissions ### Tools design-time notes (historical, non-activating) Keyword tools, metadata APIs, ranking dashboards **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with search-intent validation",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8258,21 +8107,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.script_editor.v1",
-    "rubricReference": "video.rubric.script_editor.v1",
+    "promptReference": "video.prompt.seo.v1",
+    "rubricReference": "video.rubric.seo.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.script_editor",
+          "agent_id: video.seo",
           "status: registered",
-          "role: Video Script Editor configuration specialist",
+          "role: SEOAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8300,11 +8149,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.script_editor.v1",
-          "rubric_reference: video.rubric.script_editor.v1",
+          "prompt_reference: video.prompt.seo.v1",
+          "rubric_reference: video.rubric.seo.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8312,25 +8161,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.script_editor`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.standardseditor`, `video.screenwriter`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.seo`\n\n- VA/generic pack ID: `video.seo`\n- Previous common ID: `video.seo_metadata_specialist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain script editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.standardseditor) Enforces editorial standards, sourcing discipline, and corrections policy ### Distilled quality (video.standardseditor) Standards-compliance rate, attribution accuracy, corrections readiness ### Distilled responsibility (video.screenwriter) Treatment → screenplay; dialogue; structure ### Distilled quality (video.screenwriter) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta",
-    "folderPath": "business/video/agents/video.script_editor",
+    "specExcerpt": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: `SEOAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Knowledge distillation sources (historical) Search ranking studies, video metadata best practices, keyword taxonomies ### Self-quality criteria (historical) Keyword fit, metadata completeness, search-intent match ### Surpass-human signal (historical) Lifts discoverability faster than manual metadata tuning ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CopywriterAgent, AnalystAgent - **Comments on:** Weak keywords, poor title-description fit, metadata omissions ### Tools design-time notes (historical, non-activating) Keyword tools, metadata APIs, ranking dashboards **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with search-intent validation",
+    "folderPath": "business/video/agents/video.seo",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.seo_metadata_specialist",
+    "id": "video.showrunner",
     "pack": "video",
-    "name": "Seo Metadata Specialist",
-    "role": "Video Seo Metadata Specialist configuration specialist",
+    "name": "Showrunner",
+    "role": "ShowrunnerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain seo metadata specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.seo) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Distilled quality (video.seo) Keyword fit, metadata completeness, search-intent match",
+    "description": "Cross-episode arc, writers'-room orchestration Host role binding: `ShowrunnerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Cross-episode arc, writers'-room orchestration ### Knowledge distillation sources (historical) WGA showrunner training; Sopranos/BB room transcripts; Mike Schur material ### Self-quality criteria (historical) Arc continuity score; character-thread completion; tonal variance within bounds ### Surpass-human signal (historical) Series Bible coverage ≥99% across 10 eps (vs ~95% human) ### Critique bus (historical) - **Accepts critique from:** Network-Notes Agent, AudienceSim, multi-agent debate w/ ScreenwriterAgent - **Comments on:** ScreenwriterAgent (arc), CastingAgent, DirectorAgent (tone) ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro 1M), vector-DB (Pinecone/Weaviate) for bible search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) ",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8347,21 +8196,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.seo_metadata_specialist.v1",
-    "rubricReference": "video.rubric.seo_metadata_specialist.v1",
+    "promptReference": "video.prompt.showrunner.v1",
+    "rubricReference": "video.rubric.showrunner.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.seo_metadata_specialist",
+          "agent_id: video.showrunner",
           "status: registered",
-          "role: Video Seo Metadata Specialist configuration specialist",
+          "role: ShowrunnerAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8389,11 +8238,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.seo_metadata_specialist.v1",
-          "rubric_reference: video.rubric.seo_metadata_specialist.v1",
+          "prompt_reference: video.prompt.showrunner.v1",
+          "rubric_reference: video.rubric.showrunner.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8401,25 +8250,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.seo_metadata_specialist`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.seo`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- "
+          "# Mapping — `video.showrunner`\n\n- VA/generic pack ID: `video.showrunner`\n- Previous common ID: `video.evaluation_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain seo metadata specialist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.seo) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Distilled quality (video.seo) Keyword fit, metadata completeness, search-intent match",
-    "folderPath": "business/video/agents/video.seo_metadata_specialist",
+    "specExcerpt": "Cross-episode arc, writers'-room orchestration Host role binding: `ShowrunnerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Cross-episode arc, writers'-room orchestration ### Knowledge distillation sources (historical) WGA showrunner training; Sopranos/BB room transcripts; Mike Schur material ### Self-quality criteria (historical) Arc continuity score; character-thread completion; tonal variance within bounds ### Surpass-human signal (historical) Series Bible coverage ≥99% across 10 eps (vs ~95% human) ### Critique bus (historical) - **Accepts critique from:** Network-Notes Agent, AudienceSim, multi-agent debate w/ ScreenwriterAgent - **Comments on:** ScreenwriterAgent (arc), CastingAgent, DirectorAgent (tone) ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro 1M), vector-DB (Pinecone/Weaviate) for bible search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) ",
+    "folderPath": "business/video/agents/video.showrunner",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.shot_planner",
+    "id": "video.signlanguageinterpreter",
     "pack": "video",
-    "name": "Shot Planner",
-    "role": "Video Shot Planner configuration specialist",
+    "name": "Signlanguageinterpreter",
+    "role": "SignLanguageInterpreterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain shot planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.cameraoperator) Executes framing / focus / move per DoP intent ### Distilled quality (video.cameraoperator) Frame steadiness, focus-hit %, action centering ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior",
+    "description": "Accurate ASL/BSL interpretation Host role binding: `SignLanguageInterpreterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate ASL/BSL interpretation ### Knowledge distillation sources (historical) RID NIC curricula; NAD corpora; Deaf-community consented data ### Self-quality criteria (historical) Sign accuracy (Deaf-reviewer vote); facial-grammar markers ### Surpass-human signal (historical) Wins blind NAD-reviewer preference at scale ### Critique bus (historical) - **Accepts critique from:** DeafCommunityReviewAgent (HiTL), LinguistAgent - **Comments on:** VoiceCloneAgent (no caption), AccessibilityAgent ### Tools design-time notes (historical, non-activating) Sign-avatar rendering (SignAll); MediaPipe pose estimation; facial-action-unit detector **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from Deaf-community review panel)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8436,21 +8285,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.shot_planner.v1",
-    "rubricReference": "video.rubric.shot_planner.v1",
+    "promptReference": "video.prompt.signlanguageinterpreter.v1",
+    "rubricReference": "video.rubric.signlanguageinterpreter.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.shot_planner",
+          "agent_id: video.signlanguageinterpreter",
           "status: registered",
-          "role: Video Shot Planner configuration specialist",
+          "role: SignLanguageInterpreterAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8478,11 +8327,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.shot_planner.v1",
-          "rubric_reference: video.rubric.shot_planner.v1",
+          "prompt_reference: video.prompt.signlanguageinterpreter.v1",
+          "rubric_reference: video.rubric.signlanguageinterpreter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8490,25 +8339,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.shot_planner`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.cameraoperator`, `video.director`\n- Local runtime: `agent_spec.json`\n- Local specifi"
+          "# Mapping — `video.signlanguageinterpreter`\n\n- VA/generic pack ID: `video.signlanguageinterpreter`\n- Previous common ID: `video.regression_analyst`\n- SPEC depth: full generic SPEC body + host runtime "
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain shot planner outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.cameraoperator) Executes framing / focus / move per DoP intent ### Distilled quality (video.cameraoperator) Frame steadiness, focus-hit %, action centering ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior",
-    "folderPath": "business/video/agents/video.shot_planner",
+    "specExcerpt": "Accurate ASL/BSL interpretation Host role binding: `SignLanguageInterpreterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate ASL/BSL interpretation ### Knowledge distillation sources (historical) RID NIC curricula; NAD corpora; Deaf-community consented data ### Self-quality criteria (historical) Sign accuracy (Deaf-reviewer vote); facial-grammar markers ### Surpass-human signal (historical) Wins blind NAD-reviewer preference at scale ### Critique bus (historical) - **Accepts critique from:** DeafCommunityReviewAgent (HiTL), LinguistAgent - **Comments on:** VoiceCloneAgent (no caption), AccessibilityAgent ### Tools design-time notes (historical, non-activating) Sign-avatar rendering (SignAll); MediaPipe pose estimation; facial-action-unit detector **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from Deaf-community review panel)",
+    "folderPath": "business/video/agents/video.signlanguageinterpreter",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.signoff_coordinator",
+    "id": "video.sme",
     "pack": "video",
-    "name": "Signoff Coordinator",
-    "role": "Video Signoff Coordinator configuration specialist",
+    "name": "Sme",
+    "role": "SMEAgent (Subject-Matter Expert) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain signoff coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
+    "description": "Domain accuracy in target field Host role binding: `SMEAgent (Subject-Matter Expert) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Domain accuracy in target field ### Knowledge distillation sources (historical) Peer-reviewed journals; certified curricula (CFA, USMLE, AWS); expert interviews ### Self-quality criteria (historical) Citation density; benchmark exam pass; hallucination ≤0.5% ### Surpass-human signal (historical) Passes same certification as human pro ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, peer SMEAgents (debate) - **Comments on:** ScriptwriterAgent (inaccuracy), MotionGraphicsAgent (mis-labels) ### Tools design-time notes (historical, non-activating) PubMed/arXiv/JSTOR search APIs; exam-question banks; RAG over certified corpora **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate + RAG retrieval",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8525,21 +8374,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.signoff_coordinator.v1",
-    "rubricReference": "video.rubric.signoff_coordinator.v1",
+    "promptReference": "video.prompt.sme.v1",
+    "rubricReference": "video.rubric.sme.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.signoff_coordinator",
+          "agent_id: video.sme",
           "status: registered",
-          "role: Video Signoff Coordinator configuration specialist",
+          "role: SMEAgent (Subject-Matter Expert) (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8567,11 +8416,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.signoff_coordinator.v1",
-          "rubric_reference: video.rubric.signoff_coordinator.v1",
+          "prompt_reference: video.prompt.sme.v1",
+          "rubric_reference: video.rubric.sme.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8579,25 +8428,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.signoff_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.gatekeeper`, `video.producer`\n- Local runtime: `agent_spec.json`\n- Local spec"
+          "# Mapping — `video.sme`\n\n- VA/generic pack ID: `video.sme`\n- Previous common ID: `video.adversarial_tester`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain signoff coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99% ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF)",
-    "folderPath": "business/video/agents/video.signoff_coordinator",
+    "specExcerpt": "Domain accuracy in target field Host role binding: `SMEAgent (Subject-Matter Expert) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Domain accuracy in target field ### Knowledge distillation sources (historical) Peer-reviewed journals; certified curricula (CFA, USMLE, AWS); expert interviews ### Self-quality criteria (historical) Citation density; benchmark exam pass; hallucination ≤0.5% ### Surpass-human signal (historical) Passes same certification as human pro ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, peer SMEAgents (debate) - **Comments on:** ScriptwriterAgent (inaccuracy), MotionGraphicsAgent (mis-labels) ### Tools design-time notes (historical, non-activating) PubMed/arXiv/JSTOR search APIs; exam-question banks; RAG over certified corpora **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate + RAG retrieval",
+    "folderPath": "business/video/agents/video.sme",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.social_editor",
+    "id": "video.socialmediastrategist",
     "pack": "video",
-    "name": "Social Editor",
-    "role": "Video Social Editor configuration specialist",
+    "name": "Socialmediastrategist",
+    "role": "SocialMediaStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain social editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.socialmediastrategist) Platform-native distribution, timing, trends ### Distilled quality (video.socialmediastrategist) Predicted-vs-actual reach error; trend-timing latency <2h ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
+    "description": "Platform-native distribution, timing, trends Host role binding: `SocialMediaStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Platform-native distribution, timing, trends ### Knowledge distillation sources (historical) TikTok Creator Portal; Meta Marketing Science; Tubular/Sensor Tower ### Self-quality criteria (historical) Predicted-vs-actual reach error; trend-timing latency <2h ### Surpass-human signal (historical) Beats agency social leads on 30-day reach lift ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, BrandAgent - **Comments on:** CopywriterAgent (off-platform tone), EditorAgent (wrong aspect) ### Tools design-time notes (historical, non-activating) Meta Graph API; TikTok Content Posting API; Buffer/Hootsuite API; Sensor Tower data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (trend search → schedule → post)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8614,21 +8463,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.social_editor.v1",
-    "rubricReference": "video.rubric.social_editor.v1",
+    "promptReference": "video.prompt.socialmediastrategist.v1",
+    "rubricReference": "video.rubric.socialmediastrategist.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.social_editor",
+          "agent_id: video.socialmediastrategist",
           "status: registered",
-          "role: Video Social Editor configuration specialist",
+          "role: SocialMediaStrategistAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8656,11 +8505,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.social_editor.v1",
-          "rubric_reference: video.rubric.social_editor.v1",
+          "prompt_reference: video.prompt.socialmediastrategist.v1",
+          "rubric_reference: video.rubric.socialmediastrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8668,25 +8517,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.social_editor`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.socialmediastrategist`, `video.editor`\n- Local runtime: `agent_spec.json`\n- Local s"
+          "# Mapping — `video.socialmediastrategist`\n\n- VA/generic pack ID: `video.socialmediastrategist`\n- Previous common ID: `video.social_editor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain social editor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.socialmediastrategist) Platform-native distribution, timing, trends ### Distilled quality (video.socialmediastrategist) Predicted-vs-actual reach error; trend-timing latency <2h ### Distilled responsibility (video.editor) Assemble cut; pacing; coverage selection ### Distilled quality (video.editor) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target",
-    "folderPath": "business/video/agents/video.social_editor",
+    "specExcerpt": "Platform-native distribution, timing, trends Host role binding: `SocialMediaStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Platform-native distribution, timing, trends ### Knowledge distillation sources (historical) TikTok Creator Portal; Meta Marketing Science; Tubular/Sensor Tower ### Self-quality criteria (historical) Predicted-vs-actual reach error; trend-timing latency <2h ### Surpass-human signal (historical) Beats agency social leads on 30-day reach lift ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, BrandAgent - **Comments on:** CopywriterAgent (off-platform tone), EditorAgent (wrong aspect) ### Tools design-time notes (historical, non-activating) Meta Graph API; TikTok Content Posting API; Buffer/Hootsuite API; Sensor Tower data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (trend search → schedule → post)",
+    "folderPath": "business/video/agents/video.socialmediastrategist",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.sound_designer",
+    "id": "video.sounddesign",
     "pack": "video",
-    "name": "Sound Designer",
-    "role": "Video Sound Designer configuration specialist",
+    "name": "Sounddesign",
+    "role": "SoundDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain sound designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.sounddesign) Ambience, foley, SFX ### Distilled quality (video.sounddesign) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS",
+    "description": "Ambience, foley, SFX Host role binding: `SoundDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Ambience, foley, SFX ### Knowledge distillation sources (historical) BBC SFX library; MPSE Golden Reel; Burtt/Lievsay notes ### Self-quality criteria (historical) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS ### Surpass-human signal (historical) Wins MPSE pairwise on horror/sci-fi ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MixerAgent - **Comments on:** EditorAgent (FX clash), ComposerAgent (masking) ### Tools design-time notes (historical, non-activating) ElevenLabs Sound FX API; Freesound; FFmpeg spectral analysis; Dolby.io loudness API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search SFX lib → validate sync → mix)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8696,39 +8545,42 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.sound_designer.v1",
-    "rubricReference": "video.rubric.sound_designer.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.elevenlabs"
+    ],
+    "promptReference": "video.prompt.sounddesign.v1",
+    "rubricReference": "video.rubric.sounddesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.sound_designer",
+          "agent_id: video.sounddesign",
           "status: registered",
-          "role: Video Sound Designer configuration specialist",
+          "role: SoundDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -8737,19 +8589,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.sound_designer.v1",
-          "rubric_reference: video.rubric.sound_designer.v1",
+          "allowed_tools: [\"media.stub\", \"media.elevenlabs\"]",
+          "prompt_reference: video.prompt.sounddesign.v1",
+          "rubric_reference: video.rubric.sounddesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8757,25 +8609,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.sound_designer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.sounddesign`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- P"
+          "# Mapping — `video.sounddesign`\n\n- VA/generic pack ID: `video.sounddesign`\n- Previous common ID: `video.sound_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain sound designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.sounddesign) Ambience, foley, SFX ### Distilled quality (video.sounddesign) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS",
-    "folderPath": "business/video/agents/video.sound_designer",
+    "specExcerpt": "Ambience, foley, SFX Host role binding: `SoundDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Ambience, foley, SFX ### Knowledge distillation sources (historical) BBC SFX library; MPSE Golden Reel; Burtt/Lievsay notes ### Self-quality criteria (historical) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS ### Surpass-human signal (historical) Wins MPSE pairwise on horror/sci-fi ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MixerAgent - **Comments on:** EditorAgent (FX clash), ComposerAgent (masking) ### Tools design-time notes (historical, non-activating) ElevenLabs Sound FX API; Freesound; FFmpeg spectral analysis; Dolby.io loudness API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search SFX lib → validate sync → mix)",
+    "folderPath": "business/video/agents/video.sounddesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.storyboard_artist",
+    "id": "video.soundmixer",
     "pack": "video",
-    "name": "Storyboard Artist",
-    "role": "Video Storyboard Artist configuration specialist",
+    "name": "Soundmixer",
+    "role": "SoundMixerAgent (Re-recording) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain storyboard artist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.storyboard) Script → shot panels ### Distilled quality (video.storyboard) Shot-language fidelity; coverage completeness; staging clarity",
+    "description": "Final mix; deliverables (5.1/Atmos) Host role binding: `SoundMixerAgent (Re-recording) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final mix; deliverables (5.1/Atmos) ### Knowledge distillation sources (historical) CAS Awards; Atmos specs; broadcast loudness standards ### Self-quality criteria (historical) LUFS target; STOI ≥0.85; spec-deliverable pass ### Surpass-human signal (historical) CAS spec on first pass without rework ### Critique bus (historical) - **Accepts critique from:** EditorAgent, SoundDesignAgent, AccessibilityAgent - **Comments on:** SoundDesignAgent (over-design), ComposerAgent (level) ### Tools design-time notes (historical, non-activating) Dolby Atmos Renderer API; LUFS/loudness measurement tools; DaVinci Fairlight MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: broadcast-spec rules)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8792,21 +8644,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.storyboard_artist.v1",
-    "rubricReference": "video.rubric.storyboard_artist.v1",
+    "promptReference": "video.prompt.soundmixer.v1",
+    "rubricReference": "video.rubric.soundmixer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.storyboard_artist",
+          "agent_id: video.soundmixer",
           "status: registered",
-          "role: Video Storyboard Artist configuration specialist",
+          "role: SoundMixerAgent (Re-recording) (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8834,11 +8686,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.storyboard_artist.v1",
-          "rubric_reference: video.rubric.storyboard_artist.v1",
+          "prompt_reference: video.prompt.soundmixer.v1",
+          "rubric_reference: video.rubric.soundmixer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8846,25 +8698,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.storyboard_artist`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.storyboard`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n-"
+          "# Mapping — `video.soundmixer`\n\n- VA/generic pack ID: `video.soundmixer`\n- Previous common ID: `video.dialog_editor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain storyboard artist outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.storyboard) Script → shot panels ### Distilled quality (video.storyboard) Shot-language fidelity; coverage completeness; staging clarity",
-    "folderPath": "business/video/agents/video.storyboard_artist",
+    "specExcerpt": "Final mix; deliverables (5.1/Atmos) Host role binding: `SoundMixerAgent (Re-recording) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final mix; deliverables (5.1/Atmos) ### Knowledge distillation sources (historical) CAS Awards; Atmos specs; broadcast loudness standards ### Self-quality criteria (historical) LUFS target; STOI ≥0.85; spec-deliverable pass ### Surpass-human signal (historical) CAS spec on first pass without rework ### Critique bus (historical) - **Accepts critique from:** EditorAgent, SoundDesignAgent, AccessibilityAgent - **Comments on:** SoundDesignAgent (over-design), ComposerAgent (level) ### Tools design-time notes (historical, non-activating) Dolby Atmos Renderer API; LUFS/loudness measurement tools; DaVinci Fairlight MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: broadcast-spec rules)",
+    "folderPath": "business/video/agents/video.soundmixer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.talent_coordinator",
+    "id": "video.sportsanalyst",
     "pack": "video",
-    "name": "Talent Coordinator",
-    "role": "Video Talent Coordinator configuration specialist",
+    "name": "Sportsanalyst",
+    "role": "SportsAnalystAgent / TelestratorOp (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain talent coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.talent) AI-rendered performance ### Distilled quality (video.talent) Emotion-target match; charisma score (audience proxy) ### Distilled responsibility (video.casting) Voice + likeness selection; audition simulation ### Distilled quality (video.casting) Character-voice fit (audience preference); consent compliance 100%",
+    "description": "Tactical breakdowns + diagrams Host role binding: `SportsAnalystAgent / TelestratorOp (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tactical breakdowns + diagrams ### Knowledge distillation sources (historical) MIT Sloan papers; ESPN Stats & Info; Goldsberry analytics ### Self-quality criteria (historical) Play-call accuracy; on-screen clarity score ### Surpass-human signal (historical) Beats ex-athlete on tactical-prediction ### Critique bus (historical) - **Accepts critique from:** SMEAgent (sport), JournalistAgent - **Comments on:** EditorAgent (missed-replay), MotionGraphicsAgent (chart clarity) ### Tools design-time notes (historical, non-activating) Sports data APIs (StatsBomb, NBA Stats); telestration overlay tools; After Effects MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch play data → annotate → render overlay)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8881,21 +8733,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.talent_coordinator.v1",
-    "rubricReference": "video.rubric.talent_coordinator.v1",
+    "promptReference": "video.prompt.sportsanalyst.v1",
+    "rubricReference": "video.rubric.sportsanalyst.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.talent_coordinator",
+          "agent_id: video.sportsanalyst",
           "status: registered",
-          "role: Video Talent Coordinator configuration specialist",
+          "role: SportsAnalystAgent / TelestratorOp (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -8923,11 +8775,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.talent_coordinator.v1",
-          "rubric_reference: video.rubric.talent_coordinator.v1",
+          "prompt_reference: video.prompt.sportsanalyst.v1",
+          "rubric_reference: video.rubric.sportsanalyst.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -8935,25 +8787,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.talent_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.talent`, `video.casting`\n- Local runtime: `agent_spec.json`\n- Local specificat"
+          "# Mapping — `video.sportsanalyst`\n\n- VA/generic pack ID: `video.sportsanalyst`\n- Previous common ID: `video.operations_observer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain talent coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.talent) AI-rendered performance ### Distilled quality (video.talent) Emotion-target match; charisma score (audience proxy) ### Distilled responsibility (video.casting) Voice + likeness selection; audition simulation ### Distilled quality (video.casting) Character-voice fit (audience preference); consent compliance 100%",
-    "folderPath": "business/video/agents/video.talent_coordinator",
+    "specExcerpt": "Tactical breakdowns + diagrams Host role binding: `SportsAnalystAgent / TelestratorOp (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tactical breakdowns + diagrams ### Knowledge distillation sources (historical) MIT Sloan papers; ESPN Stats & Info; Goldsberry analytics ### Self-quality criteria (historical) Play-call accuracy; on-screen clarity score ### Surpass-human signal (historical) Beats ex-athlete on tactical-prediction ### Critique bus (historical) - **Accepts critique from:** SMEAgent (sport), JournalistAgent - **Comments on:** EditorAgent (missed-replay), MotionGraphicsAgent (chart clarity) ### Tools design-time notes (historical, non-activating) Sports data APIs (StatsBomb, NBA Stats); telestration overlay tools; After Effects MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch play data → annotate → render overlay)",
+    "folderPath": "business/video/agents/video.sportsanalyst",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.technical_qc_reviewer",
+    "id": "video.standardseditor",
     "pack": "video",
-    "name": "Technical Qc Reviewer",
-    "role": "Video Technical Qc Reviewer configuration specialist",
+    "name": "Standardseditor",
+    "role": "StandardsEditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain technical qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.standardseditor) Enforces editorial standards, sourcing discipline, and corrections policy ### Distilled quality (video.standardseditor) Standards-compliance rate, attribution accuracy, corrections readiness ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
+    "description": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: `StandardsEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces editorial standards, sourcing discipline, and corrections policy ### Knowledge distillation sources (historical) Newsroom standards manuals, corrections policies, attribution standards ### Self-quality criteria (historical) Standards-compliance rate, attribution accuracy, corrections readiness ### Surpass-human signal (historical) Reduces standards drift better than late-stage copy edits ### Critique bus (historical) - **Accepts critique from:** JournalistAgent, FactCheckerAgent, CorrectionsAgent, LegalAgent - **Comments on:** Weak attribution, standards violations, correction policy gaps ### Tools design-time notes (historical, non-activating) Editorial checklists, attribution validators, standards DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8970,21 +8822,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.technical_qc_reviewer.v1",
-    "rubricReference": "video.rubric.technical_qc_reviewer.v1",
+    "promptReference": "video.prompt.standardseditor.v1",
+    "rubricReference": "video.rubric.standardseditor.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.technical_qc_reviewer",
+          "agent_id: video.standardseditor",
           "status: registered",
-          "role: Video Technical Qc Reviewer configuration specialist",
+          "role: StandardsEditorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9012,11 +8864,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.technical_qc_reviewer.v1",
-          "rubric_reference: video.rubric.technical_qc_reviewer.v1",
+          "prompt_reference: video.prompt.standardseditor.v1",
+          "rubric_reference: video.rubric.standardseditor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9024,25 +8876,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.technical_qc_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.standardseditor`, `video.critic`\n- Local runtime: `agent_spec.json`\n- Local"
+          "# Mapping — `video.standardseditor`\n\n- VA/generic pack ID: `video.standardseditor`\n- Previous common ID: `video.script_editor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain technical qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.standardseditor) Enforces editorial standards, sourcing discipline, and corrections policy ### Distilled quality (video.standardseditor) Standards-compliance rate, attribution accuracy, corrections readiness ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity",
-    "folderPath": "business/video/agents/video.technical_qc_reviewer",
+    "specExcerpt": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: `StandardsEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces editorial standards, sourcing discipline, and corrections policy ### Knowledge distillation sources (historical) Newsroom standards manuals, corrections policies, attribution standards ### Self-quality criteria (historical) Standards-compliance rate, attribution accuracy, corrections readiness ### Surpass-human signal (historical) Reduces standards drift better than late-stage copy edits ### Critique bus (historical) - **Accepts critique from:** JournalistAgent, FactCheckerAgent, CorrectionsAgent, LegalAgent - **Comments on:** Weak attribution, standards violations, correction policy gaps ### Tools design-time notes (historical, non-activating) Editorial checklists, attribution validators, standards DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional",
+    "folderPath": "business/video/agents/video.standardseditor",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.thumbnail_designer",
+    "id": "video.storyboard",
     "pack": "video",
-    "name": "Thumbnail Designer",
-    "role": "Video Thumbnail Designer configuration specialist",
+    "name": "Storyboard",
+    "role": "StoryboardAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain thumbnail designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.templatedesign) Designs reusable and safe personalization templates ### Distilled quality (video.templatedesign) Merge-field robustness, layout stability, render survivability ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail",
+    "description": "Script → shot panels Host role binding: `StoryboardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Script → shot panels ### Knowledge distillation sources (historical) *Framed Ink* (Mateu-Mestre); Pixar story-trust; Despretz boards ### Self-quality criteria (historical) Shot-language fidelity; coverage completeness; staging clarity ### Surpass-human signal (historical) Pixar story-trust pass rate at minutes per page ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ScriptwriterAgent (unfilmable), DirectorAgent (staging) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney API; panel-layout templates; Fountain parser **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (director feedback loop)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9059,21 +8911,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.thumbnail_designer.v1",
-    "rubricReference": "video.rubric.thumbnail_designer.v1",
+    "promptReference": "video.prompt.storyboard.v1",
+    "rubricReference": "video.rubric.storyboard.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.thumbnail_designer",
+          "agent_id: video.storyboard",
           "status: registered",
-          "role: Video Thumbnail Designer configuration specialist",
+          "role: StoryboardAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9101,11 +8953,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.thumbnail_designer.v1",
-          "rubric_reference: video.rubric.thumbnail_designer.v1",
+          "prompt_reference: video.prompt.storyboard.v1",
+          "rubric_reference: video.rubric.storyboard.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9113,25 +8965,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.thumbnail_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.templatedesign`, `video.motiongraphics`\n- Local runtime: `agent_spec.json`\n- L"
+          "# Mapping — `video.storyboard`\n\n- VA/generic pack ID: `video.storyboard`\n- Previous common ID: `video.storyboard_artist`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain thumbnail designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.templatedesign) Designs reusable and safe personalization templates ### Distilled quality (video.templatedesign) Merge-field robustness, layout stability, render survivability ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail",
-    "folderPath": "business/video/agents/video.thumbnail_designer",
+    "specExcerpt": "Script → shot panels Host role binding: `StoryboardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Script → shot panels ### Knowledge distillation sources (historical) *Framed Ink* (Mateu-Mestre); Pixar story-trust; Despretz boards ### Self-quality criteria (historical) Shot-language fidelity; coverage completeness; staging clarity ### Surpass-human signal (historical) Pixar story-trust pass rate at minutes per page ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ScriptwriterAgent (unfilmable), DirectorAgent (staging) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney API; panel-layout templates; Fountain parser **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (director feedback loop)",
+    "folderPath": "business/video/agents/video.storyboard",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.title_designer",
+    "id": "video.styletransfer",
     "pack": "video",
-    "name": "Title Designer",
-    "role": "Video Title Designer configuration specialist",
+    "name": "Styletransfer",
+    "role": "StyleTransferAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain title designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail ### Distilled responsibility (video.templatedesign) Designs reusable and safe personalization templates ### Distilled quality (video.templatedesign) Merge-field robustness, layout stability, render survivability",
+    "description": "Applies named aesthetic consistently across shots Host role binding: `StyleTransferAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Applies named aesthetic consistently across shots ### Knowledge distillation sources (historical) Curated style corpora; LoRA/seed registries; reference-frame banks ### Self-quality criteria (historical) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Surpass-human signal (historical) Wins blind preference vs human colorist+grader ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent - **Comments on:** GeneratorAgent (off-style) ### Tools design-time notes (historical, non-activating) LoRA weights per style; CLIP/DINO similarity scorer; Runway style-lock mode; ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (CLIP style score as feedback)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9141,39 +8993,43 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.title_designer.v1",
-    "rubricReference": "video.rubric.title_designer.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.runway",
+      "media.veo"
+    ],
+    "promptReference": "video.prompt.styletransfer.v1",
+    "rubricReference": "video.rubric.styletransfer.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.title_designer",
+          "agent_id: video.styletransfer",
           "status: registered",
-          "role: Video Title Designer configuration specialist",
+          "role: StyleTransferAgent (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -9182,19 +9038,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.title_designer.v1",
-          "rubric_reference: video.rubric.title_designer.v1",
+          "allowed_tools: [\"media.stub\", \"media.runway\", \"media.veo\"]",
+          "prompt_reference: video.prompt.styletransfer.v1",
+          "rubric_reference: video.rubric.styletransfer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9202,25 +9058,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.title_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.motiongraphics`, `video.templatedesign`\n- Local runtime: `agent_spec.json`\n- Local"
+          "# Mapping — `video.styletransfer`\n\n- VA/generic pack ID: `video.styletransfer`\n- Previous common ID: `video.image_generation_operator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain title designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.motiongraphics) Kinetic typography, lower thirds, infographics ### Distilled quality (video.motiongraphics) Typographic hierarchy; brand compliance; readability at thumbnail ### Distilled responsibility (video.templatedesign) Designs reusable and safe personalization templates ### Distilled quality (video.templatedesign) Merge-field robustness, layout stability, render survivability",
-    "folderPath": "business/video/agents/video.title_designer",
+    "specExcerpt": "Applies named aesthetic consistently across shots Host role binding: `StyleTransferAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Applies named aesthetic consistently across shots ### Knowledge distillation sources (historical) Curated style corpora; LoRA/seed registries; reference-frame banks ### Self-quality criteria (historical) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Surpass-human signal (historical) Wins blind preference vs human colorist+grader ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent - **Comments on:** GeneratorAgent (off-style) ### Tools design-time notes (historical, non-activating) LoRA weights per style; CLIP/DINO similarity scorer; Runway style-lock mode; ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (CLIP style score as feedback)",
+    "folderPath": "business/video/agents/video.styletransfer",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.tool_policy_designer",
+    "id": "video.talent",
     "pack": "video",
-    "name": "Tool Policy Designer",
-    "role": "Video Tool Policy Designer configuration specialist",
+    "name": "Talent",
+    "role": "TalentAgent (On-camera) (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain tool policy designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.router) Picks right specialist agent (and model) for each subtask ### Distilled quality (video.router) Routing accuracy ≥95% vs oracle; cost within budget ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
+    "description": "AI-rendered performance Host role binding: `TalentAgent (On-camera) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) AI-rendered performance ### Knowledge distillation sources (historical) Method-acting transcripts; consented actor performance corpora ### Self-quality criteria (historical) Emotion-target match; charisma score (audience proxy) ### Surpass-human signal (historical) Hold-rate matches top creators in cohort ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, CastingAgent - **Comments on:** DirectorAgent (impossible blocking) ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV; Synthesia personal avatars; emotion-detection models (AffectNet) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + emotion-regression validator",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9237,21 +9093,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.tool_policy_designer.v1",
-    "rubricReference": "video.rubric.tool_policy_designer.v1",
+    "promptReference": "video.prompt.talent.v1",
+    "rubricReference": "video.rubric.talent.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.tool_policy_designer",
+          "agent_id: video.talent",
           "status: registered",
-          "role: Video Tool Policy Designer configuration specialist",
+          "role: TalentAgent (On-camera) (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9279,11 +9135,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.tool_policy_designer.v1",
-          "rubric_reference: video.rubric.tool_policy_designer.v1",
+          "prompt_reference: video.prompt.talent.v1",
+          "rubric_reference: video.rubric.talent.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9291,25 +9147,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.tool_policy_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.router`, `video.gatekeeper`\n- Local runtime: `agent_spec.json`\n- Local speci"
+          "# Mapping — `video.talent`\n\n- VA/generic pack ID: `video.talent`\n- Previous common ID: `video.talent_coordinator`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain tool policy designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.router) Picks right specialist agent (and model) for each subtask ### Distilled quality (video.router) Routing accuracy ≥95% vs oracle; cost within budget ### Distilled responsibility (video.gatekeeper) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Distilled quality (video.gatekeeper) Zero leaked defects; sign-off SLA ≥99%",
-    "folderPath": "business/video/agents/video.tool_policy_designer",
+    "specExcerpt": "AI-rendered performance Host role binding: `TalentAgent (On-camera) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) AI-rendered performance ### Knowledge distillation sources (historical) Method-acting transcripts; consented actor performance corpora ### Self-quality criteria (historical) Emotion-target match; charisma score (audience proxy) ### Surpass-human signal (historical) Hold-rate matches top creators in cohort ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, CastingAgent - **Comments on:** DirectorAgent (impossible blocking) ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV; Synthesia personal avatars; emotion-detection models (AffectNet) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + emotion-regression validator",
+    "folderPath": "business/video/agents/video.talent",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.translation_reviewer",
+    "id": "video.templatedesign",
     "pack": "video",
-    "name": "Translation Reviewer",
-    "role": "Video Translation Reviewer configuration specialist",
+    "name": "Templatedesign",
+    "role": "TemplateDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain translation reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
+    "description": "Designs reusable and safe personalization templates Host role binding: `TemplateDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Designs reusable and safe personalization templates ### Knowledge distillation sources (historical) Variable-content design systems, dynamic layout rules, campaign template libraries ### Self-quality criteria (historical) Merge-field robustness, layout stability, render survivability ### Surpass-human signal (historical) Produces reusable templates with fewer breakages than manual design variants ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, UXAgent, CRMAgent - **Comments on:** Fragile layouts, unsafe placeholder logic, merge collisions ### Tools design-time notes (historical, non-activating) Template engines, design systems, schema validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on template schemas and render constraints",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9326,21 +9182,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.translation_reviewer.v1",
-    "rubricReference": "video.rubric.translation_reviewer.v1",
+    "promptReference": "video.prompt.templatedesign.v1",
+    "rubricReference": "video.rubric.templatedesign.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.translation_reviewer",
+          "agent_id: video.templatedesign",
           "status: registered",
-          "role: Video Translation Reviewer configuration specialist",
+          "role: TemplateDesignAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9368,11 +9224,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.translation_reviewer.v1",
-          "rubric_reference: video.rubric.translation_reviewer.v1",
+          "prompt_reference: video.prompt.templatedesign.v1",
+          "rubric_reference: video.rubric.templatedesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9380,25 +9236,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.translation_reviewer`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.localizationqa`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPE"
+          "# Mapping — `video.templatedesign`\n\n- VA/generic pack ID: `video.templatedesign`\n- Previous common ID: `video.thumbnail_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain translation reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.localizationqa) Translation + cultural fit ### Distilled quality (video.localizationqa) MQM error/1k words; cultural-flag count",
-    "folderPath": "business/video/agents/video.translation_reviewer",
+    "specExcerpt": "Designs reusable and safe personalization templates Host role binding: `TemplateDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Designs reusable and safe personalization templates ### Knowledge distillation sources (historical) Variable-content design systems, dynamic layout rules, campaign template libraries ### Self-quality criteria (historical) Merge-field robustness, layout stability, render survivability ### Surpass-human signal (historical) Produces reusable templates with fewer breakages than manual design variants ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, UXAgent, CRMAgent - **Comments on:** Fragile layouts, unsafe placeholder logic, merge collisions ### Tools design-time notes (historical, non-activating) Template engines, design systems, schema validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on template schemas and render constraints",
+    "folderPath": "business/video/agents/video.templatedesign",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.trend_analyst",
+    "id": "video.trailereditor",
     "pack": "video",
-    "name": "Trend Analyst",
-    "role": "Video Trend Analyst configuration specialist",
+    "name": "Trailereditor",
+    "role": "TrailerEditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain trend analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trendintelligence) Detects emerging memes, sounds, formats ### Distilled quality (video.trendintelligence) Prediction lead time vs peak; precision/recall on trend list",
+    "description": "Hook-driven trailer cuts Host role binding: `TrailerEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Hook-driven trailer cuts ### Knowledge distillation sources (historical) Golden Trailer Awards; Woollen/AV Squad reels; trailer-music libs ### Self-quality criteria (historical) Hook-rate at 3s; rising-action curve; music-sync precision ### Surpass-human signal (historical) Wins Golden-Trailer-rubric blind comparison ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MusicSupervisorAgent - **Comments on:** EditorAgent (over-cut), ComposerAgent (mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve (MCP); trailer-music APIs (Musicbed/Artlist); retention-curve predictor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (retention-curve model as feedback)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9415,21 +9271,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.trend_analyst.v1",
-    "rubricReference": "video.rubric.trend_analyst.v1",
+    "promptReference": "video.prompt.trailereditor.v1",
+    "rubricReference": "video.rubric.trailereditor.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.trend_analyst",
+          "agent_id: video.trailereditor",
           "status: registered",
-          "role: Video Trend Analyst configuration specialist",
+          "role: TrailerEditorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9457,11 +9313,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.trend_analyst.v1",
-          "rubric_reference: video.rubric.trend_analyst.v1",
+          "prompt_reference: video.prompt.trailereditor.v1",
+          "rubric_reference: video.rubric.trailereditor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9469,25 +9325,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.trend_analyst`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.trendintelligence`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md"
+          "# Mapping — `video.trailereditor`\n\n- VA/generic pack ID: `video.trailereditor`\n- Previous common ID: `video.audit_liaison`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain trend analyst outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.trendintelligence) Detects emerging memes, sounds, formats ### Distilled quality (video.trendintelligence) Prediction lead time vs peak; precision/recall on trend list",
-    "folderPath": "business/video/agents/video.trend_analyst",
+    "specExcerpt": "Hook-driven trailer cuts Host role binding: `TrailerEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Hook-driven trailer cuts ### Knowledge distillation sources (historical) Golden Trailer Awards; Woollen/AV Squad reels; trailer-music libs ### Self-quality criteria (historical) Hook-rate at 3s; rising-action curve; music-sync precision ### Surpass-human signal (historical) Wins Golden-Trailer-rubric blind comparison ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MusicSupervisorAgent - **Comments on:** EditorAgent (over-cut), ComposerAgent (mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve (MCP); trailer-music APIs (Musicbed/Artlist); retention-curve predictor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (retention-curve model as feedback)",
+    "folderPath": "business/video/agents/video.trailereditor",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.vendor_coordinator",
+    "id": "video.travelcine",
     "pack": "video",
-    "name": "Vendor Coordinator",
-    "role": "Video Vendor Coordinator configuration specialist",
+    "name": "Travelcine",
+    "role": "TravelCineAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain vendor coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
+    "description": "Destination cinematography Host role binding: `TravelCineAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Destination cinematography ### Knowledge distillation sources (historical) Brandon Li/Burkard reels; NatGeo style guide; Banff Fest ### Self-quality criteria (historical) Establishing-shot diversity; location-mood match ### Surpass-human signal (historical) Wins T+L preference at 0.1× sortie cost ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DronePilotAgent - **Comments on:** DronePilotAgent (no-fly zone) ### Tools design-time notes (historical, non-activating) Veo 3.1 (location gen); Google Earth Studio; AirMap geofence; Unsplash API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + geofence safety validator",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9504,21 +9360,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.vendor_coordinator.v1",
-    "rubricReference": "video.rubric.vendor_coordinator.v1",
+    "promptReference": "video.prompt.travelcine.v1",
+    "rubricReference": "video.rubric.travelcine.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.vendor_coordinator",
+          "agent_id: video.travelcine",
           "status: registered",
-          "role: Video Vendor Coordinator configuration specialist",
+          "role: TravelCineAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9546,11 +9402,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.vendor_coordinator.v1",
-          "rubric_reference: video.rubric.vendor_coordinator.v1",
+          "prompt_reference: video.prompt.travelcine.v1",
+          "rubric_reference: video.rubric.travelcine.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9558,25 +9414,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.vendor_coordinator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.producer`, `video.comms`\n- Local runtime: `agent_spec.json`\n- Local specificat"
+          "# Mapping — `video.travelcine`\n\n- VA/generic pack ID: `video.travelcine`\n- Previous common ID: `video.procurement_advisor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain vendor coordinator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.producer) Budget, schedule, hiring, delivery; greenlights phase gates ### Distilled quality (video.producer) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Distilled responsibility (video.comms) Coordinates external messaging, disclosure, and public-response posture ### Distilled quality (video.comms) Message consistency, disclosure completeness, escalation quality",
-    "folderPath": "business/video/agents/video.vendor_coordinator",
+    "specExcerpt": "Destination cinematography Host role binding: `TravelCineAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Destination cinematography ### Knowledge distillation sources (historical) Brandon Li/Burkard reels; NatGeo style guide; Banff Fest ### Self-quality criteria (historical) Establishing-shot diversity; location-mood match ### Surpass-human signal (historical) Wins T+L preference at 0.1× sortie cost ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DronePilotAgent - **Comments on:** DronePilotAgent (no-fly zone) ### Tools design-time notes (historical, non-activating) Veo 3.1 (location gen); Google Earth Studio; AirMap geofence; Unsplash API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + geofence safety validator",
+    "folderPath": "business/video/agents/video.travelcine",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.vfx_supervisor",
+    "id": "video.trendintelligence",
     "pack": "video",
-    "name": "Vfx Supervisor",
-    "role": "Video Vfx Supervisor configuration specialist",
+    "name": "Trendintelligence",
+    "role": "TrendIntelligenceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain vfx supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.vfxsupervisor) Plans + supervises VFX pipeline ### Distilled quality (video.vfxsupervisor) Shot-completion %; comp-error pixel count; CLIP-T vs plate",
+    "description": "Detects emerging memes, sounds, formats Host role binding: `TrendIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects emerging memes, sounds, formats ### Knowledge distillation sources (historical) TikTok Creative Center; Trendpop; Tubular; Reddit/X firehose ### Self-quality criteria (historical) Prediction lead time vs peak; precision/recall on trend list ### Surpass-human signal (historical) Earlier detection than human strategists at higher precision ### Critique bus (historical) - **Accepts critique from:** SocialStrategistAgent, CopywriterAgent - **Comments on:** IdeationAgent (off-trend) ### Tools design-time notes (historical, non-activating) TikTok Creative Center API; Reddit/X streaming APIs; Sensor Tower; Google Trends **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct + time-series anomaly detection",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9593,21 +9449,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.vfx_supervisor.v1",
-    "rubricReference": "video.rubric.vfx_supervisor.v1",
+    "promptReference": "video.prompt.trendintelligence.v1",
+    "rubricReference": "video.rubric.trendintelligence.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.vfx_supervisor",
+          "agent_id: video.trendintelligence",
           "status: registered",
-          "role: Video Vfx Supervisor configuration specialist",
+          "role: TrendIntelligenceAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9635,11 +9491,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.vfx_supervisor.v1",
-          "rubric_reference: video.rubric.vfx_supervisor.v1",
+          "prompt_reference: video.prompt.trendintelligence.v1",
+          "rubric_reference: video.rubric.trendintelligence.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9647,25 +9503,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: exact",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.vfx_supervisor`\n\n- Mapping status: `exact`\n- Source agent IDs (historical): `video.vfxsupervisor`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- P"
+          "# Mapping — `video.trendintelligence`\n\n- VA/generic pack ID: `video.trendintelligence`\n- Previous common ID: `video.trend_analyst`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain vfx supervisor outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.vfxsupervisor) Plans + supervises VFX pipeline ### Distilled quality (video.vfxsupervisor) Shot-completion %; comp-error pixel count; CLIP-T vs plate",
-    "folderPath": "business/video/agents/video.vfx_supervisor",
+    "specExcerpt": "Detects emerging memes, sounds, formats Host role binding: `TrendIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects emerging memes, sounds, formats ### Knowledge distillation sources (historical) TikTok Creative Center; Trendpop; Tubular; Reddit/X firehose ### Self-quality criteria (historical) Prediction lead time vs peak; precision/recall on trend list ### Surpass-human signal (historical) Earlier detection than human strategists at higher precision ### Critique bus (historical) - **Accepts critique from:** SocialStrategistAgent, CopywriterAgent - **Comments on:** IdeationAgent (off-trend) ### Tools design-time notes (historical, non-activating) TikTok Creative Center API; Reddit/X streaming APIs; Sensor Tower; Google Trends **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct + time-series anomaly detection",
+    "folderPath": "business/video/agents/video.trendintelligence",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.video_generation_operator",
+    "id": "video.trustsafety",
     "pack": "video",
-    "name": "Video Generation Operator",
-    "role": "Video Video Generation Operator configuration specialist",
+    "name": "Trustsafety",
+    "role": "TrustSafetyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain video generation operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed",
+    "description": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: `TrustSafetyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Screens outputs for impersonation, abuse, or harmful misuse ### Knowledge distillation sources (historical) Abuse-taxonomy corpora, impersonation cases, policy rulebooks ### Self-quality criteria (historical) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Surpass-human signal (historical) Catches misuse risk earlier than generic moderation queues ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, DeepfakeDetectionAgent, SafetyRedTeamAgent - **Comments on:** Harmful misuse pathways, impersonation vectors, policy gaps ### Tools design-time notes (historical, non-activating) Safety classifiers, abuse taxonomy DB, moderation APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI for trust-and-safety policy enforcement",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9682,21 +9538,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.video_generation_operator.v1",
-    "rubricReference": "video.rubric.video_generation_operator.v1",
+    "promptReference": "video.prompt.trustsafety.v1",
+    "rubricReference": "video.rubric.trustsafety.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.video_generation_operator",
+          "agent_id: video.trustsafety",
           "status: registered",
-          "role: Video Video Generation Operator configuration specialist",
+          "role: TrustSafetyAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9724,11 +9580,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.video_generation_operator.v1",
-          "rubric_reference: video.rubric.video_generation_operator.v1",
+          "prompt_reference: video.prompt.trustsafety.v1",
+          "rubric_reference: video.rubric.trustsafety.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9736,25 +9592,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.video_generation_operator`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.promptengineer`, `video.promptoptimizer`\n- Local runtime: `agent_spec.j"
+          "# Mapping — `video.trustsafety`\n\n- VA/generic pack ID: `video.trustsafety`\n- Previous common ID: `video.privacy_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain video generation operator outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.promptengineer) Crafts prompts; steers Sora/Veo/Runway/Kling ### Distilled quality (video.promptengineer) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Distilled responsibility (video.promptoptimizer) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Distilled quality (video.promptoptimizer) Score uplift per iteration; convergence speed",
-    "folderPath": "business/video/agents/video.video_generation_operator",
+    "specExcerpt": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: `TrustSafetyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Screens outputs for impersonation, abuse, or harmful misuse ### Knowledge distillation sources (historical) Abuse-taxonomy corpora, impersonation cases, policy rulebooks ### Self-quality criteria (historical) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Surpass-human signal (historical) Catches misuse risk earlier than generic moderation queues ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, DeepfakeDetectionAgent, SafetyRedTeamAgent - **Comments on:** Harmful misuse pathways, impersonation vectors, policy gaps ### Tools design-time notes (historical, non-activating) Safety classifiers, abuse taxonomy DB, moderation APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI for trust-and-safety policy enforcement",
+    "folderPath": "business/video/agents/video.trustsafety",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.visual_director",
+    "id": "video.ugccreator",
     "pack": "video",
-    "name": "Visual Director",
-    "role": "Video Visual Director configuration specialist",
+    "name": "Ugccreator",
+    "role": "UGCCreatorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain visual director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Distilled responsibility (video.cinematographer) Lensing, lighting, composition, look ### Distilled quality (video.cinematographer) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency",
+    "description": "Authentic-feel ads in creator voice Host role binding: `UGCCreatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Authentic-feel ads in creator voice ### Knowledge distillation sources (historical) TikTok Creative Center; Alix-Earle-style benchmarks (style not identity) ### Self-quality criteria (historical) Hook-rate ≥30%; \"scripted\" detector < threshold ### Surpass-human signal (historical) Beats paid-creator avg ROAS at 0.1× cost ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, BrandAgent - **Comments on:** PerformanceMarketerAgent (wrong audience) ### Tools design-time notes (historical, non-activating) Veo 3.1 (portrait 9:16); ElevenLabs voice; CapCut API; TikTok Ads Manager **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from ROAS signal)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9771,21 +9627,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.visual_director.v1",
-    "rubricReference": "video.rubric.visual_director.v1",
+    "promptReference": "video.prompt.ugccreator.v1",
+    "rubricReference": "video.rubric.ugccreator.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.visual_director",
+          "agent_id: video.ugccreator",
           "status: registered",
-          "role: Video Visual Director configuration specialist",
+          "role: UGCCreatorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9813,11 +9669,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.visual_director.v1",
-          "rubric_reference: video.rubric.visual_director.v1",
+          "prompt_reference: video.prompt.ugccreator.v1",
+          "rubric_reference: video.rubric.ugccreator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9825,25 +9681,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.visual_director`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.director`, `video.cinematographer`\n- Local runtime: `agent_spec.json`\n- Local spe"
+          "# Mapping — `video.ugccreator`\n\n- VA/generic pack ID: `video.ugccreator`\n- Previous common ID: `video.localization_qc_reviewer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain visual director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.director) Owns vision; issues shot intents, sets pacing, approves takes ### Distilled quality (video.director) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Distilled responsibility (video.cinematographer) Lensing, lighting, composition, look ### Distilled quality (video.cinematographer) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency",
-    "folderPath": "business/video/agents/video.visual_director",
+    "specExcerpt": "Authentic-feel ads in creator voice Host role binding: `UGCCreatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Authentic-feel ads in creator voice ### Knowledge distillation sources (historical) TikTok Creative Center; Alix-Earle-style benchmarks (style not identity) ### Self-quality criteria (historical) Hook-rate ≥30%; \"scripted\" detector < threshold ### Surpass-human signal (historical) Beats paid-creator avg ROAS at 0.1× cost ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, BrandAgent - **Comments on:** PerformanceMarketerAgent (wrong audience) ### Tools design-time notes (historical, non-activating) Veo 3.1 (portrait 9:16); ElevenLabs voice; CapCut API; TikTok Ads Manager **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from ROAS signal)",
+    "folderPath": "business/video/agents/video.ugccreator",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.visual_qc_reviewer",
+    "id": "video.ux",
     "pack": "video",
-    "name": "Visual Qc Reviewer",
-    "role": "Video Visual Qc Reviewer configuration specialist",
+    "name": "Ux",
+    "role": "UXAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain visual qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.colorist) Final grade; look consistency ### Distilled quality (video.colorist) ΔE drift <2; skin-tone IT8 alignment; mood vector match",
+    "description": "Reviews clarity and usability of personalized or interactive outputs Host role binding: `UXAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews clarity and usability of personalized or interactive outputs ### Knowledge distillation sources (historical) UX heuristics, accessibility criteria, usability testing patterns ### Self-quality criteria (historical) Readability, friction-point detection, user-flow clarity ### Surpass-human signal (historical) Flags user confusion earlier than launch-stage support teams ### Critique bus (historical) - **Accepts critique from:** TemplateDesignAgent, PersonalizationEngineerAgent, AccessibilityAgent - **Comments on:** Confusing flows, readability issues, weak interaction cues ### Tools design-time notes (historical, non-activating) UX review checklists, session replay, readability tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge with UX rubric",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9860,21 +9716,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.visual_qc_reviewer.v1",
-    "rubricReference": "video.rubric.visual_qc_reviewer.v1",
+    "promptReference": "video.prompt.ux.v1",
+    "rubricReference": "video.rubric.ux.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.visual_qc_reviewer",
+          "agent_id: video.ux",
           "status: registered",
-          "role: Video Visual Qc Reviewer configuration specialist",
+          "role: UXAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9902,11 +9758,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.visual_qc_reviewer.v1",
-          "rubric_reference: video.rubric.visual_qc_reviewer.v1",
+          "prompt_reference: video.prompt.ux.v1",
+          "rubric_reference: video.rubric.ux.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -9914,25 +9770,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.visual_qc_reviewer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.critic`, `video.colorist`\n- Local runtime: `agent_spec.json`\n- Local specifica"
+          "# Mapping — `video.ux`\n\n- VA/generic pack ID: `video.ux`\n- Previous common ID: `video.delivery_packager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain visual qc reviewer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.critic) Simulates reviewer, press, or jury interpretation ### Distilled quality (video.critic) Interpretive depth, consistency, reviewer-mode diversity ### Distilled responsibility (video.colorist) Final grade; look consistency ### Distilled quality (video.colorist) ΔE drift <2; skin-tone IT8 alignment; mood vector match",
-    "folderPath": "business/video/agents/video.visual_qc_reviewer",
+    "specExcerpt": "Reviews clarity and usability of personalized or interactive outputs Host role binding: `UXAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews clarity and usability of personalized or interactive outputs ### Knowledge distillation sources (historical) UX heuristics, accessibility criteria, usability testing patterns ### Self-quality criteria (historical) Readability, friction-point detection, user-flow clarity ### Surpass-human signal (historical) Flags user confusion earlier than launch-stage support teams ### Critique bus (historical) - **Accepts critique from:** TemplateDesignAgent, PersonalizationEngineerAgent, AccessibilityAgent - **Comments on:** Confusing flows, readability issues, weak interaction cues ### Tools design-time notes (historical, non-activating) UX review checklists, session replay, readability tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge with UX rubric",
+    "folderPath": "business/video/agents/video.ux",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.voice_director",
+    "id": "video.vfxsupervisor",
     "pack": "video",
-    "name": "Voice Director",
-    "role": "Video Voice Director configuration specialist",
+    "name": "Vfxsupervisor",
+    "role": "VFXSupervisorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain voice director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.voiceover) Narration, character VO, ad reads ### Distilled quality (video.voiceover) Prosody match; pronunciation 100%; emotion tag match ### Distilled responsibility (video.voiceclone) Voice cloning + lip-sync ### Distilled quality (video.voiceclone) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified",
+    "description": "Plans + supervises VFX pipeline Host role binding: `VFXSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans + supervises VFX pipeline ### Knowledge distillation sources (historical) VES Awards; SIGGRAPH papers; Weta/DNEG talks; Foundry training ### Self-quality criteria (historical) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Surpass-human signal (historical) Weta-grade QC pass rate at fraction of time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent, ConsistencyAgent - **Comments on:** AIGeneratorAgent (artifacts), CompositorAgent ### Tools design-time notes (historical, non-activating) Nuke via MCP bridge; Runway Gen-4 Aleph (video-to-video); ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (fan-out per shot) + LLM-as-Judge (QC rubric)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9949,21 +9805,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.voice_director.v1",
-    "rubricReference": "video.rubric.voice_director.v1",
+    "promptReference": "video.prompt.vfxsupervisor.v1",
+    "rubricReference": "video.rubric.vfxsupervisor.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.voice_director",
+          "agent_id: video.vfxsupervisor",
           "status: registered",
-          "role: Video Voice Director configuration specialist",
+          "role: VFXSupervisorAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -9991,11 +9847,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.voice_director.v1",
-          "rubric_reference: video.rubric.voice_director.v1",
+          "prompt_reference: video.prompt.vfxsupervisor.v1",
+          "rubric_reference: video.rubric.vfxsupervisor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -10003,25 +9859,25 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.voice_director`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.voiceover`, `video.voiceclone`\n- Local runtime: `agent_spec.json`\n- Local specific"
+          "# Mapping — `video.vfxsupervisor`\n\n- VA/generic pack ID: `video.vfxsupervisor`\n- Previous common ID: `video.vfx_supervisor`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain voice director outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.voiceover) Narration, character VO, ad reads ### Distilled quality (video.voiceover) Prosody match; pronunciation 100%; emotion tag match ### Distilled responsibility (video.voiceclone) Voice cloning + lip-sync ### Distilled quality (video.voiceclone) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified",
-    "folderPath": "business/video/agents/video.voice_director",
+    "specExcerpt": "Plans + supervises VFX pipeline Host role binding: `VFXSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans + supervises VFX pipeline ### Knowledge distillation sources (historical) VES Awards; SIGGRAPH papers; Weta/DNEG talks; Foundry training ### Self-quality criteria (historical) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Surpass-human signal (historical) Weta-grade QC pass rate at fraction of time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent, ConsistencyAgent - **Comments on:** AIGeneratorAgent (artifacts), CompositorAgent ### Tools design-time notes (historical, non-activating) Nuke via MCP bridge; Runway Gen-4 Aleph (video-to-video); ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (fan-out per shot) + LLM-as-Judge (QC rubric)",
+    "folderPath": "business/video/agents/video.vfxsupervisor",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.web_researcher",
+    "id": "video.voiceclone",
     "pack": "video",
-    "name": "Web Researcher",
-    "role": "Video Web Researcher configuration specialist",
+    "name": "Voiceclone",
+    "role": "VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain web researcher outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.webresearch) Live web search, source ranking, citation extraction ### Distilled quality (video.webresearch) Source-grade per claim; citation precision; recency hit",
+    "description": "Voice cloning + lip-sync Host role binding: `VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice cloning + lip-sync ### Knowledge distillation sources (historical) ElevenLabs safety docs; Wav2Lip/Sync.so; Baxter lip-sync refs ### Self-quality criteria (historical) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified ### Surpass-human signal (historical) Wins blind MOS vs professional ADR ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), AnimatorAgent (lip-sync gold) - **Comments on:** AvatarDesignAgent (face flicker), DubbingAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 cloning API; Sync.so lip-sync; Wav2Lip; consent-doc verification **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + MOS scoring model as judge",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -10031,39 +9887,42 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "network?"
     ],
     "domains": [
       "video"
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
-    "productionActivationRequested": false,
-    "networkAccess": false,
-    "provider": "local_deterministic",
-    "allowedTools": [],
-    "promptReference": "video.prompt.web_researcher.v1",
-    "rubricReference": "video.rubric.web_researcher.v1",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.elevenlabs"
+    ],
+    "promptReference": "video.prompt.voiceclone.v1",
+    "rubricReference": "video.rubric.voiceclone.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.web_researcher",
+          "agent_id: video.voiceclone",
           "status: registered",
-          "role: Video Web Researcher configuration specialist",
+          "role: VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)",
           "schema_version: 1.0",
-          "production_activation_requested: False"
+          "production_activation_requested: True"
         ]
       },
       {
         "id": "model",
         "title": "Model policy",
         "lines": [
-          "provider: local_deterministic",
+          "provider: media_host",
           "model_id: local-video-config-v1",
-          "network_access: False"
+          "network_access: True"
         ]
       },
       {
@@ -10072,19 +9931,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "lines": [
           "max_input_tokens: 2048",
           "max_output_tokens: 1024",
-          "max_tool_requests: 0"
+          "max_tool_requests: 4"
         ]
       },
       {
         "id": "tools_critique",
         "title": "Tools & critique",
         "lines": [
-          "allowed_tools: []",
-          "prompt_reference: video.prompt.web_researcher.v1",
-          "rubric_reference: video.rubric.web_researcher.v1",
+          "allowed_tools: [\"media.stub\", \"media.elevenlabs\"]",
+          "prompt_reference: video.prompt.voiceclone.v1",
+          "rubric_reference: video.rubric.voiceclone.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -10092,25 +9951,117 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: related",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.web_researcher`\n\n- Mapping status: `related`\n- Source agent IDs (historical): `video.webresearch`\n- Local runtime: `agent_spec.json`\n- Local specification: `SPEC.md`\n- P"
+          "# Mapping — `video.voiceclone`\n\n- VA/generic pack ID: `video.voiceclone`\n- Previous common ID: `video.lifecycle_manager`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain web researcher outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.webresearch) Live web search, source ranking, citation extraction ### Distilled quality (video.webresearch) Source-grade per claim; citation precision; recency hit",
-    "folderPath": "business/video/agents/video.web_researcher",
+    "specExcerpt": "Voice cloning + lip-sync Host role binding: `VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice cloning + lip-sync ### Knowledge distillation sources (historical) ElevenLabs safety docs; Wav2Lip/Sync.so; Baxter lip-sync refs ### Self-quality criteria (historical) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified ### Surpass-human signal (historical) Wins blind MOS vs professional ADR ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), AnimatorAgent (lip-sync gold) - **Comments on:** AvatarDesignAgent (face flicker), DubbingAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 cloning API; Sync.so lip-sync; Wav2Lip; consent-doc verification **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + MOS scoring model as judge",
+    "folderPath": "business/video/agents/video.voiceclone",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
   },
   {
-    "id": "video.workflow_designer",
+    "id": "video.voiceover",
     "pack": "video",
-    "name": "Workflow Designer",
-    "role": "Video Workflow Designer configuration specialist",
+    "name": "Voiceover",
+    "role": "VoiceOverAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns the video-domain workflow designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10% ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
+    "description": "Narration, character VO, ad reads Host role binding: `VoiceOverAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Narration, character VO, ad reads ### Knowledge distillation sources (historical) SOVAS reels; consented voice corpora; Wolfson/Cashman coaching ### Self-quality criteria (historical) Prosody match; pronunciation 100%; emotion tag match ### Surpass-human signal (historical) Beats junior VO in blind preference; matches senior on emotion ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, BrandAgent - **Comments on:** ScriptwriterAgent (unspeakable phrasing) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 TTS + voice cloning; Resemble.AI; pronunciation lexicon API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (MOS scoring rubric)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "network?"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": true,
+    "networkAccess": true,
+    "provider": "media_host",
+    "allowedTools": [
+      "media.stub",
+      "media.elevenlabs"
+    ],
+    "promptReference": "video.prompt.voiceover.v1",
+    "rubricReference": "video.rubric.voiceover.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.voiceover",
+          "status: registered",
+          "role: VoiceOverAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: media_host",
+          "model_id: local-video-config-v1",
+          "network_access: True"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 4"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: [\"media.stub\", \"media.elevenlabs\"]",
+          "prompt_reference: video.prompt.voiceover.v1",
+          "rubric_reference: video.rubric.voiceover.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.voiceover`\n\n- VA/generic pack ID: `video.voiceover`\n- Previous common ID: `video.voice_director`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Narration, character VO, ad reads Host role binding: `VoiceOverAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Narration, character VO, ad reads ### Knowledge distillation sources (historical) SOVAS reels; consented voice corpora; Wolfson/Cashman coaching ### Self-quality criteria (historical) Prosody match; pronunciation 100%; emotion tag match ### Surpass-human signal (historical) Beats junior VO in blind preference; matches senior on emotion ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, BrandAgent - **Comments on:** ScriptwriterAgent (unspeakable phrasing) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 TTS + voice cloning; Resemble.AI; pronunciation lexicon API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (MOS scoring rubric)",
+    "folderPath": "business/video/agents/video.voiceover",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.webresearch",
+    "pack": "video",
+    "name": "Webresearch",
+    "role": "WebResearchAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Live web search, source ranking, citation extraction Host role binding: `WebResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Live web search, source ranking, citation extraction ### Knowledge distillation sources (historical) Bing/Google/Brave APIs; Common Crawl; Perplexity patterns ### Self-quality criteria (historical) Source-grade per claim; citation precision; recency hit ### Surpass-human signal (historical) Faster + more sources than newsroom researcher ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, CitationAgent - **Comments on:** ScriptwriterAgent (uncited claim) ### Tools design-time notes (historical, non-activating) Brave/Google Search API; Jina Reader (web→markdown); source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (query → fetch → extract → grade → cite)",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -10127,21 +10078,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     ],
     "category": "video",
     "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critique_coordinator\"],\"outputs\":[\"video.judge_agent\"]}",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
     "allowedTools": [],
-    "promptReference": "video.prompt.workflow_designer.v1",
-    "rubricReference": "video.rubric.workflow_designer.v1",
+    "promptReference": "video.prompt.webresearch.v1",
+    "rubricReference": "video.rubric.webresearch.v1",
     "configSummaries": [
       {
         "id": "runtime",
         "title": "Runtime binding",
         "lines": [
-          "agent_id: video.workflow_designer",
+          "agent_id: video.webresearch",
           "status: registered",
-          "role: Video Workflow Designer configuration specialist",
+          "role: WebResearchAgent (VA Domain Pack)",
           "schema_version: 1.0",
           "production_activation_requested: False"
         ]
@@ -10169,11 +10120,11 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Tools & critique",
         "lines": [
           "allowed_tools: []",
-          "prompt_reference: video.prompt.workflow_designer.v1",
-          "rubric_reference: video.rubric.workflow_designer.v1",
+          "prompt_reference: video.prompt.webresearch.v1",
+          "rubric_reference: video.rubric.webresearch.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critique_coordinator\"]",
-          "critique_outputs: [\"video.judge_agent\"]"
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
         ]
       },
       {
@@ -10181,14 +10132,103 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         "title": "Local provenance",
         "lines": [
           "pack: video",
-          "mapping_status: composite",
+          "mapping_status: ",
           "sources: agents/<id>/sources/ (self-contained)",
-          "# Source mapping note — `video.workflow_designer`\n\n- Mapping status: `composite`\n- Source agent IDs (historical): `video.planner`, `video.orchestrator`\n- Local runtime: `agent_spec.json`\n- Local speci"
+          "# Mapping — `video.webresearch`\n\n- VA/generic pack ID: `video.webresearch`\n- Previous common ID: `video.web_researcher`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
         ]
       }
     ],
-    "specExcerpt": "Owns the video-domain workflow designer outcome by producing a reviewable video artifact, applying the approved pack rubric, recording acceptance criteria, and escalating rights, safety, or quality failures before downstream handoff. ### Domain distillation (embedded) ### Distilled responsibility (video.planner) Decomposes brief into phased DAG with assignments + critic gates ### Distilled quality (video.planner) Plan validity (no missing gate); cost variance <10% ### Distilled responsibility (video.orchestrator) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Distilled quality (video.orchestrator) DAG completion ≥99.5%; SLA adherence; deadlock = 0",
-    "folderPath": "business/video/agents/video.workflow_designer",
+    "specExcerpt": "Live web search, source ranking, citation extraction Host role binding: `WebResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Live web search, source ranking, citation extraction ### Knowledge distillation sources (historical) Bing/Google/Brave APIs; Common Crawl; Perplexity patterns ### Self-quality criteria (historical) Source-grade per claim; citation precision; recency hit ### Surpass-human signal (historical) Faster + more sources than newsroom researcher ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, CitationAgent - **Comments on:** ScriptwriterAgent (uncited claim) ### Tools design-time notes (historical, non-activating) Brave/Google Search API; Jina Reader (web→markdown); source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (query → fetch → extract → grade → cite)",
+    "folderPath": "business/video/agents/video.webresearch",
+    "hasSpecMd": true,
+    "hasReadme": true,
+    "hasSources": true
+  },
+  {
+    "id": "video.worldbuilding",
+    "pack": "video",
+    "name": "Worldbuilding",
+    "role": "WorldBuildingAgent (VA Domain Pack)",
+    "status": "registered",
+    "description": "Lore, rules, geography, factions, magic/tech systems Host role binding: `WorldBuildingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lore, rules, geography, factions, magic/tech systems ### Knowledge distillation sources (historical) Tolkien; *Worldbuilding* (Adams); fan-wikis; series-bible leaks ### Self-quality criteria (historical) Internal-consistency (no contradictions); rule-completeness ### Surpass-human signal (historical) Lower contradiction rate than writers' bibles at 10× volume ### Critique bus (historical) - **Accepts critique from:** ShowrunnerAgent, FactCheckerAgent - **Comments on:** ScreenwriterAgent (lore break), ConceptArtistAgent ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro); contradiction-detection model; wiki-graph DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (contradiction corrections → episodic memory)",
+    "versionLabel": "video · registered · schema 1.0",
+    "success": "—",
+    "avgTokens": "1024",
+    "latency": "local",
+    "usage": "Pack `video` · self-contained folder",
+    "badges": [
+      "video",
+      "registered",
+      "self-contained",
+      "no-network"
+    ],
+    "domains": [
+      "video"
+    ],
+    "category": "video",
+    "architecture": "pack agent folder",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "productionActivationRequested": false,
+    "networkAccess": false,
+    "provider": "local_deterministic",
+    "allowedTools": [],
+    "promptReference": "video.prompt.worldbuilding.v1",
+    "rubricReference": "video.rubric.worldbuilding.v1",
+    "configSummaries": [
+      {
+        "id": "runtime",
+        "title": "Runtime binding",
+        "lines": [
+          "agent_id: video.worldbuilding",
+          "status: registered",
+          "role: WorldBuildingAgent (VA Domain Pack)",
+          "schema_version: 1.0",
+          "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "model",
+        "title": "Model policy",
+        "lines": [
+          "provider: local_deterministic",
+          "model_id: local-video-config-v1",
+          "network_access: False"
+        ]
+      },
+      {
+        "id": "budget",
+        "title": "Budget policy",
+        "lines": [
+          "max_input_tokens: 2048",
+          "max_output_tokens: 1024",
+          "max_tool_requests: 0"
+        ]
+      },
+      {
+        "id": "tools_critique",
+        "title": "Tools & critique",
+        "lines": [
+          "allowed_tools: []",
+          "prompt_reference: video.prompt.worldbuilding.v1",
+          "rubric_reference: video.rubric.worldbuilding.v1",
+          "max_refinement_count: 3",
+          "critique_inputs: [\"video.critic\"]",
+          "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "provenance",
+        "title": "Local provenance",
+        "lines": [
+          "pack: video",
+          "mapping_status: ",
+          "sources: agents/<id>/sources/ (self-contained)",
+          "# Mapping — `video.worldbuilding`\n\n- VA/generic pack ID: `video.worldbuilding`\n- Previous common ID: `video.environment_designer`\n- SPEC depth: full generic SPEC body + host runtime binding\n"
+        ]
+      }
+    ],
+    "specExcerpt": "Lore, rules, geography, factions, magic/tech systems Host role binding: `WorldBuildingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lore, rules, geography, factions, magic/tech systems ### Knowledge distillation sources (historical) Tolkien; *Worldbuilding* (Adams); fan-wikis; series-bible leaks ### Self-quality criteria (historical) Internal-consistency (no contradictions); rule-completeness ### Surpass-human signal (historical) Lower contradiction rate than writers' bibles at 10× volume ### Critique bus (historical) - **Accepts critique from:** ShowrunnerAgent, FactCheckerAgent - **Comments on:** ScreenwriterAgent (lore break), ConceptArtistAgent ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro); contradiction-detection model; wiki-graph DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (contradiction corrections → episodic memory)",
+    "folderPath": "business/video/agents/video.worldbuilding",
     "hasSpecMd": true,
     "hasReadme": true,
     "hasSources": true
@@ -10822,7 +10862,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Intent Analysis Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, production-ready, modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by multi-party",
+    "description": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10899,7 +10939,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, production-ready, modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by multi-party",
+    "specExcerpt": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by",
     "folderPath": "business/specials/agents/specials.intent-analysis-agent",
     "hasSpecMd": true,
     "hasReadme": true,
@@ -11089,7 +11129,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Optimization Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a production-ready, agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a production-ready, agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
+    "description": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11166,7 +11206,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a production-ready, agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a production-ready, agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
+    "specExcerpt": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
     "folderPath": "business/specials/agents/specials.optimization-agent",
     "hasSpecMd": true,
     "hasReadme": true,

@@ -128,7 +128,7 @@ export const LOCAL_BLUEPRINTS_LANDING: BlueprintsLandingView = {
         "Router architecture + delivery channel settings (presentation only)",
         "Rights/consent on publish artifact remain server-gated",
         "pack_spine is the sole safe stub — not blueprint realization",
-        `${VIDEO_DOMAIN_MIGRATION_CLAIM.agentInventoryCount} common video agents stay L0 until migration evidence`,
+        `${VIDEO_DOMAIN_MIGRATION_CLAIM.agentInventoryCount} common video agents stay non-active (COMPLETE pack is offline, not production-activated)`,
       ],
     },
     {

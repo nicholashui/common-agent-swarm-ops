@@ -35,16 +35,20 @@ async function collectSourceFiles(directory: string): Promise<readonly string[]>
   return files;
 }
 
-test("migration claim remains PROPOSED and fail-closed", (): void => {
-  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.documentStatus, "proposed");
-  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.selfContained, false);
+test("migration claim is COMPLETE self-contained while fail-closed on activation", (): void => {
+  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.documentStatus, "complete");
+  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.selfContained, true);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.packSpineIsBlueprintRealization, false);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.soleSafeStubGraphId, "pack_spine");
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.agentInventoryCount, 114);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.productionActivationImplied, false);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.liveProvidersEnabled, false);
-  assert.match(videoDomainMigrationSummary(), /PROPOSED/);
+  assert.match(videoDomainMigrationSummary(), /COMPLETE|self-contained/i);
   assert.match(videoDomainMigrationSummary(), /pack_spine/);
+  assert.match(
+    videoDomainMigrationSummary(),
+    /credentials|env|API keys|never stores credentials|silently activates/i,
+  );
   assert.equal(
     formatPackMaturityLabel("cataloged", "registered"),
     "cataloged · registered",

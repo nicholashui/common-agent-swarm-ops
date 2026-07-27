@@ -1,0 +1,88 @@
+{
+  "skill_id": "agentic_rag",
+  "plan": "planning/special/agentic_rag.md",
+  "kind": "research_retrieval",
+  "summary": "Agentic RAG via research agents + host knowledge/memory",
+  "status": "mvp_integrated",
+  "integrated_at": "2026-07-13",
+  "n1": "video logic in pack only; host modules are infrastructure",
+  "agents": [
+    "video.webresearch",
+    "video.archiveresearch",
+    "video.citation",
+    "video.memory"
+  ],
+  "dna": [
+    "wf_video_spine_v1"
+  ],
+  "modules": [
+    "backend/app/domain/knowledge/retrieval.py",
+    "backend/app/domain/memory/retrieval.py"
+  ],
+  "process_ids": [
+    "video.spine.orchestrate"
+  ],
+  "evidence": {
+    "agents": [
+      {
+        "pack_id": "video.webresearch",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 147.4
+      },
+      {
+        "pack_id": "video.archiveresearch",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 152.8
+      },
+      {
+        "pack_id": "video.citation",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 190.2
+      },
+      {
+        "pack_id": "video.memory",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 293.1
+      }
+    ],
+    "dna": [
+      {
+        "dna_id": "wf_video_spine_v1",
+        "exists": true,
+        "valid_json": true,
+        "steps": 8,
+        "depth": null,
+        "id_match": true
+      }
+    ],
+    "modules": [
+      {
+        "path": "backend/app/domain/knowledge/retrieval.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/domain/memory/retrieval.py",
+        "exists": true
+      }
+    ],
+    "plan_exists": true,
+    "plan_bytes": 20963
+  },
+  "notes": {
+    "privacy": false,
+    "tools_design_time_only": false,
+    "n1_note": null
+  }
+}

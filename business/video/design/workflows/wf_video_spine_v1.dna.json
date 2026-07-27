@@ -1,0 +1,137 @@
+{
+  "id": "wf_video_spine_v1",
+  "name": "Video Orchestration Spine",
+  "domain": "video",
+  "objective": "Orchestrator-down video spine: plan, creative, research, media stub, QC, gated package.",
+  "owner": "video.orchestrator",
+  "version": "1.0.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": ["brief", "hook_concept"],
+  "preconditions": ["brief is non-empty"],
+  "steps": [
+    {
+      "id": "orchestrate",
+      "state": "control",
+      "next": ["plan"],
+      "agent": "video.orchestrator",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "plan",
+      "state": "research",
+      "next": ["direct"],
+      "agent": "video.planner",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "direct",
+      "state": "creative",
+      "next": ["screenwrite"],
+      "agent": "video.director",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "screenwrite",
+      "state": "creative",
+      "next": ["research"],
+      "agent": "video.screenwriter",
+      "tools": ["video_script_format"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "research",
+      "state": "research",
+      "next": ["media_gen"],
+      "agent": "video.webresearch",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "media_gen",
+      "state": "execution",
+      "next": ["qc"],
+      "agent": "video.director",
+      "tools": ["video_media_gen_stub"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "qc",
+      "state": "verification",
+      "next": ["package"],
+      "agent": "video.aiqaconsistency",
+      "tools": ["video_qc_stub"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "package",
+      "state": "critical_gate",
+      "next": ["complete"],
+      "agent": "video.producer",
+      "tools": ["video_package_stub"],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": ["organization_memory", "past_failures"],
+  "memory_writes": ["event_log", "lessons_learned"],
+  "guardrails": {
+    "human_approval_required_if": [
+      "step.irreversible == true",
+      "tool_action_is_irreversible == true"
+    ],
+    "forbidden_actions": [
+      "Call real Sora/Veo APIs from CI",
+      "Mutate production DNA without sandbox"
+    ]
+  },
+  "verification": {
+    "required_checks": [
+      "script_formatted",
+      "media_stub_generated",
+      "qc_pass",
+      "package_approved"
+    ]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": [
+      "discard_package",
+      "notify_producer"
+    ]
+  },
+  "fitness_metrics": [
+    "hook_strength",
+    "consistency_score",
+    "cycle_time",
+    "human_escalation_rate"
+  ],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "adoption.md#5.1",
+      "improvements.md#wave-2",
+      "va-agent-swarm/study/SYSTEM_REFERENCE.md"
+    ],
+    "captured_by": "wave-2",
+    "recorded_at": "2026-07-12T00:00:00Z"
+  }
+}

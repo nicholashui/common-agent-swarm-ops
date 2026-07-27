@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "wave": 5,
+  "va_only_count": 0,
+  "note": "Full VA/generic process catalog (historical design). Host gate uses process_coverage.json.",
+  "processes": [
+    {
+      "process_id": "video.spine.orchestrate",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_spine_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.spine.plan",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_spine_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.1.intent_planning",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.2.creative",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.3.prepro",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.4.production",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.5.post",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.phase.6.delivery",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.a.viral_hook",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.b.ugc_ad",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.c.animated_explainer",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.d.personalized_birthday",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.e.ai_short_film",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.f.corporate_training",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.g.music_video",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.h.ai_avatar",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.i.documentary",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.arch.j.feature_film",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.overview",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.scene_flow",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.per_shot_loop",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.character_consistency",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.engine_routing",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.lqr.quality_gates",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.qc.critique_bus",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.qc.consistency",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.delivery.package",
+      "representation": "dna",
+      "path": "business/video/workflows/wf_video_delivery_v1.dna.json",
+      "status": "dna_ready",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.map.human_production",
+      "representation": "pack_doc",
+      "path": "business/video/docs/process-maps.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.map.ai_agent_production",
+      "representation": "pack_doc",
+      "path": "business/video/docs/process-maps.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.ui.agent_management",
+      "representation": "pack_doc",
+      "path": "business/video/docs/process-maps.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.ui.project_creation",
+      "representation": "pack_doc",
+      "path": "business/video/docs/process-maps.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.ui.architecture_comm",
+      "representation": "pack_doc",
+      "path": "business/video/docs/process-maps.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    },
+    {
+      "process_id": "video.module.deep_spec",
+      "representation": "pack_doc",
+      "path": "business/video/docs/deep-spec-modules.md",
+      "status": "pack_linked",
+      "historical_and_non_binding": true
+    }
+  ],
+  "provenance": {
+    "source_refs": [
+      "improvements.md#wave-5"
+    ],
+    "recorded_at": "2026-07-12"
+  }
+}

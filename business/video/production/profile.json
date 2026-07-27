@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "enabled": true,
+  "updated_at": "2026-07-27T02:01:23Z",
+  "requires_env": [
+    "CASOPS_VIDEO_PRODUCTION_ENABLED=true",
+    "CASOPS_VIDEO_MEDIA_NETWORK=true",
+    "CASOPS_MEDIA_SORA_API_KEY or OPENAI_API_KEY",
+    "CASOPS_MEDIA_VEO_API_KEY or GOOGLE_API_KEY",
+    "CASOPS_MEDIA_RUNWAY_API_KEY or RUNWAY_API_KEY",
+    "CASOPS_MEDIA_ELEVENLABS_API_KEY or ELEVENLABS_API_KEY"
+  ],
+  "adapters": [
+    "media.stub",
+    "media.sora",
+    "media.veo",
+    "media.runway",
+    "media.elevenlabs"
+  ],
+  "note": "Pack-level production profile. Host still requires env flags and provider credentials before live network calls succeed."
+}

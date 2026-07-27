@@ -280,3 +280,7 @@ No phase may claim completion without passing focused tests, an immutable eviden
 ## 12. Definition of successful adoption
 
 Adoption is successful when the common repository can register and operate multiple unrelated domain packs without domain-specific host code; `business/video/` is the checked-in self-contained source of truth for the pinned/adapted pack and its complete 114-agent source mapping; every active video agent has enforceable, auditable individual knowledge acquisition; and every documented video workflow family and required phase is backed by a reviewed local graph or explicit reviewed gap. Any graph counted as mature is traceable, governed, reproducible, reversible, mapping-complete, reference-integral, deterministically validated offline, and evidenced as non-production-active. Cataloging agents, retaining source prose, or keeping `pack_spine.json` alone is not completion.
+
+## Migration redesign closeout (2026-07-27T01:49:22Z)
+
+Video pack source of truth is local `business/video/`. Migration redesign status: **COMPLETE** (self-contained, non-production). See `docs/migration_redesign/evidence/`.

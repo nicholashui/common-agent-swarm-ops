@@ -16,7 +16,7 @@ from app.models.identifiers import CorrelationId, OrganizationId, RunId
 from app.models.runs import RunRecord
 from app.repositories.protocols import RunRepository
 
-COMPLIANCE_AGENT_ID: Final[str] = "video.compliance_agent"
+COMPLIANCE_AGENT_ID: Final[str] = "video.compliance"
 STUB_MEDIA_ADAPTER_ID: Final[str] = "media.stub"
 MAX_BLOCKER_RESPONSE_SECONDS: Final[float] = 5.0
 

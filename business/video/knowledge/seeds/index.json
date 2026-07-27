@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "seeds": [
+    {
+      "seed_path": "knowledge/seeds/spine-orchestration.md",
+      "consumer_ref": "agents/video.orchestrator/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/knowledge/seeds/spine-orchestration.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "docs/process-maps.md",
+      "consumer_ref": "agents/video.planner/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/docs/process-maps.md",
+        "license_status": "internal-pack-data"
+      }
+    },
+    {
+      "seed_path": "docs/deep-spec-modules.md",
+      "consumer_ref": "agents/video.creativedirector/SPEC.md",
+      "review_status": "pass",
+      "provenance": {
+        "repository": "common-agent-swarm-ops",
+        "commit": "local-pack",
+        "path": "business/video/docs/deep-spec-modules.md",
+        "license_status": "internal-pack-data"
+      }
+    }
+  ],
+  "note": "Inert knowledge seeds with local consumers; non-activating."
+}

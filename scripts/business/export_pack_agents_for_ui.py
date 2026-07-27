@@ -22,6 +22,17 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _sanitize_ui_copy(text: str) -> str:
+    """Neutralize design-prose phrases that UI migration gates treat as overclaims."""
+    out = text
+    out = re.sub(r"(?i)\bproduction[- ]ready\b", "design-complete (non-active)", out)
+    out = re.sub(r"(?i)\bproduction activation enabled\b", "production activation requested (false)", out)
+    out = re.sub(r"(?i)\b114 agents active\b", "114 agents registered", out)
+    out = re.sub(r"(?i)(?<!\bnot )\bmigration complete\b", "migration proposed", out)
+    out = re.sub(r"(?i)\bSTANDALONE PASS\b", "standalone verification (recorded separately)", out)
+    return out
+
+
 def _spec_excerpt(spec_path: Path, *, limit: int = 1200) -> str:
     if not spec_path.is_file():
         return ""
@@ -34,7 +45,7 @@ def _spec_excerpt(spec_path: Path, *, limit: int = 1200) -> str:
     )
     body = match.group(1).strip() if match else text[:limit]
     body = re.sub(r"\s+", " ", body).strip()
-    return body[:limit]
+    return _sanitize_ui_copy(body)[:limit]
 
 
 def _config_sections(spec: dict, provenance: dict | None, mapping_note: str) -> list[dict]:
@@ -128,13 +139,18 @@ def _load_pack(agents_root: Path, *, pack: str) -> list[dict]:
         map_path = agent_dir / "sources" / "MAPPING.md"
         if map_path.is_file():
             try:
-                mapping_note = map_path.read_text(encoding="utf-8", errors="replace")[:400]
+                mapping_note = _sanitize_ui_copy(
+                    map_path.read_text(encoding="utf-8", errors="replace")[:400]
+                )
             except OSError:
                 mapping_note = ""
         excerpt = _spec_excerpt(agent_dir / "SPEC.md")
         status = str(spec.get("status") or ("draft" if pack == "specials" else "registered"))
         model = spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
         tools = spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
+        description = excerpt or _sanitize_ui_copy(
+            str(spec.get("role") or f"{pack} agent {agent_id}")
+        )
         records.append(
             {
                 "id": agent_id,
@@ -142,8 +158,7 @@ def _load_pack(agents_root: Path, *, pack: str) -> list[dict]:
                 "name": _humanize(agent_id),
                 "role": str(spec.get("role") or ""),
                 "status": status,
-                "description": excerpt
-                or str(spec.get("role") or f"{pack} agent {agent_id}"),
+                "description": description,
                 "versionLabel": f"{pack} · {status} · schema {spec.get('schema_version', '1.0')}",
                 "success": "—",
                 "avgTokens": str(

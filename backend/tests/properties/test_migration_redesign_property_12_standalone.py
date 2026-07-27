@@ -375,6 +375,10 @@ def test_property_12_isolated_runs_aggregate_every_local_validator_deterministic
         video_root = tmp_path / "business" / "video"
         (video_root / "workflows").mkdir(parents=True)
         (video_root / "workflows" / "pack_spine.json").write_text("{}\n", encoding="utf-8")
+        # Corpus is optional at pack root, but when present integrity is validated.
+        # Create the directory so the monkeypatched integrity seam is exercised
+        # (absent corpus short-circuits to PASS without calling the validator).
+        (video_root / "corpus").mkdir(parents=True)
         _install_local_validator_outcomes(monkeypatch, outcomes)
 
         report = verify_standalone(

@@ -40,9 +40,9 @@ test("3 adoption_redesign: domain-neutral pack extension slots exist", async () 
   assert.doesNotMatch(slot, /if\s*\(.*video/i);
 });
 
-test("4 migration_redesign: video claim remains PROPOSED fail-closed", (): void => {
-  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.documentStatus, "proposed");
-  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.selfContained, false);
+test("4 migration_redesign: video claim is COMPLETE self-contained and fail-closed on activation", (): void => {
+  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.documentStatus, "complete");
+  assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.selfContained, true);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.packSpineIsBlueprintRealization, false);
   assert.equal(VIDEO_DOMAIN_MIGRATION_CLAIM.productionActivationImplied, false);
 });

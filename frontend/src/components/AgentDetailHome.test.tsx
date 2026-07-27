@@ -40,13 +40,13 @@ test("agent detail resolves every pack agent id", () => {
   assert.equal(PACK_AGENT_COUNTS.total, 133);
   assert.equal(PACK_AGENT_COUNTS.video, 114);
   assert.equal(PACK_AGENT_COUNTS.specials, 19);
-  const video = getPackAgent("video.creative_director");
+  const video = getPackAgent("video.creativedirector");
   const special = getPackAgent("specials.aesthetics-agent");
   assert.ok(video);
   assert.ok(special);
-  const videoView = resolveAgentDetailView("video.creative_director");
+  const videoView = resolveAgentDetailView("video.creativedirector");
   const specialView = resolveAgentDetailView("specials.aesthetics-agent");
-  assert.match(videoView.agentName, /Creative Director/i);
+  assert.match(videoView.agentName, /Creative\s*Director|Creativedirector/i);
   assert.match(specialView.agentName, /Aesthetics/i);
   assert.ok(videoView.configSummaries.some((s) => s.id === "runtime"));
   assert.ok(specialView.configSummaries.some((s) => s.id === "model"));

@@ -10,68 +10,75 @@
     {
       "agent_id": "video.orchestrator",
       "status": "registered",
-      "allowed_tools": [],
+      "allowed_tools": [
+        "media.stub"
+      ],
       "agent_spec_path": "agents/video.orchestrator/agent_spec.json"
     },
     {
-      "agent_id": "video.compliance_agent",
+      "agent_id": "video.compliance",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.compliance_agent/agent_spec.json"
+      "agent_spec_path": "agents/video.compliance/agent_spec.json"
     },
     {
-      "agent_id": "video.rights_consent_agent",
+      "agent_id": "video.legal",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.rights_consent_agent/agent_spec.json"
+      "agent_spec_path": "agents/video.legal/agent_spec.json"
     },
     {
-      "agent_id": "video.brief_intake",
+      "agent_id": "video.planner",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.brief_intake/agent_spec.json"
+      "agent_spec_path": "agents/video.planner/agent_spec.json"
     },
     {
-      "agent_id": "video.audience_researcher",
+      "agent_id": "video.audiencesim",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.audience_researcher/agent_spec.json"
+      "agent_spec_path": "agents/video.audiencesim/agent_spec.json"
     },
     {
-      "agent_id": "video.web_researcher",
+      "agent_id": "video.webresearch",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.web_researcher/agent_spec.json"
+      "agent_spec_path": "agents/video.webresearch/agent_spec.json"
     },
     {
-      "agent_id": "video.trend_analyst",
+      "agent_id": "video.trendintelligence",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.trend_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.trendintelligence/agent_spec.json"
     },
     {
-      "agent_id": "video.content_strategist",
+      "agent_id": "video.brandstrategist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.content_strategist/agent_spec.json"
+      "agent_spec_path": "agents/video.brandstrategist/agent_spec.json"
     },
     {
-      "agent_id": "video.creative_director",
+      "agent_id": "video.creativedirector",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.creative_director/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.sora",
+        "media.veo",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.creativedirector/agent_spec.json"
     },
     {
-      "agent_id": "video.concept_developer",
+      "agent_id": "video.ideation",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.concept_developer/agent_spec.json"
+      "agent_spec_path": "agents/video.ideation/agent_spec.json"
     },
     {
-      "agent_id": "video.hook_specialist",
+      "agent_id": "video.copywriter",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.hook_specialist/agent_spec.json"
+      "agent_spec_path": "agents/video.copywriter/agent_spec.json"
     },
     {
       "agent_id": "video.screenwriter",
@@ -80,136 +87,165 @@
       "agent_spec_path": "agents/video.screenwriter/agent_spec.json"
     },
     {
-      "agent_id": "video.script_editor",
+      "agent_id": "video.standardseditor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.script_editor/agent_spec.json"
+      "agent_spec_path": "agents/video.standardseditor/agent_spec.json"
     },
     {
-      "agent_id": "video.narrative_designer",
+      "agent_id": "video.narrativearc",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.narrative_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.narrativearc/agent_spec.json"
     },
     {
-      "agent_id": "video.storyboard_artist",
+      "agent_id": "video.storyboard",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.storyboard_artist/agent_spec.json"
+      "agent_spec_path": "agents/video.storyboard/agent_spec.json"
     },
     {
-      "agent_id": "video.shot_planner",
+      "agent_id": "video.cameraoperator",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.shot_planner/agent_spec.json"
+      "agent_spec_path": "agents/video.cameraoperator/agent_spec.json"
     },
     {
-      "agent_id": "video.visual_director",
+      "agent_id": "video.director",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.visual_director/agent_spec.json"
+      "agent_spec_path": "agents/video.director/agent_spec.json"
     },
     {
-      "agent_id": "video.cinematography_planner",
+      "agent_id": "video.cinematographer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.cinematography_planner/agent_spec.json"
+      "agent_spec_path": "agents/video.cinematographer/agent_spec.json"
     },
     {
-      "agent_id": "video.production_designer",
+      "agent_id": "video.productiondesign",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.production_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.productiondesign/agent_spec.json"
     },
     {
-      "agent_id": "video.casting_director",
+      "agent_id": "video.casting",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.casting_director/agent_spec.json"
+      "agent_spec_path": "agents/video.casting/agent_spec.json"
     },
     {
-      "agent_id": "video.talent_coordinator",
+      "agent_id": "video.talent",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.talent_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.talent/agent_spec.json"
     },
     {
-      "agent_id": "video.voice_director",
+      "agent_id": "video.voiceover",
+      "status": "registered",
+      "allowed_tools": [
+        "media.stub",
+        "media.elevenlabs"
+      ],
+      "agent_spec_path": "agents/video.voiceover/agent_spec.json"
+    },
+    {
+      "agent_id": "video.musicsupervisor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.voice_director/agent_spec.json"
+      "agent_spec_path": "agents/video.musicsupervisor/agent_spec.json"
     },
     {
-      "agent_id": "video.music_supervisor",
+      "agent_id": "video.sounddesign",
+      "status": "registered",
+      "allowed_tools": [
+        "media.stub",
+        "media.elevenlabs"
+      ],
+      "agent_spec_path": "agents/video.sounddesign/agent_spec.json"
+    },
+    {
+      "agent_id": "video.soundmixer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.music_supervisor/agent_spec.json"
+      "agent_spec_path": "agents/video.soundmixer/agent_spec.json"
     },
     {
-      "agent_id": "video.sound_designer",
+      "agent_id": "video.motiongraphics",
+      "status": "registered",
+      "allowed_tools": [
+        "media.stub",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.motiongraphics/agent_spec.json"
+    },
+    {
+      "agent_id": "video.animator_2d",
+      "status": "registered",
+      "allowed_tools": [
+        "media.stub",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.animator_2d/agent_spec.json"
+    },
+    {
+      "agent_id": "video.avatardesign",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.sound_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.avatardesign/agent_spec.json"
     },
     {
-      "agent_id": "video.dialog_editor",
+      "agent_id": "video.worldbuilding",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.dialog_editor/agent_spec.json"
+      "agent_spec_path": "agents/video.worldbuilding/agent_spec.json"
     },
     {
-      "agent_id": "video.motion_designer",
+      "agent_id": "video.archivemaster",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.motion_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.archivemaster/agent_spec.json"
     },
     {
-      "agent_id": "video.animation_director",
+      "agent_id": "video.promptengineer",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.animation_director/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.sora",
+        "media.veo",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.promptengineer/agent_spec.json"
     },
     {
-      "agent_id": "video.character_designer",
+      "agent_id": "video.archiveproducer",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.character_designer/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.sora",
+        "media.veo",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.archiveproducer/agent_spec.json"
     },
     {
-      "agent_id": "video.environment_designer",
+      "agent_id": "video.styletransfer",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.environment_designer/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.runway",
+        "media.veo"
+      ],
+      "agent_spec_path": "agents/video.styletransfer/agent_spec.json"
     },
     {
-      "agent_id": "video.asset_librarian",
+      "agent_id": "video.editor",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.asset_librarian/agent_spec.json"
-    },
-    {
-      "agent_id": "video.generative_media_operator",
-      "status": "registered",
-      "allowed_tools": ["media.stub"],
-      "agent_spec_path": "agents/video.generative_media_operator/agent_spec.json"
-    },
-    {
-      "agent_id": "video.video_generation_operator",
-      "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.video_generation_operator/agent_spec.json"
-    },
-    {
-      "agent_id": "video.image_generation_operator",
-      "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.image_generation_operator/agent_spec.json"
-    },
-    {
-      "agent_id": "video.edit_assembler",
-      "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.edit_assembler/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.runway"
+      ],
+      "agent_spec_path": "agents/video.editor/agent_spec.json"
     },
     {
       "agent_id": "video.colorist",
@@ -218,478 +254,485 @@
       "agent_spec_path": "agents/video.colorist/agent_spec.json"
     },
     {
-      "agent_id": "video.vfx_supervisor",
+      "agent_id": "video.vfxsupervisor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.vfx_supervisor/agent_spec.json"
+      "agent_spec_path": "agents/video.vfxsupervisor/agent_spec.json"
     },
     {
-      "agent_id": "video.compositing_artist",
+      "agent_id": "video.composer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.compositing_artist/agent_spec.json"
+      "agent_spec_path": "agents/video.composer/agent_spec.json"
     },
     {
-      "agent_id": "video.title_designer",
+      "agent_id": "video.audiobooknarrator",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.title_designer/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.elevenlabs"
+      ],
+      "agent_spec_path": "agents/video.audiobooknarrator/agent_spec.json"
     },
     {
-      "agent_id": "video.caption_specialist",
+      "agent_id": "video.accessibility",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.caption_specialist/agent_spec.json"
+      "agent_spec_path": "agents/video.accessibility/agent_spec.json"
     },
     {
-      "agent_id": "video.accessibility_specialist",
+      "agent_id": "video.awardsstrategist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.accessibility_specialist/agent_spec.json"
+      "agent_spec_path": "agents/video.awardsstrategist/agent_spec.json"
     },
     {
-      "agent_id": "video.localization_specialist",
+      "agent_id": "video.localizationqa",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.localization_specialist/agent_spec.json"
+      "agent_spec_path": "agents/video.localizationqa/agent_spec.json"
     },
     {
-      "agent_id": "video.translation_reviewer",
+      "agent_id": "video.benchmarkresearch",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.translation_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.benchmarkresearch/agent_spec.json"
     },
     {
-      "agent_id": "video.cultural_reviewer",
+      "agent_id": "video.ethics",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.cultural_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.ethics/agent_spec.json"
     },
     {
-      "agent_id": "video.continuity_supervisor",
+      "agent_id": "video.continuity",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.continuity_supervisor/agent_spec.json"
+      "agent_spec_path": "agents/video.continuity/agent_spec.json"
     },
     {
-      "agent_id": "video.aiqa_consistency",
+      "agent_id": "video.aiqaconsistency",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.aiqa_consistency/agent_spec.json"
+      "agent_spec_path": "agents/video.aiqaconsistency/agent_spec.json"
     },
     {
-      "agent_id": "video.factual_verifier",
+      "agent_id": "video.factchecker",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.factual_verifier/agent_spec.json"
+      "agent_spec_path": "agents/video.factchecker/agent_spec.json"
     },
     {
-      "agent_id": "video.brand_guardian",
+      "agent_id": "video.brand",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.brand_guardian/agent_spec.json"
+      "agent_spec_path": "agents/video.brand/agent_spec.json"
     },
     {
-      "agent_id": "video.legal_reviewer",
+      "agent_id": "video.childrensauthor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.legal_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.childrensauthor/agent_spec.json"
     },
     {
-      "agent_id": "video.privacy_reviewer",
+      "agent_id": "video.trustsafety",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.privacy_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.trustsafety/agent_spec.json"
     },
     {
-      "agent_id": "video.safety_reviewer",
+      "agent_id": "video.safetyredteam",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.safety_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.safetyredteam/agent_spec.json"
     },
     {
-      "agent_id": "video.content_moderator",
+      "agent_id": "video.choreography",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.content_moderator/agent_spec.json"
+      "agent_spec_path": "agents/video.choreography/agent_spec.json"
     },
     {
-      "agent_id": "video.quality_controller",
+      "agent_id": "video.critic",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.quality_controller/agent_spec.json"
+      "agent_spec_path": "agents/video.critic/agent_spec.json"
     },
     {
-      "agent_id": "video.qc_l1_reviewer",
+      "agent_id": "video.comedywriter",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.qc_l1_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.comedywriter/agent_spec.json"
     },
     {
-      "agent_id": "video.qc_l2_reviewer",
+      "agent_id": "video.comms",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.qc_l2_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.comms/agent_spec.json"
     },
     {
-      "agent_id": "video.qc_l3_reviewer",
+      "agent_id": "video.judge",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.qc_l3_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.judge/agent_spec.json"
     },
     {
-      "agent_id": "video.audio_qc_reviewer",
+      "agent_id": "video.competitorintelligence",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.audio_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.competitorintelligence/agent_spec.json"
     },
     {
-      "agent_id": "video.visual_qc_reviewer",
+      "agent_id": "video.conceptartist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.visual_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.conceptartist/agent_spec.json"
     },
     {
-      "agent_id": "video.technical_qc_reviewer",
+      "agent_id": "video.corrections",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.technical_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.corrections/agent_spec.json"
     },
     {
-      "agent_id": "video.delivery_qc_reviewer",
+      "agent_id": "video.distributor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.delivery_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.distributor/agent_spec.json"
     },
     {
-      "agent_id": "video.platform_policy_reviewer",
+      "agent_id": "video.mpa",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.platform_policy_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.mpa/agent_spec.json"
     },
     {
-      "agent_id": "video.provenance_agent",
+      "agent_id": "video.citation",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.provenance_agent/agent_spec.json"
+      "agent_spec_path": "agents/video.citation/agent_spec.json"
     },
     {
-      "agent_id": "video.c2pa_verifier",
+      "agent_id": "video.deepfakedetection",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.c2pa_verifier/agent_spec.json"
+      "agent_spec_path": "agents/video.deepfakedetection/agent_spec.json"
     },
     {
-      "agent_id": "video.model_input_recorder",
+      "agent_id": "video.costumedesign",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.model_input_recorder/agent_spec.json"
+      "agent_spec_path": "agents/video.costumedesign/agent_spec.json"
     },
     {
-      "agent_id": "video.prompt_version_recorder",
+      "agent_id": "video.promptoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.prompt_version_recorder/agent_spec.json"
+      "agent_spec_path": "agents/video.promptoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.signoff_coordinator",
+      "agent_id": "video.gatekeeper",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.signoff_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.gatekeeper/agent_spec.json"
     },
     {
-      "agent_id": "video.release_manager",
+      "agent_id": "video.dronepilot",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.release_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.dronepilot/agent_spec.json"
     },
     {
-      "agent_id": "video.distribution_planner",
+      "agent_id": "video.emotionalarc",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.distribution_planner/agent_spec.json"
+      "agent_spec_path": "agents/video.emotionalarc/agent_spec.json"
     },
     {
-      "agent_id": "video.channel_optimizer",
+      "agent_id": "video.channelmanager",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.channel_optimizer/agent_spec.json"
+      "agent_spec_path": "agents/video.channelmanager/agent_spec.json"
     },
     {
-      "agent_id": "video.seo_metadata_specialist",
+      "agent_id": "video.seo",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.seo_metadata_specialist/agent_spec.json"
+      "agent_spec_path": "agents/video.seo/agent_spec.json"
     },
     {
-      "agent_id": "video.thumbnail_designer",
+      "agent_id": "video.templatedesign",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.thumbnail_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.templatedesign/agent_spec.json"
     },
     {
-      "agent_id": "video.social_editor",
+      "agent_id": "video.socialmediastrategist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.social_editor/agent_spec.json"
+      "agent_spec_path": "agents/video.socialmediastrategist/agent_spec.json"
     },
     {
-      "agent_id": "video.community_manager",
+      "agent_id": "video.community",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.community_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.community/agent_spec.json"
     },
     {
-      "agent_id": "video.campaign_manager",
+      "agent_id": "video.marketing",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.campaign_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.marketing/agent_spec.json"
     },
     {
-      "agent_id": "video.performance_analyst",
+      "agent_id": "video.performancemarketer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.performance_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.performancemarketer/agent_spec.json"
     },
     {
-      "agent_id": "video.experiment_designer",
+      "agent_id": "video.evaluationharness",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.experiment_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.evaluationharness/agent_spec.json"
     },
     {
-      "agent_id": "video.analytics_reporter",
+      "agent_id": "video.analyst",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.analytics_reporter/agent_spec.json"
+      "agent_spec_path": "agents/video.analyst/agent_spec.json"
     },
     {
-      "agent_id": "video.crm_coordinator",
+      "agent_id": "video.crm",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.crm_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.crm/agent_spec.json"
     },
     {
-      "agent_id": "video.client_success_manager",
+      "agent_id": "video.sales",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.client_success_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.sales/agent_spec.json"
     },
     {
-      "agent_id": "video.project_manager",
+      "agent_id": "video.producer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.project_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.producer/agent_spec.json"
     },
     {
-      "agent_id": "video.schedule_manager",
+      "agent_id": "video.festivalstrategist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.schedule_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.festivalstrategist/agent_spec.json"
     },
     {
-      "agent_id": "video.budget_controller",
+      "agent_id": "video.finance",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.budget_controller/agent_spec.json"
+      "agent_spec_path": "agents/video.finance/agent_spec.json"
     },
     {
-      "agent_id": "video.resource_planner",
+      "agent_id": "video.foodstylist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.resource_planner/agent_spec.json"
+      "agent_spec_path": "agents/video.foodstylist/agent_spec.json"
     },
     {
-      "agent_id": "video.vendor_coordinator",
+      "agent_id": "video.instructionaldesign",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.vendor_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.instructionaldesign/agent_spec.json"
     },
     {
-      "agent_id": "video.location_manager",
+      "agent_id": "video.interviewsynthesis",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.location_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.interviewsynthesis/agent_spec.json"
     },
     {
-      "agent_id": "video.production_coordinator",
+      "agent_id": "video.journalist",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.production_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.journalist/agent_spec.json"
     },
     {
-      "agent_id": "video.postproduction_coordinator",
+      "agent_id": "video.labela_r",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.postproduction_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.labela_r/agent_spec.json"
     },
     {
-      "agent_id": "video.archive_manager",
+      "agent_id": "video.labeldigital",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.archive_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.labeldigital/agent_spec.json"
     },
     {
-      "agent_id": "video.asset_security_officer",
+      "agent_id": "video.learnersim",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.asset_security_officer/agent_spec.json"
+      "agent_spec_path": "agents/video.learnersim/agent_spec.json"
     },
     {
-      "agent_id": "video.data_governance_officer",
+      "agent_id": "video.lipsync",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.data_governance_officer/agent_spec.json"
+      "agent_spec_path": "agents/video.lipsync/agent_spec.json"
     },
     {
-      "agent_id": "video.incident_manager",
+      "agent_id": "video.lms",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.incident_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.lms/agent_spec.json"
     },
     {
-      "agent_id": "video.risk_manager",
+      "agent_id": "video.medicalillustrator",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.risk_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.medicalillustrator/agent_spec.json"
     },
     {
-      "agent_id": "video.human_review_coordinator",
+      "agent_id": "video.moodboard",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.human_review_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.moodboard/agent_spec.json"
     },
     {
-      "agent_id": "video.escalation_manager",
+      "agent_id": "video.mua_makeup",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.escalation_manager/agent_spec.json"
+      "agent_spec_path": "agents/video.mua_makeup/agent_spec.json"
     },
     {
-      "agent_id": "video.critique_coordinator",
+      "agent_id": "video.musicvideodirector",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.critique_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.musicvideodirector/agent_spec.json"
     },
     {
-      "agent_id": "video.judge_agent",
+      "agent_id": "video.novelty",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.judge_agent/agent_spec.json"
+      "agent_spec_path": "agents/video.novelty/agent_spec.json"
     },
     {
-      "agent_id": "video.refine_coordinator",
+      "agent_id": "video.personalizationengineer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.refine_coordinator/agent_spec.json"
+      "agent_spec_path": "agents/video.personalizationengineer/agent_spec.json"
     },
     {
-      "agent_id": "video.learning_reflector",
+      "agent_id": "video.memory",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.learning_reflector/agent_spec.json"
+      "agent_spec_path": "agents/video.memory/agent_spec.json"
     },
     {
-      "agent_id": "video.memory_curator",
+      "agent_id": "video.realestatephoto",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.memory_curator/agent_spec.json"
+      "agent_spec_path": "agents/video.realestatephoto/agent_spec.json"
     },
     {
-      "agent_id": "video.workflow_designer",
+      "agent_id": "video.retentionoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.workflow_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.retentionoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.graph_topology_designer",
+      "agent_id": "video.roasoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.graph_topology_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.roasoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.tool_policy_designer",
+      "agent_id": "video.router",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.tool_policy_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.router/agent_spec.json"
     },
     {
-      "agent_id": "video.evaluation_designer",
+      "agent_id": "video.showrunner",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.evaluation_designer/agent_spec.json"
+      "agent_spec_path": "agents/video.showrunner/agent_spec.json"
     },
     {
-      "agent_id": "video.regression_analyst",
+      "agent_id": "video.signlanguageinterpreter",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.regression_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.signlanguageinterpreter/agent_spec.json"
     },
     {
-      "agent_id": "video.adversarial_tester",
+      "agent_id": "video.sme",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.adversarial_tester/agent_spec.json"
+      "agent_spec_path": "agents/video.sme/agent_spec.json"
     },
     {
-      "agent_id": "video.historical_replay_analyst",
+      "agent_id": "video.archiveresearch",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.historical_replay_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.archiveresearch/agent_spec.json"
     },
     {
-      "agent_id": "video.latency_analyst",
+      "agent_id": "video.latencyoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.latency_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.latencyoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.cost_analyst",
+      "agent_id": "video.costoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.cost_analyst/agent_spec.json"
+      "agent_spec_path": "agents/video.costoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.operations_observer",
+      "agent_id": "video.sportsanalyst",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.operations_observer/agent_spec.json"
+      "agent_spec_path": "agents/video.sportsanalyst/agent_spec.json"
     },
     {
-      "agent_id": "video.audit_liaison",
+      "agent_id": "video.trailereditor",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.audit_liaison/agent_spec.json"
+      "agent_spec_path": "agents/video.trailereditor/agent_spec.json"
     },
     {
-      "agent_id": "video.procurement_advisor",
+      "agent_id": "video.travelcine",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.procurement_advisor/agent_spec.json"
+      "agent_spec_path": "agents/video.travelcine/agent_spec.json"
     },
     {
-      "agent_id": "video.accessibility_qc_reviewer",
+      "agent_id": "video.accessibilityoptimizer",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.accessibility_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.accessibilityoptimizer/agent_spec.json"
     },
     {
-      "agent_id": "video.localization_qc_reviewer",
+      "agent_id": "video.ugccreator",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.localization_qc_reviewer/agent_spec.json"
+      "agent_spec_path": "agents/video.ugccreator/agent_spec.json"
     },
     {
-      "agent_id": "video.delivery_packager",
+      "agent_id": "video.ux",
       "status": "registered",
       "allowed_tools": [],
-      "agent_spec_path": "agents/video.delivery_packager/agent_spec.json"
+      "agent_spec_path": "agents/video.ux/agent_spec.json"
     },
     {
-      "agent_id": "video.lifecycle_manager",
+      "agent_id": "video.voiceclone",
       "status": "registered",
-      "allowed_tools": [],
-      "agent_spec_path": "agents/video.lifecycle_manager/agent_spec.json"
+      "allowed_tools": [
+        "media.stub",
+        "media.elevenlabs"
+      ],
+      "agent_spec_path": "agents/video.voiceclone/agent_spec.json"
     }
-  ]
+  ],
+  "taxonomy_note": "Agent IDs aligned to VA/generic Domain Pack taxonomy"
 }

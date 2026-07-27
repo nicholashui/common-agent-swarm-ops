@@ -1,0 +1,37 @@
+{
+  "id": "video_spine",
+  "name": "Video Spine Orchestration",
+  "domain_id": "video",
+  "description": "Pack spine for viral-hook / multi-agent video execution (stubs).",
+  "orchestration": {
+    "pattern": "pack_spine",
+    "config": {
+      "domain_id": "video",
+      "entry_agent": "video.orchestrator",
+      "max_handoffs": 12
+    }
+  },
+  "agents": [
+    "video.planner",
+    "video.screenwriter",
+    "video.webresearch",
+    "video.aiqaconsistency",
+    "video.producer"
+  ],
+  "nodes": [
+    { "id": "entry", "agent": "video.orchestrator", "kind": "supervisor" },
+    { "id": "plan", "agent": "video.planner", "kind": "specialist" },
+    { "id": "write", "agent": "video.screenwriter", "kind": "specialist" },
+    { "id": "research", "agent": "video.webresearch", "kind": "specialist" },
+    { "id": "qc", "agent": "video.aiqaconsistency", "kind": "specialist" },
+    { "id": "package", "agent": "video.producer", "kind": "specialist" }
+  ],
+  "edges": [
+    { "from": "entry", "to": "plan" },
+    { "from": "plan", "to": "write" },
+    { "from": "write", "to": "research" },
+    { "from": "research", "to": "qc" },
+    { "from": "qc", "to": "package" },
+    { "from": "package", "to": "entry" }
+  ]
+}

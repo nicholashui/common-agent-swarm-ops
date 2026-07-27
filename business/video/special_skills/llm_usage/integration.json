@@ -1,0 +1,71 @@
+{
+  "skill_id": "llm_usage",
+  "plan": "planning/special/llm_usage.md",
+  "kind": "host_infra",
+  "summary": "LLM usage policy via host providers + cost/latency optimizers",
+  "status": "mvp_integrated",
+  "integrated_at": "2026-07-13",
+  "n1": "video logic in pack only; host modules are infrastructure",
+  "agents": [
+    "video.costoptimizer",
+    "video.latencyoptimizer",
+    "video.router"
+  ],
+  "dna": [],
+  "modules": [
+    "backend/app/infrastructure/llm/base.py",
+    "backend/app/infrastructure/llm/mock_provider.py",
+    "backend/app/infrastructure/llm/openai_provider.py"
+  ],
+  "process_ids": [],
+  "evidence": {
+    "agents": [
+      {
+        "pack_id": "video.costoptimizer",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 88.0
+      },
+      {
+        "pack_id": "video.latencyoptimizer",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 68.3
+      },
+      {
+        "pack_id": "video.router",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 263.6
+      }
+    ],
+    "dna": [],
+    "modules": [
+      {
+        "path": "backend/app/infrastructure/llm/base.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/infrastructure/llm/mock_provider.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/infrastructure/llm/openai_provider.py",
+        "exists": true
+      }
+    ],
+    "plan_exists": true,
+    "plan_bytes": 19022
+  },
+  "notes": {
+    "privacy": false,
+    "tools_design_time_only": false,
+    "n1_note": null
+  }
+}

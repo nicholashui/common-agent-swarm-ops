@@ -1,0 +1,35 @@
+{
+  "agent_id": "video.sounddesign",
+  "allowed_tools": [
+    "media.stub",
+    "media.elevenlabs"
+  ],
+  "budget_policy": {
+    "max_input_tokens": 2048,
+    "max_output_tokens": 1024,
+    "max_tool_requests": 4
+  },
+  "critique_edges": {
+    "inputs": [
+      "video.critic"
+    ],
+    "outputs": [
+      "video.judge"
+    ]
+  },
+  "max_refinement_count": 3,
+  "model_policy": {
+    "model_id": "local-video-config-v1",
+    "network_access": true,
+    "provider": "media_host"
+  },
+  "production_activation_requested": true,
+  "prompt_reference": "video.prompt.sounddesign.v1",
+  "role": "SoundDesignAgent (VA Domain Pack)",
+  "rubric_reference": "video.rubric.sounddesign.v1",
+  "schema_version": "1.0",
+  "status": "registered",
+  "va_id": 19,
+  "va_name": "SoundDesignAgent",
+  "va_category": "4-Snd"
+}

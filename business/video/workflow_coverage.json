@@ -1,0 +1,2048 @@
+{
+  "schema_version": "1.0",
+  "reviewed_by": "migration-redesign-closeout",
+  "reviewed_at": "2026-07-27T01:49:22Z",
+  "sole_safe_stub": {
+    "path": "workflows/pack_spine.json",
+    "is_blueprint_realization": false,
+    "note": "Sole current safe stub for live host spine claims."
+  },
+  "families": [
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "title": "Viral Hook Clip/Meme",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "write_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "render_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "publish_hook",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "title": "UGC-Style Performance Ad",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "concept_performance",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "concept_copy",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "produce_ugc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "edit_cut",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "motion_packaging",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "brand_gate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "compliance_gate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "title": "Animated Explainer",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "title": "Personalized Birthday Video",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "title": "AI Multi-Scene Short Film",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "story",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "direct_vision",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "storyboard",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "concept_look",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "prompt_pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "generate_takes",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "continuity_qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "edit",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "grade",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "showrunner_review",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "title": "Corporate Training Video",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "title": "Music Video",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_3",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "title": "AI Avatar Talking-Head",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "title": "Documentary Explained Episode",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_3",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "title": "Feature-Length AI Film",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_3",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "title": "Orchestration Spine",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "direct",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "screenwrite",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "research",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "media_gen",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_spine_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "title": "Production E2E phases",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase1_intent",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase2_creative",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase3_prepro",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase4_production",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase5_post",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "phase6_delivery",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "title": "LQR overview / QC loops",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "title": "Delivery / distribution package",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "status": "local_graph_present",
+      "is_blueprint_realization": false,
+      "production_ready": false,
+      "phases": [
+        {
+          "phase_id": "orchestrate",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "plan",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_0",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_1",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "specialize_2",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "qc",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "graph_validated_non_active",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false,
+          "note": "Host-adapted DNA pack_graph; not production-ready."
+        },
+        {
+          "phase_id": "greenlight",
+          "phase_name": "Greenlight",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "pre_production_packet",
+          "phase_name": "Pre-production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "production_packet",
+          "phase_name": "Production packet",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_master",
+          "phase_name": "Post master",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "review_and_release_pack",
+          "phase_name": "Review and release pack",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "distribution_package",
+          "phase_name": "Distribution package",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        },
+        {
+          "phase_id": "post_launch_learning_set",
+          "phase_name": "Post-launch learning set",
+          "representation": "local_graph",
+          "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+          "status": "covered_by_family_graph",
+          "is_blueprint_realization": false,
+          "is_pack_spine": false
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "families": 14,
+    "with_local_graph": 14,
+    "explicit_gaps": 0
+  },
+  "note": "Coverage ledger: every blueprint family has a local host DNA graph. pack_spine is recorded separately and is NOT a blueprint realization."
+}

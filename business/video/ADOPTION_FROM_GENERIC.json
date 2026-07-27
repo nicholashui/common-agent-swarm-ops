@@ -1,0 +1,28 @@
+{
+  "generic_commit": "8f61e2889fb5a750cc24ee319e7e6a655c0f02f5",
+  "common_commit": "f3bb469eca549167d0425040cf1cb663777914ca",
+  "adopted_at": "2026-07-27T00:22:32.350799Z",
+  "corpus_files_copied": 335,
+  "corpus_manifest_count": 330,
+  "knowledge_files": 2,
+  "docs_files": 2,
+  "special_skills_files": 36,
+  "workflow_dna": [
+    "wf_video_arch_a_viral_hook_v1.dna.json",
+    "wf_video_arch_b_ugc_ad_v1.dna.json",
+    "wf_video_arch_c_animated_explainer_v1.dna.json",
+    "wf_video_arch_d_personalized_birthday_v1.dna.json",
+    "wf_video_arch_e_ai_short_film_v1.dna.json",
+    "wf_video_arch_f_corporate_training_v1.dna.json",
+    "wf_video_arch_g_music_video_v1.dna.json",
+    "wf_video_arch_h_ai_avatar_v1.dna.json",
+    "wf_video_arch_i_documentary_v1.dna.json",
+    "wf_video_arch_j_feature_film_v1.dna.json",
+    "wf_video_delivery_v1.dna.json",
+    "wf_video_lqr_overview_v1.dna.json",
+    "wf_video_production_e2e_v1.dna.json",
+    "wf_video_spine_v1.dna.json"
+  ],
+  "workflow_dna_count": 14,
+  "specs_enriched": 114
+}

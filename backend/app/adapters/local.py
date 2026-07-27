@@ -56,8 +56,14 @@ class StubMediaAdapter(DeterministicLocalAdapter):
         super().__init__("media.stub", LOCAL_ADAPTER_VERSION, "stub_media_created")
 
 
-def default_local_adapters() -> tuple[DeterministicLocalAdapter, ...]:
-    """Create the complete fixed v1 local adapter allow-list for Host startup."""
+def default_local_adapters() -> tuple[object, ...]:
+    """Create the Host adapter allow-list including live media providers.
+
+    Live media adapters (Sora/Veo/Runway/ElevenLabs) are always registered as
+    host tools; they fail closed unless production flags and credentials exist.
+    """
+    from app.adapters.media_live import default_live_media_adapters
+
     return (
         ContractParsingAdapter(),
         PolicyLookupAdapter(),
@@ -66,4 +72,5 @@ def default_local_adapters() -> tuple[DeterministicLocalAdapter, ...]:
         EmailAdapter(),
         AuditAdapter(),
         StubMediaAdapter(),
+        *default_live_media_adapters(),
     )

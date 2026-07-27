@@ -1,0 +1,76 @@
+{
+  "skill_id": "video_generation_techology_should_learn_now",
+  "plan": "planning/special/video_generation_techology_should_learn_now.md",
+  "kind": "tech_radar",
+  "summary": "Gen-video tech radar \u2192 prompt/benchmark/eval agents + media stubs",
+  "status": "mvp_integrated",
+  "integrated_at": "2026-07-13",
+  "n1": "video logic in pack only; host modules are infrastructure",
+  "agents": [
+    "video.promptengineer",
+    "video.benchmarkresearch",
+    "video.evaluationharness"
+  ],
+  "dna": [
+    "wf_video_spine_v1",
+    "wf_video_arch_e_ai_short_film_v1"
+  ],
+  "modules": [],
+  "process_ids": [
+    "video.spine.orchestrate"
+  ],
+  "evidence": {
+    "agents": [
+      {
+        "pack_id": "video.promptengineer",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 183.0
+      },
+      {
+        "pack_id": "video.benchmarkresearch",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 138.2
+      },
+      {
+        "pack_id": "video.evaluationharness",
+        "folder": true,
+        "spec": true,
+        "agent_spec": true,
+        "alc": true,
+        "spec_kb": 262.7
+      }
+    ],
+    "dna": [
+      {
+        "dna_id": "wf_video_spine_v1",
+        "exists": true,
+        "valid_json": true,
+        "steps": 8,
+        "depth": null,
+        "id_match": true
+      },
+      {
+        "dna_id": "wf_video_arch_e_ai_short_film_v1",
+        "exists": true,
+        "valid_json": true,
+        "steps": 13,
+        "depth": "phased_v1",
+        "id_match": true
+      }
+    ],
+    "modules": [],
+    "plan_exists": true,
+    "plan_bytes": 16649
+  },
+  "notes": {
+    "privacy": false,
+    "tools_design_time_only": true,
+    "n1_note": null
+  }
+}

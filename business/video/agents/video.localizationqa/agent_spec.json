@@ -1,0 +1,32 @@
+{
+  "agent_id": "video.localizationqa",
+  "allowed_tools": [],
+  "budget_policy": {
+    "max_input_tokens": 2048,
+    "max_output_tokens": 1024,
+    "max_tool_requests": 0
+  },
+  "critique_edges": {
+    "inputs": [
+      "video.critic"
+    ],
+    "outputs": [
+      "video.judge"
+    ]
+  },
+  "max_refinement_count": 3,
+  "model_policy": {
+    "model_id": "local-video-config-v1",
+    "network_access": false,
+    "provider": "local_deterministic"
+  },
+  "production_activation_requested": false,
+  "prompt_reference": "video.prompt.localizationqa.v1",
+  "role": "LocalizationQAAgent (Linguist) (VA Domain Pack)",
+  "rubric_reference": "video.rubric.localizationqa.v1",
+  "schema_version": "1.0",
+  "status": "registered",
+  "va_id": 44,
+  "va_name": "LocalizationQAAgent (Linguist)",
+  "va_category": "7-Edu"
+}

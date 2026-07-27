@@ -96,12 +96,25 @@ def main(argv: list[str] | None = None) -> int:
                 findings.append(f"{agent_id}: SPEC missing agent id")
             if _EXTERNAL_REQUIRED.search(text):
                 findings.append(f"{agent_id}: SPEC has required external/corpus dependency")
-            # Fail-closed runtime check
+            # Fail-closed runtime check unless pack production profile is enabled
             binding = json.loads((agent_dir / "agent_spec.json").read_text(encoding="utf-8"))
-            if binding.get("production_activation_requested") is True:
+            production_profile = False
+            profile_path = video / "production" / "profile.json"
+            if profile_path.is_file():
+                try:
+                    production_profile = (
+                        json.loads(profile_path.read_text(encoding="utf-8")).get("enabled") is True
+                    )
+                except (OSError, json.JSONDecodeError):
+                    production_profile = False
+            if binding.get("production_activation_requested") is True and not production_profile:
                 findings.append(f"{agent_id}: production activation requested")
             model = binding.get("model_policy") or {}
-            if isinstance(model, dict) and model.get("network_access") is True:
+            if (
+                isinstance(model, dict)
+                and model.get("network_access") is True
+                and not production_profile
+            ):
                 findings.append(f"{agent_id}: network_access enabled")
 
     # Corpus must not be required

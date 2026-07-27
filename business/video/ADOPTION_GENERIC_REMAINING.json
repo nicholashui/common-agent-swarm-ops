@@ -1,0 +1,25 @@
+{
+  "adopted_at": "2026-07-27T01:30:29.051951+00:00",
+  "generic_root": "C:\\Project\\generic-swarm-ops",
+  "trees": {
+    "graphs": 2,
+    "tools": 1,
+    "evals": 5,
+    "ui": 0,
+    "docs/process-maps.md": 1,
+    "docs/deep-spec-modules.md": 1,
+    "policies_new": 1,
+    "design_dna": 15
+  },
+  "agent_source_depth": {
+    "agents": 114,
+    "files": 924,
+    "skipped": 0
+  },
+  "process_coverage": {
+    "host_processes": 27,
+    "design_processes": 33
+  },
+  "production_activation": false,
+  "goal": "common surpasses generic for VA implementation (content + host + UI + specials)"
+}

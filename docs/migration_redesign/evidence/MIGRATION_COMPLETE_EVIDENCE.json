@@ -1,0 +1,44 @@
+{
+  "title": "migration_redesign COMPLETE evidence",
+  "recorded_at": "2026-07-27T01:49:22Z",
+  "reviewer": "migration-redesign-closeout",
+  "document": "docs/migration_redesign/migration_redesign.md",
+  "status": "COMPLETE",
+  "self_contained": true,
+  "production_activation": false,
+  "live_providers": false,
+  "network_required": false,
+  "sole_safe_stub": "business/video/workflows/pack_spine.json",
+  "artifacts": {
+    "WORKFLOW_ROLE_MAP.json": {
+      "entries": 212,
+      "workflows": 14,
+      "implemented_or_reviewed": 212,
+      "gaps": 0
+    },
+    "workflow_coverage.json": {
+      "families": 14,
+      "with_local_graph": 14,
+      "explicit_gaps": 0
+    },
+    "knowledge/seeds/index.json": {
+      "seeds": 3
+    },
+    "special_skills/index.json": {
+      "skills": 17
+    },
+    "agents": 114,
+    "dna_workflows": 14
+  },
+  "commands": [
+    "python scripts/business/close_migration_redesign_complete.py",
+    "python scripts/business/check_common_video_agents_standalone.py",
+    "python scripts/business/check_video_domain_standalone.py --network-disabled --upstreams-unavailable"
+  ],
+  "residuals": [
+    "Live media vendors remain stubs.",
+    "DNA graphs production_ready remain false.",
+    "Agents remain non_active / registered.",
+    "Frontend may not drive every host API route."
+  ]
+}

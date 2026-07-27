@@ -1,7 +1,5 @@
-# Source mapping note — `video.colorist`
+# Mapping — `video.colorist`
 
-- Mapping status: `exact`
-- Source agent IDs (historical): `video.colorist`
-- Local runtime: `agent_spec.json`
-- Local specification: `SPEC.md`
-- Pack corpus: **not required** for this agent
+- VA/generic pack ID: `video.colorist`
+- Previous common ID: `video.colorist`
+- SPEC depth: full generic SPEC body + host runtime binding

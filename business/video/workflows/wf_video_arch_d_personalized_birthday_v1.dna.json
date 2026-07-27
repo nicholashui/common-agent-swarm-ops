@@ -1,0 +1,167 @@
+{
+  "definition_type": "pack_graph",
+  "id": "wf_video_arch_d_personalized_birthday_v1",
+  "name": "Archetype D — Personalized Birthday",
+  "version": "1.0.0",
+  "owner_id": "video.orchestrator",
+  "engine": "graph",
+  "domain": "video",
+  "production_ready": true,
+  "pattern": "adapted_dna",
+  "agent_ids": [
+    "video.aiqaconsistency",
+    "video.gatekeeper",
+    "video.orchestrator",
+    "video.planner",
+    "video.screenwriter"
+  ],
+  "common_agent_ids": [
+    "video.aiqaconsistency",
+    "video.gatekeeper",
+    "video.orchestrator",
+    "video.planner",
+    "video.screenwriter"
+  ],
+  "execution_budget": {
+    "max_node_visits": 7,
+    "max_handoffs": 6,
+    "max_wall_clock_seconds": 60,
+    "max_tool_requests": 16
+  },
+  "memory": {
+    "reads": [],
+    "writes": []
+  },
+  "risk_gate_ids": [
+    "video.local-safe"
+  ],
+  "rollback": {
+    "plan_id": "video.rollback.wf_video_arch_d_personalized_birthday_v1",
+    "compensation_step_ids": [
+      "package"
+    ]
+  },
+  "critique_loops": {
+    "enabled": true,
+    "max_iterations": 3,
+    "lead_agent_id": "video.critic",
+    "judge_agent_id": "video.judge"
+  },
+  "human_interrupts": {
+    "required": true,
+    "gates": [
+      {
+        "id": "release_or_irreversible",
+        "when": "irreversible_or_publish",
+        "required": true
+      }
+    ],
+    "approval_authority": "host_gated"
+  },
+  "nodes": [
+    {
+      "id": "orchestrate",
+      "agent_id": "video.orchestrator",
+      "tool_ids": [
+        "media.stub"
+      ],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "plan",
+      "agent_id": "video.planner",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "specialize_0",
+      "agent_id": "video.orchestrator",
+      "tool_ids": [
+        "media.stub"
+      ],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "specialize_1",
+      "agent_id": "video.screenwriter",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "specialize_2",
+      "agent_id": "video.orchestrator",
+      "tool_ids": [
+        "media.stub"
+      ],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "qc",
+      "agent_id": "video.aiqaconsistency",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "package",
+      "agent_id": "video.gatekeeper",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "orchestrate",
+      "to": "plan",
+      "max_traversals": 1
+    },
+    {
+      "from": "plan",
+      "to": "specialize_0",
+      "max_traversals": 1
+    },
+    {
+      "from": "specialize_0",
+      "to": "specialize_1",
+      "max_traversals": 1
+    },
+    {
+      "from": "specialize_1",
+      "to": "specialize_2",
+      "max_traversals": 1
+    },
+    {
+      "from": "specialize_2",
+      "to": "qc",
+      "max_traversals": 1
+    },
+    {
+      "from": "qc",
+      "to": "package",
+      "max_traversals": 1
+    }
+  ],
+  "entry_node": "orchestrate",
+  "terminal_node_ids": [
+    "package"
+  ],
+  "allowed_tools": [
+    "media.stub",
+    "media.sora",
+    "media.veo",
+    "media.runway",
+    "media.elevenlabs"
+  ],
+  "provenance": {
+    "source": "design/workflows DNA adapted from generic/va",
+    "historical_and_non_binding": true,
+    "adapted_by": "convert_design_dna_to_host_graphs.py",
+    "design_source": "design/workflows/wf_video_arch_d_personalized_birthday_v1.dna.json"
+  }
+}

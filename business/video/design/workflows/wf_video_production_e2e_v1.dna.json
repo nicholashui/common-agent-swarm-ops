@@ -1,0 +1,186 @@
+{
+  "id": "wf_video_production_e2e_v1",
+  "name": "Video Production Six-Phase E2E",
+  "domain": "video",
+  "objective": "Orchestrator-down six-phase production skeleton (N3 process wiring).",
+  "owner": "video.orchestrator",
+  "version": "1.0.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": [
+    "brief"
+  ],
+  "preconditions": [
+    "brief is non-empty"
+  ],
+  "steps": [
+    {
+      "id": "orchestrate",
+      "state": "execution",
+      "next": [
+        "phase1_intent"
+      ],
+      "agent": "video.orchestrator",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase1_intent",
+      "state": "execution",
+      "next": [
+        "phase2_creative"
+      ],
+      "agent": "video.planner",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase2_creative",
+      "state": "execution",
+      "next": [
+        "phase3_prepro"
+      ],
+      "agent": "video.director",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase3_prepro",
+      "state": "execution",
+      "next": [
+        "phase4_production"
+      ],
+      "agent": "video.productiondesign",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase4_production",
+      "state": "execution",
+      "next": [
+        "phase5_post"
+      ],
+      "agent": "video.promptengineer",
+      "tools": [
+        "video_media_gen_stub"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase5_post",
+      "state": "execution",
+      "next": [
+        "phase6_delivery"
+      ],
+      "agent": "video.editor",
+      "tools": [
+        "video_script_format"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "phase6_delivery",
+      "state": "execution",
+      "next": [
+        "qc"
+      ],
+      "agent": "video.socialmediastrategist",
+      "tools": [
+        "audit_log_writer"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "qc",
+      "state": "execution",
+      "next": [
+        "package"
+      ],
+      "agent": "video.aiqaconsistency",
+      "tools": [
+        "video_qc_stub"
+      ],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "package",
+      "state": "critical_gate",
+      "next": [
+        "complete"
+      ],
+      "agent": "video.producer",
+      "tools": [
+        "video_package_stub"
+      ],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": [
+    "organization_memory",
+    "past_failures"
+  ],
+  "memory_writes": [
+    "event_log",
+    "lessons_learned"
+  ],
+  "guardrails": {
+    "human_approval_required_if": [
+      "step.irreversible == true"
+    ]
+  },
+  "verification": {
+    "required_checks": [
+      "six_phase_complete",
+      "qc_pass",
+      "package_approved"
+    ]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": [
+      "halt_delivery",
+      "notify_producer"
+    ]
+  },
+  "fitness_metrics": [
+    "phase_completion",
+    "quality",
+    "cycle_time"
+  ],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "va-agent-swarm/study/SYSTEM_REFERENCE.md#6.1",
+      "improvements.md#wave-5"
+    ],
+    "captured_by": "wave-5-n3",
+    "recorded_at": "2026-07-12T00:00:00Z",
+    "depth": "thin_stub_n3"
+  }
+}

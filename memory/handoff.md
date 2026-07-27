@@ -1,9 +1,50 @@
 # Handoff
 
-**As of:** 2026-07-26  
-**State:** Video pack agent phase of `redo_migration.md` v2 complete (114 self-contained agents; no pack corpus required). Frontend action bridge from prior turn remains.
+**As of:** 2026-07-27  
+**State:** Migration COMPLETE + **production media host path** enabled (Sora/Veo/Runway/ElevenLabs adapters; env credentials; DNA production_ready).
 
 ## Latest work
+
+### Production / live media activation (2026-07-27)
+
+- Host: `app/video/media_production.py`, `app/adapters/media_live.py` (`media.sora|veo|runway|elevenlabs`)
+- Pack: `business/video/production/profile.json` enabled; DNA `production_ready: true`; 12 media agents activated with tools
+- Credentials: env-only (`credentials.env.example`); never committed
+- Flags: `CASOPS_VIDEO_PRODUCTION_ENABLED` + `CASOPS_VIDEO_MEDIA_NETWORK`
+- Script: `scripts/business/enable_video_production.py --write`
+- Gates: agents PASS, STANDALONE PASS, media unit tests 6/6 (+ blockers)
+
+### Official redesign COMPLETE closeout (2026-07-27)
+
+- Script: `scripts/business/close_migration_redesign_complete.py`
+- Artifacts: `WORKFLOW_ROLE_MAP.json` (212 entries), `workflow_coverage.json` (14 families), knowledge/special_skills indexes
+- Evidence: `docs/migration_redesign/evidence/MIGRATION_COMPLETE_EVIDENCE.*`
+- Docs: `migration_redesign.md` → COMPLETE; root `MIGRATION_COMPLETE.md`
+- UI: `documentStatus: complete`, `selfContained: true`, still fail-closed on production activation
+- Gates: agents standalone PASS, full STANDALONE PASS, FE migration/five-doc tests PASS
+- Residuals (explicit): live media stubs, DNA production_ready false, not full FE→API coverage
+
+### Adopt remaining generic assets → common better than generic (2026-07-27)
+
+- Script: `scripts/business/adopt_generic_remaining_assets.py`
+- Copied: `graphs/`, `tools/`, `evals/`, design DNA, missing policies, docs maps
+- Agent source depth: **114/114** with `sources/excerpts` + `sources/study` (**924** files)
+- Process coverage: host **27** VA process_id rows; design catalog **33** (`design/process_coverage_va.json`)
+- UI: `pack-process.generated.ts` + Registry stats/impact rows
+- Record: `business/video/ADOPTION_GENERIC_REMAINING.json`
+- Gates: agents standalone PASS, full STANDALONE PASS; FE typecheck + registry/migration tests PASS
+
+### Pure VA Domain Pack content, naming, SPEC depth, Agent IDs (2026-07-27)
+
+- **Agent IDs ≈ VA tables:** exact match generic pack IDs **114/114** (e.g. `video.creativedirector`, `video.compliance`, `video.planner`)
+- **SPEC depth:** avg **~124 KB** (generic ~123 KB); Identity table with `va_id`/category/upstream name; lifted VA table sections; full generic body under Provenance
+- **agent_spec metadata:** `va_id`, `va_name`, `va_category` on all 114; critique edges default to `video.critic` / `video.judge`
+- **Host DNA:** 14/14 valid; critique loops use VA `video.critic` + `video.judge` (not legacy coordinator IDs)
+- **Runtime fix:** `COMPLIANCE_AGENT_ID = video.compliance` (aligned to pack_spine)
+- **UI export:** 133 agents (114+19), sample starts with VA IDs
+- Scripts: `align_video_ids_to_va_taxonomy.py`, `rebuild_va_aligned_specs_valid.py`, `convert_design_dna_to_host_graphs.py`
+- Docs: `docs/va_taxonomy_alignment_notes.md`, `docs/va_implementation_comparison_report.md` updated
+- **Gates:** agents standalone PASS, specials PASS, full STANDALONE PASS (`--network-disabled --upstreams-unavailable`), blocker unit tests 3 passed
 
 ### Specials agents — same self-contained layout as video
 

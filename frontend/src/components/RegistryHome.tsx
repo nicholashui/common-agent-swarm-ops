@@ -52,7 +52,7 @@ export function RegistryHome({
   const filteredAgents = useMemo(() => {
     const q = search.trim().toLowerCase();
     return view.agents.filter((agent) => {
-      // Facets are badge/domain tags (pack: video|specials, status, self-contained, …).
+      // Facets are badge or pack tags (video|specials, status, folder-local layout, …).
       for (const facet of activeFacets) {
         const f = facet.toLowerCase();
         const matchesBadge = agent.badges.some((badge) => badge.toLowerCase() === f);

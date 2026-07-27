@@ -2,7 +2,10 @@
 
 **Version:** 1.0  
 **Date:** 2026-07-20  
-**Status:** **PROPOSED — NOT YET SELF-CONTAINED**  
+**Status:** **COMPLETE — SELF-CONTAINED (non-production)**  
+**Completed at:** 2026-07-27T01:49:22Z  
+**Evidence:** `docs/migration_redesign/evidence/MIGRATION_COMPLETE_EVIDENCE.json`  
+**Note:** COMPLETE means offline self-contained pack + maps/graphs/gates. It does **not** enable live media, credentials, network providers, or production_ready DNA.  
 **Destination:** `C:\Project\common-agent-swarm-ops`  
 **Controlled source snapshot:** `C:\Project\generic-swarm-ops\business\video`  
 **Original corpus provenance:** `va-agent-swarm` commit recorded by the source corpus manifest  
@@ -533,4 +536,11 @@ Do not copy generic agent directories wholesale, retain “see another repositor
 
 ---
 
-*End of migration plan v1.0. Status remains PROPOSED until the import, mapping, validation, and documentation gates are evidenced.*
+*End of migration plan v1.0. Status set to COMPLETE with evidence at 2026-07-27T01:49:22Z. Self-contained offline pack; production activation remains false.*
+
+## 14. Completion record
+
+- Status flipped to COMPLETE at 2026-07-27T01:49:22Z.
+- Artifacts: `business/video/WORKFLOW_ROLE_MAP.json`, `business/video/workflow_coverage.json`, `business/video/knowledge/seeds/index.json`, `business/video/special_skills/index.json`.
+- Evidence: `docs/migration_redesign/evidence/`.
+- Activation: all agents non_active; DNA production_ready false; pack_spine sole safe stub.

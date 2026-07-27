@@ -17,6 +17,7 @@ from app.adapters.local import (
     StubMediaAdapter,
     default_local_adapters,
 )
+from app.adapters.media_live import LiveMediaAdapter, default_live_media_adapters
 from app.governance.adapter_execution import BrokerOnlyAdapterError
 
 __all__ = [
@@ -29,9 +30,11 @@ __all__ = [
     "DeterministicLocalAdapter",
     "EmailAdapter",
     "GovernedDispatchAdapter",
+    "LiveMediaAdapter",
     "LocalInlineGovernedAdapter",
     "PolicyLookupAdapter",
     "RemoteGovernedAdapter",
     "StubMediaAdapter",
+    "default_live_media_adapters",
     "default_local_adapters",
 ]

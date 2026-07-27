@@ -1,0 +1,4257 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed",
+  "reviewed_by": "migration-redesign-closeout",
+  "reviewed_at": "2026-07-27T01:49:22Z",
+  "activation_policy": "non_active",
+  "production_ready": false,
+  "note": "Human-reviewed workflow-role map for migration_redesign COMPLETE. Resolutions use only inventory video.* IDs. Graphs are host-adapted DNA (production_ready false). pack_spine is not a blueprint realization.",
+  "entries": [
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "orchestrate_hook",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate_hook` maps to pack agent `video.orchestrator` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "plan_hook",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan_hook` maps to pack agent `video.planner` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "write_hook",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `write_hook` maps to pack agent `video.screenwriter` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "render_hook",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `render_hook` maps to pack agent `video.creativedirector` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "qc_hook",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc_hook` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "publish_hook",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Host-adapted DNA node `publish_hook` maps to pack agent `video.gatekeeper` for workflow `video.workflow-a-viral-hook-clip` (Viral Hook Clip/Meme). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.creativedirector` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.gatekeeper` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.orchestrator` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.planner` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.screenwriter` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-a-viral-hook-clip",
+      "workflow_title": "Viral Hook Clip/Meme",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_a_viral_hook_v1.dna.json` agent `video.screenwriter` for `video.workflow-a-viral-hook-clip`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "concept_performance",
+      "documented_role": "MarketingAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.marketing",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `concept_performance` maps to pack agent `video.marketing` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "concept_copy",
+      "documented_role": "CopywriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.copywriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `concept_copy` maps to pack agent `video.copywriter` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "produce_ugc",
+      "documented_role": "CopywriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.copywriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `produce_ugc` maps to pack agent `video.copywriter` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "edit_cut",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `edit_cut` maps to pack agent `video.soundmixer` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "motion_packaging",
+      "documented_role": "MotiongraphicsAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.motiongraphics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `motion_packaging` maps to pack agent `video.motiongraphics` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "brand_gate",
+      "documented_role": "BrandAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.brand",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `brand_gate` maps to pack agent `video.brand` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "compliance_gate",
+      "documented_role": "ComplianceAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.compliance",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `compliance_gate` maps to pack agent `video.compliance` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-b-ugc-performance-ad` (UGC-Style Performance Ad). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.brand",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.brand` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.compliance",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.compliance` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.copywriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.copywriter` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.gatekeeper` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.marketing",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.marketing` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-b-ugc-performance-ad",
+      "workflow_title": "UGC-Style Performance Ad",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.motiongraphics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_b_ugc_ad_v1.dna.json` agent `video.motiongraphics` for `video.workflow-b-ugc-performance-ad`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "specialize_0",
+      "documented_role": "Animator2dAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.animator_2d",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.animator_2d` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "specialize_1",
+      "documented_role": "MotiongraphicsAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.motiongraphics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.motiongraphics` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "specialize_2",
+      "documented_role": "StoryboardAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.storyboard",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.storyboard` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-c-animated-explainer` (Animated Explainer). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.animator_2d",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.animator_2d` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.gatekeeper` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.motiongraphics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.motiongraphics` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.orchestrator` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.planner` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-c-animated-explainer",
+      "workflow_title": "Animated Explainer",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.storyboard",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_c_animated_explainer_v1.dna.json` agent `video.storyboard` for `video.workflow-c-animated-explainer`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "specialize_0",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.orchestrator` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "specialize_1",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.screenwriter` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "specialize_2",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.orchestrator` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-d-personalized-birthday` (Personalized Birthday Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.gatekeeper` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.orchestrator` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.planner` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.screenwriter` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.screenwriter` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-d-personalized-birthday",
+      "workflow_title": "Personalized Birthday Video",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_d_personalized_birthday_v1.dna.json` agent `video.screenwriter` for `video.workflow-d-personalized-birthday`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "story",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `story` maps to pack agent `video.screenwriter` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "direct_vision",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `direct_vision` maps to pack agent `video.creativedirector` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "storyboard",
+      "documented_role": "StoryboardAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.storyboard",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `storyboard` maps to pack agent `video.storyboard` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "concept_look",
+      "documented_role": "IdeationAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.ideation",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `concept_look` maps to pack agent `video.ideation` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "prompt_pack",
+      "documented_role": "PromptengineerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `prompt_pack` maps to pack agent `video.promptengineer` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "generate_takes",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `generate_takes` maps to pack agent `video.creativedirector` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "continuity_qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `continuity_qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "edit",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `edit` maps to pack agent `video.soundmixer` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "grade",
+      "documented_role": "ColoristAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.colorist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `grade` maps to pack agent `video.colorist` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "showrunner_review",
+      "documented_role": "NarrativearcAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.narrativearc",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `showrunner_review` maps to pack agent `video.narrativearc` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-e-ai-short-film` (AI Multi-Scene Short Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.colorist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.colorist` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.creativedirector` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.gatekeeper` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.ideation",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.ideation` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.narrativearc",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.narrativearc` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-e-ai-short-film",
+      "workflow_title": "AI Multi-Scene Short Film",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_e_ai_short_film_v1.dna.json` agent `video.orchestrator` for `video.workflow-e-ai-short-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "specialize_0",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.orchestrator` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "specialize_1",
+      "documented_role": "EthicsAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.ethics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.ethics` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "specialize_2",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.screenwriter` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-f-corporate-training` (Corporate Training Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.ethics",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.ethics` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.gatekeeper` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.orchestrator` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.planner` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.screenwriter` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-f-corporate-training",
+      "workflow_title": "Corporate Training Video",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_f_corporate_training_v1.dna.json` agent `video.screenwriter` for `video.workflow-f-corporate-training`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "specialize_0",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.orchestrator` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "specialize_1",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.orchestrator` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "specialize_2",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.orchestrator` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "specialize_3",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_3` maps to pack agent `video.soundmixer` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-g-music-video` (Music Video). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.gatekeeper` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.orchestrator` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.planner` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.soundmixer` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.soundmixer` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-g-music-video",
+      "workflow_title": "Music Video",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_g_music_video_v1.dna.json` agent `video.soundmixer` for `video.workflow-g-music-video`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "specialize_0",
+      "documented_role": "AvatardesignAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.avatardesign",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.avatardesign` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "specialize_1",
+      "documented_role": "VoiceoverAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.voiceover",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.voiceover` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "specialize_2",
+      "documented_role": "PromptengineerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.promptengineer` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-h-ai-avatar` (AI Avatar Talking-Head). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.avatardesign",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.avatardesign` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.gatekeeper` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.orchestrator` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.planner` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.promptengineer` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-h-ai-avatar",
+      "workflow_title": "AI Avatar Talking-Head",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.voiceover",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_h_ai_avatar_v1.dna.json` agent `video.voiceover` for `video.workflow-h-ai-avatar`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "specialize_0",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.orchestrator` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "specialize_1",
+      "documented_role": "FactcheckerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.factchecker",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.factchecker` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "specialize_2",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.soundmixer` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "specialize_3",
+      "documented_role": "ArchiveresearchAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.archiveresearch",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_3` maps to pack agent `video.archiveresearch` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-i-documentary-explained` (Documentary Explained Episode). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.archiveresearch",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.archiveresearch` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.factchecker",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.factchecker` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.gatekeeper` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.orchestrator` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.planner` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-i-documentary-explained",
+      "workflow_title": "Documentary Explained Episode",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_arch_i_documentary_v1.dna.json` agent `video.soundmixer` for `video.workflow-i-documentary-explained`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "specialize_0",
+      "documented_role": "NarrativearcAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.narrativearc",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.narrativearc` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "specialize_1",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.creativedirector` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "specialize_2",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.screenwriter` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "specialize_3",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_3` maps to pack agent `video.soundmixer` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-j-feature-length-ai-film` (Feature-Length AI Film). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.creativedirector` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.gatekeeper` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.orchestrator` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.planner` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.productiondesign",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.productiondesign` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.promptengineer` for `video.workflow-j-feature-length-ai-film`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "development",
+      "documented_role": "Feature-LengthAIFilmDevelopmentLead",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.narrativearc",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Feature-film phase `Feature-Length AI Film Development` mapped to local pack agent.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-j-feature-length-ai-film",
+      "workflow_title": "Feature-Length AI Film",
+      "phase_id": "pre_production",
+      "documented_role": "Feature-LengthAIFilmPre-ProductionLead",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "rationale": "Feature-film phase `Feature-Length AI Film Pre-Production` mapped to local pack agent.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "direct",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `direct` maps to pack agent `video.creativedirector` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "screenwrite",
+      "documented_role": "ScreenwriterAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `screenwrite` maps to pack agent `video.screenwriter` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "research",
+      "documented_role": "WebresearchAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.webresearch",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `research` maps to pack agent `video.webresearch` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "media_gen",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `media_gen` maps to pack agent `video.creativedirector` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-spine-orchestration` (Orchestration Spine). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_spine_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_spine_v1.dna.json` agent `video.creativedirector` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_spine_v1.dna.json` agent `video.gatekeeper` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_spine_v1.dna.json` agent `video.orchestrator` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_spine_v1.dna.json` agent `video.planner` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.screenwriter",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_spine_v1.dna.json` agent `video.screenwriter` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-spine-orchestration",
+      "workflow_title": "Orchestration Spine",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.webresearch",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_spine_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_spine_v1.dna.json` agent `video.webresearch` for `video.workflow-spine-orchestration`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase1_intent",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase1_intent` maps to pack agent `video.planner` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase2_creative",
+      "documented_role": "CreativedirectorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase2_creative` maps to pack agent `video.creativedirector` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase3_prepro",
+      "documented_role": "ProductiondesignAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.productiondesign",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase3_prepro` maps to pack agent `video.productiondesign` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase4_production",
+      "documented_role": "PromptengineerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase4_production` maps to pack agent `video.promptengineer` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase5_post",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase5_post` maps to pack agent `video.soundmixer` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "phase6_delivery",
+      "documented_role": "SocialmediastrategistAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.socialmediastrategist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `phase6_delivery` maps to pack agent `video.socialmediastrategist` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-production-e2e` (Production E2E phases). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.creativedirector",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.creativedirector` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.gatekeeper` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.orchestrator` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.planner` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.productiondesign",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.productiondesign` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-production-e2e",
+      "workflow_title": "Production E2E phases",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.promptengineer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_production_e2e_v1.dna.json` agent `video.promptengineer` for `video.workflow-production-e2e`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "specialize_0",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "specialize_1",
+      "documented_role": "SoundmixerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.soundmixer` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-lqr-overview` (LQR overview / QC loops). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.gatekeeper` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.orchestrator` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.planner` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.soundmixer` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.soundmixer` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-lqr-overview",
+      "workflow_title": "LQR overview / QC loops",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.soundmixer",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_lqr_overview_v1.dna.json` agent `video.soundmixer` for `video.workflow-lqr-overview`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "orchestrate",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `orchestrate` maps to pack agent `video.orchestrator` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "plan",
+      "documented_role": "PlannerAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `plan` maps to pack agent `video.planner` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "specialize_0",
+      "documented_role": "SocialmediastrategistAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.socialmediastrategist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_0` maps to pack agent `video.socialmediastrategist` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "specialize_1",
+      "documented_role": "MarketingAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.marketing",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_1` maps to pack agent `video.marketing` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "specialize_2",
+      "documented_role": "OrchestratorAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `specialize_2` maps to pack agent `video.orchestrator` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "qc",
+      "documented_role": "AiqaconsistencyAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `qc` maps to pack agent `video.aiqaconsistency` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "package",
+      "documented_role": "GatekeeperAgent",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "implemented",
+      "maturity_state": "graph_validated",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Host-adapted DNA node `package` maps to pack agent `video.gatekeeper` for workflow `video.workflow-delivery` (Delivery / distribution package). Non-production; fail-closed.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "greenlight",
+      "documented_role": "SkeletonGreenlightRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.aiqaconsistency",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Greenlight` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.aiqaconsistency` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "pre_production_packet",
+      "documented_role": "SkeletonPre-productionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.gatekeeper",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Pre-production packet` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.gatekeeper` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "production_packet",
+      "documented_role": "SkeletonProductionpacketRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.marketing",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Production packet` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.marketing` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "post_master",
+      "documented_role": "SkeletonPostmasterRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.orchestrator",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post master` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.orchestrator` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "review_and_release_pack",
+      "documented_role": "SkeletonReviewandreleasepackRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.planner",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Review and release pack` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.planner` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "distribution_package",
+      "documented_role": "SkeletonDistributionpackageRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.socialmediastrategist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Distribution package` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.socialmediastrategist` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    },
+    {
+      "workflow_id": "video.workflow-delivery",
+      "workflow_title": "Delivery / distribution package",
+      "phase_id": "post_launch_learning_set",
+      "documented_role": "SkeletonPost-launchlearningsetRole",
+      "resolution": {
+        "kind": "common_agent",
+        "common_agent_id": "video.socialmediastrategist",
+        "composite_id": null,
+        "component_agent_ids": [],
+        "gap_id": null
+      },
+      "mapping_status": "reviewed",
+      "maturity_state": "mapped",
+      "activation_state": "non_active",
+      "graph_path": "workflows/wf_video_delivery_v1.dna.json",
+      "rationale": "Shared skeleton phase `Post-launch learning set` covered by local graph `wf_video_delivery_v1.dna.json` agent `video.socialmediastrategist` for `video.workflow-delivery`.",
+      "reviewed_by": "migration-redesign-closeout",
+      "reviewed_at": "2026-07-27T01:49:22Z"
+    }
+  ],
+  "counts": {
+    "entries": 212,
+    "workflows": 14,
+    "implemented_or_reviewed": 212,
+    "gaps": 0
+  }
+}

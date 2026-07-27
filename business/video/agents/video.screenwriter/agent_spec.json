@@ -8,10 +8,10 @@
   },
   "critique_edges": {
     "inputs": [
-      "video.critique_coordinator"
+      "video.critic"
     ],
     "outputs": [
-      "video.judge_agent"
+      "video.judge"
     ]
   },
   "max_refinement_count": 3,
@@ -22,8 +22,11 @@
   },
   "production_activation_requested": false,
   "prompt_reference": "video.prompt.screenwriter.v1",
-  "role": "Video Screenwriter configuration specialist",
+  "role": "ScreenwriterAgent (VA Domain Pack)",
   "rubric_reference": "video.rubric.screenwriter.v1",
   "schema_version": "1.0",
-  "status": "registered"
+  "status": "registered",
+  "va_id": 3,
+  "va_name": "ScreenwriterAgent",
+  "va_category": "1-ATL"
 }

@@ -1,0 +1,589 @@
+{
+  "schema_version": "1.0",
+  "domain_id": "video",
+  "entry_agents": [
+    "video.orchestrator",
+    "video.planner"
+  ],
+  "selection_policy": {
+    "require_hitl_confirm": true,
+    "min_confidence_auto": 0.72,
+    "fallback_dna_id": "wf_video_spine_v1",
+    "fallback_process_id": "video.spine.orchestrate",
+    "notes": "Classifier is deterministic keyword/scale scoring. Planner may override after HiTL confirm."
+  },
+  "scale_profiles": {
+    "S1": {
+      "label": "micro",
+      "duration_sec_max": 30,
+      "agent_budget": "minimal",
+      "delivery_branches": [
+        "social"
+      ]
+    },
+    "S2": {
+      "label": "short_social",
+      "duration_sec_max": 90,
+      "agent_budget": "small",
+      "delivery_branches": [
+        "social",
+        "streaming_cutdown"
+      ]
+    },
+    "S3": {
+      "label": "premium_social",
+      "duration_sec_max": 300,
+      "agent_budget": "medium",
+      "delivery_branches": [
+        "social",
+        "streaming",
+        "archive"
+      ]
+    },
+    "S4": {
+      "label": "broadcast_series",
+      "duration_sec_max": 1200,
+      "agent_budget": "large",
+      "delivery_branches": [
+        "streaming",
+        "broadcast",
+        "archive",
+        "social"
+      ]
+    },
+    "S5": {
+      "label": "longform_doc",
+      "duration_sec_max": 3600,
+      "agent_budget": "large",
+      "delivery_branches": [
+        "streaming",
+        "broadcast",
+        "archive"
+      ]
+    },
+    "S6": {
+      "label": "enterprise_library",
+      "duration_sec_max": 7200,
+      "agent_budget": "large",
+      "delivery_branches": [
+        "lms",
+        "streaming",
+        "archive"
+      ]
+    },
+    "S7": {
+      "label": "feature_cinematic",
+      "duration_sec_max": null,
+      "agent_budget": "full_roster_standby",
+      "delivery_branches": [
+        "theatrical",
+        "streaming",
+        "broadcast",
+        "archive"
+      ]
+    }
+  },
+  "archetypes": [
+    {
+      "code": "A",
+      "name": "Viral Hook Clip / Meme",
+      "process_id": "video.arch.a.viral_hook",
+      "dna_id": "wf_video_arch_a_viral_hook_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/A-viral-hook.svg",
+      "default_scale": "S1",
+      "allowed_scales": [
+        "S1",
+        "S2"
+      ],
+      "duration_sec_hint": [
+        5,
+        45
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "runnable_spine",
+      "keywords": [
+        "viral",
+        "hook",
+        "meme",
+        "tiktok",
+        "reels",
+        "shorts",
+        "trend",
+        "15s",
+        "30s",
+        "cold open",
+        "scroll stop",
+        "for you",
+        "fyp",
+        "clip"
+      ],
+      "negative_keywords": [
+        "feature film",
+        "feature-length",
+        "feature length",
+        "lms",
+        "training course"
+      ],
+      "lead_agents": [
+        "video.trendintelligence",
+        "video.copywriter",
+        "video.screenwriter",
+        "video.editor",
+        "video.socialmediastrategist"
+      ],
+      "critic_agents": [
+        "video.audiencesim",
+        "video.compliance",
+        "video.aiqaconsistency"
+      ]
+    },
+    {
+      "code": "B",
+      "name": "UGC-Style Performance Ad",
+      "process_id": "video.arch.b.ugc_ad",
+      "dna_id": "wf_video_arch_b_ugc_ad_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/B-ugc-ad.svg",
+      "default_scale": "S2",
+      "allowed_scales": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "duration_sec_hint": [
+        15,
+        60
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "phased_v1",
+      "keywords": [
+        "ugc",
+        "ad",
+        "ads",
+        "roas",
+        "performance",
+        "meta ads",
+        "tiktok ads",
+        "creator",
+        "testimonial",
+        "cta",
+        "conversion",
+        "product demo",
+        "paid social"
+      ],
+      "negative_keywords": [
+        "documentary",
+        "feature film",
+        "birthday personalization"
+      ],
+      "lead_agents": [
+        "video.performancemarketer",
+        "video.copywriter",
+        "video.ugccreator",
+        "video.editor",
+        "video.motiongraphics"
+      ],
+      "critic_agents": [
+        "video.brand",
+        "video.compliance",
+        "video.legal",
+        "video.finance"
+      ]
+    },
+    {
+      "code": "C",
+      "name": "Animated Explainer",
+      "process_id": "video.arch.c.animated_explainer",
+      "dna_id": "wf_video_arch_c_animated_explainer_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/C-animated-explainer.svg",
+      "default_scale": "S2",
+      "allowed_scales": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "duration_sec_hint": [
+        45,
+        180
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "explainer",
+        "animated",
+        "animation",
+        "how it works",
+        "motion graphics",
+        "whiteboard",
+        "infographic",
+        "product explainer",
+        "2d"
+      ],
+      "negative_keywords": [
+        "live action only",
+        "feature film"
+      ],
+      "lead_agents": [
+        "video.instructionaldesign",
+        "video.screenwriter",
+        "video.storyboard",
+        "video.animator_2d",
+        "video.voiceover",
+        "video.motiongraphics"
+      ],
+      "critic_agents": [
+        "video.sme",
+        "video.brand",
+        "video.accessibility"
+      ]
+    },
+    {
+      "code": "D",
+      "name": "Personalized Birthday / CRM Video",
+      "process_id": "video.arch.d.personalized_birthday",
+      "dna_id": "wf_video_arch_d_personalized_birthday_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/D-personalized-birthday.svg",
+      "default_scale": "S1",
+      "allowed_scales": [
+        "S1",
+        "S2"
+      ],
+      "duration_sec_hint": [
+        10,
+        60
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "birthday",
+        "personalized",
+        "personalisation",
+        "personalization",
+        "crm",
+        "name insert",
+        "happy birthday",
+        "gift video",
+        "1:1"
+      ],
+      "negative_keywords": [
+        "feature film",
+        "documentary"
+      ],
+      "lead_agents": [
+        "video.templatedesign",
+        "video.personalizationengineer",
+        "video.voiceclone",
+        "video.crm"
+      ],
+      "critic_agents": [
+        "video.trustsafety",
+        "video.compliance",
+        "video.ux"
+      ]
+    },
+    {
+      "code": "E",
+      "name": "AI Multi-Scene Short Film",
+      "process_id": "video.arch.e.ai_short_film",
+      "dna_id": "wf_video_arch_e_ai_short_film_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/E-ai-short-film.svg",
+      "related_family": [
+        "wf_video_lqr_overview_v1"
+      ],
+      "default_scale": "S3",
+      "allowed_scales": [
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "duration_sec_hint": [
+        45,
+        600
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "phased_v1",
+      "keywords": [
+        "short film",
+        "shortfilm",
+        "narrative",
+        "multi-scene",
+        "cinematic short",
+        "story",
+        "drama",
+        "character",
+        "festival short",
+        "lqr",
+        "scene"
+      ],
+      "negative_keywords": [
+        "ugc ad only",
+        "birthday"
+      ],
+      "lead_agents": [
+        "video.director",
+        "video.screenwriter",
+        "video.storyboard",
+        "video.conceptartist",
+        "video.promptengineer",
+        "video.editor",
+        "video.colorist"
+      ],
+      "critic_agents": [
+        "video.showrunner",
+        "video.aiqaconsistency",
+        "video.legal",
+        "video.lipsync"
+      ]
+    },
+    {
+      "code": "F",
+      "name": "Corporate Training / LMS",
+      "process_id": "video.arch.f.corporate_training",
+      "dna_id": "wf_video_arch_f_corporate_training_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/F-corporate-training.svg",
+      "default_scale": "S4",
+      "allowed_scales": [
+        "S3",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "duration_sec_hint": [
+        180,
+        1800
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "training",
+        "lms",
+        "corporate",
+        "compliance training",
+        "onboarding",
+        "e-learning",
+        "elearning",
+        "learner",
+        "scorm",
+        "hr"
+      ],
+      "negative_keywords": [
+        "meme",
+        "music video"
+      ],
+      "lead_agents": [
+        "video.instructionaldesign",
+        "video.compliance",
+        "video.sme",
+        "video.avatardesign",
+        "video.motiongraphics",
+        "video.lms"
+      ],
+      "critic_agents": [
+        "video.legal",
+        "video.accessibility",
+        "video.learnersim"
+      ]
+    },
+    {
+      "code": "G",
+      "name": "Music Video",
+      "process_id": "video.arch.g.music_video",
+      "dna_id": "wf_video_arch_g_music_video_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/G-music-video.svg",
+      "default_scale": "S3",
+      "allowed_scales": [
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "duration_sec_hint": [
+        120,
+        360
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "music video",
+        "mv",
+        "song",
+        "lyrics",
+        "choreography",
+        "performance video",
+        "artist",
+        "label",
+        "beat sync"
+      ],
+      "negative_keywords": [
+        "lms",
+        "birthday"
+      ],
+      "lead_agents": [
+        "video.musicvideodirector",
+        "video.choreography",
+        "video.cinematographer",
+        "video.editor",
+        "video.vfxsupervisor",
+        "video.musicsupervisor"
+      ],
+      "critic_agents": [
+        "video.compliance",
+        "video.legal",
+        "video.labela_r"
+      ]
+    },
+    {
+      "code": "H",
+      "name": "AI Avatar Talking-Head",
+      "process_id": "video.arch.h.ai_avatar",
+      "dna_id": "wf_video_arch_h_ai_avatar_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/H-ai-avatar.svg",
+      "default_scale": "S2",
+      "allowed_scales": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "duration_sec_hint": [
+        30,
+        600
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "avatar",
+        "talking head",
+        "presenter",
+        "synthesia",
+        "heygen",
+        "digital human",
+        "spokesperson",
+        "voice clone",
+        "lip sync",
+        "lipsync"
+      ],
+      "negative_keywords": [
+        "music video dance",
+        "feature film"
+      ],
+      "lead_agents": [
+        "video.brandstrategist",
+        "video.screenwriter",
+        "video.avatardesign",
+        "video.voiceclone",
+        "video.lipsync",
+        "video.motiongraphics"
+      ],
+      "critic_agents": [
+        "video.brand",
+        "video.compliance",
+        "video.deepfakedetection"
+      ]
+    },
+    {
+      "code": "I",
+      "name": "Documentary",
+      "process_id": "video.arch.i.documentary",
+      "dna_id": "wf_video_arch_i_documentary_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/I-documentary.svg",
+      "default_scale": "S5",
+      "allowed_scales": [
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "duration_sec_hint": [
+        600,
+        5400
+      ],
+      "risk_tier": "tier_3_execute_reversible",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "documentary",
+        "doc",
+        "interview",
+        "archive",
+        "nonfiction",
+        "investigative",
+        "fact check",
+        "journalism",
+        "b-roll",
+        "truth"
+      ],
+      "negative_keywords": [
+        "birthday",
+        "ugc ad"
+      ],
+      "lead_agents": [
+        "video.journalist",
+        "video.archiveresearch",
+        "video.factchecker",
+        "video.director",
+        "video.editor",
+        "video.interviewsynthesis"
+      ],
+      "critic_agents": [
+        "video.compliance",
+        "video.legal",
+        "video.ethics",
+        "video.citation"
+      ]
+    },
+    {
+      "code": "J",
+      "name": "Feature Film",
+      "process_id": "video.arch.j.feature_film",
+      "dna_id": "wf_video_arch_j_feature_film_v1",
+      "dna_path": "business/video/workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "va_source": "va-agent-swarm/study/workflows/J-feature-film.svg",
+      "default_scale": "S7",
+      "allowed_scales": [
+        "S7"
+      ],
+      "duration_sec_hint": [
+        3600,
+        10800
+      ],
+      "risk_tier": "tier_4_execute_with_gate",
+      "depth": "thin_stub_n3",
+      "keywords": [
+        "feature",
+        "feature film",
+        "feature-length",
+        "theatrical",
+        "cinema",
+        "90 minute",
+        "feature length",
+        "full length film",
+        "movie"
+      ],
+      "negative_keywords": [
+        "15s hook",
+        "ugc only",
+        "birthday"
+      ],
+      "lead_agents": [
+        "video.showrunner",
+        "video.director",
+        "video.screenwriter",
+        "video.producer",
+        "video.cinematographer",
+        "video.editor",
+        "video.vfxsupervisor"
+      ],
+      "critic_agents": [
+        "video.gatekeeper",
+        "video.legal",
+        "video.mpa",
+        "video.finance"
+      ]
+    }
+  ]
+}

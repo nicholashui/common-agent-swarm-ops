@@ -572,23 +572,49 @@ class VideoInventoryValidator:
                 )
             )
         if spec.get("production_activation_requested", False) is not False:
-            issues.append(
-                InventoryIssue(
-                    code="production_activation_requested",
-                    message="Agent specifications cannot request production activation.",
-                    field=f"{field}.production_activation_requested",
+            if not self._production_pack_enabled():
+                issues.append(
+                    InventoryIssue(
+                        code="production_activation_requested",
+                        message=(
+                            "Agent specifications cannot request production activation "
+                            "unless business/video/production/profile.json is enabled."
+                        ),
+                        field=f"{field}.production_activation_requested",
+                    )
                 )
-            )
+
+    def _production_pack_enabled(self) -> bool:
+        """Allow production-capable agent specs when the pack production profile is on."""
+        try:
+            from app.video.media_production import load_production_profile
+
+            return load_production_profile().get("enabled") is True
+        except Exception:
+            return False
 
     def _validate_model_policy(
         self, value: object, field: str, issues: list[InventoryIssue]
     ) -> None:
         policy = self._mapping(value, f"{field}.model_policy", issues)
-        if policy.get("provider") != "local_deterministic":
+        production = self._production_pack_enabled()
+        allowed_providers = {"local_deterministic"}
+        if production:
+            allowed_providers |= {
+                "media_host",
+                "openai",
+                "google",
+                "runway",
+                "elevenlabs",
+            }
+        if policy.get("provider") not in allowed_providers:
             issues.append(
                 InventoryIssue(
                     code="invalid_model_policy",
-                    message="Video agent model policy must use the local deterministic provider.",
+                    message=(
+                        "Video agent model policy must use the local deterministic provider "
+                        "(or an approved media host provider when production profile is enabled)."
+                    ),
                     field=f"{field}.model_policy.provider",
                 )
             )
@@ -602,13 +628,14 @@ class VideoInventoryValidator:
                 )
             )
         if policy.get("network_access") is not False:
-            issues.append(
-                InventoryIssue(
-                    code="external_access_requested",
-                    message="Video agent model policy cannot enable network access.",
-                    field=f"{field}.model_policy.network_access",
+            if not production:
+                issues.append(
+                    InventoryIssue(
+                        code="external_access_requested",
+                        message="Video agent model policy cannot enable network access.",
+                        field=f"{field}.model_policy.network_access",
+                    )
                 )
-            )
 
     def _validate_budget_policy(
         self, value: object, field: str, issues: list[InventoryIssue]

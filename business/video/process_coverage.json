@@ -1,0 +1,470 @@
+{
+  "schema_version": "1.0",
+  "host": "common-agent-swarm-ops",
+  "va_only_count": 0,
+  "note": "Host process coverage expanded to VA process_id breadth from generic. Each DNA-linked process references a host-valid pack_graph under workflows/. pack_doc rows live only in design/process_coverage_va.json. Safe baseline remains workflows/pack_spine.json.",
+  "processes": [
+    {
+      "process_id": "video.spine.orchestrate",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_spine_v1.dna.json",
+      "path": "workflows/wf_video_spine_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.webresearch"
+      ],
+      "va_process_id": "video.spine.orchestrate"
+    },
+    {
+      "process_id": "video.spine.plan",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_spine_v1.dna.json",
+      "path": "workflows/wf_video_spine_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.webresearch"
+      ],
+      "va_process_id": "video.spine.plan"
+    },
+    {
+      "process_id": "video.phase.1.intent_planning",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.1.intent_planning"
+    },
+    {
+      "process_id": "video.phase.2.creative",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.2.creative"
+    },
+    {
+      "process_id": "video.phase.3.prepro",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.3.prepro"
+    },
+    {
+      "process_id": "video.phase.4.production",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.4.production"
+    },
+    {
+      "process_id": "video.phase.5.post",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.5.post"
+    },
+    {
+      "process_id": "video.phase.6.delivery",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "path": "workflows/wf_video_production_e2e_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.phase.6.delivery"
+    },
+    {
+      "process_id": "video.arch.a.viral_hook",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "path": "workflows/wf_video_arch_a_viral_hook_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "va_process_id": "video.arch.a.viral_hook"
+    },
+    {
+      "process_id": "video.arch.b.ugc_ad",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "path": "workflows/wf_video_arch_b_ugc_ad_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.brand",
+        "video.compliance",
+        "video.copywriter",
+        "video.gatekeeper",
+        "video.marketing",
+        "video.motiongraphics",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.arch.b.ugc_ad"
+    },
+    {
+      "process_id": "video.arch.c.animated_explainer",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "path": "workflows/wf_video_arch_c_animated_explainer_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.animator_2d",
+        "video.gatekeeper",
+        "video.motiongraphics",
+        "video.orchestrator",
+        "video.planner",
+        "video.storyboard"
+      ],
+      "va_process_id": "video.arch.c.animated_explainer"
+    },
+    {
+      "process_id": "video.arch.d.personalized_birthday",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "path": "workflows/wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "va_process_id": "video.arch.d.personalized_birthday"
+    },
+    {
+      "process_id": "video.arch.e.ai_short_film",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "path": "workflows/wf_video_arch_e_ai_short_film_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.colorist",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.ideation",
+        "video.narrativearc",
+        "video.orchestrator",
+        "video.planner",
+        "video.promptengineer",
+        "video.screenwriter",
+        "video.soundmixer",
+        "video.storyboard"
+      ],
+      "va_process_id": "video.arch.e.ai_short_film"
+    },
+    {
+      "process_id": "video.arch.f.corporate_training",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "path": "workflows/wf_video_arch_f_corporate_training_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.ethics",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "va_process_id": "video.arch.f.corporate_training"
+    },
+    {
+      "process_id": "video.arch.g.music_video",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "path": "workflows/wf_video_arch_g_music_video_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.arch.g.music_video"
+    },
+    {
+      "process_id": "video.arch.h.ai_avatar",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "path": "workflows/wf_video_arch_h_ai_avatar_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.avatardesign",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.promptengineer",
+        "video.voiceover"
+      ],
+      "va_process_id": "video.arch.h.ai_avatar"
+    },
+    {
+      "process_id": "video.arch.i.documentary",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "path": "workflows/wf_video_arch_i_documentary_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.archiveresearch",
+        "video.factchecker",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.arch.i.documentary"
+    },
+    {
+      "process_id": "video.arch.j.feature_film",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "path": "workflows/wf_video_arch_j_feature_film_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.narrativearc",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.arch.j.feature_film"
+    },
+    {
+      "process_id": "video.lqr.overview",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.overview"
+    },
+    {
+      "process_id": "video.lqr.scene_flow",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.scene_flow"
+    },
+    {
+      "process_id": "video.lqr.per_shot_loop",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.per_shot_loop"
+    },
+    {
+      "process_id": "video.lqr.character_consistency",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.character_consistency"
+    },
+    {
+      "process_id": "video.lqr.engine_routing",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.engine_routing"
+    },
+    {
+      "process_id": "video.lqr.quality_gates",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.lqr.quality_gates"
+    },
+    {
+      "process_id": "video.qc.critique_bus",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.qc.critique_bus"
+    },
+    {
+      "process_id": "video.qc.consistency",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "path": "workflows/wf_video_lqr_overview_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "va_process_id": "video.qc.consistency"
+    },
+    {
+      "process_id": "video.delivery.package",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/wf_video_delivery_v1.dna.json",
+      "path": "workflows/wf_video_delivery_v1.dna.json",
+      "status": "adapted_host_graph",
+      "agent_ids": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.marketing",
+        "video.orchestrator",
+        "video.planner",
+        "video.socialmediastrategist"
+      ],
+      "va_process_id": "video.delivery.package"
+    }
+  ],
+  "provenance": {
+    "source": "generic-swarm-ops/business/video/process_coverage.json",
+    "adapted_at": "2026-07-27T01:30:29.048862+00:00",
+    "production_ready": false
+  }
+}

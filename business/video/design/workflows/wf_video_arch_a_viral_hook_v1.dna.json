@@ -1,0 +1,103 @@
+{
+  "id": "wf_video_arch_a_viral_hook_v1",
+  "name": "Archetype A — Viral Hook",
+  "domain": "video",
+  "objective": "Thin vertical viral-hook path on the orchestration spine (archetype A).",
+  "owner": "video.orchestrator",
+  "version": "1.0.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": ["hook_concept", "platform"],
+  "preconditions": ["hook_concept is non-empty"],
+  "steps": [
+    {
+      "id": "orchestrate_hook",
+      "state": "control",
+      "next": ["plan_hook"],
+      "agent": "video.orchestrator",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "plan_hook",
+      "state": "research",
+      "next": ["write_hook"],
+      "agent": "video.planner",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "write_hook",
+      "state": "creative",
+      "next": ["render_hook"],
+      "agent": "video.screenwriter",
+      "tools": ["video_script_format"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "render_hook",
+      "state": "execution",
+      "next": ["qc_hook"],
+      "agent": "video.director",
+      "tools": ["video_media_gen_stub"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "qc_hook",
+      "state": "verification",
+      "next": ["publish_hook"],
+      "agent": "video.aiqaconsistency",
+      "tools": ["video_qc_stub"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "publish_hook",
+      "state": "critical_gate",
+      "next": ["complete"],
+      "agent": "video.producer",
+      "tools": ["video_package_stub"],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": ["organization_memory"],
+  "memory_writes": ["event_log", "lessons_learned"],
+  "guardrails": {
+    "human_approval_required_if": ["step.irreversible == true"],
+    "forbidden_actions": ["External publish without human gate"]
+  },
+  "verification": {
+    "required_checks": ["hook_script", "media_stub", "qc_pass", "publish_approved"]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": ["unpublish_stub", "notify_producer"]
+  },
+  "fitness_metrics": ["hook_strength", "retention_proxy", "cycle_time"],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "va-agent-swarm/study/workflows/A-viral-hook.svg",
+      "business/video/corpus/study/workflows/A-viral-hook.svg",
+      "adoption.md#5.1",
+      "improvements.md#wave-2",
+      "EXECUTABLE_PRODUCT.md"
+    ],
+    "captured_by": "wave-2",
+    "recorded_at": "2026-07-12T00:00:00Z",
+    "host_executable_demo": true,
+    "depth": "runnable_spine",
+    "proven_by": "backend/app/tests/unit/test_video_spine_e2e.py::test_viral_hook_spine_run_with_gate_and_alc"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "host": "common-agent-swarm-ops",
+  "va_only_count": 0,
+  "note": "Executable process coverage for host validation. Full VA/generic DNA inventory is under design/process_coverage_va.json (design-time only).",
+  "processes": [
+    {
+      "process_id": "video.pack_spine.safe",
+      "representation": "pack_graph",
+      "workflow_path": "workflows/pack_spine.json",
+      "path": "workflows/pack_spine.json",
+      "status": "safe_baseline",
+      "agent_ids": [
+        "video.orchestrator",
+        "video.generative_media_operator",
+        "video.compliance_agent",
+        "video.delivery_packager"
+      ]
+    }
+  ]
+}

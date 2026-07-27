@@ -1,0 +1,26 @@
+{
+  "id": "golden_video_spine_viral_hook_v1",
+  "workflow_id": "wf_video_arch_a_viral_hook_v1",
+  "domain": "video",
+  "description": "Wave 2 spine/viral-hook golden — orchestrator-down with human package gate",
+  "input": {
+    "hook_concept": "15s curiosity open for AI video platform",
+    "platform": "short_form"
+  },
+  "expected": {
+    "status_in": ["completed"],
+    "requires_human_gate_step": "publish_hook",
+    "min_steps": 6
+  },
+  "rubrics": {
+    "aesthetics": "hook clarity and pacing proxy",
+    "consistency": "video_qc_stub pass",
+    "psychological_alignment": "curiosity without deception"
+  },
+  "provenance": {
+    "source_refs": [
+      "improvements.md#wave-2",
+      "va-agent-swarm/study/workflows/A-viral-hook.svg"
+    ]
+  }
+}

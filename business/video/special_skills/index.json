@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0",
+  "skills": [
+    {
+      "skill_id": "video.special_skill.aesthetics_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/aesthetics_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.agent_loop_v3",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/agent_loop_v3/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.agentic_rag",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/agentic_rag/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.coding_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/coding_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.complex_problem_solution_process_model",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/complex_problem_solution_process_model/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.general_creative_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/general_creative_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.intent_analysis_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/intent_analysis_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.knowledge_router_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/knowledge_router_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.lifes_quiet_redemption_agent_workflow",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/lifes_quiet_redemption_agent_workflow/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.llm_usage",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/llm_usage/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.optimization_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/optimization_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.podcast_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/podcast_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.psychological_profile_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/psychological_profile_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.research_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/research_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.screenwriter_strategic_goal_achievement_agent",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/screenwriter_strategic_goal_achievement_agent/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.thinking_model",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/thinking_model/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    },
+    {
+      "skill_id": "video.special_skill.video_generation_techology_should_learn_now",
+      "review": {
+        "compatibility": true,
+        "security": true,
+        "overlap": true,
+        "license": true,
+        "reviewer": "migration-redesign-closeout",
+        "reviewed_at": "2026-07-27T01:49:22Z",
+        "consumer_ref": "special_skills/video_generation_techology_should_learn_now/integration.json",
+        "result": "pass",
+        "activation": false,
+        "note": "Data-only inclusion; not tool-activated."
+      }
+    }
+  ],
+  "note": "Reviewed special-skill data included without tool/MCP activation."
+}

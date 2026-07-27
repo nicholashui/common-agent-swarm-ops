@@ -1,0 +1,23 @@
+{
+  "id": "viral_hook",
+  "name": "Viral Hook Clip Graph",
+  "domain_id": "video",
+  "description": "Maps to wf_video_arch_a_viral_hook_v1 spine with stub tools.",
+  "dna_id": "wf_video_arch_a_viral_hook_v1",
+  "orchestration": {
+    "pattern": "pack_spine",
+    "config": {
+      "domain_id": "video",
+      "entry_agent": "video.orchestrator",
+      "graph_id": "viral_hook",
+      "max_handoffs": 8
+    }
+  },
+  "agents": [
+    "video.trendintelligence",
+    "video.copywriter",
+    "video.screenwriter",
+    "video.editor",
+    "video.aiqaconsistency"
+  ]
+}

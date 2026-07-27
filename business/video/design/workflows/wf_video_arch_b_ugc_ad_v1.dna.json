@@ -1,0 +1,150 @@
+{
+  "id": "wf_video_arch_b_ugc_ad_v1",
+  "name": "Archetype B — UGC Performance Ad",
+  "domain": "video",
+  "objective": "UGC-style performance ad: concept → creator voice → edit/motion → brand/compliance gates → package.",
+  "owner": "video.orchestrator",
+  "version": "1.1.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": ["brief", "product", "audience", "platform"],
+  "preconditions": ["brief is non-empty"],
+  "steps": [
+    {
+      "id": "orchestrate",
+      "state": "control",
+      "next": ["plan"],
+      "agent": "video.orchestrator",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "plan",
+      "state": "research",
+      "next": ["concept_performance"],
+      "agent": "video.planner",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "concept_performance",
+      "state": "creative",
+      "next": ["concept_copy"],
+      "agent": "video.performancemarketer",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "concept_copy",
+      "state": "creative",
+      "next": ["produce_ugc"],
+      "agent": "video.copywriter",
+      "tools": ["video_script_format"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "produce_ugc",
+      "state": "execution",
+      "next": ["edit_cut"],
+      "agent": "video.ugccreator",
+      "tools": ["video_media_gen_stub"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "edit_cut",
+      "state": "execution",
+      "next": ["motion_packaging"],
+      "agent": "video.editor",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "motion_packaging",
+      "state": "execution",
+      "next": ["brand_gate"],
+      "agent": "video.motiongraphics",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "brand_gate",
+      "state": "verification",
+      "next": ["compliance_gate"],
+      "agent": "video.brand",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "compliance_gate",
+      "state": "verification",
+      "next": ["qc"],
+      "agent": "video.compliance",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "qc",
+      "state": "verification",
+      "next": ["package"],
+      "agent": "video.aiqaconsistency",
+      "tools": ["video_qc_stub"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "package",
+      "state": "critical_gate",
+      "next": ["complete"],
+      "agent": "video.producer",
+      "tools": ["video_package_stub"],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": ["organization_memory"],
+  "memory_writes": ["event_log", "lessons_learned"],
+  "guardrails": {
+    "human_approval_required_if": ["step.irreversible == true"],
+    "forbidden_actions": ["External ad publish without human gate"]
+  },
+  "verification": {
+    "required_checks": ["script_ok", "media_stub", "brand_ok", "compliance_ok", "qc_pass", "package_approved"]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": ["unpublish_stub", "notify_producer"]
+  },
+  "fitness_metrics": ["hook_strength", "roas_proxy", "cycle_time"],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "va-agent-swarm/study/workflows/B-ugc-ad.svg",
+      "va-agent-swarm/study/ai_agent_video_production_workflow.md#3.2",
+      "business/video/archetype_registry.json",
+      "improvements.md#wave-5"
+    ],
+    "captured_by": "workflow-selection-v1",
+    "recorded_at": "2026-07-13T00:00:00Z",
+    "depth": "phased_v1"
+  }
+}

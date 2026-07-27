@@ -1,7 +1,5 @@
-# Source mapping note — `video.orchestrator`
+# Mapping — `video.orchestrator`
 
-- Mapping status: `exact`
-- Source agent IDs (historical): `video.orchestrator`
-- Local runtime: `agent_spec.json`
-- Local specification: `SPEC.md`
-- Pack corpus: **not required** for this agent
+- VA/generic pack ID: `video.orchestrator`
+- Previous common ID: `video.orchestrator`
+- SPEC depth: full generic SPEC body + host runtime binding

@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0",
+  "entry": "video.orchestrator",
+  "categories": {
+    "1-ATL": [
+      "video.director",
+      "video.producer",
+      "video.screenwriter",
+      "video.showrunner",
+      "video.casting"
+    ],
+    "2-Cam": [
+      "video.cinematographer",
+      "video.cameraoperator",
+      "video.dronepilot"
+    ],
+    "3-Edit": [
+      "video.editor",
+      "video.colorist",
+      "video.vfxsupervisor",
+      "video.animator_2d",
+      "video.motiongraphics",
+      "video.storyboard",
+      "video.conceptartist",
+      "video.productiondesign",
+      "video.costumedesign",
+      "video.mua_makeup"
+    ],
+    "4-Snd": [
+      "video.sounddesign",
+      "video.composer",
+      "video.voiceover",
+      "video.soundmixer"
+    ],
+    "5-Perf": [
+      "video.choreography",
+      "video.musicvideodirector",
+      "video.comedywriter",
+      "video.talent",
+      "video.ugccreator"
+    ],
+    "6-Dist": [
+      "video.socialmediastrategist",
+      "video.copywriter",
+      "video.creativedirector",
+      "video.performancemarketer"
+    ],
+    "7-Edu": [
+      "video.instructionaldesign",
+      "video.sme",
+      "video.factchecker",
+      "video.medicalillustrator",
+      "video.journalist",
+      "video.compliance",
+      "video.finance",
+      "video.foodstylist",
+      "video.travelcine",
+      "video.childrensauthor",
+      "video.audiobooknarrator",
+      "video.signlanguageinterpreter",
+      "video.localizationqa",
+      "video.realestatephoto"
+    ],
+    "8-AI": [
+      "video.promptengineer",
+      "video.avatardesign",
+      "video.voiceclone",
+      "video.aiqaconsistency",
+      "video.personalizationengineer",
+      "video.trailereditor",
+      "video.sportsanalyst"
+    ],
+    "9-Meta": [
+      "video.orchestrator",
+      "video.planner",
+      "video.router",
+      "video.judge",
+      "video.gatekeeper",
+      "video.memory",
+      "video.ideation",
+      "video.narrativearc",
+      "video.styletransfer",
+      "video.worldbuilding",
+      "video.moodboard",
+      "video.novelty",
+      "video.emotionalarc",
+      "video.webresearch",
+      "video.archiveresearch",
+      "video.trendintelligence",
+      "video.competitorintelligence",
+      "video.citation",
+      "video.interviewsynthesis",
+      "video.benchmarkresearch",
+      "video.promptoptimizer",
+      "video.costoptimizer",
+      "video.latencyoptimizer",
+      "video.retentionoptimizer",
+      "video.roasoptimizer",
+      "video.accessibilityoptimizer",
+      "video.evaluationharness",
+      "video.safetyredteam"
+    ],
+    "10-Sup": [
+      "video.analyst",
+      "video.audiencesim",
+      "video.accessibility",
+      "video.brand",
+      "video.brandstrategist",
+      "video.marketing",
+      "video.seo",
+      "video.community",
+      "video.templatedesign",
+      "video.ux",
+      "video.trustsafety",
+      "video.crm",
+      "video.legal",
+      "video.festivalstrategist",
+      "video.critic",
+      "video.lms",
+      "video.learnersim",
+      "video.continuity",
+      "video.lipsync",
+      "video.musicsupervisor",
+      "video.labela_r",
+      "video.labeldigital",
+      "video.deepfakedetection",
+      "video.comms",
+      "video.archiveproducer",
+      "video.standardseditor",
+      "video.ethics",
+      "video.channelmanager",
+      "video.corrections",
+      "video.mpa",
+      "video.sales",
+      "video.distributor",
+      "video.awardsstrategist",
+      "video.archivemaster"
+    ]
+  },
+  "processes": {
+    "video.spine.orchestrate": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.router",
+        "video.judge"
+      ]
+    },
+    "video.production.e2e": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.director",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.editor",
+        "video.socialmediastrategist",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.lqr.overview": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.aiqaconsistency",
+        "video.editor",
+        "video.producer"
+      ]
+    },
+    "video.delivery.package": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.socialmediastrategist",
+        "video.performancemarketer",
+        "video.trailereditor",
+        "video.producer"
+      ]
+    },
+    "video.arch.b.ugc_ad": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.ugccreator",
+        "video.copywriter",
+        "video.creativedirector",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.c.animated_explainer": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.animator_2d",
+        "video.motiongraphics",
+        "video.storyboard",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.d.personalized_birthday": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.personalizationengineer",
+        "video.screenwriter",
+        "video.composer",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.e.ai_short_film": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.director",
+        "video.screenwriter",
+        "video.cinematographer",
+        "video.editor",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.f.corporate_training": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.instructionaldesign",
+        "video.sme",
+        "video.screenwriter",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.g.music_video": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.musicvideodirector",
+        "video.composer",
+        "video.choreography",
+        "video.editor",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.h.ai_avatar": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.avatardesign",
+        "video.voiceclone",
+        "video.promptengineer",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.i.documentary": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.journalist",
+        "video.factchecker",
+        "video.editor",
+        "video.archiveresearch",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.j.feature_film": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.showrunner",
+        "video.director",
+        "video.screenwriter",
+        "video.editor",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    },
+    "video.arch.a.viral_hook": {
+      "entry": "video.orchestrator",
+      "agents": [
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.director",
+        "video.aiqaconsistency",
+        "video.producer"
+      ]
+    }
+  },
+  "provenance": {
+    "source_refs": [
+      "improvements.md#wave-5"
+    ],
+    "recorded_at": "2026-07-12"
+  }
+}

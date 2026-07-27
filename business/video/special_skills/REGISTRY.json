@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "domain_id": "video",
+  "generated": "2026-07-13",
+  "skill_count": 17,
+  "skills": [
+    "aesthetics_agent",
+    "agent_loop_v3",
+    "agentic_rag",
+    "coding_agent",
+    "complex_problem_solution_process_model",
+    "general_creative_agent",
+    "intent_analysis_agent",
+    "knowledge_router_agent",
+    "lifes_quiet_redemption_agent_workflow",
+    "llm_usage",
+    "optimization_agent",
+    "podcast_agent",
+    "psychological_profile_agent",
+    "research_agent",
+    "screenwriter_strategic_goal_achievement_agent",
+    "thinking_model",
+    "video_generation_techology_should_learn_now"
+  ],
+  "impl_root": "business/video/special_skills",
+  "plans_root": "planning/special",
+  "score_file": "planning/special/special_skill_impl_score.md"
+}

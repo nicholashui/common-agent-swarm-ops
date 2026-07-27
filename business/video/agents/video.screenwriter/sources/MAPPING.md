@@ -1,7 +1,5 @@
-# Source mapping note — `video.screenwriter`
+# Mapping — `video.screenwriter`
 
-- Mapping status: `exact`
-- Source agent IDs (historical): `video.screenwriter`
-- Local runtime: `agent_spec.json`
-- Local specification: `SPEC.md`
-- Pack corpus: **not required** for this agent
+- VA/generic pack ID: `video.screenwriter`
+- Previous common ID: `video.screenwriter`
+- SPEC depth: full generic SPEC body + host runtime binding

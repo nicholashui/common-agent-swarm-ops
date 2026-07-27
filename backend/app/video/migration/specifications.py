@@ -880,24 +880,41 @@ def _validate_runtime_binding(
                 )
             )
     if parsed.get("production_activation_requested") is not False:
-        issues.append(
-            SpecificationIssue(
-                "production_activation_requested",
-                agent_id,
-                "Runtime binding.production_activation_requested",
-                "Local specifications cannot request production activation.",
+        production_ok = False
+        try:
+            from app.video.media_production import load_production_profile
+
+            production_ok = load_production_profile().get("enabled") is True
+        except Exception:
+            production_ok = False
+        if not production_ok:
+            issues.append(
+                SpecificationIssue(
+                    "production_activation_requested",
+                    agent_id,
+                    "Runtime binding.production_activation_requested",
+                    "Local specifications cannot request production activation "
+                    "unless the pack production profile is enabled.",
+                )
             )
-        )
     model_policy = parsed.get("model_policy")
     if isinstance(model_policy, Mapping) and model_policy.get("network_access") is not False:
-        issues.append(
-            SpecificationIssue(
-                "network_access_requested",
-                agent_id,
-                "Runtime binding.model_policy.network_access",
-                "Local specification runtime binding cannot enable network access.",
+        production_ok = False
+        try:
+            from app.video.media_production import load_production_profile
+
+            production_ok = load_production_profile().get("enabled") is True
+        except Exception:
+            production_ok = False
+        if not production_ok:
+            issues.append(
+                SpecificationIssue(
+                    "network_access_requested",
+                    agent_id,
+                    "Runtime binding.model_policy.network_access",
+                    "Local specification runtime binding cannot enable network access.",
+                )
             )
-        )
 
 
 def _validate_critical_review(
@@ -1123,11 +1140,16 @@ def _validate_corpus_manifest(
             continue
         try:
             path = normalize_relative_path(entry["path"])
-            if not path.startswith("corpus/"):
-                raise UnsafeLocalPathError("out_of_root", path)
-            resolve_under_root(
-                repository, f"business/video/{path}", must_exist=True, require_readable=True
-            )
+            # Accept pack-relative paths (corpus/study/...) or corpus-root-relative (study/...).
+            if path.startswith("corpus/"):
+                resolve_under_root(
+                    repository, f"business/video/{path}", must_exist=True, require_readable=True
+                )
+            else:
+                corpus_root = root / "corpus" if (root / "corpus").is_dir() else root
+                resolve_under_root(
+                    corpus_root, path, must_exist=True, require_readable=True
+                )
         except (TypeError, ValueError, OSError, RuntimeError, UnsafeLocalPathError):
             issues.append(
                 SpecificationIssue(

@@ -1,0 +1,172 @@
+{
+  "id": "wf_video_arch_e_ai_short_film_v1",
+  "name": "Archetype E — AI Multi-Scene Short Film",
+  "domain": "video",
+  "objective": "Narrative short: plan → board → generate → continuity QC → grade/edit → gated package. LQR family optional sibling.",
+  "owner": "video.orchestrator",
+  "version": "1.1.0",
+  "risk_tier": "tier_3_execute_reversible",
+  "production_ready": false,
+  "inputs": ["brief", "logline", "duration_sec", "style_refs"],
+  "preconditions": ["brief is non-empty"],
+  "steps": [
+    {
+      "id": "orchestrate",
+      "state": "control",
+      "next": ["plan"],
+      "agent": "video.orchestrator",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "plan",
+      "state": "research",
+      "next": ["story"],
+      "agent": "video.planner",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "story",
+      "state": "creative",
+      "next": ["direct_vision"],
+      "agent": "video.screenwriter",
+      "tools": ["video_script_format"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "direct_vision",
+      "state": "creative",
+      "next": ["storyboard"],
+      "agent": "video.director",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "storyboard",
+      "state": "creative",
+      "next": ["concept_look"],
+      "agent": "video.storyboard",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "concept_look",
+      "state": "creative",
+      "next": ["prompt_pack"],
+      "agent": "video.conceptartist",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "prompt_pack",
+      "state": "execution",
+      "next": ["generate_takes"],
+      "agent": "video.promptengineer",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "generate_takes",
+      "state": "execution",
+      "next": ["continuity_qc"],
+      "agent": "video.director",
+      "tools": ["video_media_gen_stub"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "continuity_qc",
+      "state": "verification",
+      "next": ["edit"],
+      "agent": "video.aiqaconsistency",
+      "tools": ["video_qc_stub"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "edit",
+      "state": "execution",
+      "next": ["grade"],
+      "agent": "video.editor",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "grade",
+      "state": "execution",
+      "next": ["showrunner_review"],
+      "agent": "video.colorist",
+      "tools": ["audit_log_writer"],
+      "action_type": "reversible_execution",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "showrunner_review",
+      "state": "verification",
+      "next": ["package"],
+      "agent": "video.showrunner",
+      "tools": ["audit_log_writer"],
+      "action_type": "analysis",
+      "human_gate_required": false,
+      "irreversible": false
+    },
+    {
+      "id": "package",
+      "state": "critical_gate",
+      "next": ["complete"],
+      "agent": "video.producer",
+      "tools": ["video_package_stub"],
+      "action_type": "irreversible_execution",
+      "human_gate_required": true,
+      "irreversible": true
+    }
+  ],
+  "memory_reads": ["organization_memory"],
+  "memory_writes": ["event_log", "lessons_learned"],
+  "guardrails": {
+    "human_approval_required_if": ["step.irreversible == true"],
+    "forbidden_actions": ["External festival/upload without human gate"]
+  },
+  "verification": {
+    "required_checks": ["script_ok", "board_ok", "media_stub", "continuity_qc", "edit_ok", "package_approved"]
+  },
+  "rollback": {
+    "reversible": false,
+    "rollback_steps": ["unpublish_stub", "notify_producer"]
+  },
+  "fitness_metrics": ["story_beat_coverage", "continuity_score", "cycle_time"],
+  "audit_log_write_required": true,
+  "provenance": {
+    "source_refs": [
+      "va-agent-swarm/study/workflows/E-ai-short-film.svg",
+      "va-agent-swarm/study/ai_agent_video_production_workflow.md#3.5",
+      "va-agent-swarm/study/lifes_quiet_redemption_agent_workflow.md",
+      "business/video/archetype_registry.json",
+      "improvements.md#wave-5"
+    ],
+    "captured_by": "workflow-selection-v1",
+    "recorded_at": "2026-07-13T00:00:00Z",
+    "depth": "phased_v1",
+    "related_family": ["wf_video_lqr_overview_v1"]
+  }
+}

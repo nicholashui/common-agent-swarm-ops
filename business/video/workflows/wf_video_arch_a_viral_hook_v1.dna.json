@@ -1,0 +1,158 @@
+{
+  "definition_type": "pack_graph",
+  "id": "wf_video_arch_a_viral_hook_v1",
+  "name": "Archetype A — Viral Hook",
+  "version": "1.0.0",
+  "owner_id": "video.orchestrator",
+  "engine": "graph",
+  "domain": "video",
+  "production_ready": true,
+  "pattern": "adapted_dna",
+  "agent_ids": [
+    "video.aiqaconsistency",
+    "video.creativedirector",
+    "video.gatekeeper",
+    "video.orchestrator",
+    "video.planner",
+    "video.screenwriter"
+  ],
+  "common_agent_ids": [
+    "video.aiqaconsistency",
+    "video.creativedirector",
+    "video.gatekeeper",
+    "video.orchestrator",
+    "video.planner",
+    "video.screenwriter"
+  ],
+  "execution_budget": {
+    "max_node_visits": 6,
+    "max_handoffs": 5,
+    "max_wall_clock_seconds": 60,
+    "max_tool_requests": 16
+  },
+  "memory": {
+    "reads": [],
+    "writes": []
+  },
+  "risk_gate_ids": [
+    "video.local-safe"
+  ],
+  "rollback": {
+    "plan_id": "video.rollback.wf_video_arch_a_viral_hook_v1",
+    "compensation_step_ids": [
+      "publish_hook"
+    ]
+  },
+  "critique_loops": {
+    "enabled": true,
+    "max_iterations": 3,
+    "lead_agent_id": "video.critic",
+    "judge_agent_id": "video.judge"
+  },
+  "human_interrupts": {
+    "required": true,
+    "gates": [
+      {
+        "id": "release_or_irreversible",
+        "when": "irreversible_or_publish",
+        "required": true
+      }
+    ],
+    "approval_authority": "host_gated"
+  },
+  "nodes": [
+    {
+      "id": "orchestrate_hook",
+      "agent_id": "video.orchestrator",
+      "tool_ids": [
+        "media.stub"
+      ],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "plan_hook",
+      "agent_id": "video.planner",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "write_hook",
+      "agent_id": "video.screenwriter",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "render_hook",
+      "agent_id": "video.creativedirector",
+      "tool_ids": [
+        "media.stub",
+        "media.sora",
+        "media.veo",
+        "media.runway"
+      ],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "qc_hook",
+      "agent_id": "video.aiqaconsistency",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    },
+    {
+      "id": "publish_hook",
+      "agent_id": "video.gatekeeper",
+      "tool_ids": [],
+      "memory_reads": [],
+      "memory_writes": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "orchestrate_hook",
+      "to": "plan_hook",
+      "max_traversals": 1
+    },
+    {
+      "from": "plan_hook",
+      "to": "write_hook",
+      "max_traversals": 1
+    },
+    {
+      "from": "write_hook",
+      "to": "render_hook",
+      "max_traversals": 1
+    },
+    {
+      "from": "render_hook",
+      "to": "qc_hook",
+      "max_traversals": 1
+    },
+    {
+      "from": "qc_hook",
+      "to": "publish_hook",
+      "max_traversals": 1
+    }
+  ],
+  "entry_node": "orchestrate_hook",
+  "terminal_node_ids": [
+    "publish_hook"
+  ],
+  "allowed_tools": [
+    "media.stub",
+    "media.sora",
+    "media.veo",
+    "media.runway",
+    "media.elevenlabs"
+  ],
+  "provenance": {
+    "source": "design/workflows DNA adapted from generic/va",
+    "historical_and_non_binding": true,
+    "adapted_by": "convert_design_dna_to_host_graphs.py",
+    "design_source": "design/workflows/wf_video_arch_a_viral_hook_v1.dna.json"
+  }
+}

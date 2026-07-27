@@ -1,0 +1,42 @@
+{
+  "skill_id": "coding_agent",
+  "plan": "planning/special/coding_agent.md",
+  "kind": "host_infra",
+  "summary": "Host engineering agent capability (not video business logic)",
+  "status": "mvp_integrated",
+  "integrated_at": "2026-07-13",
+  "n1": "video logic in pack only; host modules are infrastructure",
+  "agents": [],
+  "dna": [],
+  "modules": [
+    "backend/app/runtime.py",
+    ".grok/skills/workflow-dna/SKILL.md",
+    "backend/app/infrastructure/llm/base.py"
+  ],
+  "process_ids": [],
+  "evidence": {
+    "agents": [],
+    "dna": [],
+    "modules": [
+      {
+        "path": "backend/app/runtime.py",
+        "exists": true
+      },
+      {
+        "path": ".grok/skills/workflow-dna/SKILL.md",
+        "exists": true
+      },
+      {
+        "path": "backend/app/infrastructure/llm/base.py",
+        "exists": true
+      }
+    ],
+    "plan_exists": true,
+    "plan_bytes": 28654
+  },
+  "notes": {
+    "privacy": false,
+    "tools_design_time_only": false,
+    "n1_note": "Stays out of video pack business logic per N1"
+  }
+}

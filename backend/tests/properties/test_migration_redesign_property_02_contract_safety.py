@@ -193,7 +193,7 @@ def _mutate_contract_documents(documents: dict[str, dict[str, object]], mutation
         assert isinstance(policy, dict)
         policy["network_access"] = True
     elif mutation == "critique":
-        agent_spec["critique_edges"] = ["video.orchestrator -> video.compliance_agent"]
+        agent_spec["critique_edges"] = ["video.orchestrator -> video.compliance"]
     elif mutation == "refinement":
         agent_spec["max_refinement_count"] = 99
     elif mutation == "agent_activation":

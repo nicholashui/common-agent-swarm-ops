@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
-  "inventory_digest": "ceb905f5ebbb55f95822235dd29b09e6fef5193f0c090d904f45af5f9df12146",
+  "inventory_digest": "f51dd04fd18529412ab953c0b864492fb9bba57fd4107912bcee82d0d34478ac",
+  "taxonomy": "va_generic_domain_pack",
   "entries": [
     {
       "common_agent_id": "video.orchestrator",
@@ -12,155 +13,160 @@
         "inventory.json",
         "agents/video.orchestrator/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.orchestrator to generic source agent(s) video.orchestrator for self-contained SPEC distillation. Distinct relationship for common role `video.orchestrator` (inventory order). Reviewed relationship unique to common agent `video.orchestrator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.orchestrator` is authoritative. Previous common inventory ID `video.orchestrator` retained as historical mapping only. Unique reviewed relationship for `video.orchestrator`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.orchestrator"
     },
     {
-      "common_agent_id": "video.compliance_agent",
-      "mapping_status": "related",
+      "common_agent_id": "video.compliance",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.compliance"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.compliance_agent/agent_spec.json"
+        "agents/video.compliance/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.compliance_agent to generic source agent(s) video.compliance for self-contained SPEC distillation. Distinct relationship for common role `video.compliance_agent` (inventory order). Reviewed relationship unique to common agent `video.compliance_agent`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.compliance` is authoritative. Previous common inventory ID `video.compliance_agent` retained as historical mapping only. Unique reviewed relationship for `video.compliance`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.compliance_agent"
     },
     {
-      "common_agent_id": "video.rights_consent_agent",
-      "mapping_status": "composite",
+      "common_agent_id": "video.legal",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.legal",
-        "video.trustsafety"
+        "video.legal"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.rights_consent_agent/agent_spec.json"
+        "agents/video.legal/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.rights_consent_agent to generic source agent(s) video.legal, video.trustsafety for self-contained SPEC distillation. Distinct relationship for common role `video.rights_consent_agent` (inventory order). Reviewed relationship unique to common agent `video.rights_consent_agent`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.legal` is authoritative. Previous common inventory ID `video.rights_consent_agent` retained as historical mapping only. Unique reviewed relationship for `video.legal`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.rights_consent_agent"
     },
     {
-      "common_agent_id": "video.brief_intake",
-      "mapping_status": "related",
+      "common_agent_id": "video.planner",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.planner"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.brief_intake/agent_spec.json"
+        "agents/video.planner/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.brief_intake to generic source agent(s) video.planner for self-contained SPEC distillation. Distinct relationship for common role `video.brief_intake` (inventory order). Reviewed relationship unique to common agent `video.brief_intake`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.planner` is authoritative. Previous common inventory ID `video.brief_intake` retained as historical mapping only. Unique reviewed relationship for `video.planner`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.brief_intake"
     },
     {
-      "common_agent_id": "video.audience_researcher",
-      "mapping_status": "composite",
+      "common_agent_id": "video.audiencesim",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.audiencesim",
-        "video.analyst"
+        "video.audiencesim"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.audience_researcher/agent_spec.json"
+        "agents/video.audiencesim/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.audience_researcher to generic source agent(s) video.audiencesim, video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.audience_researcher` (inventory order). Reviewed relationship unique to common agent `video.audience_researcher`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.audiencesim` is authoritative. Previous common inventory ID `video.audience_researcher` retained as historical mapping only. Unique reviewed relationship for `video.audiencesim`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.audience_researcher"
     },
     {
-      "common_agent_id": "video.web_researcher",
-      "mapping_status": "related",
+      "common_agent_id": "video.webresearch",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.webresearch"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.web_researcher/agent_spec.json"
+        "agents/video.webresearch/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.web_researcher to generic source agent(s) video.webresearch for self-contained SPEC distillation. Distinct relationship for common role `video.web_researcher` (inventory order). Reviewed relationship unique to common agent `video.web_researcher`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.webresearch` is authoritative. Previous common inventory ID `video.web_researcher` retained as historical mapping only. Unique reviewed relationship for `video.webresearch`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.web_researcher"
     },
     {
-      "common_agent_id": "video.trend_analyst",
-      "mapping_status": "related",
+      "common_agent_id": "video.trendintelligence",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.trendintelligence"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.trend_analyst/agent_spec.json"
+        "agents/video.trendintelligence/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.trend_analyst to generic source agent(s) video.trendintelligence for self-contained SPEC distillation. Distinct relationship for common role `video.trend_analyst` (inventory order). Reviewed relationship unique to common agent `video.trend_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.trendintelligence` is authoritative. Previous common inventory ID `video.trend_analyst` retained as historical mapping only. Unique reviewed relationship for `video.trendintelligence`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.trend_analyst"
     },
     {
-      "common_agent_id": "video.content_strategist",
-      "mapping_status": "composite",
+      "common_agent_id": "video.brandstrategist",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.brandstrategist",
-        "video.marketing"
+        "video.brandstrategist"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.content_strategist/agent_spec.json"
+        "agents/video.brandstrategist/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.content_strategist to generic source agent(s) video.brandstrategist, video.marketing for self-contained SPEC distillation. Distinct relationship for common role `video.content_strategist` (inventory order). Reviewed relationship unique to common agent `video.content_strategist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.brandstrategist` is authoritative. Previous common inventory ID `video.content_strategist` retained as historical mapping only. Unique reviewed relationship for `video.brandstrategist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.content_strategist"
     },
     {
-      "common_agent_id": "video.creative_director",
-      "mapping_status": "composite",
+      "common_agent_id": "video.creativedirector",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.creativedirector",
-        "video.director"
+        "video.creativedirector"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.creative_director/agent_spec.json"
+        "agents/video.creativedirector/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.creative_director to generic source agent(s) video.creativedirector, video.director for self-contained SPEC distillation. Distinct relationship for common role `video.creative_director` (inventory order). Reviewed relationship unique to common agent `video.creative_director`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.creativedirector` is authoritative. Previous common inventory ID `video.creative_director` retained as historical mapping only. Unique reviewed relationship for `video.creativedirector`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.creative_director"
     },
     {
-      "common_agent_id": "video.concept_developer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.ideation",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.ideation",
-        "video.conceptartist"
+        "video.ideation"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.concept_developer/agent_spec.json"
+        "agents/video.ideation/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.concept_developer to generic source agent(s) video.ideation, video.conceptartist for self-contained SPEC distillation. Distinct relationship for common role `video.concept_developer` (inventory order). Reviewed relationship unique to common agent `video.concept_developer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.ideation` is authoritative. Previous common inventory ID `video.concept_developer` retained as historical mapping only. Unique reviewed relationship for `video.ideation`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.concept_developer"
     },
     {
-      "common_agent_id": "video.hook_specialist",
-      "mapping_status": "composite",
+      "common_agent_id": "video.copywriter",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.copywriter",
-        "video.ugccreator"
+        "video.copywriter"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.hook_specialist/agent_spec.json"
+        "agents/video.copywriter/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.hook_specialist to generic source agent(s) video.copywriter, video.ugccreator for self-contained SPEC distillation. Distinct relationship for common role `video.hook_specialist` (inventory order). Reviewed relationship unique to common agent `video.hook_specialist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.copywriter` is authoritative. Previous common inventory ID `video.hook_specialist` retained as historical mapping only. Unique reviewed relationship for `video.copywriter`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.hook_specialist"
     },
     {
       "common_agent_id": "video.screenwriter",
@@ -172,328 +178,340 @@
         "inventory.json",
         "agents/video.screenwriter/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.screenwriter to generic source agent(s) video.screenwriter for self-contained SPEC distillation. Distinct relationship for common role `video.screenwriter` (inventory order). Reviewed relationship unique to common agent `video.screenwriter`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.screenwriter` is authoritative. Previous common inventory ID `video.screenwriter` retained as historical mapping only. Unique reviewed relationship for `video.screenwriter`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.screenwriter"
     },
     {
-      "common_agent_id": "video.script_editor",
-      "mapping_status": "composite",
+      "common_agent_id": "video.standardseditor",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.standardseditor",
-        "video.screenwriter"
+        "video.standardseditor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.script_editor/agent_spec.json"
+        "agents/video.standardseditor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.script_editor to generic source agent(s) video.standardseditor, video.screenwriter for self-contained SPEC distillation. Distinct relationship for common role `video.script_editor` (inventory order). Reviewed relationship unique to common agent `video.script_editor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.standardseditor` is authoritative. Previous common inventory ID `video.script_editor` retained as historical mapping only. Unique reviewed relationship for `video.standardseditor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.script_editor"
     },
     {
-      "common_agent_id": "video.narrative_designer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.narrativearc",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.narrativearc",
-        "video.showrunner"
+        "video.narrativearc"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.narrative_designer/agent_spec.json"
+        "agents/video.narrativearc/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.narrative_designer to generic source agent(s) video.narrativearc, video.showrunner for self-contained SPEC distillation. Distinct relationship for common role `video.narrative_designer` (inventory order). Reviewed relationship unique to common agent `video.narrative_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.narrativearc` is authoritative. Previous common inventory ID `video.narrative_designer` retained as historical mapping only. Unique reviewed relationship for `video.narrativearc`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.narrative_designer"
     },
     {
-      "common_agent_id": "video.storyboard_artist",
-      "mapping_status": "related",
+      "common_agent_id": "video.storyboard",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.storyboard"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.storyboard_artist/agent_spec.json"
+        "agents/video.storyboard/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.storyboard_artist to generic source agent(s) video.storyboard for self-contained SPEC distillation. Distinct relationship for common role `video.storyboard_artist` (inventory order). Reviewed relationship unique to common agent `video.storyboard_artist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.storyboard` is authoritative. Previous common inventory ID `video.storyboard_artist` retained as historical mapping only. Unique reviewed relationship for `video.storyboard`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.storyboard_artist"
     },
     {
-      "common_agent_id": "video.shot_planner",
-      "mapping_status": "composite",
+      "common_agent_id": "video.cameraoperator",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.cameraoperator",
+        "video.cameraoperator"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.cameraoperator/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.cameraoperator` is authoritative. Previous common inventory ID `video.shot_planner` retained as historical mapping only. Unique reviewed relationship for `video.cameraoperator`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.shot_planner"
+    },
+    {
+      "common_agent_id": "video.director",
+      "mapping_status": "exact",
+      "source_agent_ids": [
         "video.director"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.shot_planner/agent_spec.json"
+        "agents/video.director/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.shot_planner to generic source agent(s) video.cameraoperator, video.director for self-contained SPEC distillation. Distinct relationship for common role `video.shot_planner` (inventory order). Reviewed relationship unique to common agent `video.shot_planner`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.director` is authoritative. Previous common inventory ID `video.visual_director` retained as historical mapping only. Unique reviewed relationship for `video.director`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.visual_director"
     },
     {
-      "common_agent_id": "video.visual_director",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.director",
-        "video.cinematographer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.visual_director/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.visual_director to generic source agent(s) video.director, video.cinematographer for self-contained SPEC distillation. Distinct relationship for common role `video.visual_director` (inventory order). Reviewed relationship unique to common agent `video.visual_director`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.cinematography_planner",
-      "mapping_status": "related",
+      "common_agent_id": "video.cinematographer",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.cinematographer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.cinematography_planner/agent_spec.json"
+        "agents/video.cinematographer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.cinematography_planner to generic source agent(s) video.cinematographer for self-contained SPEC distillation. Distinct relationship for common role `video.cinematography_planner` (inventory order). Reviewed relationship unique to common agent `video.cinematography_planner`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.cinematographer` is authoritative. Previous common inventory ID `video.cinematography_planner` retained as historical mapping only. Unique reviewed relationship for `video.cinematographer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.cinematography_planner"
     },
     {
-      "common_agent_id": "video.production_designer",
-      "mapping_status": "related",
+      "common_agent_id": "video.productiondesign",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.productiondesign"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.production_designer/agent_spec.json"
+        "agents/video.productiondesign/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.production_designer to generic source agent(s) video.productiondesign for self-contained SPEC distillation. Distinct relationship for common role `video.production_designer` (inventory order). Reviewed relationship unique to common agent `video.production_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.productiondesign` is authoritative. Previous common inventory ID `video.production_designer` retained as historical mapping only. Unique reviewed relationship for `video.productiondesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.production_designer"
     },
     {
-      "common_agent_id": "video.casting_director",
-      "mapping_status": "related",
+      "common_agent_id": "video.casting",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.casting"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.casting_director/agent_spec.json"
+        "agents/video.casting/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.casting_director to generic source agent(s) video.casting for self-contained SPEC distillation. Distinct relationship for common role `video.casting_director` (inventory order). Reviewed relationship unique to common agent `video.casting_director`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.casting` is authoritative. Previous common inventory ID `video.casting_director` retained as historical mapping only. Unique reviewed relationship for `video.casting`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.casting_director"
     },
     {
-      "common_agent_id": "video.talent_coordinator",
-      "mapping_status": "composite",
+      "common_agent_id": "video.talent",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.talent",
-        "video.casting"
+        "video.talent"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.talent_coordinator/agent_spec.json"
+        "agents/video.talent/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.talent_coordinator to generic source agent(s) video.talent, video.casting for self-contained SPEC distillation. Distinct relationship for common role `video.talent_coordinator` (inventory order). Reviewed relationship unique to common agent `video.talent_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.talent` is authoritative. Previous common inventory ID `video.talent_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.talent`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.talent_coordinator"
     },
     {
-      "common_agent_id": "video.voice_director",
-      "mapping_status": "composite",
+      "common_agent_id": "video.voiceover",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.voiceover",
-        "video.voiceclone"
+        "video.voiceover"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.voice_director/agent_spec.json"
+        "agents/video.voiceover/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.voice_director to generic source agent(s) video.voiceover, video.voiceclone for self-contained SPEC distillation. Distinct relationship for common role `video.voice_director` (inventory order). Reviewed relationship unique to common agent `video.voice_director`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.voiceover` is authoritative. Previous common inventory ID `video.voice_director` retained as historical mapping only. Unique reviewed relationship for `video.voiceover`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.voice_director"
     },
     {
-      "common_agent_id": "video.music_supervisor",
+      "common_agent_id": "video.musicsupervisor",
       "mapping_status": "exact",
       "source_agent_ids": [
         "video.musicsupervisor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.music_supervisor/agent_spec.json"
+        "agents/video.musicsupervisor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.music_supervisor to generic source agent(s) video.musicsupervisor for self-contained SPEC distillation. Distinct relationship for common role `video.music_supervisor` (inventory order). Reviewed relationship unique to common agent `video.music_supervisor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.musicsupervisor` is authoritative. Previous common inventory ID `video.music_supervisor` retained as historical mapping only. Unique reviewed relationship for `video.musicsupervisor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.music_supervisor"
     },
     {
-      "common_agent_id": "video.sound_designer",
-      "mapping_status": "related",
+      "common_agent_id": "video.sounddesign",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.sounddesign"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.sound_designer/agent_spec.json"
+        "agents/video.sounddesign/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.sound_designer to generic source agent(s) video.sounddesign for self-contained SPEC distillation. Distinct relationship for common role `video.sound_designer` (inventory order). Reviewed relationship unique to common agent `video.sound_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.sounddesign` is authoritative. Previous common inventory ID `video.sound_designer` retained as historical mapping only. Unique reviewed relationship for `video.sounddesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.sound_designer"
     },
     {
-      "common_agent_id": "video.dialog_editor",
-      "mapping_status": "composite",
+      "common_agent_id": "video.soundmixer",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.soundmixer",
-        "video.editor"
+        "video.soundmixer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.dialog_editor/agent_spec.json"
+        "agents/video.soundmixer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.dialog_editor to generic source agent(s) video.soundmixer, video.editor for self-contained SPEC distillation. Distinct relationship for common role `video.dialog_editor` (inventory order). Reviewed relationship unique to common agent `video.dialog_editor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.soundmixer` is authoritative. Previous common inventory ID `video.dialog_editor` retained as historical mapping only. Unique reviewed relationship for `video.soundmixer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.dialog_editor"
     },
     {
-      "common_agent_id": "video.motion_designer",
-      "mapping_status": "related",
+      "common_agent_id": "video.motiongraphics",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.motiongraphics"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.motion_designer/agent_spec.json"
+        "agents/video.motiongraphics/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.motion_designer to generic source agent(s) video.motiongraphics for self-contained SPEC distillation. Distinct relationship for common role `video.motion_designer` (inventory order). Reviewed relationship unique to common agent `video.motion_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.motiongraphics` is authoritative. Previous common inventory ID `video.motion_designer` retained as historical mapping only. Unique reviewed relationship for `video.motiongraphics`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.motion_designer"
     },
     {
-      "common_agent_id": "video.animation_director",
-      "mapping_status": "related",
+      "common_agent_id": "video.animator_2d",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.animator_2d"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.animation_director/agent_spec.json"
+        "agents/video.animator_2d/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.animation_director to generic source agent(s) video.animator_2d for self-contained SPEC distillation. Distinct relationship for common role `video.animation_director` (inventory order). Reviewed relationship unique to common agent `video.animation_director`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.animator_2d` is authoritative. Previous common inventory ID `video.animation_director` retained as historical mapping only. Unique reviewed relationship for `video.animator_2d`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.animation_director"
     },
     {
-      "common_agent_id": "video.character_designer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.avatardesign",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.avatardesign",
-        "video.conceptartist"
+        "video.avatardesign"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.character_designer/agent_spec.json"
+        "agents/video.avatardesign/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.character_designer to generic source agent(s) video.avatardesign, video.conceptartist for self-contained SPEC distillation. Distinct relationship for common role `video.character_designer` (inventory order). Reviewed relationship unique to common agent `video.character_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.avatardesign` is authoritative. Previous common inventory ID `video.character_designer` retained as historical mapping only. Unique reviewed relationship for `video.avatardesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.character_designer"
     },
     {
-      "common_agent_id": "video.environment_designer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.worldbuilding",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.worldbuilding",
-        "video.productiondesign"
+        "video.worldbuilding"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.environment_designer/agent_spec.json"
+        "agents/video.worldbuilding/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.environment_designer to generic source agent(s) video.worldbuilding, video.productiondesign for self-contained SPEC distillation. Distinct relationship for common role `video.environment_designer` (inventory order). Reviewed relationship unique to common agent `video.environment_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.worldbuilding` is authoritative. Previous common inventory ID `video.environment_designer` retained as historical mapping only. Unique reviewed relationship for `video.worldbuilding`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.environment_designer"
     },
     {
-      "common_agent_id": "video.asset_librarian",
-      "mapping_status": "related",
+      "common_agent_id": "video.archivemaster",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.archivemaster"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.asset_librarian/agent_spec.json"
+        "agents/video.archivemaster/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.asset_librarian to generic source agent(s) video.archivemaster for self-contained SPEC distillation. Distinct relationship for common role `video.asset_librarian` (inventory order). Reviewed relationship unique to common agent `video.asset_librarian`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.archivemaster` is authoritative. Previous common inventory ID `video.asset_librarian` retained as historical mapping only. Unique reviewed relationship for `video.archivemaster`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.asset_librarian"
     },
     {
-      "common_agent_id": "video.generative_media_operator",
-      "mapping_status": "related",
+      "common_agent_id": "video.promptengineer",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.promptengineer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.generative_media_operator/agent_spec.json"
+        "agents/video.promptengineer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.generative_media_operator to generic source agent(s) video.promptengineer for self-contained SPEC distillation. Distinct relationship for common role `video.generative_media_operator` (inventory order). Reviewed relationship unique to common agent `video.generative_media_operator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.promptengineer` is authoritative. Previous common inventory ID `video.generative_media_operator` retained as historical mapping only. Unique reviewed relationship for `video.promptengineer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.generative_media_operator"
     },
     {
-      "common_agent_id": "video.video_generation_operator",
-      "mapping_status": "composite",
+      "common_agent_id": "video.archiveproducer",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.promptengineer",
-        "video.promptoptimizer"
+        "video.archiveproducer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.video_generation_operator/agent_spec.json"
+        "agents/video.archiveproducer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.video_generation_operator to generic source agent(s) video.promptengineer, video.promptoptimizer for self-contained SPEC distillation. Distinct relationship for common role `video.video_generation_operator` (inventory order). Reviewed relationship unique to common agent `video.video_generation_operator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.archiveproducer` is authoritative. Previous common inventory ID `video.video_generation_operator` retained as historical mapping only. Unique reviewed relationship for `video.archiveproducer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.video_generation_operator"
     },
     {
-      "common_agent_id": "video.image_generation_operator",
-      "mapping_status": "composite",
+      "common_agent_id": "video.styletransfer",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.styletransfer",
-        "video.promptengineer"
+        "video.styletransfer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.image_generation_operator/agent_spec.json"
+        "agents/video.styletransfer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.image_generation_operator to generic source agent(s) video.styletransfer, video.promptengineer for self-contained SPEC distillation. Distinct relationship for common role `video.image_generation_operator` (inventory order). Reviewed relationship unique to common agent `video.image_generation_operator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.styletransfer` is authoritative. Previous common inventory ID `video.image_generation_operator` retained as historical mapping only. Unique reviewed relationship for `video.styletransfer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.image_generation_operator"
     },
     {
-      "common_agent_id": "video.edit_assembler",
-      "mapping_status": "related",
+      "common_agent_id": "video.editor",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.editor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.edit_assembler/agent_spec.json"
+        "agents/video.editor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.edit_assembler to generic source agent(s) video.editor for self-contained SPEC distillation. Distinct relationship for common role `video.edit_assembler` (inventory order). Reviewed relationship unique to common agent `video.edit_assembler`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.editor` is authoritative. Previous common inventory ID `video.edit_assembler` retained as historical mapping only. Unique reviewed relationship for `video.editor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.edit_assembler"
     },
     {
       "common_agent_id": "video.colorist",
@@ -505,1170 +523,1195 @@
         "inventory.json",
         "agents/video.colorist/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.colorist to generic source agent(s) video.colorist for self-contained SPEC distillation. Distinct relationship for common role `video.colorist` (inventory order). Reviewed relationship unique to common agent `video.colorist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.colorist` is authoritative. Previous common inventory ID `video.colorist` retained as historical mapping only. Unique reviewed relationship for `video.colorist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.colorist"
     },
     {
-      "common_agent_id": "video.vfx_supervisor",
+      "common_agent_id": "video.vfxsupervisor",
       "mapping_status": "exact",
       "source_agent_ids": [
         "video.vfxsupervisor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.vfx_supervisor/agent_spec.json"
+        "agents/video.vfxsupervisor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.vfx_supervisor to generic source agent(s) video.vfxsupervisor for self-contained SPEC distillation. Distinct relationship for common role `video.vfx_supervisor` (inventory order). Reviewed relationship unique to common agent `video.vfx_supervisor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.vfxsupervisor` is authoritative. Previous common inventory ID `video.vfx_supervisor` retained as historical mapping only. Unique reviewed relationship for `video.vfxsupervisor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.vfx_supervisor"
     },
     {
-      "common_agent_id": "video.compositing_artist",
-      "mapping_status": "composite",
+      "common_agent_id": "video.composer",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.vfxsupervisor",
-        "video.editor"
+        "video.composer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.compositing_artist/agent_spec.json"
+        "agents/video.composer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.compositing_artist to generic source agent(s) video.vfxsupervisor, video.editor for self-contained SPEC distillation. Distinct relationship for common role `video.compositing_artist` (inventory order). Reviewed relationship unique to common agent `video.compositing_artist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.composer` is authoritative. Previous common inventory ID `video.compositing_artist` retained as historical mapping only. Unique reviewed relationship for `video.composer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.compositing_artist"
     },
     {
-      "common_agent_id": "video.title_designer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.audiobooknarrator",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.motiongraphics",
-        "video.templatedesign"
+        "video.audiobooknarrator"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.title_designer/agent_spec.json"
+        "agents/video.audiobooknarrator/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.title_designer to generic source agent(s) video.motiongraphics, video.templatedesign for self-contained SPEC distillation. Distinct relationship for common role `video.title_designer` (inventory order). Reviewed relationship unique to common agent `video.title_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.audiobooknarrator` is authoritative. Previous common inventory ID `video.title_designer` retained as historical mapping only. Unique reviewed relationship for `video.audiobooknarrator`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.title_designer"
     },
     {
-      "common_agent_id": "video.caption_specialist",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.accessibility",
-        "video.localizationqa"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.caption_specialist/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.caption_specialist to generic source agent(s) video.accessibility, video.localizationqa for self-contained SPEC distillation. Distinct relationship for common role `video.caption_specialist` (inventory order). Reviewed relationship unique to common agent `video.caption_specialist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.accessibility_specialist",
-      "mapping_status": "related",
+      "common_agent_id": "video.accessibility",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.accessibility"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.accessibility_specialist/agent_spec.json"
+        "agents/video.accessibility/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.accessibility_specialist to generic source agent(s) video.accessibility for self-contained SPEC distillation. Distinct relationship for common role `video.accessibility_specialist` (inventory order). Reviewed relationship unique to common agent `video.accessibility_specialist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.accessibility` is authoritative. Previous common inventory ID `video.caption_specialist` retained as historical mapping only. Unique reviewed relationship for `video.accessibility`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.caption_specialist"
     },
     {
-      "common_agent_id": "video.localization_specialist",
-      "mapping_status": "related",
+      "common_agent_id": "video.awardsstrategist",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.awardsstrategist"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.awardsstrategist/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.awardsstrategist` is authoritative. Previous common inventory ID `video.accessibility_specialist` retained as historical mapping only. Unique reviewed relationship for `video.awardsstrategist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.accessibility_specialist"
+    },
+    {
+      "common_agent_id": "video.localizationqa",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.localizationqa"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.localization_specialist/agent_spec.json"
+        "agents/video.localizationqa/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.localization_specialist to generic source agent(s) video.localizationqa for self-contained SPEC distillation. Distinct relationship for common role `video.localization_specialist` (inventory order). Reviewed relationship unique to common agent `video.localization_specialist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.localizationqa` is authoritative. Previous common inventory ID `video.localization_specialist` retained as historical mapping only. Unique reviewed relationship for `video.localizationqa`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.localization_specialist"
     },
     {
-      "common_agent_id": "video.translation_reviewer",
-      "mapping_status": "related",
+      "common_agent_id": "video.benchmarkresearch",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.localizationqa"
+        "video.benchmarkresearch"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.translation_reviewer/agent_spec.json"
+        "agents/video.benchmarkresearch/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.translation_reviewer to generic source agent(s) video.localizationqa for self-contained SPEC distillation. Distinct relationship for common role `video.translation_reviewer` (inventory order). Reviewed relationship unique to common agent `video.translation_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.benchmarkresearch` is authoritative. Previous common inventory ID `video.translation_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.benchmarkresearch`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.translation_reviewer"
     },
     {
-      "common_agent_id": "video.cultural_reviewer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.ethics",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.ethics",
-        "video.sme"
+        "video.ethics"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.cultural_reviewer/agent_spec.json"
+        "agents/video.ethics/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.cultural_reviewer to generic source agent(s) video.ethics, video.sme for self-contained SPEC distillation. Distinct relationship for common role `video.cultural_reviewer` (inventory order). Reviewed relationship unique to common agent `video.cultural_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.ethics` is authoritative. Previous common inventory ID `video.cultural_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.ethics`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.cultural_reviewer"
     },
     {
-      "common_agent_id": "video.continuity_supervisor",
-      "mapping_status": "related",
+      "common_agent_id": "video.continuity",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.continuity"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.continuity_supervisor/agent_spec.json"
+        "agents/video.continuity/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.continuity_supervisor to generic source agent(s) video.continuity for self-contained SPEC distillation. Distinct relationship for common role `video.continuity_supervisor` (inventory order). Reviewed relationship unique to common agent `video.continuity_supervisor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.continuity` is authoritative. Previous common inventory ID `video.continuity_supervisor` retained as historical mapping only. Unique reviewed relationship for `video.continuity`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.continuity_supervisor"
     },
     {
-      "common_agent_id": "video.aiqa_consistency",
+      "common_agent_id": "video.aiqaconsistency",
       "mapping_status": "exact",
       "source_agent_ids": [
         "video.aiqaconsistency"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.aiqa_consistency/agent_spec.json"
+        "agents/video.aiqaconsistency/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.aiqa_consistency to generic source agent(s) video.aiqaconsistency for self-contained SPEC distillation. Distinct relationship for common role `video.aiqa_consistency` (inventory order). Reviewed relationship unique to common agent `video.aiqa_consistency`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.aiqaconsistency` is authoritative. Previous common inventory ID `video.aiqa_consistency` retained as historical mapping only. Unique reviewed relationship for `video.aiqaconsistency`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.aiqa_consistency"
     },
     {
-      "common_agent_id": "video.factual_verifier",
-      "mapping_status": "composite",
+      "common_agent_id": "video.factchecker",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.factchecker",
-        "video.citation"
+        "video.factchecker"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.factual_verifier/agent_spec.json"
+        "agents/video.factchecker/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.factual_verifier to generic source agent(s) video.factchecker, video.citation for self-contained SPEC distillation. Distinct relationship for common role `video.factual_verifier` (inventory order). Reviewed relationship unique to common agent `video.factual_verifier`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.factchecker` is authoritative. Previous common inventory ID `video.factual_verifier` retained as historical mapping only. Unique reviewed relationship for `video.factchecker`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.factual_verifier"
     },
     {
-      "common_agent_id": "video.brand_guardian",
-      "mapping_status": "related",
+      "common_agent_id": "video.brand",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.brand"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.brand_guardian/agent_spec.json"
+        "agents/video.brand/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.brand_guardian to generic source agent(s) video.brand for self-contained SPEC distillation. Distinct relationship for common role `video.brand_guardian` (inventory order). Reviewed relationship unique to common agent `video.brand_guardian`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.brand` is authoritative. Previous common inventory ID `video.brand_guardian` retained as historical mapping only. Unique reviewed relationship for `video.brand`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.brand_guardian"
     },
     {
-      "common_agent_id": "video.legal_reviewer",
-      "mapping_status": "related",
+      "common_agent_id": "video.childrensauthor",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.legal"
+        "video.childrensauthor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.legal_reviewer/agent_spec.json"
+        "agents/video.childrensauthor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.legal_reviewer to generic source agent(s) video.legal for self-contained SPEC distillation. Distinct relationship for common role `video.legal_reviewer` (inventory order). Reviewed relationship unique to common agent `video.legal_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.childrensauthor` is authoritative. Previous common inventory ID `video.legal_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.childrensauthor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.legal_reviewer"
     },
     {
-      "common_agent_id": "video.privacy_reviewer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.trustsafety",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.trustsafety",
-        "video.legal"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.privacy_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.privacy_reviewer to generic source agent(s) video.trustsafety, video.legal for self-contained SPEC distillation. Distinct relationship for common role `video.privacy_reviewer` (inventory order). Reviewed relationship unique to common agent `video.privacy_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.safety_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.safetyredteam",
         "video.trustsafety"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.safety_reviewer/agent_spec.json"
+        "agents/video.trustsafety/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.safety_reviewer to generic source agent(s) video.safetyredteam, video.trustsafety for self-contained SPEC distillation. Distinct relationship for common role `video.safety_reviewer` (inventory order). Reviewed relationship unique to common agent `video.safety_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.trustsafety` is authoritative. Previous common inventory ID `video.privacy_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.trustsafety`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.privacy_reviewer"
     },
     {
-      "common_agent_id": "video.content_moderator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.trustsafety",
-        "video.gatekeeper"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.content_moderator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.content_moderator to generic source agent(s) video.trustsafety, video.gatekeeper for self-contained SPEC distillation. Distinct relationship for common role `video.content_moderator` (inventory order). Reviewed relationship unique to common agent `video.content_moderator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.quality_controller",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.critic",
-        "video.judge"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.quality_controller/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.quality_controller to generic source agent(s) video.critic, video.judge for self-contained SPEC distillation. Distinct relationship for common role `video.quality_controller` (inventory order). Reviewed relationship unique to common agent `video.quality_controller`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.qc_l1_reviewer",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.critic"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.qc_l1_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.qc_l1_reviewer to generic source agent(s) video.critic for self-contained SPEC distillation. Distinct relationship for common role `video.qc_l1_reviewer` (inventory order). Reviewed relationship unique to common agent `video.qc_l1_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.qc_l2_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.critic",
-        "video.judge"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.qc_l2_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.qc_l2_reviewer to generic source agent(s) video.critic, video.judge for self-contained SPEC distillation. Distinct relationship for common role `video.qc_l2_reviewer` (inventory order). Reviewed relationship unique to common agent `video.qc_l2_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.qc_l3_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.judge",
-        "video.gatekeeper"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.qc_l3_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.qc_l3_reviewer to generic source agent(s) video.judge, video.gatekeeper for self-contained SPEC distillation. Distinct relationship for common role `video.qc_l3_reviewer` (inventory order). Reviewed relationship unique to common agent `video.qc_l3_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.audio_qc_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.soundmixer",
-        "video.critic"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.audio_qc_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.audio_qc_reviewer to generic source agent(s) video.soundmixer, video.critic for self-contained SPEC distillation. Distinct relationship for common role `video.audio_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.audio_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.visual_qc_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.critic",
-        "video.colorist"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.visual_qc_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.visual_qc_reviewer to generic source agent(s) video.critic, video.colorist for self-contained SPEC distillation. Distinct relationship for common role `video.visual_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.visual_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.technical_qc_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.standardseditor",
-        "video.critic"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.technical_qc_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.technical_qc_reviewer to generic source agent(s) video.standardseditor, video.critic for self-contained SPEC distillation. Distinct relationship for common role `video.technical_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.technical_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.delivery_qc_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.distributor",
-        "video.gatekeeper"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.delivery_qc_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.delivery_qc_reviewer to generic source agent(s) video.distributor, video.gatekeeper for self-contained SPEC distillation. Distinct relationship for common role `video.delivery_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.delivery_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.platform_policy_reviewer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.mpa",
-        "video.trustsafety"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.platform_policy_reviewer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.platform_policy_reviewer to generic source agent(s) video.mpa, video.trustsafety for self-contained SPEC distillation. Distinct relationship for common role `video.platform_policy_reviewer` (inventory order). Reviewed relationship unique to common agent `video.platform_policy_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.provenance_agent",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.citation",
-        "video.deepfakedetection"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.provenance_agent/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.provenance_agent to generic source agent(s) video.citation, video.deepfakedetection for self-contained SPEC distillation. Distinct relationship for common role `video.provenance_agent` (inventory order). Reviewed relationship unique to common agent `video.provenance_agent`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.c2pa_verifier",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.deepfakedetection",
-        "video.citation"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.c2pa_verifier/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.c2pa_verifier to generic source agent(s) video.deepfakedetection, video.citation for self-contained SPEC distillation. Distinct relationship for common role `video.c2pa_verifier` (inventory order). Reviewed relationship unique to common agent `video.c2pa_verifier`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.model_input_recorder",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.promptengineer",
-        "video.memory"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.model_input_recorder/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.model_input_recorder to generic source agent(s) video.promptengineer, video.memory for self-contained SPEC distillation. Distinct relationship for common role `video.model_input_recorder` (inventory order). Reviewed relationship unique to common agent `video.model_input_recorder`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.prompt_version_recorder",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.promptoptimizer",
-        "video.memory"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.prompt_version_recorder/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.prompt_version_recorder to generic source agent(s) video.promptoptimizer, video.memory for self-contained SPEC distillation. Distinct relationship for common role `video.prompt_version_recorder` (inventory order). Reviewed relationship unique to common agent `video.prompt_version_recorder`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.signoff_coordinator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.gatekeeper",
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.signoff_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.signoff_coordinator to generic source agent(s) video.gatekeeper, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.signoff_coordinator` (inventory order). Reviewed relationship unique to common agent `video.signoff_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.release_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.distributor",
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.release_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.release_manager to generic source agent(s) video.distributor, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.release_manager` (inventory order). Reviewed relationship unique to common agent `video.release_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.distribution_planner",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.distributor"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.distribution_planner/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.distribution_planner to generic source agent(s) video.distributor for self-contained SPEC distillation. Distinct relationship for common role `video.distribution_planner` (inventory order). Reviewed relationship unique to common agent `video.distribution_planner`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.channel_optimizer",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.channelmanager"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.channel_optimizer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.channel_optimizer to generic source agent(s) video.channelmanager for self-contained SPEC distillation. Distinct relationship for common role `video.channel_optimizer` (inventory order). Reviewed relationship unique to common agent `video.channel_optimizer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.seo_metadata_specialist",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.seo"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.seo_metadata_specialist/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.seo_metadata_specialist to generic source agent(s) video.seo for self-contained SPEC distillation. Distinct relationship for common role `video.seo_metadata_specialist` (inventory order). Reviewed relationship unique to common agent `video.seo_metadata_specialist`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.thumbnail_designer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.templatedesign",
-        "video.motiongraphics"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.thumbnail_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.thumbnail_designer to generic source agent(s) video.templatedesign, video.motiongraphics for self-contained SPEC distillation. Distinct relationship for common role `video.thumbnail_designer` (inventory order). Reviewed relationship unique to common agent `video.thumbnail_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.social_editor",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.socialmediastrategist",
-        "video.editor"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.social_editor/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.social_editor to generic source agent(s) video.socialmediastrategist, video.editor for self-contained SPEC distillation. Distinct relationship for common role `video.social_editor` (inventory order). Reviewed relationship unique to common agent `video.social_editor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.community_manager",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.community"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.community_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.community_manager to generic source agent(s) video.community for self-contained SPEC distillation. Distinct relationship for common role `video.community_manager` (inventory order). Reviewed relationship unique to common agent `video.community_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.campaign_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.marketing",
-        "video.performancemarketer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.campaign_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.campaign_manager to generic source agent(s) video.marketing, video.performancemarketer for self-contained SPEC distillation. Distinct relationship for common role `video.campaign_manager` (inventory order). Reviewed relationship unique to common agent `video.campaign_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.performance_analyst",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.performancemarketer",
-        "video.analyst"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.performance_analyst/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.performance_analyst to generic source agent(s) video.performancemarketer, video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.performance_analyst` (inventory order). Reviewed relationship unique to common agent `video.performance_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.experiment_designer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.evaluationharness",
-        "video.analyst"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.experiment_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.experiment_designer to generic source agent(s) video.evaluationharness, video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.experiment_designer` (inventory order). Reviewed relationship unique to common agent `video.experiment_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.analytics_reporter",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.analyst"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.analytics_reporter/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.analytics_reporter to generic source agent(s) video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.analytics_reporter` (inventory order). Reviewed relationship unique to common agent `video.analytics_reporter`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.crm_coordinator",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.crm"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.crm_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.crm_coordinator to generic source agent(s) video.crm for self-contained SPEC distillation. Distinct relationship for common role `video.crm_coordinator` (inventory order). Reviewed relationship unique to common agent `video.crm_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.client_success_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.sales",
-        "video.comms"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.client_success_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.client_success_manager to generic source agent(s) video.sales, video.comms for self-contained SPEC distillation. Distinct relationship for common role `video.client_success_manager` (inventory order). Reviewed relationship unique to common agent `video.client_success_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.project_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.producer",
-        "video.planner"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.project_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.project_manager to generic source agent(s) video.producer, video.planner for self-contained SPEC distillation. Distinct relationship for common role `video.project_manager` (inventory order). Reviewed relationship unique to common agent `video.project_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.schedule_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.producer",
-        "video.planner"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.schedule_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.schedule_manager to generic source agent(s) video.producer, video.planner for self-contained SPEC distillation. Distinct relationship for common role `video.schedule_manager` (inventory order). Reviewed relationship unique to common agent `video.schedule_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.budget_controller",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.finance",
-        "video.costoptimizer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.budget_controller/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.budget_controller to generic source agent(s) video.finance, video.costoptimizer for self-contained SPEC distillation. Distinct relationship for common role `video.budget_controller` (inventory order). Reviewed relationship unique to common agent `video.budget_controller`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.resource_planner",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.producer",
-        "video.planner"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.resource_planner/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.resource_planner to generic source agent(s) video.producer, video.planner for self-contained SPEC distillation. Distinct relationship for common role `video.resource_planner` (inventory order). Reviewed relationship unique to common agent `video.resource_planner`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.vendor_coordinator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.producer",
-        "video.comms"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.vendor_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.vendor_coordinator to generic source agent(s) video.producer, video.comms for self-contained SPEC distillation. Distinct relationship for common role `video.vendor_coordinator` (inventory order). Reviewed relationship unique to common agent `video.vendor_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.location_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.productiondesign",
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.location_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.location_manager to generic source agent(s) video.productiondesign, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.location_manager` (inventory order). Reviewed relationship unique to common agent `video.location_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.production_coordinator",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.production_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.production_coordinator to generic source agent(s) video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.production_coordinator` (inventory order). Reviewed relationship unique to common agent `video.production_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.postproduction_coordinator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.editor",
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.postproduction_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.postproduction_coordinator to generic source agent(s) video.editor, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.postproduction_coordinator` (inventory order). Reviewed relationship unique to common agent `video.postproduction_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.archive_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.archivemaster",
-        "video.archiveproducer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.archive_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.archive_manager to generic source agent(s) video.archivemaster, video.archiveproducer for self-contained SPEC distillation. Distinct relationship for common role `video.archive_manager` (inventory order). Reviewed relationship unique to common agent `video.archive_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.asset_security_officer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.trustsafety",
-        "video.archivemaster"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.asset_security_officer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.asset_security_officer to generic source agent(s) video.trustsafety, video.archivemaster for self-contained SPEC distillation. Distinct relationship for common role `video.asset_security_officer` (inventory order). Reviewed relationship unique to common agent `video.asset_security_officer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.data_governance_officer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.trustsafety",
-        "video.legal"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.data_governance_officer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.data_governance_officer to generic source agent(s) video.trustsafety, video.legal for self-contained SPEC distillation. Distinct relationship for common role `video.data_governance_officer` (inventory order). Reviewed relationship unique to common agent `video.data_governance_officer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.incident_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.gatekeeper",
-        "video.comms"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.incident_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.incident_manager to generic source agent(s) video.gatekeeper, video.comms for self-contained SPEC distillation. Distinct relationship for common role `video.incident_manager` (inventory order). Reviewed relationship unique to common agent `video.incident_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.risk_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.ethics",
-        "video.gatekeeper"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.risk_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.risk_manager to generic source agent(s) video.ethics, video.gatekeeper for self-contained SPEC distillation. Distinct relationship for common role `video.risk_manager` (inventory order). Reviewed relationship unique to common agent `video.risk_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.human_review_coordinator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.gatekeeper",
-        "video.judge"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.human_review_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.human_review_coordinator to generic source agent(s) video.gatekeeper, video.judge for self-contained SPEC distillation. Distinct relationship for common role `video.human_review_coordinator` (inventory order). Reviewed relationship unique to common agent `video.human_review_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.escalation_manager",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.gatekeeper",
-        "video.producer"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.escalation_manager/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.escalation_manager to generic source agent(s) video.gatekeeper, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.escalation_manager` (inventory order). Reviewed relationship unique to common agent `video.escalation_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.critique_coordinator",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.critic"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.critique_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.critique_coordinator to generic source agent(s) video.critic for self-contained SPEC distillation. Distinct relationship for common role `video.critique_coordinator` (inventory order). Reviewed relationship unique to common agent `video.critique_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.judge_agent",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.judge"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.judge_agent/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.judge_agent to generic source agent(s) video.judge for self-contained SPEC distillation. Distinct relationship for common role `video.judge_agent` (inventory order). Reviewed relationship unique to common agent `video.judge_agent`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.refine_coordinator",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.promptoptimizer",
-        "video.critic"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.refine_coordinator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.refine_coordinator to generic source agent(s) video.promptoptimizer, video.critic for self-contained SPEC distillation. Distinct relationship for common role `video.refine_coordinator` (inventory order). Reviewed relationship unique to common agent `video.refine_coordinator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.learning_reflector",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.memory",
-        "video.evaluationharness"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.learning_reflector/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.learning_reflector to generic source agent(s) video.memory, video.evaluationharness for self-contained SPEC distillation. Distinct relationship for common role `video.learning_reflector` (inventory order). Reviewed relationship unique to common agent `video.learning_reflector`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.memory_curator",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.memory"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.memory_curator/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.memory_curator to generic source agent(s) video.memory for self-contained SPEC distillation. Distinct relationship for common role `video.memory_curator` (inventory order). Reviewed relationship unique to common agent `video.memory_curator`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.workflow_designer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.planner",
-        "video.orchestrator"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.workflow_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.workflow_designer to generic source agent(s) video.planner, video.orchestrator for self-contained SPEC distillation. Distinct relationship for common role `video.workflow_designer` (inventory order). Reviewed relationship unique to common agent `video.workflow_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.graph_topology_designer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.orchestrator",
-        "video.router"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.graph_topology_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.graph_topology_designer to generic source agent(s) video.orchestrator, video.router for self-contained SPEC distillation. Distinct relationship for common role `video.graph_topology_designer` (inventory order). Reviewed relationship unique to common agent `video.graph_topology_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.tool_policy_designer",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.router",
-        "video.gatekeeper"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.tool_policy_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.tool_policy_designer to generic source agent(s) video.router, video.gatekeeper for self-contained SPEC distillation. Distinct relationship for common role `video.tool_policy_designer` (inventory order). Reviewed relationship unique to common agent `video.tool_policy_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.evaluation_designer",
-      "mapping_status": "related",
-      "source_agent_ids": [
-        "video.evaluationharness"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.evaluation_designer/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.evaluation_designer to generic source agent(s) video.evaluationharness for self-contained SPEC distillation. Distinct relationship for common role `video.evaluation_designer` (inventory order). Reviewed relationship unique to common agent `video.evaluation_designer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.regression_analyst",
-      "mapping_status": "composite",
-      "source_agent_ids": [
-        "video.evaluationharness",
-        "video.analyst"
-      ],
-      "source_documents": [
-        "inventory.json",
-        "agents/video.regression_analyst/agent_spec.json"
-      ],
-      "rationale": "Human-reviewed mapping of video.regression_analyst to generic source agent(s) video.evaluationharness, video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.regression_analyst` (inventory order). Reviewed relationship unique to common agent `video.regression_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
-    },
-    {
-      "common_agent_id": "video.adversarial_tester",
-      "mapping_status": "related",
+      "common_agent_id": "video.safetyredteam",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.safetyredteam"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.adversarial_tester/agent_spec.json"
+        "agents/video.safetyredteam/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.adversarial_tester to generic source agent(s) video.safetyredteam for self-contained SPEC distillation. Distinct relationship for common role `video.adversarial_tester` (inventory order). Reviewed relationship unique to common agent `video.adversarial_tester`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.safetyredteam` is authoritative. Previous common inventory ID `video.safety_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.safetyredteam`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.safety_reviewer"
     },
     {
-      "common_agent_id": "video.historical_replay_analyst",
-      "mapping_status": "composite",
+      "common_agent_id": "video.choreography",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.archiveresearch",
-        "video.analyst"
+        "video.choreography"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.historical_replay_analyst/agent_spec.json"
+        "agents/video.choreography/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.historical_replay_analyst to generic source agent(s) video.archiveresearch, video.analyst for self-contained SPEC distillation. Distinct relationship for common role `video.historical_replay_analyst` (inventory order). Reviewed relationship unique to common agent `video.historical_replay_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.choreography` is authoritative. Previous common inventory ID `video.content_moderator` retained as historical mapping only. Unique reviewed relationship for `video.choreography`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.content_moderator"
     },
     {
-      "common_agent_id": "video.latency_analyst",
-      "mapping_status": "related",
+      "common_agent_id": "video.critic",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.latencyoptimizer"
+        "video.critic"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.latency_analyst/agent_spec.json"
+        "agents/video.critic/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.latency_analyst to generic source agent(s) video.latencyoptimizer for self-contained SPEC distillation. Distinct relationship for common role `video.latency_analyst` (inventory order). Reviewed relationship unique to common agent `video.latency_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.critic` is authoritative. Previous common inventory ID `video.quality_controller` retained as historical mapping only. Unique reviewed relationship for `video.critic`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.quality_controller"
     },
     {
-      "common_agent_id": "video.cost_analyst",
-      "mapping_status": "composite",
+      "common_agent_id": "video.comedywriter",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.costoptimizer",
-        "video.finance"
+        "video.comedywriter"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.cost_analyst/agent_spec.json"
+        "agents/video.comedywriter/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.cost_analyst to generic source agent(s) video.costoptimizer, video.finance for self-contained SPEC distillation. Distinct relationship for common role `video.cost_analyst` (inventory order). Reviewed relationship unique to common agent `video.cost_analyst`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.comedywriter` is authoritative. Previous common inventory ID `video.qc_l1_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.comedywriter`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.qc_l1_reviewer"
     },
     {
-      "common_agent_id": "video.operations_observer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.comms",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.analyst",
-        "video.orchestrator"
+        "video.comms"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.operations_observer/agent_spec.json"
+        "agents/video.comms/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.operations_observer to generic source agent(s) video.analyst, video.orchestrator for self-contained SPEC distillation. Distinct relationship for common role `video.operations_observer` (inventory order). Reviewed relationship unique to common agent `video.operations_observer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.comms` is authoritative. Previous common inventory ID `video.qc_l2_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.comms`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.qc_l2_reviewer"
     },
     {
-      "common_agent_id": "video.audit_liaison",
-      "mapping_status": "composite",
+      "common_agent_id": "video.judge",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.compliance",
-        "video.legal"
+        "video.judge"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.audit_liaison/agent_spec.json"
+        "agents/video.judge/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.audit_liaison to generic source agent(s) video.compliance, video.legal for self-contained SPEC distillation. Distinct relationship for common role `video.audit_liaison` (inventory order). Reviewed relationship unique to common agent `video.audit_liaison`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.judge` is authoritative. Previous common inventory ID `video.qc_l3_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.judge`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.qc_l3_reviewer"
     },
     {
-      "common_agent_id": "video.procurement_advisor",
-      "mapping_status": "composite",
+      "common_agent_id": "video.competitorintelligence",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.finance",
-        "video.producer"
+        "video.competitorintelligence"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.procurement_advisor/agent_spec.json"
+        "agents/video.competitorintelligence/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.procurement_advisor to generic source agent(s) video.finance, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.procurement_advisor` (inventory order). Reviewed relationship unique to common agent `video.procurement_advisor`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.competitorintelligence` is authoritative. Previous common inventory ID `video.audio_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.competitorintelligence`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.audio_qc_reviewer"
     },
     {
-      "common_agent_id": "video.accessibility_qc_reviewer",
-      "mapping_status": "composite",
+      "common_agent_id": "video.conceptartist",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.accessibilityoptimizer",
-        "video.accessibility"
+        "video.conceptartist"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.accessibility_qc_reviewer/agent_spec.json"
+        "agents/video.conceptartist/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.accessibility_qc_reviewer to generic source agent(s) video.accessibilityoptimizer, video.accessibility for self-contained SPEC distillation. Distinct relationship for common role `video.accessibility_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.accessibility_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.conceptartist` is authoritative. Previous common inventory ID `video.visual_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.conceptartist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.visual_qc_reviewer"
     },
     {
-      "common_agent_id": "video.localization_qc_reviewer",
-      "mapping_status": "related",
+      "common_agent_id": "video.corrections",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.localizationqa"
+        "video.corrections"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.localization_qc_reviewer/agent_spec.json"
+        "agents/video.corrections/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.localization_qc_reviewer to generic source agent(s) video.localizationqa for self-contained SPEC distillation. Distinct relationship for common role `video.localization_qc_reviewer` (inventory order). Reviewed relationship unique to common agent `video.localization_qc_reviewer`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.corrections` is authoritative. Previous common inventory ID `video.technical_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.corrections`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.technical_qc_reviewer"
     },
     {
-      "common_agent_id": "video.delivery_packager",
-      "mapping_status": "related",
+      "common_agent_id": "video.distributor",
+      "mapping_status": "exact",
       "source_agent_ids": [
         "video.distributor"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.delivery_packager/agent_spec.json"
+        "agents/video.distributor/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.delivery_packager to generic source agent(s) video.distributor for self-contained SPEC distillation. Distinct relationship for common role `video.delivery_packager` (inventory order). Reviewed relationship unique to common agent `video.delivery_packager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.distributor` is authoritative. Previous common inventory ID `video.delivery_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.distributor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.delivery_qc_reviewer"
     },
     {
-      "common_agent_id": "video.lifecycle_manager",
-      "mapping_status": "composite",
+      "common_agent_id": "video.mpa",
+      "mapping_status": "exact",
       "source_agent_ids": [
-        "video.orchestrator",
+        "video.mpa"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.mpa/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.mpa` is authoritative. Previous common inventory ID `video.platform_policy_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.mpa`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.platform_policy_reviewer"
+    },
+    {
+      "common_agent_id": "video.citation",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.citation"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.citation/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.citation` is authoritative. Previous common inventory ID `video.provenance_agent` retained as historical mapping only. Unique reviewed relationship for `video.citation`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.provenance_agent"
+    },
+    {
+      "common_agent_id": "video.deepfakedetection",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.deepfakedetection"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.deepfakedetection/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.deepfakedetection` is authoritative. Previous common inventory ID `video.c2pa_verifier` retained as historical mapping only. Unique reviewed relationship for `video.deepfakedetection`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.c2pa_verifier"
+    },
+    {
+      "common_agent_id": "video.costumedesign",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.costumedesign"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.costumedesign/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.costumedesign` is authoritative. Previous common inventory ID `video.model_input_recorder` retained as historical mapping only. Unique reviewed relationship for `video.costumedesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.model_input_recorder"
+    },
+    {
+      "common_agent_id": "video.promptoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.promptoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.promptoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.promptoptimizer` is authoritative. Previous common inventory ID `video.prompt_version_recorder` retained as historical mapping only. Unique reviewed relationship for `video.promptoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.prompt_version_recorder"
+    },
+    {
+      "common_agent_id": "video.gatekeeper",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.gatekeeper"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.gatekeeper/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.gatekeeper` is authoritative. Previous common inventory ID `video.signoff_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.gatekeeper`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.signoff_coordinator"
+    },
+    {
+      "common_agent_id": "video.dronepilot",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.dronepilot"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.dronepilot/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.dronepilot` is authoritative. Previous common inventory ID `video.release_manager` retained as historical mapping only. Unique reviewed relationship for `video.dronepilot`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.release_manager"
+    },
+    {
+      "common_agent_id": "video.emotionalarc",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.emotionalarc"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.emotionalarc/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.emotionalarc` is authoritative. Previous common inventory ID `video.distribution_planner` retained as historical mapping only. Unique reviewed relationship for `video.emotionalarc`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.distribution_planner"
+    },
+    {
+      "common_agent_id": "video.channelmanager",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.channelmanager"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.channelmanager/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.channelmanager` is authoritative. Previous common inventory ID `video.channel_optimizer` retained as historical mapping only. Unique reviewed relationship for `video.channelmanager`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.channel_optimizer"
+    },
+    {
+      "common_agent_id": "video.seo",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.seo"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.seo/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.seo` is authoritative. Previous common inventory ID `video.seo_metadata_specialist` retained as historical mapping only. Unique reviewed relationship for `video.seo`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.seo_metadata_specialist"
+    },
+    {
+      "common_agent_id": "video.templatedesign",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.templatedesign"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.templatedesign/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.templatedesign` is authoritative. Previous common inventory ID `video.thumbnail_designer` retained as historical mapping only. Unique reviewed relationship for `video.templatedesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.thumbnail_designer"
+    },
+    {
+      "common_agent_id": "video.socialmediastrategist",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.socialmediastrategist"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.socialmediastrategist/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.socialmediastrategist` is authoritative. Previous common inventory ID `video.social_editor` retained as historical mapping only. Unique reviewed relationship for `video.socialmediastrategist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.social_editor"
+    },
+    {
+      "common_agent_id": "video.community",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.community"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.community/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.community` is authoritative. Previous common inventory ID `video.community_manager` retained as historical mapping only. Unique reviewed relationship for `video.community`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.community_manager"
+    },
+    {
+      "common_agent_id": "video.marketing",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.marketing"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.marketing/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.marketing` is authoritative. Previous common inventory ID `video.campaign_manager` retained as historical mapping only. Unique reviewed relationship for `video.marketing`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.campaign_manager"
+    },
+    {
+      "common_agent_id": "video.performancemarketer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.performancemarketer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.performancemarketer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.performancemarketer` is authoritative. Previous common inventory ID `video.performance_analyst` retained as historical mapping only. Unique reviewed relationship for `video.performancemarketer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.performance_analyst"
+    },
+    {
+      "common_agent_id": "video.evaluationharness",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.evaluationharness"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.evaluationharness/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.evaluationharness` is authoritative. Previous common inventory ID `video.experiment_designer` retained as historical mapping only. Unique reviewed relationship for `video.evaluationharness`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.experiment_designer"
+    },
+    {
+      "common_agent_id": "video.analyst",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.analyst"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.analyst/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.analyst` is authoritative. Previous common inventory ID `video.analytics_reporter` retained as historical mapping only. Unique reviewed relationship for `video.analyst`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.analytics_reporter"
+    },
+    {
+      "common_agent_id": "video.crm",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.crm"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.crm/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.crm` is authoritative. Previous common inventory ID `video.crm_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.crm`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.crm_coordinator"
+    },
+    {
+      "common_agent_id": "video.sales",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.sales"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.sales/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.sales` is authoritative. Previous common inventory ID `video.client_success_manager` retained as historical mapping only. Unique reviewed relationship for `video.sales`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.client_success_manager"
+    },
+    {
+      "common_agent_id": "video.producer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
         "video.producer"
       ],
       "source_documents": [
         "inventory.json",
-        "agents/video.lifecycle_manager/agent_spec.json"
+        "agents/video.producer/agent_spec.json"
       ],
-      "rationale": "Human-reviewed mapping of video.lifecycle_manager to generic source agent(s) video.orchestrator, video.producer for self-contained SPEC distillation. Distinct relationship for common role `video.lifecycle_manager` (inventory order). Reviewed relationship unique to common agent `video.lifecycle_manager`.",
-      "reviewed_by": "migration-reviewer-common",
-      "reviewed_at": "2026-07-26T12:00:00Z"
+      "rationale": "VA/generic Domain Pack ID `video.producer` is authoritative. Previous common inventory ID `video.project_manager` retained as historical mapping only. Unique reviewed relationship for `video.producer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.project_manager"
+    },
+    {
+      "common_agent_id": "video.festivalstrategist",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.festivalstrategist"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.festivalstrategist/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.festivalstrategist` is authoritative. Previous common inventory ID `video.schedule_manager` retained as historical mapping only. Unique reviewed relationship for `video.festivalstrategist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.schedule_manager"
+    },
+    {
+      "common_agent_id": "video.finance",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.finance"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.finance/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.finance` is authoritative. Previous common inventory ID `video.budget_controller` retained as historical mapping only. Unique reviewed relationship for `video.finance`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.budget_controller"
+    },
+    {
+      "common_agent_id": "video.foodstylist",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.foodstylist"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.foodstylist/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.foodstylist` is authoritative. Previous common inventory ID `video.resource_planner` retained as historical mapping only. Unique reviewed relationship for `video.foodstylist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.resource_planner"
+    },
+    {
+      "common_agent_id": "video.instructionaldesign",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.instructionaldesign"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.instructionaldesign/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.instructionaldesign` is authoritative. Previous common inventory ID `video.vendor_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.instructionaldesign`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.vendor_coordinator"
+    },
+    {
+      "common_agent_id": "video.interviewsynthesis",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.interviewsynthesis"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.interviewsynthesis/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.interviewsynthesis` is authoritative. Previous common inventory ID `video.location_manager` retained as historical mapping only. Unique reviewed relationship for `video.interviewsynthesis`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.location_manager"
+    },
+    {
+      "common_agent_id": "video.journalist",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.journalist"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.journalist/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.journalist` is authoritative. Previous common inventory ID `video.production_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.journalist`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.production_coordinator"
+    },
+    {
+      "common_agent_id": "video.labela_r",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.labela_r"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.labela_r/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.labela_r` is authoritative. Previous common inventory ID `video.postproduction_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.labela_r`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.postproduction_coordinator"
+    },
+    {
+      "common_agent_id": "video.labeldigital",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.labeldigital"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.labeldigital/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.labeldigital` is authoritative. Previous common inventory ID `video.archive_manager` retained as historical mapping only. Unique reviewed relationship for `video.labeldigital`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.archive_manager"
+    },
+    {
+      "common_agent_id": "video.learnersim",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.learnersim"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.learnersim/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.learnersim` is authoritative. Previous common inventory ID `video.asset_security_officer` retained as historical mapping only. Unique reviewed relationship for `video.learnersim`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.asset_security_officer"
+    },
+    {
+      "common_agent_id": "video.lipsync",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.lipsync"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.lipsync/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.lipsync` is authoritative. Previous common inventory ID `video.data_governance_officer` retained as historical mapping only. Unique reviewed relationship for `video.lipsync`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.data_governance_officer"
+    },
+    {
+      "common_agent_id": "video.lms",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.lms"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.lms/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.lms` is authoritative. Previous common inventory ID `video.incident_manager` retained as historical mapping only. Unique reviewed relationship for `video.lms`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.incident_manager"
+    },
+    {
+      "common_agent_id": "video.medicalillustrator",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.medicalillustrator"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.medicalillustrator/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.medicalillustrator` is authoritative. Previous common inventory ID `video.risk_manager` retained as historical mapping only. Unique reviewed relationship for `video.medicalillustrator`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.risk_manager"
+    },
+    {
+      "common_agent_id": "video.moodboard",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.moodboard"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.moodboard/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.moodboard` is authoritative. Previous common inventory ID `video.human_review_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.moodboard`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.human_review_coordinator"
+    },
+    {
+      "common_agent_id": "video.mua_makeup",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.mua_makeup"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.mua_makeup/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.mua_makeup` is authoritative. Previous common inventory ID `video.escalation_manager` retained as historical mapping only. Unique reviewed relationship for `video.mua_makeup`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.escalation_manager"
+    },
+    {
+      "common_agent_id": "video.musicvideodirector",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.musicvideodirector"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.musicvideodirector/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.musicvideodirector` is authoritative. Previous common inventory ID `video.critique_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.musicvideodirector`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.critique_coordinator"
+    },
+    {
+      "common_agent_id": "video.novelty",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.novelty"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.novelty/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.novelty` is authoritative. Previous common inventory ID `video.judge_agent` retained as historical mapping only. Unique reviewed relationship for `video.novelty`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.judge_agent"
+    },
+    {
+      "common_agent_id": "video.personalizationengineer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.personalizationengineer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.personalizationengineer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.personalizationengineer` is authoritative. Previous common inventory ID `video.refine_coordinator` retained as historical mapping only. Unique reviewed relationship for `video.personalizationengineer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.refine_coordinator"
+    },
+    {
+      "common_agent_id": "video.memory",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.memory"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.memory/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.memory` is authoritative. Previous common inventory ID `video.learning_reflector` retained as historical mapping only. Unique reviewed relationship for `video.memory`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.learning_reflector"
+    },
+    {
+      "common_agent_id": "video.realestatephoto",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.realestatephoto"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.realestatephoto/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.realestatephoto` is authoritative. Previous common inventory ID `video.memory_curator` retained as historical mapping only. Unique reviewed relationship for `video.realestatephoto`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.memory_curator"
+    },
+    {
+      "common_agent_id": "video.retentionoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.retentionoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.retentionoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.retentionoptimizer` is authoritative. Previous common inventory ID `video.workflow_designer` retained as historical mapping only. Unique reviewed relationship for `video.retentionoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.workflow_designer"
+    },
+    {
+      "common_agent_id": "video.roasoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.roasoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.roasoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.roasoptimizer` is authoritative. Previous common inventory ID `video.graph_topology_designer` retained as historical mapping only. Unique reviewed relationship for `video.roasoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.graph_topology_designer"
+    },
+    {
+      "common_agent_id": "video.router",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.router"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.router/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.router` is authoritative. Previous common inventory ID `video.tool_policy_designer` retained as historical mapping only. Unique reviewed relationship for `video.router`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.tool_policy_designer"
+    },
+    {
+      "common_agent_id": "video.showrunner",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.showrunner"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.showrunner/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.showrunner` is authoritative. Previous common inventory ID `video.evaluation_designer` retained as historical mapping only. Unique reviewed relationship for `video.showrunner`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.evaluation_designer"
+    },
+    {
+      "common_agent_id": "video.signlanguageinterpreter",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.signlanguageinterpreter"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.signlanguageinterpreter/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.signlanguageinterpreter` is authoritative. Previous common inventory ID `video.regression_analyst` retained as historical mapping only. Unique reviewed relationship for `video.signlanguageinterpreter`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.regression_analyst"
+    },
+    {
+      "common_agent_id": "video.sme",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.sme"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.sme/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.sme` is authoritative. Previous common inventory ID `video.adversarial_tester` retained as historical mapping only. Unique reviewed relationship for `video.sme`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.adversarial_tester"
+    },
+    {
+      "common_agent_id": "video.archiveresearch",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.archiveresearch"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.archiveresearch/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.archiveresearch` is authoritative. Previous common inventory ID `video.historical_replay_analyst` retained as historical mapping only. Unique reviewed relationship for `video.archiveresearch`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.historical_replay_analyst"
+    },
+    {
+      "common_agent_id": "video.latencyoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.latencyoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.latencyoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.latencyoptimizer` is authoritative. Previous common inventory ID `video.latency_analyst` retained as historical mapping only. Unique reviewed relationship for `video.latencyoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.latency_analyst"
+    },
+    {
+      "common_agent_id": "video.costoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.costoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.costoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.costoptimizer` is authoritative. Previous common inventory ID `video.cost_analyst` retained as historical mapping only. Unique reviewed relationship for `video.costoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.cost_analyst"
+    },
+    {
+      "common_agent_id": "video.sportsanalyst",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.sportsanalyst"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.sportsanalyst/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.sportsanalyst` is authoritative. Previous common inventory ID `video.operations_observer` retained as historical mapping only. Unique reviewed relationship for `video.sportsanalyst`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.operations_observer"
+    },
+    {
+      "common_agent_id": "video.trailereditor",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.trailereditor"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.trailereditor/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.trailereditor` is authoritative. Previous common inventory ID `video.audit_liaison` retained as historical mapping only. Unique reviewed relationship for `video.trailereditor`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.audit_liaison"
+    },
+    {
+      "common_agent_id": "video.travelcine",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.travelcine"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.travelcine/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.travelcine` is authoritative. Previous common inventory ID `video.procurement_advisor` retained as historical mapping only. Unique reviewed relationship for `video.travelcine`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.procurement_advisor"
+    },
+    {
+      "common_agent_id": "video.accessibilityoptimizer",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.accessibilityoptimizer"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.accessibilityoptimizer/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.accessibilityoptimizer` is authoritative. Previous common inventory ID `video.accessibility_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.accessibilityoptimizer`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.accessibility_qc_reviewer"
+    },
+    {
+      "common_agent_id": "video.ugccreator",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.ugccreator"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.ugccreator/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.ugccreator` is authoritative. Previous common inventory ID `video.localization_qc_reviewer` retained as historical mapping only. Unique reviewed relationship for `video.ugccreator`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.localization_qc_reviewer"
+    },
+    {
+      "common_agent_id": "video.ux",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.ux"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.ux/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.ux` is authoritative. Previous common inventory ID `video.delivery_packager` retained as historical mapping only. Unique reviewed relationship for `video.ux`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.delivery_packager"
+    },
+    {
+      "common_agent_id": "video.voiceclone",
+      "mapping_status": "exact",
+      "source_agent_ids": [
+        "video.voiceclone"
+      ],
+      "source_documents": [
+        "inventory.json",
+        "agents/video.voiceclone/agent_spec.json"
+      ],
+      "rationale": "VA/generic Domain Pack ID `video.voiceclone` is authoritative. Previous common inventory ID `video.lifecycle_manager` retained as historical mapping only. Unique reviewed relationship for `video.voiceclone`.",
+      "reviewed_by": "va-taxonomy-alignment",
+      "reviewed_at": "2026-07-27T12:00:00Z",
+      "previous_common_agent_id": "video.lifecycle_manager"
     }
   ]
 }

@@ -1,0 +1,220 @@
+{
+  "items": [
+    {
+      "file": "wf_video_arch_a_viral_hook_v1.dna.json",
+      "nodes": 6,
+      "edges": 5,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_b_ugc_ad_v1.dna.json",
+      "nodes": 11,
+      "edges": 10,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.brand",
+        "video.compliance",
+        "video.copywriter",
+        "video.gatekeeper",
+        "video.marketing",
+        "video.motiongraphics",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_c_animated_explainer_v1.dna.json",
+      "nodes": 7,
+      "edges": 6,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.animator_2d",
+        "video.gatekeeper",
+        "video.motiongraphics",
+        "video.orchestrator",
+        "video.planner",
+        "video.storyboard"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_d_personalized_birthday_v1.dna.json",
+      "nodes": 7,
+      "edges": 6,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_e_ai_short_film_v1.dna.json",
+      "nodes": 13,
+      "edges": 12,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.colorist",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.ideation",
+        "video.narrativearc",
+        "video.orchestrator",
+        "video.planner",
+        "video.promptengineer",
+        "video.screenwriter",
+        "video.soundmixer",
+        "video.storyboard"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_f_corporate_training_v1.dna.json",
+      "nodes": 7,
+      "edges": 6,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.ethics",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_g_music_video_v1.dna.json",
+      "nodes": 8,
+      "edges": 7,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_h_ai_avatar_v1.dna.json",
+      "nodes": 7,
+      "edges": 6,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.avatardesign",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.promptengineer",
+        "video.voiceover"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_i_documentary_v1.dna.json",
+      "nodes": 8,
+      "edges": 7,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.archiveresearch",
+        "video.factchecker",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_arch_j_feature_film_v1.dna.json",
+      "nodes": 8,
+      "edges": 7,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.narrativearc",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_delivery_v1.dna.json",
+      "nodes": 7,
+      "edges": 6,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.marketing",
+        "video.orchestrator",
+        "video.planner",
+        "video.socialmediastrategist"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_lqr_overview_v1.dna.json",
+      "nodes": 6,
+      "edges": 5,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_production_e2e_v1.dna.json",
+      "nodes": 9,
+      "edges": 8,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.productiondesign",
+        "video.promptengineer",
+        "video.socialmediastrategist",
+        "video.soundmixer"
+      ],
+      "valid": true
+    },
+    {
+      "file": "wf_video_spine_v1.dna.json",
+      "nodes": 8,
+      "edges": 7,
+      "agents": [
+        "video.aiqaconsistency",
+        "video.creativedirector",
+        "video.gatekeeper",
+        "video.orchestrator",
+        "video.planner",
+        "video.screenwriter",
+        "video.webresearch"
+      ],
+      "valid": true
+    }
+  ],
+  "written": 14,
+  "valid": 14,
+  "failures": [],
+  "processes": 14
+}
