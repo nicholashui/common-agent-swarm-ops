@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import inspect
 import json
+import os
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, replace
 
@@ -20,6 +21,7 @@ from app.api.v1.dependencies import (
     reject_client_authority_fields,
     set_authenticated_request_context,
 )
+from app.models.identifiers import ActorId, CorrelationId, OrganizationId, new_correlation_id
 from app.api.v1.errors import (
     PUBLIC_ENVELOPE_HEADER,
     PublicApiException,
@@ -247,6 +249,40 @@ def is_public_api_path(path: str) -> bool:
     return path.startswith(f"{API_V1_PREFIX}/")
 
 
+def _local_dev_trust_enabled() -> bool:
+    """Local stack trust for browser→Host via FE rewrite (never production default)."""
+    flag = os.environ.get("CASOPS_DEV_TRUST", "").strip().lower()
+    if flag in {"1", "true", "yes", "on"}:
+        return True
+    if flag in {"0", "false", "no", "off"}:
+        return False
+    # Default on only when not marked production.
+    return os.environ.get("CASOPS_ENV", os.environ.get("ENV", "")).strip().lower() not in {
+        "production",
+        "prod",
+    }
+
+
+def _local_dev_trusted_context(_request: Request) -> AuthenticatedRequestContext:
+    """Server-owned local identity for product façade development — not browser authority."""
+    return AuthenticatedRequestContext(
+        tenant_id=OrganizationId("org-local-dev"),
+        actor_id=ActorId("actor-local-dev"),
+        correlation_id=new_correlation_id(),
+        permissions=frozenset(
+            {
+                # Route authorizer expects control_plane:{read|mutation|...}
+                "control_plane:*",
+                "*",
+                "registry.read",
+                "registry.propose",
+                "swarm.write",
+                "swarm.read",
+            }
+        ),
+    )
+
+
 def create_app(
     *,
     deployment_configuration: DeploymentConfiguration | None = None,
@@ -276,7 +312,12 @@ def create_app(
     application.state.outbox_publisher = composition.outbox_publisher
     application.state.governed_library_delegate = composition.governed_library_delegate
     application.state.governed_local_adapter = composition.governed_local_adapter
-    application.state.trusted_context_resolver = trusted_context_resolver
+    if trusted_context_resolver is not None:
+        application.state.trusted_context_resolver = trusted_context_resolver
+    elif _local_dev_trust_enabled():
+        application.state.trusted_context_resolver = _local_dev_trusted_context
+    else:
+        application.state.trusted_context_resolver = None
     application.dependency_overrides[get_control_plane_services] = lambda: composition.services
     application.dependency_overrides[get_adoption_services] = lambda: composition.adoption_services
 

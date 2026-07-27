@@ -6,7 +6,7 @@ import json
 from collections.abc import Iterator
 from typing import Annotated, NoReturn, Protocol, runtime_checkable
 
-from fastapi import APIRouter, Depends, Header, Request, Response, status
+from fastapi import APIRouter, Depends, Header, Query, Request, Response, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import StreamingResponse
 
@@ -67,6 +67,47 @@ async def get_activity_projection_store(request: Request) -> ActivityProjectionS
     if isinstance(store, ActivityProjectionStore):
         return store
     _raise_events_unavailable(request)
+
+
+@router.get("/events/stream")
+async def stream_multi_topic_events(
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    replay_service: Annotated[EventReplayService, Depends(get_event_replay_service)],
+    policy: Annotated[EventReplayPolicy, Depends(get_event_replay_policy)],
+    topics: Annotated[str | None, Query(max_length=2_000)] = None,
+    last_event_id: Annotated[int | None, Header()] = None,
+) -> StreamingResponse:
+    """Product multi-topic SSE alias expected by the frontend live client.
+
+    Query: topics=comma,separated,topic ids. Replays each topic in order
+    (finite frames). Gaps still surface as recovery frames per topic.
+    """
+    topic_list = [part.strip() for part in (topics or "activity:new").split(",") if part.strip()]
+    if not topic_list:
+        topic_list = ["activity:new"]
+
+    def _multi_frames() -> Iterator[bytes]:
+        # Announce subscription; never fail the stream after headers start.
+        yield _frame("stream.connected", {"topics": topic_list})
+        for topic in topic_list:
+            result = replay_service.replay(context, topic, last_event_id or 0, policy)
+            if result.is_success and result.value is not None:
+                yield from _sse_frames(result.value.events, result.value.recovery is not None)
+            else:
+                # Unauthorized or empty topic → recovery cue (observation-only).
+                yield _frame(
+                    "recovery",
+                    {
+                        "topic": topic,
+                        "refresh_activity_projection": True,
+                    },
+                )
+
+    return StreamingResponse(
+        _multi_frames(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache"},
+    )
 
 
 @router.get("/events/{topic}/stream")

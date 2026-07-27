@@ -11,6 +11,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
+import { logoutSession } from "../lib/auth/logout";
 import {
   type ProfileLandingView,
   type ProfileSectionId,
@@ -306,6 +307,25 @@ function SecuritySection({
   onAnnounce: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
+  const [logoutBusy, setLogoutBusy] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | undefined>();
+
+  const handleLogout = (): void => {
+    if (logoutBusy) return;
+    setLogoutBusy(true);
+    setLogoutError(undefined);
+    void logoutSession().then((result) => {
+      if (!result.ok) {
+        setLogoutError(result.message);
+        setLogoutBusy(false);
+        return;
+      }
+      if (typeof window !== "undefined") {
+        window.location.assign(result.redirectTo);
+      }
+    });
+  };
+
   return (
     <section className="profile-home__panel" aria-label={L(labels, "security")}>
       <h2>{L(labels, "security")}</h2>
@@ -332,15 +352,30 @@ function SecuritySection({
           </li>
         ))}
       </ul>
-      <button
-        className="profile-home__action"
-        onClick={() =>
-          onAnnounce("Sign out other sessions requires an authorized session action.")
-        }
-        type="button"
-      >
-        Sign out other sessions
-      </button>
+      <div className="profile-home__button-row">
+        <button
+          className="profile-home__action profile-home__action--danger"
+          disabled={logoutBusy}
+          onClick={handleLogout}
+          type="button"
+        >
+          {logoutBusy ? "Signing out…" : "Log out"}
+        </button>
+        <button
+          className="profile-home__action"
+          onClick={() =>
+            onAnnounce("Sign out other sessions requires an authorized session action.")
+          }
+          type="button"
+        >
+          Sign out other sessions
+        </button>
+      </div>
+      {logoutError ? (
+        <p className="profile-home__status profile-home__status--error" role="alert">
+          {logoutError}
+        </p>
+      ) : null}
     </section>
   );
 }

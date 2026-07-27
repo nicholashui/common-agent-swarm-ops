@@ -49,6 +49,11 @@ test("shell navigation renders ui_00_menu product chrome and IA groups", () => {
   assert.match(markup, /Open full document page/);
   assert.match(markup, /Open help panel|Close help panel|Toggle help panel/);
   assert.match(markup, /workspace-topbar/);
+  assert.match(markup, /aria-label="Profile"/);
+  assert.match(markup, /aria-label="Log out"/);
+  assert.match(markup, /menu-footer-account/);
+  assert.match(markup, /menu-footer-logout/);
+  assert.doesNotMatch(markup, /workspace-topbar__icon[^>]*>[\s\S]*Log out/);
 });
 
 test("shell navigation shows authorized VA and correlation when returned", () => {

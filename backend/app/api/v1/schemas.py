@@ -934,3 +934,140 @@ class CapacityActionResponse(StrictSchema):
     audit_recorded: bool | None
     reason: str | None
     correlation_id: str
+
+
+# --- Product façade (commons / swarms / activity) ---
+
+
+class ActionReferenceResponse(StrictSchema):
+    """Server-issued permit that enables a specific UI control."""
+
+    id: str
+    label: str
+    kind: str
+    eligible: bool
+    resource_ref: str | None = None
+
+
+class ProposalCreateRequest(StrictSchema):
+    """Submit an improvement or pattern proposal without mutating published versions."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    base_version: str = Field(default="current", min_length=1, max_length=100)
+    summary: str = Field(min_length=1, max_length=2_000)
+    diff_ref: str | None = Field(default=None, max_length=500)
+    evidence_refs: list[str] = Field(default_factory=list, max_length=50)
+    rationale_ref: str | None = Field(default=None, max_length=500)
+
+
+class ProposalCreateResponse(StrictSchema):
+    """Retained proposal identity; published commons remain immutable."""
+
+    proposal_id: str
+    status: str
+    target_type: str
+    target_id: str
+    base_version: str
+    correlation_id: str
+
+
+class AgentForkRequest(StrictSchema):
+    """Fork a catalog agent into an organization draft."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    label: str | None = Field(default=None, max_length=200)
+    visibility: Literal["organization"] = "organization"
+
+
+class AgentForkResponse(StrictSchema):
+    """Draft fork identity with provenance to the source agent."""
+
+    fork_id: str
+    forked_from_id: str
+    forked_from_version: str
+    status: str
+    label: str
+
+
+class SwarmCreateRequest(StrictSchema):
+    """Create an organization-owned swarm draft."""
+
+    action_reference_id: str | None = Field(default=None, max_length=200)
+    name: str = Field(min_length=1, max_length=200)
+    pattern_ref: str | None = Field(default=None, max_length=200)
+    goal_summary: str | None = Field(default=None, max_length=2_000)
+    initial_graph: dict[str, object] | None = None
+
+
+class SwarmCreateResponse(StrictSchema):
+    """Created swarm draft coordinates."""
+
+    swarm_id: str
+    revision: int
+    status: str
+    name: str
+
+
+class SwarmGraphPatchRequest(StrictSchema):
+    """Optimistic graph revision write."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    expected_revision: int = Field(ge=0)
+    graph: dict[str, object]
+
+
+class SwarmMemberRequest(StrictSchema):
+    """Add a common agent node to a swarm draft."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    agent_id: str = Field(min_length=1, max_length=200)
+    agent_version: str | None = Field(default=None, max_length=100)
+    pin_policy: str | None = Field(default="exact", max_length=50)
+
+
+class SwarmPinsRequest(StrictSchema):
+    """Replace version pins for a swarm draft."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    pins: list[dict[str, object]] = Field(default_factory=list, max_length=200)
+
+
+class SwarmRunRequest(StrictSchema):
+    """Queue a façade run intent for a swarm draft."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    inputs_ref: str | None = Field(default=None, max_length=200)
+    pin_commons: bool = True
+    confirm_dispatch: bool = False
+
+
+class SwarmValidateRequest(StrictSchema):
+    """Validate graph provenance rules without execution."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+
+
+class SwarmExportRequest(StrictSchema):
+    """Request a redacted export job reference."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    format: Literal["json", "yaml"] = "json"
+
+
+class PatternInstantiateRequest(StrictSchema):
+    """Instantiate a pattern into a new or existing swarm draft."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    swarm_id: str | None = Field(default=None, max_length=200)
+    name: str | None = Field(default=None, max_length=200)
+
+
+class PlaygroundRunRequest(StrictSchema):
+    """Isolated playground invocation; never production activation."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    prompt: str = Field(min_length=1, max_length=8_000)
+    model_override: str | None = Field(default=None, max_length=200)
+    enable_tools: bool = False
+    swarm_context_ref: str | None = Field(default=None, max_length=200)
+    stream: bool = False

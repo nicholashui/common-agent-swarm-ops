@@ -37,6 +37,27 @@ export function BoundRegistryHome(): JSX.Element {
               : `Marked ${action.ids.length} item(s) read in session.`,
         });
         return;
+      case "commons.propose": {
+        setStatus({
+          kind: "busy",
+          message: `Submitting proposal for ${action.agentId}…`,
+        });
+        const { proposeAgentImprovement } = await import(
+          "../../lib/api/product-commons"
+        );
+        const result = await proposeAgentImprovement(action.agentId, {
+          summary: action.summary,
+        });
+        if (!result.ok) {
+          setStatus({ kind: "error", message: result.message });
+          return;
+        }
+        setStatus({
+          kind: "success",
+          message: `Proposal ${result.proposalId} ${result.status} for ${result.targetId}.`,
+        });
+        return;
+      }
       case "governed.fail_closed":
         setStatus({
           kind: "error",

@@ -452,6 +452,16 @@ class ControlPlaneServices:
             PendingApprovalOperation(authorization_context, tool_request)
         )
 
+    def list_pending_approval_ids(
+        self, organization_id: OrganizationId
+    ) -> tuple[ApprovalId, ...]:
+        """Return approval IDs with Host-held pending operations for the org."""
+        return tuple(
+            approval_id
+            for (org_id, approval_id) in self._pending_approvals
+            if org_id == organization_id
+        )
+
     def submit_approval(
         self,
         organization_id: OrganizationId,

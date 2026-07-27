@@ -1,10 +1,10 @@
 "use client";
 
 /**
- * Full-page markdown viewer (independent of the right help drawer).
+ * Markdown document view for the shell main content area (and reusable elsewhere).
+ * Independent of the right help drawer (help_spec.md).
  */
 import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 
 import { MarkdownDocument } from "../../lib/help/markdown-render";
 import {
@@ -51,22 +51,21 @@ export function MarkdownViewerPage({
       <header className="docs-page__header">
         <div>
           <p className="eyebrow">Documentation</p>
-          <h1>Document viewer</h1>
+          <h1>User guide</h1>
           <p className="docs-page__path">
             <code>{path || "—"}</code>
           </p>
         </div>
-        <Link className="docs-page__back" href="/">
-          ← Back to console
-        </Link>
       </header>
-      <div className="docs-page__body panel">
+      <div className="docs-page__body">
         {state.status === "loading" || state.status === "idle" ? (
-          <p>Loading document…</p>
+          <p className="docs-page__status">Loading document…</p>
         ) : null}
-        {state.status === "empty" ? <p>{state.message}</p> : null}
+        {state.status === "empty" ? (
+          <p className="docs-page__status">{state.message}</p>
+        ) : null}
         {state.status === "error" ? (
-          <p role="alert">
+          <p className="docs-page__status docs-page__status--error" role="alert">
             Could not load {state.path}: {state.message}
           </p>
         ) : null}

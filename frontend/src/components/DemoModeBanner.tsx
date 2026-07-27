@@ -11,6 +11,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { logoutSession } from "../lib/auth/logout";
+
 export function DemoModeBanner(): JSX.Element {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -19,22 +21,14 @@ export function DemoModeBanner(): JSX.Element {
   const exitDemo = async (): Promise<void> => {
     setBusy(true);
     setError(undefined);
-    try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "same-origin",
-      });
-      if (!response.ok) {
-        setError("Could not exit demo mode.");
-        setBusy(false);
-        return;
-      }
-      router.replace("/login");
-      router.refresh();
-    } catch {
-      setError("Could not exit demo mode.");
+    const result = await logoutSession();
+    if (!result.ok) {
+      setError(result.message || "Could not exit demo mode.");
       setBusy(false);
+      return;
     }
+    router.replace(result.redirectTo);
+    router.refresh();
   };
 
   return (

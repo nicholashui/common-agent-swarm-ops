@@ -16,6 +16,8 @@ from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parents[2]
 _OUT = _ROOT / "frontend" / "src" / "lib" / "projections" / "pack-agents.generated.ts"
+_PUBLIC_AGENTS_DOCS = _ROOT / "frontend" / "public" / "docs" / "agents"
+_SAFE_AGENT_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]*$")
 
 
 def _read_json(path: Path) -> dict:
@@ -33,19 +35,65 @@ def _sanitize_ui_copy(text: str) -> str:
     return out
 
 
-def _spec_excerpt(spec_path: Path, *, limit: int = 1200) -> str:
+def _strip_markdown_to_plain(text: str) -> str:
+    """Collapse markdown to a short plain-text blurb (cards / insight strips)."""
+    body = text
+    body = re.sub(r"```.*?```", " ", body, flags=re.S)
+    body = re.sub(r"`([^`]+)`", r"\1", body)
+    body = re.sub(r"!\[([^\]]*)\]\([^)]+\)", r"\1", body)
+    body = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", body)
+    body = re.sub(r"(?m)^\s{0,3}#{1,6}\s+", "", body)
+    body = re.sub(r"(?m)^\s{0,3}>\s?", "", body)
+    body = re.sub(r"(?m)^\s*[-*+]\s+", "", body)
+    body = re.sub(r"(?m)^\s*\d+\.\s+", "", body)
+    body = re.sub(r"[|*_~]", " ", body)
+    body = re.sub(r"\s+", " ", body).strip()
+    return body
+
+
+def _spec_excerpt(spec_path: Path, *, limit: int = 280) -> str:
+    """Plain-language summary for list cards — not raw markdown dump."""
     if not spec_path.is_file():
         return ""
     text = spec_path.read_text(encoding="utf-8", errors="replace")
-    # Prefer Responsibility section
+    # Prefer first paragraph under ## Responsibility (before ### subsections)
     match = re.search(
-        r"##\s+Responsibility\s*\n(.*?)(?=\n##\s+|\Z)",
+        r"##\s+Responsibility\s*\n+(.*?)(?=\n#{1,3}\s+|\Z)",
         text,
         re.S | re.I,
     )
-    body = match.group(1).strip() if match else text[:limit]
-    body = re.sub(r"\s+", " ", body).strip()
-    return _sanitize_ui_copy(body)[:limit]
+    if match:
+        body = match.group(1).strip()
+    else:
+        # Fall back to first non-heading paragraph
+        paras = [
+            p.strip()
+            for p in re.split(r"\n\s*\n", text)
+            if p.strip() and not p.strip().startswith("#")
+        ]
+        body = paras[0] if paras else text[:limit]
+    plain = _strip_markdown_to_plain(body)
+    return _sanitize_ui_copy(plain)[:limit]
+
+
+def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dict[str, str | None]:
+    """Copy SPEC/README into public/docs/agents/<id>/ for browser markdown rendering."""
+    if not _SAFE_AGENT_ID.match(agent_id):
+        return {"specDocPath": None, "readmeDocPath": None}
+    dest_dir = docs_root / agent_id
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    paths: dict[str, str | None] = {"specDocPath": None, "readmeDocPath": None}
+    for name, key in (("SPEC.md", "specDocPath"), ("README.md", "readmeDocPath")):
+        src = agent_dir / name
+        if not src.is_file():
+            continue
+        try:
+            content = _sanitize_ui_copy(src.read_text(encoding="utf-8", errors="replace"))
+        except OSError:
+            continue
+        (dest_dir / name).write_text(content, encoding="utf-8", newline="\n")
+        paths[key] = f"/docs/agents/{agent_id}/{name}"
+    return paths
 
 
 def _config_sections(spec: dict, provenance: dict | None, mapping_note: str) -> list[dict]:
@@ -113,7 +161,12 @@ def _humanize(agent_id: str) -> str:
     return " ".join(part.capitalize() for part in re.split(r"[-_.]+", bare) if part)
 
 
-def _load_pack(agents_root: Path, *, pack: str) -> list[dict]:
+def _load_pack(
+    agents_root: Path,
+    *,
+    pack: str,
+    docs_root: Path,
+) -> list[dict]:
     records: list[dict] = []
     if not agents_root.is_dir():
         return records
@@ -145,6 +198,7 @@ def _load_pack(agents_root: Path, *, pack: str) -> list[dict]:
             except OSError:
                 mapping_note = ""
         excerpt = _spec_excerpt(agent_dir / "SPEC.md")
+        doc_paths = _sync_agent_markdown(agent_dir, agent_id, docs_root)
         status = str(spec.get("status") or ("draft" if pack == "specials" else "registered"))
         model = spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
         tools = spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
@@ -196,6 +250,8 @@ def _load_pack(agents_root: Path, *, pack: str) -> list[dict]:
                 "hasSpecMd": (agent_dir / "SPEC.md").is_file(),
                 "hasReadme": (agent_dir / "README.md").is_file(),
                 "hasSources": (agent_dir / "sources").is_dir(),
+                "specDocPath": doc_paths["specDocPath"],
+                "readmeDocPath": doc_paths["readmeDocPath"],
             }
         )
     return records
@@ -207,10 +263,29 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, default=_OUT)
     args = parser.parse_args(argv)
     root = args.project_root.resolve()
-    video = _load_pack(root / "business" / "video" / "agents", pack="video")
-    specials = _load_pack(root / "business" / "specials" / "agents", pack="specials")
+    docs_root = root / "frontend" / "public" / "docs" / "agents"
+    docs_root.mkdir(parents=True, exist_ok=True)
+    video = _load_pack(root / "business" / "video" / "agents", pack="video", docs_root=docs_root)
+    specials = _load_pack(
+        root / "business" / "specials" / "agents",
+        pack="specials",
+        docs_root=docs_root,
+    )
     all_agents = video + specials
     by_id = {item["id"]: item for item in all_agents}
+
+    # Drop stale public agent docs that are no longer exported
+    keep = {item["id"] for item in all_agents if _SAFE_AGENT_ID.match(item["id"])}
+    if docs_root.is_dir():
+        for child in docs_root.iterdir():
+            if child.is_dir() and child.name not in keep:
+                for stale in child.rglob("*"):
+                    if stale.is_file():
+                        stale.unlink(missing_ok=True)
+                try:
+                    child.rmdir()
+                except OSError:
+                    pass
 
     payload = {
         "schemaVersion": "1.0",
@@ -261,6 +336,8 @@ def main(argv: list[str] | None = None) -> int:
         "  readonly hasSpecMd: boolean;\n"
         "  readonly hasReadme: boolean;\n"
         "  readonly hasSources: boolean;\n"
+        "  readonly specDocPath: string | null;\n"
+        "  readonly readmeDocPath: string | null;\n"
         "}\n\n"
         f"export const PACK_AGENT_COUNTS = {json.dumps(payload['counts'], indent=2)} as const;\n\n"
         f"export const PACK_AGENTS: readonly PackAgentRecord[] = {json.dumps(all_agents, indent=2, ensure_ascii=False)} as const;\n\n"
@@ -281,8 +358,10 @@ def main(argv: list[str] | None = None) -> int:
         json.dumps(
             {
                 "out": str(args.out.relative_to(root)),
+                "docs": str(docs_root.relative_to(root)),
                 "counts": payload["counts"],
                 "sample": list(by_id)[:5],
+                "specDocs": sum(1 for a in all_agents if a.get("specDocPath")),
             },
             indent=2,
         )

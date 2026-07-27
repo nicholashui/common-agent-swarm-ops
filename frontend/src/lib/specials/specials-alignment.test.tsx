@@ -117,8 +117,26 @@ test("SpecialsCatalog UI presents draft/non-active and never production activati
   assert.match(markup, /draft · non-active/);
   assert.match(markup, /production activation requested: no/);
   assert.match(markup, /untrusted design provenance/i);
+  assert.match(markup, /specials-catalog__summary/);
+  assert.match(markup, /specials-catalog__actions/);
   assert.doesNotMatch(markup, /production-ready|114 agents active|migration complete/i);
   assert.doesNotMatch(markup, /production_activation_requested:\s*yes/i);
+});
+
+test("specials catalog CSS prevents text overlap on cards", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { dirname, resolve } = await import("node:path");
+  const { fileURLToPath } = await import("node:url");
+  const css = await readFile(
+    resolve(dirname(fileURLToPath(import.meta.url)), "../../app/globals.css"),
+    "utf8",
+  );
+  assert.match(css, /\.specials-catalog__card-head\s*\{[^}]*flex-wrap:\s*wrap/s);
+  assert.match(css, /\.specials-catalog__card-head h3\s*\{[^}]*min-width:\s*0/s);
+  assert.match(css, /\.specials-catalog__card-head h3\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(css, /\.specials-catalog__summary\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(css, /\.specials-catalog__actions\s*\{[^}]*flex-wrap:\s*wrap/s);
+  assert.match(css, /\.specials-catalog__id code[^}]*word-break:\s*break-all/s);
 });
 
 test("specials pack has no executable workflows under business/specials", async () => {

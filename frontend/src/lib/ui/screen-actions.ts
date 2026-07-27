@@ -4,6 +4,7 @@
  * Governed mutations without host action refs fail closed (honest feedback).
  */
 
+import { proposeAgentImprovement } from "../api/product-commons";
 import type { InteractionRuntime } from "./interaction-runtime";
 
 export type ScreenUiAction =
@@ -30,6 +31,11 @@ export type ScreenUiAction =
       readonly reason: string;
     }
   | { readonly kind: "topology.load"; readonly workflowId: string }
+  | {
+      readonly kind: "commons.propose";
+      readonly agentId: string;
+      readonly summary?: string;
+    }
   | {
       readonly kind: "governed.fail_closed";
       readonly message: string;
@@ -138,6 +144,20 @@ export async function performScreenAction(
       return runtime.decideApproval(action.approvalId, action.value, action.reason);
     case "topology.load":
       return runtime.loadTopology(action.workflowId);
+    case "commons.propose": {
+      runtime.setInfo(`Submitting proposal for ${action.agentId}…`);
+      const result = await proposeAgentImprovement(action.agentId, {
+        summary: action.summary,
+      });
+      if (!result.ok) {
+        runtime.setError(result.message);
+        return false;
+      }
+      runtime.setSuccess(
+        `Proposal ${result.proposalId} ${result.status} for ${result.targetId}.`,
+      );
+      return true;
+    }
     case "governed.fail_closed": {
       const hint = action.actionHint
         ? ` ${action.actionHint}`

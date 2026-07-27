@@ -20,6 +20,7 @@ import {
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { AgentPackMarkdown } from "./AgentPackMarkdown";
 
 const PLAYGROUND_MODELS = [
   "Model override: default",
@@ -40,7 +41,8 @@ export function AgentDetailHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
-  const [tab, setTab] = useState<AgentDetailTabId>("history");
+  // Spec / Config first so pack SPEC.md is the primary reading surface.
+  const [tab, setTab] = useState<AgentDetailTabId>("config");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [playgroundInput, setPlaygroundInput] = useState("");
   const [knowledgeQuery, setKnowledgeQuery] = useState("");
@@ -95,11 +97,19 @@ export function AgentDetailHome({
         <div className="agent-detail__actions" role="group" aria-label={L(labels, "quick_actions")}>
           <button
             className="agent-detail__action agent-detail__action--primary"
-            onClick={() =>
+            onClick={() => {
+              if (onAction && agentId) {
+                void onAction({
+                  kind: "commons.propose",
+                  agentId,
+                  summary: `Improvement proposal for ${view.agentName} (${agentId}).`,
+                });
+                return;
+              }
               announce(
                 "Propose Improvement requires an authorized commons proposal action.",
-              )
-            }
+              );
+            }}
             type="button"
           >
             ✦ Propose Improvement
@@ -369,6 +379,16 @@ function ConfigTab({
 }>): JSX.Element {
   return (
     <div className="agent-detail__config">
+      <AgentPackMarkdown path={view.specDocPath} title="Agent SPEC" />
+      <AgentPackMarkdown path={view.readmeDocPath} title="Agent README" />
+
+      {!view.specDocPath && !view.readmeDocPath ? (
+        <p className="agent-detail__muted" role="status">
+          No SPEC.md / README.md published for this agent yet. Re-run pack export
+          to sync documents under public/docs/agents/.
+        </p>
+      ) : null}
+
       <section
         aria-labelledby="version-timeline-heading"
         className="agent-detail__versions"

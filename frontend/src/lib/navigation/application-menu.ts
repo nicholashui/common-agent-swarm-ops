@@ -24,6 +24,7 @@ export type MenuIconName =
   | "monitoring"
   | "notification"
   | "profile"
+  | "logout"
   | "registry"
   | "settings";
 

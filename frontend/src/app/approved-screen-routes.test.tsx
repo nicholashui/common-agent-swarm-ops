@@ -222,3 +222,10 @@ test("login remains a public identity-only session-entry route", () => {
   assert.doesNotMatch(source, /AuthenticatedShell|AppShell|UnavailableScreen/);
   assert.equal(getScreenDefinition("ui_01_login").routeOrShell, "/login");
 });
+
+test("docs view renders user guide inside authenticated shell main content", () => {
+  const source = readSource(new URL("./docs/view/page.tsx", import.meta.url));
+  assert.match(source, /AppShell/);
+  assert.match(source, /DocsViewContent/);
+  assert.doesNotMatch(source, /UnavailableScreen/);
+});

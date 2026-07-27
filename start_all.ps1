@@ -145,7 +145,8 @@ $frontendErr = Join-Path $LogDir "frontend.err.log"
 $backendProc = $null
 $frontendProc = $null
 
-$backendCommand = "set PYTHONPATH=.&& `"$pythonExecutable`" -m uvicorn app.main:app --host 127.0.0.1 --port $BackendPort"
+# CASOPS_DEV_TRUST enables local trusted Host context so FE rewrites to /api/v1 work.
+$backendCommand = "set PYTHONPATH=.&& set CASOPS_DEV_TRUST=1&& `"$pythonExecutable`" -m uvicorn app.main:app --host 127.0.0.1 --port $BackendPort"
 $frontendCommand = "set BACKEND_API_ORIGIN=http://127.0.0.1:$BackendPort&& `"$npmExecutable`" run dev -- --hostname 127.0.0.1 --port $FrontendPort"
 
 try {
@@ -211,6 +212,8 @@ try {
   Write-Host "Common Agent Swarm Ops started." -ForegroundColor Green
   Write-Host ("  Backend  PID {0,-8} http://127.0.0.1:{1}" -f $backendProc.Id, $BackendPort)
   Write-Host ("  Frontend PID {0,-8} http://127.0.0.1:{1}" -f $frontendProc.Id, $FrontendPort)
+  Write-Host "  CASOPS_DEV_TRUST=1 (local Host trusted context)"
+  Write-Host ("  BACKEND_API_ORIGIN=http://127.0.0.1:{0} (FE rewrite /api/v1 -> backend)" -f $BackendPort)
   Write-Host "  Logs:     $LogDir"
   Write-Host "  PID file: $PidFile"
   Write-Host ""

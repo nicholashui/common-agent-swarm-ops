@@ -83,6 +83,10 @@ export interface AgentDetailLandingView {
   readonly opsWhereUsed: string;
   readonly opsMetrics: readonly AgentDetailStat[];
   readonly footerNote: string;
+  /** Public path to SPEC.md for markdown rendering (e.g. /docs/agents/video.accessibility/SPEC.md). */
+  readonly specDocPath?: string | null;
+  /** Public path to README.md when present. */
+  readonly readmeDocPath?: string | null;
 }
 
 const AGENT_DETAIL_LABELS: ScreenLabels = {
@@ -152,7 +156,9 @@ export function buildAgentDetailView(
       },
     ],
     insightStrip: agent.specExcerpt || agent.description,
-    yourUsageNote: "Open full SPEC.md in pack folder →",
+    yourUsageNote: agent.specDocPath
+      ? "Full SPEC rendered under Config / Spec →"
+      : "Open full SPEC.md in pack folder →",
     historyFilters: ["Self-contained", "Config", "Provenance"],
     usageRows: [
       {
@@ -229,6 +235,8 @@ export function buildAgentDetailView(
     ],
     footerNote:
       "Agent settings projected from self-contained pack folders. Browser is non-authority; mutations require host action refs.",
+    specDocPath: agent.specDocPath,
+    readmeDocPath: agent.readmeDocPath,
   };
 }
 
@@ -268,6 +276,8 @@ function defaultPackAgentDetail(): AgentDetailLandingView {
     opsWhereUsed: "—",
     opsMetrics: [],
     footerNote: "No demo agents are registered in the UI catalog.",
+    specDocPath: null,
+    readmeDocPath: null,
   };
 }
 
@@ -287,8 +297,8 @@ export const AGENT_DETAIL_TABS: readonly {
   readonly id: AgentDetailTabId;
   readonly label: string;
 }[] = [
+  { id: "config", label: "Spec / Config" },
   { id: "history", label: "History + Cross-Swarm Usage" },
-  { id: "config", label: "Config / Spec" },
   { id: "playground", label: "Playground" },
   { id: "knowledge", label: "Knowledge" },
   { id: "ops", label: "Ops & Rollout" },

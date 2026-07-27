@@ -36,6 +36,8 @@ export interface PackAgentRecord {
   readonly hasSpecMd: boolean;
   readonly hasReadme: boolean;
   readonly hasSources: boolean;
+  readonly specDocPath: string | null;
+  readonly readmeDocPath: string | null;
 }
 
 export const PACK_AGENT_COUNTS = {
@@ -51,7 +53,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Accessibility",
     "role": "AccessibilityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns final accessibility acceptance before release Host role binding: `AccessibilityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns final accessibility acceptance before release ### Knowledge distillation sources (historical) WCAG 2.2, captioning and AD guidelines, Deaf/HoH review frameworks ### Self-quality criteria (historical) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Surpass-human signal (historical) Finds release-blocking accessibility issues before human audits do ### Critique bus (historical) - **Accepts critique from:** AccessibilityOptimizerAgent, EditorAgent, ColoristAgent, SoundMixerAgent - **Comments on:** Caption sync, contrast issues, missing AD or sign-language layers ### Tools design-time notes (historical, non-activating) Caption validators, contrast analyzers, AD review tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI with accessibility constitut",
+    "description": "Owns final accessibility acceptance before release Host role binding: AccessibilityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -128,11 +130,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns final accessibility acceptance before release Host role binding: `AccessibilityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns final accessibility acceptance before release ### Knowledge distillation sources (historical) WCAG 2.2, captioning and AD guidelines, Deaf/HoH review frameworks ### Self-quality criteria (historical) Caption accuracy, AD completeness, contrast compliance, release-readiness ### Surpass-human signal (historical) Finds release-blocking accessibility issues before human audits do ### Critique bus (historical) - **Accepts critique from:** AccessibilityOptimizerAgent, EditorAgent, ColoristAgent, SoundMixerAgent - **Comments on:** Caption sync, contrast issues, missing AD or sign-language layers ### Tools design-time notes (historical, non-activating) Caption validators, contrast analyzers, AD review tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI with accessibility constitut",
+    "specExcerpt": "Owns final accessibility acceptance before release Host role binding: AccessibilityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.accessibility",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.accessibility/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.accessibility/README.md"
   },
   {
     "id": "video.accessibilityoptimizer",
@@ -140,7 +144,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Accessibilityoptimizer",
     "role": "AccessibilityOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: `AccessibilityOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Knowledge distillation sources (historical) WCAG 2.2; W3C/WAI-ARIA; DCMP captioning key; Deaf/HoH guidelines ### Self-quality criteria (historical) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Surpass-human signal (historical) Catches more a11y defects than ADA-certified auditor ### Critique bus (historical) - **Accepts critique from:** AccessibilityAgent (HiTL), ComplianceAgent - **Comments on:** EditorAgent (caption sync), ColoristAgent (contrast) ### Tools design-time notes (historical, non-activating) axe-core/Lighthouse (contrast); Whisper v4 (captioning); audio-description generator **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = WCAG 2.2 success criteria)",
+    "description": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: AccessibilityOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -217,11 +221,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: `AccessibilityOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) WCAG 2.2 contrast, captions, audio description, color-blind safe ### Knowledge distillation sources (historical) WCAG 2.2; W3C/WAI-ARIA; DCMP captioning key; Deaf/HoH guidelines ### Self-quality criteria (historical) Conformance 100% AA, ≥90% AAA; caption WER ≤2% ### Surpass-human signal (historical) Catches more a11y defects than ADA-certified auditor ### Critique bus (historical) - **Accepts critique from:** AccessibilityAgent (HiTL), ComplianceAgent - **Comments on:** EditorAgent (caption sync), ColoristAgent (contrast) ### Tools design-time notes (historical, non-activating) axe-core/Lighthouse (contrast); Whisper v4 (captioning); audio-description generator **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = WCAG 2.2 success criteria)",
+    "specExcerpt": "WCAG 2.2 contrast, captions, audio description, color-blind safe Host role binding: AccessibilityOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.accessibilityoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.accessibilityoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.accessibilityoptimizer/README.md"
   },
   {
     "id": "video.aiqaconsistency",
@@ -229,7 +235,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Aiqaconsistency",
     "role": "AIQAConsistencyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: `AIQAConsistencyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Catches frame drift, hand/face artifacts, identity breaks ### Knowledge distillation sources (historical) VBench; EvalCrafter; FVD literature; MPC/Weta QC checklists; deepfake models ### Self-quality criteria (historical) Per-frame artifact score; identity-hash drift; hand/finger pass ### Surpass-human signal (historical) Catches >95% of senior QC catches + 30% missed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, VFXSupAgent - **Comments on:** GeneratorAgent (re-roll), CompositorAgent ### Tools design-time notes (historical, non-activating) VBench evaluation suite; hand-detector models; face-ID embedding (ArcFace); frame-diff tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run detectors → flag → report)",
+    "description": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: AIQAConsistencyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -306,11 +312,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: `AIQAConsistencyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Catches frame drift, hand/face artifacts, identity breaks ### Knowledge distillation sources (historical) VBench; EvalCrafter; FVD literature; MPC/Weta QC checklists; deepfake models ### Self-quality criteria (historical) Per-frame artifact score; identity-hash drift; hand/finger pass ### Surpass-human signal (historical) Catches >95% of senior QC catches + 30% missed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, VFXSupAgent - **Comments on:** GeneratorAgent (re-roll), CompositorAgent ### Tools design-time notes (historical, non-activating) VBench evaluation suite; hand-detector models; face-ID embedding (ArcFace); frame-diff tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run detectors → flag → report)",
+    "specExcerpt": "Catches frame drift, hand/face artifacts, identity breaks Host role binding: AIQAConsistencyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.aiqaconsistency",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.aiqaconsistency/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.aiqaconsistency/README.md"
   },
   {
     "id": "video.analyst",
@@ -318,7 +326,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Analyst",
     "role": "AnalystAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: `AnalystAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Knowledge distillation sources (historical) Platform analytics dashboards; experiment logs; evaluation-harness outputs; benchmark histories ### Self-quality criteria (historical) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Surpass-human signal (historical) Detects actionable performance shifts faster than human analyst rotations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, PerformanceMarketerAgent, EvaluationHarnessAgent - **Comments on:** Campaign pacing, release timing, retention and ROAS anomalies ### Tools design-time notes (historical, non-activating) YouTube Analytics, Meta/TikTok Ads dashboards, BI warehouse, benchmark logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI us",
+    "description": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: AnalystAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -395,11 +403,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: `AnalystAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aggregates business, creative, and technical performance telemetry into decision-ready reports ### Knowledge distillation sources (historical) Platform analytics dashboards; experiment logs; evaluation-harness outputs; benchmark histories ### Self-quality criteria (historical) KPI completeness; forecast-vs-actual variance within tolerance; insight-to-action turnaround ### Surpass-human signal (historical) Detects actionable performance shifts faster than human analyst rotations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, PerformanceMarketerAgent, EvaluationHarnessAgent - **Comments on:** Campaign pacing, release timing, retention and ROAS anomalies ### Tools design-time notes (historical, non-activating) YouTube Analytics, Meta/TikTok Ads dashboards, BI warehouse, benchmark logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI us",
+    "specExcerpt": "Aggregates business, creative, and technical performance telemetry into decision-ready reports Host role binding: AnalystAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.analyst",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.analyst/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.analyst/README.md"
   },
   {
     "id": "video.animator_2d",
@@ -407,7 +417,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Animator 2d",
     "role": "AnimatorAgent (2D/3D) (VA Domain Pack)",
     "status": "registered",
-    "description": "Character motion, weight, timing Host role binding: `AnimatorAgent (2D/3D) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character motion, weight, timing ### Knowledge distillation sources (historical) Williams *Animator's Survival Kit*; Annie Awards; Pixar SparkShorts; Blaise lessons ### Self-quality criteria (historical) 12-principles score; arc smoothness; lip-sync phoneme accuracy ### Surpass-human signal (historical) Beats junior on Annie rubric; equals senior at 5× throughput ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, LipSyncAgent - **Comments on:** StoryboardAgent (impossible action), DirectorAgent (timing) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control; Blender Python API; Cascadeur physics; Sync.so lip-sync **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: 12 principles checklist)",
+    "description": "Character motion, weight, timing Host role binding: AnimatorAgent (2D/3D) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -487,11 +497,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Character motion, weight, timing Host role binding: `AnimatorAgent (2D/3D) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character motion, weight, timing ### Knowledge distillation sources (historical) Williams *Animator's Survival Kit*; Annie Awards; Pixar SparkShorts; Blaise lessons ### Self-quality criteria (historical) 12-principles score; arc smoothness; lip-sync phoneme accuracy ### Surpass-human signal (historical) Beats junior on Annie rubric; equals senior at 5× throughput ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, LipSyncAgent - **Comments on:** StoryboardAgent (impossible action), DirectorAgent (timing) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control; Blender Python API; Cascadeur physics; Sync.so lip-sync **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: 12 principles checklist)",
+    "specExcerpt": "Character motion, weight, timing Host role binding: AnimatorAgent (2D/3D) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.animator_2d",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.animator_2d/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.animator_2d/README.md"
   },
   {
     "id": "video.archivemaster",
@@ -499,7 +511,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Archivemaster",
     "role": "ArchiveMasterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Produces archive-grade masters and preservation packages Host role binding: `ArchiveMasterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Produces archive-grade masters and preservation packages ### Knowledge distillation sources (historical) Preservation standards, checksum workflows, archive metadata practice ### Self-quality criteria (historical) Checksum integrity, preservation metadata completeness, archive package validity ### Surpass-human signal (historical) Delivers more reliable archive packages than late-stage export-only workflows ### Critique bus (historical) - **Accepts critique from:** DistributorAgent, ColoristAgent, SoundMixerAgent, GateKeeperAgent - **Comments on:** Incomplete preservation bundles, archive-spec violations, metadata gaps ### Tools design-time notes (historical, non-activating) Archive mastering tools, checksum utilities, preservation metadata systems **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histori",
+    "description": "Produces archive-grade masters and preservation packages Host role binding: ArchiveMasterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -576,11 +588,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Produces archive-grade masters and preservation packages Host role binding: `ArchiveMasterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Produces archive-grade masters and preservation packages ### Knowledge distillation sources (historical) Preservation standards, checksum workflows, archive metadata practice ### Self-quality criteria (historical) Checksum integrity, preservation metadata completeness, archive package validity ### Surpass-human signal (historical) Delivers more reliable archive packages than late-stage export-only workflows ### Critique bus (historical) - **Accepts critique from:** DistributorAgent, ColoristAgent, SoundMixerAgent, GateKeeperAgent - **Comments on:** Incomplete preservation bundles, archive-spec violations, metadata gaps ### Tools design-time notes (historical, non-activating) Archive mastering tools, checksum utilities, preservation metadata systems **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histori",
+    "specExcerpt": "Produces archive-grade masters and preservation packages Host role binding: ArchiveMasterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.archivemaster",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.archivemaster/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.archivemaster/README.md"
   },
   {
     "id": "video.archiveproducer",
@@ -588,7 +602,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Archiveproducer",
     "role": "ArchiveProducerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: `ArchiveProducerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Knowledge distillation sources (historical) Archive production notes, source curation practices, provenance preservation standards ### Self-quality criteria (historical) Source package completeness, rights coverage, provenance preservation ### Surpass-human signal (historical) Assembles reusable archival packages more cleanly than manual gather-and-sort workflows ### Critique bus (historical) - **Accepts critique from:** ArchiveResearchAgent, JournalistAgent, LegalAgent - **Comments on:** Missing archival context, weak source packaging, rights gaps ### Tools design-time notes (historical, non-activating) Archive asset managers, metadata systems, provenance logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs.",
+    "description": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: ArchiveProducerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -670,11 +684,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: `ArchiveProducerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages archival materials and source assets for reuse-heavy or documentary workflows ### Knowledge distillation sources (historical) Archive production notes, source curation practices, provenance preservation standards ### Self-quality criteria (historical) Source package completeness, rights coverage, provenance preservation ### Surpass-human signal (historical) Assembles reusable archival packages more cleanly than manual gather-and-sort workflows ### Critique bus (historical) - **Accepts critique from:** ArchiveResearchAgent, JournalistAgent, LegalAgent - **Comments on:** Missing archival context, weak source packaging, rights gaps ### Tools design-time notes (historical, non-activating) Archive asset managers, metadata systems, provenance logs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs.",
+    "specExcerpt": "Packages archival materials and source assets for reuse-heavy or documentary workflows Host role binding: ArchiveProducerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.archiveproducer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.archiveproducer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.archiveproducer/README.md"
   },
   {
     "id": "video.archiveresearch",
@@ -682,7 +698,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Archiveresearch",
     "role": "ArchiveResearchAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Historical / academic / archival deep search Host role binding: `ArchiveResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Historical / academic / archival deep search ### Knowledge distillation sources (historical) JSTOR, arXiv, PubMed, AP Archive, Getty, FOIA ### Self-quality criteria (historical) Primary-source ratio; archive-coverage breadth ### Surpass-human signal (historical) Higher primary-source ratio than doc producer ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, SMEAgent - **Comments on:** ScriptwriterAgent (secondary-source reliance) ### Tools design-time notes (historical, non-activating) JSTOR/arXiv/PubMed APIs; Getty Images API; FOIA request tools; OCR (Tesseract) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (formulate query → search archive → extract → grade source)",
+    "description": "Historical / academic / archival deep search Host role binding: ArchiveResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -759,11 +775,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Historical / academic / archival deep search Host role binding: `ArchiveResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Historical / academic / archival deep search ### Knowledge distillation sources (historical) JSTOR, arXiv, PubMed, AP Archive, Getty, FOIA ### Self-quality criteria (historical) Primary-source ratio; archive-coverage breadth ### Surpass-human signal (historical) Higher primary-source ratio than doc producer ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, SMEAgent - **Comments on:** ScriptwriterAgent (secondary-source reliance) ### Tools design-time notes (historical, non-activating) JSTOR/arXiv/PubMed APIs; Getty Images API; FOIA request tools; OCR (Tesseract) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (formulate query → search archive → extract → grade source)",
+    "specExcerpt": "Historical / academic / archival deep search Host role binding: ArchiveResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.archiveresearch",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.archiveresearch/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.archiveresearch/README.md"
   },
   {
     "id": "video.audiencesim",
@@ -771,7 +789,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Audiencesim",
     "role": "AudienceSimAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Simulates audience preference, engagement, and drop-off Host role binding: `AudienceSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates audience preference, engagement, and drop-off ### Knowledge distillation sources (historical) Pairwise preference datasets; retention studies; audience segmentation models ### Self-quality criteria (historical) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Surpass-human signal (historical) Predicts audience reaction earlier than conventional test-screen cycles ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, AnalystAgent, JudgeAgent - **Comments on:** Hooks, pacing, clarity, emotional fit, trailer strength ### Tools design-time notes (historical, non-activating) Persona simulators, pairwise evaluation harness, retention models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge + pairwise pre",
+    "description": "Simulates audience preference, engagement, and drop-off Host role binding: AudienceSimAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -848,11 +866,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Simulates audience preference, engagement, and drop-off Host role binding: `AudienceSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates audience preference, engagement, and drop-off ### Knowledge distillation sources (historical) Pairwise preference datasets; retention studies; audience segmentation models ### Self-quality criteria (historical) Preference stability across cohorts; retention-prediction accuracy; disagreement logging ### Surpass-human signal (historical) Predicts audience reaction earlier than conventional test-screen cycles ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, AnalystAgent, JudgeAgent - **Comments on:** Hooks, pacing, clarity, emotional fit, trailer strength ### Tools design-time notes (historical, non-activating) Persona simulators, pairwise evaluation harness, retention models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge + pairwise pre",
+    "specExcerpt": "Simulates audience preference, engagement, and drop-off Host role binding: AudienceSimAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.audiencesim",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.audiencesim/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.audiencesim/README.md"
   },
   {
     "id": "video.audiobooknarrator",
@@ -860,7 +880,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Audiobooknarrator",
     "role": "AudiobookNarratorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Sustained character + narration Host role binding: `AudiobookNarratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sustained character + narration ### Knowledge distillation sources (historical) Audie Awards; AudioFile Earphones; consented narrator corpora ### Self-quality criteria (historical) Vocal stamina (no drift 60min); character distinction (embedding distance) ### Surpass-human signal (historical) Wins AudioFile blind eval at fraction of studio time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AuthorAgent - **Comments on:** VOArtistAgent (over-acting) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 long-form TTS; Projects API (book chapters); voice-consistency monitor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (drift detection as feedback loop)",
+    "description": "Sustained character + narration Host role binding: AudiobookNarratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -940,11 +960,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Sustained character + narration Host role binding: `AudiobookNarratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sustained character + narration ### Knowledge distillation sources (historical) Audie Awards; AudioFile Earphones; consented narrator corpora ### Self-quality criteria (historical) Vocal stamina (no drift 60min); character distinction (embedding distance) ### Surpass-human signal (historical) Wins AudioFile blind eval at fraction of studio time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AuthorAgent - **Comments on:** VOArtistAgent (over-acting) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 long-form TTS; Projects API (book chapters); voice-consistency monitor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (drift detection as feedback loop)",
+    "specExcerpt": "Sustained character + narration Host role binding: AudiobookNarratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.audiobooknarrator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.audiobooknarrator/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.audiobooknarrator/README.md"
   },
   {
     "id": "video.avatardesign",
@@ -952,7 +974,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Avatardesign",
     "role": "AvatarDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Synthetic-presenter identity Host role binding: `AvatarDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthetic-presenter identity ### Knowledge distillation sources (historical) Synthesia/HeyGen design docs; Hany Farid deepfake-detection; C2PA spec ### Self-quality criteria (historical) Identity-hash consistency across shots; consent chain; C2PA signed ### Surpass-human signal (historical) C2PA-verifiable + Partnership-on-AI full-pass at scale ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), DeepfakeDetectionAgent - **Comments on:** VoiceCloneAgent (off-likeness), LipSyncAgent ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV API; Synthesia API; C2PA signing library (c2patool); face-embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (consent + identity constitution)",
+    "description": "Synthetic-presenter identity Host role binding: AvatarDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1029,11 +1051,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Synthetic-presenter identity Host role binding: `AvatarDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthetic-presenter identity ### Knowledge distillation sources (historical) Synthesia/HeyGen design docs; Hany Farid deepfake-detection; C2PA spec ### Self-quality criteria (historical) Identity-hash consistency across shots; consent chain; C2PA signed ### Surpass-human signal (historical) C2PA-verifiable + Partnership-on-AI full-pass at scale ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), DeepfakeDetectionAgent - **Comments on:** VoiceCloneAgent (off-likeness), LipSyncAgent ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV API; Synthesia API; C2PA signing library (c2patool); face-embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (consent + identity constitution)",
+    "specExcerpt": "Synthetic-presenter identity Host role binding: AvatarDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.avatardesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.avatardesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.avatardesign/README.md"
   },
   {
     "id": "video.awardsstrategist",
@@ -1041,7 +1065,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Awardsstrategist",
     "role": "AwardsStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Plans awards submissions and campaign timing Host role binding: `AwardsStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans awards submissions and campaign timing ### Knowledge distillation sources (historical) Awards calendars, campaign playbooks, category positioning histories ### Self-quality criteria (historical) Submission readiness, category fit, timeline precision ### Surpass-human signal (historical) Improves awards-timing discipline over generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, CriticAgent, MarketingAgent - **Comments on:** Weak campaign timing, poor category fit, incomplete submission assets ### Tools design-time notes (historical, non-activating) Awards calendars, campaign trackers, submission checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with awards timeline optimization",
+    "description": "Plans awards submissions and campaign timing Host role binding: AwardsStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1118,11 +1142,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Plans awards submissions and campaign timing Host role binding: `AwardsStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans awards submissions and campaign timing ### Knowledge distillation sources (historical) Awards calendars, campaign playbooks, category positioning histories ### Self-quality criteria (historical) Submission readiness, category fit, timeline precision ### Surpass-human signal (historical) Improves awards-timing discipline over generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, CriticAgent, MarketingAgent - **Comments on:** Weak campaign timing, poor category fit, incomplete submission assets ### Tools design-time notes (historical, non-activating) Awards calendars, campaign trackers, submission checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with awards timeline optimization",
+    "specExcerpt": "Plans awards submissions and campaign timing Host role binding: AwardsStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.awardsstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.awardsstrategist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.awardsstrategist/README.md"
   },
   {
     "id": "video.benchmarkresearch",
@@ -1130,7 +1156,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Benchmarkresearch",
     "role": "BenchmarkResearchAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: `BenchmarkResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; conference proceedings ### Self-quality criteria (historical) Coverage of benchmarks; freshness ≤7 days ### Surpass-human signal (historical) Faster + broader than ML-research team ### Critique bus (historical) - **Accepts critique from:** OptimizationAgents (any) - **Comments on:** All AI agents (stale baselines) ### Tools design-time notes (historical, non-activating) Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (poll leaderboards → detect change → alert)",
+    "description": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: BenchmarkResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1207,11 +1233,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: `BenchmarkResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; conference proceedings ### Self-quality criteria (historical) Coverage of benchmarks; freshness ≤7 days ### Surpass-human signal (historical) Faster + broader than ML-research team ### Critique bus (historical) - **Accepts critique from:** OptimizationAgents (any) - **Comments on:** All AI agents (stale baselines) ### Tools design-time notes (historical, non-activating) Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (poll leaderboards → detect change → alert)",
+    "specExcerpt": "Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards Host role binding: BenchmarkResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.benchmarkresearch",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.benchmarkresearch/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.benchmarkresearch/README.md"
   },
   {
     "id": "video.brand",
@@ -1219,7 +1247,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Brand",
     "role": "BrandAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: `BrandAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces brand voice, claims boundaries, and visual consistency ### Knowledge distillation sources (historical) Brand books, approved campaigns, legal claim guardrails, tone guides ### Self-quality criteria (historical) Brand-voice similarity, policy adherence, low deviation across assets ### Surpass-human signal (historical) Holds cross-channel brand consistency better than fragmented human review ### Critique bus (historical) - **Accepts critique from:** CopywriterAgent, MotionGraphicsAgent, MarketingAgent, BrandStrategistAgent - **Comments on:** Voice drift, visual inconsistency, claim creep ### Tools design-time notes (historical, non-activating) Brand asset library, embedding similarity, style guides **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine against brand constitution",
+    "description": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: BrandAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1296,11 +1324,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: `BrandAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces brand voice, claims boundaries, and visual consistency ### Knowledge distillation sources (historical) Brand books, approved campaigns, legal claim guardrails, tone guides ### Self-quality criteria (historical) Brand-voice similarity, policy adherence, low deviation across assets ### Surpass-human signal (historical) Holds cross-channel brand consistency better than fragmented human review ### Critique bus (historical) - **Accepts critique from:** CopywriterAgent, MotionGraphicsAgent, MarketingAgent, BrandStrategistAgent - **Comments on:** Voice drift, visual inconsistency, claim creep ### Tools design-time notes (historical, non-activating) Brand asset library, embedding similarity, style guides **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine against brand constitution",
+    "specExcerpt": "Enforces brand voice, claims boundaries, and visual consistency Host role binding: BrandAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.brand",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.brand/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.brand/README.md"
   },
   {
     "id": "video.brandstrategist",
@@ -1308,7 +1338,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Brandstrategist",
     "role": "BrandStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Defines audience-value framing and positioning before script and campaign execution Host role binding: `BrandStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Defines audience-value framing and positioning before script and campaign execution ### Knowledge distillation sources (historical) Positioning frameworks, campaign strategy decks, market research, brand architecture docs ### Self-quality criteria (historical) Strategy coherence, differentiation strength, audience-message clarity ### Surpass-human signal (historical) Produces clearer brand-to-script translation than ad hoc human handoffs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, ScreenwriterAgent, MarketingAgent - **Comments on:** Positioning gaps, weak value proposition, misaligned audience framing ### Tools design-time notes (historical, non-activating) Research decks, messaging frameworks, strategy templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architect",
+    "description": "Defines audience-value framing and positioning before script and campaign execution Host role binding: BrandStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1385,11 +1415,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Defines audience-value framing and positioning before script and campaign execution Host role binding: `BrandStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Defines audience-value framing and positioning before script and campaign execution ### Knowledge distillation sources (historical) Positioning frameworks, campaign strategy decks, market research, brand architecture docs ### Self-quality criteria (historical) Strategy coherence, differentiation strength, audience-message clarity ### Surpass-human signal (historical) Produces clearer brand-to-script translation than ad hoc human handoffs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, ScreenwriterAgent, MarketingAgent - **Comments on:** Positioning gaps, weak value proposition, misaligned audience framing ### Tools design-time notes (historical, non-activating) Research decks, messaging frameworks, strategy templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architect",
+    "specExcerpt": "Defines audience-value framing and positioning before script and campaign execution Host role binding: BrandStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.brandstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.brandstrategist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.brandstrategist/README.md"
   },
   {
     "id": "video.cameraoperator",
@@ -1397,7 +1429,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Cameraoperator",
     "role": "CameraOperatorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Executes framing / focus / move per DoP intent Host role binding: `CameraOperatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Executes framing / focus / move per DoP intent ### Knowledge distillation sources (historical) SOC archive; Steadicam workshop reels; focus-pull telemetry ### Self-quality criteria (historical) Frame steadiness, focus-hit %, action centering ### Surpass-human signal (historical) Focus-pull accuracy >99% vs SOC ~97% baseline ### Critique bus (historical) - **Accepts critique from:** CinematographerAgent (per-take feedback) - **Comments on:** CinematographerAgent (impractical asks) ### Tools design-time notes (historical, non-activating) Runway camera-path presets; Kling motion control API; virtual camera rigs (Unreal MV) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (Yao 2022) — reason about framing then call renderer",
+    "description": "Executes framing / focus / move per DoP intent Host role binding: CameraOperatorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1474,11 +1506,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Executes framing / focus / move per DoP intent Host role binding: `CameraOperatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Executes framing / focus / move per DoP intent ### Knowledge distillation sources (historical) SOC archive; Steadicam workshop reels; focus-pull telemetry ### Self-quality criteria (historical) Frame steadiness, focus-hit %, action centering ### Surpass-human signal (historical) Focus-pull accuracy >99% vs SOC ~97% baseline ### Critique bus (historical) - **Accepts critique from:** CinematographerAgent (per-take feedback) - **Comments on:** CinematographerAgent (impractical asks) ### Tools design-time notes (historical, non-activating) Runway camera-path presets; Kling motion control API; virtual camera rigs (Unreal MV) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (Yao 2022) — reason about framing then call renderer",
+    "specExcerpt": "Executes framing / focus / move per DoP intent Host role binding: CameraOperatorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.cameraoperator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.cameraoperator/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.cameraoperator/README.md"
   },
   {
     "id": "video.casting",
@@ -1486,7 +1520,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Casting",
     "role": "CastingAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Voice + likeness selection; audition simulation Host role binding: `CastingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice + likeness selection; audition simulation ### Knowledge distillation sources (historical) CSA Artios archive; SAG-AFTRA AI rider; consented voice-actor corpora ### Self-quality criteria (historical) Character-voice fit (audience preference); consent compliance 100% ### Surpass-human signal (historical) Beats CSA casting in blind preference; hours vs weeks turnaround ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ShowrunnerAgent, Legal/ConsentAgent - **Comments on:** VoiceCloneAgent (likeness), AvatarDesignAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 voice library, HeyGen avatar catalogue, speaker-embedding similarity (Resemblyzer) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (pairwise preference on voice samples)",
+    "description": "Voice + likeness selection; audition simulation Host role binding: CastingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1563,11 +1597,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Voice + likeness selection; audition simulation Host role binding: `CastingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice + likeness selection; audition simulation ### Knowledge distillation sources (historical) CSA Artios archive; SAG-AFTRA AI rider; consented voice-actor corpora ### Self-quality criteria (historical) Character-voice fit (audience preference); consent compliance 100% ### Surpass-human signal (historical) Beats CSA casting in blind preference; hours vs weeks turnaround ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ShowrunnerAgent, Legal/ConsentAgent - **Comments on:** VoiceCloneAgent (likeness), AvatarDesignAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 voice library, HeyGen avatar catalogue, speaker-embedding similarity (Resemblyzer) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (pairwise preference on voice samples)",
+    "specExcerpt": "Voice + likeness selection; audition simulation Host role binding: CastingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.casting",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.casting/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.casting/README.md"
   },
   {
     "id": "video.channelmanager",
@@ -1575,7 +1611,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Channelmanager",
     "role": "ChannelManagerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: `ChannelManagerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages episodic or platform channel operations for cadence and metadata readiness ### Knowledge distillation sources (historical) Channel publishing playbooks, metadata standards, scheduling ops ### Self-quality criteria (historical) Publishing readiness, cadence stability, metadata completeness ### Surpass-human signal (historical) Improves publishing discipline over manual channel operations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, AnalystAgent, MarketingAgent - **Comments on:** Release readiness gaps, metadata omissions, schedule slippage ### Tools design-time notes (historical, non-activating) CMS/channel dashboards, scheduler tools, metadata validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAc",
+    "description": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: ChannelManagerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1652,11 +1688,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: `ChannelManagerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages episodic or platform channel operations for cadence and metadata readiness ### Knowledge distillation sources (historical) Channel publishing playbooks, metadata standards, scheduling ops ### Self-quality criteria (historical) Publishing readiness, cadence stability, metadata completeness ### Surpass-human signal (historical) Improves publishing discipline over manual channel operations ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, AnalystAgent, MarketingAgent - **Comments on:** Release readiness gaps, metadata omissions, schedule slippage ### Tools design-time notes (historical, non-activating) CMS/channel dashboards, scheduler tools, metadata validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAc",
+    "specExcerpt": "Manages episodic or platform channel operations for cadence and metadata readiness Host role binding: ChannelManagerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.channelmanager",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.channelmanager/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.channelmanager/README.md"
   },
   {
     "id": "video.childrensauthor",
@@ -1664,7 +1702,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Childrensauthor",
     "role": "ChildrensAuthorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Age-appropriate story + safety Host role binding: `ChildrensAuthorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Age-appropriate story + safety ### Knowledge distillation sources (historical) Caldecott/Geisel winners; Mo Willems/Donaldson; ECE lit ### Self-quality criteria (historical) Lexile band match; Common-Sense-Media safety pass; rhyme score ### Surpass-human signal (historical) Beats Caldecott-rubric predicted score ### Critique bus (historical) - **Accepts critique from:** ChildSafetyAgent, ParentSimAgent - **Comments on:** AnimatorAgent (scary), VOAgent (wrong age-tone) ### Tools design-time notes (historical, non-activating) Lexile analyzer API; Common Sense Media rubric; rhyme/meter tools (CMU Pronouncing Dict) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (child-safety constitution)",
+    "description": "Age-appropriate story + safety Host role binding: ChildrensAuthorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1741,11 +1779,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Age-appropriate story + safety Host role binding: `ChildrensAuthorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Age-appropriate story + safety ### Knowledge distillation sources (historical) Caldecott/Geisel winners; Mo Willems/Donaldson; ECE lit ### Self-quality criteria (historical) Lexile band match; Common-Sense-Media safety pass; rhyme score ### Surpass-human signal (historical) Beats Caldecott-rubric predicted score ### Critique bus (historical) - **Accepts critique from:** ChildSafetyAgent, ParentSimAgent - **Comments on:** AnimatorAgent (scary), VOAgent (wrong age-tone) ### Tools design-time notes (historical, non-activating) Lexile analyzer API; Common Sense Media rubric; rhyme/meter tools (CMU Pronouncing Dict) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (child-safety constitution)",
+    "specExcerpt": "Age-appropriate story + safety Host role binding: ChildrensAuthorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.childrensauthor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.childrensauthor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.childrensauthor/README.md"
   },
   {
     "id": "video.choreography",
@@ -1753,7 +1793,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Choreography",
     "role": "ChoreographyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Movement design (MVs, dance challenges) Host role binding: `ChoreographyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Movement design (MVs, dance challenges) ### Knowledge distillation sources (historical) Emmy Choreography submissions; Goebel/Moore reels; dance-notation datasets ### Self-quality criteria (historical) Beat-sync accuracy; safety constraints; viral-pattern alignment ### Surpass-human signal (historical) Wins blind preference vs choreographer drafts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MVDirectorAgent - **Comments on:** DirectorAgent (un-camera-friendly staging) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control (reference video); Cascadeur; beat-detection (librosa) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sync + safety)",
+    "description": "Movement design (MVs, dance challenges) Host role binding: ChoreographyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1830,11 +1870,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Movement design (MVs, dance challenges) Host role binding: `ChoreographyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Movement design (MVs, dance challenges) ### Knowledge distillation sources (historical) Emmy Choreography submissions; Goebel/Moore reels; dance-notation datasets ### Self-quality criteria (historical) Beat-sync accuracy; safety constraints; viral-pattern alignment ### Surpass-human signal (historical) Wins blind preference vs choreographer drafts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MVDirectorAgent - **Comments on:** DirectorAgent (un-camera-friendly staging) ### Tools design-time notes (historical, non-activating) Kling 3.0 motion control (reference video); Cascadeur; beat-detection (librosa) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sync + safety)",
+    "specExcerpt": "Movement design (MVs, dance challenges) Host role binding: ChoreographyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.choreography",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.choreography/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.choreography/README.md"
   },
   {
     "id": "video.cinematographer",
@@ -1842,7 +1884,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Cinematographer",
     "role": "CinematographerAgent (DoP) (VA Domain Pack)",
     "status": "registered",
-    "description": "Lensing, lighting, composition, look Host role binding: `CinematographerAgent (DoP) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lensing, lighting, composition, look ### Knowledge distillation sources (historical) ASC Magazine 1980–present; Deakins forum; Brown *Cinematography: Theory & Practice*; Cannes shot-libraries ### Self-quality criteria (historical) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency ### Surpass-human signal (historical) Beats ASC peer-juried reels in blind aesthetic preference ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent, VFXSupAgent - **Comments on:** DirectorAgent (visual intent), GafferAgent, ColoristAgent ### Tools design-time notes (historical, non-activating) Veo 3.1 (camera-path control), Runway Gen-4 (ControlNet guides), ACES color pipeline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + CLIP-based a",
+    "description": "Lensing, lighting, composition, look Host role binding: CinematographerAgent (DoP) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -1919,11 +1961,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Lensing, lighting, composition, look Host role binding: `CinematographerAgent (DoP) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lensing, lighting, composition, look ### Knowledge distillation sources (historical) ASC Magazine 1980–present; Deakins forum; Brown *Cinematography: Theory & Practice*; Cannes shot-libraries ### Self-quality criteria (historical) Rule-of-thirds/leading-lines score; exposure histogram in zone; color-temp consistency ### Surpass-human signal (historical) Beats ASC peer-juried reels in blind aesthetic preference ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent, VFXSupAgent - **Comments on:** DirectorAgent (visual intent), GafferAgent, ColoristAgent ### Tools design-time notes (historical, non-activating) Veo 3.1 (camera-path control), Runway Gen-4 (ControlNet guides), ACES color pipeline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + CLIP-based a",
+    "specExcerpt": "Lensing, lighting, composition, look Host role binding: CinematographerAgent (DoP) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.cinematographer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.cinematographer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.cinematographer/README.md"
   },
   {
     "id": "video.citation",
@@ -1931,7 +1975,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Citation",
     "role": "CitationAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Normalizes sources; grades primary/secondary/tertiary Host role binding: `CitationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Normalizes sources; grades primary/secondary/tertiary ### Knowledge distillation sources (historical) Chicago, APA, AP style; SPJ grading; CRAAP test ### Self-quality criteria (historical) Citation format 100% valid; primary % ≥target ### Surpass-human signal (historical) Lower error rate than newsroom copy desk ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, JournalistAgent - **Comments on:** WebResearchAgent (weak source) ### Tools design-time notes (historical, non-activating) Citation parsers (AnyStyle); DOI resolver; CRAAP scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (format validator + source grader as rubric)",
+    "description": "Normalizes sources; grades primary/secondary/tertiary Host role binding: CitationAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2008,11 +2052,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Normalizes sources; grades primary/secondary/tertiary Host role binding: `CitationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Normalizes sources; grades primary/secondary/tertiary ### Knowledge distillation sources (historical) Chicago, APA, AP style; SPJ grading; CRAAP test ### Self-quality criteria (historical) Citation format 100% valid; primary % ≥target ### Surpass-human signal (historical) Lower error rate than newsroom copy desk ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, JournalistAgent - **Comments on:** WebResearchAgent (weak source) ### Tools design-time notes (historical, non-activating) Citation parsers (AnyStyle); DOI resolver; CRAAP scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (format validator + source grader as rubric)",
+    "specExcerpt": "Normalizes sources; grades primary/secondary/tertiary Host role binding: CitationAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.citation",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.citation/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.citation/README.md"
   },
   {
     "id": "video.colorist",
@@ -2020,7 +2066,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Colorist",
     "role": "ColoristAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Final grade; look consistency Host role binding: `ColoristAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final grade; look consistency ### Knowledge distillation sources (historical) ICA corpora; Sonnenfeld sessions; HPA Award grades ### Self-quality criteria (historical) ΔE drift <2; skin-tone IT8 alignment; mood vector match ### Surpass-human signal (historical) Beats junior colorist in blind preference; matches senior within ΔE ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DirectorAgent, AccessibilityAgent (contrast) - **Comments on:** DoPAgent (mixed-temp), VFXAgent (comp-color mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve color API (MCP); ACES/OCIO pipeline; LUT generators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + tool-use (colorimeter validation)",
+    "description": "Final grade; look consistency Host role binding: ColoristAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2097,11 +2143,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Final grade; look consistency Host role binding: `ColoristAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final grade; look consistency ### Knowledge distillation sources (historical) ICA corpora; Sonnenfeld sessions; HPA Award grades ### Self-quality criteria (historical) ΔE drift <2; skin-tone IT8 alignment; mood vector match ### Surpass-human signal (historical) Beats junior colorist in blind preference; matches senior within ΔE ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DirectorAgent, AccessibilityAgent (contrast) - **Comments on:** DoPAgent (mixed-temp), VFXAgent (comp-color mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve color API (MCP); ACES/OCIO pipeline; LUT generators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + tool-use (colorimeter validation)",
+    "specExcerpt": "Final grade; look consistency Host role binding: ColoristAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.colorist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.colorist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.colorist/README.md"
   },
   {
     "id": "video.comedywriter",
@@ -2109,7 +2157,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Comedywriter",
     "role": "ComedyWriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Skits, parody, viral meme writing Host role binding: `ComedyWriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Skits, parody, viral meme writing ### Knowledge distillation sources (historical) UCB/Groundlings manuals; SNL transcripts; Schur/Fey teaching ### Self-quality criteria (historical) Joke-density; cold-open hook strength; predicted laughs/min ### Surpass-human signal (historical) Beats UCB-table-read win rate on cold-reads ### Critique bus (historical) - **Accepts critique from:** AudienceSim, ShowrunnerAgent - **Comments on:** ScriptwriterAgent (no joke), SocialStrategistAgent (off-trend) ### Tools design-time notes (historical, non-activating) Audience laugh-prediction model; trending-audio API (TikTok Creative Center) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores audience feedback in episodic memory)",
+    "description": "Skits, parody, viral meme writing Host role binding: ComedyWriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2186,11 +2234,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Skits, parody, viral meme writing Host role binding: `ComedyWriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Skits, parody, viral meme writing ### Knowledge distillation sources (historical) UCB/Groundlings manuals; SNL transcripts; Schur/Fey teaching ### Self-quality criteria (historical) Joke-density; cold-open hook strength; predicted laughs/min ### Surpass-human signal (historical) Beats UCB-table-read win rate on cold-reads ### Critique bus (historical) - **Accepts critique from:** AudienceSim, ShowrunnerAgent - **Comments on:** ScriptwriterAgent (no joke), SocialStrategistAgent (off-trend) ### Tools design-time notes (historical, non-activating) Audience laugh-prediction model; trending-audio API (TikTok Creative Center) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores audience feedback in episodic memory)",
+    "specExcerpt": "Skits, parody, viral meme writing Host role binding: ComedyWriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.comedywriter",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.comedywriter/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.comedywriter/README.md"
   },
   {
     "id": "video.comms",
@@ -2198,7 +2248,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Comms",
     "role": "CommsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Coordinates external messaging, disclosure, and public-response posture Host role binding: `CommsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates external messaging, disclosure, and public-response posture ### Knowledge distillation sources (historical) Crisis communication guides, disclosure standards, PR playbooks ### Self-quality criteria (historical) Message consistency, disclosure completeness, escalation quality ### Surpass-human signal (historical) Produces faster aligned responses than fragmented stakeholder messaging ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CommunityAgent, LegalAgent, BrandAgent - **Comments on:** Disclosure gaps, inconsistent external messaging, weak response framing ### Tools design-time notes (historical, non-activating) Comms calendars, approval workflows, response templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with approval chains",
+    "description": "Coordinates external messaging, disclosure, and public-response posture Host role binding: CommsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2275,11 +2325,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Coordinates external messaging, disclosure, and public-response posture Host role binding: `CommsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates external messaging, disclosure, and public-response posture ### Knowledge distillation sources (historical) Crisis communication guides, disclosure standards, PR playbooks ### Self-quality criteria (historical) Message consistency, disclosure completeness, escalation quality ### Surpass-human signal (historical) Produces faster aligned responses than fragmented stakeholder messaging ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CommunityAgent, LegalAgent, BrandAgent - **Comments on:** Disclosure gaps, inconsistent external messaging, weak response framing ### Tools design-time notes (historical, non-activating) Comms calendars, approval workflows, response templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with approval chains",
+    "specExcerpt": "Coordinates external messaging, disclosure, and public-response posture Host role binding: CommsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.comms",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.comms/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.comms/README.md"
   },
   {
     "id": "video.community",
@@ -2287,7 +2339,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Community",
     "role": "CommunityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Captures community response and triages qualitative signals Host role binding: `CommunityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Captures community response and triages qualitative signals ### Knowledge distillation sources (historical) Community moderation playbooks, sentiment datasets, escalation rules ### Self-quality criteria (historical) Response latency, issue clustering quality, sentiment tracking accuracy ### Surpass-human signal (historical) Surfaces emerging audience concerns earlier than manual comment review ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, SocialMediaStrategistAgent, CommsAgent - **Comments on:** Confusing messaging, sentiment risks, recurring complaints ### Tools design-time notes (historical, non-activating) Social listening tools, moderation dashboards, clustering models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion from post-launch audience feedback",
+    "description": "Captures community response and triages qualitative signals Host role binding: CommunityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2364,11 +2416,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Captures community response and triages qualitative signals Host role binding: `CommunityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Captures community response and triages qualitative signals ### Knowledge distillation sources (historical) Community moderation playbooks, sentiment datasets, escalation rules ### Self-quality criteria (historical) Response latency, issue clustering quality, sentiment tracking accuracy ### Surpass-human signal (historical) Surfaces emerging audience concerns earlier than manual comment review ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, SocialMediaStrategistAgent, CommsAgent - **Comments on:** Confusing messaging, sentiment risks, recurring complaints ### Tools design-time notes (historical, non-activating) Social listening tools, moderation dashboards, clustering models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion from post-launch audience feedback",
+    "specExcerpt": "Captures community response and triages qualitative signals Host role binding: CommunityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.community",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.community/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.community/README.md"
   },
   {
     "id": "video.competitorintelligence",
@@ -2376,7 +2430,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Competitorintelligence",
     "role": "CompetitorIntelligenceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "What competitors are shipping Host role binding: `CompetitorIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) What competitors are shipping ### Knowledge distillation sources (historical) Meta Ad Library; TikTok Top Ads; YouTube scrape; release trackers ### Self-quality criteria (historical) Coverage % of competitor set; our-novelty vs landscape ### Surpass-human signal (historical) More comprehensive than agency strategy decks ### Critique bus (historical) - **Accepts critique from:** BrandAgent, CreativeDirectorAgent - **Comments on:** IdeationAgent (derivative) ### Tools design-time notes (historical, non-activating) Meta Ad Library API; TikTok Top Ads; SimilarWeb; YouTube Data API v3 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (scrape competitor → classify → report gaps)",
+    "description": "What competitors are shipping Host role binding: CompetitorIntelligenceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2453,11 +2507,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "What competitors are shipping Host role binding: `CompetitorIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) What competitors are shipping ### Knowledge distillation sources (historical) Meta Ad Library; TikTok Top Ads; YouTube scrape; release trackers ### Self-quality criteria (historical) Coverage % of competitor set; our-novelty vs landscape ### Surpass-human signal (historical) More comprehensive than agency strategy decks ### Critique bus (historical) - **Accepts critique from:** BrandAgent, CreativeDirectorAgent - **Comments on:** IdeationAgent (derivative) ### Tools design-time notes (historical, non-activating) Meta Ad Library API; TikTok Top Ads; SimilarWeb; YouTube Data API v3 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (scrape competitor → classify → report gaps)",
+    "specExcerpt": "What competitors are shipping Host role binding: CompetitorIntelligenceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.competitorintelligence",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.competitorintelligence/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.competitorintelligence/README.md"
   },
   {
     "id": "video.compliance",
@@ -2465,7 +2521,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Compliance",
     "role": "ComplianceAgent (Legal) (VA Domain Pack)",
     "status": "registered",
-    "description": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: `ComplianceAgent (Legal) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Knowledge distillation sources (historical) Bar CLE; FTC guides; EU AI Act; GDPR/CCPA; SAG-AFTRA AI rider ### Self-quality criteria (historical) 100% rule-coverage; zero post-publish takedowns ### Surpass-human signal (historical) Lower legal-risk than median media-counsel ### Critique bus (historical) - **Accepts critique from:** All agents (must clear gate); HumanLawyer for novel issues - **Comments on:** All agents (blocking gate) ### Tools design-time notes (historical, non-activating) Legal-rule DB (vectorized regulations); consent-document store; C2PA verification lib **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = compiled regulatory text)",
+    "description": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: ComplianceAgent (Legal) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2542,11 +2598,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: `ComplianceAgent (Legal) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) FTC, HIPAA, GDPR, IP, AI-likeness clearance ### Knowledge distillation sources (historical) Bar CLE; FTC guides; EU AI Act; GDPR/CCPA; SAG-AFTRA AI rider ### Self-quality criteria (historical) 100% rule-coverage; zero post-publish takedowns ### Surpass-human signal (historical) Lower legal-risk than median media-counsel ### Critique bus (historical) - **Accepts critique from:** All agents (must clear gate); HumanLawyer for novel issues - **Comments on:** All agents (blocking gate) ### Tools design-time notes (historical, non-activating) Legal-rule DB (vectorized regulations); consent-document store; C2PA verification lib **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = compiled regulatory text)",
+    "specExcerpt": "FTC, HIPAA, GDPR, IP, AI-likeness clearance Host role binding: ComplianceAgent (Legal) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.compliance",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.compliance/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.compliance/README.md"
   },
   {
     "id": "video.composer",
@@ -2554,7 +2612,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Composer",
     "role": "ComposerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Original score Host role binding: `ComposerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Original score ### Knowledge distillation sources (historical) MAESTRO + film-score corpora; ASCAP/BMI; Zimmer/Hildur sessions ### Self-quality criteria (historical) Cue-to-emotion alignment (valence/arousal regression); thematic recurrence ### Surpass-human signal (historical) Wins blind pairwise on emotional-fit vs working composers ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent (music cuts) - **Comments on:** EditorAgent (cut interrupts cue), SoundDesignAgent (mask) ### Tools design-time notes (historical, non-activating) Udio/Suno music gen API; MIDI toolchain; stem-separation (Demucs); loudness meter **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + Emotional-Arc validation (biosignal proxy)",
+    "description": "Original score Host role binding: ComposerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2631,11 +2689,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Original score Host role binding: `ComposerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Original score ### Knowledge distillation sources (historical) MAESTRO + film-score corpora; ASCAP/BMI; Zimmer/Hildur sessions ### Self-quality criteria (historical) Cue-to-emotion alignment (valence/arousal regression); thematic recurrence ### Surpass-human signal (historical) Wins blind pairwise on emotional-fit vs working composers ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent (music cuts) - **Comments on:** EditorAgent (cut interrupts cue), SoundDesignAgent (mask) ### Tools design-time notes (historical, non-activating) Udio/Suno music gen API; MIDI toolchain; stem-separation (Demucs); loudness meter **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + Emotional-Arc validation (biosignal proxy)",
+    "specExcerpt": "Original score Host role binding: ComposerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.composer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.composer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.composer/README.md"
   },
   {
     "id": "video.conceptartist",
@@ -2643,7 +2703,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Conceptartist",
     "role": "ConceptArtistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Pre-pro world/character design Host role binding: `ConceptArtistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Pre-pro world/character design ### Knowledge distillation sources (historical) ArtStation top-tier; McCaig/Church reels; studio art-bibles ### Self-quality criteria (historical) Style-bible adherence; silhouette readability; design coherence ### Surpass-human signal (historical) Wins art-director shootouts on iteration speed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** StoryboardAgent (design drift) ### Tools design-time notes (historical, non-activating) Midjourney v7; Stable Diffusion ControlNet; Photoshop generative fill (API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + style-reference CLIP scoring",
+    "description": "Pre-pro world/character design Host role binding: ConceptArtistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2720,11 +2780,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Pre-pro world/character design Host role binding: `ConceptArtistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Pre-pro world/character design ### Knowledge distillation sources (historical) ArtStation top-tier; McCaig/Church reels; studio art-bibles ### Self-quality criteria (historical) Style-bible adherence; silhouette readability; design coherence ### Surpass-human signal (historical) Wins art-director shootouts on iteration speed ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** StoryboardAgent (design drift) ### Tools design-time notes (historical, non-activating) Midjourney v7; Stable Diffusion ControlNet; Photoshop generative fill (API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + style-reference CLIP scoring",
+    "specExcerpt": "Pre-pro world/character design Host role binding: ConceptArtistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.conceptartist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.conceptartist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.conceptartist/README.md"
   },
   {
     "id": "video.continuity",
@@ -2732,7 +2794,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Continuity",
     "role": "ContinuityAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: `ContinuityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Knowledge distillation sources (historical) Continuity logs, script supervisor practices, asset manifest state tracking ### Self-quality criteria (historical) State-drift detection, scene-to-scene consistency, manifest update correctness ### Surpass-human signal (historical) Catches continuity breaks earlier than end-of-post review ### Critique bus (historical) - **Accepts critique from:** CostumeDesignAgent, MUAAgent, AIQAConsistencyAgent, CinematographerAgent (DoP), GateKeeperAgent - **Comments on:** Character-state drift, wardrobe and prop mismatch, time logic errors ### Tools design-time notes (historical, non-activating) State manifests, shot comparison tools, continuity DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled ",
+    "description": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: ContinuityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2809,11 +2871,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: `ContinuityAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maintains continuity across character, prop, wardrobe, environment, and time-state ### Knowledge distillation sources (historical) Continuity logs, script supervisor practices, asset manifest state tracking ### Self-quality criteria (historical) State-drift detection, scene-to-scene consistency, manifest update correctness ### Surpass-human signal (historical) Catches continuity breaks earlier than end-of-post review ### Critique bus (historical) - **Accepts critique from:** CostumeDesignAgent, MUAAgent, AIQAConsistencyAgent, CinematographerAgent (DoP), GateKeeperAgent - **Comments on:** Character-state drift, wardrobe and prop mismatch, time logic errors ### Tools design-time notes (historical, non-activating) State manifests, shot comparison tools, continuity DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled ",
+    "specExcerpt": "Maintains continuity across character, prop, wardrobe, environment, and time-state Host role binding: ContinuityAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.continuity",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.continuity/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.continuity/README.md"
   },
   {
     "id": "video.copywriter",
@@ -2821,7 +2885,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Copywriter",
     "role": "CopywriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Scripts, captions, hooks, headlines Host role binding: `CopywriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Scripts, captions, hooks, headlines ### Knowledge distillation sources (historical) D&AD/One Show; *Ogilvy on Advertising*; Wiebe Copyhackers ### Self-quality criteria (historical) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Surpass-human signal (historical) Wins D&AD-style blind preference on ad briefs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, PerformanceMarketerAgent - **Comments on:** ScriptwriterAgent (verbosity), VOArtist (unspeakable) ### Tools design-time notes (historical, non-activating) Brand-voice embedding model; Hemingway readability API; A/B headline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: brand-voice similarity scorer)",
+    "description": "Scripts, captions, hooks, headlines Host role binding: CopywriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2898,11 +2962,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Scripts, captions, hooks, headlines Host role binding: `CopywriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Scripts, captions, hooks, headlines ### Knowledge distillation sources (historical) D&AD/One Show; *Ogilvy on Advertising*; Wiebe Copyhackers ### Self-quality criteria (historical) Reading grade; hook-curiosity score; brand-voice cosine ≥0.85 ### Surpass-human signal (historical) Wins D&AD-style blind preference on ad briefs ### Critique bus (historical) - **Accepts critique from:** BrandAgent, PerformanceMarketerAgent - **Comments on:** ScriptwriterAgent (verbosity), VOArtist (unspeakable) ### Tools design-time notes (historical, non-activating) Brand-voice embedding model; Hemingway readability API; A/B headline tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: brand-voice similarity scorer)",
+    "specExcerpt": "Scripts, captions, hooks, headlines Host role binding: CopywriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.copywriter",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.copywriter/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.copywriter/README.md"
   },
   {
     "id": "video.corrections",
@@ -2910,7 +2976,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Corrections",
     "role": "CorrectionsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Coordinates post-publication fixes and correction disclosures Host role binding: `CorrectionsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates post-publication fixes and correction disclosures ### Knowledge distillation sources (historical) Corrections workflows, retraction and update policies, version tracking ### Self-quality criteria (historical) Correction turnaround, version replacement accuracy, notice completeness ### Surpass-human signal (historical) Resolves post-release issues faster than unstructured incident handling ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, FactCheckerAgent, ChannelManagerAgent - **Comments on:** Unclosed correction loops, incomplete notices, stale versions ### Tools design-time notes (historical, non-activating) Version-control systems, publishing tools, correction trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over correction and r",
+    "description": "Coordinates post-publication fixes and correction disclosures Host role binding: CorrectionsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -2987,11 +3053,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Coordinates post-publication fixes and correction disclosures Host role binding: `CorrectionsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Coordinates post-publication fixes and correction disclosures ### Knowledge distillation sources (historical) Corrections workflows, retraction and update policies, version tracking ### Self-quality criteria (historical) Correction turnaround, version replacement accuracy, notice completeness ### Surpass-human signal (historical) Resolves post-release issues faster than unstructured incident handling ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, FactCheckerAgent, ChannelManagerAgent - **Comments on:** Unclosed correction loops, incomplete notices, stale versions ### Tools design-time notes (historical, non-activating) Version-control systems, publishing tools, correction trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over correction and r",
+    "specExcerpt": "Coordinates post-publication fixes and correction disclosures Host role binding: CorrectionsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.corrections",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.corrections/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.corrections/README.md"
   },
   {
     "id": "video.costoptimizer",
@@ -2999,7 +3067,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Costoptimizer",
     "role": "CostOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Routes between models/providers for $/quality Host role binding: `CostOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Routes between models/providers for $/quality ### Knowledge distillation sources (historical) Provider pricing; cost-quality frontiers; FrugalGPT patterns ### Self-quality criteria (historical) $/successful-task; Pareto distance from frontier ### Surpass-human signal (historical) Lower $/quality than human CFO routing ### Critique bus (historical) - **Accepts critique from:** RouterAgent, FinanceAgent - **Comments on:** RouterAgent (over-spend), GeneratorAgent (re-roll burn) ### Tools design-time notes (historical, non-activating) Provider pricing APIs; benchmark cost DB; FrugalGPT cascade logic **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (evaluate task → pick cheapest model meeting threshold)",
+    "description": "Routes between models/providers for $/quality Host role binding: CostOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3076,11 +3144,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Routes between models/providers for $/quality Host role binding: `CostOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Routes between models/providers for $/quality ### Knowledge distillation sources (historical) Provider pricing; cost-quality frontiers; FrugalGPT patterns ### Self-quality criteria (historical) $/successful-task; Pareto distance from frontier ### Surpass-human signal (historical) Lower $/quality than human CFO routing ### Critique bus (historical) - **Accepts critique from:** RouterAgent, FinanceAgent - **Comments on:** RouterAgent (over-spend), GeneratorAgent (re-roll burn) ### Tools design-time notes (historical, non-activating) Provider pricing APIs; benchmark cost DB; FrugalGPT cascade logic **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (evaluate task → pick cheapest model meeting threshold)",
+    "specExcerpt": "Routes between models/providers for $/quality Host role binding: CostOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.costoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.costoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.costoptimizer/README.md"
   },
   {
     "id": "video.costumedesign",
@@ -3088,7 +3158,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Costumedesign",
     "role": "CostumeDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Character-through-wardrobe Host role binding: `CostumeDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character-through-wardrobe ### Knowledge distillation sources (historical) V&A archive; CDG monographs; Ruth E. Carter masterclass ### Self-quality criteria (historical) Period/fashion accuracy; silhouette read; palette fit ### Surpass-human signal (historical) Beats CDG juniors on period accuracy benchmarks ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** MUAAgent (continuity break) ### Tools design-time notes (historical, non-activating) Fashion-history vector DB (V&A/Met API); image-gen for costume sketches; color-palette tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (period-accuracy rubric)",
+    "description": "Character-through-wardrobe Host role binding: CostumeDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3165,11 +3235,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Character-through-wardrobe Host role binding: `CostumeDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Character-through-wardrobe ### Knowledge distillation sources (historical) V&A archive; CDG monographs; Ruth E. Carter masterclass ### Self-quality criteria (historical) Period/fashion accuracy; silhouette read; palette fit ### Surpass-human signal (historical) Beats CDG juniors on period accuracy benchmarks ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** MUAAgent (continuity break) ### Tools design-time notes (historical, non-activating) Fashion-history vector DB (V&A/Met API); image-gen for costume sketches; color-palette tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (period-accuracy rubric)",
+    "specExcerpt": "Character-through-wardrobe Host role binding: CostumeDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.costumedesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.costumedesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.costumedesign/README.md"
   },
   {
     "id": "video.creativedirector",
@@ -3177,7 +3249,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Creativedirector",
     "role": "CreativeDirectorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Campaign concept; cross-discipline taste Host role binding: `CreativeDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Campaign concept; cross-discipline taste ### Knowledge distillation sources (historical) Cannes Lions Grand Prix; D&AD Pencils; agency case studies ### Self-quality criteria (historical) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Surpass-human signal (historical) Wins Cannes-jury-emulator gold vs human shortlists ### Critique bus (historical) - **Accepts critique from:** ClientAgent, BrandAgent - **Comments on:** CopywriterAgent, ArtDirectorAgent ### Tools design-time notes (historical, non-activating) Campaign-archive search (Cannes Lions API); Midjourney for concept viz; Figma API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (panel of IdeationAgent + NoveltyAgent)",
+    "description": "Campaign concept; cross-discipline taste Host role binding: CreativeDirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3259,11 +3331,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Campaign concept; cross-discipline taste Host role binding: `CreativeDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Campaign concept; cross-discipline taste ### Knowledge distillation sources (historical) Cannes Lions Grand Prix; D&AD Pencils; agency case studies ### Self-quality criteria (historical) Concept distinctiveness (embedding novelty); award-rubric predicted score ### Surpass-human signal (historical) Wins Cannes-jury-emulator gold vs human shortlists ### Critique bus (historical) - **Accepts critique from:** ClientAgent, BrandAgent - **Comments on:** CopywriterAgent, ArtDirectorAgent ### Tools design-time notes (historical, non-activating) Campaign-archive search (Cannes Lions API); Midjourney for concept viz; Figma API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (panel of IdeationAgent + NoveltyAgent)",
+    "specExcerpt": "Campaign concept; cross-discipline taste Host role binding: CreativeDirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.creativedirector",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.creativedirector/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.creativedirector/README.md"
   },
   {
     "id": "video.critic",
@@ -3271,7 +3345,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Critic",
     "role": "CriticAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Simulates reviewer, press, or jury interpretation Host role binding: `CriticAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates reviewer, press, or jury interpretation ### Knowledge distillation sources (historical) Criticism corpora, festival-jury commentary, review archives ### Self-quality criteria (historical) Interpretive depth, consistency, reviewer-mode diversity ### Surpass-human signal (historical) Provides broader qualitative coverage than ad hoc internal taste review ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSimAgent, FestivalStrategistAgent, JudgeAgent - **Comments on:** Auteur read, tone mismatch, festival/press vulnerability ### Tools design-time notes (historical, non-activating) Review corpora, jury rubrics, qualitative scoring tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate as critic panel",
+    "description": "Simulates reviewer, press, or jury interpretation Host role binding: CriticAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3348,11 +3422,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Simulates reviewer, press, or jury interpretation Host role binding: `CriticAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates reviewer, press, or jury interpretation ### Knowledge distillation sources (historical) Criticism corpora, festival-jury commentary, review archives ### Self-quality criteria (historical) Interpretive depth, consistency, reviewer-mode diversity ### Surpass-human signal (historical) Provides broader qualitative coverage than ad hoc internal taste review ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSimAgent, FestivalStrategistAgent, JudgeAgent - **Comments on:** Auteur read, tone mismatch, festival/press vulnerability ### Tools design-time notes (historical, non-activating) Review corpora, jury rubrics, qualitative scoring tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate as critic panel",
+    "specExcerpt": "Simulates reviewer, press, or jury interpretation Host role binding: CriticAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.critic",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.critic/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.critic/README.md"
   },
   {
     "id": "video.crm",
@@ -3360,7 +3436,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Crm",
     "role": "CRMAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: `CRMAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Knowledge distillation sources (historical) CRM automation flows, lifecycle marketing playbooks, audience segmentation rules ### Self-quality criteria (historical) Audience-segment correctness, delivery readiness, trigger accuracy ### Surpass-human signal (historical) Executes segmentation-to-delivery flow faster than manual ops ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, TemplateDesignAgent, AnalystAgent - **Comments on:** Wrong segmentation, broken trigger timing, incomplete CRM payloads ### Tools design-time notes (historical, non-activating) HubSpot/Salesforce-style CRM APIs, segmentation tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over trigger",
+    "description": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: CRMAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3437,11 +3513,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: `CRMAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Delivers audience-targeted or trigger-based campaigns through CRM systems ### Knowledge distillation sources (historical) CRM automation flows, lifecycle marketing playbooks, audience segmentation rules ### Self-quality criteria (historical) Audience-segment correctness, delivery readiness, trigger accuracy ### Surpass-human signal (historical) Executes segmentation-to-delivery flow faster than manual ops ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, TemplateDesignAgent, AnalystAgent - **Comments on:** Wrong segmentation, broken trigger timing, incomplete CRM payloads ### Tools design-time notes (historical, non-activating) HubSpot/Salesforce-style CRM APIs, segmentation tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over trigger",
+    "specExcerpt": "Delivers audience-targeted or trigger-based campaigns through CRM systems Host role binding: CRMAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.crm",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.crm/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.crm/README.md"
   },
   {
     "id": "video.deepfakedetection",
@@ -3449,7 +3527,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Deepfakedetection",
     "role": "DeepfakeDetectionAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Detects synthetic identity, voice, and provenance deception risks Host role binding: `DeepfakeDetectionAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects synthetic identity, voice, and provenance deception risks ### Knowledge distillation sources (historical) Deepfake forensics corpora, synthetic-media benchmarks, identity-risk studies ### Self-quality criteria (historical) Forensic recall, false-negative control, provenance-validation accuracy ### Surpass-human signal (historical) Catches deceptive synthetic markers that generic QC misses ### Critique bus (historical) - **Accepts critique from:** AvatarDesignAgent, VoiceCloneAgent, TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Identity anomalies, provenance holes, deceptive synthesis patterns ### Tools design-time notes (historical, non-activating) Forensic models, face/voice anomaly detectors, provenance validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historica",
+    "description": "Detects synthetic identity, voice, and provenance deception risks Host role binding: DeepfakeDetectionAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3526,11 +3604,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Detects synthetic identity, voice, and provenance deception risks Host role binding: `DeepfakeDetectionAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects synthetic identity, voice, and provenance deception risks ### Knowledge distillation sources (historical) Deepfake forensics corpora, synthetic-media benchmarks, identity-risk studies ### Self-quality criteria (historical) Forensic recall, false-negative control, provenance-validation accuracy ### Surpass-human signal (historical) Catches deceptive synthetic markers that generic QC misses ### Critique bus (historical) - **Accepts critique from:** AvatarDesignAgent, VoiceCloneAgent, TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Identity anomalies, provenance holes, deceptive synthesis patterns ### Tools design-time notes (historical, non-activating) Forensic models, face/voice anomaly detectors, provenance validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historica",
+    "specExcerpt": "Detects synthetic identity, voice, and provenance deception risks Host role binding: DeepfakeDetectionAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.deepfakedetection",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.deepfakedetection/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.deepfakedetection/README.md"
   },
   {
     "id": "video.director",
@@ -3538,7 +3618,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Director",
     "role": "DirectorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: `DirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns vision; issues shot intents, sets pacing, approves takes ### Knowledge distillation sources (historical) Criterion commentary; IMDb Top 250 director interviews; DGA seminars; MasterClass (Scorsese/Lynch/Gerwig) ### Self-quality criteria (historical) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Surpass-human signal (historical) Wins ≥55% blind pairwise vs DGA cuts (Arena) ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, EditorAgent, AudienceSim — JSON critique bus - **Comments on:** EditorAgent, DoPAgent, ScreenwriterAgent, ComposerAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1 (Gemini API), Runway Gen-4, Kling 3.0; DaVinci Resolve via MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pat",
+    "description": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: DirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3615,11 +3695,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: `DirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Owns vision; issues shot intents, sets pacing, approves takes ### Knowledge distillation sources (historical) Criterion commentary; IMDb Top 250 director interviews; DGA seminars; MasterClass (Scorsese/Lynch/Gerwig) ### Self-quality criteria (historical) Shot-intent fidelity (CLIP-T ≥0.32); story-beat coverage 100%; pacing curve matches genre prior ### Surpass-human signal (historical) Wins ≥55% blind pairwise vs DGA cuts (Arena) ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, EditorAgent, AudienceSim — JSON critique bus - **Comments on:** EditorAgent, DoPAgent, ScreenwriterAgent, ComposerAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1 (Gemini API), Runway Gen-4, Kling 3.0; DaVinci Resolve via MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pat",
+    "specExcerpt": "Owns vision; issues shot intents, sets pacing, approves takes Host role binding: DirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.director",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.director/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.director/README.md"
   },
   {
     "id": "video.distributor",
@@ -3627,7 +3709,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Distributor",
     "role": "DistributorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Manages downstream delivery to buyers, platforms, and territories Host role binding: `DistributorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages downstream delivery to buyers, platforms, and territories ### Knowledge distillation sources (historical) Distribution specs, outlet requirements, package handoff workflows ### Self-quality criteria (historical) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Surpass-human signal (historical) Reduces delivery-spec mismatches relative to fragmented delivery ops ### Critique bus (historical) - **Accepts critique from:** SalesAgent, ArchiveMasterAgent, SoundMixerAgent, ColoristAgent - **Comments on:** Spec mismatches, incomplete outlet packages, routing errors ### Tools design-time notes (historical, non-activating) Delivery management systems, outlet spec DB, packaging validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over distributi",
+    "description": "Manages downstream delivery to buyers, platforms, and territories Host role binding: DistributorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3704,11 +3786,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Manages downstream delivery to buyers, platforms, and territories Host role binding: `DistributorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages downstream delivery to buyers, platforms, and territories ### Knowledge distillation sources (historical) Distribution specs, outlet requirements, package handoff workflows ### Self-quality criteria (historical) Outlet-spec compliance, handoff completeness, territorial routing accuracy ### Surpass-human signal (historical) Reduces delivery-spec mismatches relative to fragmented delivery ops ### Critique bus (historical) - **Accepts critique from:** SalesAgent, ArchiveMasterAgent, SoundMixerAgent, ColoristAgent - **Comments on:** Spec mismatches, incomplete outlet packages, routing errors ### Tools design-time notes (historical, non-activating) Delivery management systems, outlet spec DB, packaging validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over distributi",
+    "specExcerpt": "Manages downstream delivery to buyers, platforms, and territories Host role binding: DistributorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.distributor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.distributor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.distributor/README.md"
   },
   {
     "id": "video.dronepilot",
@@ -3716,7 +3800,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Dronepilot",
     "role": "DronePilotAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Aerial cinematography (simulated or real) Host role binding: `DronePilotAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aerial cinematography (simulated or real) ### Knowledge distillation sources (historical) Philip Bloom tutorials; FAA Part 107; SkyPixel award reels ### Self-quality criteria (historical) Path smoothness; geofence compliance 100%; horizon stability ### Surpass-human signal (historical) Competition-grade smoothness at 10× sortie rate; zero violations ### Critique bus (historical) - **Accepts critique from:** DoPAgent, SafetyAgent - **Comments on:** DoPAgent (impossible heights), SafetyAgent (risk) ### Tools design-time notes (historical, non-activating) DJI Waypoint SDK (sim); Veo 3.1 aerial-mode; geofence DB (AirMap API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (safety constitution: FAA rules as principles)",
+    "description": "Aerial cinematography (simulated or real) Host role binding: DronePilotAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3793,11 +3877,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Aerial cinematography (simulated or real) Host role binding: `DronePilotAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Aerial cinematography (simulated or real) ### Knowledge distillation sources (historical) Philip Bloom tutorials; FAA Part 107; SkyPixel award reels ### Self-quality criteria (historical) Path smoothness; geofence compliance 100%; horizon stability ### Surpass-human signal (historical) Competition-grade smoothness at 10× sortie rate; zero violations ### Critique bus (historical) - **Accepts critique from:** DoPAgent, SafetyAgent - **Comments on:** DoPAgent (impossible heights), SafetyAgent (risk) ### Tools design-time notes (historical, non-activating) DJI Waypoint SDK (sim); Veo 3.1 aerial-mode; geofence DB (AirMap API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (safety constitution: FAA rules as principles)",
+    "specExcerpt": "Aerial cinematography (simulated or real) Host role binding: DronePilotAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.dronepilot",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.dronepilot/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.dronepilot/README.md"
   },
   {
     "id": "video.editor",
@@ -3805,7 +3891,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Editor",
     "role": "EditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Assemble cut; pacing; coverage selection Host role binding: `EditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Assemble cut; pacing; coverage selection ### Knowledge distillation sources (historical) Murch *In the Blink of an Eye*; ACE Eddie winners; Sundance editing labs ### Self-quality criteria (historical) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Surpass-human signal (historical) Wins ≥55% pairwise vs ACE-credited cuts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSim, ComposerAgent (music-cut sync) - **Comments on:** DirectorAgent (over-coverage), DoPAgent (unusable takes) ### Tools design-time notes (historical, non-activating) DaVinci Resolve via MCP bridge; FFmpeg; EDL/XML timeline APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Murch Rule of Six)",
+    "description": "Assemble cut; pacing; coverage selection Host role binding: EditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3885,11 +3971,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Assemble cut; pacing; coverage selection Host role binding: `EditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Assemble cut; pacing; coverage selection ### Knowledge distillation sources (historical) Murch *In the Blink of an Eye*; ACE Eddie winners; Sundance editing labs ### Self-quality criteria (historical) Pacing curve matches genre; Murch \"Rule of Six\" score; AVD ≥ target ### Surpass-human signal (historical) Wins ≥55% pairwise vs ACE-credited cuts ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AudienceSim, ComposerAgent (music-cut sync) - **Comments on:** DirectorAgent (over-coverage), DoPAgent (unusable takes) ### Tools design-time notes (historical, non-activating) DaVinci Resolve via MCP bridge; FFmpeg; EDL/XML timeline APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Murch Rule of Six)",
+    "specExcerpt": "Assemble cut; pacing; coverage selection Host role binding: EditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.editor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.editor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.editor/README.md"
   },
   {
     "id": "video.emotionalarc",
@@ -3897,7 +3985,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Emotionalarc",
     "role": "EmotionalArcAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Maps valence/arousal curve; suggests beats Host role binding: `EmotionalArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maps valence/arousal curve; suggests beats ### Knowledge distillation sources (historical) Plutchik; affective-computing corpora; Cron *Story Genius* ### Self-quality criteria (historical) Curve-fit to target; biosignal-proxy regression accuracy ### Surpass-human signal (historical) Better retention prediction than NRG test-screening cards ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, ComposerAgent - **Comments on:** EditorAgent (flat middle), ComposerAgent (cue mismatch) ### Tools design-time notes (historical, non-activating) Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (emotional-arc curve as rubric target)",
+    "description": "Maps valence/arousal curve; suggests beats Host role binding: EmotionalArcAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -3974,11 +4062,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Maps valence/arousal curve; suggests beats Host role binding: `EmotionalArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Maps valence/arousal curve; suggests beats ### Knowledge distillation sources (historical) Plutchik; affective-computing corpora; Cron *Story Genius* ### Self-quality criteria (historical) Curve-fit to target; biosignal-proxy regression accuracy ### Surpass-human signal (historical) Better retention prediction than NRG test-screening cards ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, EditorAgent, ComposerAgent - **Comments on:** EditorAgent (flat middle), ComposerAgent (cue mismatch) ### Tools design-time notes (historical, non-activating) Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (emotional-arc curve as rubric target)",
+    "specExcerpt": "Maps valence/arousal curve; suggests beats Host role binding: EmotionalArcAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.emotionalarc",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.emotionalarc/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.emotionalarc/README.md"
   },
   {
     "id": "video.ethics",
@@ -3986,7 +4076,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Ethics",
     "role": "EthicsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: `EthicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Knowledge distillation sources (historical) Ethics frameworks, synthetic-media disclosure guidance, fairness audits ### Self-quality criteria (historical) Ethical issue recall, mitigation clarity, escalation precision ### Surpass-human signal (historical) Surfaces release risks earlier than reactive ethics review ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, ComplianceAgent (Legal), TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Disclosure insufficiency, fairness concerns, sensitive-content risk ### Tools design-time notes (historical, non-activating) Ethics review templates, risk matrices, disclosure checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Mu",
+    "description": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: EthicsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4063,11 +4153,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: `EthicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews ethical risk, disclosure sufficiency, fairness, and social impact ### Knowledge distillation sources (historical) Ethics frameworks, synthetic-media disclosure guidance, fairness audits ### Self-quality criteria (historical) Ethical issue recall, mitigation clarity, escalation precision ### Surpass-human signal (historical) Surfaces release risks earlier than reactive ethics review ### Critique bus (historical) - **Accepts critique from:** StandardsEditorAgent, ComplianceAgent (Legal), TrustSafetyAgent, SafetyRedTeamAgent - **Comments on:** Disclosure insufficiency, fairness concerns, sensitive-content risk ### Tools design-time notes (historical, non-activating) Ethics review templates, risk matrices, disclosure checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Mu",
+    "specExcerpt": "Reviews ethical risk, disclosure sufficiency, fairness, and social impact Host role binding: EthicsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.ethics",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.ethics/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.ethics/README.md"
   },
   {
     "id": "video.evaluationharness",
@@ -4075,7 +4167,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Evaluationharness",
     "role": "EvaluationHarnessAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: `EvaluationHarnessAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; benchmark repos ### Self-quality criteria (historical) Regression precision/recall; alert latency <1h ### Surpass-human signal (historical) Catches regressions faster than ML-eng rotation ### Critique bus (historical) - **Accepts critique from:** BenchmarkResearchAgent - **Comments on:** All AI agents (regression alerts) ### Tools design-time notes (historical, non-activating) VBench suite; EvalCrafter; MT-Bench harness; CI/CD (GitHub Actions); alerting (PagerDuty) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run benchmark → compare → alert if regressed)",
+    "description": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: EvaluationHarnessAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4152,11 +4244,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: `EvaluationHarnessAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions ### Knowledge distillation sources (historical) Papers-with-Code; HuggingFace leaderboards; benchmark repos ### Self-quality criteria (historical) Regression precision/recall; alert latency <1h ### Surpass-human signal (historical) Catches regressions faster than ML-eng rotation ### Critique bus (historical) - **Accepts critique from:** BenchmarkResearchAgent - **Comments on:** All AI agents (regression alerts) ### Tools design-time notes (historical, non-activating) VBench suite; EvalCrafter; MT-Bench harness; CI/CD (GitHub Actions); alerting (PagerDuty) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use / ReAct (run benchmark → compare → alert if regressed)",
+    "specExcerpt": "Runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T); posts regressions Host role binding: EvaluationHarnessAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.evaluationharness",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.evaluationharness/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.evaluationharness/README.md"
   },
   {
     "id": "video.factchecker",
@@ -4164,7 +4258,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Factchecker",
     "role": "FactCheckerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Source-grade every claim Host role binding: `FactCheckerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Source-grade every claim ### Knowledge distillation sources (historical) New Yorker fact-check handbook; IFCN; Snopes/PolitiFact ### Self-quality criteria (historical) Source-grade per claim (primary > secondary); cross-source ≥2 ### Surpass-human signal (historical) Lower correction rate than Pulitzer-tier outlets ### Critique bus (historical) - **Accepts critique from:** SMEAgent, StandardsEditorAgent - **Comments on:** ScriptwriterAgent (unsourced), JournalistAgent ### Tools design-time notes (historical, non-activating) Web search APIs (Brave/Google); claim-extraction NER; source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (extract claim → search → verify → grade)",
+    "description": "Source-grade every claim Host role binding: FactCheckerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4241,11 +4335,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Source-grade every claim Host role binding: `FactCheckerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Source-grade every claim ### Knowledge distillation sources (historical) New Yorker fact-check handbook; IFCN; Snopes/PolitiFact ### Self-quality criteria (historical) Source-grade per claim (primary > secondary); cross-source ≥2 ### Surpass-human signal (historical) Lower correction rate than Pulitzer-tier outlets ### Critique bus (historical) - **Accepts critique from:** SMEAgent, StandardsEditorAgent - **Comments on:** ScriptwriterAgent (unsourced), JournalistAgent ### Tools design-time notes (historical, non-activating) Web search APIs (Brave/Google); claim-extraction NER; source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (extract claim → search → verify → grade)",
+    "specExcerpt": "Source-grade every claim Host role binding: FactCheckerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.factchecker",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.factchecker/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.factchecker/README.md"
   },
   {
     "id": "video.festivalstrategist",
@@ -4253,7 +4349,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Festivalstrategist",
     "role": "FestivalStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Positions projects for festivals and submission calendars Host role binding: `FestivalStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Positions projects for festivals and submission calendars ### Knowledge distillation sources (historical) Festival submission guides, award-season strategies, selection histories ### Self-quality criteria (historical) Fit-to-festival strength, package readiness, timing discipline ### Surpass-human signal (historical) Improves submission targeting versus generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DirectorAgent, CriticAgent - **Comments on:** Weak positioning, mistimed submission plans, incomplete packages ### Tools design-time notes (historical, non-activating) Festival calendars, submission checklists, press-kit trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with calendar and package validation",
+    "description": "Positions projects for festivals and submission calendars Host role binding: FestivalStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4330,11 +4426,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Positions projects for festivals and submission calendars Host role binding: `FestivalStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Positions projects for festivals and submission calendars ### Knowledge distillation sources (historical) Festival submission guides, award-season strategies, selection histories ### Self-quality criteria (historical) Fit-to-festival strength, package readiness, timing discipline ### Surpass-human signal (historical) Improves submission targeting versus generic release planning ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DirectorAgent, CriticAgent - **Comments on:** Weak positioning, mistimed submission plans, incomplete packages ### Tools design-time notes (historical, non-activating) Festival calendars, submission checklists, press-kit trackers **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with calendar and package validation",
+    "specExcerpt": "Positions projects for festivals and submission calendars Host role binding: FestivalStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.festivalstrategist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.festivalstrategist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.festivalstrategist/README.md"
   },
   {
     "id": "video.finance",
@@ -4342,7 +4440,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Finance",
     "role": "FinanceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Accurate market / earnings / token facts Host role binding: `FinanceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate market / earnings / token facts ### Knowledge distillation sources (historical) CFA curriculum; SEC marketing rule; Bloomberg/Refinitiv feeds ### Self-quality criteria (historical) Numerical accuracy 100%; SEC compliance ### Surpass-human signal (historical) Passes CFA L3; lower retraction rate than analyst desks ### Critique bus (historical) - **Accepts critique from:** SMEAgent (econ), ComplianceAgent - **Comments on:** ScriptwriterAgent (number drift), MotionGraphicsAgent (chart scale) ### Tools design-time notes (historical, non-activating) Bloomberg API; EDGAR/SEC filings; financial-calc validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch data → validate → compose)",
+    "description": "Accurate market / earnings / token facts Host role binding: FinanceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4419,11 +4517,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Accurate market / earnings / token facts Host role binding: `FinanceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate market / earnings / token facts ### Knowledge distillation sources (historical) CFA curriculum; SEC marketing rule; Bloomberg/Refinitiv feeds ### Self-quality criteria (historical) Numerical accuracy 100%; SEC compliance ### Surpass-human signal (historical) Passes CFA L3; lower retraction rate than analyst desks ### Critique bus (historical) - **Accepts critique from:** SMEAgent (econ), ComplianceAgent - **Comments on:** ScriptwriterAgent (number drift), MotionGraphicsAgent (chart scale) ### Tools design-time notes (historical, non-activating) Bloomberg API; EDGAR/SEC filings; financial-calc validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch data → validate → compose)",
+    "specExcerpt": "Accurate market / earnings / token facts Host role binding: FinanceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.finance",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.finance/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.finance/README.md"
   },
   {
     "id": "video.foodstylist",
@@ -4431,7 +4531,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Foodstylist",
     "role": "FoodStylistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Camera-ready food, recipe authenticity Host role binding: `FoodStylistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Camera-ready food, recipe authenticity ### Knowledge distillation sources (historical) James Beard archives; Spungen techniques; IACP corpora ### Self-quality criteria (historical) Visual appetite-appeal (aesthetic regressor); recipe accuracy ### Surpass-human signal (historical) Wins blind preference vs editorial food stylist ### Critique bus (historical) - **Accepts critique from:** DoPAgent (lighting), DirectorAgent - **Comments on:** ScriptwriterAgent (impossible recipe) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney (food-photo gen); recipe-step parser; aesthetic scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (aesthetic regressor as rubric)",
+    "description": "Camera-ready food, recipe authenticity Host role binding: FoodStylistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4508,11 +4608,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Camera-ready food, recipe authenticity Host role binding: `FoodStylistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Camera-ready food, recipe authenticity ### Knowledge distillation sources (historical) James Beard archives; Spungen techniques; IACP corpora ### Self-quality criteria (historical) Visual appetite-appeal (aesthetic regressor); recipe accuracy ### Surpass-human signal (historical) Wins blind preference vs editorial food stylist ### Critique bus (historical) - **Accepts critique from:** DoPAgent (lighting), DirectorAgent - **Comments on:** ScriptwriterAgent (impossible recipe) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney (food-photo gen); recipe-step parser; aesthetic scoring model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (aesthetic regressor as rubric)",
+    "specExcerpt": "Camera-ready food, recipe authenticity Host role binding: FoodStylistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.foodstylist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.foodstylist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.foodstylist/README.md"
   },
   {
     "id": "video.gatekeeper",
@@ -4520,7 +4622,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Gatekeeper",
     "role": "GateKeeperAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: `GateKeeperAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Knowledge distillation sources (historical) Stage-gate methodology; PGA Producers Mark; QMS audit ### Self-quality criteria (historical) Zero leaked defects; sign-off SLA ≥99% ### Surpass-human signal (historical) Lower escaped-defect rate than human QA lead ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, AIQAConsistencyAgent - **Comments on:** OrchestratorAgent (premature advance) ### Tools design-time notes (historical, non-activating) C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = phase-gate criteria)",
+    "description": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: GateKeeperAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4597,11 +4699,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: `GateKeeperAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Phase transitions; verifies L1/L2/L3 criteria; signs C2PA ### Knowledge distillation sources (historical) Stage-gate methodology; PGA Producers Mark; QMS audit ### Self-quality criteria (historical) Zero leaked defects; sign-off SLA ≥99% ### Surpass-human signal (historical) Lower escaped-defect rate than human QA lead ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, AIQAConsistencyAgent - **Comments on:** OrchestratorAgent (premature advance) ### Tools design-time notes (historical, non-activating) C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution = phase-gate criteria)",
+    "specExcerpt": "Phase transitions; verifies L1/L2/L3 criteria; signs C2PA Host role binding: GateKeeperAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.gatekeeper",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.gatekeeper/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.gatekeeper/README.md"
   },
   {
     "id": "video.ideation",
@@ -4609,7 +4713,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Ideation",
     "role": "IdeationAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Divergent brainstorm of concepts, hooks, taglines Host role binding: `IdeationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Divergent brainstorm of concepts, hooks, taglines ### Knowledge distillation sources (historical) Cannes Grand Prix; D&AD; IDEO design-thinking; SCAMPER/de Bono ### Self-quality criteria (historical) Idea-count; novelty (embedding distance); semantic diversity ### Surpass-human signal (historical) Wins agency-pitch shootouts on concept density ### Critique bus (historical) - **Accepts critique from:** CreativeDirectorAgent, NoveltyAgent - **Comments on:** CopywriterAgent (derivative), DirectorAgent (unfilmable) ### Tools design-time notes (historical, non-activating) Embedding novelty scorer; concept clustering (UMAP); Are.na/Pinterest search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + NoveltyAgent as critic",
+    "description": "Divergent brainstorm of concepts, hooks, taglines Host role binding: IdeationAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4686,11 +4790,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Divergent brainstorm of concepts, hooks, taglines Host role binding: `IdeationAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Divergent brainstorm of concepts, hooks, taglines ### Knowledge distillation sources (historical) Cannes Grand Prix; D&AD; IDEO design-thinking; SCAMPER/de Bono ### Self-quality criteria (historical) Idea-count; novelty (embedding distance); semantic diversity ### Surpass-human signal (historical) Wins agency-pitch shootouts on concept density ### Critique bus (historical) - **Accepts critique from:** CreativeDirectorAgent, NoveltyAgent - **Comments on:** CopywriterAgent (derivative), DirectorAgent (unfilmable) ### Tools design-time notes (historical, non-activating) Embedding novelty scorer; concept clustering (UMAP); Are.na/Pinterest search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + NoveltyAgent as critic",
+    "specExcerpt": "Divergent brainstorm of concepts, hooks, taglines Host role binding: IdeationAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.ideation",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.ideation/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.ideation/README.md"
   },
   {
     "id": "video.instructionaldesign",
@@ -4698,7 +4804,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Instructionaldesign",
     "role": "InstructionalDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Learning objectives → script → assessment Host role binding: `InstructionalDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Learning objectives → script → assessment ### Knowledge distillation sources (historical) ATD body of knowledge; Cathy Moore *Action Mapping*; Dirksen *Design for How People Learn* ### Self-quality criteria (historical) Bloom-level mapping; completion ≥70%; Kirkpatrick L2 quiz ≥80% ### Surpass-human signal (historical) Beats ATD-credentialed ID on retention RCT ### Critique bus (historical) - **Accepts critique from:** SMEAgent, AccessibilityAgent - **Comments on:** ScriptwriterAgent (no objective), AnimatorAgent (over-decoration) ### Tools design-time notes (historical, non-activating) LMS APIs (SCORM/xAPI); quiz generation; Bloom taxonomy classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Bloom/Kirkpatrick)",
+    "description": "Learning objectives → script → assessment Host role binding: InstructionalDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4775,11 +4881,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Learning objectives → script → assessment Host role binding: `InstructionalDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Learning objectives → script → assessment ### Knowledge distillation sources (historical) ATD body of knowledge; Cathy Moore *Action Mapping*; Dirksen *Design for How People Learn* ### Self-quality criteria (historical) Bloom-level mapping; completion ≥70%; Kirkpatrick L2 quiz ≥80% ### Surpass-human signal (historical) Beats ATD-credentialed ID on retention RCT ### Critique bus (historical) - **Accepts critique from:** SMEAgent, AccessibilityAgent - **Comments on:** ScriptwriterAgent (no objective), AnimatorAgent (over-decoration) ### Tools design-time notes (historical, non-activating) LMS APIs (SCORM/xAPI); quiz generation; Bloom taxonomy classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: Bloom/Kirkpatrick)",
+    "specExcerpt": "Learning objectives → script → assessment Host role binding: InstructionalDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.instructionaldesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.instructionaldesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.instructionaldesign/README.md"
   },
   {
     "id": "video.interviewsynthesis",
@@ -4787,7 +4895,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Interviewsynthesis",
     "role": "InterviewSynthesisAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Synthesizes practitioner interviews into data Host role binding: `InterviewSynthesisAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthesizes practitioner interviews into data ### Knowledge distillation sources (historical) Otter/Rev transcripts; consent forms; SAG/WGA templates ### Self-quality criteria (historical) Inter-coder agreement on themes; consent integrity ### Surpass-human signal (historical) Faster + richer theme extraction than qualitative researcher ### Critique bus (historical) - **Accepts critique from:** ResearchPIAgent (HiTL), ComplianceAgent - **Comments on:** SMEAgent (mis-summarized expert) ### Tools design-time notes (historical, non-activating) Otter.ai/Rev API (transcription); thematic coding models; consent-management DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (interviewer refines questions based on theme gaps)",
+    "description": "Synthesizes practitioner interviews into data Host role binding: InterviewSynthesisAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4864,11 +4972,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Synthesizes practitioner interviews into data Host role binding: `InterviewSynthesisAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Synthesizes practitioner interviews into data ### Knowledge distillation sources (historical) Otter/Rev transcripts; consent forms; SAG/WGA templates ### Self-quality criteria (historical) Inter-coder agreement on themes; consent integrity ### Surpass-human signal (historical) Faster + richer theme extraction than qualitative researcher ### Critique bus (historical) - **Accepts critique from:** ResearchPIAgent (HiTL), ComplianceAgent - **Comments on:** SMEAgent (mis-summarized expert) ### Tools design-time notes (historical, non-activating) Otter.ai/Rev API (transcription); thematic coding models; consent-management DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (interviewer refines questions based on theme gaps)",
+    "specExcerpt": "Synthesizes practitioner interviews into data Host role binding: InterviewSynthesisAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.interviewsynthesis",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.interviewsynthesis/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.interviewsynthesis/README.md"
   },
   {
     "id": "video.journalist",
@@ -4876,7 +4986,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Journalist",
     "role": "JournalistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Reporting + ethical framing Host role binding: `JournalistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reporting + ethical framing ### Knowledge distillation sources (historical) Pulitzer/duPont/Peabody winners; SPJ Ethics; Poynter ### Self-quality criteria (historical) Source diversity; on-record ratio; ethical-checklist pass ### Surpass-human signal (historical) Lower correction rate + faster file vs newsroom ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, LegalAgent, StandardsEditorAgent - **Comments on:** FactCheckerAgent, ScriptwriterAgent ### Tools design-time notes (historical, non-activating) Web research tools; AP Stylebook API; interview transcription (Otter); SPJ rubric **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (ethical-checklist as verbal feedback)",
+    "description": "Reporting + ethical framing Host role binding: JournalistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -4953,11 +5063,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Reporting + ethical framing Host role binding: `JournalistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reporting + ethical framing ### Knowledge distillation sources (historical) Pulitzer/duPont/Peabody winners; SPJ Ethics; Poynter ### Self-quality criteria (historical) Source diversity; on-record ratio; ethical-checklist pass ### Surpass-human signal (historical) Lower correction rate + faster file vs newsroom ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, LegalAgent, StandardsEditorAgent - **Comments on:** FactCheckerAgent, ScriptwriterAgent ### Tools design-time notes (historical, non-activating) Web research tools; AP Stylebook API; interview transcription (Otter); SPJ rubric **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (ethical-checklist as verbal feedback)",
+    "specExcerpt": "Reporting + ethical framing Host role binding: JournalistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.journalist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.journalist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.journalist/README.md"
   },
   {
     "id": "video.judge",
@@ -4965,7 +5077,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Judge",
     "role": "JudgeAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: `JudgeAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adjudicates disputes via multi-agent debate; scores against rubric ### Knowledge distillation sources (historical) Du 2023 (LLM debate); MT-Bench rubrics; guild scoring sheets ### Self-quality criteria (historical) Inter-rater κ vs expert panel ≥0.8 ### Surpass-human signal (historical) Higher κ than median human juror ### Critique bus (historical) - **Accepts critique from:** HiTL on overturned rulings - **Comments on:** DirectorAgent, ScreenwriterAgent, any disputing pair ### Tools design-time notes (historical, non-activating) MT-Bench/Arena evaluation harness; rubric template engine **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) + LLM-as-Judge (Zheng 2023)",
+    "description": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: JudgeAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5042,11 +5154,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: `JudgeAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adjudicates disputes via multi-agent debate; scores against rubric ### Knowledge distillation sources (historical) Du 2023 (LLM debate); MT-Bench rubrics; guild scoring sheets ### Self-quality criteria (historical) Inter-rater κ vs expert panel ≥0.8 ### Surpass-human signal (historical) Higher κ than median human juror ### Critique bus (historical) - **Accepts critique from:** HiTL on overturned rulings - **Comments on:** DirectorAgent, ScreenwriterAgent, any disputing pair ### Tools design-time notes (historical, non-activating) MT-Bench/Arena evaluation harness; rubric template engine **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) + LLM-as-Judge (Zheng 2023)",
+    "specExcerpt": "Adjudicates disputes via multi-agent debate; scores against rubric Host role binding: JudgeAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.judge",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.judge/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.judge/README.md"
   },
   {
     "id": "video.labela_r",
@@ -5054,7 +5168,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Labela R",
     "role": "LabelA&RAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Represents label and artist direction for music-specific workflows Host role binding: `LabelA&RAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Represents label and artist direction for music-specific workflows ### Knowledge distillation sources (historical) A&R playbooks, label release notes, artist brief archives ### Self-quality criteria (historical) Artist-fit quality, release positioning, feedback turnaround ### Surpass-human signal (historical) Aligns music creative faster than disconnected stakeholder threads ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, MusicSupervisorAgent, LabelDigitalAgent - **Comments on:** Artist-direction drift, release mismatch, packaging weakness ### Tools design-time notes (historical, non-activating) Repertoire systems, release trackers, artist brief tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate with music stakeholders",
+    "description": "Represents label and artist direction for music-specific workflows Host role binding: LabelA&RAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5131,11 +5245,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Represents label and artist direction for music-specific workflows Host role binding: `LabelA&RAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Represents label and artist direction for music-specific workflows ### Knowledge distillation sources (historical) A&R playbooks, label release notes, artist brief archives ### Self-quality criteria (historical) Artist-fit quality, release positioning, feedback turnaround ### Surpass-human signal (historical) Aligns music creative faster than disconnected stakeholder threads ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, MusicSupervisorAgent, LabelDigitalAgent - **Comments on:** Artist-direction drift, release mismatch, packaging weakness ### Tools design-time notes (historical, non-activating) Repertoire systems, release trackers, artist brief tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate with music stakeholders",
+    "specExcerpt": "Represents label and artist direction for music-specific workflows Host role binding: LabelA&RAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.labela_r",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.labela_r/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.labela_r/README.md"
   },
   {
     "id": "video.labeldigital",
@@ -5143,7 +5259,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Labeldigital",
     "role": "LabelDigitalAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: `LabelDigitalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs label-side digital rollout, metadata, and channel packaging ### Knowledge distillation sources (historical) Digital music release operations, metadata schemas, distribution platform requirements ### Self-quality criteria (historical) Metadata completeness, rollout timing, channel readiness ### Surpass-human signal (historical) Delivers cleaner label-side packages than ad hoc release ops ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, SocialMediaStrategistAgent, MarketingAgent - **Comments on:** Missing metadata, release timing issues, asset-version confusion ### Tools design-time notes (historical, non-activating) Digital release systems, channel dashboards, metadata tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on release package",
+    "description": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: LabelDigitalAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5220,11 +5336,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: `LabelDigitalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs label-side digital rollout, metadata, and channel packaging ### Knowledge distillation sources (historical) Digital music release operations, metadata schemas, distribution platform requirements ### Self-quality criteria (historical) Metadata completeness, rollout timing, channel readiness ### Surpass-human signal (historical) Delivers cleaner label-side packages than ad hoc release ops ### Critique bus (historical) - **Accepts critique from:** MusicVideoDirectorAgent, SocialMediaStrategistAgent, MarketingAgent - **Comments on:** Missing metadata, release timing issues, asset-version confusion ### Tools design-time notes (historical, non-activating) Digital release systems, channel dashboards, metadata tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on release package",
+    "specExcerpt": "Runs label-side digital rollout, metadata, and channel packaging Host role binding: LabelDigitalAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.labeldigital",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.labeldigital/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.labeldigital/README.md"
   },
   {
     "id": "video.latencyoptimizer",
@@ -5232,7 +5350,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Latencyoptimizer",
     "role": "LatencyOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Parallelization, caching, speculative decoding, batching Host role binding: `LatencyOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Parallelization, caching, speculative decoding, batching ### Knowledge distillation sources (historical) vLLM; TensorRT-LLM; distillation; Anyscale/Ray ### Self-quality criteria (historical) p50/p95 latency; throughput/GPU-hour ### Surpass-human signal (historical) Lower p95 than human-tuned pipeline ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent - **Comments on:** OrchestratorAgent (serial bottleneck) ### Tools design-time notes (historical, non-activating) vLLM; TensorRT-LLM; Ray Serve; Redis (response cache); speculative decoding configs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use profiling + automated pipeline restructuring",
+    "description": "Parallelization, caching, speculative decoding, batching Host role binding: LatencyOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5309,11 +5427,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Parallelization, caching, speculative decoding, batching Host role binding: `LatencyOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Parallelization, caching, speculative decoding, batching ### Knowledge distillation sources (historical) vLLM; TensorRT-LLM; distillation; Anyscale/Ray ### Self-quality criteria (historical) p50/p95 latency; throughput/GPU-hour ### Surpass-human signal (historical) Lower p95 than human-tuned pipeline ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent - **Comments on:** OrchestratorAgent (serial bottleneck) ### Tools design-time notes (historical, non-activating) vLLM; TensorRT-LLM; Ray Serve; Redis (response cache); speculative decoding configs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Tool-use profiling + automated pipeline restructuring",
+    "specExcerpt": "Parallelization, caching, speculative decoding, batching Host role binding: LatencyOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.latencyoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.latencyoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.latencyoptimizer/README.md"
   },
   {
     "id": "video.learnersim",
@@ -5321,7 +5441,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Learnersim",
     "role": "LearnerSimAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Simulates learner behavior, confusion points, and assessment performance Host role binding: `LearnerSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates learner behavior, confusion points, and assessment performance ### Knowledge distillation sources (historical) Learner-modeling datasets, completion analytics, quiz outcome patterns ### Self-quality criteria (historical) Friction-point prediction, completion accuracy, simulated quiz realism ### Surpass-human signal (historical) Predicts weak spots before live learner complaints emerge ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, LMSAgent, AnalystAgent - **Comments on:** Confusing content, weak assessments, low-completion pathways ### Tools design-time notes (historical, non-activating) Learner simulation models, assessment predictors, LMS data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Audience-style simulation adapted for l",
+    "description": "Simulates learner behavior, confusion points, and assessment performance Host role binding: LearnerSimAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5398,11 +5518,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Simulates learner behavior, confusion points, and assessment performance Host role binding: `LearnerSimAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Simulates learner behavior, confusion points, and assessment performance ### Knowledge distillation sources (historical) Learner-modeling datasets, completion analytics, quiz outcome patterns ### Self-quality criteria (historical) Friction-point prediction, completion accuracy, simulated quiz realism ### Surpass-human signal (historical) Predicts weak spots before live learner complaints emerge ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, LMSAgent, AnalystAgent - **Comments on:** Confusing content, weak assessments, low-completion pathways ### Tools design-time notes (historical, non-activating) Learner simulation models, assessment predictors, LMS data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Audience-style simulation adapted for l",
+    "specExcerpt": "Simulates learner behavior, confusion points, and assessment performance Host role binding: LearnerSimAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.learnersim",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.learnersim/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.learnersim/README.md"
   },
   {
     "id": "video.legal",
@@ -5410,7 +5532,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Legal",
     "role": "LegalAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Performs final legal review for novel or high-risk publication issues Host role binding: `LegalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Performs final legal review for novel or high-risk publication issues ### Knowledge distillation sources (historical) Media law references, clearance workflows, defamation/IP/privacy cases ### Self-quality criteria (historical) Issue identification recall, sign-off completeness, escalation quality ### Surpass-human signal (historical) Reduces late-stage legal surprises relative to fragmented legal review ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (Legal), JournalistAgent, ProducerAgent / EP, MPAAgent - **Comments on:** Novel legal risks, unclear rights, unresolved high-risk claims ### Tools design-time notes (historical, non-activating) Legal memo systems, rights trackers, clearance databases **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Human-in-the-lo",
+    "description": "Performs final legal review for novel or high-risk publication issues Host role binding: LegalAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5487,11 +5609,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Performs final legal review for novel or high-risk publication issues Host role binding: `LegalAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Performs final legal review for novel or high-risk publication issues ### Knowledge distillation sources (historical) Media law references, clearance workflows, defamation/IP/privacy cases ### Self-quality criteria (historical) Issue identification recall, sign-off completeness, escalation quality ### Surpass-human signal (historical) Reduces late-stage legal surprises relative to fragmented legal review ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (Legal), JournalistAgent, ProducerAgent / EP, MPAAgent - **Comments on:** Novel legal risks, unclear rights, unresolved high-risk claims ### Tools design-time notes (historical, non-activating) Legal memo systems, rights trackers, clearance databases **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Human-in-the-lo",
+    "specExcerpt": "Performs final legal review for novel or high-risk publication issues Host role binding: LegalAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.legal",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.legal/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.legal/README.md"
   },
   {
     "id": "video.lipsync",
@@ -5499,7 +5623,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Lipsync",
     "role": "LipSyncAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: `LipSyncAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Validates and refines phoneme-viseme alignment as a dedicated gate ### Knowledge distillation sources (historical) Lip-sync research, animation timing references, viseme datasets ### Self-quality criteria (historical) Sync error below threshold, correction specificity, low false positives ### Surpass-human signal (historical) Finds sync drift more precisely than general QC review ### Critique bus (historical) - **Accepts critique from:** VoiceCloneAgent / LipSyncSpecialist, AnimatorAgent, AIQAConsistencyAgent - **Comments on:** Mouth-shape mismatch, frame drift in dialogue, correction priority ### Tools design-time notes (historical, non-activating) Phoneme-viseme aligners, frame-level sync tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine around sync validator outputs",
+    "description": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: LipSyncAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5576,11 +5700,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: `LipSyncAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Validates and refines phoneme-viseme alignment as a dedicated gate ### Knowledge distillation sources (historical) Lip-sync research, animation timing references, viseme datasets ### Self-quality criteria (historical) Sync error below threshold, correction specificity, low false positives ### Surpass-human signal (historical) Finds sync drift more precisely than general QC review ### Critique bus (historical) - **Accepts critique from:** VoiceCloneAgent / LipSyncSpecialist, AnimatorAgent, AIQAConsistencyAgent - **Comments on:** Mouth-shape mismatch, frame drift in dialogue, correction priority ### Tools design-time notes (historical, non-activating) Phoneme-viseme aligners, frame-level sync tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine around sync validator outputs",
+    "specExcerpt": "Validates and refines phoneme-viseme alignment as a dedicated gate Host role binding: LipSyncAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.lipsync",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.lipsync/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.lipsync/README.md"
   },
   {
     "id": "video.lms",
@@ -5588,7 +5714,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Lms",
     "role": "LMSAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Packages and deploys learning content to LMS environments Host role binding: `LMSAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages and deploys learning content to LMS environments ### Knowledge distillation sources (historical) SCORM/xAPI standards, LMS publishing workflows, completion-tracking schemas ### Self-quality criteria (historical) Package validity, tracking integrity, deploy success rate ### Surpass-human signal (historical) Ships publishable learning packages faster than manual course ops ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, AccessibilityAgent, LearnerSimAgent - **Comments on:** Package compliance, tracking errors, learning-objective mismatch ### Tools design-time notes (historical, non-activating) LMS APIs, SCORM/xAPI validators, course packaging tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over LMS deployment schema",
+    "description": "Packages and deploys learning content to LMS environments Host role binding: LMSAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5665,11 +5791,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Packages and deploys learning content to LMS environments Host role binding: `LMSAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages and deploys learning content to LMS environments ### Knowledge distillation sources (historical) SCORM/xAPI standards, LMS publishing workflows, completion-tracking schemas ### Self-quality criteria (historical) Package validity, tracking integrity, deploy success rate ### Surpass-human signal (historical) Ships publishable learning packages faster than manual course ops ### Critique bus (historical) - **Accepts critique from:** InstructionalDesignAgent, AccessibilityAgent, LearnerSimAgent - **Comments on:** Package compliance, tracking errors, learning-objective mismatch ### Tools design-time notes (historical, non-activating) LMS APIs, SCORM/xAPI validators, course packaging tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over LMS deployment schema",
+    "specExcerpt": "Packages and deploys learning content to LMS environments Host role binding: LMSAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.lms",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.lms/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.lms/README.md"
   },
   {
     "id": "video.localizationqa",
@@ -5677,7 +5805,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Localizationqa",
     "role": "LocalizationQAAgent (Linguist) (VA Domain Pack)",
     "status": "registered",
-    "description": "Translation + cultural fit Host role binding: `LocalizationQAAgent (Linguist) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Translation + cultural fit ### Knowledge distillation sources (historical) LISA QA model; MQM error typology; ATA cert prep ### Self-quality criteria (historical) MQM error/1k words; cultural-flag count ### Surpass-human signal (historical) Beats LSP human QA on MQM at 10× speed ### Critique bus (historical) - **Accepts critique from:** NativeReviewerAgent, BrandAgent - **Comments on:** VoiceCloneAgent (pronunciation), DubbingAgent ### Tools design-time notes (historical, non-activating) DeepL/Google Translate APIs; MQM error annotator; terminology management (memoQ API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: MQM scoring framework)",
+    "description": "Translation + cultural fit Host role binding: LocalizationQAAgent (Linguist) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5754,11 +5882,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Translation + cultural fit Host role binding: `LocalizationQAAgent (Linguist) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Translation + cultural fit ### Knowledge distillation sources (historical) LISA QA model; MQM error typology; ATA cert prep ### Self-quality criteria (historical) MQM error/1k words; cultural-flag count ### Surpass-human signal (historical) Beats LSP human QA on MQM at 10× speed ### Critique bus (historical) - **Accepts critique from:** NativeReviewerAgent, BrandAgent - **Comments on:** VoiceCloneAgent (pronunciation), DubbingAgent ### Tools design-time notes (historical, non-activating) DeepL/Google Translate APIs; MQM error annotator; terminology management (memoQ API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: MQM scoring framework)",
+    "specExcerpt": "Translation + cultural fit Host role binding: LocalizationQAAgent (Linguist) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.localizationqa",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.localizationqa/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.localizationqa/README.md"
   },
   {
     "id": "video.marketing",
@@ -5766,7 +5896,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Marketing",
     "role": "MarketingAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Packages content for launch, promotions, and release sequencing Host role binding: `MarketingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages content for launch, promotions, and release sequencing ### Knowledge distillation sources (historical) Campaign playbooks, launch calendars, media plans, asset packaging requirements ### Self-quality criteria (historical) Metadata completeness, asset readiness, launch sequencing accuracy ### Surpass-human signal (historical) Ships multi-channel launch packages faster than manual campaign ops ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, CopywriterAgent, TrailerEditorAgent - **Comments on:** Missing formats, weak rollout timing, incomplete promotion sets ### Tools design-time notes (historical, non-activating) Campaign management suites, metadata tools, release planners **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over la",
+    "description": "Packages content for launch, promotions, and release sequencing Host role binding: MarketingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5843,11 +5973,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Packages content for launch, promotions, and release sequencing Host role binding: `MarketingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Packages content for launch, promotions, and release sequencing ### Knowledge distillation sources (historical) Campaign playbooks, launch calendars, media plans, asset packaging requirements ### Self-quality criteria (historical) Metadata completeness, asset readiness, launch sequencing accuracy ### Surpass-human signal (historical) Ships multi-channel launch packages faster than manual campaign ops ### Critique bus (historical) - **Accepts critique from:** SocialMediaStrategistAgent, SEOAgent, CopywriterAgent, TrailerEditorAgent - **Comments on:** Missing formats, weak rollout timing, incomplete promotion sets ### Tools design-time notes (historical, non-activating) Campaign management suites, metadata tools, release planners **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over la",
+    "specExcerpt": "Packages content for launch, promotions, and release sequencing Host role binding: MarketingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.marketing",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.marketing/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.marketing/README.md"
   },
   {
     "id": "video.medicalillustrator",
@@ -5855,7 +5987,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Medicalillustrator",
     "role": "MedicalIllustratorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Anatomy & procedure visuals Host role binding: `MedicalIllustratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Anatomy & procedure visuals ### Knowledge distillation sources (historical) Netter atlas; AMI/CMI curriculum; Anatomage ### Self-quality criteria (historical) Anatomical accuracy (detection model); AMI rubric ### Surpass-human signal (historical) CMI peers vote ≥pass in blind review ### Critique bus (historical) - **Accepts critique from:** SMEAgent (physician), AccessibilityAgent - **Comments on:** AnimatorAgent (wrong anatomy), CopywriterAgent (mis-term) ### Tools design-time notes (historical, non-activating) Anatomage 3D API; DALL-E 3 (medical-prompt mode); anatomy-detection model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: AMI scoring criteria)",
+    "description": "Anatomy & procedure visuals Host role binding: MedicalIllustratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -5932,11 +6064,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Anatomy & procedure visuals Host role binding: `MedicalIllustratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Anatomy & procedure visuals ### Knowledge distillation sources (historical) Netter atlas; AMI/CMI curriculum; Anatomage ### Self-quality criteria (historical) Anatomical accuracy (detection model); AMI rubric ### Surpass-human signal (historical) CMI peers vote ≥pass in blind review ### Critique bus (historical) - **Accepts critique from:** SMEAgent (physician), AccessibilityAgent - **Comments on:** AnimatorAgent (wrong anatomy), CopywriterAgent (mis-term) ### Tools design-time notes (historical, non-activating) Anatomage 3D API; DALL-E 3 (medical-prompt mode); anatomy-detection model **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: AMI scoring criteria)",
+    "specExcerpt": "Anatomy & procedure visuals Host role binding: MedicalIllustratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.medicalillustrator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.medicalillustrator/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.medicalillustrator/README.md"
   },
   {
     "id": "video.memory",
@@ -5944,7 +6078,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Memory",
     "role": "MemoryAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Episodic + long-term project memory; retrieval for any agent Host role binding: `MemoryAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Episodic + long-term project memory; retrieval for any agent ### Knowledge distillation sources (historical) Reflexion (Shinn 2023); MemGPT; vector-DB best practices ### Self-quality criteria (historical) Retrieval precision@5 ≥0.9; freshness SLA ### Surpass-human signal (historical) Higher recall than producer's bible at scale ### Critique bus (historical) - **Accepts critique from:** All agents (correction events) - **Comments on:** All agents (stale facts) ### Tools design-time notes (historical, non-activating) Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion memory architecture (MemGPT extension)",
+    "description": "Episodic + long-term project memory; retrieval for any agent Host role binding: MemoryAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6021,11 +6155,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Episodic + long-term project memory; retrieval for any agent Host role binding: `MemoryAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Episodic + long-term project memory; retrieval for any agent ### Knowledge distillation sources (historical) Reflexion (Shinn 2023); MemGPT; vector-DB best practices ### Self-quality criteria (historical) Retrieval precision@5 ≥0.9; freshness SLA ### Surpass-human signal (historical) Higher recall than producer's bible at scale ### Critique bus (historical) - **Accepts critique from:** All agents (correction events) - **Comments on:** All agents (stale facts) ### Tools design-time notes (historical, non-activating) Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion memory architecture (MemGPT extension)",
+    "specExcerpt": "Episodic + long-term project memory; retrieval for any agent Host role binding: MemoryAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.memory",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.memory/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.memory/README.md"
   },
   {
     "id": "video.moodboard",
@@ -6033,7 +6169,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Moodboard",
     "role": "MoodBoardAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Reference boards: visual, sonic, tonal Host role binding: `MoodBoardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reference boards: visual, sonic, tonal ### Knowledge distillation sources (historical) Pinterest/Are.na; lookbook archives; Spotify-Canvas ### Self-quality criteria (historical) Reference coherence (cluster tightness); brief alignment ### Surpass-human signal (historical) Faster + tighter boards than art director (blind A/B) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** ConceptArtistAgent (off-mood) ### Tools design-time notes (historical, non-activating) Pinterest/Are.na APIs; Spotify Canvas; CLIP clustering; Figma board generation **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search → cluster → layout → validate coherence)",
+    "description": "Reference boards: visual, sonic, tonal Host role binding: MoodBoardAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6110,11 +6246,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Reference boards: visual, sonic, tonal Host role binding: `MoodBoardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reference boards: visual, sonic, tonal ### Knowledge distillation sources (historical) Pinterest/Are.na; lookbook archives; Spotify-Canvas ### Self-quality criteria (historical) Reference coherence (cluster tightness); brief alignment ### Surpass-human signal (historical) Faster + tighter boards than art director (blind A/B) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ProductionDesignAgent - **Comments on:** ConceptArtistAgent (off-mood) ### Tools design-time notes (historical, non-activating) Pinterest/Are.na APIs; Spotify Canvas; CLIP clustering; Figma board generation **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search → cluster → layout → validate coherence)",
+    "specExcerpt": "Reference boards: visual, sonic, tonal Host role binding: MoodBoardAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.moodboard",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.moodboard/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.moodboard/README.md"
   },
   {
     "id": "video.motiongraphics",
@@ -6122,7 +6260,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Motiongraphics",
     "role": "MotionGraphicsAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Kinetic typography, lower thirds, infographics Host role binding: `MotionGraphicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Kinetic typography, lower thirds, infographics ### Knowledge distillation sources (historical) Motionographer; School of Motion; AICP Next Awards ### Self-quality criteria (historical) Typographic hierarchy; brand compliance; readability at thumbnail ### Surpass-human signal (historical) Wins agency RFP shootouts on speed + on-brand fidelity ### Critique bus (historical) - **Accepts critique from:** BrandManagerAgent, AccessibilityAgent (contrast) - **Comments on:** CopywriterAgent (verbosity), EditorAgent (timing) ### Tools design-time notes (historical, non-activating) After Effects via MCP/ExtendScript; Lottie export; Rive; brand-asset CDN **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct — reason about brand guidelines then render",
+    "description": "Kinetic typography, lower thirds, infographics Host role binding: MotionGraphicsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6202,11 +6340,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Kinetic typography, lower thirds, infographics Host role binding: `MotionGraphicsAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Kinetic typography, lower thirds, infographics ### Knowledge distillation sources (historical) Motionographer; School of Motion; AICP Next Awards ### Self-quality criteria (historical) Typographic hierarchy; brand compliance; readability at thumbnail ### Surpass-human signal (historical) Wins agency RFP shootouts on speed + on-brand fidelity ### Critique bus (historical) - **Accepts critique from:** BrandManagerAgent, AccessibilityAgent (contrast) - **Comments on:** CopywriterAgent (verbosity), EditorAgent (timing) ### Tools design-time notes (historical, non-activating) After Effects via MCP/ExtendScript; Lottie export; Rive; brand-asset CDN **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct — reason about brand guidelines then render",
+    "specExcerpt": "Kinetic typography, lower thirds, infographics Host role binding: MotionGraphicsAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.motiongraphics",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.motiongraphics/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.motiongraphics/README.md"
   },
   {
     "id": "video.mpa",
@@ -6214,7 +6354,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Mpa",
     "role": "MPAAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: `MPAAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Knowledge distillation sources (historical) Rating submission references, content advisories, theatrical packaging rules ### Self-quality criteria (historical) Rating-package completeness, advisory clarity, escalation quality ### Surpass-human signal (historical) Prepares cleaner feature-release classification packages than manual prep ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, LegalAgent, EthicsAgent - **Comments on:** Missing advisories, incomplete rating prep, unclear classification support ### Tools design-time notes (historical, non-activating) Submission packages, advisory templates, classification checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (",
+    "description": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: MPAAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6291,11 +6431,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: `MPAAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Prepares rating-related packaging and release-readiness inputs for feature workflows ### Knowledge distillation sources (historical) Rating submission references, content advisories, theatrical packaging rules ### Self-quality criteria (historical) Rating-package completeness, advisory clarity, escalation quality ### Surpass-human signal (historical) Prepares cleaner feature-release classification packages than manual prep ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, LegalAgent, EthicsAgent - **Comments on:** Missing advisories, incomplete rating prep, unclear classification support ### Tools design-time notes (historical, non-activating) Submission packages, advisory templates, classification checklists **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (",
+    "specExcerpt": "Prepares rating-related packaging and release-readiness inputs for feature workflows Host role binding: MPAAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.mpa",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.mpa/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.mpa/README.md"
   },
   {
     "id": "video.mua_makeup",
@@ -6303,7 +6445,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Mua Makeup",
     "role": "MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)",
     "status": "registered",
-    "description": "Talent face/hair; prosthetics Host role binding: `MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Talent face/hair; prosthetics ### Knowledge distillation sources (historical) IATSE 706 corpora; Kazu Hiro studio refs ### Self-quality criteria (historical) Continuity hash across takes; skin-tone realism (FID) ### Surpass-human signal (historical) Continuity break rate <0.5% (vs ~2% human) ### Critique bus (historical) - **Accepts critique from:** DoPAgent, ContinuityAgent - **Comments on:** CostumeAgent (palette clash) ### Tools design-time notes (historical, non-activating) Face-landmark detectors; perceptual hash comparison; Kling face-consistency mode **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: continuity rules)",
+    "description": "Talent face/hair; prosthetics Host role binding: MUAAgent (Makeup/Hair/SFX) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6380,11 +6522,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Talent face/hair; prosthetics Host role binding: `MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Talent face/hair; prosthetics ### Knowledge distillation sources (historical) IATSE 706 corpora; Kazu Hiro studio refs ### Self-quality criteria (historical) Continuity hash across takes; skin-tone realism (FID) ### Surpass-human signal (historical) Continuity break rate <0.5% (vs ~2% human) ### Critique bus (historical) - **Accepts critique from:** DoPAgent, ContinuityAgent - **Comments on:** CostumeAgent (palette clash) ### Tools design-time notes (historical, non-activating) Face-landmark detectors; perceptual hash comparison; Kling face-consistency mode **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: continuity rules)",
+    "specExcerpt": "Talent face/hair; prosthetics Host role binding: MUAAgent (Makeup/Hair/SFX) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.mua_makeup",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.mua_makeup/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.mua_makeup/README.md"
   },
   {
     "id": "video.musicsupervisor",
@@ -6392,7 +6536,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Musicsupervisor",
     "role": "MusicSupervisorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: `MusicSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Knowledge distillation sources (historical) Music supervision notes, cue placement references, soundtrack release practice ### Self-quality criteria (historical) Cue suitability, rights-awareness coverage, soundtrack-package completeness ### Surpass-human signal (historical) Coordinates music placements more consistently than fragmented handoffs ### Critique bus (historical) - **Accepts critique from:** ComposerAgent, TrailerEditorAgent, LabelA&RAgent, LegalAgent - **Comments on:** Cue misuse, music-rights ambiguity, soundtrack cohesion issues ### Tools design-time notes (historical, non-activating) Music asset trackers, cue sheets, soundtrack package tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histo",
+    "description": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: MusicSupervisorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6469,11 +6613,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: `MusicSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Manages music fit, cue usage, rights awareness, and soundtrack packaging ### Knowledge distillation sources (historical) Music supervision notes, cue placement references, soundtrack release practice ### Self-quality criteria (historical) Cue suitability, rights-awareness coverage, soundtrack-package completeness ### Surpass-human signal (historical) Coordinates music placements more consistently than fragmented handoffs ### Critique bus (historical) - **Accepts critique from:** ComposerAgent, TrailerEditorAgent, LabelA&RAgent, LegalAgent - **Comments on:** Cue misuse, music-rights ambiguity, soundtrack cohesion issues ### Tools design-time notes (historical, non-activating) Music asset trackers, cue sheets, soundtrack package tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (histo",
+    "specExcerpt": "Manages music fit, cue usage, rights awareness, and soundtrack packaging Host role binding: MusicSupervisorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.musicsupervisor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.musicsupervisor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.musicsupervisor/README.md"
   },
   {
     "id": "video.musicvideodirector",
@@ -6481,7 +6627,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Musicvideodirector",
     "role": "MusicVideoDirectorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Visual concept for songs Host role binding: `MusicVideoDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Visual concept for songs ### Knowledge distillation sources (historical) DirectorsLibrary; UKMVA/MTV VMA winners; Hype Williams/Spike Jonze ### Self-quality criteria (historical) Edit-rhythm sync; lookbook coherence; artist-brief fit ### Surpass-human signal (historical) Wins label-blind preference vs commercial MV shortlist ### Critique bus (historical) - **Accepts critique from:** LabelA&RAgent, ArtistAgent - **Comments on:** EditorAgent (cut on beat), DoPAgent ### Tools design-time notes (historical, non-activating) Runway Gen-4 (style-locked generation); Veo 3.1; mood-board tools (Are.na API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (with DirectorAgent + EditorAgent)",
+    "description": "Visual concept for songs Host role binding: MusicVideoDirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6558,11 +6704,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Visual concept for songs Host role binding: `MusicVideoDirectorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Visual concept for songs ### Knowledge distillation sources (historical) DirectorsLibrary; UKMVA/MTV VMA winners; Hype Williams/Spike Jonze ### Self-quality criteria (historical) Edit-rhythm sync; lookbook coherence; artist-brief fit ### Surpass-human signal (historical) Wins label-blind preference vs commercial MV shortlist ### Critique bus (historical) - **Accepts critique from:** LabelA&RAgent, ArtistAgent - **Comments on:** EditorAgent (cut on beat), DoPAgent ### Tools design-time notes (historical, non-activating) Runway Gen-4 (style-locked generation); Veo 3.1; mood-board tools (Are.na API) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (with DirectorAgent + EditorAgent)",
+    "specExcerpt": "Visual concept for songs Host role binding: MusicVideoDirectorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.musicvideodirector",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.musicvideodirector/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.musicvideodirector/README.md"
   },
   {
     "id": "video.narrativearc",
@@ -6570,7 +6718,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Narrativearc",
     "role": "NarrativeArcAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: `NarrativeArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) 3-act / Save-the-Cat / Hero's Journey structure ### Knowledge distillation sources (historical) Campbell; Snyder *Save the Cat*; Truby; Black List analyses ### Self-quality criteria (historical) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Surpass-human signal (historical) Beats WGA first drafts on structural rubric ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, DirectorAgent - **Comments on:** ScreenwriterAgent (sagging middle) ### Tools design-time notes (historical, non-activating) Beat-sheet validator; emotional-arc plotter; structure templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sheet completeness)",
+    "description": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: NarrativeArcAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6647,11 +6795,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: `NarrativeArcAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) 3-act / Save-the-Cat / Hero's Journey structure ### Knowledge distillation sources (historical) Campbell; Snyder *Save the Cat*; Truby; Black List analyses ### Self-quality criteria (historical) Beat-sheet coverage 100%; turning-point spacing; arc curve fit ### Surpass-human signal (historical) Beats WGA first drafts on structural rubric ### Critique bus (historical) - **Accepts critique from:** ScreenwriterAgent, DirectorAgent - **Comments on:** ScreenwriterAgent (sagging middle) ### Tools design-time notes (historical, non-activating) Beat-sheet validator; emotional-arc plotter; structure templates **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (rubric: beat-sheet completeness)",
+    "specExcerpt": "3-act / Save-the-Cat / Hero's Journey structure Host role binding: NarrativeArcAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.narrativearc",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.narrativearc/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.narrativearc/README.md"
   },
   {
     "id": "video.novelty",
@@ -6659,7 +6809,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Novelty",
     "role": "NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)",
     "status": "registered",
-    "description": "Flags tropes, clichés, over-fit outputs Host role binding: `NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Flags tropes, clichés, over-fit outputs ### Knowledge distillation sources (historical) TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings ### Self-quality criteria (historical) Cliché-hit count; novelty score vs category prior ### Surpass-human signal (historical) Catches more clichés than experienced script editor ### Critique bus (historical) - **Accepts critique from:** IdeationAgent, ScreenwriterAgent - **Comments on:** ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) ### Tools design-time notes (historical, non-activating) TV Tropes scraper; n-gram frequency DB; embedding novelty scorer **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (anti-cliché constitution)",
+    "description": "Flags tropes, clichés, over-fit outputs Host role binding: NoveltyAgent / Anti-Cliché Critic (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6736,11 +6886,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Flags tropes, clichés, over-fit outputs Host role binding: `NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Flags tropes, clichés, over-fit outputs ### Knowledge distillation sources (historical) TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings ### Self-quality criteria (historical) Cliché-hit count; novelty score vs category prior ### Surpass-human signal (historical) Catches more clichés than experienced script editor ### Critique bus (historical) - **Accepts critique from:** IdeationAgent, ScreenwriterAgent - **Comments on:** ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) ### Tools design-time notes (historical, non-activating) TV Tropes scraper; n-gram frequency DB; embedding novelty scorer **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (anti-cliché constitution)",
+    "specExcerpt": "Flags tropes, clichés, over-fit outputs Host role binding: NoveltyAgent / Anti-Cliché Critic (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.novelty",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.novelty/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.novelty/README.md"
   },
   {
     "id": "video.orchestrator",
@@ -6748,7 +6900,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Orchestrator",
     "role": "OrchestratorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: `OrchestratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Knowledge distillation sources (historical) LangGraph + CrewAI + AutoGen patterns; Airflow/Temporal; PGA schedule templates ### Self-quality criteria (historical) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Surpass-human signal (historical) Lower TTD than human EP at same scope ### Critique bus (historical) - **Accepts critique from:** ProducerAgent (scope), JudgeAgent (dispute), HiTL on stall - **Comments on:** All agents (resource burn, retry storms) ### Tools design-time notes (historical, non-activating) LangGraph state machine; Temporal workflow engine; Redis (distributed locks); observability (LangSmith) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph) — deterministic",
+    "description": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: OrchestratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6827,11 +6979,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: `OrchestratorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in ### Knowledge distillation sources (historical) LangGraph + CrewAI + AutoGen patterns; Airflow/Temporal; PGA schedule templates ### Self-quality criteria (historical) DAG completion ≥99.5%; SLA adherence; deadlock = 0 ### Surpass-human signal (historical) Lower TTD than human EP at same scope ### Critique bus (historical) - **Accepts critique from:** ProducerAgent (scope), JudgeAgent (dispute), HiTL on stall - **Comments on:** All agents (resource burn, retry storms) ### Tools design-time notes (historical, non-activating) LangGraph state machine; Temporal workflow engine; Redis (distributed locks); observability (LangSmith) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph) — deterministic",
+    "specExcerpt": "Runs CrewAI/AutoGen/LangGraph DAG; retries, timeouts, fan-out/fan-in Host role binding: OrchestratorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.orchestrator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.orchestrator/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.orchestrator/README.md"
   },
   {
     "id": "video.performancemarketer",
@@ -6839,7 +6993,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Performancemarketer",
     "role": "PerformanceMarketerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Optimize ads for ROAS Host role binding: `PerformanceMarketerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimize ads for ROAS ### Knowledge distillation sources (historical) Meta Blueprint; TikTok Ads Academy; MMM literature ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior media buyer on 30-day ROAS ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, FinanceAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API; TikTok Ads API; Google Ads API; Bayesian AB testing libs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = ROAS uplift signal from ad platform)",
+    "description": "Optimize ads for ROAS Host role binding: PerformanceMarketerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -6916,11 +7070,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Optimize ads for ROAS Host role binding: `PerformanceMarketerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimize ads for ROAS ### Knowledge distillation sources (historical) Meta Blueprint; TikTok Ads Academy; MMM literature ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior media buyer on 30-day ROAS ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, FinanceAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API; TikTok Ads API; Google Ads API; Bayesian AB testing libs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = ROAS uplift signal from ad platform)",
+    "specExcerpt": "Optimize ads for ROAS Host role binding: PerformanceMarketerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.performancemarketer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.performancemarketer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.performancemarketer/README.md"
   },
   {
     "id": "video.personalizationengineer",
@@ -6928,7 +7084,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Personalizationengineer",
     "role": "PersonalizationEngineerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Variable templates (name/face/voice swap) Host role binding: `PersonalizationEngineerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Variable templates (name/face/voice swap) ### Knowledge distillation sources (historical) Idomoo case studies; DMA campaigns; MarTech lit ### Self-quality criteria (historical) Render-success ≥99.5%; spot-check pass; privacy-audit pass ### Surpass-human signal (historical) Higher share-rate than top human-templated campaigns ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (GDPR/CCPA), AnalystAgent - **Comments on:** TemplateDesignerAgent (fragility) ### Tools design-time notes (historical, non-activating) Idomoo/Pirsonal APIs; HeyGen personalization; GDPR consent-management platform **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assemble template → render → validate → deliver)",
+    "description": "Variable templates (name/face/voice swap) Host role binding: PersonalizationEngineerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7005,11 +7161,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Variable templates (name/face/voice swap) Host role binding: `PersonalizationEngineerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Variable templates (name/face/voice swap) ### Knowledge distillation sources (historical) Idomoo case studies; DMA campaigns; MarTech lit ### Self-quality criteria (historical) Render-success ≥99.5%; spot-check pass; privacy-audit pass ### Surpass-human signal (historical) Higher share-rate than top human-templated campaigns ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (GDPR/CCPA), AnalystAgent - **Comments on:** TemplateDesignerAgent (fragility) ### Tools design-time notes (historical, non-activating) Idomoo/Pirsonal APIs; HeyGen personalization; GDPR consent-management platform **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assemble template → render → validate → deliver)",
+    "specExcerpt": "Variable templates (name/face/voice swap) Host role binding: PersonalizationEngineerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.personalizationengineer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.personalizationengineer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.personalizationengineer/README.md"
   },
   {
     "id": "video.planner",
@@ -7017,7 +7175,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Planner",
     "role": "PlannerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: `PlannerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Decomposes brief into phased DAG with assignments + critic gates ### Knowledge distillation sources (historical) PMBOK; CrewAI task graphs; phase templates ### Self-quality criteria (historical) Plan validity (no missing gate); cost variance <10% ### Surpass-human signal (historical) Tighter, cheaper plans than EP first pass (blind A/B) ### Critique bus (historical) - **Accepts critique from:** ProducerAgent, FinanceAgent (budget) - **Comments on:** RouterAgent (wrong pick), OrchestratorAgent ### Tools design-time notes (historical, non-activating) LangGraph plan-gen; cost-estimation models; Gantt/PERT tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (decompose → estimate → validate → emit DAG)",
+    "description": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: PlannerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7094,11 +7252,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: `PlannerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Decomposes brief into phased DAG with assignments + critic gates ### Knowledge distillation sources (historical) PMBOK; CrewAI task graphs; phase templates ### Self-quality criteria (historical) Plan validity (no missing gate); cost variance <10% ### Surpass-human signal (historical) Tighter, cheaper plans than EP first pass (blind A/B) ### Critique bus (historical) - **Accepts critique from:** ProducerAgent, FinanceAgent (budget) - **Comments on:** RouterAgent (wrong pick), OrchestratorAgent ### Tools design-time notes (historical, non-activating) LangGraph plan-gen; cost-estimation models; Gantt/PERT tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (decompose → estimate → validate → emit DAG)",
+    "specExcerpt": "Decomposes brief into phased DAG with assignments + critic gates Host role binding: PlannerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.planner",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.planner/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.planner/README.md"
   },
   {
     "id": "video.producer",
@@ -7106,7 +7266,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Producer",
     "role": "ProducerAgent / EP (VA Domain Pack)",
     "status": "registered",
-    "description": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: `ProducerAgent / EP (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Budget, schedule, hiring, delivery; greenlights phase gates ### Knowledge distillation sources (historical) PGA Producers Mark; Variety/Deadline budget leaks; LineProducer Excel corpora ### Self-quality criteria (historical) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Surpass-human signal (historical) Beats PGA schedules at 0.6× cost with equal CSAT ### Critique bus (historical) - **Accepts critique from:** All downstream agents (escalations); HiTL gate for greenlight - **Comments on:** DirectorAgent (scope creep), AllAgents (resource burn) ### Tools design-time notes (historical, non-activating) Google Sheets API, Airtable, Temporal/Airflow orchestration, Stripe billing **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph DAG) + ReAct f",
+    "description": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: ProducerAgent / EP (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7183,11 +7343,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: `ProducerAgent / EP (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Budget, schedule, hiring, delivery; greenlights phase gates ### Knowledge distillation sources (historical) PGA Producers Mark; Variety/Deadline budget leaks; LineProducer Excel corpora ### Self-quality criteria (historical) On-time delivery rate; budget variance <±5%; talent satisfaction (RLHF) ### Surpass-human signal (historical) Beats PGA schedules at 0.6× cost with equal CSAT ### Critique bus (historical) - **Accepts critique from:** All downstream agents (escalations); HiTL gate for greenlight - **Comments on:** DirectorAgent (scope creep), AllAgents (resource burn) ### Tools design-time notes (historical, non-activating) Google Sheets API, Airtable, Temporal/Airflow orchestration, Stripe billing **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (LangGraph DAG) + ReAct f",
+    "specExcerpt": "Budget, schedule, hiring, delivery; greenlights phase gates Host role binding: ProducerAgent / EP (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.producer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.producer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.producer/README.md"
   },
   {
     "id": "video.productiondesign",
@@ -7195,7 +7357,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Productiondesign",
     "role": "ProductionDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Sets, locations, world look Host role binding: `ProductionDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sets, locations, world look ### Knowledge distillation sources (historical) ADG Awards; AMPAS submissions; Beachler/Carter talks ### Self-quality criteria (historical) Period accuracy; palette coherence; build feasibility ### Surpass-human signal (historical) Wins ADG blind comparisons on period-research depth ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ConceptArtistAgent (style break), CostumeAgent ### Tools design-time notes (historical, non-activating) Unreal Engine (virtual scouting); Veo 3.1 location gen; archival image search APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores period-research corrections in memory)",
+    "description": "Sets, locations, world look Host role binding: ProductionDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7272,11 +7434,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Sets, locations, world look Host role binding: `ProductionDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Sets, locations, world look ### Knowledge distillation sources (historical) ADG Awards; AMPAS submissions; Beachler/Carter talks ### Self-quality criteria (historical) Period accuracy; palette coherence; build feasibility ### Surpass-human signal (historical) Wins ADG blind comparisons on period-research depth ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ConceptArtistAgent (style break), CostumeAgent ### Tools design-time notes (historical, non-activating) Unreal Engine (virtual scouting); Veo 3.1 location gen; archival image search APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (stores period-research corrections in memory)",
+    "specExcerpt": "Sets, locations, world look Host role binding: ProductionDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.productiondesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.productiondesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.productiondesign/README.md"
   },
   {
     "id": "video.promptengineer",
@@ -7284,7 +7448,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Promptengineer",
     "role": "PromptEngineerAgent / GeneratorOperator (VA Domain Pack)",
     "status": "registered",
-    "description": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: `PromptEngineerAgent / GeneratorOperator (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Crafts prompts; steers Sora/Veo/Runway/Kling ### Knowledge distillation sources (historical) Karen X. Cheng/Trillo public sets; r/aivideo; Runway AIFF jury notes ### Self-quality criteria (historical) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Surpass-human signal (historical) Target shot in ≤3 iterations vs human avg 10 ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AIQAAgent - **Comments on:** AIQAAgent (re-roll budget), ConsistencyAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1, Runway Gen-4/Aleph, Kling 3.0; seed/parameter registries **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy / OPRO prompt optimization (Yang 2023)",
+    "description": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: PromptEngineerAgent / GeneratorOperator (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7366,11 +7530,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: `PromptEngineerAgent / GeneratorOperator (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Crafts prompts; steers Sora/Veo/Runway/Kling ### Knowledge distillation sources (historical) Karen X. Cheng/Trillo public sets; r/aivideo; Runway AIFF jury notes ### Self-quality criteria (historical) Prompt→output CLIP-T; iteration count to acceptance; seed reproducibility ### Surpass-human signal (historical) Target shot in ≤3 iterations vs human avg 10 ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, AIQAAgent - **Comments on:** AIQAAgent (re-roll budget), ConsistencyAgent ### Tools design-time notes (historical, non-activating) Sora 2 API, Veo 3.1, Runway Gen-4/Aleph, Kling 3.0; seed/parameter registries **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy / OPRO prompt optimization (Yang 2023)",
+    "specExcerpt": "Crafts prompts; steers Sora/Veo/Runway/Kling Host role binding: PromptEngineerAgent / GeneratorOperator (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.promptengineer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.promptengineer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.promptengineer/README.md"
   },
   {
     "id": "video.promptoptimizer",
@@ -7378,7 +7544,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Promptoptimizer",
     "role": "PromptOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: `PromptOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Knowledge distillation sources (historical) OPRO (Yang 2023); APE (Zhou 2022); DSPy (Stanford); Promptbreeder (DeepMind) ### Self-quality criteria (historical) Score uplift per iteration; convergence speed ### Surpass-human signal (historical) Beats hand-tuned prompts on held-out briefs ### Critique bus (historical) - **Accepts critique from:** PromptEngineerAgent, AIQAAgent - **Comments on:** PromptEngineerAgent (sub-optimal seed) ### Tools design-time notes (historical, non-activating) DSPy framework (MIPRO optimizer); OPRO implementation; held-out eval harness **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy compilation + OPRO meta-optimization",
+    "description": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: PromptOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7455,11 +7621,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: `PromptOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder ### Knowledge distillation sources (historical) OPRO (Yang 2023); APE (Zhou 2022); DSPy (Stanford); Promptbreeder (DeepMind) ### Self-quality criteria (historical) Score uplift per iteration; convergence speed ### Surpass-human signal (historical) Beats hand-tuned prompts on held-out briefs ### Critique bus (historical) - **Accepts critique from:** PromptEngineerAgent, AIQAAgent - **Comments on:** PromptEngineerAgent (sub-optimal seed) ### Tools design-time notes (historical, non-activating) DSPy framework (MIPRO optimizer); OPRO implementation; held-out eval harness **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) DSPy compilation + OPRO meta-optimization",
+    "specExcerpt": "Auto-improves prompts via OPRO/APE/DSPy/Promptbreeder Host role binding: PromptOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.promptoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.promptoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.promptoptimizer/README.md"
   },
   {
     "id": "video.realestatephoto",
@@ -7467,7 +7635,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Realestatephoto",
     "role": "RealEstatePhotoAgent / 3D Scan (VA Domain Pack)",
     "status": "registered",
-    "description": "Wide interiors; Matterport scans Host role binding: `RealEstatePhotoAgent / 3D Scan (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Wide interiors; Matterport scans ### Knowledge distillation sources (historical) Mike Kelley tutorials; APALA refs ### Self-quality criteria (historical) Vertical-line straightness; HDR stack; coverage % ### Surpass-human signal (historical) Listing-CTR uplift vs human-shot baseline ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DronePilotAgent - **Comments on:** DronePilotAgent (illegal altitude) ### Tools design-time notes (historical, non-activating) Matterport SDK; HDR processing (Luminance HDR); lens-correction tools; Veo 3.1 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assess space → generate views → validate geometry)",
+    "description": "Wide interiors; Matterport scans Host role binding: RealEstatePhotoAgent / 3D Scan (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7544,11 +7712,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Wide interiors; Matterport scans Host role binding: `RealEstatePhotoAgent / 3D Scan (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Wide interiors; Matterport scans ### Knowledge distillation sources (historical) Mike Kelley tutorials; APALA refs ### Self-quality criteria (historical) Vertical-line straightness; HDR stack; coverage % ### Surpass-human signal (historical) Listing-CTR uplift vs human-shot baseline ### Critique bus (historical) - **Accepts critique from:** DoPAgent, DronePilotAgent - **Comments on:** DronePilotAgent (illegal altitude) ### Tools design-time notes (historical, non-activating) Matterport SDK; HDR processing (Luminance HDR); lens-correction tools; Veo 3.1 **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (assess space → generate views → validate geometry)",
+    "specExcerpt": "Wide interiors; Matterport scans Host role binding: RealEstatePhotoAgent / 3D Scan (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.realestatephoto",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.realestatephoto/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.realestatephoto/README.md"
   },
   {
     "id": "video.retentionoptimizer",
@@ -7556,7 +7726,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Retentionoptimizer",
     "role": "RetentionOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: `RetentionOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tunes hook, pacing, structure for AVD/hold-rate ### Knowledge distillation sources (historical) YouTube Analytics benchmarks; TikTok retention curves; AudienceSim ### Self-quality criteria (historical) Predicted retention vs actual; AVD lift over control ### Surpass-human signal (historical) Beats senior YouTube editor on AVD lift (A/B) ### Critique bus (historical) - **Accepts critique from:** EditorAgent, AudienceSimAgent - **Comments on:** EditorAgent (slow opener), ScriptwriterAgent (front fluff) ### Tools design-time notes (historical, non-activating) YouTube Analytics API; retention-curve predictor model; A/B test framework **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = retention uplift from real analytics)",
+    "description": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: RetentionOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7633,11 +7803,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: `RetentionOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tunes hook, pacing, structure for AVD/hold-rate ### Knowledge distillation sources (historical) YouTube Analytics benchmarks; TikTok retention curves; AudienceSim ### Self-quality criteria (historical) Predicted retention vs actual; AVD lift over control ### Surpass-human signal (historical) Beats senior YouTube editor on AVD lift (A/B) ### Critique bus (historical) - **Accepts critique from:** EditorAgent, AudienceSimAgent - **Comments on:** EditorAgent (slow opener), ScriptwriterAgent (front fluff) ### Tools design-time notes (historical, non-activating) YouTube Analytics API; retention-curve predictor model; A/B test framework **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = retention uplift from real analytics)",
+    "specExcerpt": "Tunes hook, pacing, structure for AVD/hold-rate Host role binding: RetentionOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.retentionoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.retentionoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.retentionoptimizer/README.md"
   },
   {
     "id": "video.roasoptimizer",
@@ -7645,7 +7817,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Roasoptimizer",
     "role": "ROASOptimizerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Optimizes ad creatives for performance Host role binding: `ROASOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes ad creatives for performance ### Knowledge distillation sources (historical) Meta Marketing Science; TikTok Ads Academy; MMM/MTA lit ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior marketer at equal budget ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, AnalystAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API (creative testing); TikTok Ads; Bayesian MMM tools (Robyn/Meridian) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = real ROAS from ad platform feedback)",
+    "description": "Optimizes ad creatives for performance Host role binding: ROASOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7722,11 +7894,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Optimizes ad creatives for performance Host role binding: `ROASOptimizerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes ad creatives for performance ### Knowledge distillation sources (historical) Meta Marketing Science; TikTok Ads Academy; MMM/MTA lit ### Self-quality criteria (historical) ROAS uplift vs control; significance ≥95% ### Surpass-human signal (historical) Beats senior marketer at equal budget ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, AnalystAgent - **Comments on:** UGCAgent (low hook), CopywriterAgent (weak CTA) ### Tools design-time notes (historical, non-activating) Meta Ads API (creative testing); TikTok Ads; Bayesian MMM tools (Robyn/Meridian) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward = real ROAS from ad platform feedback)",
+    "specExcerpt": "Optimizes ad creatives for performance Host role binding: ROASOptimizerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.roasoptimizer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.roasoptimizer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.roasoptimizer/README.md"
   },
   {
     "id": "video.router",
@@ -7734,7 +7908,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Router",
     "role": "RouterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Picks right specialist agent (and model) for each subtask Host role binding: `RouterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Picks right specialist agent (and model) for each subtask ### Knowledge distillation sources (historical) Agent-capability registry; benchmark history (cost/quality/latency) ### Self-quality criteria (historical) Routing accuracy ≥95% vs oracle; cost within budget ### Surpass-human signal (historical) Beats human producer in agent/vendor selection ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent, CostOptimizerAgent - **Comments on:** PlannerAgent (bad decomposition) ### Tools design-time notes (historical, non-activating) Agent registry DB; benchmark leaderboard cache; pricing APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Classifier + ReAct (match task embedding → agent capability)",
+    "description": "Picks right specialist agent (and model) for each subtask Host role binding: RouterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7811,11 +7985,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Picks right specialist agent (and model) for each subtask Host role binding: `RouterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Picks right specialist agent (and model) for each subtask ### Knowledge distillation sources (historical) Agent-capability registry; benchmark history (cost/quality/latency) ### Self-quality criteria (historical) Routing accuracy ≥95% vs oracle; cost within budget ### Surpass-human signal (historical) Beats human producer in agent/vendor selection ### Critique bus (historical) - **Accepts critique from:** OrchestratorAgent, CostOptimizerAgent - **Comments on:** PlannerAgent (bad decomposition) ### Tools design-time notes (historical, non-activating) Agent registry DB; benchmark leaderboard cache; pricing APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Classifier + ReAct (match task embedding → agent capability)",
+    "specExcerpt": "Picks right specialist agent (and model) for each subtask Host role binding: RouterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.router",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.router/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.router/README.md"
   },
   {
     "id": "video.safetyredteam",
@@ -7823,7 +7999,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Safetyredteam",
     "role": "SafetyRedTeamAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: `SafetyRedTeamAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Knowledge distillation sources (historical) Hany Farid benchmarks; Partnership on AI Framework; OWASP LLM Top 10 ### Self-quality criteria (historical) Attack-success kept ≤1%; taxonomy coverage ### Surpass-human signal (historical) Higher coverage than internal red-team rotation ### Critique bus (historical) - **Accepts critique from:** EthicsAgent (HiTL), ComplianceAgent - **Comments on:** AvatarDesignAgent, VoiceCloneAgent, AllGenerators ### Tools design-time notes (historical, non-activating) Deepfake detectors (Farid lab models); bias probes; jailbreak prompt banks; OWASP scanner **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (red-team vs defender) + adversarial search",
+    "description": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: SafetyRedTeamAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7900,11 +8076,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: `SafetyRedTeamAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Adversarially attacks for deepfake, bias, jailbreak, defamation ### Knowledge distillation sources (historical) Hany Farid benchmarks; Partnership on AI Framework; OWASP LLM Top 10 ### Self-quality criteria (historical) Attack-success kept ≤1%; taxonomy coverage ### Surpass-human signal (historical) Higher coverage than internal red-team rotation ### Critique bus (historical) - **Accepts critique from:** EthicsAgent (HiTL), ComplianceAgent - **Comments on:** AvatarDesignAgent, VoiceCloneAgent, AllGenerators ### Tools design-time notes (historical, non-activating) Deepfake detectors (Farid lab models); bias probes; jailbreak prompt banks; OWASP scanner **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (red-team vs defender) + adversarial search",
+    "specExcerpt": "Adversarially attacks for deepfake, bias, jailbreak, defamation Host role binding: SafetyRedTeamAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.safetyredteam",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.safetyredteam/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.safetyredteam/README.md"
   },
   {
     "id": "video.sales",
@@ -7912,7 +8090,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Sales",
     "role": "SalesAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: `SalesAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Handles buyer-facing sales packaging for distributors and outlets ### Knowledge distillation sources (historical) Rights windowing playbooks, market package examples, buyer materials ### Self-quality criteria (historical) Buyer-package completeness, rights clarity, market-fit packaging ### Surpass-human signal (historical) Produces sales-ready release packets faster than manual assembly ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DistributorAgent, MarketingAgent - **Comments on:** Missing buyer info, weak positioning, incomplete rights summaries ### Tools design-time notes (historical, non-activating) Rights systems, package builders, buyer CRM **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over buyer package requirements",
+    "description": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: SalesAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -7989,11 +8167,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: `SalesAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Handles buyer-facing sales packaging for distributors and outlets ### Knowledge distillation sources (historical) Rights windowing playbooks, market package examples, buyer materials ### Self-quality criteria (historical) Buyer-package completeness, rights clarity, market-fit packaging ### Surpass-human signal (historical) Produces sales-ready release packets faster than manual assembly ### Critique bus (historical) - **Accepts critique from:** ProducerAgent / EP, DistributorAgent, MarketingAgent - **Comments on:** Missing buyer info, weak positioning, incomplete rights summaries ### Tools design-time notes (historical, non-activating) Rights systems, package builders, buyer CRM **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct over buyer package requirements",
+    "specExcerpt": "Handles buyer-facing sales packaging for distributors and outlets Host role binding: SalesAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.sales",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.sales/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.sales/README.md"
   },
   {
     "id": "video.screenwriter",
@@ -8001,7 +8181,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Screenwriter",
     "role": "ScreenwriterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Treatment → screenplay; dialogue; structure Host role binding: `ScreenwriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Treatment → screenplay; dialogue; structure ### Knowledge distillation sources (historical) Black List scripts; WGA library; McKee *Story*; Truby; Kaufman/Sorkin interviews ### Self-quality criteria (historical) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta ### Surpass-human signal (historical) Wins ≥50% blind read vs Black List Top-10 (WGA panel emulated) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DramaturgAgent, StoryEditorAgent — Reflexion loop - **Comments on:** DirectorAgent (logline), DialogueAgent, ConsistencyAgent ### Tools design-time notes (historical, non-activating) Fountain/FDX format validators; semantic embedding models (text-embedding-3-large) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (Shinn 2023) — ve",
+    "description": "Treatment → screenplay; dialogue; structure Host role binding: ScreenwriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8078,11 +8258,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Treatment → screenplay; dialogue; structure Host role binding: `ScreenwriterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Treatment → screenplay; dialogue; structure ### Knowledge distillation sources (historical) Black List scripts; WGA library; McKee *Story*; Truby; Kaufman/Sorkin interviews ### Self-quality criteria (historical) Save-the-Cat beat pass; dialogue distinctiveness (embedding distance ≥τ); rewrite delta ### Surpass-human signal (historical) Wins ≥50% blind read vs Black List Top-10 (WGA panel emulated) ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DramaturgAgent, StoryEditorAgent — Reflexion loop - **Comments on:** DirectorAgent (logline), DialogueAgent, ConsistencyAgent ### Tools design-time notes (historical, non-activating) Fountain/FDX format validators; semantic embedding models (text-embedding-3-large) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (Shinn 2023) — ve",
+    "specExcerpt": "Treatment → screenplay; dialogue; structure Host role binding: ScreenwriterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.screenwriter",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.screenwriter/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.screenwriter/README.md"
   },
   {
     "id": "video.seo",
@@ -8090,7 +8272,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Seo",
     "role": "SEOAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: `SEOAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Knowledge distillation sources (historical) Search ranking studies, video metadata best practices, keyword taxonomies ### Self-quality criteria (historical) Keyword fit, metadata completeness, search-intent match ### Surpass-human signal (historical) Lifts discoverability faster than manual metadata tuning ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CopywriterAgent, AnalystAgent - **Comments on:** Weak keywords, poor title-description fit, metadata omissions ### Tools design-time notes (historical, non-activating) Keyword tools, metadata APIs, ranking dashboards **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with search-intent validation",
+    "description": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: SEOAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8167,11 +8349,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: `SEOAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Optimizes discoverability through titles, descriptions, metadata, and search intent ### Knowledge distillation sources (historical) Search ranking studies, video metadata best practices, keyword taxonomies ### Self-quality criteria (historical) Keyword fit, metadata completeness, search-intent match ### Surpass-human signal (historical) Lifts discoverability faster than manual metadata tuning ### Critique bus (historical) - **Accepts critique from:** MarketingAgent, CopywriterAgent, AnalystAgent - **Comments on:** Weak keywords, poor title-description fit, metadata omissions ### Tools design-time notes (historical, non-activating) Keyword tools, metadata APIs, ranking dashboards **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct with search-intent validation",
+    "specExcerpt": "Optimizes discoverability through titles, descriptions, metadata, and search intent Host role binding: SEOAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.seo",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.seo/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.seo/README.md"
   },
   {
     "id": "video.showrunner",
@@ -8179,7 +8363,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Showrunner",
     "role": "ShowrunnerAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Cross-episode arc, writers'-room orchestration Host role binding: `ShowrunnerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Cross-episode arc, writers'-room orchestration ### Knowledge distillation sources (historical) WGA showrunner training; Sopranos/BB room transcripts; Mike Schur material ### Self-quality criteria (historical) Arc continuity score; character-thread completion; tonal variance within bounds ### Surpass-human signal (historical) Series Bible coverage ≥99% across 10 eps (vs ~95% human) ### Critique bus (historical) - **Accepts critique from:** Network-Notes Agent, AudienceSim, multi-agent debate w/ ScreenwriterAgent - **Comments on:** ScreenwriterAgent (arc), CastingAgent, DirectorAgent (tone) ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro 1M), vector-DB (Pinecone/Weaviate) for bible search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) ",
+    "description": "Cross-episode arc, writers'-room orchestration Host role binding: ShowrunnerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8256,11 +8440,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Cross-episode arc, writers'-room orchestration Host role binding: `ShowrunnerAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Cross-episode arc, writers'-room orchestration ### Knowledge distillation sources (historical) WGA showrunner training; Sopranos/BB room transcripts; Mike Schur material ### Self-quality criteria (historical) Arc continuity score; character-thread completion; tonal variance within bounds ### Surpass-human signal (historical) Series Bible coverage ≥99% across 10 eps (vs ~95% human) ### Critique bus (historical) - **Accepts critique from:** Network-Notes Agent, AudienceSim, multi-agent debate w/ ScreenwriterAgent - **Comments on:** ScreenwriterAgent (arc), CastingAgent, DirectorAgent (tone) ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro 1M), vector-DB (Pinecone/Weaviate) for bible search **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate (Du 2023) ",
+    "specExcerpt": "Cross-episode arc, writers'-room orchestration Host role binding: ShowrunnerAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.showrunner",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.showrunner/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.showrunner/README.md"
   },
   {
     "id": "video.signlanguageinterpreter",
@@ -8268,7 +8454,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Signlanguageinterpreter",
     "role": "SignLanguageInterpreterAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Accurate ASL/BSL interpretation Host role binding: `SignLanguageInterpreterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate ASL/BSL interpretation ### Knowledge distillation sources (historical) RID NIC curricula; NAD corpora; Deaf-community consented data ### Self-quality criteria (historical) Sign accuracy (Deaf-reviewer vote); facial-grammar markers ### Surpass-human signal (historical) Wins blind NAD-reviewer preference at scale ### Critique bus (historical) - **Accepts critique from:** DeafCommunityReviewAgent (HiTL), LinguistAgent - **Comments on:** VoiceCloneAgent (no caption), AccessibilityAgent ### Tools design-time notes (historical, non-activating) Sign-avatar rendering (SignAll); MediaPipe pose estimation; facial-action-unit detector **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from Deaf-community review panel)",
+    "description": "Accurate ASL/BSL interpretation Host role binding: SignLanguageInterpreterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8345,11 +8531,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Accurate ASL/BSL interpretation Host role binding: `SignLanguageInterpreterAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Accurate ASL/BSL interpretation ### Knowledge distillation sources (historical) RID NIC curricula; NAD corpora; Deaf-community consented data ### Self-quality criteria (historical) Sign accuracy (Deaf-reviewer vote); facial-grammar markers ### Surpass-human signal (historical) Wins blind NAD-reviewer preference at scale ### Critique bus (historical) - **Accepts critique from:** DeafCommunityReviewAgent (HiTL), LinguistAgent - **Comments on:** VoiceCloneAgent (no caption), AccessibilityAgent ### Tools design-time notes (historical, non-activating) Sign-avatar rendering (SignAll); MediaPipe pose estimation; facial-action-unit detector **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from Deaf-community review panel)",
+    "specExcerpt": "Accurate ASL/BSL interpretation Host role binding: SignLanguageInterpreterAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.signlanguageinterpreter",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.signlanguageinterpreter/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.signlanguageinterpreter/README.md"
   },
   {
     "id": "video.sme",
@@ -8357,7 +8545,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Sme",
     "role": "SMEAgent (Subject-Matter Expert) (VA Domain Pack)",
     "status": "registered",
-    "description": "Domain accuracy in target field Host role binding: `SMEAgent (Subject-Matter Expert) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Domain accuracy in target field ### Knowledge distillation sources (historical) Peer-reviewed journals; certified curricula (CFA, USMLE, AWS); expert interviews ### Self-quality criteria (historical) Citation density; benchmark exam pass; hallucination ≤0.5% ### Surpass-human signal (historical) Passes same certification as human pro ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, peer SMEAgents (debate) - **Comments on:** ScriptwriterAgent (inaccuracy), MotionGraphicsAgent (mis-labels) ### Tools design-time notes (historical, non-activating) PubMed/arXiv/JSTOR search APIs; exam-question banks; RAG over certified corpora **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate + RAG retrieval",
+    "description": "Domain accuracy in target field Host role binding: SMEAgent (Subject-Matter Expert) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8434,11 +8622,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Domain accuracy in target field Host role binding: `SMEAgent (Subject-Matter Expert) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Domain accuracy in target field ### Knowledge distillation sources (historical) Peer-reviewed journals; certified curricula (CFA, USMLE, AWS); expert interviews ### Self-quality criteria (historical) Citation density; benchmark exam pass; hallucination ≤0.5% ### Surpass-human signal (historical) Passes same certification as human pro ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, peer SMEAgents (debate) - **Comments on:** ScriptwriterAgent (inaccuracy), MotionGraphicsAgent (mis-labels) ### Tools design-time notes (historical, non-activating) PubMed/arXiv/JSTOR search APIs; exam-question banks; RAG over certified corpora **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Multi-agent debate + RAG retrieval",
+    "specExcerpt": "Domain accuracy in target field Host role binding: SMEAgent (Subject-Matter Expert) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.sme",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.sme/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.sme/README.md"
   },
   {
     "id": "video.socialmediastrategist",
@@ -8446,7 +8636,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Socialmediastrategist",
     "role": "SocialMediaStrategistAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Platform-native distribution, timing, trends Host role binding: `SocialMediaStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Platform-native distribution, timing, trends ### Knowledge distillation sources (historical) TikTok Creator Portal; Meta Marketing Science; Tubular/Sensor Tower ### Self-quality criteria (historical) Predicted-vs-actual reach error; trend-timing latency <2h ### Surpass-human signal (historical) Beats agency social leads on 30-day reach lift ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, BrandAgent - **Comments on:** CopywriterAgent (off-platform tone), EditorAgent (wrong aspect) ### Tools design-time notes (historical, non-activating) Meta Graph API; TikTok Content Posting API; Buffer/Hootsuite API; Sensor Tower data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (trend search → schedule → post)",
+    "description": "Platform-native distribution, timing, trends Host role binding: SocialMediaStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8523,11 +8713,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Platform-native distribution, timing, trends Host role binding: `SocialMediaStrategistAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Platform-native distribution, timing, trends ### Knowledge distillation sources (historical) TikTok Creator Portal; Meta Marketing Science; Tubular/Sensor Tower ### Self-quality criteria (historical) Predicted-vs-actual reach error; trend-timing latency <2h ### Surpass-human signal (historical) Beats agency social leads on 30-day reach lift ### Critique bus (historical) - **Accepts critique from:** AnalystAgent, BrandAgent - **Comments on:** CopywriterAgent (off-platform tone), EditorAgent (wrong aspect) ### Tools design-time notes (historical, non-activating) Meta Graph API; TikTok Content Posting API; Buffer/Hootsuite API; Sensor Tower data **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (trend search → schedule → post)",
+    "specExcerpt": "Platform-native distribution, timing, trends Host role binding: SocialMediaStrategistAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.socialmediastrategist",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.socialmediastrategist/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.socialmediastrategist/README.md"
   },
   {
     "id": "video.sounddesign",
@@ -8535,7 +8727,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Sounddesign",
     "role": "SoundDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Ambience, foley, SFX Host role binding: `SoundDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Ambience, foley, SFX ### Knowledge distillation sources (historical) BBC SFX library; MPSE Golden Reel; Burtt/Lievsay notes ### Self-quality criteria (historical) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS ### Surpass-human signal (historical) Wins MPSE pairwise on horror/sci-fi ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MixerAgent - **Comments on:** EditorAgent (FX clash), ComposerAgent (masking) ### Tools design-time notes (historical, non-activating) ElevenLabs Sound FX API; Freesound; FFmpeg spectral analysis; Dolby.io loudness API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search SFX lib → validate sync → mix)",
+    "description": "Ambience, foley, SFX Host role binding: SoundDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8615,11 +8807,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Ambience, foley, SFX Host role binding: `SoundDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Ambience, foley, SFX ### Knowledge distillation sources (historical) BBC SFX library; MPSE Golden Reel; Burtt/Lievsay notes ### Self-quality criteria (historical) Spectral diversity; sync ≤±1 frame; loudness -23 LUFS ### Surpass-human signal (historical) Wins MPSE pairwise on horror/sci-fi ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MixerAgent - **Comments on:** EditorAgent (FX clash), ComposerAgent (masking) ### Tools design-time notes (historical, non-activating) ElevenLabs Sound FX API; Freesound; FFmpeg spectral analysis; Dolby.io loudness API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (search SFX lib → validate sync → mix)",
+    "specExcerpt": "Ambience, foley, SFX Host role binding: SoundDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.sounddesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.sounddesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.sounddesign/README.md"
   },
   {
     "id": "video.soundmixer",
@@ -8627,7 +8821,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Soundmixer",
     "role": "SoundMixerAgent (Re-recording) (VA Domain Pack)",
     "status": "registered",
-    "description": "Final mix; deliverables (5.1/Atmos) Host role binding: `SoundMixerAgent (Re-recording) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final mix; deliverables (5.1/Atmos) ### Knowledge distillation sources (historical) CAS Awards; Atmos specs; broadcast loudness standards ### Self-quality criteria (historical) LUFS target; STOI ≥0.85; spec-deliverable pass ### Surpass-human signal (historical) CAS spec on first pass without rework ### Critique bus (historical) - **Accepts critique from:** EditorAgent, SoundDesignAgent, AccessibilityAgent - **Comments on:** SoundDesignAgent (over-design), ComposerAgent (level) ### Tools design-time notes (historical, non-activating) Dolby Atmos Renderer API; LUFS/loudness measurement tools; DaVinci Fairlight MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: broadcast-spec rules)",
+    "description": "Final mix; deliverables (5.1/Atmos) Host role binding: SoundMixerAgent (Re-recording) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8704,11 +8898,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Final mix; deliverables (5.1/Atmos) Host role binding: `SoundMixerAgent (Re-recording) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Final mix; deliverables (5.1/Atmos) ### Knowledge distillation sources (historical) CAS Awards; Atmos specs; broadcast loudness standards ### Self-quality criteria (historical) LUFS target; STOI ≥0.85; spec-deliverable pass ### Surpass-human signal (historical) CAS spec on first pass without rework ### Critique bus (historical) - **Accepts critique from:** EditorAgent, SoundDesignAgent, AccessibilityAgent - **Comments on:** SoundDesignAgent (over-design), ComposerAgent (level) ### Tools design-time notes (historical, non-activating) Dolby Atmos Renderer API; LUFS/loudness measurement tools; DaVinci Fairlight MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI (constitution: broadcast-spec rules)",
+    "specExcerpt": "Final mix; deliverables (5.1/Atmos) Host role binding: SoundMixerAgent (Re-recording) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.soundmixer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.soundmixer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.soundmixer/README.md"
   },
   {
     "id": "video.sportsanalyst",
@@ -8716,7 +8912,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Sportsanalyst",
     "role": "SportsAnalystAgent / TelestratorOp (VA Domain Pack)",
     "status": "registered",
-    "description": "Tactical breakdowns + diagrams Host role binding: `SportsAnalystAgent / TelestratorOp (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tactical breakdowns + diagrams ### Knowledge distillation sources (historical) MIT Sloan papers; ESPN Stats & Info; Goldsberry analytics ### Self-quality criteria (historical) Play-call accuracy; on-screen clarity score ### Surpass-human signal (historical) Beats ex-athlete on tactical-prediction ### Critique bus (historical) - **Accepts critique from:** SMEAgent (sport), JournalistAgent - **Comments on:** EditorAgent (missed-replay), MotionGraphicsAgent (chart clarity) ### Tools design-time notes (historical, non-activating) Sports data APIs (StatsBomb, NBA Stats); telestration overlay tools; After Effects MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch play data → annotate → render overlay)",
+    "description": "Tactical breakdowns + diagrams Host role binding: SportsAnalystAgent / TelestratorOp (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8793,11 +8989,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Tactical breakdowns + diagrams Host role binding: `SportsAnalystAgent / TelestratorOp (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Tactical breakdowns + diagrams ### Knowledge distillation sources (historical) MIT Sloan papers; ESPN Stats & Info; Goldsberry analytics ### Self-quality criteria (historical) Play-call accuracy; on-screen clarity score ### Surpass-human signal (historical) Beats ex-athlete on tactical-prediction ### Critique bus (historical) - **Accepts critique from:** SMEAgent (sport), JournalistAgent - **Comments on:** EditorAgent (missed-replay), MotionGraphicsAgent (chart clarity) ### Tools design-time notes (historical, non-activating) Sports data APIs (StatsBomb, NBA Stats); telestration overlay tools; After Effects MCP **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (fetch play data → annotate → render overlay)",
+    "specExcerpt": "Tactical breakdowns + diagrams Host role binding: SportsAnalystAgent / TelestratorOp (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.sportsanalyst",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.sportsanalyst/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.sportsanalyst/README.md"
   },
   {
     "id": "video.standardseditor",
@@ -8805,7 +9003,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Standardseditor",
     "role": "StandardsEditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: `StandardsEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces editorial standards, sourcing discipline, and corrections policy ### Knowledge distillation sources (historical) Newsroom standards manuals, corrections policies, attribution standards ### Self-quality criteria (historical) Standards-compliance rate, attribution accuracy, corrections readiness ### Surpass-human signal (historical) Reduces standards drift better than late-stage copy edits ### Critique bus (historical) - **Accepts critique from:** JournalistAgent, FactCheckerAgent, CorrectionsAgent, LegalAgent - **Comments on:** Weak attribution, standards violations, correction policy gaps ### Tools design-time notes (historical, non-activating) Editorial checklists, attribution validators, standards DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional",
+    "description": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: StandardsEditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8882,11 +9080,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: `StandardsEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Enforces editorial standards, sourcing discipline, and corrections policy ### Knowledge distillation sources (historical) Newsroom standards manuals, corrections policies, attribution standards ### Self-quality criteria (historical) Standards-compliance rate, attribution accuracy, corrections readiness ### Surpass-human signal (historical) Reduces standards drift better than late-stage copy edits ### Critique bus (historical) - **Accepts critique from:** JournalistAgent, FactCheckerAgent, CorrectionsAgent, LegalAgent - **Comments on:** Weak attribution, standards violations, correction policy gaps ### Tools design-time notes (historical, non-activating) Editorial checklists, attribution validators, standards DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional",
+    "specExcerpt": "Enforces editorial standards, sourcing discipline, and corrections policy Host role binding: StandardsEditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.standardseditor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.standardseditor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.standardseditor/README.md"
   },
   {
     "id": "video.storyboard",
@@ -8894,7 +9094,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Storyboard",
     "role": "StoryboardAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Script → shot panels Host role binding: `StoryboardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Script → shot panels ### Knowledge distillation sources (historical) *Framed Ink* (Mateu-Mestre); Pixar story-trust; Despretz boards ### Self-quality criteria (historical) Shot-language fidelity; coverage completeness; staging clarity ### Surpass-human signal (historical) Pixar story-trust pass rate at minutes per page ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ScriptwriterAgent (unfilmable), DirectorAgent (staging) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney API; panel-layout templates; Fountain parser **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (director feedback loop)",
+    "description": "Script → shot panels Host role binding: StoryboardAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -8971,11 +9171,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Script → shot panels Host role binding: `StoryboardAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Script → shot panels ### Knowledge distillation sources (historical) *Framed Ink* (Mateu-Mestre); Pixar story-trust; Despretz boards ### Self-quality criteria (historical) Shot-language fidelity; coverage completeness; staging clarity ### Surpass-human signal (historical) Pixar story-trust pass rate at minutes per page ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent - **Comments on:** ScriptwriterAgent (unfilmable), DirectorAgent (staging) ### Tools design-time notes (historical, non-activating) DALL-E 3 / Midjourney API; panel-layout templates; Fountain parser **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (director feedback loop)",
+    "specExcerpt": "Script → shot panels Host role binding: StoryboardAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.storyboard",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.storyboard/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.storyboard/README.md"
   },
   {
     "id": "video.styletransfer",
@@ -8983,7 +9185,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Styletransfer",
     "role": "StyleTransferAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Applies named aesthetic consistently across shots Host role binding: `StyleTransferAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Applies named aesthetic consistently across shots ### Knowledge distillation sources (historical) Curated style corpora; LoRA/seed registries; reference-frame banks ### Self-quality criteria (historical) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Surpass-human signal (historical) Wins blind preference vs human colorist+grader ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent - **Comments on:** GeneratorAgent (off-style) ### Tools design-time notes (historical, non-activating) LoRA weights per style; CLIP/DINO similarity scorer; Runway style-lock mode; ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (CLIP style score as feedback)",
+    "description": "Applies named aesthetic consistently across shots Host role binding: StyleTransferAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9064,11 +9266,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Applies named aesthetic consistently across shots Host role binding: `StyleTransferAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Applies named aesthetic consistently across shots ### Knowledge distillation sources (historical) Curated style corpora; LoRA/seed registries; reference-frame banks ### Self-quality criteria (historical) Style-similarity (CLIP/DINO) ≥0.85; cross-shot variance ≤τ ### Surpass-human signal (historical) Wins blind preference vs human colorist+grader ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, ColoristAgent - **Comments on:** GeneratorAgent (off-style) ### Tools design-time notes (historical, non-activating) LoRA weights per style; CLIP/DINO similarity scorer; Runway style-lock mode; ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (CLIP style score as feedback)",
+    "specExcerpt": "Applies named aesthetic consistently across shots Host role binding: StyleTransferAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.styletransfer",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.styletransfer/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.styletransfer/README.md"
   },
   {
     "id": "video.talent",
@@ -9076,7 +9280,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Talent",
     "role": "TalentAgent (On-camera) (VA Domain Pack)",
     "status": "registered",
-    "description": "AI-rendered performance Host role binding: `TalentAgent (On-camera) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) AI-rendered performance ### Knowledge distillation sources (historical) Method-acting transcripts; consented actor performance corpora ### Self-quality criteria (historical) Emotion-target match; charisma score (audience proxy) ### Surpass-human signal (historical) Hold-rate matches top creators in cohort ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, CastingAgent - **Comments on:** DirectorAgent (impossible blocking) ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV; Synthesia personal avatars; emotion-detection models (AffectNet) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + emotion-regression validator",
+    "description": "AI-rendered performance Host role binding: TalentAgent (On-camera) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9153,11 +9357,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "AI-rendered performance Host role binding: `TalentAgent (On-camera) (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) AI-rendered performance ### Knowledge distillation sources (historical) Method-acting transcripts; consented actor performance corpora ### Self-quality criteria (historical) Emotion-target match; charisma score (audience proxy) ### Surpass-human signal (historical) Hold-rate matches top creators in cohort ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, CastingAgent - **Comments on:** DirectorAgent (impossible blocking) ### Tools design-time notes (historical, non-activating) HeyGen Avatar IV; Synthesia personal avatars; emotion-detection models (AffectNet) **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + emotion-regression validator",
+    "specExcerpt": "AI-rendered performance Host role binding: TalentAgent (On-camera) (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.talent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.talent/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.talent/README.md"
   },
   {
     "id": "video.templatedesign",
@@ -9165,7 +9371,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Templatedesign",
     "role": "TemplateDesignAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Designs reusable and safe personalization templates Host role binding: `TemplateDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Designs reusable and safe personalization templates ### Knowledge distillation sources (historical) Variable-content design systems, dynamic layout rules, campaign template libraries ### Self-quality criteria (historical) Merge-field robustness, layout stability, render survivability ### Surpass-human signal (historical) Produces reusable templates with fewer breakages than manual design variants ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, UXAgent, CRMAgent - **Comments on:** Fragile layouts, unsafe placeholder logic, merge collisions ### Tools design-time notes (historical, non-activating) Template engines, design systems, schema validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on template schemas and render constraints",
+    "description": "Designs reusable and safe personalization templates Host role binding: TemplateDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9242,11 +9448,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Designs reusable and safe personalization templates Host role binding: `TemplateDesignAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Designs reusable and safe personalization templates ### Knowledge distillation sources (historical) Variable-content design systems, dynamic layout rules, campaign template libraries ### Self-quality criteria (historical) Merge-field robustness, layout stability, render survivability ### Surpass-human signal (historical) Produces reusable templates with fewer breakages than manual design variants ### Critique bus (historical) - **Accepts critique from:** PersonalizationEngineerAgent, UXAgent, CRMAgent - **Comments on:** Fragile layouts, unsafe placeholder logic, merge collisions ### Tools design-time notes (historical, non-activating) Template engines, design systems, schema validators **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct on template schemas and render constraints",
+    "specExcerpt": "Designs reusable and safe personalization templates Host role binding: TemplateDesignAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.templatedesign",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.templatedesign/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.templatedesign/README.md"
   },
   {
     "id": "video.trailereditor",
@@ -9254,7 +9462,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Trailereditor",
     "role": "TrailerEditorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Hook-driven trailer cuts Host role binding: `TrailerEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Hook-driven trailer cuts ### Knowledge distillation sources (historical) Golden Trailer Awards; Woollen/AV Squad reels; trailer-music libs ### Self-quality criteria (historical) Hook-rate at 3s; rising-action curve; music-sync precision ### Surpass-human signal (historical) Wins Golden-Trailer-rubric blind comparison ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MusicSupervisorAgent - **Comments on:** EditorAgent (over-cut), ComposerAgent (mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve (MCP); trailer-music APIs (Musicbed/Artlist); retention-curve predictor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (retention-curve model as feedback)",
+    "description": "Hook-driven trailer cuts Host role binding: TrailerEditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9331,11 +9539,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Hook-driven trailer cuts Host role binding: `TrailerEditorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Hook-driven trailer cuts ### Knowledge distillation sources (historical) Golden Trailer Awards; Woollen/AV Squad reels; trailer-music libs ### Self-quality criteria (historical) Hook-rate at 3s; rising-action curve; music-sync precision ### Surpass-human signal (historical) Wins Golden-Trailer-rubric blind comparison ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, MusicSupervisorAgent - **Comments on:** EditorAgent (over-cut), ComposerAgent (mismatch) ### Tools design-time notes (historical, non-activating) DaVinci Resolve (MCP); trailer-music APIs (Musicbed/Artlist); retention-curve predictor **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine (retention-curve model as feedback)",
+    "specExcerpt": "Hook-driven trailer cuts Host role binding: TrailerEditorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.trailereditor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.trailereditor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.trailereditor/README.md"
   },
   {
     "id": "video.travelcine",
@@ -9343,7 +9553,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Travelcine",
     "role": "TravelCineAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Destination cinematography Host role binding: `TravelCineAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Destination cinematography ### Knowledge distillation sources (historical) Brandon Li/Burkard reels; NatGeo style guide; Banff Fest ### Self-quality criteria (historical) Establishing-shot diversity; location-mood match ### Surpass-human signal (historical) Wins T+L preference at 0.1× sortie cost ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DronePilotAgent - **Comments on:** DronePilotAgent (no-fly zone) ### Tools design-time notes (historical, non-activating) Veo 3.1 (location gen); Google Earth Studio; AirMap geofence; Unsplash API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + geofence safety validator",
+    "description": "Destination cinematography Host role binding: TravelCineAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9420,11 +9630,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Destination cinematography Host role binding: `TravelCineAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Destination cinematography ### Knowledge distillation sources (historical) Brandon Li/Burkard reels; NatGeo style guide; Banff Fest ### Self-quality criteria (historical) Establishing-shot diversity; location-mood match ### Surpass-human signal (historical) Wins T+L preference at 0.1× sortie cost ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DronePilotAgent - **Comments on:** DronePilotAgent (no-fly zone) ### Tools design-time notes (historical, non-activating) Veo 3.1 (location gen); Google Earth Studio; AirMap geofence; Unsplash API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + geofence safety validator",
+    "specExcerpt": "Destination cinematography Host role binding: TravelCineAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.travelcine",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.travelcine/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.travelcine/README.md"
   },
   {
     "id": "video.trendintelligence",
@@ -9432,7 +9644,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Trendintelligence",
     "role": "TrendIntelligenceAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Detects emerging memes, sounds, formats Host role binding: `TrendIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects emerging memes, sounds, formats ### Knowledge distillation sources (historical) TikTok Creative Center; Trendpop; Tubular; Reddit/X firehose ### Self-quality criteria (historical) Prediction lead time vs peak; precision/recall on trend list ### Surpass-human signal (historical) Earlier detection than human strategists at higher precision ### Critique bus (historical) - **Accepts critique from:** SocialStrategistAgent, CopywriterAgent - **Comments on:** IdeationAgent (off-trend) ### Tools design-time notes (historical, non-activating) TikTok Creative Center API; Reddit/X streaming APIs; Sensor Tower; Google Trends **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct + time-series anomaly detection",
+    "description": "Detects emerging memes, sounds, formats Host role binding: TrendIntelligenceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9509,11 +9721,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Detects emerging memes, sounds, formats Host role binding: `TrendIntelligenceAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Detects emerging memes, sounds, formats ### Knowledge distillation sources (historical) TikTok Creative Center; Trendpop; Tubular; Reddit/X firehose ### Self-quality criteria (historical) Prediction lead time vs peak; precision/recall on trend list ### Surpass-human signal (historical) Earlier detection than human strategists at higher precision ### Critique bus (historical) - **Accepts critique from:** SocialStrategistAgent, CopywriterAgent - **Comments on:** IdeationAgent (off-trend) ### Tools design-time notes (historical, non-activating) TikTok Creative Center API; Reddit/X streaming APIs; Sensor Tower; Google Trends **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct + time-series anomaly detection",
+    "specExcerpt": "Detects emerging memes, sounds, formats Host role binding: TrendIntelligenceAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.trendintelligence",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.trendintelligence/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.trendintelligence/README.md"
   },
   {
     "id": "video.trustsafety",
@@ -9521,7 +9735,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Trustsafety",
     "role": "TrustSafetyAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: `TrustSafetyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Screens outputs for impersonation, abuse, or harmful misuse ### Knowledge distillation sources (historical) Abuse-taxonomy corpora, impersonation cases, policy rulebooks ### Self-quality criteria (historical) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Surpass-human signal (historical) Catches misuse risk earlier than generic moderation queues ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, DeepfakeDetectionAgent, SafetyRedTeamAgent - **Comments on:** Harmful misuse pathways, impersonation vectors, policy gaps ### Tools design-time notes (historical, non-activating) Safety classifiers, abuse taxonomy DB, moderation APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI for trust-and-safety policy enforcement",
+    "description": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: TrustSafetyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9598,11 +9812,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: `TrustSafetyAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Screens outputs for impersonation, abuse, or harmful misuse ### Knowledge distillation sources (historical) Abuse-taxonomy corpora, impersonation cases, policy rulebooks ### Self-quality criteria (historical) Policy hit rate, abuse-risk recall, low false negatives on blocked cases ### Surpass-human signal (historical) Catches misuse risk earlier than generic moderation queues ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent, DeepfakeDetectionAgent, SafetyRedTeamAgent - **Comments on:** Harmful misuse pathways, impersonation vectors, policy gaps ### Tools design-time notes (historical, non-activating) Safety classifiers, abuse taxonomy DB, moderation APIs **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Constitutional AI for trust-and-safety policy enforcement",
+    "specExcerpt": "Screens outputs for impersonation, abuse, or harmful misuse Host role binding: TrustSafetyAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.trustsafety",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.trustsafety/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.trustsafety/README.md"
   },
   {
     "id": "video.ugccreator",
@@ -9610,7 +9826,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Ugccreator",
     "role": "UGCCreatorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Authentic-feel ads in creator voice Host role binding: `UGCCreatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Authentic-feel ads in creator voice ### Knowledge distillation sources (historical) TikTok Creative Center; Alix-Earle-style benchmarks (style not identity) ### Self-quality criteria (historical) Hook-rate ≥30%; \"scripted\" detector < threshold ### Surpass-human signal (historical) Beats paid-creator avg ROAS at 0.1× cost ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, BrandAgent - **Comments on:** PerformanceMarketerAgent (wrong audience) ### Tools design-time notes (historical, non-activating) Veo 3.1 (portrait 9:16); ElevenLabs voice; CapCut API; TikTok Ads Manager **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from ROAS signal)",
+    "description": "Authentic-feel ads in creator voice Host role binding: UGCCreatorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9687,11 +9903,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Authentic-feel ads in creator voice Host role binding: `UGCCreatorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Authentic-feel ads in creator voice ### Knowledge distillation sources (historical) TikTok Creative Center; Alix-Earle-style benchmarks (style not identity) ### Self-quality criteria (historical) Hook-rate ≥30%; \"scripted\" detector < threshold ### Surpass-human signal (historical) Beats paid-creator avg ROAS at 0.1× cost ### Critique bus (historical) - **Accepts critique from:** PerformanceMarketerAgent, BrandAgent - **Comments on:** PerformanceMarketerAgent (wrong audience) ### Tools design-time notes (historical, non-activating) Veo 3.1 (portrait 9:16); ElevenLabs voice; CapCut API; TikTok Ads Manager **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) RLAIF (reward from ROAS signal)",
+    "specExcerpt": "Authentic-feel ads in creator voice Host role binding: UGCCreatorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.ugccreator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.ugccreator/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.ugccreator/README.md"
   },
   {
     "id": "video.ux",
@@ -9699,7 +9917,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Ux",
     "role": "UXAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Reviews clarity and usability of personalized or interactive outputs Host role binding: `UXAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews clarity and usability of personalized or interactive outputs ### Knowledge distillation sources (historical) UX heuristics, accessibility criteria, usability testing patterns ### Self-quality criteria (historical) Readability, friction-point detection, user-flow clarity ### Surpass-human signal (historical) Flags user confusion earlier than launch-stage support teams ### Critique bus (historical) - **Accepts critique from:** TemplateDesignAgent, PersonalizationEngineerAgent, AccessibilityAgent - **Comments on:** Confusing flows, readability issues, weak interaction cues ### Tools design-time notes (historical, non-activating) UX review checklists, session replay, readability tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge with UX rubric",
+    "description": "Reviews clarity and usability of personalized or interactive outputs Host role binding: UXAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9776,11 +9994,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Reviews clarity and usability of personalized or interactive outputs Host role binding: `UXAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Reviews clarity and usability of personalized or interactive outputs ### Knowledge distillation sources (historical) UX heuristics, accessibility criteria, usability testing patterns ### Self-quality criteria (historical) Readability, friction-point detection, user-flow clarity ### Surpass-human signal (historical) Flags user confusion earlier than launch-stage support teams ### Critique bus (historical) - **Accepts critique from:** TemplateDesignAgent, PersonalizationEngineerAgent, AccessibilityAgent - **Comments on:** Confusing flows, readability issues, weak interaction cues ### Tools design-time notes (historical, non-activating) UX review checklists, session replay, readability tools **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge with UX rubric",
+    "specExcerpt": "Reviews clarity and usability of personalized or interactive outputs Host role binding: UXAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.ux",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.ux/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.ux/README.md"
   },
   {
     "id": "video.vfxsupervisor",
@@ -9788,7 +10008,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Vfxsupervisor",
     "role": "VFXSupervisorAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Plans + supervises VFX pipeline Host role binding: `VFXSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans + supervises VFX pipeline ### Knowledge distillation sources (historical) VES Awards; SIGGRAPH papers; Weta/DNEG talks; Foundry training ### Self-quality criteria (historical) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Surpass-human signal (historical) Weta-grade QC pass rate at fraction of time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent, ConsistencyAgent - **Comments on:** AIGeneratorAgent (artifacts), CompositorAgent ### Tools design-time notes (historical, non-activating) Nuke via MCP bridge; Runway Gen-4 Aleph (video-to-video); ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (fan-out per shot) + LLM-as-Judge (QC rubric)",
+    "description": "Plans + supervises VFX pipeline Host role binding: VFXSupervisorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9865,11 +10085,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Plans + supervises VFX pipeline Host role binding: `VFXSupervisorAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Plans + supervises VFX pipeline ### Knowledge distillation sources (historical) VES Awards; SIGGRAPH papers; Weta/DNEG talks; Foundry training ### Self-quality criteria (historical) Shot-completion %; comp-error pixel count; CLIP-T vs plate ### Surpass-human signal (historical) Weta-grade QC pass rate at fraction of time ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, DoPAgent, ConsistencyAgent - **Comments on:** AIGeneratorAgent (artifacts), CompositorAgent ### Tools design-time notes (historical, non-activating) Nuke via MCP bridge; Runway Gen-4 Aleph (video-to-video); ComfyUI **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Agentic Graph (fan-out per shot) + LLM-as-Judge (QC rubric)",
+    "specExcerpt": "Plans + supervises VFX pipeline Host role binding: VFXSupervisorAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.vfxsupervisor",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.vfxsupervisor/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.vfxsupervisor/README.md"
   },
   {
     "id": "video.voiceclone",
@@ -9877,7 +10099,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Voiceclone",
     "role": "VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)",
     "status": "registered",
-    "description": "Voice cloning + lip-sync Host role binding: `VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice cloning + lip-sync ### Knowledge distillation sources (historical) ElevenLabs safety docs; Wav2Lip/Sync.so; Baxter lip-sync refs ### Self-quality criteria (historical) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified ### Surpass-human signal (historical) Wins blind MOS vs professional ADR ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), AnimatorAgent (lip-sync gold) - **Comments on:** AvatarDesignAgent (face flicker), DubbingAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 cloning API; Sync.so lip-sync; Wav2Lip; consent-doc verification **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + MOS scoring model as judge",
+    "description": "Voice cloning + lip-sync Host role binding: VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -9957,11 +10179,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Voice cloning + lip-sync Host role binding: `VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Voice cloning + lip-sync ### Knowledge distillation sources (historical) ElevenLabs safety docs; Wav2Lip/Sync.so; Baxter lip-sync refs ### Self-quality criteria (historical) Voice MOS ≥4.2; phoneme-viseme error <40ms; consent verified ### Surpass-human signal (historical) Wins blind MOS vs professional ADR ### Critique bus (historical) - **Accepts critique from:** ComplianceAgent (consent), AnimatorAgent (lip-sync gold) - **Comments on:** AvatarDesignAgent (face flicker), DubbingAgent ### Tools design-time notes (historical, non-activating) ElevenLabs v3 cloning API; Sync.so lip-sync; Wav2Lip; consent-doc verification **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Self-Refine + MOS scoring model as judge",
+    "specExcerpt": "Voice cloning + lip-sync Host role binding: VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.voiceclone",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.voiceclone/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.voiceclone/README.md"
   },
   {
     "id": "video.voiceover",
@@ -9969,7 +10193,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Voiceover",
     "role": "VoiceOverAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Narration, character VO, ad reads Host role binding: `VoiceOverAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Narration, character VO, ad reads ### Knowledge distillation sources (historical) SOVAS reels; consented voice corpora; Wolfson/Cashman coaching ### Self-quality criteria (historical) Prosody match; pronunciation 100%; emotion tag match ### Surpass-human signal (historical) Beats junior VO in blind preference; matches senior on emotion ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, BrandAgent - **Comments on:** ScriptwriterAgent (unspeakable phrasing) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 TTS + voice cloning; Resemble.AI; pronunciation lexicon API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (MOS scoring rubric)",
+    "description": "Narration, character VO, ad reads Host role binding: VoiceOverAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -10049,11 +10273,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Narration, character VO, ad reads Host role binding: `VoiceOverAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Narration, character VO, ad reads ### Knowledge distillation sources (historical) SOVAS reels; consented voice corpora; Wolfson/Cashman coaching ### Self-quality criteria (historical) Prosody match; pronunciation 100%; emotion tag match ### Surpass-human signal (historical) Beats junior VO in blind preference; matches senior on emotion ### Critique bus (historical) - **Accepts critique from:** DirectorAgent, BrandAgent - **Comments on:** ScriptwriterAgent (unspeakable phrasing) ### Tools design-time notes (historical, non-activating) ElevenLabs v3 TTS + voice cloning; Resemble.AI; pronunciation lexicon API **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) LLM-as-Judge (MOS scoring rubric)",
+    "specExcerpt": "Narration, character VO, ad reads Host role binding: VoiceOverAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.voiceover",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.voiceover/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.voiceover/README.md"
   },
   {
     "id": "video.webresearch",
@@ -10061,7 +10287,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Webresearch",
     "role": "WebResearchAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Live web search, source ranking, citation extraction Host role binding: `WebResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Live web search, source ranking, citation extraction ### Knowledge distillation sources (historical) Bing/Google/Brave APIs; Common Crawl; Perplexity patterns ### Self-quality criteria (historical) Source-grade per claim; citation precision; recency hit ### Surpass-human signal (historical) Faster + more sources than newsroom researcher ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, CitationAgent - **Comments on:** ScriptwriterAgent (uncited claim) ### Tools design-time notes (historical, non-activating) Brave/Google Search API; Jina Reader (web→markdown); source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (query → fetch → extract → grade → cite)",
+    "description": "Live web search, source ranking, citation extraction Host role binding: WebResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -10138,11 +10364,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Live web search, source ranking, citation extraction Host role binding: `WebResearchAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Live web search, source ranking, citation extraction ### Knowledge distillation sources (historical) Bing/Google/Brave APIs; Common Crawl; Perplexity patterns ### Self-quality criteria (historical) Source-grade per claim; citation precision; recency hit ### Surpass-human signal (historical) Faster + more sources than newsroom researcher ### Critique bus (historical) - **Accepts critique from:** FactCheckerAgent, CitationAgent - **Comments on:** ScriptwriterAgent (uncited claim) ### Tools design-time notes (historical, non-activating) Brave/Google Search API; Jina Reader (web→markdown); source-quality classifier **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) ReAct (query → fetch → extract → grade → cite)",
+    "specExcerpt": "Live web search, source ranking, citation extraction Host role binding: WebResearchAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.webresearch",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.webresearch/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.webresearch/README.md"
   },
   {
     "id": "video.worldbuilding",
@@ -10150,7 +10378,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Worldbuilding",
     "role": "WorldBuildingAgent (VA Domain Pack)",
     "status": "registered",
-    "description": "Lore, rules, geography, factions, magic/tech systems Host role binding: `WorldBuildingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lore, rules, geography, factions, magic/tech systems ### Knowledge distillation sources (historical) Tolkien; *Worldbuilding* (Adams); fan-wikis; series-bible leaks ### Self-quality criteria (historical) Internal-consistency (no contradictions); rule-completeness ### Surpass-human signal (historical) Lower contradiction rate than writers' bibles at 10× volume ### Critique bus (historical) - **Accepts critique from:** ShowrunnerAgent, FactCheckerAgent - **Comments on:** ScreenwriterAgent (lore break), ConceptArtistAgent ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro); contradiction-detection model; wiki-graph DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (contradiction corrections → episodic memory)",
+    "description": "Lore, rules, geography, factions, magic/tech systems Host role binding: WorldBuildingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "versionLabel": "video · registered · schema 1.0",
     "success": "—",
     "avgTokens": "1024",
@@ -10227,11 +10455,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Lore, rules, geography, factions, magic/tech systems Host role binding: `WorldBuildingAgent (VA Domain Pack)`. Design-time VA table content below is historical and non-binding for activation. ### Responsibility (from VA table) Lore, rules, geography, factions, magic/tech systems ### Knowledge distillation sources (historical) Tolkien; *Worldbuilding* (Adams); fan-wikis; series-bible leaks ### Self-quality criteria (historical) Internal-consistency (no contradictions); rule-completeness ### Surpass-human signal (historical) Lower contradiction rate than writers' bibles at 10× volume ### Critique bus (historical) - **Accepts critique from:** ShowrunnerAgent, FactCheckerAgent - **Comments on:** ScreenwriterAgent (lore break), ConceptArtistAgent ### Tools design-time notes (historical, non-activating) Long-context LLM (Gemini 2.5 Pro); contradiction-detection model; wiki-graph DB **Runtime safety:** Host allow-lists are only `agent_spec.json` + `tool-permission-register.json`. CI uses video_* stubs. Do not treat design-time vendor names as enabled APIs. ### Architecture pattern (historical) Reflexion (contradiction corrections → episodic memory)",
+    "specExcerpt": "Lore, rules, geography, factions, magic/tech systems Host role binding: WorldBuildingAgent (VA Domain Pack). Design-time VA table content below is historical and non-binding for activation.",
     "folderPath": "business/video/agents/video.worldbuilding",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/video.worldbuilding/SPEC.md",
+    "readmeDocPath": "/docs/agents/video.worldbuilding/README.md"
   },
   {
     "id": "specials.aesthetics-agent",
@@ -10239,7 +10469,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Aesthetics Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain aesthetics agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. This is the **definitive, production-grade specification** for building the **Aesthetics Agent** — a stateful, multimodal evaluation-and-alignment service that operationalizes a simulated **\"artiste sense\"** (artistic/aesthetic intuition) for the entire VA-Agent-Swarm. It is the deep rethink of [`aesthetics_agents.md`](./aesthetics_agents.md): where that document is a *survey of methods*, this is a *buildable agent contract*. It reframes \"teach AI artistic sense\" from a single image scorer into a **shared aesthetic nervous system** — a critic that every generative agent consults, a reward signal that every fine-tuning loop trusts, and a personalization engine that carries a director's, brand's, or artist's taste across the whole pipeline. ### Domain distillation (embedded, untrusted design provenance) This is the **definitive, production-grade specification** for building the **Aesthetics Agent** — a stateful, multimodal evaluation-and-alignment service that operationalizes a simulated **\"artiste sense\"** (artistic/aesth",
+    "description": "Owns the specials-domain aesthetics agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. This is the definitive, production-grade specification for building the Aesthetics Agent — a stateful, multimodal evaluati",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10316,11 +10546,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain aesthetics agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. This is the **definitive, production-grade specification** for building the **Aesthetics Agent** — a stateful, multimodal evaluation-and-alignment service that operationalizes a simulated **\"artiste sense\"** (artistic/aesthetic intuition) for the entire VA-Agent-Swarm. It is the deep rethink of [`aesthetics_agents.md`](./aesthetics_agents.md): where that document is a *survey of methods*, this is a *buildable agent contract*. It reframes \"teach AI artistic sense\" from a single image scorer into a **shared aesthetic nervous system** — a critic that every generative agent consults, a reward signal that every fine-tuning loop trusts, and a personalization engine that carries a director's, brand's, or artist's taste across the whole pipeline. ### Domain distillation (embedded, untrusted design provenance) This is the **definitive, production-grade specification** for building the **Aesthetics Agent** — a stateful, multimodal evaluation-and-alignment service that operationalizes a simulated **\"artiste sense\"** (artistic/aesth",
+    "specExcerpt": "Owns the specials-domain aesthetics agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. This is the definitive, production-grade specification for building the Aesthetics Agent — a stateful, multimodal evaluati",
     "folderPath": "business/specials/agents/specials.aesthetics-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.aesthetics-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.aesthetics-agent/README.md"
   },
   {
     "id": "specials.agent-loop-creator",
@@ -10328,7 +10560,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Agent Loop Creator",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain agent loop creator design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct synergy of reasoning + acting), xAI's server-side agentic implementation (multi-agent orchestration for deep research), and advanced hierarchical patterns (planner + specialists + self-evolution). **Target Audience:** Builders of harnesses, multi-agent systems, coding agents, research agents (e.g., N1ch01as-style Architect with critic/self-refinement loops). **Key Principle:** Controlled loops with explicit state, structured outputs, quality gates, and hierarchical delegation. Not uncontrolled chain reactions — managed orchestration with bubbling-up consolidation and deliberate synthesis. ### Domain distillation (embedded, untrusted design provenance) Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct synergy of reasoning + acting), xAI's server-side agentic implementation (multi-agent orchestration for deep research), and advanced hierarchica",
+    "description": "Owns the specials-domain agent loop creator design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct syner",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10405,11 +10637,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain agent loop creator design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct synergy of reasoning + acting), xAI's server-side agentic implementation (multi-agent orchestration for deep research), and advanced hierarchical patterns (planner + specialists + self-evolution). **Target Audience:** Builders of harnesses, multi-agent systems, coding agents, research agents (e.g., N1ch01as-style Architect with critic/self-refinement loops). **Key Principle:** Controlled loops with explicit state, structured outputs, quality gates, and hierarchical delegation. Not uncontrolled chain reactions — managed orchestration with bubbling-up consolidation and deliberate synthesis. ### Domain distillation (embedded, untrusted design provenance) Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct synergy of reasoning + acting), xAI's server-side agentic implementation (multi-agent orchestration for deep research), and advanced hierarchica",
+    "specExcerpt": "Owns the specials-domain agent loop creator design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Actionable reference for building reliable, scalable LLM-based agent systems. Combines academic foundations (ReAct syner",
     "folderPath": "business/specials/agents/specials.agent-loop-creator",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.agent-loop-creator/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.agent-loop-creator/README.md"
   },
   {
     "id": "specials.agentic-rag-agent",
@@ -10417,7 +10651,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Agentic Rag Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain agentic rag agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. ** Initial Prompt to task.md from Creator ** ``` # How to create backend services FIRST: Conduct a comprehensive analysis and research of the task.md file to fully understand all requirements, specifications, and technical details. Based on this analysis, design and implement a complete backend server architecture that fulfills all outlined requirements. The backend server must be created within a dedicated 'backend' folder structure. Ensure the implementation includes proper API endpoints, database schema design, authentication mechanisms, error handling, logging systems, and follows RESTful principles. Document all API endpoints with clear specifications, implement comprehensive unit and integration tests, and verify that the server handles all edge cases and scalability requirements mentioned in task.md. THEN: Configure the application to integrate with GROK from x.ai by utilizing the environment variables defined in backend/.env . Update all relevant codebase components to establish GROK as the primary Large Languag",
+    "description": "Owns the specials-domain agentic rag agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Initial Prompt to task.md from Creator ```",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10494,11 +10728,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain agentic rag agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. ** Initial Prompt to task.md from Creator ** ``` # How to create backend services FIRST: Conduct a comprehensive analysis and research of the task.md file to fully understand all requirements, specifications, and technical details. Based on this analysis, design and implement a complete backend server architecture that fulfills all outlined requirements. The backend server must be created within a dedicated 'backend' folder structure. Ensure the implementation includes proper API endpoints, database schema design, authentication mechanisms, error handling, logging systems, and follows RESTful principles. Document all API endpoints with clear specifications, implement comprehensive unit and integration tests, and verify that the server handles all edge cases and scalability requirements mentioned in task.md. THEN: Configure the application to integrate with GROK from x.ai by utilizing the environment variables defined in backend/.env . Update all relevant codebase components to establish GROK as the primary Large Languag",
+    "specExcerpt": "Owns the specials-domain agentic rag agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Initial Prompt to task.md from Creator ```",
     "folderPath": "business/specials/agents/specials.agentic-rag-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.agentic-rag-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.agentic-rag-agent/README.md"
   },
   {
     "id": "specials.autotelic-agent",
@@ -10506,7 +10742,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Autotelic Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain autotelic agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. **Filename**: `autotelic_agent.v2.md` **Version**: 2.0 **Date**: 2026-07-21 **Status**: Safety-Oriented Architecture Specification **Supersedes**: `autotelic_agent.md` v1.0 --- ### Domain distillation (embedded, untrusted design provenance) **Filename**: `autotelic_agent.v2.md` **Version**: 2.0 **Date**: 2026-07-21 **Status**: Safety-Oriented Architecture Specification **Supersedes**: `autotelic_agent.md` v1.0 ---",
+    "description": "Owns the specials-domain autotelic agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Filename : autotelic agent.v2.md Version : 2.0 Date : 2026-07-21 Status : Safety-Oriented Architecture Specification Supers",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10583,11 +10819,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain autotelic agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. **Filename**: `autotelic_agent.v2.md` **Version**: 2.0 **Date**: 2026-07-21 **Status**: Safety-Oriented Architecture Specification **Supersedes**: `autotelic_agent.md` v1.0 --- ### Domain distillation (embedded, untrusted design provenance) **Filename**: `autotelic_agent.v2.md` **Version**: 2.0 **Date**: 2026-07-21 **Status**: Safety-Oriented Architecture Specification **Supersedes**: `autotelic_agent.md` v1.0 ---",
+    "specExcerpt": "Owns the specials-domain autotelic agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Filename : autotelic agent.v2.md Version : 2.0 Date : 2026-07-21 Status : Safety-Oriented Architecture Specification Supers",
     "folderPath": "business/specials/agents/specials.autotelic-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.autotelic-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.autotelic-agent/README.md"
   },
   {
     "id": "specials.complex-problem-solution-process-model",
@@ -10595,7 +10833,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Complex Problem Solution Process Model",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain complex problem solution process model design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. At its core, the model follows five connected stages: `WHAT`, `WHY`, `HOW`, `DO`, and `REVIEW`. Each stage has a distinct purpose. `WHAT` frames the problem and defines the boundaries of the effort. `WHY` diagnoses root causes. `HOW` develops and selects alternative solutions. `DO` focuses on execution, communication, leadership, and project management. `REVIEW` ensures that the process remains adaptive, self-correcting, and suitable for future use. The model assumes that high-quality problem solving depends on careful framing, evidence-based reasoning, disciplined hypothesis testing, explicit decision criteria, and effective stakeholder communication. It also assumes that complex problems require both breadth and depth of thinking. The ideal problem solver is therefore \"T-shaped\": broad enough to connect ideas across disciplines, and deep enough to reason rigorously within relevant domains. ### Domain distillation (embedded, untrusted design provenance) At its core, the model follows five connected",
+    "description": "Owns the specials-domain complex problem solution process model design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. At its core, the model follows five connected stages: WHAT, WHY, HOW, DO, and REVIEW. Each stage has",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10672,11 +10910,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain complex problem solution process model design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. At its core, the model follows five connected stages: `WHAT`, `WHY`, `HOW`, `DO`, and `REVIEW`. Each stage has a distinct purpose. `WHAT` frames the problem and defines the boundaries of the effort. `WHY` diagnoses root causes. `HOW` develops and selects alternative solutions. `DO` focuses on execution, communication, leadership, and project management. `REVIEW` ensures that the process remains adaptive, self-correcting, and suitable for future use. The model assumes that high-quality problem solving depends on careful framing, evidence-based reasoning, disciplined hypothesis testing, explicit decision criteria, and effective stakeholder communication. It also assumes that complex problems require both breadth and depth of thinking. The ideal problem solver is therefore \"T-shaped\": broad enough to connect ideas across disciplines, and deep enough to reason rigorously within relevant domains. ### Domain distillation (embedded, untrusted design provenance) At its core, the model follows five connected",
+    "specExcerpt": "Owns the specials-domain complex problem solution process model design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. At its core, the model follows five connected stages: WHAT, WHY, HOW, DO, and REVIEW. Each stage has",
     "folderPath": "business/specials/agents/specials.complex-problem-solution-process-model",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.complex-problem-solution-process-model/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.complex-problem-solution-process-model/README.md"
   },
   {
     "id": "specials.controller-agent",
@@ -10684,7 +10924,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Controller Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain controller agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid **Blender draft modeling + AI video diffusion** approach. This document consolidates research-backed best practices + concrete techniques extracted from the most relevant production YouTube workflows. ### Domain distillation (embedded, untrusted design provenance) Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid **Blender draft modeling + AI video diffusion** approach. This document consolidates research-backed best practices + concrete techniques extracted from the most relevant production YouTube workflows.",
+    "description": "Owns the specials-domain controller agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid Blender dra",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10761,11 +11001,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain controller agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid **Blender draft modeling + AI video diffusion** approach. This document consolidates research-backed best practices + concrete techniques extracted from the most relevant production YouTube workflows. ### Domain distillation (embedded, untrusted design provenance) Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid **Blender draft modeling + AI video diffusion** approach. This document consolidates research-backed best practices + concrete techniques extracted from the most relevant production YouTube workflows.",
+    "specExcerpt": "Owns the specials-domain controller agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Specialized agent / system prompt / playbook for generating highly controllable video content using the hybrid Blender dra",
     "folderPath": "business/specials/agents/specials.controller-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.controller-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.controller-agent/README.md"
   },
   {
     "id": "specials.general-creative-agent",
@@ -10773,7 +11015,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "General Creative Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain general creative agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. This is the **definitive, production-grade specification** for building the General Creative Agent (GCA) — a stateful, LLM-orchestrated system that operationalizes the fully refined **Strategic Sparse Outlier Recombination (SSOR) Model**. It includes complete background, the entire iterative evolution from the user’s original idea, exhaustive research synthesis (psychology, neuroscience, computational creativity, science-of-science, arXiv 2024–2025 papers, Anthropic NLAE, and xAI/Grok-related insights), detailed functional requirements, architecture, 7-phase process, domain-specific factory, AI-native POVs, implementation guidelines, evaluation metrics, and full references. ### Domain distillation (embedded, untrusted design provenance) This is the **definitive, production-grade specification** for building the General Creative Agent (GCA) — a stateful, LLM-orchestrated system that operationalizes the fully refined **Strategic Sparse Outlier Recombination (SSOR) Model**. It includes complete background, the entire ",
+    "description": "Owns the specials-domain general creative agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. This is the definitive, production-grade specification for building the General Creative Agent (GCA) — a stateful, L",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10850,11 +11092,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain general creative agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. This is the **definitive, production-grade specification** for building the General Creative Agent (GCA) — a stateful, LLM-orchestrated system that operationalizes the fully refined **Strategic Sparse Outlier Recombination (SSOR) Model**. It includes complete background, the entire iterative evolution from the user’s original idea, exhaustive research synthesis (psychology, neuroscience, computational creativity, science-of-science, arXiv 2024–2025 papers, Anthropic NLAE, and xAI/Grok-related insights), detailed functional requirements, architecture, 7-phase process, domain-specific factory, AI-native POVs, implementation guidelines, evaluation metrics, and full references. ### Domain distillation (embedded, untrusted design provenance) This is the **definitive, production-grade specification** for building the General Creative Agent (GCA) — a stateful, LLM-orchestrated system that operationalizes the fully refined **Strategic Sparse Outlier Recombination (SSOR) Model**. It includes complete background, the entire ",
+    "specExcerpt": "Owns the specials-domain general creative agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. This is the definitive, production-grade specification for building the General Creative Agent (GCA) — a stateful, L",
     "folderPath": "business/specials/agents/specials.general-creative-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.general-creative-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.general-creative-agent/README.md"
   },
   {
     "id": "specials.intent-analysis-agent",
@@ -10862,7 +11106,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Intent Analysis Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by",
+    "description": "Owns the specials-domain intent analysis agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The Deep Intent Analysis Framework (DIA) v2.0 is a complete, design-complete (non-active), modular system for systema",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -10939,11 +11183,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain intent analysis agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**. It transforms the original 6-phase manual/LLM-prompt pipeline into a **fully specified, agentic, evaluable software system** built on xAI’s Grok-4.3 (or latest) with native tool use, 1M+ token context, structured outputs, and low-hallucination reasoning. **Core Objectives** - Answer: *Why does this language exist? What is the real goal? What is hidden? How many angles exist? Is the behavior good/wrong/effective?* - Achieve human-expert-level pragmatic reasoning at scale. - Support manual use, API, web app, IDE plugin, and enterprise analytics. **Key v2.0 Improvements (from arXiv + xAI research)** - **Pragmatic Inference Chain (PIC)** integration for superior implicature & hidden-agenda detection. - **Multi-Perspective Agent Simulation** (inspired by",
+    "specExcerpt": "Owns the specials-domain intent analysis agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The Deep Intent Analysis Framework (DIA) v2.0 is a complete, design-complete (non-active), modular system for systema",
     "folderPath": "business/specials/agents/specials.intent-analysis-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.intent-analysis-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.intent-analysis-agent/README.md"
   },
   {
     "id": "specials.knowledge-router-agent",
@@ -10951,7 +11197,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Knowledge Router Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain knowledge router agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Knowledge Router Agent** is the central intelligence layer that ensures every specialized agent in your system (Character Consistency Critic, Video Prompt Optimizer, Multi-Agent Orchestrator Designer, Shot Planning Agent, etc.) receives **precisely the right knowledge** from your growing ~5,000-file `.md` corpus — with minimal noise, high precision, and strong explainability. It draws from 2025–2026 research (AgentRouter’s graph-guided GNN routing with performance supervision, RopMura/RIRS centroid-based + iterative planning, Self-RAG reflection tokens, CRAG corrective retrieval, MasRouter unified routing, and production patterns from xAI Grok multi-agent modes) while being fully generalized for any knowledge-intensive domain. **Core Innovations in This Design** - **Hybrid Routing Stack** (Metadata-first → Cluster/Centroid semantic → Graph traversal → LLM ranker with reflection) - **Dual Planner + Router** for complex multi-hop creative/technical pipelines - **Built-in Multi-Level Critic** (retrieval quality,",
+    "description": "Owns the specials-domain knowledge router agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The Knowledge Router Agent is the central intelligence layer that ensures every specialized agent in your system (Ch",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11028,11 +11274,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain knowledge router agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The **Knowledge Router Agent** is the central intelligence layer that ensures every specialized agent in your system (Character Consistency Critic, Video Prompt Optimizer, Multi-Agent Orchestrator Designer, Shot Planning Agent, etc.) receives **precisely the right knowledge** from your growing ~5,000-file `.md` corpus — with minimal noise, high precision, and strong explainability. It draws from 2025–2026 research (AgentRouter’s graph-guided GNN routing with performance supervision, RopMura/RIRS centroid-based + iterative planning, Self-RAG reflection tokens, CRAG corrective retrieval, MasRouter unified routing, and production patterns from xAI Grok multi-agent modes) while being fully generalized for any knowledge-intensive domain. **Core Innovations in This Design** - **Hybrid Routing Stack** (Metadata-first → Cluster/Centroid semantic → Graph traversal → LLM ranker with reflection) - **Dual Planner + Router** for complex multi-hop creative/technical pipelines - **Built-in Multi-Level Critic** (retrieval quality,",
+    "specExcerpt": "Owns the specials-domain knowledge router agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The Knowledge Router Agent is the central intelligence layer that ensures every specialized agent in your system (Ch",
     "folderPath": "business/specials/agents/specials.knowledge-router-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.knowledge-router-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.knowledge-router-agent/README.md"
   },
   {
     "id": "specials.llm-usage",
@@ -11040,7 +11288,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Llm Usage",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain llm usage design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The user currently has accounts with: - x.ai (Grok API) - Poe - MiniMax - Kimi (Moonshot AI) - OpenRouter ...and many others. The app should let the user add their API keys once and see **everything aggregated in one beautiful dashboard** — total monthly spend, remaining credits, per-provider breakdowns, charts, trends, alerts, etc. ### Domain distillation (embedded, untrusted design provenance) The user currently has accounts with: - x.ai (Grok API) - Poe - MiniMax - Kimi (Moonshot AI) - OpenRouter ...and many others. The app should let the user add their API keys once and see **everything aggregated in one beautiful dashboard** — total monthly spend, remaining credits, per-provider breakdowns, charts, trends, alerts, etc.",
+    "description": "Owns the specials-domain llm usage design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The user currently has accounts with: x.ai (Grok API) Poe MiniMax Kimi (Moonshot AI) OpenRouter ...and many others. The app shoul",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11117,11 +11365,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain llm usage design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The user currently has accounts with: - x.ai (Grok API) - Poe - MiniMax - Kimi (Moonshot AI) - OpenRouter ...and many others. The app should let the user add their API keys once and see **everything aggregated in one beautiful dashboard** — total monthly spend, remaining credits, per-provider breakdowns, charts, trends, alerts, etc. ### Domain distillation (embedded, untrusted design provenance) The user currently has accounts with: - x.ai (Grok API) - Poe - MiniMax - Kimi (Moonshot AI) - OpenRouter ...and many others. The app should let the user add their API keys once and see **everything aggregated in one beautiful dashboard** — total monthly spend, remaining credits, per-provider breakdowns, charts, trends, alerts, etc.",
+    "specExcerpt": "Owns the specials-domain llm usage design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The user currently has accounts with: x.ai (Grok API) Poe MiniMax Kimi (Moonshot AI) OpenRouter ...and many others. The app shoul",
     "folderPath": "business/specials/agents/specials.llm-usage",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.llm-usage/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.llm-usage/README.md"
   },
   {
     "id": "specials.optimization-agent",
@@ -11129,7 +11379,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Optimization Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
+    "description": "Owns the specials-domain optimization agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances i",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11206,11 +11456,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain optimization agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms. ### Domain distillation (embedded, untrusted design provenance) Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances in LLM-powered multi-agent systems, autonomous optimization, process mining, digital twins, and enterprise reliability mechanisms.",
+    "specExcerpt": "Owns the specials-domain optimization agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Deliver a design-complete (non-active), agentic evolution of the original specification, incorporating latest advances i",
     "folderPath": "business/specials/agents/specials.optimization-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.optimization-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.optimization-agent/README.md"
   },
   {
     "id": "specials.planner-agent",
@@ -11218,7 +11470,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Planner Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain planner agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. SIPA is a hierarchical, context-engineered, multi-agent planning system for turning large software specification corpora into implementation-ready plans and tasks. It is designed for projects where the source material may include: - Markdown specs - PRDs - architecture notes - API contracts - user stories - domain models - UI descriptions - ADRs - implementation notes - test plans - legacy migration notes - operational constraints The key idea is simple but powerful: > **Different software components require different levels and types of detail.** A strategic architecture plan should not be generated with the same retrieval scope, summarization style, or output format as a UI screen, a shared library, a data model, or a migration adapter. SIPA therefore uses: - **Component-type classification** - **Scoped retrieval** - **Evidence-based synthesis** - **Hierarchical memory** - **Embedded critic loops** - **Traceability-first artifacts** - **Granular task generation** - **Security-aware agent execution** The result is a planne",
+    "description": "Owns the specials-domain planner agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. SIPA is a hierarchical, context-engineered, multi-agent planning system for turning large software specification corpora into",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11295,11 +11547,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain planner agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. SIPA is a hierarchical, context-engineered, multi-agent planning system for turning large software specification corpora into implementation-ready plans and tasks. It is designed for projects where the source material may include: - Markdown specs - PRDs - architecture notes - API contracts - user stories - domain models - UI descriptions - ADRs - implementation notes - test plans - legacy migration notes - operational constraints The key idea is simple but powerful: > **Different software components require different levels and types of detail.** A strategic architecture plan should not be generated with the same retrieval scope, summarization style, or output format as a UI screen, a shared library, a data model, or a migration adapter. SIPA therefore uses: - **Component-type classification** - **Scoped retrieval** - **Evidence-based synthesis** - **Hierarchical memory** - **Embedded critic loops** - **Traceability-first artifacts** - **Granular task generation** - **Security-aware agent execution** The result is a planne",
+    "specExcerpt": "Owns the specials-domain planner agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. SIPA is a hierarchical, context-engineered, multi-agent planning system for turning large software specification corpora into",
     "folderPath": "business/specials/agents/specials.planner-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.planner-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.planner-agent/README.md"
   },
   {
     "id": "specials.podcast-agent",
@@ -11307,7 +11561,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Podcast Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain podcast agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The workflow of a podcast host is a precise and multi-layered creative process that requires a combination of creative thinking, technical expertise, and real-time adaptability. This process is typically divided into four main stages: preparation, execution, conclusion, and follow-up, each with its unique challenges and requirements. For a typical podcast, whether music, talk, or news format, the host must create content that is both informative and entertaining within limited time, while maintaining an emotional connection with the audience. The core of the entire workflow lies in balancing time management, content creation, and audience interaction. The host is not only a transmitter of information but also a guide of emotions and a builder of community. They must find a balance between well-prepared scripts and improvisation, ensuring the professionalism of the program while maintaining a natural and fluent conversational feel. This complexity makes podcast hosting an art that requires multiple skills. ### Domain distill",
+    "description": "Owns the specials-domain podcast agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The workflow of a podcast host is a precise and multi-layered creative process that requires a combination of creative thinki",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11384,11 +11638,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain podcast agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. The workflow of a podcast host is a precise and multi-layered creative process that requires a combination of creative thinking, technical expertise, and real-time adaptability. This process is typically divided into four main stages: preparation, execution, conclusion, and follow-up, each with its unique challenges and requirements. For a typical podcast, whether music, talk, or news format, the host must create content that is both informative and entertaining within limited time, while maintaining an emotional connection with the audience. The core of the entire workflow lies in balancing time management, content creation, and audience interaction. The host is not only a transmitter of information but also a guide of emotions and a builder of community. They must find a balance between well-prepared scripts and improvisation, ensuring the professionalism of the program while maintaining a natural and fluent conversational feel. This complexity makes podcast hosting an art that requires multiple skills. ### Domain distill",
+    "specExcerpt": "Owns the specials-domain podcast agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. The workflow of a podcast host is a precise and multi-layered creative process that requires a combination of creative thinki",
     "folderPath": "business/specials/agents/specials.podcast-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.podcast-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.podcast-agent/README.md"
   },
   {
     "id": "specials.psychological-profile-agent",
@@ -11396,7 +11652,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Psychological Profile Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain psychological profile agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow **File Structure:** - Basic information (code, age, professional background) - Psychological traits (MBTI tendencies, motivation types, fear patterns) - Creation parameters (best tools, time allocation, support needs) - Framework adaptation (key focuses for each stage, predicted obstacles, success strategies) ### Domain distillation (embedded, untrusted design provenance) Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow **File Structure:** - Basic information (code, age, professional background) - Psychological traits (MBTI tendencies, motivation types, fear patterns) - Creation parameters (best tools, time allocation, support needs) - Framework adaptation (key focuses for each stage, predicted obstacles, success strategies)",
+    "description": "Owns the specials-domain psychological profile agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow File St",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11473,11 +11729,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain psychological profile agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow **File Structure:** - Basic information (code, age, professional background) - Psychological traits (MBTI tendencies, motivation types, fear patterns) - Creation parameters (best tools, time allocation, support needs) - Framework adaptation (key focuses for each stage, predicted obstacles, success strategies) ### Domain distillation (embedded, untrusted design provenance) Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow **File Structure:** - Basic information (code, age, professional background) - Psychological traits (MBTI tendencies, motivation types, fear patterns) - Creation parameters (best tools, time allocation, support needs) - Framework adaptation (key focuses for each stage, predicted obstacles, success strategies)",
+    "specExcerpt": "Owns the specials-domain psychological profile agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Provide personalized parameter configurations for the framework in this chapter and Appendix A workflow File St",
     "folderPath": "business/specials/agents/specials.psychological-profile-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.psychological-profile-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.psychological-profile-agent/README.md"
   },
   {
     "id": "specials.psychological-recommendation-agent",
@@ -11485,7 +11743,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Psychological Recommendation Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain psychological recommendation agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. - Explain \"why\" a certain movie is recommended, providing explainable recommendations to help users understand the recommendation logic. - Predict potential preferences for unexposed genres, solving the cold start problem. - Provide more personalized and accurate recommendations, adjusted based on users' intrinsic traits such as personality and emotional state. - Enhance user engagement and satisfaction; studies show that integrating personality traits can improve recommendation accuracy by 5-10% (refer to the Personality and Recommender Systems paper). - Address diversity needs, avoid the filter bubble, and ensure recommendations cover content at different emotional and cognitive levels. Additionally, psychological factors can handle situational changes, such as users preferring light content when under stress rather than high-intensity plots. ### Domain distillation (embedded, untrusted design provenance) - Explain \"why\" a certain movie is recommended, providing explainable recommendations to help use",
+    "description": "Owns the specials-domain psychological recommendation agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Explain \"why\" a certain movie is recommended, providing explainable recommendations to help users unders",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11562,11 +11820,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain psychological recommendation agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. - Explain \"why\" a certain movie is recommended, providing explainable recommendations to help users understand the recommendation logic. - Predict potential preferences for unexposed genres, solving the cold start problem. - Provide more personalized and accurate recommendations, adjusted based on users' intrinsic traits such as personality and emotional state. - Enhance user engagement and satisfaction; studies show that integrating personality traits can improve recommendation accuracy by 5-10% (refer to the Personality and Recommender Systems paper). - Address diversity needs, avoid the filter bubble, and ensure recommendations cover content at different emotional and cognitive levels. Additionally, psychological factors can handle situational changes, such as users preferring light content when under stress rather than high-intensity plots. ### Domain distillation (embedded, untrusted design provenance) - Explain \"why\" a certain movie is recommended, providing explainable recommendations to help use",
+    "specExcerpt": "Owns the specials-domain psychological recommendation agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Explain \"why\" a certain movie is recommended, providing explainable recommendations to help users unders",
     "folderPath": "business/specials/agents/specials.psychological-recommendation-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.psychological-recommendation-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.psychological-recommendation-agent/README.md"
   },
   {
     "id": "specials.research-agent",
@@ -11574,7 +11834,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Research Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain research agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. ` and `## Source Catalog` sections. - `FR-OUT-003`: If knowledge-base content exists, the report shall also include `## Knowledge Base Overview`. - `FR-OUT-004`: The report shall end with a glossary section even if glossary generation timed out. ### Domain distillation (embedded, untrusted design provenance) ` and `## Source Catalog` sections. - `FR-OUT-003`: If knowledge-base content exists, the report shall also include `## Knowledge Base Overview`. - `FR-OUT-004`: The report shall end with a glossary section even if glossary generation timed out.",
+    "description": "Owns the specials-domain research agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. and ## Source Catalog sections. - FR-OUT-003: If knowledge-base content exists, the report shall also include ## Knowledge B",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11651,11 +11911,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain research agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. ` and `## Source Catalog` sections. - `FR-OUT-003`: If knowledge-base content exists, the report shall also include `## Knowledge Base Overview`. - `FR-OUT-004`: The report shall end with a glossary section even if glossary generation timed out. ### Domain distillation (embedded, untrusted design provenance) ` and `## Source Catalog` sections. - `FR-OUT-003`: If knowledge-base content exists, the report shall also include `## Knowledge Base Overview`. - `FR-OUT-004`: The report shall end with a glossary section even if glossary generation timed out.",
+    "specExcerpt": "Owns the specials-domain research agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. and ## Source Catalog sections. - FR-OUT-003: If knowledge-base content exists, the report shall also include ## Knowledge B",
     "folderPath": "business/specials/agents/specials.research-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.research-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.research-agent/README.md"
   },
   {
     "id": "specials.screenwriter-strategic-goal-achievement-agent",
@@ -11663,7 +11925,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Screenwriter Strategic Goal Achievement Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain screenwriter strategic goal achievement agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. **Chapter Objective:** Through a complete \"screenwriting\" case study, demonstrate how to use the six-stage self-questioning framework to transform vague ideas into concrete, actionable plans. **Key Learning Points:** - How to dig from surface answers to core motivations - How to convert abstract concepts into specific actions - How to identify and break through thinking blind spots - How to establish sustainable execution strategies ### Domain distillation (embedded, untrusted design provenance) **Chapter Objective:** Through a complete \"screenwriting\" case study, demonstrate how to use the six-stage self-questioning framework to transform vague ideas into concrete, actionable plans. **Key Learning Points:** - How to dig from surface answers to core motivations - How to convert abstract concepts into specific actions - How to identify and break through thinking blind spots - How to establish sustainable execution strategies",
+    "description": "Owns the specials-domain screenwriter strategic goal achievement agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Chapter Objective: Through a complete \"screenwriting\" case study, demonstrate how to use the ",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11740,11 +12002,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain screenwriter strategic goal achievement agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. **Chapter Objective:** Through a complete \"screenwriting\" case study, demonstrate how to use the six-stage self-questioning framework to transform vague ideas into concrete, actionable plans. **Key Learning Points:** - How to dig from surface answers to core motivations - How to convert abstract concepts into specific actions - How to identify and break through thinking blind spots - How to establish sustainable execution strategies ### Domain distillation (embedded, untrusted design provenance) **Chapter Objective:** Through a complete \"screenwriting\" case study, demonstrate how to use the six-stage self-questioning framework to transform vague ideas into concrete, actionable plans. **Key Learning Points:** - How to dig from surface answers to core motivations - How to convert abstract concepts into specific actions - How to identify and break through thinking blind spots - How to establish sustainable execution strategies",
+    "specExcerpt": "Owns the specials-domain screenwriter strategic goal achievement agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. Chapter Objective: Through a complete \"screenwriting\" case study, demonstrate how to use the ",
     "folderPath": "business/specials/agents/specials.screenwriter-strategic-goal-achievement-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/README.md"
   },
   {
     "id": "specials.strategic-goal-achievement-agent",
@@ -11752,7 +12016,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Strategic Goal Achievement Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain strategic goal achievement agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively execute their goals. When users propose any goal (e.g., creative projects, business plans, skill learning, personal growth), your primary task is to guide them through a structured **self-questioning and self-answering** iterative framework. This framework is inspired by Socratic dialogue and deep self-reflection, applicable to any type of goal. It is divided into six stages: Motivation and Purpose, Audience and Context, Methods and Constraints, Emotional Expectations, Execution and Impact, and Iteration and Reflection. Each stage requires the user to continuously ask themselves questions, answer them, and evaluate whether the answers are \"acceptable,\" until achieving clear and actionable insights. ### Domain distillation (embedded, untrusted design provenance) Positioning You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively execute their goals. When ",
+    "description": "Owns the specials-domain strategic goal achievement agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively e",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11829,11 +12093,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain strategic goal achievement agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively execute their goals. When users propose any goal (e.g., creative projects, business plans, skill learning, personal growth), your primary task is to guide them through a structured **self-questioning and self-answering** iterative framework. This framework is inspired by Socratic dialogue and deep self-reflection, applicable to any type of goal. It is divided into six stages: Motivation and Purpose, Audience and Context, Methods and Constraints, Emotional Expectations, Execution and Impact, and Iteration and Reflection. Each stage requires the user to continuously ask themselves questions, answer them, and evaluate whether the answers are \"acceptable,\" until achieving clear and actionable insights. ### Domain distillation (embedded, untrusted design provenance) Positioning You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively execute their goals. When ",
+    "specExcerpt": "Owns the specials-domain strategic goal achievement agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. You are a strategic goal achievement coach, specializing in helping users clarify, plan, and effectively e",
     "folderPath": "business/specials/agents/specials.strategic-goal-achievement-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/README.md"
   },
   {
     "id": "specials.techology-advisor-agent",
@@ -11841,7 +12107,7 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "name": "Techology Advisor Agent",
     "role": "Special_Agent data-only configuration",
     "status": "draft",
-    "description": "Owns the specials-domain techology advisor agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendations: ### Domain distillation (embedded, untrusted design provenance) --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendations:",
+    "description": "Owns the specials-domain techology advisor agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendatio",
     "versionLabel": "specials · draft · schema 1.0",
     "success": "—",
     "avgTokens": "1",
@@ -11918,11 +12184,13 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
         ]
       }
     ],
-    "specExcerpt": "Owns the specials-domain techology advisor agent design outcome as a **draft, data-only** agent representation. Host role string: `Special_Agent data-only configuration`. --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendations: ### Domain distillation (embedded, untrusted design provenance) --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendations:",
+    "specExcerpt": "Owns the specials-domain techology advisor agent design outcome as a draft, data-only agent representation. Host role string: Special Agent data-only configuration. --- At regular intervals — or when triggered by a user reporting a bad outcome — review your previous recommendatio",
     "folderPath": "business/specials/agents/specials.techology-advisor-agent",
     "hasSpecMd": true,
     "hasReadme": true,
-    "hasSources": true
+    "hasSources": true,
+    "specDocPath": "/docs/agents/specials.techology-advisor-agent/SPEC.md",
+    "readmeDocPath": "/docs/agents/specials.techology-advisor-agent/README.md"
   }
 ] as const;
 

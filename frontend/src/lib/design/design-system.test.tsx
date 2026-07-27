@@ -52,6 +52,22 @@ test("globals.css imports design-system and authenticated shell uses light frame
   assert.match(css, /#4f46e5/);
 });
 
+test("docs viewer is light-framed for shell main content", async () => {
+  const [ds, globals] = await Promise.all([
+    readFile(resolve(root, "app/design-system.css"), "utf8"),
+    readFile(resolve(root, "app/globals.css"), "utf8"),
+  ]);
+  // Light design tokens apply to .docs-page alongside login/shell
+  assert.match(ds, /\.docs-page\s*\{/);
+  assert.match(ds, /\.login-page,\s*\n\.docs-page|\.docs-page\s*,/);
+  // In-shell content surface (not a chrome-less dark page)
+  assert.match(globals, /\.docs-page\s*\{[^}]*color-scheme:\s*light/s);
+  assert.match(globals, /\.docs-page\s*\{[^}]*color:\s*#1c1917/s);
+  assert.match(globals, /\.docs-page__body\s*\{[^}]*background:\s*#ffffff/s);
+  // Explicit override so dark .panel never wins on the guide body
+  assert.match(globals, /\.docs-page__body\.panel|\.docs-page\s+\.panel/);
+});
+
 test("design status pill announces text status not color alone", () => {
   const markup = renderToStaticMarkup(
     <DesignStatusPill status="reconnecting" />,

@@ -75,7 +75,9 @@ export function SpecialsCatalog({
               <p className="specials-catalog__id">
                 <code>{agent.agentId}</code>
               </p>
-              <SafeContent content={agent.summary} />
+              <p className="specials-catalog__summary">
+                <SafeContent content={agent.summary} />
+              </p>
               <p className="specials-catalog__meta">
                 provider: {agent.provider} · tools: {agent.allowedTools.length} · network:{" "}
                 {agent.networkAccess ? "on" : "off"} · production activation requested:{" "}

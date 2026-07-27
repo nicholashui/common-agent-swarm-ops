@@ -44,6 +44,7 @@ export function RegistryHome({
   );
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [reviewOpen, setReviewOpen] = useState(true);
+  const [contributionsOpen, setContributionsOpen] = useState(false);
   const [selectedGraphId, setSelectedGraphId] = useState<string | undefined>();
   /** Progressive list window — keeps first paint light when catalog is large. */
   const [visibleLimit, setVisibleLimit] = useState(36);
@@ -124,10 +125,23 @@ export function RegistryHome({
         </div>
         <div className="registry-home__header-actions">
           <button
-            className="registry-home__action"
-            onClick={() =>
-              announce(L(labels, "my_contributions_forks_require_an_authorized_pro"))
+            aria-expanded={contributionsOpen}
+            className={
+              contributionsOpen
+                ? "registry-home__action registry-home__action--primary"
+                : "registry-home__action"
             }
+            onClick={() => {
+              setContributionsOpen((open) => {
+                const next = !open;
+                setStatusMessage(
+                  next
+                    ? L(labels, "my_contributions_local_note")
+                    : "My Contributions panel closed.",
+                );
+                return next;
+              });
+            }}
             type="button"
           >
             My Contributions
@@ -136,17 +150,65 @@ export function RegistryHome({
             className="registry-home__action"
             onClick={() => {
               setReviewOpen(true);
-              announce(L(labels, "pending_proposals_shown_from_local_fixture"));
+              const count = (view.proposals ?? []).length;
+              setStatusMessage(
+                count === 0
+                  ? L(labels, "pending_proposals_empty_note")
+                  : Lfmt(labels, "pending_proposals_count_note", {
+                      count: String(count),
+                    }),
+              );
+              if (typeof document !== "undefined") {
+                document
+                  .getElementById("proposals-heading")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
             }}
             type="button"
           >
             Pending Proposals
+            {(view.proposals ?? []).length > 0
+              ? ` (${(view.proposals ?? []).length})`
+              : ""}
           </button>
           <Link className="registry-home__action registry-home__action--primary" href="/composer">
             ✧ Suggest New
           </Link>
         </div>
       </header>
+
+      {contributionsOpen ? (
+        <section
+          aria-label="My contributions and forks"
+          className="registry-home__contributions"
+        >
+          <h2>My Contributions &amp; Forks</h2>
+          <p className="registry-home__muted">
+            {L(labels, "my_contributions_local_note")}
+          </p>
+          <ul className="registry-home__contributions-list">
+            <li>
+              <strong>Proposals</strong>
+              <span>
+                {(view.proposals ?? []).length} pending in this workspace
+                projection (not necessarily yours alone).
+              </span>
+            </li>
+            <li>
+              <strong>Personal forks</strong>
+              <span>
+                None listed in the local pack catalog. Host contribution
+                projection will populate this list when linked.
+              </span>
+            </li>
+          </ul>
+          <p className="registry-home__muted">
+            To propose an improvement, open an agent card and use{" "}
+            <strong>Propose</strong> when the Host returns an eligible action
+            reference — or use pack-backed detail for inspection only.
+          </p>
+        </section>
+      ) : null}
 
       <div className="registry-home__toolbar">
         <label className="registry-home__search">
@@ -263,6 +325,7 @@ export function RegistryHome({
                     agent={agent}
                     key={agent.id}
                     labels={labels}
+                    onAction={onAction}
                     onAnnounce={announce}
                   />
                 ))}
@@ -349,32 +412,38 @@ export function RegistryHome({
                 {reviewOpen ? "Hide review" : "Show review"}
               </button>
             </div>
-            <ul className="registry-home__proposals">
-              {view.proposals.map((proposal) => (
-                <li key={proposal.id}>
-                  <div>
-                    <strong>{proposal.title}</strong>
-                    <span>{proposal.detail}</span>
-                  </div>
-                  <button
-                    className={
-                      proposal.primary
-                        ? "registry-home__action registry-home__action--primary"
-                        : "registry-home__action"
-                    }
-                    onClick={() => {
-                      setReviewOpen(true);
-                      announce(
-                        "Review & Merge requires an authorized governance action.",
-                      );
-                    }}
-                    type="button"
-                  >
-                    Review &amp; Merge
-                  </button>
-                </li>
-              ))}
-            </ul>
+            {(view.proposals ?? []).length === 0 ? (
+              <p className="registry-home__empty panel">
+                {L(labels, "pending_proposals_empty_note")}
+              </p>
+            ) : (
+              <ul className="registry-home__proposals">
+                {(view.proposals ?? []).map((proposal) => (
+                  <li key={proposal.id}>
+                    <div>
+                      <strong>{proposal.title}</strong>
+                      <span>{proposal.detail}</span>
+                    </div>
+                    <button
+                      className={
+                        proposal.primary
+                          ? "registry-home__action registry-home__action--primary"
+                          : "registry-home__action"
+                      }
+                      onClick={() => {
+                        setReviewOpen(true);
+                        announce(
+                          "Review & Merge requires an authorized governance action.",
+                        );
+                      }}
+                      type="button"
+                    >
+                      Review &amp; Merge
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
 
             {reviewOpen ? (
               <div
@@ -492,10 +561,12 @@ export function RegistryHome({
 function AgentCard({
   agent,
   onAnnounce,
+  onAction,
   labels,
 }: Readonly<{
   agent: RegistryAgentCard;
   onAnnounce: (message: string) => void;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
   labels: ScreenLabels;
 }>): JSX.Element {
   return (
@@ -554,11 +625,19 @@ function AgentCard({
         </button>
         <button
           className="registry-home__action"
-          onClick={() =>
+          onClick={() => {
+            if (onAction) {
+              void onAction({
+                kind: "commons.propose",
+                agentId: agent.id,
+                summary: `Improvement proposal for ${agent.name} (${agent.id}).`,
+              });
+              return;
+            }
             onAnnounce(
               "Propose Improvement requires an authorized proposal action.",
-            )
-          }
+            );
+          }}
           type="button"
         >
           Propose

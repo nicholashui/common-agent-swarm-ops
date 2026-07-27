@@ -19,6 +19,7 @@ import React, {
   type ReactNode,
 } from "react";
 
+import { logoutSession } from "../lib/auth/logout";
 import {
   type ApplicationMenuProjection,
   type MenuIconName,
@@ -66,6 +67,12 @@ const MENU_ICON_PATHS: Readonly<Record<MenuIconName, readonly string[]>> = {
   monitoring: ["M4 18h16", "M6 15l4-5 3 3 5-7"],
   notification: ["M6 16h12l-1.5-2V9a4.5 4.5 0 0 0-9 0v5Z", "M10 19h4"],
   profile: ["M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z", "M4 21c1-6 15-6 16 0"],
+  /** Door with arrow — sign out */
+  logout: [
+    "M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5",
+    "M16 12H7",
+    "m13 8 4 4-4 4",
+  ],
   registry: ["M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z", "M8 12h8", "M12 8v8"],
   settings: [
     "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
@@ -188,6 +195,8 @@ export function ApplicationMenuView({
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
   const [rightPanelWidth, setRightPanelWidth] = useState(HELP_PANEL_DEFAULT_WIDTH);
   const [rightPanelDragging, setRightPanelDragging] = useState(false);
+  const [logoutBusy, setLogoutBusy] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | undefined>();
   const baseId = useId();
 
   const projection = menuProjection ?? DEFAULT_PROJECTION;
@@ -263,6 +272,23 @@ export function ApplicationMenuView({
   }, [isMenuOpen]);
 
   const closeMenu = (): void => setIsMenuOpen(false);
+
+  const handleLogout = (): void => {
+    if (logoutBusy) return;
+    setLogoutBusy(true);
+    setLogoutError(undefined);
+    void logoutSession().then((result) => {
+      if (!result.ok) {
+        setLogoutError(result.message);
+        setLogoutBusy(false);
+        return;
+      }
+      closeMenu();
+      if (typeof window !== "undefined") {
+        window.location.assign(result.redirectTo);
+      }
+    });
+  };
 
   const toggleGroup = (groupId: string): void => {
     setCollapsedGroups((current) => {
@@ -405,16 +431,37 @@ export function ApplicationMenuView({
                   </small>
                 ) : null}
               </span>
-              <Link
-                aria-label="Profile"
-                className="menu-footer-profile"
-                href="/profile"
-                onClick={closeMenu}
-              >
-                <MenuIcon name="profile" />
-                <span className="menu-profile-copy">Profile</span>
-              </Link>
+              <div className="menu-footer-account">
+                <Link
+                  aria-label="Profile"
+                  className="menu-footer-profile"
+                  href="/profile"
+                  onClick={closeMenu}
+                  title="Profile"
+                >
+                  <MenuIcon name="profile" />
+                  <span className="menu-profile-copy">Profile</span>
+                </Link>
+                <button
+                  aria-label={logoutBusy ? "Signing out" : "Log out"}
+                  className="menu-footer-logout"
+                  disabled={logoutBusy}
+                  onClick={handleLogout}
+                  title="Log out"
+                  type="button"
+                >
+                  <MenuIcon name="logout" />
+                  <span className="visually-hidden">
+                    {logoutBusy ? "Signing out" : "Log out"}
+                  </span>
+                </button>
+              </div>
             </div>
+            {logoutError ? (
+              <p className="menu-logout-error" role="alert">
+                {logoutError}
+              </p>
+            ) : null}
             <button
               aria-label={
                 isCompact
