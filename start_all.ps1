@@ -93,6 +93,12 @@ if (-not $PidFile) {
   $PidFile = Resolve-ProjectPath -Path $PidFile -BasePath $Root
 }
 
+# Drop any stale PID state so a fresh start always owns .run\servers.json.
+if (Test-Path -LiteralPath $PidFile -PathType Leaf) {
+  Remove-Item -LiteralPath $PidFile -Force
+  Write-Host "Removed existing PID file: $PidFile"
+}
+
 if (-not (Test-Path -LiteralPath $BackendDir -PathType Container)) {
   throw "Backend directory not found: $BackendDir"
 }
@@ -131,9 +137,6 @@ if (Test-PortInUse -Port $BackendPort) {
 }
 if (Test-PortInUse -Port $FrontendPort) {
   throw "Port $FrontendPort is already in use. Run .\stop_all.ps1 or choose -FrontendPort."
-}
-if (Test-Path -LiteralPath $PidFile -PathType Leaf) {
-  throw "PID file already exists: $PidFile. Run .\stop_all.ps1 first, or remove a stale state file after confirming no project processes are running."
 }
 
 New-Item -ItemType Directory -Force -Path $RunDir, $LogDir | Out-Null
