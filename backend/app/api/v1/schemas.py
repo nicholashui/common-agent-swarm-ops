@@ -979,6 +979,29 @@ class AgentForkRequest(StrictSchema):
     visibility: Literal["organization"] = "organization"
 
 
+class RolloutCreateRequest(StrictSchema):
+    """Start a sandbox/canary rollout (A/B or safe rollout) with a host action reference."""
+
+    action_reference_id: str = Field(min_length=1, max_length=200)
+    type: Literal["ab_test", "safe_rollout"] = "ab_test"
+    baseline_version: str = Field(default="current", min_length=1, max_length=100)
+    candidate_version: str = Field(default="candidate", min_length=1, max_length=100)
+    summary: str | None = Field(default=None, max_length=2_000)
+
+
+class RolloutCreateResponse(StrictSchema):
+    """Created canary rollout identity; production remains fail-closed."""
+
+    rollout_id: str
+    agent_id: str
+    type: str
+    baseline_version: str
+    candidate_version: str
+    status: str
+    correlation_id: str
+    production_activation: bool = False
+
+
 class AgentForkResponse(StrictSchema):
     """Draft fork identity with provenance to the source agent."""
 

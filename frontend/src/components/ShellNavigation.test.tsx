@@ -100,3 +100,56 @@ test("menu CSS implements 264px rail, 72px compact, and 44px mobile targets", as
   assert.match(css, /@media \(max-width: 900px\)/);
   assert.match(css, /\.menu-sidebar--open/);
 });
+
+test("main content and help panel use independent vertical scroll containers", async () => {
+  const css = await readFile(
+    resolve(componentDirectory, "../app/globals.css"),
+    "utf8",
+  );
+
+  // Document/window scroll disabled while authenticated shell is mounted.
+  assert.match(css, /html:has\(\.menu-workspace\)/);
+  assert.match(css, /body:has\(\.menu-workspace\)[\s\S]*?overflow:\s*hidden/);
+  assert.match(
+    css,
+    /body:has\(\.menu-workspace\)[\s\S]*?position:\s*fixed/,
+  );
+  // Viewport-locked shell so page body does not own dual-column scroll.
+  assert.match(
+    css,
+    /\.app-shell:has\(\.menu-workspace\)\s*\{[\s\S]*?overflow:\s*hidden/,
+  );
+  assert.match(
+    css,
+    /\.menu-workspace-main\s*\{[\s\S]*?overflow:\s*hidden/,
+  );
+  // Main column scrolls on its own track.
+  assert.match(
+    css,
+    /\.menu-workspace-main\s*>\s*\.app-main\.menu-main[\s\S]*?overflow-y:\s*auto/,
+  );
+  // Help panel document body scrolls separately.
+  assert.match(css, /\.help-panel__body\s*\{[\s\S]*?overflow-y:\s*auto/);
+  assert.match(css, /\.help-panel\s*\{[\s\S]*?overflow:\s*hidden/);
+});
+
+test("main content fills full width when help panel is closed", async () => {
+  const css = await readFile(
+    resolve(componentDirectory, "../app/globals.css"),
+    "utf8",
+  );
+  // Closed state: single-column grid + main full-bleed (overrides global 1480px cap).
+  assert.match(
+    css,
+    /\.menu-workspace-main:not\(\.menu-workspace-main--help-open\)\s*>\s*\.app-main\.menu-main[\s\S]*?max-width:\s*none/,
+  );
+  assert.match(
+    css,
+    /\.menu-workspace-main\s*>\s*\.app-main\.menu-main[\s\S]*?width:\s*100%/,
+  );
+  // Open state still uses a second auto track for the help panel only.
+  assert.match(
+    css,
+    /\.menu-workspace-main--help-open\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s+auto/,
+  );
+});

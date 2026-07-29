@@ -80,8 +80,41 @@ function looksLikeParamSegment(segment: string): boolean {
 }
 
 /**
+ * When the route is an agent detail page (/registry/agents/:agentId), surface
+ * pack-exported operator guides under /docs/agents/:agentId/ first.
+ * Convention only — no pack-specific agent names.
+ */
+function packAgentHelpCandidates(
+  pathname: string,
+  tabId: string,
+): readonly string[] {
+  const exact = normalizeRoutePath(pathname);
+  const match = exact.match(/^\/registry\/agents\/([^/]+)$/i);
+  if (!match) return [];
+  const agentId = match[1];
+  if (!agentId || !looksLikeParamSegment(agentId)) return [];
+  // reject path traversal / unsafe ids
+  if (agentId.includes("..") || agentId.includes("/") || agentId.includes("\\")) {
+    return [];
+  }
+
+  const tab = tabId.replace(/[^a-z0-9_-]/gi, "").toLowerCase() || "doc";
+  const out: string[] = [];
+  if (tab === "userguide") {
+    // Pack export writes both names; prefer the product filename.
+    out.push(`/docs/agents/${agentId}/user_guide.md`);
+    out.push(`/docs/agents/${agentId}/userguide.md`);
+    // Soft fallback to SPEC if guide not yet exported
+    out.push(`/docs/agents/${agentId}/SPEC.md`);
+  } else {
+    out.push(`/docs/agents/${agentId}/${tab}.md`);
+  }
+  return out;
+}
+
+/**
  * Build candidate markdown URLs under /docs for a tab on the current route.
- * Order: exact route path, then param-stripped fallback.
+ * Order: pack agent guide (when on agent detail), exact route path, then fallbacks.
  */
 export function resolveHelpMarkdownCandidates(
   pathname: string,
@@ -98,9 +131,14 @@ export function resolveHelpMarkdownCandidates(
   const file = `${tabId.replace(/[^a-z0-9_-]/gi, "").toLowerCase() || "doc"}.md`;
 
   const candidates: string[] = [];
+
+  for (const packPath of packAgentHelpCandidates(pathname, tabId)) {
+    if (!candidates.includes(packPath)) candidates.push(packPath);
+  }
+
   const exactDoc =
     exact === "/" ? `/docs/${file}` : `/docs${exact}/${file}`;
-  candidates.push(exactDoc);
+  if (!candidates.includes(exactDoc)) candidates.push(exactDoc);
 
   if (stripped !== exact) {
     const strippedDoc =

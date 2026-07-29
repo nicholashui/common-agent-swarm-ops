@@ -116,9 +116,21 @@ export function AgentDetailHome({
           </button>
           <button
             className="agent-detail__action"
-            onClick={() =>
-              announce(L(labels, "a_b_test_requires_an_authorized_rollout_contract"))
-            }
+            onClick={() => {
+              if (onAction && agentId) {
+                void onAction({
+                  kind: "commons.rollout_ab",
+                  agentId,
+                  baselineVersion: "current",
+                  candidateVersion: "candidate",
+                  summary: `A/B canary for ${view.agentName} (${agentId}).`,
+                });
+                return;
+              }
+              announce(
+                L(labels, "a_b_test_requires_an_authorized_rollout_contract"),
+              );
+            }}
             type="button"
           >
             A/B Test vs newer
@@ -223,7 +235,15 @@ export function AgentDetailHome({
             onAnnounce={announce}
            labels={labels} />
         ) : null}
-        {tab === "ops" ? <OpsTab view={view} onAnnounce={announce}  labels={labels} /> : null}
+        {tab === "ops" ? (
+          <OpsTab
+            view={view}
+            agentId={agentId}
+            onAction={onAction}
+            onAnnounce={announce}
+            labels={labels}
+          />
+        ) : null}
       </div>
 
       <p className="agent-detail__footer">{view.footerNote}</p>
@@ -733,10 +753,14 @@ function KnowledgeTab({
 
 function OpsTab({
   view,
+  agentId,
+  onAction,
   onAnnounce,
   labels,
 }: Readonly<{
   view: AgentDetailLandingView;
+  agentId?: string;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
   onAnnounce: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
@@ -762,20 +786,42 @@ function OpsTab({
         <div className="agent-detail__ops-actions">
           <button
             className="agent-detail__action agent-detail__action--primary"
-            onClick={() =>
+            onClick={() => {
+              if (onAction && agentId) {
+                void onAction({
+                  kind: "commons.rollout_safe",
+                  agentId,
+                  baselineVersion: "current",
+                  candidateVersion: "candidate",
+                  summary: `Safe rollout canary for ${agentId}.`,
+                });
+                return;
+              }
               onAnnounce(
                 "Safe Rollout All requires an authorized rollout action and approval workflow.",
-              )
-            }
+              );
+            }}
             type="button"
           >
             Safe Rollout All
           </button>
           <button
             className="agent-detail__action"
-            onClick={() =>
-              onAnnounce("A/B v3.0 vs v2.9 requires an authorized rollout contract.")
-            }
+            onClick={() => {
+              if (onAction && agentId) {
+                void onAction({
+                  kind: "commons.rollout_ab",
+                  agentId,
+                  baselineVersion: "current",
+                  candidateVersion: "candidate",
+                  summary: `A/B canary (candidate vs current) for ${agentId}.`,
+                });
+                return;
+              }
+              onAnnounce(
+                "A/B v3.0 vs v2.9 requires an authorized rollout contract.",
+              );
+            }}
             type="button"
           >
             A/B v3.0 vs v2.9

@@ -1,0 +1,306 @@
+各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 Aesthetics Agent，
+即系美学代理嘅操作同设计指南。
+
+首先讲吓呢份指南系写畀边个睇嘅。呢份文件主要系写畀喺 common-agent-swarm-ops 入面工作嘅操作员、
+pack 作者、swarm 设计师同埋审查人员。睇完之后你会得到乜嘢呢？
+你会清楚了解呢个角色嘅任务定位、几时应该用佢嘅指引、协作关系图、
+喺 CASOPS 上面点样操作嘅步骤、改善路径，仲有一个分信任层级嘅来源地图。
+
+不过要讲清楚，呢份文件唔系一个畀你激活供应商、开放网络访问或者自己发明工具嘅许可证。
+Host 嘅真相系 fail-closed 嘅 agent_spec.json。
+来自 VA 或者 redesign 文档嘅设计文本属于不受信任嘅来源。
+
+呢个 agent 嘅 pack 路径系 business/specials/agents/specials.aesthetics-agent/，
+指南就喺 docs/user_guide.md，由 scripts/business/generate_agent_user_guides.py 生成。
+
+好，我哋入正题，先睇第一部分：Snapshot，即系快照概览。
+
+Aesthetics Agent，代号 specials.aesthetics-agent，
+系一个 Specials pack 能力，运行喺 CASOPS 平台上面。
+用简单嘅话讲，Aesthetics Agent 系整个 swarm 嘅「艺术感知」计算化身。
+佢唔系嚟取代人类嘅品味，而系将人类品味放大、编码同埋以超人嘅速度传播到 114 个代理入面。
+佢有三个独立但可以组合嘅功能。
+
+睇吓佢嘅基本资料：显示名称系 Aesthetics Agent，
+Pack agent id 系 specials.aesthetics-agent，
+属于 specials pack。Host 角色字串系 Special_Agent data-only configuration。
+目录状态系 draft，即系草稿阶段。成熟度系 L0，即系非激活状态，
+主要做目录同设计保真度。VA id 冇，VA 类别系 specials，
+属于 Specials 元代理 pack。供应商系 local_deterministic，
+网络访问系 False，允许嘅工具系空嘅，生产激活请求系 False。
+Prompt 同 rubric 嘅引用分别系 spagent.aesthetics-agent-prompt 同 spagent.aesthetics-agent-rubric。
+
+第二部分：点解呢个角色存在。
+
+Specials 代理捕捉嘅系跨领域认知技能，呢啲技能系领域手艺 pack 唔应该重新发明嘅。
+呢个角色嘅设计成果系：Aesthetics Agent 系整个 swarm 嘅「artiste sense」计算化身。
+佢唔系取代人类品味，而系放大、编码同传播品味，以超人嘅速度覆盖 114 个代理。
+佢有三个独立、可组合嘅功能。
+
+第三部分：乜嘢叫做「做得好」。
+
+呢度列出嘅标准系你审阅输出、撰写评分准则或者评分提案嗰阵要用嘅。
+
+主要成果方面：Aesthetics Agent 系 swarm 嘅美学感知计算化身，
+放大、编码同传播人类品味到 114 个代理。
+
+自我质量标准系：aesthetic judgment 嘅可追溯输出、
+fail-closed schema 验证、冇静默嘅生产激活。
+
+设计时嘅雄心信号系：喺相同嘅语料库约束下，产出比临时人工流程更一致嘅美学判断结果。
+
+架构模式系 Aesthetic judgment pattern，
+设计时嘅层级式或多代理循环，host 保持 local_deterministic 数据专用直到通过门控。
+
+Host 质量同批评绑定方面：本地 rubric 引用系 spagent.aesthetics-agent-rubric，
+呢个系一个惰性识别符。Prompt 引用系 spagent.aesthetics-agent-prompt，
+都系惰性嘅。批评边缘系输入 spagent.aesthetics-agent-input，
+输出 spagent.aesthetics-agent-output。
+精炼限制系 1 次，如果有未解决嘅安全或激活请求就升级处理而唔系绕过治理。
+注册效果最多系 eligible_draft_representation。
+
+输入输出同接受标准方面：输入制品系本地 pack 配置、治理来源记录，
+同埋已经复制喺 sources 目录下嘅可选设计来源。输出制品系可审阅嘅数据专用 specials 代理表示，
+包括 SPEC 加 agent_spec.json，适合目录同离线审阅。
+接受条件系 fail-closed schema 验证通过、冇生产激活、
+所有主要引用喺呢个代理文件夹或 specials pack 根目录入面解析到。
+
+第四部分：范围，即系拥有乜嘢、分享乜嘢、拒绝乜嘢。
+
+拥有方面：Aesthetics Agent 系 swarm 嘅美学感知计算化身，
+放大、编码同传播人类品味到 114 个代理，有三个独立可组合功能。
+
+同同伴分享方面，即系批评表面：接受嚟自人类治理嘅批评，仲有同伴 specials，
+包括 intent、research、controller、optimization。
+有资格评论嘅范围系美学判断中嘅差距、缺失证据、不安全嘅激活、薄弱嘅交接。
+Host 批评边缘输入系 spagent.aesthetics-agent-input，
+输出系 spagent.aesthetics-agent-output。
+最大精炼次数系 1。
+
+拒绝或升级方面：保持 status draft，production_activation_requested 系 false。
+allowed_tools 必须保持空，network_access 必须保持 false，
+provider 保持 local_deterministic。
+唔会发明供应商、凭证、MCP 工具、hooks 或者第二个控制平面。
+docs/special_agents_redesign/ 下面嘅来源重新设计文档只系哈希来源，
+永远唔会作为运行时配置加载。任何关于生产激活、外部写入、凭证或网络权限嘅请求都会升级到人类治理做风险评估加审批。
+
+第五部分：几时应该用呢个代理。
+
+当你需要判断品味、风格一致性同视觉或音频质量嘅时候，就应该调用呢个能力。
+佢嘅能力家族系 Aesthetic judgment，典型上游系 Creative outputs，
+典型下游系 Creative director 加 craft agents 同 optimization。
+
+具体任务片段系：Aesthetics Agent 系 swarm 嘅美学感知计算化身，
+放大、编码同传播人类品味到 114 个代理。
+
+唔好将佢当做静默嘅生产激活器或者凭证中介用，specials 喺治理批准之前都系 data-only 加 draft 状态。
+
+决策速查表方面：如果缺失嘅技能属于 Aesthetics Agent 嘅专长，
+就应该将佢纳入该阶段嘅 swarm 图。如果只系元数据或目录编辑，
+就用 Registry inspect 加 proposal，
+唔好发明运行时。如果任务需要工具或网络，host 目前唔允许，
+除非 agent_spec 加 permission register 另有说明。
+如果有人类专属风险，例如法律、伤害、权利相关，就保留人类门控，
+代理输出只系咨询性质直到被激活。
+
+第六部分：协作地图。
+
+将呢个代理想象做一个「批评总线」上嘅节点，而唔系一个独立嘅聊天机器人。同伴精炼质量，判官同门控决定接受。
+
+入站批评嚟自人类治理同同伴 specials，包括 intent、
+research、controller、optimization。
+出站评论涵盖美学判断中嘅差距、缺失证据、不安全嘅激活、薄弱嘅交接。
+Host 边缘输入系 spagent.aesthetics-agent-input，
+输出系 spagent.aesthetics-agent-output。
+
+Specials 通道位置方面：家族系 Aesthetic judgment，
+上游系 Creative outputs，下游系 Creative director 加 craft agents 同 optimization。
+
+第七部分：佢喺生产中嘅位置。
+
+先讲人类生产工作流：佢运作喺领域手艺团队之上，涵盖规划、路由、
+检索、控制同策略。典型嘅交接制品包括计划、路线、证据包、控制决策、
+优化工单。将责任映射到经典阶段：开发、预制作、制作、后期制作、
+交付或实时运营。优先选择一个人类担任呢个职位嘅人会签字嘅阶段。
+
+多代理 AI 工作流方面：呢啲系元层节点，决定专家代理点样被选择、
+被通知同被改善。设计时嘅工具备注，对 host 无约束力：host 上面冇，
+fail-closed；redesign 文档可能历史上命名过检索或规划工具。
+
+稍后实现运行时嗰阵要模拟嘅循环风格系：Aesthetic judgment pattern，
+设计时嘅层级式或多代理循环，host 保持 local_deterministic 数据专用直到门控通过。
+喺今日嘅 CASOPS 上面，呢个模式只系文档，实际嘅 provider 系 local deterministic 加空或存根嘅工具白名单。
+
+Swarm-ready 嘅共享交接合约方面：当你将呢个代理接入未来嘅活跃 swarm 时，
+需要节点之间嘅机器可读清单。包括 artifact_id 加版本提供不可变身份做批评同重播；
+parent_assets 提供来源链；brief_scope 阻止超出责任范围；
+acceptance_criteria 关联到上面提到嘅自我质量标准；
+qc_status 加 gate flags 畀下游门控做短路；
+rights_and_consent 阻止不安全嘅合成或许可滥用；
+critique_log 指针启用精炼而唔失去历史记录。
+
+第八部分：今日点样喺 CASOPS 上面操作呢个代理。
+
+今日呢个代理系一个目录加设计对象。呢个系故意嘅：你可以研究、审阅、提议同将佢放入 swarm 设计而唔需要授予生产权力。
+
+操作步骤如下：第一步系发现，去 Registry Hub 嘅 pack catalog，
+路径系 /registry，确认佢嘅库存成员身份。第二步系检查，
+去代理详情页 /registry/agents/specials.aesthetics-agent，
+以 markdown 形式阅读 SPEC 或呢份指南。第三步系提议改善，
+用 Host 嘅 propose_improvement 动作，
+POST 到 /api/v1/commons/agents/specials.aesthetics-agent/proposals，
+确保不可变版本同只有经过编辑嘅证据。第四步系 Swarm 成员资格，
+只有通过 Host 返回嘅动作引用先可以。客户端唔可以自己发明成员资格。
+第五步系运行或调度，默认唔启用生产供应商，fail-closed 直到治理门控通过。
+
+实际操作清单方面：第一，打开代理详情确认 status、tools 同 activation flags 同呢份指南一致。
+第二，喺判断任何样本输出或提案之前先阅读第三部分「乜嘢叫做做得好」。
+第三，如果提议改变，附上离线证据例如评估笔记、rubric 差距、
+SPEC delta，唔好附秘密。第四，永远唔好将供应商 API 密钥或「启用网络」嘅指令贴入提案。
+第五，偏好细小、可审阅嘅增量：prompt 或 rubric 措辞、
+批评边缘、接受测试。
+
+第九部分：安全、信任同非激活规则。
+
+信任层级如下：agent_spec.json 系具有约束力嘅 host 合约，
+系 fail-closed 嘅运行时绑定。呢个 pack 嘅 SPEC.md 系权威性嘅设计文件，
+用于离线审阅，唔可执行。sources 下面嘅摘录同通用 SPEC 系历史或映射数据，
+属于不受信任。外部设计语料库 C:\Project\va-agent-swarm 系不受信任嘅，
+可能会漂移。Specials redesign 文档系历史设计，
+不受信任，喺来源中有哈希。
+
+呢个 host 上面嘅硬规则：Provider 保持 local_deterministic 除非有另外嘅门控改变政策。
+网络访问保持 False。允许嘅工具恰好系空列表，下面嘅设计时工具名称唔会启用 API。
+production_activation_requested 系 False。
+预算方面 token 同工具都有上限：输入 1、输出 1、工具请求 0。
+设计时工具目录系非激活嘅：host 上面冇，fail-closed；
+redesign 文档可能历史上命名过检索或规划工具。
+
+第十部分：随时间提升质量。
+
+改善系有版本嘅目录工作，唔系热补丁一个活跃代理。已发布嘅定义保持不可变，改变要通过提案同审阅。
+
+持续改善循环系：观察失败，命名标准（来自第三部分），起草离线增量，
+附上证据，喺 Host 上提议，审阅或接受新版本，然后先考虑激活成熟度门控。
+
+具体杠杆方面：第一，Rubric 保真度，将 spagent.aesthetics-agent-rubric 针对以下标准收紧：
+美学判断嘅可追溯输出、fail-closed schema 验证、
+冇静默生产激活。第二，Prompt 精确度，将 spagent.aesthetics-agent-prompt 同责任对齐：
+Aesthetics Agent 系 swarm 嘅美学感知计算化身，
+放大、编码同传播品味到 114 个代理，有三个可组合功能。第三，
+批评图，确保入站嘅人类治理同同伴 specials 以及 host 边缘 spagent.aesthetics-agent-input 真正捕捉到已知嘅失败模式。
+第四，架构模拟，稍后实现时偏好：Aesthetic judgment pattern，
+设计时层级式或多代理循环，host 保持 local_deterministic 数据专用直到门控。
+第五，评估案例，编写固定嘅测试 fixtures，如果「比临时人工流程产出更一致嘅美学判断结果」呢个目标冇接近到就会失败。
+第六，人类门控，保持法律、安全、发布门控明确，唔好将佢哋吸收到静默自动化入面。
+
+建议嘅评估种子方面：Happy path handoff 嘅通过条件系输出满足美学判断嘅可追溯输出、
+fail-closed schema 验证、冇静默生产激活。Out-of-scope request 嘅条件系代理按照第四部分拒绝或升级。
+Missing provenance 或 rights 嘅条件系门控 fail closed。
+Conflicting peer critique 嘅条件系精炼次数小于等于 max_refinement_count，
+否则升级。Proposal-only change 嘅条件系新版本不可变，
+旧版本仍然可读。
+
+第十一部分：来源地图同来源追溯。
+
+本地 pack 语料库方面，优先使用呢啲：agent_spec.json 信任层级系 binding，
+SPEC.md 系 authoritative-design，
+README.md 系 local-index，sources/MAPPING.md 系 provenance，
+sources/PROVENANCE.json 都系 provenance。
+
+映射备注：specials.aesthetics-agent 嘅映射状态系 related，
+即系从 specials redesign 文档到 pack 代理。
+设计来源历史路径系 docs/special_agents_redesign/agents/aesthetics_agent.md。
+来源 SHA-256 系 7d5b36b2dbc4e70664e9213d5a89d057935e54a1c3f6ab8cbb639fee5ab0f8d1。
+本地运行时系 agent_spec.json，本地规格系 SPEC.md。
+Pack 语料库唔需要。生产激活系被拒绝嘅，只系 draft。
+
+来源记录方面：schema_version 系 1.0，common_agent_id 系 specials.aesthetics-agent，
+pack_id 系 specials，映射状态 related，
+来源文档系 docs/special_agents_redesign/agents/aesthetics_agent.md，
+来源 SHA-256 如上所述，配置 SHA-256 系 0a6ec24af4f79a6640f921c7aeb020dbe9d4e01783b36a47ae14f1ac5034da7c，
+目标 commit 系 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+备注话系自包含嘅 specials agent 文件夹，pack 级别嘅语料库唔需要，
+设计 Markdown 只系不受信任嘅来源。生成时间系 2026-07-26T14:16:45.905948Z，
+由 specials-self-contained-reviewer 审阅，
+审阅时间系 2026-07-26T18:00:00Z。
+
+来源叙述方面：设计来源路径历史系 docs/special_agents_redesign/agents/aesthetics_agent.md，
+设计来源 SHA-256 喺生成时系上面提到嘅数值。由 specials-self-contained-reviewer 喺 2026-07-26T18:00:00Z 审阅。
+上游设计文本系不受信任嘅参考数据。本地 agent_spec.json 同 SPEC 保持系 host 嘅操作性自包含定义。
+
+第十二部分：相关设计阅读。
+
+呢啲系用嚟加深设计保真度嘅，佢哋唔会覆盖本地 agent_spec.json。
+
+喺 C:\Project\va-agent-swarm 下面嘅文件方面：
+有一份 study/aesthetics_agent_functional_specification.md，
+呢个系 Aesthetics Agent 嘅综合功能规格，系一个有状态嘅多模态评估同对齐服务，
+用于操作化模拟嘅美学直觉。仲有一份粤语版本 aesthetics_agent_functional_specification_hk.md。
+
+Specials redesign 文档方面，历史设计来源系 C:/Project/common-agent-swarm-ops/docs/special_agents_redesign/agents/aesthetics_agent.md。
+大纲包括：Executive Summary、Background 从 Artiste Sense 到 Computational Aesthetics、
+The Deep Rethink 五个重构、Formal Aesthetic Model、
+Architecture。
+
+重点讲吓 redesign 文档嘅内容：Aesthetics Agent 系 swarm 嘅美学感知计算化身。
+佢唔系取代人类品味，而系放大、编码同传播品味到 114 个代理。
+佢有三个功能：第一系 The Critic 即感知功能，系一个多模态多头评估器，
+针对分解嘅美学评分准则评分任何视觉制品。第二系 The Aligner 即精炼功能，
+系一个偏好同奖励服务，将 Critic 嘅判断转化为可操作嘅反馈同训练信号。
+第三系 The Taste-Keeper 即个性化功能，系一个品味档案存储，
+捕捉边个嘅美学管治一个项目。
+
+本地知识索引方面：Runtime binding 指向 agent_spec.json，
+系权威嘅 fail-closed specials 合约。Folder index 指向 README.md，
+系呢个代理嘅离线布局。Provenance 指向 sources/PROVENANCE.json，
+用于审计嘅哈希同来源映射。Mapping note 指向 sources/MAPPING.md，
+系设计文档关系嘅历史记录。Pack manifest 指向 manifest.json，
+系 specials 目录条目。Governance source-record 如果存在的话指向 specials.aesthetics-agent.json。
+所有离线使用所需嘅主要引用都系本地嘅，外部路径只作为非必需嘅历史来源出现。
+
+Folder README 摘要：呢个系一个自包含嘅 draft specials agent，
+用于 host common-agent-swarm-ops。
+文件包括 SPEC.md 做完整离线角色定义、agent_spec.json 做 host 运行时绑定（draft，
+fail-closed）、sources 目录做来源追溯同映射备注做审计、
+prompts 目录做可选 prompt 存根、rubrics 目录做可选 rubric 存根。
+单独打开呢个文件夹就得，唔需要外部 repo 或 pack corpus。
+呢个代理唔系 production-active。
+
+第十三部分：附录，host 合约 agent_spec.json。
+
+呢个系呢个代理喺 CASOPS 上面嘅权威 fail-closed 配置：
+schema_version 系 1.0，agent_id 系 specials.aesthetics-agent，
+status 系 draft，role 系 Special_Agent data-only configuration，
+allowed_tools 系空列表。Model policy 方面 provider 系 local_deterministic，
+model_id 系 specials-local-deterministic-v1，
+network_access 系 false。Budget policy 方面 max_input_tokens 系 1，
+max_output_tokens 系 1，max_tool_requests 系 0。
+prompt_reference 系 spagent.aesthetics-agent-prompt，
+rubric_reference 系 spagent.aesthetics-agent-rubric。
+Critique edges 嘅 inputs 系 spagent.aesthetics-agent-input，
+outputs 系 spagent.aesthetics-agent-output。
+max_refinement_count 系 1，production_activation_requested 系 false。
+
+第十四部分：附录，SPEC 责任摘录。
+
+呢个代理拥有 specials-domain aesthetics agent 设计成果嘅 draft、
+data-only 代理表示。Host 角色字串系 Special_Agent data-only configuration。
+呢个系用于构建 Aesthetics Agent 嘅最终生产级规格，
+系一个有状态嘅多模态评估同对齐服务，将模拟嘅 artiste sense 操作化为整个 VA-Agent-Swarm 服务。
+佢将「教 AI 艺术感知」从单一图像评分器重新构建为一个共享嘅美学神经系统，
+系每个生成代理都会咨询嘅评审、每个微调循环都信任嘅奖励信号，同埋一个将导演、
+品牌或艺术家嘅品味贯穿整条生产线嘅个性化引擎。
+
+第十五部分：文档控制。
+
+生成器系 scripts/business/generate_agent_user_guides.py。
+Agent 文件夹系 business/specials/agents/specials.aesthetics-agent/。
+输出系 docs/user_guide.md。VA 语料库根目录系 C:\Project\va-agent-swarm。
+重新生成命令系 python scripts/business/generate_agent_user_guides.py。
+信任模型系设计语料库等于不受信任数据，host 配置等于 fail-closed。
+
+好啦，以上就系 Aesthetics Agent 嘅完整操作同设计指南。
+建议大家从第一部分 Snapshot 同第五部分 When to involve 开始睇，
+用第八到第十部分做 CASOPS 操作同改善，用第十一到第十二部分做深度设计保真度。
+多谢大家收睇，我哋下条片再见。

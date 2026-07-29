@@ -1,0 +1,272 @@
+各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 Intent Analysis Agent，
+即系意图分析代理嘅操作同设计指南。
+
+首先呢份指南写畀喺 common-agent-swarm-ops 工作嘅操作员、
+pack 作者、swarm 设计师同审查人员。你会得到任务清晰度、
+用法指引、协作图、CASOPS 步骤、改善路径同信任来源地图。
+
+呢份文件唔系激活供应商、开放网络或发明工具嘅许可证。Host 真相系 fail-closed agent_spec.json。
+设计文本不受信任。
+
+Pack 路径 business/specials/agents/specials.intent-analysis-agent/，
+指南 docs/user_guide.md。
+
+第一部分：Snapshot。
+
+Intent Analysis Agent，代号 specials.intent-analysis-agent，
+系 Specials pack 能力喺 CASOPS 上。简单讲：
+Deep Intent Analysis Framework 即 DIA v2.0 系一个完整、
+生产就绪、模块化嘅系统，用于系统性解码任何文本嘅目的、隐藏议程、
+多角度视角、言语行为力量同伦理或行为质量。
+
+基本资料：显示名 Intent Analysis Agent，
+Pack agent id specials.intent-analysis-agent，
+specials pack。目录状态 draft，成熟度 L0 非激活。
+供应商 local_deterministic，网络 False，
+工具空，生产激活 False。Prompt 同 rubric 引用 spagent.intent-analysis-agent-prompt 同 spagent.intent-analysis-agent-rubric。
+
+第二部分：点解存在。
+
+Specials 代理捕捉跨领域认知技能。呢个角色：DIA v2.0 系完整系统用于解码文本目的、
+隐藏议程、多角度视角、言语行为力量同伦理质量。
+
+第三部分：做得好标准。
+
+主要成果：DIA v2.0 完整生产就绪模块化系统做意图解码。
+
+自我质量标准：intent understanding 嘅可追溯输出、
+fail-closed schema 验证、冇静默生产激活。
+
+设计时雄心：产出比临时人工更一致嘅意图理解结果。
+
+架构模式：Intent understanding pattern，
+设计时层级或多代理循环，host local_deterministic 数据专用直到门控。
+
+Host 批评绑定：rubric spagent.intent-analysis-agent-rubric 惰性。
+Prompt 同名惰性。边缘输入 spagent.intent-analysis-agent-input 输出 spagent.intent-analysis-agent-output。
+精炼 1。
+
+输入输出接受：本地配置、治理记录、sources 来源。输出可审阅 data-only 表示。
+接受 fail-closed 通过、冇激活、引用本地。
+
+第四部分：范围。
+
+拥有：DIA v2.0 系统性解码意图同质量。
+
+分享：接受人类治理同同伴 specials 批评。评论 intent understanding 差距、
+缺失证据、不安全激活、薄弱交接。边缘如上。最大精炼 1。
+
+拒绝升级：status draft，activation false。
+tools 空 network false。唔发明任何嘢。redesign 哈希来源。
+请求升级人类治理。
+
+第五部分：几时用。
+
+当用户目标模糊需要喺规划前澄清嗰阵调用。能力家族 Intent understanding。
+典型上游 Raw user requests 或 product briefs。
+典型下游 Planner、research、knowledge router。
+
+具体任务：DIA v2.0 系统性解码文本意图。
+
+唔好当做静默激活器或凭证中介。
+
+决策速查：技能属于本代理专长纳入 swarm 图。元数据用 Registry。工具网络唔允许。人类风险保留门控。
+
+第六部分：协作地图。
+
+批评总线节点。入站人类治理同同伴 specials。出站 intent understanding 差距、
+缺失证据、不安全激活、薄弱交接。
+
+Specials 通道：家族 Intent understanding，
+上游 Raw user requests 或 product briefs，
+下游 Planner、research、knowledge router。
+
+第七部分：生产位置。
+
+人类工作流：领域手艺团队之上。交接制品计划、路线、证据包、控制决策、优化工单。
+
+多代理 AI 工作流：元层节点。设计时工具 host 冇 fail-closed。
+运行时 Intent understanding pattern host local_deterministic 直到门控。
+今日只文档。
+
+Swarm-ready 合约：artifact_id 版本、parent_assets、
+brief_scope、acceptance_criteria、
+qc_status gate flags、rights_and_consent、
+critique_log。
+
+第八部分：CASOPS 操作。
+
+目录加设计对象。步骤：发现 /registry。检查 /registry/agents/specials.intent-analysis-agent。
+提议 POST proposals。Swarm 成员 Host 引用。
+运行默认唔启用。
+
+实际清单：确认 flags。读第三部分。附证据。唔贴密钥。细小增量。
+
+第九部分：安全信任非激活。
+
+信任层级：agent_spec.json binding。SPEC.md 权威设计。
+sources 不受信任。外部语料库不受信任。redesign 历史有哈希。
+
+硬规则：provider local_deterministic。
+网络 False。工具空。activation False。预算 1/1/0。
+设计时工具非激活。
+
+第十部分：提升质量。
+
+有版本目录工作。循环：观察、命名、起草、附证据、提议、审阅、门控。
+
+杠杆：rubric 收紧针对 intent understanding 输出。
+prompt 对齐 DIA v2.0 责任。批评图捕捉失败。架构模拟 Intent understanding pattern。
+评估案例。人类门控。
+
+评估种子：Happy path 满足。Out-of-scope 拒绝。
+Missing provenance fail closed。
+Conflicting critique 限制。Proposal-only 不可变。
+
+第十一部分：来源地图。
+
+本地优先：agent_spec.json binding，SPEC.md authoritative-design，
+README.md local-index，MAPPING.md provenance，
+PROVENANCE.json provenance。
+
+映射：specials.intent-analysis-agent 状态 related。
+历史来源 docs/special_agents_redesign/agents/intent_analysis_agent.md。
+SHA-256 f0c895b3438bfe511c44876f2ceeb8126d09e9114fa094d0e19f0e1d955d5bf7。
+本地运行时 agent_spec.json。Pack 语料库唔需要。
+
+来源记录：schema_version 1.0，common_agent_id specials.intent-analysis-agent，
+pack_id specials，映射 related。配置 SHA-256 9ccb51486c62d7bbc54442a37e9a1cf69dc1648a376f01d3aeb4aa7e8114e8c6，
+目标 commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+生成 2026-07-26T14:16:45.942257Z，
+审阅 2026-07-26T18:00:00Z。
+
+第十二部分：相关设计阅读。
+
+唔覆盖 agent_spec.json。
+
+va-agent-swarm 下：intent_analysis_agent_functional_specification.md 系 DIA v2.0 综合功能规格，
+Research-Enhanced 版。仲有粤语版本。
+
+Specials redesign 文档大纲：Executive Summary、
+Background Motivation Research Foundation、
+System Architecture、Detailed Functional Requirements 6 Phases v2.0 Enhanced、
+Data Models Output Schema JSON、
+Non-Functional Requirements、Implementation Roadmap、
+Evaluation Framework、Limitations Future Work、
+References。
+
+核心内容好详尽。DIA v2.0 系完整生产就绪模块化系统，解码任何文本嘅目的、
+隐藏议程、多角度视角、illocutionary force 同伦理行为质量。
+
+佢将原始 6 阶段手动或 LLM 提示管道转化为完全规格化嘅 agentic 可评估软件系统，
+构建喺 xAI Grok-4.3 或最新版上面，有原生工具使用、
+百万 token 以上上下文、结构化输出同低幻觉推理。
+
+核心目标：回答点解呢段语言存在、真正目标系乜嘢、隐藏咗乜嘢、有几多角度、
+行为系好定错定有效。达到人类专家级嘅语用推理规模化。支持手动使用、
+API、web app、IDE 插件同企业分析。
+
+v2.0 关键改进：Pragmatic Inference Chain 即 PIC 整合用于优秀嘅隐含同隐藏议程检测。
+Multi-Perspective Agent Simulation 受多方对话代理调研启发做更丰富嘅角度映射。
+Gricean 加扩展准则包括 AI 上下文嘅 Benevolence 同 Transparency。
+自动 Speech Act 或 Dialog Act Classification 用最新分类法同 LLM 判官。
+混合评估管道自动指标加人在回路。原生 xAI 整合 Grok-4.3 推理模式、
+工具调用、实时搜索做上下文验证。
+
+目标用户：记者、分析师、研究者、教育者、内容审核者、法律团队、AI 安全工程师同想要「看穿」语言嘅高级用户。
+
+系统架构方面系模块化 agentic 设计：Phase 0 Context Analyzer Agent、
+Phase 1 Purpose Classifier 用 Jakobson 加 LLM、
+Phase 2 Surface Literal Parser、
+Phase 3 Pragmatic Engine 包括 Speech Acts 加 PIC 加 Grice Maxim Detector、
+Phase 4 Hidden Agenda and Multi-Angle Dissector 用 Multi-Agent ToM Simulation、
+Phase 5 Judgment Engine 多标准评分加伦理审计、
+Phase 6 Synthesizer and Action Recommender。
+最终输出结构化 JSON 加人类可读报告。
+
+研究基础方面整合 2025-2026 arXiv 研究：Pragmatics in Era of LLMs Survey 涵盖 speech acts 同 implicature 数据集。
+PIC 4 步 relevance-theory 提示显着改善隐含毒性检测。
+Multi-Party Conversational Agents Survey 提供 State-of-Mind taxonomy。
+Gricean Maxims in NLP 扩展 Grice 加 Benevolence 同 Transparency。
+xAI Grok Research 系理想骨干因为 agentic tool use 同低幻觉。
+
+本地知识索引同 Folder README 标准结构。
+
+第十三部分：host 合约。
+
+权威配置标准：agent_id specials.intent-analysis-agent，
+其余同其他 specials 代理一致。
+
+第十四部分：SPEC 责任摘录。
+
+拥有 intent analysis agent 设计成果作为 draft data-only 表示。
+DIA v2.0 系完整系统解码文本目的同质量。转化 6 阶段管道为 agentic 可评估系统。
+核心目标回答语言存在原因、真正目标、隐藏内容、角度数量同行为有效性。
+
+第十五部分：文档控制。
+
+标准配置同其他代理一致。
+
+好啦，以上就系 Intent Analysis Agent 嘅完整指南。
+DIA v2.0 系一个好强大嘅意图分析框架，6 个阶段系统性解码语言背后嘅真正意图。
+多谢收睇，下条片见。
+
+我再详细补充 DIA v2.0 嘅六个阶段。
+Phase 0 系 Context Analyzer Agent。
+喺正式分析之前先理解文本嘅上下文。
+包括来源、受众、时间背景、文化环境等。
+呢啲上下文信息会影响后续所有阶段嘅分析。
+Phase 1 系 Purpose Classifier。
+用 Jakobson 嘅语言功能模型加 LLM 判断文本嘅主要目的。
+Jakobson 识别六种语言功能：
+指涉、表达、意动、交际、元语言同诗学。
+每段文本通常有多个功能同时存在，
+但有一个主导功能。
+Phase 2 系 Surface Literal Parser。
+用 NLP 加 LLM 解析文本嘅表面字面意义。
+呢个系基础层，后续嘅深层分析建立喺呢个之上。
+识别命题内容、语法结构同词汇选择。
+Phase 3 系 Pragmatic Engine，呢个系核心。
+包含 Speech Acts 分析识别言语行为类型。
+例如断言、指令、承诺、表达同宣告。
+PIC 即 Pragmatic Inference Chain 做四步推理。
+第一步识别字面意义。
+第二步识别隐喻同比喻语言。
+第三步检测规范违反。
+第四步做出判断。
+Grice Maxim Detector 检测 Grice 准则嘅违反。
+量嘅准则、质嘅准则、关联准则同方式准则。
+违反通常暗示隐含意义或故意误导。
+v2.0 扩展加入 Benevolence 同 Transparency 准则用于 AI 上下文。
+Phase 4 系 Hidden Agenda and Multi-Angle Dissector。
+用 Multi-Agent Theory of Mind Simulation。
+模拟多个利益相关方嘅视角，
+揭示隐藏嘅议程同多角度解读。
+呢个受多方对话代理调研嘅 State-of-Mind taxonomy 启发。
+包括情感、参与度、Big-Five 人格、对话行为分析。
+Theory of Mind 建模用于理解唔同参与者嘅心理状态。
+Phase 5 系 Judgment Engine。
+多标准评分器评估文本嘅质量同意图。
+Ethical Auditor 检查伦理问题。
+唔只系判断好唔好，
+而系从多个维度系统性评估。
+Phase 6 系 Synthesizer and Action Recommender。
+综合前面所有阶段嘅分析结果，
+产出结构化 JSON 输出加人类可读报告。
+仲会推荐后续行动。
+整个系统构建喺 xAI Grok-4.3 上面。
+利用原生工具使用能力做实时搜索同验证。
+百万 token 以上嘅上下文窗口处理长文本。
+结构化输出确保结果可程序化处理。
+低幻觉推理确保分析嘅可靠性。
+目标用户好广泛：
+记者用嚟分析政治言论同新闻报道嘅隐含意义。
+分析师用嚟解读商业沟通同市场信号。
+研究者用嚟系统性分析话语数据。
+教育者用嚟教学生批判性思维。
+内容审核者用嚟识别隐含嘅有害内容。
+法律团队用嚟分析合同同证词。
+AI 安全工程师用嚟检测 AI 输出中嘅问题。
+高级用户用嚟「看穿」日常沟通中嘅真正意图。
+呢个框架嘅强大之处在于系统性同可重复性。
+唔系凭直觉判断，而系有明确步骤嘅分析过程。

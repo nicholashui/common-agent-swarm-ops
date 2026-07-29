@@ -551,7 +551,13 @@ export function RegistryHome({
         </aside>
       </div>
 
-      <SpecialsCatalog view={view.specials} />
+      <SpecialsCatalog
+        activeFacets={activeFacets}
+        domainFacets={view.domainFacets}
+        onSearchChange={setSearch}
+        search={search}
+        view={view.specials}
+      />
 
       <p className="registry-home__footer">{view.footerNote}</p>
     </section>

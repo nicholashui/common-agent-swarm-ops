@@ -38,6 +38,7 @@ export interface PackAgentRecord {
   readonly hasSources: boolean;
   readonly specDocPath: string | null;
   readonly readmeDocPath: string | null;
+  readonly userGuideDocPath: string | null;
 }
 
 export const PACK_AGENT_COUNTS = {
@@ -136,7 +137,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.accessibility/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.accessibility/README.md"
+    "readmeDocPath": "/docs/agents/video.accessibility/README.md",
+    "userGuideDocPath": "/docs/agents/video.accessibility/user_guide.md"
   },
   {
     "id": "video.accessibilityoptimizer",
@@ -227,7 +229,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.accessibilityoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.accessibilityoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.accessibilityoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.accessibilityoptimizer/user_guide.md"
   },
   {
     "id": "video.aiqaconsistency",
@@ -318,7 +321,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.aiqaconsistency/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.aiqaconsistency/README.md"
+    "readmeDocPath": "/docs/agents/video.aiqaconsistency/README.md",
+    "userGuideDocPath": "/docs/agents/video.aiqaconsistency/user_guide.md"
   },
   {
     "id": "video.analyst",
@@ -409,7 +413,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.analyst/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.analyst/README.md"
+    "readmeDocPath": "/docs/agents/video.analyst/README.md",
+    "userGuideDocPath": "/docs/agents/video.analyst/user_guide.md"
   },
   {
     "id": "video.animator_2d",
@@ -503,7 +508,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.animator_2d/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.animator_2d/README.md"
+    "readmeDocPath": "/docs/agents/video.animator_2d/README.md",
+    "userGuideDocPath": "/docs/agents/video.animator_2d/user_guide.md"
   },
   {
     "id": "video.archivemaster",
@@ -594,7 +600,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.archivemaster/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.archivemaster/README.md"
+    "readmeDocPath": "/docs/agents/video.archivemaster/README.md",
+    "userGuideDocPath": "/docs/agents/video.archivemaster/user_guide.md"
   },
   {
     "id": "video.archiveproducer",
@@ -690,7 +697,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.archiveproducer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.archiveproducer/README.md"
+    "readmeDocPath": "/docs/agents/video.archiveproducer/README.md",
+    "userGuideDocPath": "/docs/agents/video.archiveproducer/user_guide.md"
   },
   {
     "id": "video.archiveresearch",
@@ -781,7 +789,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.archiveresearch/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.archiveresearch/README.md"
+    "readmeDocPath": "/docs/agents/video.archiveresearch/README.md",
+    "userGuideDocPath": "/docs/agents/video.archiveresearch/user_guide.md"
   },
   {
     "id": "video.audiencesim",
@@ -872,7 +881,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.audiencesim/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.audiencesim/README.md"
+    "readmeDocPath": "/docs/agents/video.audiencesim/README.md",
+    "userGuideDocPath": "/docs/agents/video.audiencesim/user_guide.md"
   },
   {
     "id": "video.audiobooknarrator",
@@ -966,7 +976,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.audiobooknarrator/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.audiobooknarrator/README.md"
+    "readmeDocPath": "/docs/agents/video.audiobooknarrator/README.md",
+    "userGuideDocPath": "/docs/agents/video.audiobooknarrator/user_guide.md"
   },
   {
     "id": "video.avatardesign",
@@ -1057,7 +1068,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.avatardesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.avatardesign/README.md"
+    "readmeDocPath": "/docs/agents/video.avatardesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.avatardesign/user_guide.md"
   },
   {
     "id": "video.awardsstrategist",
@@ -1148,7 +1160,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.awardsstrategist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.awardsstrategist/README.md"
+    "readmeDocPath": "/docs/agents/video.awardsstrategist/README.md",
+    "userGuideDocPath": "/docs/agents/video.awardsstrategist/user_guide.md"
   },
   {
     "id": "video.benchmarkresearch",
@@ -1239,7 +1252,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.benchmarkresearch/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.benchmarkresearch/README.md"
+    "readmeDocPath": "/docs/agents/video.benchmarkresearch/README.md",
+    "userGuideDocPath": "/docs/agents/video.benchmarkresearch/user_guide.md"
   },
   {
     "id": "video.brand",
@@ -1330,7 +1344,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.brand/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.brand/README.md"
+    "readmeDocPath": "/docs/agents/video.brand/README.md",
+    "userGuideDocPath": "/docs/agents/video.brand/user_guide.md"
   },
   {
     "id": "video.brandstrategist",
@@ -1421,7 +1436,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.brandstrategist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.brandstrategist/README.md"
+    "readmeDocPath": "/docs/agents/video.brandstrategist/README.md",
+    "userGuideDocPath": "/docs/agents/video.brandstrategist/user_guide.md"
   },
   {
     "id": "video.cameraoperator",
@@ -1512,7 +1528,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.cameraoperator/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.cameraoperator/README.md"
+    "readmeDocPath": "/docs/agents/video.cameraoperator/README.md",
+    "userGuideDocPath": "/docs/agents/video.cameraoperator/user_guide.md"
   },
   {
     "id": "video.casting",
@@ -1603,7 +1620,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.casting/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.casting/README.md"
+    "readmeDocPath": "/docs/agents/video.casting/README.md",
+    "userGuideDocPath": "/docs/agents/video.casting/user_guide.md"
   },
   {
     "id": "video.channelmanager",
@@ -1694,7 +1712,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.channelmanager/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.channelmanager/README.md"
+    "readmeDocPath": "/docs/agents/video.channelmanager/README.md",
+    "userGuideDocPath": "/docs/agents/video.channelmanager/user_guide.md"
   },
   {
     "id": "video.childrensauthor",
@@ -1785,7 +1804,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.childrensauthor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.childrensauthor/README.md"
+    "readmeDocPath": "/docs/agents/video.childrensauthor/README.md",
+    "userGuideDocPath": "/docs/agents/video.childrensauthor/user_guide.md"
   },
   {
     "id": "video.choreography",
@@ -1876,7 +1896,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.choreography/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.choreography/README.md"
+    "readmeDocPath": "/docs/agents/video.choreography/README.md",
+    "userGuideDocPath": "/docs/agents/video.choreography/user_guide.md"
   },
   {
     "id": "video.cinematographer",
@@ -1967,7 +1988,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.cinematographer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.cinematographer/README.md"
+    "readmeDocPath": "/docs/agents/video.cinematographer/README.md",
+    "userGuideDocPath": "/docs/agents/video.cinematographer/user_guide.md"
   },
   {
     "id": "video.citation",
@@ -2058,7 +2080,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.citation/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.citation/README.md"
+    "readmeDocPath": "/docs/agents/video.citation/README.md",
+    "userGuideDocPath": "/docs/agents/video.citation/user_guide.md"
   },
   {
     "id": "video.colorist",
@@ -2149,7 +2172,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.colorist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.colorist/README.md"
+    "readmeDocPath": "/docs/agents/video.colorist/README.md",
+    "userGuideDocPath": "/docs/agents/video.colorist/user_guide.md"
   },
   {
     "id": "video.comedywriter",
@@ -2240,7 +2264,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.comedywriter/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.comedywriter/README.md"
+    "readmeDocPath": "/docs/agents/video.comedywriter/README.md",
+    "userGuideDocPath": "/docs/agents/video.comedywriter/user_guide.md"
   },
   {
     "id": "video.comms",
@@ -2331,7 +2356,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.comms/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.comms/README.md"
+    "readmeDocPath": "/docs/agents/video.comms/README.md",
+    "userGuideDocPath": "/docs/agents/video.comms/user_guide.md"
   },
   {
     "id": "video.community",
@@ -2422,7 +2448,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.community/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.community/README.md"
+    "readmeDocPath": "/docs/agents/video.community/README.md",
+    "userGuideDocPath": "/docs/agents/video.community/user_guide.md"
   },
   {
     "id": "video.competitorintelligence",
@@ -2513,7 +2540,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.competitorintelligence/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.competitorintelligence/README.md"
+    "readmeDocPath": "/docs/agents/video.competitorintelligence/README.md",
+    "userGuideDocPath": "/docs/agents/video.competitorintelligence/user_guide.md"
   },
   {
     "id": "video.compliance",
@@ -2604,7 +2632,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.compliance/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.compliance/README.md"
+    "readmeDocPath": "/docs/agents/video.compliance/README.md",
+    "userGuideDocPath": "/docs/agents/video.compliance/user_guide.md"
   },
   {
     "id": "video.composer",
@@ -2695,7 +2724,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.composer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.composer/README.md"
+    "readmeDocPath": "/docs/agents/video.composer/README.md",
+    "userGuideDocPath": "/docs/agents/video.composer/user_guide.md"
   },
   {
     "id": "video.conceptartist",
@@ -2786,7 +2816,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.conceptartist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.conceptartist/README.md"
+    "readmeDocPath": "/docs/agents/video.conceptartist/README.md",
+    "userGuideDocPath": "/docs/agents/video.conceptartist/user_guide.md"
   },
   {
     "id": "video.continuity",
@@ -2877,7 +2908,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.continuity/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.continuity/README.md"
+    "readmeDocPath": "/docs/agents/video.continuity/README.md",
+    "userGuideDocPath": "/docs/agents/video.continuity/user_guide.md"
   },
   {
     "id": "video.copywriter",
@@ -2968,7 +3000,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.copywriter/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.copywriter/README.md"
+    "readmeDocPath": "/docs/agents/video.copywriter/README.md",
+    "userGuideDocPath": "/docs/agents/video.copywriter/user_guide.md"
   },
   {
     "id": "video.corrections",
@@ -3059,7 +3092,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.corrections/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.corrections/README.md"
+    "readmeDocPath": "/docs/agents/video.corrections/README.md",
+    "userGuideDocPath": "/docs/agents/video.corrections/user_guide.md"
   },
   {
     "id": "video.costoptimizer",
@@ -3150,7 +3184,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.costoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.costoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.costoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.costoptimizer/user_guide.md"
   },
   {
     "id": "video.costumedesign",
@@ -3241,7 +3276,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.costumedesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.costumedesign/README.md"
+    "readmeDocPath": "/docs/agents/video.costumedesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.costumedesign/user_guide.md"
   },
   {
     "id": "video.creativedirector",
@@ -3337,7 +3373,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.creativedirector/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.creativedirector/README.md"
+    "readmeDocPath": "/docs/agents/video.creativedirector/README.md",
+    "userGuideDocPath": "/docs/agents/video.creativedirector/user_guide.md"
   },
   {
     "id": "video.critic",
@@ -3428,7 +3465,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.critic/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.critic/README.md"
+    "readmeDocPath": "/docs/agents/video.critic/README.md",
+    "userGuideDocPath": "/docs/agents/video.critic/user_guide.md"
   },
   {
     "id": "video.crm",
@@ -3519,7 +3557,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.crm/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.crm/README.md"
+    "readmeDocPath": "/docs/agents/video.crm/README.md",
+    "userGuideDocPath": "/docs/agents/video.crm/user_guide.md"
   },
   {
     "id": "video.deepfakedetection",
@@ -3610,7 +3649,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.deepfakedetection/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.deepfakedetection/README.md"
+    "readmeDocPath": "/docs/agents/video.deepfakedetection/README.md",
+    "userGuideDocPath": "/docs/agents/video.deepfakedetection/user_guide.md"
   },
   {
     "id": "video.director",
@@ -3701,7 +3741,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.director/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.director/README.md"
+    "readmeDocPath": "/docs/agents/video.director/README.md",
+    "userGuideDocPath": "/docs/agents/video.director/user_guide.md"
   },
   {
     "id": "video.distributor",
@@ -3792,7 +3833,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.distributor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.distributor/README.md"
+    "readmeDocPath": "/docs/agents/video.distributor/README.md",
+    "userGuideDocPath": "/docs/agents/video.distributor/user_guide.md"
   },
   {
     "id": "video.dronepilot",
@@ -3883,7 +3925,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.dronepilot/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.dronepilot/README.md"
+    "readmeDocPath": "/docs/agents/video.dronepilot/README.md",
+    "userGuideDocPath": "/docs/agents/video.dronepilot/user_guide.md"
   },
   {
     "id": "video.editor",
@@ -3977,7 +4020,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.editor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.editor/README.md"
+    "readmeDocPath": "/docs/agents/video.editor/README.md",
+    "userGuideDocPath": "/docs/agents/video.editor/user_guide.md"
   },
   {
     "id": "video.emotionalarc",
@@ -4068,7 +4112,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.emotionalarc/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.emotionalarc/README.md"
+    "readmeDocPath": "/docs/agents/video.emotionalarc/README.md",
+    "userGuideDocPath": "/docs/agents/video.emotionalarc/user_guide.md"
   },
   {
     "id": "video.ethics",
@@ -4159,7 +4204,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.ethics/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.ethics/README.md"
+    "readmeDocPath": "/docs/agents/video.ethics/README.md",
+    "userGuideDocPath": "/docs/agents/video.ethics/user_guide.md"
   },
   {
     "id": "video.evaluationharness",
@@ -4250,7 +4296,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.evaluationharness/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.evaluationharness/README.md"
+    "readmeDocPath": "/docs/agents/video.evaluationharness/README.md",
+    "userGuideDocPath": "/docs/agents/video.evaluationharness/user_guide.md"
   },
   {
     "id": "video.factchecker",
@@ -4341,7 +4388,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.factchecker/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.factchecker/README.md"
+    "readmeDocPath": "/docs/agents/video.factchecker/README.md",
+    "userGuideDocPath": "/docs/agents/video.factchecker/user_guide.md"
   },
   {
     "id": "video.festivalstrategist",
@@ -4432,7 +4480,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.festivalstrategist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.festivalstrategist/README.md"
+    "readmeDocPath": "/docs/agents/video.festivalstrategist/README.md",
+    "userGuideDocPath": "/docs/agents/video.festivalstrategist/user_guide.md"
   },
   {
     "id": "video.finance",
@@ -4523,7 +4572,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.finance/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.finance/README.md"
+    "readmeDocPath": "/docs/agents/video.finance/README.md",
+    "userGuideDocPath": "/docs/agents/video.finance/user_guide.md"
   },
   {
     "id": "video.foodstylist",
@@ -4614,7 +4664,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.foodstylist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.foodstylist/README.md"
+    "readmeDocPath": "/docs/agents/video.foodstylist/README.md",
+    "userGuideDocPath": "/docs/agents/video.foodstylist/user_guide.md"
   },
   {
     "id": "video.gatekeeper",
@@ -4705,7 +4756,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.gatekeeper/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.gatekeeper/README.md"
+    "readmeDocPath": "/docs/agents/video.gatekeeper/README.md",
+    "userGuideDocPath": "/docs/agents/video.gatekeeper/user_guide.md"
   },
   {
     "id": "video.ideation",
@@ -4796,7 +4848,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.ideation/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.ideation/README.md"
+    "readmeDocPath": "/docs/agents/video.ideation/README.md",
+    "userGuideDocPath": "/docs/agents/video.ideation/user_guide.md"
   },
   {
     "id": "video.instructionaldesign",
@@ -4887,7 +4940,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.instructionaldesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.instructionaldesign/README.md"
+    "readmeDocPath": "/docs/agents/video.instructionaldesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.instructionaldesign/user_guide.md"
   },
   {
     "id": "video.interviewsynthesis",
@@ -4978,7 +5032,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.interviewsynthesis/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.interviewsynthesis/README.md"
+    "readmeDocPath": "/docs/agents/video.interviewsynthesis/README.md",
+    "userGuideDocPath": "/docs/agents/video.interviewsynthesis/user_guide.md"
   },
   {
     "id": "video.journalist",
@@ -5069,7 +5124,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.journalist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.journalist/README.md"
+    "readmeDocPath": "/docs/agents/video.journalist/README.md",
+    "userGuideDocPath": "/docs/agents/video.journalist/user_guide.md"
   },
   {
     "id": "video.judge",
@@ -5160,7 +5216,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.judge/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.judge/README.md"
+    "readmeDocPath": "/docs/agents/video.judge/README.md",
+    "userGuideDocPath": "/docs/agents/video.judge/user_guide.md"
   },
   {
     "id": "video.labela_r",
@@ -5251,7 +5308,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.labela_r/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.labela_r/README.md"
+    "readmeDocPath": "/docs/agents/video.labela_r/README.md",
+    "userGuideDocPath": "/docs/agents/video.labela_r/user_guide.md"
   },
   {
     "id": "video.labeldigital",
@@ -5342,7 +5400,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.labeldigital/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.labeldigital/README.md"
+    "readmeDocPath": "/docs/agents/video.labeldigital/README.md",
+    "userGuideDocPath": "/docs/agents/video.labeldigital/user_guide.md"
   },
   {
     "id": "video.latencyoptimizer",
@@ -5433,7 +5492,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.latencyoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.latencyoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.latencyoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.latencyoptimizer/user_guide.md"
   },
   {
     "id": "video.learnersim",
@@ -5524,7 +5584,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.learnersim/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.learnersim/README.md"
+    "readmeDocPath": "/docs/agents/video.learnersim/README.md",
+    "userGuideDocPath": "/docs/agents/video.learnersim/user_guide.md"
   },
   {
     "id": "video.legal",
@@ -5615,7 +5676,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.legal/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.legal/README.md"
+    "readmeDocPath": "/docs/agents/video.legal/README.md",
+    "userGuideDocPath": "/docs/agents/video.legal/user_guide.md"
   },
   {
     "id": "video.lipsync",
@@ -5706,7 +5768,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.lipsync/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.lipsync/README.md"
+    "readmeDocPath": "/docs/agents/video.lipsync/README.md",
+    "userGuideDocPath": "/docs/agents/video.lipsync/user_guide.md"
   },
   {
     "id": "video.lms",
@@ -5797,7 +5860,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.lms/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.lms/README.md"
+    "readmeDocPath": "/docs/agents/video.lms/README.md",
+    "userGuideDocPath": "/docs/agents/video.lms/user_guide.md"
   },
   {
     "id": "video.localizationqa",
@@ -5888,7 +5952,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.localizationqa/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.localizationqa/README.md"
+    "readmeDocPath": "/docs/agents/video.localizationqa/README.md",
+    "userGuideDocPath": "/docs/agents/video.localizationqa/user_guide.md"
   },
   {
     "id": "video.marketing",
@@ -5979,7 +6044,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.marketing/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.marketing/README.md"
+    "readmeDocPath": "/docs/agents/video.marketing/README.md",
+    "userGuideDocPath": "/docs/agents/video.marketing/user_guide.md"
   },
   {
     "id": "video.medicalillustrator",
@@ -6070,7 +6136,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.medicalillustrator/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.medicalillustrator/README.md"
+    "readmeDocPath": "/docs/agents/video.medicalillustrator/README.md",
+    "userGuideDocPath": "/docs/agents/video.medicalillustrator/user_guide.md"
   },
   {
     "id": "video.memory",
@@ -6161,7 +6228,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.memory/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.memory/README.md"
+    "readmeDocPath": "/docs/agents/video.memory/README.md",
+    "userGuideDocPath": "/docs/agents/video.memory/user_guide.md"
   },
   {
     "id": "video.moodboard",
@@ -6252,7 +6320,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.moodboard/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.moodboard/README.md"
+    "readmeDocPath": "/docs/agents/video.moodboard/README.md",
+    "userGuideDocPath": "/docs/agents/video.moodboard/user_guide.md"
   },
   {
     "id": "video.motiongraphics",
@@ -6346,7 +6415,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.motiongraphics/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.motiongraphics/README.md"
+    "readmeDocPath": "/docs/agents/video.motiongraphics/README.md",
+    "userGuideDocPath": "/docs/agents/video.motiongraphics/user_guide.md"
   },
   {
     "id": "video.mpa",
@@ -6437,7 +6507,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.mpa/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.mpa/README.md"
+    "readmeDocPath": "/docs/agents/video.mpa/README.md",
+    "userGuideDocPath": "/docs/agents/video.mpa/user_guide.md"
   },
   {
     "id": "video.mua_makeup",
@@ -6528,7 +6599,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.mua_makeup/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.mua_makeup/README.md"
+    "readmeDocPath": "/docs/agents/video.mua_makeup/README.md",
+    "userGuideDocPath": "/docs/agents/video.mua_makeup/user_guide.md"
   },
   {
     "id": "video.musicsupervisor",
@@ -6619,7 +6691,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.musicsupervisor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.musicsupervisor/README.md"
+    "readmeDocPath": "/docs/agents/video.musicsupervisor/README.md",
+    "userGuideDocPath": "/docs/agents/video.musicsupervisor/user_guide.md"
   },
   {
     "id": "video.musicvideodirector",
@@ -6710,7 +6783,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.musicvideodirector/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.musicvideodirector/README.md"
+    "readmeDocPath": "/docs/agents/video.musicvideodirector/README.md",
+    "userGuideDocPath": "/docs/agents/video.musicvideodirector/user_guide.md"
   },
   {
     "id": "video.narrativearc",
@@ -6801,7 +6875,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.narrativearc/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.narrativearc/README.md"
+    "readmeDocPath": "/docs/agents/video.narrativearc/README.md",
+    "userGuideDocPath": "/docs/agents/video.narrativearc/user_guide.md"
   },
   {
     "id": "video.novelty",
@@ -6892,7 +6967,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.novelty/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.novelty/README.md"
+    "readmeDocPath": "/docs/agents/video.novelty/README.md",
+    "userGuideDocPath": "/docs/agents/video.novelty/user_guide.md"
   },
   {
     "id": "video.orchestrator",
@@ -6985,7 +7061,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.orchestrator/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.orchestrator/README.md"
+    "readmeDocPath": "/docs/agents/video.orchestrator/README.md",
+    "userGuideDocPath": "/docs/agents/video.orchestrator/user_guide.md"
   },
   {
     "id": "video.performancemarketer",
@@ -7076,7 +7153,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.performancemarketer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.performancemarketer/README.md"
+    "readmeDocPath": "/docs/agents/video.performancemarketer/README.md",
+    "userGuideDocPath": "/docs/agents/video.performancemarketer/user_guide.md"
   },
   {
     "id": "video.personalizationengineer",
@@ -7167,7 +7245,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.personalizationengineer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.personalizationengineer/README.md"
+    "readmeDocPath": "/docs/agents/video.personalizationengineer/README.md",
+    "userGuideDocPath": "/docs/agents/video.personalizationengineer/user_guide.md"
   },
   {
     "id": "video.planner",
@@ -7258,7 +7337,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.planner/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.planner/README.md"
+    "readmeDocPath": "/docs/agents/video.planner/README.md",
+    "userGuideDocPath": "/docs/agents/video.planner/user_guide.md"
   },
   {
     "id": "video.producer",
@@ -7349,7 +7429,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.producer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.producer/README.md"
+    "readmeDocPath": "/docs/agents/video.producer/README.md",
+    "userGuideDocPath": "/docs/agents/video.producer/user_guide.md"
   },
   {
     "id": "video.productiondesign",
@@ -7440,7 +7521,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.productiondesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.productiondesign/README.md"
+    "readmeDocPath": "/docs/agents/video.productiondesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.productiondesign/user_guide.md"
   },
   {
     "id": "video.promptengineer",
@@ -7536,7 +7618,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.promptengineer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.promptengineer/README.md"
+    "readmeDocPath": "/docs/agents/video.promptengineer/README.md",
+    "userGuideDocPath": "/docs/agents/video.promptengineer/user_guide.md"
   },
   {
     "id": "video.promptoptimizer",
@@ -7627,7 +7710,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.promptoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.promptoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.promptoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.promptoptimizer/user_guide.md"
   },
   {
     "id": "video.realestatephoto",
@@ -7718,7 +7802,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.realestatephoto/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.realestatephoto/README.md"
+    "readmeDocPath": "/docs/agents/video.realestatephoto/README.md",
+    "userGuideDocPath": "/docs/agents/video.realestatephoto/user_guide.md"
   },
   {
     "id": "video.retentionoptimizer",
@@ -7809,7 +7894,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.retentionoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.retentionoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.retentionoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.retentionoptimizer/user_guide.md"
   },
   {
     "id": "video.roasoptimizer",
@@ -7900,7 +7986,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.roasoptimizer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.roasoptimizer/README.md"
+    "readmeDocPath": "/docs/agents/video.roasoptimizer/README.md",
+    "userGuideDocPath": "/docs/agents/video.roasoptimizer/user_guide.md"
   },
   {
     "id": "video.router",
@@ -7991,7 +8078,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.router/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.router/README.md"
+    "readmeDocPath": "/docs/agents/video.router/README.md",
+    "userGuideDocPath": "/docs/agents/video.router/user_guide.md"
   },
   {
     "id": "video.safetyredteam",
@@ -8082,7 +8170,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.safetyredteam/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.safetyredteam/README.md"
+    "readmeDocPath": "/docs/agents/video.safetyredteam/README.md",
+    "userGuideDocPath": "/docs/agents/video.safetyredteam/user_guide.md"
   },
   {
     "id": "video.sales",
@@ -8173,7 +8262,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.sales/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.sales/README.md"
+    "readmeDocPath": "/docs/agents/video.sales/README.md",
+    "userGuideDocPath": "/docs/agents/video.sales/user_guide.md"
   },
   {
     "id": "video.screenwriter",
@@ -8264,7 +8354,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.screenwriter/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.screenwriter/README.md"
+    "readmeDocPath": "/docs/agents/video.screenwriter/README.md",
+    "userGuideDocPath": "/docs/agents/video.screenwriter/user_guide.md"
   },
   {
     "id": "video.seo",
@@ -8355,7 +8446,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.seo/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.seo/README.md"
+    "readmeDocPath": "/docs/agents/video.seo/README.md",
+    "userGuideDocPath": "/docs/agents/video.seo/user_guide.md"
   },
   {
     "id": "video.showrunner",
@@ -8446,7 +8538,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.showrunner/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.showrunner/README.md"
+    "readmeDocPath": "/docs/agents/video.showrunner/README.md",
+    "userGuideDocPath": "/docs/agents/video.showrunner/user_guide.md"
   },
   {
     "id": "video.signlanguageinterpreter",
@@ -8537,7 +8630,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.signlanguageinterpreter/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.signlanguageinterpreter/README.md"
+    "readmeDocPath": "/docs/agents/video.signlanguageinterpreter/README.md",
+    "userGuideDocPath": "/docs/agents/video.signlanguageinterpreter/user_guide.md"
   },
   {
     "id": "video.sme",
@@ -8628,7 +8722,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.sme/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.sme/README.md"
+    "readmeDocPath": "/docs/agents/video.sme/README.md",
+    "userGuideDocPath": "/docs/agents/video.sme/user_guide.md"
   },
   {
     "id": "video.socialmediastrategist",
@@ -8719,7 +8814,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.socialmediastrategist/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.socialmediastrategist/README.md"
+    "readmeDocPath": "/docs/agents/video.socialmediastrategist/README.md",
+    "userGuideDocPath": "/docs/agents/video.socialmediastrategist/user_guide.md"
   },
   {
     "id": "video.sounddesign",
@@ -8813,7 +8909,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.sounddesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.sounddesign/README.md"
+    "readmeDocPath": "/docs/agents/video.sounddesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.sounddesign/user_guide.md"
   },
   {
     "id": "video.soundmixer",
@@ -8904,7 +9001,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.soundmixer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.soundmixer/README.md"
+    "readmeDocPath": "/docs/agents/video.soundmixer/README.md",
+    "userGuideDocPath": "/docs/agents/video.soundmixer/user_guide.md"
   },
   {
     "id": "video.sportsanalyst",
@@ -8995,7 +9093,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.sportsanalyst/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.sportsanalyst/README.md"
+    "readmeDocPath": "/docs/agents/video.sportsanalyst/README.md",
+    "userGuideDocPath": "/docs/agents/video.sportsanalyst/user_guide.md"
   },
   {
     "id": "video.standardseditor",
@@ -9086,7 +9185,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.standardseditor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.standardseditor/README.md"
+    "readmeDocPath": "/docs/agents/video.standardseditor/README.md",
+    "userGuideDocPath": "/docs/agents/video.standardseditor/user_guide.md"
   },
   {
     "id": "video.storyboard",
@@ -9177,7 +9277,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.storyboard/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.storyboard/README.md"
+    "readmeDocPath": "/docs/agents/video.storyboard/README.md",
+    "userGuideDocPath": "/docs/agents/video.storyboard/user_guide.md"
   },
   {
     "id": "video.styletransfer",
@@ -9272,7 +9373,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.styletransfer/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.styletransfer/README.md"
+    "readmeDocPath": "/docs/agents/video.styletransfer/README.md",
+    "userGuideDocPath": "/docs/agents/video.styletransfer/user_guide.md"
   },
   {
     "id": "video.talent",
@@ -9363,7 +9465,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.talent/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.talent/README.md"
+    "readmeDocPath": "/docs/agents/video.talent/README.md",
+    "userGuideDocPath": "/docs/agents/video.talent/user_guide.md"
   },
   {
     "id": "video.templatedesign",
@@ -9454,7 +9557,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.templatedesign/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.templatedesign/README.md"
+    "readmeDocPath": "/docs/agents/video.templatedesign/README.md",
+    "userGuideDocPath": "/docs/agents/video.templatedesign/user_guide.md"
   },
   {
     "id": "video.trailereditor",
@@ -9545,7 +9649,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.trailereditor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.trailereditor/README.md"
+    "readmeDocPath": "/docs/agents/video.trailereditor/README.md",
+    "userGuideDocPath": "/docs/agents/video.trailereditor/user_guide.md"
   },
   {
     "id": "video.travelcine",
@@ -9636,7 +9741,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.travelcine/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.travelcine/README.md"
+    "readmeDocPath": "/docs/agents/video.travelcine/README.md",
+    "userGuideDocPath": "/docs/agents/video.travelcine/user_guide.md"
   },
   {
     "id": "video.trendintelligence",
@@ -9727,7 +9833,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.trendintelligence/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.trendintelligence/README.md"
+    "readmeDocPath": "/docs/agents/video.trendintelligence/README.md",
+    "userGuideDocPath": "/docs/agents/video.trendintelligence/user_guide.md"
   },
   {
     "id": "video.trustsafety",
@@ -9818,7 +9925,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.trustsafety/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.trustsafety/README.md"
+    "readmeDocPath": "/docs/agents/video.trustsafety/README.md",
+    "userGuideDocPath": "/docs/agents/video.trustsafety/user_guide.md"
   },
   {
     "id": "video.ugccreator",
@@ -9909,7 +10017,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.ugccreator/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.ugccreator/README.md"
+    "readmeDocPath": "/docs/agents/video.ugccreator/README.md",
+    "userGuideDocPath": "/docs/agents/video.ugccreator/user_guide.md"
   },
   {
     "id": "video.ux",
@@ -10000,7 +10109,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.ux/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.ux/README.md"
+    "readmeDocPath": "/docs/agents/video.ux/README.md",
+    "userGuideDocPath": "/docs/agents/video.ux/user_guide.md"
   },
   {
     "id": "video.vfxsupervisor",
@@ -10091,7 +10201,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.vfxsupervisor/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.vfxsupervisor/README.md"
+    "readmeDocPath": "/docs/agents/video.vfxsupervisor/README.md",
+    "userGuideDocPath": "/docs/agents/video.vfxsupervisor/user_guide.md"
   },
   {
     "id": "video.voiceclone",
@@ -10185,7 +10296,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.voiceclone/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.voiceclone/README.md"
+    "readmeDocPath": "/docs/agents/video.voiceclone/README.md",
+    "userGuideDocPath": "/docs/agents/video.voiceclone/user_guide.md"
   },
   {
     "id": "video.voiceover",
@@ -10279,7 +10391,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.voiceover/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.voiceover/README.md"
+    "readmeDocPath": "/docs/agents/video.voiceover/README.md",
+    "userGuideDocPath": "/docs/agents/video.voiceover/user_guide.md"
   },
   {
     "id": "video.webresearch",
@@ -10370,7 +10483,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.webresearch/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.webresearch/README.md"
+    "readmeDocPath": "/docs/agents/video.webresearch/README.md",
+    "userGuideDocPath": "/docs/agents/video.webresearch/user_guide.md"
   },
   {
     "id": "video.worldbuilding",
@@ -10461,7 +10575,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/video.worldbuilding/SPEC.md",
-    "readmeDocPath": "/docs/agents/video.worldbuilding/README.md"
+    "readmeDocPath": "/docs/agents/video.worldbuilding/README.md",
+    "userGuideDocPath": "/docs/agents/video.worldbuilding/user_guide.md"
   },
   {
     "id": "specials.aesthetics-agent",
@@ -10552,7 +10667,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.aesthetics-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.aesthetics-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.aesthetics-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.aesthetics-agent/user_guide.md"
   },
   {
     "id": "specials.agent-loop-creator",
@@ -10643,7 +10759,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.agent-loop-creator/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.agent-loop-creator/README.md"
+    "readmeDocPath": "/docs/agents/specials.agent-loop-creator/README.md",
+    "userGuideDocPath": "/docs/agents/specials.agent-loop-creator/user_guide.md"
   },
   {
     "id": "specials.agentic-rag-agent",
@@ -10734,7 +10851,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.agentic-rag-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.agentic-rag-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.agentic-rag-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.agentic-rag-agent/user_guide.md"
   },
   {
     "id": "specials.autotelic-agent",
@@ -10825,7 +10943,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.autotelic-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.autotelic-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.autotelic-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.autotelic-agent/user_guide.md"
   },
   {
     "id": "specials.complex-problem-solution-process-model",
@@ -10916,7 +11035,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.complex-problem-solution-process-model/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.complex-problem-solution-process-model/README.md"
+    "readmeDocPath": "/docs/agents/specials.complex-problem-solution-process-model/README.md",
+    "userGuideDocPath": "/docs/agents/specials.complex-problem-solution-process-model/user_guide.md"
   },
   {
     "id": "specials.controller-agent",
@@ -11007,7 +11127,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.controller-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.controller-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.controller-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.controller-agent/user_guide.md"
   },
   {
     "id": "specials.general-creative-agent",
@@ -11098,7 +11219,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.general-creative-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.general-creative-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.general-creative-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.general-creative-agent/user_guide.md"
   },
   {
     "id": "specials.intent-analysis-agent",
@@ -11189,7 +11311,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.intent-analysis-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.intent-analysis-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.intent-analysis-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.intent-analysis-agent/user_guide.md"
   },
   {
     "id": "specials.knowledge-router-agent",
@@ -11280,7 +11403,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.knowledge-router-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.knowledge-router-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.knowledge-router-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.knowledge-router-agent/user_guide.md"
   },
   {
     "id": "specials.llm-usage",
@@ -11371,7 +11495,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.llm-usage/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.llm-usage/README.md"
+    "readmeDocPath": "/docs/agents/specials.llm-usage/README.md",
+    "userGuideDocPath": "/docs/agents/specials.llm-usage/user_guide.md"
   },
   {
     "id": "specials.optimization-agent",
@@ -11462,7 +11587,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.optimization-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.optimization-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.optimization-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.optimization-agent/user_guide.md"
   },
   {
     "id": "specials.planner-agent",
@@ -11553,7 +11679,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.planner-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.planner-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.planner-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.planner-agent/user_guide.md"
   },
   {
     "id": "specials.podcast-agent",
@@ -11644,7 +11771,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.podcast-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.podcast-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.podcast-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.podcast-agent/user_guide.md"
   },
   {
     "id": "specials.psychological-profile-agent",
@@ -11735,7 +11863,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.psychological-profile-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.psychological-profile-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.psychological-profile-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.psychological-profile-agent/user_guide.md"
   },
   {
     "id": "specials.psychological-recommendation-agent",
@@ -11826,7 +11955,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.psychological-recommendation-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.psychological-recommendation-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.psychological-recommendation-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.psychological-recommendation-agent/user_guide.md"
   },
   {
     "id": "specials.research-agent",
@@ -11917,7 +12047,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.research-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.research-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.research-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.research-agent/user_guide.md"
   },
   {
     "id": "specials.screenwriter-strategic-goal-achievement-agent",
@@ -12008,7 +12139,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.screenwriter-strategic-goal-achievement-agent/user_guide.md"
   },
   {
     "id": "specials.strategic-goal-achievement-agent",
@@ -12099,7 +12231,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.strategic-goal-achievement-agent/user_guide.md"
   },
   {
     "id": "specials.techology-advisor-agent",
@@ -12190,7 +12323,8 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
     "hasReadme": true,
     "hasSources": true,
     "specDocPath": "/docs/agents/specials.techology-advisor-agent/SPEC.md",
-    "readmeDocPath": "/docs/agents/specials.techology-advisor-agent/README.md"
+    "readmeDocPath": "/docs/agents/specials.techology-advisor-agent/README.md",
+    "userGuideDocPath": "/docs/agents/specials.techology-advisor-agent/user_guide.md"
   }
 ] as const;
 

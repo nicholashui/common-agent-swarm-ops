@@ -139,6 +139,84 @@ def test_swarm_create_member_run_activity(client: TestClient) -> None:
     assert body(health)["total_agents"] >= 1
 
 
+def test_agent_ab_rollout_requires_action_and_is_sandbox_only(client: TestClient) -> None:
+    detail = body(client.get("/api/v1/commons/agents/video.accessibility"))
+    actions = detail["actions"]
+    ab = next(a for a in actions if a["kind"] == "rollout.ab_test")
+    assert ab["eligible"] is True
+
+    denied = client.post(
+        "/api/v1/commons/agents/video.accessibility/rollouts",
+        json={
+            "action_reference_id": "act_not_real",
+            "type": "ab_test",
+            "baseline_version": "current",
+            "candidate_version": "candidate",
+        },
+    )
+    assert denied.status_code == 403
+
+    created = client.post(
+        "/api/v1/commons/agents/video.accessibility/rollouts",
+        json={
+            "action_reference_id": ab["id"],
+            "type": "ab_test",
+            "baseline_version": "current",
+            "candidate_version": "candidate",
+            "summary": "A/B canary for accessibility acceptance.",
+        },
+    )
+    assert created.status_code == 201
+    payload = body(created)
+    assert payload["rollout_id"].startswith("roll_")
+    assert payload["status"] == "active_canary"
+    assert payload["production_activation"] is False
+    assert payload["type"] == "ab_test"
+
+    # Consumed action cannot start another campaign
+    again = client.post(
+        "/api/v1/commons/agents/video.accessibility/rollouts",
+        json={
+            "action_reference_id": ab["id"],
+            "type": "ab_test",
+            "baseline_version": "current",
+            "candidate_version": "candidate",
+        },
+    )
+    assert again.status_code == 403
+
+    got = client.get(f"/api/v1/commons/rollouts/{payload['rollout_id']}")
+    assert got.status_code == 200
+    got_body = body(got)
+    assert got_body["agent_id"] == "video.accessibility"
+    assert any(c["id"] == "pairwise_preference" for c in got_body["criteria"])
+
+    impact = client.get(f"/api/v1/commons/rollouts/{payload['rollout_id']}/impact")
+    assert impact.status_code == 200
+    impact_body = body(impact)
+    assert impact_body["rollout_id"] == payload["rollout_id"]
+    assert impact_body["impact"]
+
+    listed = body(client.get("/api/v1/commons/agents/video.accessibility/rollouts"))
+    assert any(i["rollout_id"] == payload["rollout_id"] for i in listed["items"])
+
+    # Safe rollout path
+    detail2 = body(client.get("/api/v1/commons/agents/video.accessibility"))
+    safe = next(a for a in detail2["actions"] if a["kind"] == "rollout.safe_all")
+    safe_resp = client.post(
+        "/api/v1/commons/agents/video.accessibility/rollouts",
+        json={
+            "action_reference_id": safe["id"],
+            "type": "safe_rollout",
+            "baseline_version": "current",
+            "candidate_version": "candidate",
+        },
+    )
+    assert safe_resp.status_code == 201
+    assert body(safe_resp)["type"] == "safe_rollout"
+    assert body(safe_resp)["production_activation"] is False
+
+
 def test_patterns_and_events_stream_alias(client: TestClient) -> None:
     patterns = client.get("/api/v1/commons/patterns")
     assert patterns.status_code == 200

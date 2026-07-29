@@ -2,11 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { LOCAL_REGISTRY_LANDING } from "../projections/registry-landing";
+import { SPECIAL_AGENT_CATALOG } from "../specials/specials-catalog";
 import {
   agentMatchesFacet,
   agentMatchesSearch,
   filterRegistryAgents,
   filterRegistryPatterns,
+  filterSpecialAgents,
   toggleFacetSelection,
 } from "./registry-filters";
 
@@ -75,6 +77,47 @@ test("toggleFacetSelection adds and removes", () => {
   assert.ok(one.has("video"));
   const none = toggleFacetSelection(one, "video");
   assert.equal(none.has("video"), false);
+});
+
+test("specials pack filter follows registry search", () => {
+  const hits = filterSpecialAgents(
+    SPECIAL_AGENT_CATALOG,
+    "planner",
+    new Set(),
+    domains,
+  );
+  assert.ok(hits.length >= 1);
+  assert.ok(hits.every((a) => /planner/i.test(a.agentId + a.title)));
+});
+
+test("specials pack hidden when only video domain facet is on", () => {
+  const hits = filterSpecialAgents(
+    SPECIAL_AGENT_CATALOG,
+    "",
+    new Set(["video"]),
+    domains,
+  );
+  assert.equal(hits.length, 0);
+});
+
+test("specials pack shows on specials domain facet", () => {
+  const hits = filterSpecialAgents(
+    SPECIAL_AGENT_CATALOG,
+    "",
+    new Set(["specials"]),
+    domains,
+  );
+  assert.equal(hits.length, SPECIAL_AGENT_CATALOG.length);
+});
+
+test("specials pack draft facet keeps drafts", () => {
+  const hits = filterSpecialAgents(
+    SPECIAL_AGENT_CATALOG,
+    "",
+    new Set(["draft"]),
+    domains,
+  );
+  assert.equal(hits.length, SPECIAL_AGENT_CATALOG.length);
 });
 
 test("pattern search filters by name", () => {

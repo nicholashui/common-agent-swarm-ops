@@ -4,7 +4,10 @@
  * Governed mutations without host action refs fail closed (honest feedback).
  */
 
-import { proposeAgentImprovement } from "../api/product-commons";
+import {
+  proposeAgentImprovement,
+  startAgentRollout,
+} from "../api/product-commons";
 import type { InteractionRuntime } from "./interaction-runtime";
 
 export type ScreenUiAction =
@@ -34,6 +37,20 @@ export type ScreenUiAction =
   | {
       readonly kind: "commons.propose";
       readonly agentId: string;
+      readonly summary?: string;
+    }
+  | {
+      readonly kind: "commons.rollout_ab";
+      readonly agentId: string;
+      readonly baselineVersion?: string;
+      readonly candidateVersion?: string;
+      readonly summary?: string;
+    }
+  | {
+      readonly kind: "commons.rollout_safe";
+      readonly agentId: string;
+      readonly baselineVersion?: string;
+      readonly candidateVersion?: string;
       readonly summary?: string;
     }
   | {
@@ -155,6 +172,43 @@ export async function performScreenAction(
       }
       runtime.setSuccess(
         `Proposal ${result.proposalId} ${result.status} for ${result.targetId}.`,
+      );
+      return true;
+    }
+    case "commons.rollout_ab": {
+      runtime.setInfo(`Starting A/B canary for ${action.agentId}…`);
+      const result = await startAgentRollout(action.agentId, {
+        type: "ab_test",
+        baselineVersion: action.baselineVersion,
+        candidateVersion: action.candidateVersion,
+        summary: action.summary,
+      });
+      if (!result.ok) {
+        runtime.setError(result.message);
+        return false;
+      }
+      runtime.setSuccess(
+        `A/B canary ${result.rolloutId} ${result.status} for ${result.agentId} ` +
+          `(${result.candidateVersion} vs ${result.baselineVersion}). ` +
+          "Sandbox only — production activation remains false.",
+      );
+      return true;
+    }
+    case "commons.rollout_safe": {
+      runtime.setInfo(`Starting safe rollout canary for ${action.agentId}…`);
+      const result = await startAgentRollout(action.agentId, {
+        type: "safe_rollout",
+        baselineVersion: action.baselineVersion,
+        candidateVersion: action.candidateVersion,
+        summary: action.summary,
+      });
+      if (!result.ok) {
+        runtime.setError(result.message);
+        return false;
+      }
+      runtime.setSuccess(
+        `Safe rollout canary ${result.rolloutId} ${result.status} for ${result.agentId}. ` +
+          "Sandbox only — production activation remains false.",
       );
       return true;
     }

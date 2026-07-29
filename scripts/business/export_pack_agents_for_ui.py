@@ -77,13 +77,28 @@ def _spec_excerpt(spec_path: Path, *, limit: int = 280) -> str:
 
 
 def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dict[str, str | None]:
-    """Copy SPEC/README into public/docs/agents/<id>/ for browser markdown rendering."""
+    """Copy SPEC/README/user_guide into public/docs/agents/<id>/ for browser markdown rendering.
+
+    user_guide.md is also written as userguide.md so the help panel tab id
+    ``userguide`` resolves without renaming product docs.
+    """
     if not _SAFE_AGENT_ID.match(agent_id):
-        return {"specDocPath": None, "readmeDocPath": None}
+        return {
+            "specDocPath": None,
+            "readmeDocPath": None,
+            "userGuideDocPath": None,
+        }
     dest_dir = docs_root / agent_id
     dest_dir.mkdir(parents=True, exist_ok=True)
-    paths: dict[str, str | None] = {"specDocPath": None, "readmeDocPath": None}
-    for name, key in (("SPEC.md", "specDocPath"), ("README.md", "readmeDocPath")):
+    paths: dict[str, str | None] = {
+        "specDocPath": None,
+        "readmeDocPath": None,
+        "userGuideDocPath": None,
+    }
+    for name, key in (
+        ("SPEC.md", "specDocPath"),
+        ("README.md", "readmeDocPath"),
+    ):
         src = agent_dir / name
         if not src.is_file():
             continue
@@ -93,6 +108,23 @@ def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dic
             continue
         (dest_dir / name).write_text(content, encoding="utf-8", newline="\n")
         paths[key] = f"/docs/agents/{agent_id}/{name}"
+
+    # Pack operator guide (preferred help-panel document for agent detail)
+    for candidate in (
+        agent_dir / "docs" / "user_guide.md",
+        agent_dir / "user_guide.md",
+    ):
+        if not candidate.is_file():
+            continue
+        try:
+            content = _sanitize_ui_copy(candidate.read_text(encoding="utf-8", errors="replace"))
+        except OSError:
+            break
+        (dest_dir / "user_guide.md").write_text(content, encoding="utf-8", newline="\n")
+        # Alias matching help tab file id (userguide.md)
+        (dest_dir / "userguide.md").write_text(content, encoding="utf-8", newline="\n")
+        paths["userGuideDocPath"] = f"/docs/agents/{agent_id}/user_guide.md"
+        break
     return paths
 
 
@@ -252,6 +284,7 @@ def _load_pack(
                 "hasSources": (agent_dir / "sources").is_dir(),
                 "specDocPath": doc_paths["specDocPath"],
                 "readmeDocPath": doc_paths["readmeDocPath"],
+                "userGuideDocPath": doc_paths.get("userGuideDocPath"),
             }
         )
     return records
@@ -338,6 +371,7 @@ def main(argv: list[str] | None = None) -> int:
         "  readonly hasSources: boolean;\n"
         "  readonly specDocPath: string | null;\n"
         "  readonly readmeDocPath: string | null;\n"
+        "  readonly userGuideDocPath: string | null;\n"
         "}\n\n"
         f"export const PACK_AGENT_COUNTS = {json.dumps(payload['counts'], indent=2)} as const;\n\n"
         f"export const PACK_AGENTS: readonly PackAgentRecord[] = {json.dumps(all_agents, indent=2, ensure_ascii=False)} as const;\n\n"
@@ -362,6 +396,7 @@ def main(argv: list[str] | None = None) -> int:
                 "counts": payload["counts"],
                 "sample": list(by_id)[:5],
                 "specDocs": sum(1 for a in all_agents if a.get("specDocPath")),
+                "userGuides": sum(1 for a in all_agents if a.get("userGuideDocPath")),
             },
             indent=2,
         )

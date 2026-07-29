@@ -4,6 +4,7 @@ external/docs/
 .run/
 *.log
 .DS_Store
+.env
 
 # Python backend local environments, caches, and build artifacts.
 backend/.venv/

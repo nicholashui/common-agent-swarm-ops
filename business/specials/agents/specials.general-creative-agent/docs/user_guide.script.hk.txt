@@ -1,0 +1,265 @@
+各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 General Creative Agent，
+即系通用创意代理嘅操作同设计指南。
+
+首先呢份指南写畀喺 common-agent-swarm-ops 工作嘅操作员、
+pack 作者、swarm 设计师同审查人员。你会得到任务清晰度、
+用法指引、协作图、CASOPS 步骤、改善路径同信任来源地图。
+
+呢份文件唔系激活供应商、开放网络或发明工具嘅许可证。Host 真相系 fail-closed agent_spec.json。
+设计文本不受信任。
+
+Pack 路径 business/specials/agents/specials.general-creative-agent/，
+指南 docs/user_guide.md。
+
+第一部分：Snapshot。
+
+General Creative Agent，代号 specials.general-creative-agent，
+系 Specials pack 能力喺 CASOPS 上。简单讲：
+General Creative Agent 即 GCA 系一个模块化、
+可扩展嘅 AI 系统，通过严格应用 Strategic Sparse Outlier Recombination 即 SSOR 模型，
+将任何输入问题或情境转化为新颖但有用嘅创意输出。
+
+基本资料：显示名 General Creative Agent，
+Pack agent id specials.general-creative-agent，
+specials pack。目录状态 draft，成熟度 L0 非激活。
+供应商 local_deterministic，网络 False，
+工具空，生产激活 False。Prompt 同 rubric 引用 spagent.general-creative-agent-prompt 同 spagent.general-creative-agent-rubric。
+
+第二部分：点解存在。
+
+Specials 代理捕捉跨领域认知技能。呢个角色：GCA 系模块化可扩展 AI 系统，
+通过 SSOR 模型将问题转化为新颖有用嘅创意输出。
+
+第三部分：做得好标准。
+
+主要成果：GCA 通过 SSOR 模型产出新颖有用嘅创意输出。
+
+自我质量标准：general creative synthesis 嘅可追溯输出、
+fail-closed schema 验证、冇静默生产激活。
+
+设计时雄心：产出比临时人工更一致嘅通用创意综合结果。
+
+架构模式：General creative synthesis pattern，
+设计时层级或多代理循环，host local_deterministic 数据专用直到门控。
+
+Host 批评绑定：rubric spagent.general-creative-agent-rubric 惰性。
+Prompt 同名惰性。边缘输入 spagent.general-creative-agent-input 输出 spagent.general-creative-agent-output。
+精炼 1。
+
+输入输出接受：本地配置、治理记录、sources 来源。输出可审阅 data-only 表示。
+接受 fail-closed 通过、冇激活、引用本地。
+
+第四部分：范围。
+
+拥有：GCA 通过 SSOR 模型转化输入为新颖有用创意输出。
+
+分享：接受人类治理同同伴 specials 批评。评论 general creative synthesis 差距、
+缺失证据、不安全激活、薄弱交接。边缘如上。最大精炼 1。
+
+拒绝升级：status draft，activation false。
+tools 空 network false。唔发明任何嘢。redesign 哈希来源。
+请求升级人类治理。
+
+第五部分：几时用。
+
+当需要喺品牌或美学约束下做开放式创意生成嗰阵调用。能力家族 General creative synthesis。
+典型上游 Aesthetics 或 intent 或 strategic goal。
+典型下游 Domain pack craft agents 例如 video。
+
+具体任务：GCA 通过 SSOR 模型产出创意输出。
+
+唔好当做静默激活器或凭证中介。
+
+决策速查：技能属于 General Creative Agent 专长纳入 swarm 图。
+元数据用 Registry。工具网络唔允许。人类风险保留门控。
+
+第六部分：协作地图。
+
+批评总线节点。入站人类治理同同伴 specials。出站 general creative synthesis 差距、
+缺失证据、不安全激活、薄弱交接。
+
+Specials 通道：家族 General creative synthesis，
+上游 Aesthetics 或 intent 或 strategic goal，
+下游 Domain pack craft agents。
+
+第七部分：生产位置。
+
+人类工作流：领域手艺团队之上。交接制品计划、路线、证据包、控制决策、优化工单。
+
+多代理 AI 工作流：元层节点。设计时工具 host 冇 fail-closed。
+运行时 General creative synthesis pattern host local_deterministic 直到门控。
+今日只文档。
+
+Swarm-ready 合约：artifact_id 版本、parent_assets、
+brief_scope、acceptance_criteria、
+qc_status gate flags、rights_and_consent、
+critique_log。
+
+第八部分：CASOPS 操作。
+
+目录加设计对象。步骤：发现 /registry。检查 /registry/agents/specials.general-creative-agent。
+提议 POST proposals。Swarm 成员 Host 引用。
+运行默认唔启用。
+
+实际清单：确认 flags。读第三部分。附证据。唔贴密钥。细小增量。
+
+第九部分：安全信任非激活。
+
+信任层级：agent_spec.json binding。SPEC.md 权威设计。
+sources 不受信任。外部语料库不受信任。redesign 历史有哈希。
+
+硬规则：provider local_deterministic。
+网络 False。工具空。activation False。预算 1/1/0。
+设计时工具非激活。
+
+第十部分：提升质量。
+
+有版本目录工作。循环：观察、命名、起草、附证据、提议、审阅、门控。
+
+杠杆：rubric 收紧。prompt 对齐 GCA 同 SSOR 模型责任。
+批评图捕捉失败。架构模拟 General creative synthesis pattern。
+评估案例。人类门控。
+
+评估种子：Happy path 满足。Out-of-scope 拒绝。
+Missing provenance fail closed。
+Conflicting critique 限制。Proposal-only 不可变。
+
+第十一部分：来源地图。
+
+本地优先：agent_spec.json binding，SPEC.md authoritative-design，
+README.md local-index，MAPPING.md provenance，
+PROVENANCE.json provenance。
+
+映射：specials.general-creative-agent 状态 related。
+历史来源 docs/special_agents_redesign/agents/general_creative_agent.md。
+SHA-256 35e61afc7c4cfdd5b14ae86ad7ae3baf79d964ede95147932448bac4cdd3c17a。
+本地运行时 agent_spec.json。Pack 语料库唔需要。
+
+来源记录：schema_version 1.0，common_agent_id specials.general-creative-agent，
+pack_id specials，映射 related。配置 SHA-256 c34dee0c65c2194a5801f6da966888b7ab3ff171ef77e0bfacda479dfacfad12，
+目标 commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+生成 2026-07-26T14:16:45.937280Z，
+审阅 2026-07-26T18:00:00Z。
+
+第十二部分：相关设计阅读。
+
+唔覆盖 agent_spec.json。
+
+va-agent-swarm 下相关文件丰富：general_creative_agent_functional_specification.md 系综合功能规格，
+general_creative_agent_technical_specification.md 系技术规格，
+仲有两份粤语版本。
+
+Specials redesign 文档大纲：Executive Summary、
+Background User Original Theory、
+Evolution of SSOR Model、Strategic Sparse Outlier Recombination Model Formal Definition、
+Research Foundation Exhaustive Synthesis、
+AI-Native POVs Derived from NLAEs、
+Functional Requirements、Domain-Specific Creative Agent Factory、
+Technical Architecture and Implementation Guidelines。
+
+核心内容好精彩。GCA 系模块化可扩展 AI 系统，转化任何输入问题为新颖有用嘅创意输出，通过 SSOR 模型。
+
+关键创新：核心引擎系多视角统计映射到策略性稀疏离群值抽样到跨维度重组到价值门控选择，
+用倒 U 型新颖度平衡加有用性加连贯性加可行性。扩展工厂可以一键创建领域特定创意代理。
+AI 原生视角利用 Anthropic NLAEs 同 xAI 推理洞察。
+可追溯性方面每个输出包含完整 SSOR 过程追踪、surprise vectors、
+创意分数同原型计划。
+
+用户原始理论嘅洞察好有意思：创意模型系从一系列统计观察值嘅多个视角中，
+大部分进入离群范围后，唔同模式嘅离群值组合会产生不可预测嘅新事件，
+呢个就系创意。
+
+SSOR 模型进化经历八个阶段：从原始统计离群值加重组想法，到加入有用性维度，
+到稀疏约束即 1-4 个策略性离群维度锚定喺传统核心，到可达性同联合新颖度，
+到转化层偶尔重写视角本身，到神经科学整合 DMN 同 ECN，
+到 AI 原生增强 NLAEs，到最终完整可操作嘅 SSOR。
+
+最终定义：创意系通过多个统计视角重新框定情境，策略性抽样稀疏离群元素，
+以新颖方式重组，然后只选择既惊人又连贯、有价值且可实现嘅涌现模式嘅过程。
+
+GCA 唔系通用 LLM 包装器，系数十年创意研究嘅计算化身，工程化为艺术、科学、商业、教育等领域嘅即时现实影响。
+
+本地知识索引同 Folder README 标准结构。
+
+第十三部分：host 合约。
+
+权威配置：schema_version 1.0，agent_id specials.general-creative-agent，
+status draft，role Special_Agent data-only configuration，
+tools 空，provider local_deterministic，
+network false，budget 1/1/0，prompt rubric edges max_refinement 如上，
+production_activation_requested false。
+
+第十四部分：SPEC 责任摘录。
+
+拥有 general creative agent 设计成果作为 draft data-only 表示。
+系构建 GCA 嘅最终生产级规格，操作化完全精炼嘅 SSOR 模型。
+包含完整背景、迭代演进、详尽研究综合涵盖心理学、神经科学、计算创意、
+科学嘅科学、arXiv 论文、Anthropic NLAE 同 xAI 洞察，
+详细功能需求、架构、7 阶段过程、领域工厂、AI 原生视角、实现指南、
+评估指标同完整引用。
+
+第十五部分：文档控制。
+
+生成器、文件夹、输出、语料库、重新生成命令同信任模型标准配置。
+
+好啦，以上就系 General Creative Agent 嘅完整指南。
+SSOR 模型系一个好有创意嘅方法论，将创意过程计算化。多谢收睇，
+下条片见。
+
+我再详细展开 SSOR 模型嘅演进同技术细节。
+模型经历八个阶段嘅演进好有意思。
+第一阶段系用户嘅原始想法：
+多视角统计离群值加重组等于新颖性。
+呢个概率性、统计性嘅框架将创意视为视角转移。
+将预期结果推入离群尾部然后重组产生涌现嘅不可预测性。
+第二阶段加入有用性维度。
+单纯嘅新颖唔够，创意嘅标准定义要求新颖加有用。
+第三阶段引入稀疏约束。
+来自 Uzzi 等人 2013 年嘅科学嘅科学研究发现，
+最有创意嘅作品通常只有一到四个策略性离群维度，
+锚定喺传统核心之上。
+唔系所有维度都系离群嘅。
+第四阶段加入可达性同联合新颖度。
+组合必须喺语义图中系可达嘅。
+要评估联合新颖度而唔只系边缘新颖度。
+第五阶段引入转化层。
+偶尔重写视角本身，
+对应 Boden 嘅转化性创意概念。
+唔只系喺现有空间中探索，
+而系改变空间本身。
+第六阶段整合神经科学。
+Default Mode Network 负责生成，
+Executive Control Network 负责过滤。
+两者嘅交互产生创意。
+第七阶段加入 AI 原生增强。
+利用 Anthropic 嘅 Natural Language Autoencoders，
+将内部模型模式作为视角使用。
+呢啲系真正非人类嘅认知模式。
+第八阶段系最终完整嘅 SSOR。
+完全可操作、可计算、可代理实现。
+GCA 嘅关键创新方面：
+核心引擎系多视角统计映射，
+然后策略性稀疏离群值抽样，
+再跨维度重组，
+最后价值门控选择。
+选择标准用倒 U 型新颖度平衡，
+加有用性、连贯性同可行性。
+扩展工厂可以一键创建领域特定嘅创意代理。
+科学领域、艺术领域、商业领域、工程领域，
+每个都可以快速生成而唔重复代码。
+AI 原生视角利用 NLAEs 同 xAI 推理洞察，
+提供真正非人类嘅认知角度做离群值发现。
+可追溯性方面每个输出都包含完整过程追踪。
+你可以睇到每个创意输出系点样产生嘅，
+经过边啲视角、边啲离群值、边啲重组步骤。
+仲有 surprise vectors 量化惊奇程度，
+创意分数评估整体创意质量，
+同原型计划指导后续实现。
+研究基础涵盖心理学、神经科学、
+计算创意、科学嘅科学，
+arXiv 2024 到 2025 嘅论文，
+Anthropic NLAE 同 xAI Grok 相关洞察。
+七阶段过程从问题输入到最终输出有明确嘅流程。
+GCA 唔系通用嘅 LLM 包装器。
+佢系数十年创意研究嘅计算化身。
+工程化为即时现实影响服务于多个领域。

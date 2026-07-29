@@ -73,6 +73,121 @@ export async function fetchCommonAgent(
   }
 }
 
+export type StartRolloutResult =
+  | {
+      readonly ok: true;
+      readonly rolloutId: string;
+      readonly status: string;
+      readonly type: string;
+      readonly agentId: string;
+      readonly baselineVersion: string;
+      readonly candidateVersion: string;
+      readonly productionActivation: boolean;
+    }
+  | { readonly ok: false; readonly message: string };
+
+/**
+ * Start a sandbox/canary A/B or safe rollout using a Host-issued action reference.
+ * Never invents action ids; never claims production activation.
+ */
+export async function startAgentRollout(
+  agentId: string,
+  options: {
+    readonly type: "ab_test" | "safe_rollout";
+    readonly baselineVersion?: string;
+    readonly candidateVersion?: string;
+    readonly summary?: string;
+    readonly fetchImpl?: typeof fetch;
+  },
+): Promise<StartRolloutResult> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  const actionKind =
+    options.type === "ab_test" ? "rollout.ab_test" : "rollout.safe_all";
+  const agent = await fetchCommonAgent(agentId, fetchImpl);
+  if (!agent.ok) {
+    return agent;
+  }
+  const action = agent.actions.find(
+    (a) => a.kind === actionKind && a.eligible,
+  );
+  if (!action) {
+    return {
+      ok: false,
+      message: `Host returned no eligible ${actionKind} action for this agent.`,
+    };
+  }
+  try {
+    const response = await fetchImpl(
+      `/api/v1/commons/agents/${encodeURIComponent(agentId)}/rollouts`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "Idempotency-Key":
+            typeof crypto !== "undefined" && "randomUUID" in crypto
+              ? crypto.randomUUID()
+              : `rollout-${Date.now()}`,
+        },
+        body: JSON.stringify({
+          action_reference_id: action.id,
+          type: options.type,
+          baseline_version: options.baselineVersion ?? "current",
+          candidate_version: options.candidateVersion ?? "candidate",
+          summary:
+            options.summary ??
+            (options.type === "ab_test"
+              ? `A/B canary for ${agentId}`
+              : `Safe rollout canary for ${agentId}`),
+        }),
+      },
+    );
+    if (!response.ok) {
+      let detail = `HTTP ${response.status}`;
+      try {
+        const errBody = (await response.json()) as {
+          error?: { message?: string };
+          detail?: { message?: string };
+        };
+        detail =
+          errBody.error?.message ?? errBody.detail?.message ?? detail;
+      } catch {
+        // keep detail
+      }
+      return { ok: false, message: `Rollout rejected: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{
+      rollout_id?: string;
+      status?: string;
+      type?: string;
+      agent_id?: string;
+      baseline_version?: string;
+      candidate_version?: string;
+      production_activation?: boolean;
+    }>(raw);
+    if (!data.rollout_id) {
+      return { ok: false, message: "Host response missing rollout_id." };
+    }
+    return {
+      ok: true,
+      rolloutId: data.rollout_id,
+      status: data.status ?? "active_canary",
+      type: data.type ?? options.type,
+      agentId: data.agent_id ?? agentId,
+      baselineVersion: data.baseline_version ?? "current",
+      candidateVersion: data.candidate_version ?? "candidate",
+      productionActivation: data.production_activation === true,
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Network error while starting rollout on Host.",
+    };
+  }
+}
+
 /**
  * Submit improvement proposal using a Host-issued action reference.
  */

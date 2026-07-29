@@ -115,6 +115,26 @@ test("ScreenUiAction kinds are structured", () => {
     { kind: "feedback", message: "ok" },
     { kind: "local.pause_swarm", swarmId: "s1" },
     { kind: "canvas.run", workflowId: "wf", version: "1" },
+    { kind: "commons.rollout_ab", agentId: "video.accessibility" },
+    { kind: "commons.rollout_safe", agentId: "video.accessibility" },
   ];
-  assert.equal(actions.length, 3);
+  assert.equal(actions.length, 5);
+});
+
+test("performScreenAction rollout fails closed without host", async () => {
+  const runtime = mockRuntime() as InteractionRuntime & { _calls: string[] };
+  const prevFetch = globalThis.fetch;
+  globalThis.fetch = (async () => {
+    throw new Error("offline");
+  }) as typeof fetch;
+  try {
+    const ok = await performScreenAction(runtime, {
+      kind: "commons.rollout_ab",
+      agentId: "video.accessibility",
+    });
+    assert.equal(ok, false);
+    assert.ok(runtime._calls.some((c) => c.startsWith("error:")));
+  } finally {
+    globalThis.fetch = prevFetch;
+  }
 });

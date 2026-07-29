@@ -1,0 +1,276 @@
+各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 Knowledge Router Agent，
+即系知识路由代理嘅操作同设计指南。
+
+首先呢份指南写畀喺 common-agent-swarm-ops 工作嘅操作员、
+pack 作者、swarm 设计师同审查人员。你会得到任务清晰度、
+用法指引、协作图、CASOPS 步骤、改善路径同信任来源地图。
+
+呢份文件唔系激活供应商、开放网络或发明工具嘅许可证。Host 真相系 fail-closed agent_spec.json。
+设计文本不受信任。
+
+Pack 路径 business/specials/agents/specials.knowledge-router-agent/，
+指南 docs/user_guide.md。
+
+第一部分：Snapshot。
+
+Knowledge Router Agent，代号 specials.knowledge-router-agent，
+系 Specials pack 能力喺 CASOPS 上。简单讲：
+Knowledge Router Agent 系中央智能层，确保系统入面每个专业代理，
+包括 Character Consistency Critic、
+Video Prompt Optimizer、Multi-Agent Orchestrator Designer、
+Shot Planning Agent 等，从你不断增长嘅约 5000 个 md 文件语料库中精确接收正确嘅知识，
+噪声最少、精度高、可解释性强。
+
+基本资料：显示名 Knowledge Router Agent，
+Pack agent id specials.knowledge-router-agent，
+specials pack。目录状态 draft，成熟度 L0 非激活。
+供应商 local_deterministic，网络 False，
+工具空，生产激活 False。Prompt 同 rubric 引用 spagent.knowledge-router-agent-prompt 同 spagent.knowledge-router-agent-rubric。
+
+第二部分：点解存在。
+
+Specials 代理捕捉跨领域认知技能。呢个角色：Knowledge Router Agent 系中央智能层确保每个专业代理从语料库精确获取正确知识。
+
+来自历史 redesign 文档嘅描述都强调咗同样嘅定位：呢个系确保每个代理获取精确知识嘅中央智能层，
+从约 5000 个 md 文件语料库中提取，噪声少精度高可解释。
+
+第三部分：做得好标准。
+
+主要成果：中央智能层确保精确知识路由。
+
+自我质量标准：knowledge routing 嘅可追溯输出、
+fail-closed schema 验证、冇静默生产激活。
+
+设计时雄心：产出比临时人工更一致嘅知识路由结果。
+
+架构模式：Knowledge routing pattern，
+设计时层级或多代理循环，host local_deterministic 数据专用直到门控。
+
+Host 批评绑定：rubric spagent.knowledge-router-agent-rubric 惰性。
+Prompt 同名惰性。边缘输入 spagent.knowledge-router-agent-input 输出 spagent.knowledge-router-agent-output。
+精炼 1。
+
+输入输出接受：本地配置、治理记录、sources 来源。输出可审阅 data-only 表示。
+接受 fail-closed 通过、冇激活、引用本地。
+
+第四部分：范围。
+
+拥有：中央智能层确保每个代理精确获取知识。
+
+分享：接受人类治理同同伴 specials 批评。评论 knowledge routing 差距、
+缺失证据、不安全激活、薄弱交接。边缘如上。最大精炼 1。
+
+拒绝升级：status draft，activation false。
+tools 空 network false。唔发明任何嘢。redesign 哈希来源。
+请求升级人类治理。
+
+第五部分：几时用。
+
+当查询必须被导向正确嘅语料库、代理或记忆层嗰阵调用。能力家族 Knowledge routing。
+典型上游 Intent analysis。典型下游 RAG、research、
+domain specialists。
+
+具体任务：确保每个代理从语料库精确获取知识。
+
+唔好当做静默激活器或凭证中介。
+
+决策速查：技能属于本代理专长纳入 swarm 图。元数据用 Registry。工具网络唔允许。人类风险保留门控。
+
+第六部分：协作地图。
+
+批评总线节点。入站人类治理同同伴 specials。出站 knowledge routing 差距、
+缺失证据、不安全激活、薄弱交接。
+
+Specials 通道：家族 Knowledge routing，
+上游 Intent analysis，下游 RAG、research、
+domain specialists。
+
+第七部分：生产位置。
+
+人类工作流：领域手艺团队之上。交接制品计划、路线、证据包、控制决策、优化工单。
+
+多代理 AI 工作流：元层节点。设计时工具 host 冇 fail-closed。
+运行时 Knowledge routing pattern host local_deterministic 直到门控。
+今日只文档。
+
+Swarm-ready 合约：artifact_id 版本、parent_assets、
+brief_scope、acceptance_criteria、
+qc_status gate flags、rights_and_consent、
+critique_log。
+
+第八部分：CASOPS 操作。
+
+目录加设计对象。步骤：发现 /registry。检查 /registry/agents/specials.knowledge-router-agent。
+提议 POST proposals。Swarm 成员 Host 引用。
+运行默认唔启用。
+
+实际清单：确认 flags。读第三部分。附证据。唔贴密钥。细小增量。
+
+第九部分：安全信任非激活。
+
+信任层级：agent_spec.json binding。SPEC.md 权威设计。
+sources 不受信任。外部语料库不受信任。redesign 历史有哈希。
+
+硬规则：provider local_deterministic。
+网络 False。工具空。activation False。预算 1/1/0。
+设计时工具非激活。
+
+第十部分：提升质量。
+
+有版本目录工作。循环：观察、命名、起草、附证据、提议、审阅、门控。
+
+杠杆：rubric 收紧针对 knowledge routing 输出。
+prompt 对齐中央智能层责任。批评图捕捉失败。架构模拟 Knowledge routing pattern。
+评估案例。人类门控。
+
+评估种子：Happy path 满足。Out-of-scope 拒绝。
+Missing provenance fail closed。
+Conflicting critique 限制。Proposal-only 不可变。
+
+第十一部分：来源地图。
+
+本地优先：agent_spec.json binding，SPEC.md authoritative-design，
+README.md local-index，MAPPING.md provenance，
+PROVENANCE.json provenance。
+
+映射：specials.knowledge-router-agent 状态 related。
+历史来源 docs/special_agents_redesign/agents/knowledge_router_agent.md。
+SHA-256 688ef2556e2e072dddebe5d990cd0f6bb8c7386d194a319a80f7f95981e35e21。
+本地运行时 agent_spec.json。Pack 语料库唔需要。
+
+来源记录：schema_version 1.0，common_agent_id specials.knowledge-router-agent，
+pack_id specials，映射 related。配置 SHA-256 baed259a681006e50e157c77f39cdaae9364b0b833cef6433fce15802c14b20f，
+目标 commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+生成 2026-07-26T14:16:45.947252Z，
+审阅 2026-07-26T18:00:00Z。
+
+第十二部分：相关设计阅读。
+
+唔覆盖 agent_spec.json。
+
+va-agent-swarm 下：study/knowledge_router_agent.md 系完整规格同实现指南，
+版本 1.0，Production-Ready 状态，跨研究论文同最佳实践重新思考。
+领域涵盖 AI Filmmaking 同 AI Agents。
+哲学系 Spec-driven、critic-loop heavy、
+hybrid deterministic 加 learned routing、
+fully traceable、continuously improving。
+
+Specials redesign 文档大纲：Executive Summary、
+Purpose Success Criteria、Architecture Overview、
+Input Output Contract、Core Components 包括 Query Analyzer Intent Classifier、
+Planner for High-Complexity、Hybrid Retrieval Engine、
+Context Assembler、Explainer Traceability、
+Multi-Level Critic、Particular Use Case Implementations。
+
+核心内容好详尽。呢个系中央智能层确保每个代理精确获取知识。佢借鉴 2025-2026 研究包括 AgentRouter 嘅图引导 GNN 路由加性能监督、
+RopMura 或 RIRS 基于质心加迭代规划、Self-RAG 反思 token、
+CRAG 纠正检索、MasRouter 统一路由同 xAI Grok 多代理模式嘅生产模式。
+
+核心创新包括：Hybrid Routing Stack 从 Metadata-first 到 Cluster 或 Centroid semantic 到 Graph traversal 到 LLM ranker with reflection。
+Dual Planner 加 Router 处理复杂多跳创意或技术管道。
+内置 Multi-Level Critic 受 Self-RAG 启发评估检索质量、
+路由决策同下游效用。Performance-Supervised Improvement 从实际代理成功获取软标签。
+Traceable 加 Explainable by design。
+Training-free bootstrap 用 RopMura 风格加可选学习组件。
+Domain packs 用于关键代理。
+
+架构概览：请求代理发送结构化请求到 Knowledge Router Agent，
+内部有 Query Analyzer 加 Intent Classifier with reflection、
+Planner for complex queries、Hybrid Retrieval Engine 包含 Metadata Hard Filters 快速确定性、
+Cluster Centroid Semantic Retriever RopMura 式、
+Graph Explorer AgentRouter 式、LLM Ranker Reflection Self-RAG 式。
+然后 Context Assembler 组装知识、Explainer 提供完整推理追踪、
+Multi-Level Critic 评估。
+
+知识库包含 5000 以上 md 文件加丰富 YAML Frontmatter、
+Vector Store、Knowledge Graph 同可选预计算 Centroids。
+
+关键设计原则：Metadata First 硬约束消除 70-80% 无关文件。
+Graph-Guided Intelligence 利用概念间关系。
+Iterative Refinement 做复杂查询。
+
+成功标准：检索精度大于等于 88%，延迟标准查询小于 4 秒 p95 复杂小于 8 秒，
+100% 决策产出可解释追踪，路由准确度随时间通过 critic 反馈改善，
+成本效率避免过度检索。
+
+本地知识索引同 Folder README 标准结构。
+
+第十三部分：host 合约。
+
+权威配置标准：agent_id specials.knowledge-router-agent，
+其余同其他 specials 代理一致。
+
+第十四部分：SPEC 责任摘录。
+
+拥有 knowledge router agent 设计成果作为 draft data-only 表示。
+系中央智能层确保精确知识路由。借鉴多项研究创新包括 Hybrid Routing Stack、
+Dual Planner Router、Multi-Level Critic、
+Performance-Supervised Improvement、
+Traceable Explainable、Training-free bootstrap 同 Domain packs。
+可直接实现或输入 coding agents。
+
+第十五部分：文档控制。
+
+标准配置。
+
+好啦，以上就系 Knowledge Router Agent 嘅完整指南。
+呢个代理系整个多代理系统嘅知识命脉，确保每个专家代理都获得精确嘅知识支持。
+多谢收睇，下条片见。
+
+我再详细讲吓 Knowledge Router 嘅核心组件同架构。
+Query Analyzer 加 Intent Classifier 系第一个组件。
+佢分析请求代理嘅查询，
+理解边个喺问、问乜嘢、点解要问。
+加入 reflection 机制做自我校正。
+如果初始分类唔确定会重新评估。
+Planner 系第二个组件，
+处理高复杂度或管道式查询。
+对于需要多跳推理嘅复杂问题，
+Planner 会分解成多个子步骤。
+每个步骤嘅结果会影响下一步嘅检索策略。
+Hybrid Retrieval Engine 系核心心脏。
+有四个层次嘅检索策略。
+第一层系 Metadata Hard Filters，
+用确定性嘅元数据筛选快速消除无关文件。
+呢个步骤可以即时消除 70 到 80% 嘅无关内容。
+第二层系 Cluster 或 Centroid Semantic Retriever，
+受 RopMura 启发用语义质心做检索。
+唔需要预训练就可以 bootstrap 启动。
+第三层系 Graph Explorer，
+受 AgentRouter 启发用异构图神经网络或轻量遍历。
+利用知识图谱中概念之间嘅关系做更智能嘅路由。
+例如「角色一致性技术改善 Seedance 中嘅多镜头叙事」
+呢种关系可以引导到更相关嘅知识。
+第四层系 LLM Ranker 加 Reflection，
+受 Self-RAG 启发做最终排序。
+加入反思 token 评估检索结果嘅质量。
+如果结果唔够好会触发重新检索。
+Context Assembler 系第四个组件。
+将原始 chunks 或综合知识包或结构化知识组装起嚟。
+根据请求代理嘅需要选择最合适嘅格式。
+Explainer 系第五个组件提供完整推理追踪。
+100% 嘅决策都产出人类可读加结构化嘅追踪。
+你可以准确知道点解呢啲文件被选中，
+经过边啲检索策略同排序步骤。
+Multi-Level Critic 系第六个组件系自我改善核心。
+评估三个层面：检索质量、路由决策质量同下游效用。
+检索质量评估返回嘅文件系咪真系相关。
+路由决策评估整体策略系咪正确。
+下游效用评估请求代理用咗知识后表现有冇改善。
+呢啲评估反馈回嚟持续改善路由准确度。
+知识库方面有超过五千个 md 文件。
+每个文件都有丰富嘅 YAML Frontmatter，
+包括 agent_relevance、tags、category、quality_score 等。
+Vector Store 存储嵌入加元数据筛选。
+Knowledge Graph 有节点包括技术、工具、失败模式、论文、代理，
+关系包括 improves、requires、common_failure、used_with。
+可选有预计算嘅 Centroids 按领域或代理集群分组。
+成功标准好严格：
+检索精度要大于等于 88% 通过 critic 或人类评估。
+路由决策质量要有可测量嘅下游代理成功提升。
+延迟标准查询小于 4 秒 p95，复杂查询小于 8 秒。
+可解释性 100% 决策有追踪。
+持续改善路由准确度随时间通过 critic 反馈提升。
+成本效率避免过度检索支持成本感知路由。
+呢个系一个好成熟嘅知识路由系统设计。
+确保每个代理都能得到佢需要嘅精确知识支持。

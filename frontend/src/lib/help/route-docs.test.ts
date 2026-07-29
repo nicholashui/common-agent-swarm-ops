@@ -30,13 +30,21 @@ test("stripDynamicRouteSegments drops ids and keeps static segments", () => {
   );
 });
 
-test("resolveHelpMarkdownCandidates prefers exact then stripped", () => {
+test("resolveHelpMarkdownCandidates prefers pack user_guide for agent detail", () => {
   const paths = resolveHelpMarkdownCandidates(
-    "/registry/agents/video.x",
+    "/registry/agents/specials.aesthetics-agent",
     "userguide",
   );
-  assert.equal(paths[0], "/docs/registry/agents/video.x/userguide.md");
+  assert.equal(paths[0], "/docs/agents/specials.aesthetics-agent/user_guide.md");
+  assert.ok(paths.includes("/docs/agents/specials.aesthetics-agent/userguide.md"));
+  assert.ok(paths.includes("/docs/registry/agents/specials.aesthetics-agent/userguide.md"));
   assert.ok(paths.includes("/docs/registry/agents/userguide.md"));
+  assert.ok(paths.includes("/docs/userguide.md"));
+});
+
+test("resolveHelpMarkdownCandidates prefers exact then stripped for non-agent routes", () => {
+  const paths = resolveHelpMarkdownCandidates("/registry", "userguide");
+  assert.equal(paths[0], "/docs/registry/userguide.md");
   assert.ok(paths.includes("/docs/userguide.md"));
 });
 

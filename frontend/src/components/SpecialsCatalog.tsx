@@ -2,8 +2,8 @@
 
 /**
  * @duty SpecialsCatalog — specials pack catalog panel
- * @role List draft/non-active specials agents; local search; never production-activate.
- * @controls Search input; in-app links; announce-only buttons fail-closed if governed.
+ * @role List draft/non-active specials agents; share Registry Hub filters; never production-activate.
+ * @controls Optional local search bound to parent registry search; in-app links.
  * @must Show disclaimer/draft status; SafeContent for untrusted summary text.
  * @mustnot Activate specials or claim production readiness.
  * @redesign docs/frontend_redesign/component_duty_catalog.md §3.5; ui_07_registry_hub.md embed
@@ -14,25 +14,45 @@ import Link from "next/link";
 import {
   type SpecialsLandingView,
 } from "../lib/projections/specials-landing";
-import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { L } from "../lib/projections/screen-labels";
+import { filterSpecialAgents } from "../lib/ui/registry-filters";
 import { SafeContent } from "./projection/SafeContent";
 
 export function SpecialsCatalog({
-  view }: Readonly<{ view: SpecialsLandingView }>): JSX.Element {
+  view,
+  search = "",
+  activeFacets,
+  domainFacets = ["video", "specials"],
+  onSearchChange,
+}: Readonly<{
+  view: SpecialsLandingView;
+  /** Shared Registry Hub search string (filters this pack too). */
+  search?: string;
+  activeFacets?: ReadonlySet<string>;
+  domainFacets?: readonly string[];
+  /** When set, specials search box drives the shared registry search. */
+  onSearchChange?: (value: string) => void;
+}>): JSX.Element {
   const labels = view.labels;
-  const [query, setQuery] = useState("");
+  const facets = activeFacets ?? new Set<string>();
+  const [localQuery, setLocalQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
-  const agents = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (q.length === 0) return view.agents;
-    return view.agents.filter(
-      (agent) =>
-        agent.title.toLowerCase().includes(q)
-        || agent.agentId.toLowerCase().includes(q)
-        || agent.summary.toLowerCase().includes(q),
-    );
-  }, [query, view.agents]);
+  // Prefer shared registry search when parent wires it; else local-only refine.
+  const effectiveSearch = onSearchChange ? search : localQuery || search;
+
+  const agents = useMemo(
+    () => filterSpecialAgents(view.agents, effectiveSearch, facets, domainFacets),
+    [domainFacets, effectiveSearch, facets, view.agents],
+  );
+
+  const onQueryChange = (value: string): void => {
+    if (onSearchChange) {
+      onSearchChange(value);
+      return;
+    }
+    setLocalQuery(value);
+  };
 
   return (
     <section aria-label={L(labels, "special_agents_pack_catalog")} className="specials-catalog">
@@ -45,9 +65,10 @@ export function SpecialsCatalog({
         <label className="specials-catalog__search">
           <span className="visually-hidden">{L(labels, "search_special_agents")}</span>
           <input
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => onQueryChange(event.target.value)}
             placeholder={L(labels, "search_specials_by_id_or_title")}
-            value={query}
+            type="search"
+            value={onSearchChange ? search : localQuery}
           />
         </label>
       </header>
@@ -56,6 +77,18 @@ export function SpecialsCatalog({
         {view.disclaimer}
       </p>
 
+      {effectiveSearch.trim().length > 0 || facets.size > 0 ? (
+        <p className="specials-catalog__filter-note" role="status">
+          Showing <strong>{agents.length}</strong> of {view.agents.length} specials
+          {effectiveSearch.trim().length > 0
+            ? ` · query: “${effectiveSearch.trim()}”`
+            : ""}
+          {facets.size > 0
+            ? ` · facets: ${[...facets].join(", ")}`
+            : ""}
+        </p>
+      ) : null}
+
       {statusMessage ? (
         <p aria-live="polite" className="specials-catalog__status" role="status">
           {statusMessage}
@@ -63,7 +96,11 @@ export function SpecialsCatalog({
       ) : null}
 
       {agents.length === 0 ? (
-        <p className="specials-catalog__empty">{view.emptyLabel}</p>
+        <p className="specials-catalog__empty">
+          {effectiveSearch.trim().length > 0 || facets.size > 0
+            ? "No special agents match the current registry search or facets."
+            : view.emptyLabel}
+        </p>
       ) : (
         <ul className="specials-catalog__list">
           {agents.map((agent) => (

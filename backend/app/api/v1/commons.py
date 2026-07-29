@@ -17,6 +17,8 @@ from app.api.v1.schemas import (
     ProposalCreateRequest,
     ProposalCreateResponse,
     PublicError,
+    RolloutCreateRequest,
+    RolloutCreateResponse,
     SwarmCreateResponse,
 )
 
@@ -196,6 +198,94 @@ async def run_agent_playground(
         )
     assert result is not None
     return result
+
+
+@router.post(
+    "/agents/{agent_id}/rollouts",
+    response_model=RolloutCreateResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+async def create_agent_rollout(
+    agent_id: str,
+    request: RolloutCreateRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> RolloutCreateResponse:
+    """Start a sandbox/canary A/B or safe rollout for a catalog agent.
+
+    Requires a Host-issued action reference (``rollout.ab_test`` or
+    ``rollout.safe_all``). Never activates production traffic or mutates
+    published commons versions.
+    """
+    record = facade.create_rollout(
+        organization_id=context.organization_id,
+        actor_id=context.actor_id,
+        correlation_id=context.correlation_id,
+        agent_id=agent_id,
+        action_reference_id=request.action_reference_id,
+        rollout_type=request.type,
+        baseline_version=request.baseline_version,
+        candidate_version=request.candidate_version,
+        summary=request.summary or "",
+    )
+    if record is None:
+        _denied(
+            str(context.correlation_id),
+            "Rollout requires a current eligible action reference for this agent "
+            "(rollout.ab_test or rollout.safe_all).",
+        )
+    assert record is not None
+    return RolloutCreateResponse(
+        rollout_id=record.rollout_id,
+        agent_id=record.agent_id,
+        type=record.rollout_type,
+        baseline_version=record.baseline_version,
+        candidate_version=record.candidate_version,
+        status=record.status,
+        correlation_id=str(context.correlation_id),
+        production_activation=False,
+    )
+
+
+@router.get("/rollouts/{rollout_id}")
+async def read_rollout(
+    rollout_id: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Read a sandbox/canary rollout campaign."""
+    payload = facade.get_rollout(context.organization_id, rollout_id)
+    if payload is None:
+        _not_found(str(context.correlation_id))
+    assert payload is not None
+    return payload
+
+
+@router.get("/rollouts/{rollout_id}/impact")
+async def read_rollout_impact(
+    rollout_id: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Impact projection for a canary rollout (no production mutation)."""
+    payload = facade.rollout_impact(context.organization_id, rollout_id)
+    if payload is None:
+        _not_found(str(context.correlation_id))
+    assert payload is not None
+    return payload
+
+
+@router.get("/agents/{agent_id}/rollouts")
+async def list_agent_rollouts(
+    agent_id: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+    limit: Annotated[int, Query(ge=1, le=100)] = 50,
+) -> dict[str, Any]:
+    """List rollouts for one agent (org-scoped)."""
+    return facade.list_rollouts(
+        context.organization_id, agent_id=agent_id, limit=limit
+    )
 
 
 @router.get("/patterns")

@@ -98,6 +98,24 @@ class ProposalRecord:
 
 
 @dataclass
+class RolloutRecord:
+    """Bounded sandbox/canary rollout (A/B or safe rollout). Never auto-promotes production."""
+
+    rollout_id: str
+    organization_id: str
+    agent_id: str
+    rollout_type: str  # ab_test | safe_rollout
+    baseline_version: str
+    candidate_version: str
+    status: str  # pending | active_canary | stopped | rolled_back
+    actor_id: str
+    created_at: datetime
+    correlation_id: str
+    criteria: list[dict[str, Any]] = field(default_factory=list)
+    summary: str = ""
+
+
+@dataclass
 class SwarmRecord:
     swarm_id: str
     organization_id: str
@@ -136,6 +154,7 @@ class ProductFacadeService:
         self._catalog: tuple[PackAgentCatalogEntry, ...] | None = None
         self._actions: dict[str, ActionRefRecord] = {}
         self._proposals: dict[str, ProposalRecord] = {}
+        self._rollouts: dict[str, RolloutRecord] = {}
         self._swarms: dict[str, SwarmRecord] = {}
         self._activity: list[ActivityRecord] = []
         self._patterns: tuple[dict[str, Any], ...] = (
@@ -324,6 +343,20 @@ class ProductFacadeService:
                 resource_ref=agent.agent_id,
                 eligible=True,
             ),
+            self.issue_action(
+                organization_id=organization_id,
+                kind="rollout.ab_test",
+                label="A/B Test vs newer",
+                resource_ref=agent.agent_id,
+                eligible=True,
+            ),
+            self.issue_action(
+                organization_id=organization_id,
+                kind="rollout.safe_all",
+                label="Safe Rollout All",
+                resource_ref=agent.agent_id,
+                eligible=True,
+            ),
         ]
         return [self.action_payload(r) for r in refs]
 
@@ -465,7 +498,206 @@ class ProductFacadeService:
                     )
                 )
             ],
+            "versions": [
+                {
+                    "id": "current",
+                    "label": agent.version_label or "current",
+                    "status": agent.status,
+                    "role": "baseline",
+                },
+                {
+                    "id": "candidate",
+                    "label": "candidate (proposal/sandbox)",
+                    "status": "draft",
+                    "role": "candidate",
+                },
+            ],
+            "rollout_defaults": {
+                "baseline_version": "current",
+                "candidate_version": "candidate",
+                "note": (
+                    "A/B and safe rollout create sandbox canary campaigns only. "
+                    "Production promotion requires separate evidence and approval."
+                ),
+            },
             "freshness": {"as_of": _utc_now().isoformat(), "state": "cached"},
+        }
+
+    def create_rollout(
+        self,
+        *,
+        organization_id: OrganizationId,
+        actor_id: ActorId,
+        correlation_id: CorrelationId,
+        agent_id: str,
+        action_reference_id: str,
+        rollout_type: str,
+        baseline_version: str,
+        candidate_version: str,
+        summary: str = "",
+    ) -> RolloutRecord | None:
+        """Create a fail-closed sandbox/canary rollout (A/B or safe rollout).
+
+        Does not mutate published commons or activate production traffic.
+        """
+        expected = (
+            "rollout.ab_test"
+            if rollout_type == "ab_test"
+            else "rollout.safe_all"
+            if rollout_type == "safe_rollout"
+            else None
+        )
+        if expected is None:
+            return None
+        action = self.consume_action(
+            organization_id=organization_id,
+            action_reference_id=action_reference_id,
+            expected_kind=expected,
+            resource_ref=agent_id,
+        )
+        if action is None or self.get_agent(agent_id) is None:
+            return None
+        baseline = (baseline_version or "current").strip() or "current"
+        candidate = (candidate_version or "candidate").strip() or "candidate"
+        if baseline == candidate:
+            return None
+        now = _utc_now()
+        criteria: list[dict[str, Any]] = [
+            {
+                "id": "eval_gate",
+                "label": "Evaluation harness gate",
+                "status": "pending",
+            },
+            {
+                "id": "error_budget",
+                "label": "Error budget within bounds",
+                "status": "pending",
+            },
+            {
+                "id": "human_signoff",
+                "label": "Human promotion approval",
+                "status": "pending",
+            },
+        ]
+        if rollout_type == "ab_test":
+            criteria.insert(
+                0,
+                {
+                    "id": "pairwise_preference",
+                    "label": "A/B pairwise preference vs baseline",
+                    "status": "pending",
+                },
+            )
+        record = RolloutRecord(
+            rollout_id=_new_id("roll"),
+            organization_id=str(organization_id),
+            agent_id=agent_id,
+            rollout_type=rollout_type,
+            baseline_version=baseline,
+            candidate_version=candidate,
+            status="active_canary",
+            actor_id=str(actor_id),
+            created_at=now,
+            correlation_id=str(correlation_id),
+            criteria=criteria,
+            summary=summary
+            or (
+                f"A/B canary {candidate} vs {baseline} for {agent_id}"
+                if rollout_type == "ab_test"
+                else f"Safe rollout canary for {agent_id} ({candidate})"
+            ),
+        )
+        with self._lock:
+            self._rollouts[record.rollout_id] = record
+            self._activity.append(
+                ActivityRecord(
+                    activity_id=_new_id("acty"),
+                    organization_id=str(organization_id),
+                    category="rollout",
+                    severity="info",
+                    summary=record.summary,
+                    subject_reference=record.rollout_id,
+                    occurred_at=now,
+                    correlation_id=str(correlation_id),
+                    status=record.status,
+                )
+            )
+        return record
+
+    def get_rollout(
+        self, organization_id: OrganizationId, rollout_id: str
+    ) -> dict[str, Any] | None:
+        with self._lock:
+            record = self._rollouts.get(rollout_id)
+            if record is None or record.organization_id != str(organization_id):
+                return None
+            return self._rollout_payload(record)
+
+    def rollout_impact(
+        self, organization_id: OrganizationId, rollout_id: str
+    ) -> dict[str, Any] | None:
+        payload = self.get_rollout(organization_id, rollout_id)
+        if payload is None:
+            return None
+        return {
+            "rollout_id": rollout_id,
+            "agent_id": payload["agent_id"],
+            "baseline_version": payload["baseline_version"],
+            "candidate_version": payload["candidate_version"],
+            "impact": [
+                {
+                    "surface": "sandbox_canary",
+                    "scope": "organization",
+                    "traffic_percent": 0,
+                    "note": "No production traffic until authorize + promote.",
+                },
+                {
+                    "surface": "commons_published",
+                    "scope": "immutable",
+                    "change": "none",
+                    "note": "Published agent versions are not mutated by canary start.",
+                },
+            ],
+            "criteria": payload["criteria"],
+            "status": payload["status"],
+            "freshness": {"as_of": _utc_now().isoformat(), "state": "cached"},
+        }
+
+    def list_rollouts(
+        self, organization_id: OrganizationId, *, agent_id: str | None = None, limit: int = 50
+    ) -> dict[str, Any]:
+        with self._lock:
+            items = [
+                self._rollout_payload(r)
+                for r in self._rollouts.values()
+                if r.organization_id == str(organization_id)
+                and (agent_id is None or r.agent_id == agent_id)
+            ]
+        items.sort(key=lambda x: x["created_at"], reverse=True)
+        return {
+            "items": items[: max(1, min(limit, 100))],
+            "freshness": {"as_of": _utc_now().isoformat(), "state": "cached"},
+        }
+
+    @staticmethod
+    def _rollout_payload(record: RolloutRecord) -> dict[str, Any]:
+        return {
+            "rollout_id": record.rollout_id,
+            "agent_id": record.agent_id,
+            "type": record.rollout_type,
+            "baseline_version": record.baseline_version,
+            "candidate_version": record.candidate_version,
+            "status": record.status,
+            "summary": record.summary,
+            "criteria": list(record.criteria),
+            "actor_id": record.actor_id,
+            "correlation_id": record.correlation_id,
+            "created_at": record.created_at.isoformat(),
+            "production_activation": False,
+            "note": (
+                "Sandbox/canary only. Failed criteria block promotion; "
+                "no silent production apply."
+            ),
         }
 
     def create_proposal(

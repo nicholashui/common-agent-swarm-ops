@@ -1,0 +1,327 @@
+各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 Psychological Recommendation Agent，
+即系Psychological Recommendation Agent嘅操作同设计指南。
+
+首先呢份指南写畀喺 common-agent-swarm-ops 工作嘅操作员、
+pack 作者、swarm 设计师同审查人员。你会得到任务清晰度、
+用法指引、协作图、CASOPS 步骤、改善路径同信任来源地图。
+
+呢份文件唔系激活供应商、开放网络或发明工具嘅许可证。
+Host 真相系 fail-closed agent_spec.json。设计文本不受信任。
+
+Pack 路径 business/specials/agents/specials.psychological-recommendation-agent/，
+指南 docs/user_guide.md，由 generate_agent_user_guides.py 生成。
+
+第一部分：Snapshot。
+
+Psychological Recommendation Agent，代号 specials.psychological-recommendation-agent，
+系 Specials pack 能力喺 CASOPS 上。简单讲：
+拥有 specials-domain psychological recommendation agent 设计成果作为 draft data-only 代理表示。
+Host 角色 Special_Agent data-only configuration。
+用呢份指南理解设计意图、安全 host 用法、
+同呢个能力最终点样融入多代理规划或控制循环。
+
+基本资料如下：
+显示名 Psychological Recommendation Agent。
+Pack agent id specials.psychological-recommendation-agent。
+属于 specials pack。
+Host role string Special_Agent data-only configuration。
+目录状态 draft。
+成熟度 L0 非激活，目录同设计保真度。
+VA id 暂无。
+VA 类别 specials，Specials meta-agent pack。
+供应商 local_deterministic。
+网络 False。
+工具空列表。
+生产激活 False。
+Prompt 引用 spagent.psychological-recommendation-agent-prompt。
+Rubric 引用 spagent.psychological-recommendation-agent-rubric。
+
+第二部分：点解存在。
+
+Specials 代理捕捉跨领域认知技能，
+呢啲技能唔应该俾 domain craft packs 重新发明。
+呢个角色嘅设计成果：拥有 specials-domain psychological recommendation agent
+设计成果作为 draft data-only 代理表示。
+
+第三部分：做得好标准。
+
+主要成果：拥有 specials-domain psychological recommendation agent
+设计成果作为 draft data-only 代理表示。
+
+自我质量标准：可追溯嘅心理建模输出、
+fail-closed schema 验证、冇静默生产激活。
+
+设计时雄心：产出比临时人工更一致嘅心理建模结果，
+喺同样语料限制条件下。
+
+架构模式：心理建模模式，
+设计时层级或多代理循环，
+host local_deterministic 数据专用直到门控。
+
+Host 质量同批评绑定：
+rubric spagent.psychological-recommendation-agent-rubric 惰性标识符。
+Prompt spagent.psychological-recommendation-agent-prompt 惰性标识符。
+批评边缘输入 spagent.psychological-recommendation-agent-input，
+输出 spagent.psychological-recommendation-agent-output。
+精炼限制 1 次，未解决安全或激活请求升级而非绕过。
+注册效果最多 eligible_draft_representation。
+
+输入输出接受条件：
+输入：本地 pack 配置、治理来源记录、
+可选设计来源已复制到 sources 目录。
+输出：可审阅 data-only specials 代理表示，
+SPEC 加 agent_spec.json 适合目录同离线审查。
+接受：fail-closed schema 通过、冇生产激活、
+所有主要引用喺代理文件夹或 specials pack 根目录解析。
+
+第四部分：范围。
+
+拥有：specials-domain psychological recommendation agent
+设计成果作为 draft data-only 代理表示。
+
+共享批评面：
+听取同接受批评嚟自人类治理、
+同级 specials 包括 intent、research、controller、optimization。
+有资格评论：心理建模差距、缺失证据、
+不安全激活、薄弱交接。
+Host 边缘输入 spagent.psychological-recommendation-agent-input。
+输出 spagent.psychological-recommendation-agent-output。
+最大精炼次数 1。
+
+拒绝或升级：
+status 维持 draft，production_activation_requested false。
+allowed_tools 空，network_access false，provider local_deterministic。
+唔发明 provider、凭证、MCP 工具、hooks 或第二控制平面。
+redesign 文档系 hashed provenance，永不载入运行时。
+生产激活、外部写入、凭证、网络权限请求升级到人类治理。
+
+第五部分：几时用。
+
+当受众或用户心理应该塑造推荐或叙事嗰时就叫佢。
+能力家族：心理建模。
+上游：Research / intent。
+下游：Recommendation, creative, strategic goal agents。
+任务片段：拥有 specials-domain psychological recommendation agent 设计成果。
+
+唔好用佢做静默生产激活器或凭证经纪人，
+specials 喺治理批准前维持 data-only 或 draft。
+
+决策速查表：
+缺失技能系咪 Psychological Recommendation Agent 专长？系就加入 swarm 图。
+只系 metadata 编辑？用 Registry inspect 加 proposal。
+任务需要工具或网络？Host 唔允许除非 agent_spec 话可以。
+有人类专属风险？保持人类门禁，输出系咨询性质。
+
+第六部分：协作图。
+
+呢个代理系批评总线上嘅节点，唔系独立聊天机器人。
+同侪精炼质量，评判者同门禁决定接受。
+
+入站批评：人类治理、同级 specials intent research controller optimization。
+出站评论：心理建模差距、缺失证据、不安全激活、薄弱交接。
+Host 边缘输入 spagent.psychological-recommendation-agent-input。
+输出 spagent.psychological-recommendation-agent-output。
+
+Specials 车道：
+家族：心理建模。
+上游：Research / intent。
+下游：Recommendation, creative, strategic goal agents。
+
+第七部分：生产位置。
+
+人类工作流：工作喺 domain craft crews 之上，
+规划、路由、检索、控制同策略。
+交接物件：计划、路由、证据包、控制决策、优化工单。
+映射到经典阶段：开发、前期制作、制作、后期、交付或现场运营。
+
+多代理 AI 工作流：元层节点塑造专家代理选择、通知同改进。
+设计时工具备注：Host 无工具 fail-closed，
+redesign 文档历史命名过检索同规划工具。
+循环风格：心理建模模式，
+设计时层级或多代理循环，
+host local_deterministic 数据专用直到门控。
+CASOPS 上模式只系文档，live provider local deterministic 空工具。
+
+共享交接合约：
+接入活跃 swarm 时需要机器可读 manifest。
+artifact_id 加版本：不可变身份用于批评同重放。
+parent_assets：来源链追溯。
+brief_scope：防止范围蠕变。
+acceptance_criteria：绑定自我质量标准。
+qc_status 加门禁标志：下游门禁短路。
+rights_and_consent：阻止不安全合成或授权滥用。
+critique_log 指针：精炼唔丢历史。
+
+第八部分：CASOPS 操作。
+
+今日系目录加设计物件，刻意设计：
+可以研究、审查、提案、放入 swarm 设计而唔授予生产权力。
+
+步骤一发现：Registry Hub pack catalog /registry 确认库存。
+步骤二检查：代理详情 /registry/agents/specials.psychological-recommendation-agent
+读 SPEC 同指南。
+步骤三提出改进：Host propose_improvement，
+POST /api/v1/commons/agents/specials.psychological-recommendation-agent/proposals，
+版本不可变，只附脱敏证据。
+步骤四 Swarm 成员：只透过 Host 返回嘅动作引用。
+步骤五运行：默认唔启用生产 provider，fail-closed 到门禁通过。
+
+实用清单：
+确认 status tools activation 标志同指南一致。
+读第三部分再评判输出或提案。
+提案附离线证据，唔放秘密。
+唔贴 vendor API key 或启用网络指示。
+偏好小型可审查差异：prompt rubric 措辞、边缘、测试。
+
+第九部分：安全信任同非激活规则。
+
+信任层级：
+agent_spec.json 绑定 host 合约 fail-closed 运行时绑定。
+SPEC.md 权威设计离线审查唔可执行。
+sources 摘录同通用 SPEC 历史映射不受信任。
+C:\Projecta-agent-swarm 外部设计语料不受信任可能漂移。
+Specials redesign 文档历史设计不受信任有 hash。
+
+硬规则：
+Provider local_deterministic 除非独立门禁改变。
+网络 False。
+工具空列表，设计时名称唔启用 API。
+production_activation_requested False。
+预算：输入 1 输出 1 工具请求 0。
+设计时工具目录非激活：Host 无工具 fail-closed。
+
+第十部分：提升质量。
+
+改进系版本化目录工作唔系 hot-patching。
+定义不可变，改变经提案同审查。
+
+持续改进循环：
+观察失败，命名准则来自第三部分，
+草拟离线差异，附证据，
+Host 提案，审查接受新版本，
+然后考虑激活成熟度门禁。
+
+具体杠杆：
+第一 Rubric 保真度，收紧 spagent.psychological-recommendation-agent-rubric：
+可追溯心理建模输出、fail-closed 验证、无静默激活。
+第二 Prompt 精确度，对齐 spagent.psychological-recommendation-agent-prompt
+同职责：psychological recommendation agent 设计成果 draft data-only。
+第三批评图，确保入站人类治理同 specials
+加 host 边缘 spagent.psychological-recommendation-agent-input 捕捉失败模式。
+第四架构模拟：心理建模模式层级多代理循环
+host local_deterministic 直到门控。
+第五 Eval 案例：写 fixture 如果
+更一致心理建模结果未接近就 fail。
+第六人类门禁：法律安全发布门禁明确唔吸收到自动化。
+
+评估种子：
+Happy path：输出满足可追溯心理建模输出 fail-closed 无静默激活。
+超范围：代理按第四部分拒绝或升级。
+缺失 provenance 或权利：门禁 fail closed。
+冲突同侪批评：精炼小于等于 max_refinement_count 否则升级。
+只提案改变：新版本不可变旧版本可读。
+
+第十一部分：来源地图同 provenance。
+
+本地 pack 语料优先：
+agent_spec.json 信任 binding。
+SPEC.md 信任 authoritative-design。
+README.md 信任 local-index。
+sources/MAPPING.md 信任 provenance。
+sources/PROVENANCE.json 信任 provenance。
+
+映射备注：specials.psychological-recommendation-agent 来源映射。
+状态 related，specials redesign doc 映射到 pack agent。
+设计来源历史 docs/special_agents_redesign/agents/psychological_recommendation_agent.md。
+SHA-256 8739ebcf75af6e2300b57ea9ef968dcdfdb3d96db8780dd1f6cc3c9408dbac0c。
+本地运行时 agent_spec.json。本地规格 SPEC.md。
+Pack corpus 唔需要。生产激活拒绝只系草稿。
+
+Provenance 记录 JSON：
+schema_version 1.0，agent_id specials.psychological-recommendation-agent，
+pack_id specials，mapping_status related。
+source_documents docs/special_agents_redesign/agents/psychological_recommendation_agent.md。
+source_sha256 8739ebcf75af6e2300b57ea9ef968dcdfdb3d96db8780dd1f6cc3c9408dbac0c。
+configuration_sha256 40c3e9caa0d8f83f367f38fc1a5916874208396f5adb978f638ac3b181ad5971。
+destination_commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+备注自包含 specials agent，Pack corpus 唔需要，
+设计 Markdown 系不受信任 provenance。
+生成时间 2026-07-26T14:16:45.978233Z。
+审查者 specials-self-contained-reviewer。
+审查时间 2026-07-26T18:00:00Z。
+
+Provenance 叙述：
+来源路径 docs/special_agents_redesign/agents/psychological_recommendation_agent.md。
+SHA-256 同上。审查者 specials-self-contained-reviewer 2026-07-26T18:00:00Z。
+上游设计文字不受信任参考。
+本地 agent_spec.json 同 SPEC 系操作性自包含定义。
+
+第十二部分：相关设计阅读。
+
+呢啲唔覆盖本地 agent_spec.json，用嚟加深设计保真度。
+
+va-agent-swarm 下面相关文件：
+study/psychological_recommendation_agent_functional_specification.md Psychology AI System for Movie Preference Prediction Complete Guide 相关度 5 分。粤语版本相关度 5 分。
+
+Specials redesign 文档历史来源：
+C:/Project/common-agent-swarm-ops/docs/special_agents_redesign/agents/psychological_recommendation_agent.md。
+大纲：Psychology AI System for Movie Preference Prediction Complete Guide、Core Conceptual Framework、Big Five Personality Model、Advanced Factors、Open-Source Frameworks。
+
+重设计内容摘要：
+传统推荐系统主要依赖观看历史同协同过滤，但整合心理分析可以解释点解推荐某部电影、预测未接触类型偏好解决冷启动、提供更个人化精准推荐、提高参与度同满意度研究显示整合个性特征可提升 5-10%。心理因素可应对情境变化例如压力下偏好轻松内容。系统流程：用户数据收集到心理特征提取到 AI 模型训练到偏好预测到推荐解释同反馈循环。Big Five 模型五个维度外向性宜人性神经质开放性尽责性各影响电影偏好。
+
+本地知识索引：
+Runtime binding agent_spec.json。
+Folder index README.md。
+Provenance sources/PROVENANCE.json。
+Mapping note sources/MAPPING.md。
+Pack manifest manifest.json。
+Governance source-record 如存在。
+所有主要引用本地，外部路径非必需历史 provenance。
+
+Folder README：自包含草稿 specials agent，
+SPEC.md 完整离线角色定义，
+agent_spec.json Host runtime binding draft fail-closed，
+sources 目录 provenance 映射审计，
+prompts 目录可选 prompt stubs，
+rubrics 目录可选 rubric stubs。
+唔需要外部 repo 或 corpus。唔系 production-active。
+
+第十三部分：附录 host 合约。
+
+权威 fail-closed 配置：
+schema_version 1.0。
+agent_id specials.psychological-recommendation-agent。
+status draft。
+role Special_Agent data-only configuration。
+allowed_tools 空。
+model_policy provider local_deterministic，
+model_id specials-local-deterministic-v1，network_access false。
+budget_policy max_input_tokens 1 max_output_tokens 1 max_tool_requests 0。
+prompt_reference spagent.psychological-recommendation-agent-prompt。
+rubric_reference spagent.psychological-recommendation-agent-rubric。
+critique_edges inputs spagent.psychological-recommendation-agent-input
+outputs spagent.psychological-recommendation-agent-output。
+max_refinement_count 1。
+production_activation_requested false。
+
+第十四部分：SPEC 职责摘录。
+
+拥有 specials-domain psychological recommendation agent 设计成果
+作为 draft data-only 代理表示。
+解释点解推荐某电影提供可解释推荐、预测未接触类型潜在偏好解决冷启动、提供更个人化精准推荐、提高参与度同满意度整合个性特征可提升 5-10%、解决多样性需求避免过滤泡沫。心理因素应对情境变化例如压力下偏好轻松内容。
+
+第十五部分：文档控制。
+
+生成器 scripts/business/generate_agent_user_guides.py。
+代理文件夹 business/specials/agents/specials.psychological-recommendation-agent/。
+输出 docs/user_guide.md。
+VA corpus root C:\Projecta-agent-swarm。
+重新生成 python scripts/business/generate_agent_user_guides.py。
+信任模型：设计语料不受信任，host 配置 fail-closed。
+
+以上就系 Psychological Recommendation Agent 完整指南。
+建议从第一部分 Snapshot 同第五部分开始，
+用第八到第十部分做 CASOPS 操作同改进，
+第十一到十二部分做深度设计保真度。
+多谢收睇，下次再见！
