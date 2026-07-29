@@ -1,150 +1,150 @@
-各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 Controller Agent，
-即系控制器代理嘅操作同设计指南。
+各位觀衆朋友大家好，歡迎返嚟我哋嘅頻道。今日呢條片我哋要詳細講解嘅系 Controller Agent，
+即系控制器代理嘅操作同設計指南。
 
-首先呢份指南写畀喺 common-agent-swarm-ops 工作嘅操作员、
-pack 作者、swarm 设计师同审查人员。你会得到任务清晰度、
-用法指引、协作图、CASOPS 步骤、改善路径同信任来源地图。
+首先呢份指南寫畀喺 common-agent-swarm-ops 工作嘅操作員、
+pack 作者、swarm 設計師同審查人員。你會得到任務清晰度、
+用法指引、協作圖、CASOPS 步驟、改善路徑同信任來源地圖。
 
-呢份文件唔系激活供应商、开放网络或发明工具嘅许可证。Host 真相系 fail-closed agent_spec.json。
-设计文本不受信任。
+呢份文件唔系激活供應商、開放網絡或發明工具嘅許可證。Host 真相系 fail-closed agent_spec.json。
+設計文本不受信任。
 
-Pack 路径 business/specials/agents/specials.controller-agent/，
+Pack 路徑 business/specials/agents/specials.controller-agent/，
 指南 docs/user_guide.md。
 
 第一部分：Snapshot。
 
-Controller Agent，代号 specials.controller-agent，
-系 Specials pack 能力喺 CASOPS 上。简单讲：
-拥有 specials-domain controller agent 设计成果作为 draft data-only 代理表示。
+Controller Agent，代號 specials.controller-agent，
+系 Specials pack 能力喺 CASOPS 上。簡單講：
+擁有 specials-domain controller agent 設計成果作爲 draft data-only 代理表示。
 Host 角色 Special_Agent data-only configuration。
 
-基本资料：显示名 Controller Agent，Pack agent id specials.controller-agent，
-specials pack。目录状态 draft，成熟度 L0 非激活。
-供应商 local_deterministic，网络 False，
-工具空，生产激活 False。Prompt 同 rubric 引用 spagent.controller-agent-prompt 同 spagent.controller-agent-rubric。
+基本資料：顯示名 Controller Agent，Pack agent id specials.controller-agent，
+specials pack。目錄狀態 draft，成熟度 L0 非激活。
+供應商 local_deterministic，網絡 False，
+工具空，生產激活 False。Prompt 同 rubric 引用 spagent.controller-agent-prompt 同 spagent.controller-agent-rubric。
 
-第二部分：点解存在。
+第二部分：點解存在。
 
-Specials 代理捕捉跨领域认知技能。呢个角色：拥有 specials-domain controller agent 设计成果作为 draft data-only 表示。
+Specials 代理捕捉跨領域認知技能。呢個角色：擁有 specials-domain controller agent 設計成果作爲 draft data-only 表示。
 
-第三部分：做得好标准。
+第三部分：做得好標準。
 
-主要成果：拥有 controller agent 设计成果。
+主要成果：擁有 controller agent 設計成果。
 
-自我质量标准：control and orchestration 嘅可追溯输出、
-fail-closed schema 验证、冇静默生产激活。
+自我質量標準：control and orchestration 嘅可追溯輸出、
+fail-closed schema 驗證、冇靜默生產激活。
 
-设计时雄心：产出比临时人工更一致嘅控制同编排结果。
+設計時雄心：產出比臨時人工更一致嘅控制同編排結果。
 
-架构模式：Control and orchestration pattern，
-设计时层级或多代理循环，host local_deterministic 数据专用直到门控。
+架構模式：Control and orchestration pattern，
+設計時層級或多代理循環，host local_deterministic 數據專用直到門控。
 
-Host 批评绑定：rubric spagent.controller-agent-rubric 惰性。
-Prompt 同名惰性。边缘输入 spagent.controller-agent-input 输出 spagent.controller-agent-output。
-精炼 1。
+Host 批評綁定：rubric spagent.controller-agent-rubric 惰性。
+Prompt 同名惰性。邊緣輸入 spagent.controller-agent-input 輸出 spagent.controller-agent-output。
+精煉 1。
 
-输入输出接受：本地配置、治理记录、sources 来源。输出可审阅 data-only 表示。
-接受 fail-closed 通过、冇激活、引用本地。
+輸入輸出接受：本地配置、治理記錄、sources 來源。輸出可審閱 data-only 表示。
+接受 fail-closed 通過、冇激活、引用本地。
 
-第四部分：范围。
+第四部分：範圍。
 
-拥有：controller agent 设计成果作为 draft data-only 表示。
+擁有：controller agent 設計成果作爲 draft data-only 表示。
 
-分享：接受人类治理同同伴 specials 批评。评论 control and orchestration 差距、
-缺失证据、不安全激活、薄弱交接。边缘如上。最大精炼 1。
+分享：接受人類治理同同伴 specials 批評。評論 control and orchestration 差距、
+缺失證據、不安全激活、薄弱交接。邊緣如上。最大精煉 1。
 
-拒绝升级：status draft，activation false。
-tools 空 network false。唔发明任何嘢。redesign 哈希来源。
-请求升级人类治理。
+拒絕升級：status draft，activation false。
+tools 空 network false。唔發明任何嘢。redesign 哈希來源。
+請求升級人類治理。
 
-第五部分：几时用。
+第五部分：幾時用。
 
-当多个专家需要有政策同预算嘅协调执行嗰阵调用。能力家族 Control and orchestration。
+當多個專家需要有政策同預算嘅協調執行嗰陣調用。能力家族 Control and orchestration。
 典型上游 Planner 或 strategic goal agents。
 典型下游 Specialist workers 同 evaluation loops。
 
-具体任务：拥有 controller agent 设计成果。
+具體任務：擁有 controller agent 設計成果。
 
-唔好当做静默激活器或凭证中介。
+唔好當做靜默激活器或憑證中介。
 
-决策速查：技能属于本代理专长纳入 swarm 图。元数据用 Registry。工具网络唔允许。人类风险保留门控。
+決策速查：技能屬於本代理專長納入 swarm 圖。元數據用 Registry。工具網絡唔允許。人類風險保留門控。
 
-第六部分：协作地图。
+第六部分：協作地圖。
 
-批评总线节点。入站人类治理同同伴 specials。出站 control and orchestration 差距、
-缺失证据、不安全激活、薄弱交接。
+批評總線節點。入站人類治理同同伴 specials。出站 control and orchestration 差距、
+缺失證據、不安全激活、薄弱交接。
 
 Specials 通道：家族 Control and orchestration，
 上游 Planner 或 strategic goal agents，
 下游 Specialist workers 同 evaluation loops。
 
-第七部分：生产位置。
+第七部分：生產位置。
 
-人类工作流：领域手艺团队之上。交接制品计划、路线、证据包、控制决策、优化工单。映射经典阶段。
+人類工作流：領域手藝團隊之上。交接製品計劃、路線、證據包、控制決策、優化工單。映射經典階段。
 
-多代理 AI 工作流：元层节点。设计时工具 host 冇 fail-closed。
-运行时 Control and orchestration pattern host local_deterministic 直到门控。
-今日只文档。
+多代理 AI 工作流：元層節點。設計時工具 host 冇 fail-closed。
+運行時 Control and orchestration pattern host local_deterministic 直到門控。
+今日只文檔。
 
-Swarm-ready 合约：artifact_id 版本、parent_assets、
+Swarm-ready 合約：artifact_id 版本、parent_assets、
 brief_scope、acceptance_criteria、
 qc_status gate flags、rights_and_consent、
 critique_log。
 
 第八部分：CASOPS 操作。
 
-目录加设计对象。步骤：发现 /registry。检查 /registry/agents/specials.controller-agent。
-提议 POST proposals。Swarm 成员 Host 引用。
-运行默认唔启用。
+目錄加設計對象。步驟：發現 /registry。檢查 /registry/agents/specials.controller-agent。
+提議 POST proposals。Swarm 成員 Host 引用。
+運行默認唔啓用。
 
-实际清单：确认 flags。读第三部分。附证据。唔贴密钥。细小增量。
+實際清單：確認 flags。讀第三部分。附證據。唔貼密鑰。細小增量。
 
 第九部分：安全信任非激活。
 
-信任层级：agent_spec.json binding。SPEC.md 权威设计。
-sources 不受信任。外部语料库不受信任。redesign 历史有哈希。
+信任層級：agent_spec.json binding。SPEC.md 權威設計。
+sources 不受信任。外部語料庫不受信任。redesign 歷史有哈希。
 
-硬规则：provider local_deterministic。
-网络 False。工具空。activation False。预算 1/1/0。
-设计时工具非激活。
+硬規則：provider local_deterministic。
+網絡 False。工具空。activation False。預算 1/1/0。
+設計時工具非激活。
 
-第十部分：提升质量。
+第十部分：提升質量。
 
-有版本目录工作。循环：观察、命名、起草、附证据、提议、审阅、门控。
+有版本目錄工作。循環：觀察、命名、起草、附證據、提議、審閱、門控。
 
-杠杆：rubric 收紧针对 control and orchestration 输出。
-prompt 对齐。批评图捕捉失败。架构模拟 Control and orchestration pattern。
-评估案例。人类门控。
+槓桿：rubric 收緊針對 control and orchestration 輸出。
+prompt 對齊。批評圖捕捉失敗。架構模擬 Control and orchestration pattern。
+評估案例。人類門控。
 
-评估种子：Happy path 满足。Out-of-scope 拒绝。
+評估種子：Happy path 滿足。Out-of-scope 拒絕。
 Missing provenance fail closed。
-Conflicting critique 限制。Proposal-only 不可变。
+Conflicting critique 限制。Proposal-only 不可變。
 
-第十一部分：来源地图。
+第十一部分：來源地圖。
 
-本地优先：agent_spec.json binding，SPEC.md authoritative-design，
+本地優先：agent_spec.json binding，SPEC.md authoritative-design，
 README.md local-index，MAPPING.md provenance，
 PROVENANCE.json provenance。
 
-映射：specials.controller-agent 状态 related。
-历史来源 docs/special_agents_redesign/agents/controller_agent.md。
+映射：specials.controller-agent 狀態 related。
+歷史來源 docs/special_agents_redesign/agents/controller_agent.md。
 SHA-256 ab695387fe27a4fb05d5b861d5f9daceea37a29511c49afce35751ca0b1f564a。
-本地运行时 agent_spec.json。Pack 语料库唔需要。
+本地運行時 agent_spec.json。Pack 語料庫唔需要。
 
-来源记录：schema_version 1.0，common_agent_id specials.controller-agent，
+來源記錄：schema_version 1.0，common_agent_id specials.controller-agent，
 pack_id specials，映射 related。配置 SHA-256 b4a488e7b4ff9749af0645bcc3b7ea7e4dc2f6cd160ccb2709bf3e5cb075dbdf，
-目标 commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
+目標 commit 5460c4b4a33c15286f9fd84b1bc764d755f5bab0。
 生成 2026-07-26T14:16:45.930785Z，
-审阅 2026-07-26T18:00:00Z。
+審閱 2026-07-26T18:00:00Z。
 
-来源叙述：设计来源路径同 SHA-256 如上。审阅者确认。上游文本不受信任。本地文件系操作性定义。
+來源敘述：設計來源路徑同 SHA-256 如上。審閱者確認。上游文本不受信任。本地文件系操作性定義。
 
-第十二部分：相关设计阅读。
+第十二部分：相關設計閱讀。
 
-唔覆盖 agent_spec.json。va-agent-swarm 下冇强关键词匹配。
+唔覆蓋 agent_spec.json。va-agent-swarm 下冇強關鍵詞匹配。
 
-Specials redesign 文档历史来源 C:/Project/common-agent-swarm-ops/docs/special_agents_redesign/agents/controller_agent.md。
-大纲：Controller Agent Controllable Video Generation Pipeline、
+Specials redesign 文檔歷史來源 C:/Project/common-agent-swarm-ops/docs/special_agents_redesign/agents/controller_agent.md。
+大綱：Controller Agent Controllable Video Generation Pipeline、
 Core Philosophy、Proven Methods Extracted from Key YouTube Videos、
 Mickmumpitz Free Local AI Render Engine、
 Multi-Character Camera Control、
@@ -155,116 +155,116 @@ Polish、Control Signal Priority、
 Recommended Tool Stack、Agent Behavior Guidelines、
 Quick Decision Matrix、Learning Resources。
 
-核心内容好丰富。呢个系专门用于生成高度可控视频内容嘅代理，用混合 Blender 草稿建模加 AI 视频扩散嘅方法。
+核心內容好豐富。呢個系專門用於生成高度可控視頻內容嘅代理，用混合 Blender 草稿建模加 AI 視頻擴散嘅方法。
 
-核心哲学：2026 年最好嘅可控视频生成方法系用 Blender 构建完整草稿，
-包括灰盒、低多边形、布局加动画但唔系最终 4K 美渲染。然后导出结构控制信号包括深度、
-边缘、姿态、运动视频、首帧、口型遮罩。再将呢啲输入到现代视频生成模型例如 LTX、
-Wan VACE、Seedance 等产出最终电影效果。Blender 等于精确导演负责镜头、
-时间、布局、姿态。AI 等于高端渲染器加细节、光照、材质生成器。
+核心哲學：2026 年最好嘅可控視頻生成方法系用 Blender 構建完整草稿，
+包括灰盒、低多邊形、佈局加動畫但唔系最終 4K 美渲染。然後導出結構控制信號包括深度、
+邊緣、姿態、運動視頻、首幀、口型遮罩。再將呢啲輸入到現代視頻生成模型例如 LTX、
+Wan VACE、Seedance 等產出最終電影效果。Blender 等於精確導演負責鏡頭、
+時間、佈局、姿態。AI 等於高端渲染器加細節、光照、材質生成器。
 
-从 YouTube 提取嘅验证方法方面：Mickmumpitz 嘅 Free Local AI Render Engine 用 ComfyUI 加 Blender。
-完整生产流程包括：第一喺 Blender 生成资产用 NVIDIA 指南加 Llama 3.1 做头脑风暴，
-TRELLIS 生成 3D 资产。第二导出控制通道包括深度通道、
-轮廓通道用 Workbench 引擎、口型遮罩用于唇部同步。第三用 Flux 做风格锁定同参考帧。
-第四用 LTX-2.3 做视频生成。第五用 NVIDIA RTX Video Super Resolution 升级到 4K 再 DaVinci Resolve 做最终装配。
+從 YouTube 提取嘅驗證方法方面：Mickmumpitz 嘅 Free Local AI Render Engine 用 ComfyUI 加 Blender。
+完整生產流程包括：第一喺 Blender 生成資產用 NVIDIA 指南加 Llama 3.1 做頭腦風暴，
+TRELLIS 生成 3D 資產。第二導出控制通道包括深度通道、
+輪廓通道用 Workbench 引擎、口型遮罩用於脣部同步。第三用 Flux 做風格鎖定同參考幀。
+第四用 LTX-2.3 做視頻生成。第五用 NVIDIA RTX Video Super Resolution 升級到 4K 再 DaVinci Resolve 做最終裝配。
 
-多角色加镜头控制方面：训练角色 LoRA，用区域钩子或遮罩确保每个 LoRA 只应用到对应角色区域。
-用 Hunyuan 3D 生成 3D 角色然后 Rigify 确保比例同姿态跨镜头一致。
+多角色加鏡頭控制方面：訓練角色 LoRA，用區域鉤子或遮罩確保每個 LoRA 只應用到對應角色區域。
+用 Hunyuan 3D 生成 3D 角色然後 Rigify 確保比例同姿態跨鏡頭一致。
 
 Rob Tuytel 混合方法都有提及。
 
-完整端到端工作流分五个阶段：Phase 1 预制作、Phase 2 Blender 草稿控制层、
-Phase 3 风格锁定同参考创建、Phase 4 受控视频生成、
+完整端到端工作流分五個階段：Phase 1 預製作、Phase 2 Blender 草稿控制層、
+Phase 3 風格鎖定同參考創建、Phase 4 受控視頻生成、
 Phase 5 打磨。
 
-控制信号优先级、推荐工具栈 2026 版 YouTube 验证版、代理行为指南、快速决策矩阵同学习资源都有涵盖。
+控制信號優先級、推薦工具棧 2026 版 YouTube 驗證版、代理行爲指南、快速決策矩陣同學習資源都有涵蓋。
 
-本地知识索引同 Folder README 标准结构。
+本地知識索引同 Folder README 標準結構。
 
-第十三部分：host 合约。
+第十三部分：host 合約。
 
-权威配置：schema_version 1.0，agent_id specials.controller-agent，
+權威配置：schema_version 1.0，agent_id specials.controller-agent，
 status draft，role Special_Agent data-only configuration，
 tools 空，provider local_deterministic，
 network false，budget 1/1/0，prompt rubric edges max_refinement 如上，
 production_activation_requested false。
 
-第十四部分：SPEC 责任摘录。
+第十四部分：SPEC 責任摘錄。
 
-拥有 controller agent 设计成果作为 draft data-only 表示。
-系专门用于生成高度可控视频内容嘅代理或系统提示或剧本，用混合 Blender 草稿建模加 AI 视频扩散方法。
-整合研究支持嘅最佳实践同从相关生产 YouTube 工作流提取嘅具体技术。
+擁有 controller agent 設計成果作爲 draft data-only 表示。
+系專門用於生成高度可控視頻內容嘅代理或系統提示或劇本，用混合 Blender 草稿建模加 AI 視頻擴散方法。
+整合研究支持嘅最佳實踐同從相關生產 YouTube 工作流提取嘅具體技術。
 
-第十五部分：文档控制。
+第十五部分：文檔控制。
 
-生成器、Agent 文件夹、输出、VA 语料库、重新生成命令同信任模型同其他代理一致。
+生成器、Agent 文件夾、輸出、VA 語料庫、重新生成命令同信任模型同其他代理一致。
 
-好啦，以上就系 Controller Agent 嘅完整指南。
-呢个代理专注于可控视频生成，结合 Blender 同 AI 嘅混合方法。
-多谢收睇，下条片见。
+好啦，以上就係 Controller Agent 嘅完整指南。
+呢個代理專注於可控視頻生成，結合 Blender 同 AI 嘅混合方法。
+多謝收睇，下條片見。
 
-我再详细补充吓 Controller Agent 嘅视频生成流程。
-呢个代理嘅核心哲学好清晰：
-用 Blender 构建完整嘅草稿作为精确导演，
-然后用 AI 做高端渲染产出最终效果。
-Blender 负责镜头角度、时间节奏、布局同姿态。
-AI 负责细节、光照、材质嘅生成。
-呢个混合方法系 2026 年最有效嘅可控视频生成方式。
-从 Mickmumpitz 嘅教程提取嘅流程好详细。
-第一步系喺 Blender 入面生成资产。
+我再詳細補充嚇 Controller Agent 嘅視頻生成流程。
+呢個代理嘅核心哲學好清晰：
+用 Blender 構建完整嘅草稿作爲精確導演，
+然後用 AI 做高端渲染產出最終效果。
+Blender 負責鏡頭角度、時間節奏、佈局同姿態。
+AI 負責細節、光照、材質嘅生成。
+呢個混合方法系 2026 年最有效嘅可控視頻生成方式。
+從 Mickmumpitz 嘅教程提取嘅流程好詳細。
+第一步系喺 Blender 入面生成資產。
 用 NVIDIA Video Generation Guide 嘅 Blender 插件，
-配合 Llama 3.1 做对象头脑风暴。
+配合 Llama 3.1 做對象頭腦風暴。
 TRELLIS 系 Microsoft 嘅工具喺 ComfyUI 入面使用，
-可以从文本或预览生成带几何同纹理嘅 3D 资产。
-优化网格要用 Decimate 加 Merge by Distance。
-角色方面用 TRELLIS 生成然后 Rigify 自动绑定，
-手动修正权重绑定。建议头同身体分开。
-可选加入眼球做眼睛控制测试。
-第二步系控制通道嘅导出，呢个非常关键。
-深度通道：View Layer 启用 Depth，
-Compositor 入面做 Invert 加可选 Normalize 同 RGB Curve，
-增强前景然后导出图像序列或视频。
-轮廓通道：切换到 Workbench 引擎启用 Outline 加 Cavity，
-渲染黑白视频。替代方案有 Freestyle 或 ComfyUI 中嘅 Canny。
-口型遮罩用于唇部同步：
-喺口部区域动画化黑色遮罩，
-黑色等于 AI 可以自由生成嘅区域用于唇部运动。
+可以從文本或預覽生成帶幾何同紋理嘅 3D 資產。
+優化網格要用 Decimate 加 Merge by Distance。
+角色方面用 TRELLIS 生成然後 Rigify 自動綁定，
+手動修正權重綁定。建議頭同身體分開。
+可選加入眼球做眼睛控制測試。
+第二步系控制通道嘅導出，呢個非常關鍵。
+深度通道：View Layer 啓用 Depth，
+Compositor 入面做 Invert 加可選 Normalize 同 RGB Curve，
+增強前景然後導出圖像序列或視頻。
+輪廓通道：切換到 Workbench 引擎啓用 Outline 加 Cavity，
+渲染黑白視頻。替代方案有 Freestyle 或 ComfyUI 中嘅 Canny。
+口型遮罩用於脣部同步：
+喺口部區域動畫化黑色遮罩，
+黑色等於 AI 可以自由生成嘅區域用於脣部運動。
 可以喺 After Effects 或 Blender Cryptomatte 做。
-第三步系风格锁定同参考帧用 Flux。
+第三步系風格鎖定同參考幀用 Flux。
 用 Flux.2 klein 或 Flux 9B 工作流。
-输入包括来自 Blender 嘅 clay/depth/outline，
-加上最多四张参考图片可以合成到一张。
-从任何着色提取 Canny。
-迭代三个以上种子。输出用作引导或中间帧。
-第四步系视频生成用 LTX-2.3。
+輸入包括來自 Blender 嘅 clay/depth/outline，
+加上最多四張參考圖片可以合成到一張。
+從任何着色提取 Canny。
+迭代三個以上種子。輸出用作引導或中間幀。
+第四步系視頻生成用 LTX-2.3。
 ComfyUI 工作流用 JSON 拖放。
-模型有 LTX-2.3 FP8、NVFP4 针对 50 系列优化、GGUF 低显存版。
-输入包括参考图片序列、深度加轮廓合并、可选口型遮罩、对话音频。
-关键设置有驱动视频强度越低越自由、
-引导帧开始中间结束加强度例如 0.75、唇部同步激活。
-分辨率要整除 64。提示描述时间事件同表情。
-速度范例约两分钟 330 帧喺 RTX 5090 上。
-第五步系升级同完成。
-用 NVIDIA RTX Video Super Resolution 节点免费升到 4K。
-最终装配喺 DaVinci Resolve 做音频、SFX、轻度调色、模拟效果。
-关键提示：骨骼唔需要完美因为只系 AI 嘅引导。
-深度加轮廓合并可以得到最强嘅结构。
-口型遮罩解决控制通道上嘅静态唇部问题。
-预合并开始同结束帧可以减少镜头扭曲伪影。
+模型有 LTX-2.3 FP8、NVFP4 針對 50 系列優化、GGUF 低顯存版。
+輸入包括參考圖片序列、深度加輪廓合併、可選口型遮罩、對話音頻。
+關鍵設置有驅動視頻強度越低越自由、
+引導幀開始中間結束加強度例如 0.75、脣部同步激活。
+分辨率要整除 64。提示描述時間事件同表情。
+速度範例約兩分鐘 330 幀喺 RTX 5090 上。
+第五步系升級同完成。
+用 NVIDIA RTX Video Super Resolution 節點免費升到 4K。
+最終裝配喺 DaVinci Resolve 做音頻、SFX、輕度調色、模擬效果。
+關鍵提示：骨骼唔需要完美因爲只系 AI 嘅引導。
+深度加輪廓合並可以得到最強嘅結構。
+口型遮罩解決控制通道上嘅靜態脣部問題。
+預合併開始同結束幀可以減少鏡頭扭曲僞影。
 多角色控制方面：
-训练角色 LoRA 用多角度多表情数据集。
-用区域钩子或遮罩确保每个 LoRA 只影响对应区域。
-用 SAM2 自动分割或手动做区域遮罩。
-Hunyuan 3D 生成 3D 角色然后清理再 Rigify 确保一致性。
-导出深度同 tile ControlNet 参考。
-用关键帧插值 ControlNet 强度前高后低，
-锁定构图同时允许细节生成。
-环境方面用 360 度 Flux 加倒深度图作为发射纹理。
-完整工作流五个阶段清晰分工，
-从预制作到最终打磨每步都有明确嘅输入输出。
+訓練角色 LoRA 用多角度多表情數據集。
+用區域鉤子或遮罩確保每個 LoRA 隻影響對應區域。
+用 SAM2 自動分割或手動做區域遮罩。
+Hunyuan 3D 生成 3D 角色然後清理再 Rigify 確保一致性。
+導出深度同 tile ControlNet 參考。
+用關鍵幀插值 ControlNet 強度前高後低，
+鎖定構圖同時允許細節生成。
+環境方面用 360 度 Flux 加倒深度圖作爲發射紋理。
+完整工作流五個階段清晰分工，
+從預製作到最終打磨每步都有明確嘅輸入輸出。
 
-最后总结：Controller Agent 嘅核心价值在于将精确控制同 AI 创意结合。
-Blender 提供像素级嘅精确控制。
-AI 提供照片级嘅真实感同细节。
-两者结合产出嘅结果远超任何单一方法。
+最後總結：Controller Agent 嘅核心價值在於將精確控制同 AI 創意結合。
+Blender 提供像素級嘅精確控制。
+AI 提供照片級嘅真實感同細節。
+兩者結合產出嘅結果遠超任何單一方法。

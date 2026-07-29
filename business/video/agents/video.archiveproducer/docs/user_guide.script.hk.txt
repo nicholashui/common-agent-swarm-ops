@@ -1,222 +1,222 @@
-各位观众朋友大家好，欢迎返嚟我哋嘅频道。今日呢条片我哋要详细讲解嘅系 ArchiveProducerAgent，
-即系档案制作代理嘅操作同设计指南。
+各位觀衆朋友大家好，歡迎返嚟我哋嘅頻道。今日呢條片我哋要詳細講解嘅系 ArchiveProducerAgent，
+即系檔案製作代理嘅操作同設計指南。
 
-首先讲吓呢份指南系写畀边个睇嘅。呢份文件主要系写畀喺 common-agent-swarm-ops 入面工作嘅操作员、
-pack 作者、swarm 设计师同埋审查人员。睇完之后你会得到乜嘢呢？
-你会清楚了解呢个角色嘅任务定位、几时应该用佢嘅指引、协作关系图、
-喺 CASOPS 上面点样操作嘅步骤、改善路径，仲有一个分信任层级嘅来源地图。
+首先講嚇呢份指南系寫畀邊個睇嘅。呢份文件主要系寫畀喺 common-agent-swarm-ops 入面工作嘅操作員、
+pack 作者、swarm 設計師同埋審查人員。睇完之後你會得到乜嘢呢？
+你會清楚瞭解呢個角色嘅任務定位、幾時應該用佢嘅指引、協作關係圖、
+喺 CASOPS 上面點樣操作嘅步驟、改善路徑，仲有一個分信任層級嘅來源地圖。
 
-不过要讲清楚，呢份文件唔系一个畀你激活供应商、开放网络访问或者自己发明工具嘅许可证。
+不過要講清楚，呢份文件唔系一個畀你激活供應商、開放網絡訪問或者自己發明工具嘅許可證。
 Host 嘅真相系 fail-closed 嘅 agent_spec.json。
-来自 VA 或者 redesign 文档嘅设计文本属于不受信任嘅来源。
+來自 VA 或者 redesign 文檔嘅設計文本屬於不受信任嘅來源。
 
-呢个 agent 嘅 pack 路径系 business/video/agents/video.archiveproducer/，
+呢個 agent 嘅 pack 路徑系 business/video/agents/video.archiveproducer/，
 指南就喺 docs/user_guide.md，由 scripts/business/generate_agent_user_guides.py 生成。
 
-好，我哋入正题，先睇第一部分：Snapshot，即系快照概览。
+好，我哋入正題，先睇第一部分：Snapshot，即系快照概覽。
 
-ArchiveProducerAgent，代号 video.archiveproducer，
-系一个 Video Domain Pack 角色，运行喺 CASOPS 平台上面。
-用简单嘅话讲，呢个代理嘅职责系将档案素材同来源资产打包，
-服务于重复使用率高嘅或者纪录片类型嘅工作流。
-呢份指南系一个畀人类操作员睇嘅地图，用于目录审阅、swarm 设计同提案驱动嘅改善，
-而唔系一个运行时激活许可证。
+ArchiveProducerAgent，代號 video.archiveproducer，
+系一個 Video Domain Pack 角色，運行喺 CASOPS 平臺上面。
+用簡單嘅話講，呢個代理嘅職責系將檔案素材同來源資產打包，
+服務於重複使用率高嘅或者紀錄片類型嘅工作流。
+呢份指南系一個畀人類操作員睇嘅地圖，用於目錄審閱、swarm 設計同提案驅動嘅改善，
+而唔系一個運行時激活許可證。
 
-睇吓佢嘅基本资料：显示名称系 ArchiveProducerAgent，
+睇嚇佢嘅基本資料：顯示名稱系 ArchiveProducerAgent，
 Pack agent id 系 video.archiveproducer，
-属于 video pack。Host 角色字串系 ArchiveProducerAgent (VA Domain Pack)。
-目录状态系 registered。成熟度系 L0，即系非激活状态，
-主要做目录同设计保真度。VA id 系 105，VA 类别系 10-Sup，
+屬於 video pack。Host 角色字串系 ArchiveProducerAgent (VA Domain Pack)。
+目錄狀態系 registered。成熟度系 L0，即系非激活狀態，
+主要做目錄同設計保真度。VA id 系 105，VA 類別系 10-Sup，
 即系 Workflow support 同 release gates。
-供应商系 media_host，网络访问系 True，
-允许嘅工具系 media.stub、media.sora、media.veo、media.runway。
-生产激活请求系 True。
-Prompt 同 rubric 嘅引用分别系 video.prompt.archiveproducer.v1 同 video.rubric.archiveproducer.v1。
+供應商系 media_host，網絡訪問系 True，
+允許嘅工具系 media.stub、media.sora、media.veo、media.runway。
+生產激活請求系 True。
+Prompt 同 rubric 嘅引用分別系 video.prompt.archiveproducer.v1 同 video.rubric.archiveproducer.v1。
 之前嘅 common id 系 video.video_generation_operator。
 Generic lineage 系 generic-swarm-ops/business/video/agents/video.archiveproducer。
 
-第二部分：点解呢个角色存在。
+第二部分：點解呢個角色存在。
 
-人类嘅视频制作团队已经喺时间压力下解决紧呢个问题：
-将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
-呢个代理形式存在嘅原因系令到多代理系统可以持续编码呢种手艺，
-喺每次交接嘅时候应用佢，只将剩余风险升级畀人类处理。
+人類嘅視頻製作團隊已經喺時間壓力下解決緊呢個問題：
+將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
+呢個代理形式存在嘅原因系令到多代理系統可以持續編碼呢種手藝，
+喺每次交接嘅時候應用佢，只將剩餘風險升級畀人類處理。
 
-佢嘅知识库系从以下来源蒸馏出嚟嘅：Archive production notes、
+佢嘅知識庫系從以下來源蒸餾出嚟嘅：Archive production notes、
 source curation practices、provenance preservation standards。
-呢啲系历史设计来源，唔系喺呢个 host 上面做实时网络调用。
+呢啲系歷史設計來源，唔系喺呢個 host 上面做實時網絡調用。
 
-设计雄心，即系超越人类嘅信号系：
-比手动嘅收集同排序工作流更加整洁咁组装可重用嘅档案包。
-当你之后写评估或提案嘅时候，用呢个做北极星指标。
+設計雄心，即系超越人類嘅信號系：
+比手動嘅收集同排序工作流更加整潔咁組裝可重用嘅檔案包。
+當你之後寫評估或提案嘅時候，用呢個做北極星指標。
 
 第三部分：乜嘢叫做「做得好」。
 
-呢度列出嘅标准系你审阅输出、撰写评分准则或者评分提案嗰阵要用嘅。
+呢度列出嘅標準系你審閱輸出、撰寫評分準則或者評分提案嗰陣要用嘅。
 
-主要成果方面：将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
+主要成果方面：將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
 
-自我质量标准系：来源包嘅完整性、权利覆盖范围、来源追溯保存。
+自我質量標準系：來源包嘅完整性、權利覆蓋範圍、來源追溯保存。
 
-设计时嘅雄心信号系：比手动嘅收集同排序工作流更加整洁咁组装可重用档案包。
+設計時嘅雄心信號系：比手動嘅收集同排序工作流更加整潔咁組裝可重用檔案包。
 
-架构模式系 ReAct over archival manifests。
+架構模式系 ReAct over archival manifests。
 
-Host 质量同批评绑定方面：Prompt 引用系 video.prompt.archiveproducer.v1，
+Host 質量同批評綁定方面：Prompt 引用系 video.prompt.archiveproducer.v1，
 Rubric 引用系 video.rubric.archiveproducer.v1。
-批评边缘系输入 video.critic，输出 video.judge。
-最大精炼次数系 3。VA 表格质量标准保留喺上面嘅来源同身份表面。
+批評邊緣系輸入 video.critic，輸出 video.judge。
+最大精煉次數系 3。VA 表格質量標準保留喺上面嘅來源同身份表面。
 
-输入输出同接受标准方面：输入系本地 pack 制品同类型化嘅交接。
-输出系可审阅嘅视频领域交付物，带有接受标准。
-接受条件系 host 政策加本地 SPEC 标准，唔需要外部存储库。
+輸入輸出同接受標準方面：輸入系本地 pack 製品同類型化嘅交接。
+輸出系可審閱嘅視頻領域交付物，帶有接受標準。
+接受條件系 host 政策加本地 SPEC 標準，唔需要外部存儲庫。
 
-第四部分：范围，即系拥有乜嘢、分享乜嘢、拒绝乜嘢。
+第四部分：範圍，即系擁有乜嘢、分享乜嘢、拒絕乜嘢。
 
-拥有方面：将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
+擁有方面：將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
 
-同同伴分享方面，即系批评表面：接受嚟自 ArchiveResearchAgent、
-JournalistAgent 同 LegalAgent 嘅批评。
-有资格评论嘅范围系缺失嘅档案上下文、薄弱嘅来源打包、权利差距。
-Host 批评边缘输入系 video.critic，输出系 video.judge。
-最大精炼次数系 3。
+同同伴分享方面，即系批評表面：接受嚟自 ArchiveResearchAgent、
+JournalistAgent 同 LegalAgent 嘅批評。
+有資格評論嘅範圍系缺失嘅檔案上下文、薄弱嘅來源打包、權利差距。
+Host 批評邊緣輸入系 video.critic，輸出系 video.judge。
+最大精煉次數系 3。
 
-拒绝或升级方面：Fail-closed，冇供应商激活、冇网络、冇从设计文本嚟嘅凭证。
-production_activation_requested 保持 false 除非有另外嘅人类门控改变佢。
-法律、安全、权利同发布决定都升级到必需嘅人类门控。
-批评主导同判官默认使用 VA ID video.critic 同 video.judge。
+拒絕或升級方面：Fail-closed，冇供應商激活、冇網絡、冇從設計文本嚟嘅憑證。
+production_activation_requested 保持 false 除非有另外嘅人類門控改變佢。
+法律、安全、權利同發佈決定都升級到必需嘅人類門控。
+批評主導同判官默認使用 VA ID video.critic 同 video.judge。
 
-第五部分：几时应该用呢个代理。
+第五部分：幾時應該用呢個代理。
 
-当你嘅工作产品需要 ArchiveProducerAgent 拥有嘅决策或制品嘅时候就应该叫佢：
-即系将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
+當你嘅工作產品需要 ArchiveProducerAgent 擁有嘅決策或製品嘅時候就應該叫佢：
+即系將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
 
-管线阶段系 Workflow support 同 release gates，
-即系支持功能同最终发布门控，包括无障碍访问、品牌、法律、档案等。
+管線階段系 Workflow support 同 release gates，
+即系支持功能同最終發佈門控，包括無障礙訪問、品牌、法律、檔案等。
 
-唔好叫佢做通用编排、预算批准或最终法律签字，
-除非呢啲职责明确列喺佢嘅责任范围入面。
+唔好叫佢做通用編排、預算批准或最終法律簽字，
+除非呢啲職責明確列喺佢嘅責任範圍入面。
 用 producer、legal 或者 compliance 同伴嚟代替。
 
-人类覆盖方面：任何阻止发布嘅安全、权利或无障碍争议都会升级到人类门控，
-即使代理喺未来嘅活跃运行时会自动通过。
+人類覆蓋方面：任何阻止發佈嘅安全、權利或無障礙爭議都會升級到人類門控，
+即使代理喺未來嘅活躍運行時會自動通過。
 
-决策速查表方面：如果缺失嘅技能属于 ArchiveProducerAgent 嘅专长，
-就应该将佢纳入该阶段嘅 swarm 图。如果只系元数据或目录编辑，
-就用 Registry inspect 加 proposal，唔好发明运行时。
-如果任务需要工具或网络，host 目前唔允许，
-除非 agent_spec 加 permission register 另有说明。
-如果有人类专属风险，例如法律、伤害、权利相关，
-就保留人类门控，代理输出只系咨询性质直到被激活。
+決策速查表方面：如果缺失嘅技能屬於 ArchiveProducerAgent 嘅專長，
+就應該將佢納入該階段嘅 swarm 圖。如果只系元數據或目錄編輯，
+就用 Registry inspect 加 proposal，唔好發明運行時。
+如果任務需要工具或網絡，host 目前唔允許，
+除非 agent_spec 加 permission register 另有說明。
+如果有人類專屬風險，例如法律、傷害、權利相關，
+就保留人類門控，代理輸出只系諮詢性質直到被激活。
 
-第六部分：协作地图。
+第六部分：協作地圖。
 
-将呢个代理想象做一个「批评总线」上嘅节点，而唔系一个独立嘅聊天机器人。
-同伴精炼质量，判官同门控决定接受。
+將呢個代理想象做一個「批評總線」上嘅節點，而唔系一個獨立嘅聊天機器人。
+同伴精煉質量，判官同門控決定接受。
 
-入站批评嚟自 ArchiveResearchAgent、JournalistAgent 同 LegalAgent。
-出站评论涵盖缺失嘅档案上下文、薄弱嘅来源打包、权利差距。
-Host 边缘输入系 video.critic，输出系 video.judge。
+入站批評嚟自 ArchiveResearchAgent、JournalistAgent 同 LegalAgent。
+出站評論涵蓋缺失嘅檔案上下文、薄弱嘅來源打包、權利差距。
+Host 邊緣輸入系 video.critic，輸出系 video.judge。
 
-第七部分：佢喺生产中嘅位置。
+第七部分：佢喺生產中嘅位置。
 
-先讲人类生产工作流：支持功能同最终发布门控，
-包括无障碍访问、品牌、法律、档案等。
+先講人類生產工作流：支持功能同最終發佈門控，
+包括無障礙訪問、品牌、法律、檔案等。
 
-典型嘅交接制品包括门控决定、合规包、无障碍层、档案母版、修正。
+典型嘅交接製品包括門控決定、合規包、無障礙層、檔案母版、修正。
 
-将责任映射到经典阶段：开发、预制作、制作、后期制作、
-交付或实时运营。优先选择一个人类担任呢个职位嘅人会签字嘅阶段。
+將責任映射到經典階段：開發、預製作、製作、後期製作、
+交付或實時運營。優先選擇一個人類擔任呢個職位嘅人會簽字嘅階段。
 
-多代理 AI 工作流方面：门控同支持节点，
-喺发布之前或启动之后接受或拒绝交接。
+多代理 AI 工作流方面：門控同支持節點，
+喺發佈之前或啓動之後接受或拒絕交接。
 
-设计时嘅工具备注，对 host 无约束力：Archive asset managers、
+設計時嘅工具備註，對 host 無約束力：Archive asset managers、
 metadata systems、provenance logs。
 
-稍后实现运行时嗰阵要模拟嘅循环风格系 ReAct over archival manifests。
-喺今日嘅 CASOPS 上面，呢个模式只系文档，
-实际嘅 provider 系 local deterministic 加空或存根嘅工具白名单。
+稍後實現運行時嗰陣要模擬嘅循環風格系 ReAct over archival manifests。
+喺今日嘅 CASOPS 上面，呢個模式只系文檔，
+實際嘅 provider 系 local deterministic 加空或存根嘅工具白名單。
 
-喺本地 AI 工作流摘录入面嘅提及：
-Production 阶段有 DirectorAgent 加 CinematographerAgent (DoP)
+喺本地 AI 工作流摘錄入面嘅提及：
+Production 階段有 DirectorAgent 加 CinematographerAgent (DoP)
 加 ArchiveProducerAgent 加 MotionGraphicsAgent 加 FactCheckerAgent，
 由 LegalAgent 做 clearance。
 
-Swarm-ready 嘅共享交接合约方面：当你将呢个代理接入未来嘅活跃 swarm 时，
-需要节点之间嘅机器可读清单。包括 artifact_id 加版本提供不可变身份做批评同重播；
-parent_assets 提供来源链；brief_scope 阻止超出责任范围；
-acceptance_criteria 关联到上面提到嘅自我质量标准；
-qc_status 加 gate flags 畀下游门控做短路；
-rights_and_consent 阻止不安全嘅合成或许可滥用；
-critique_log 指针启用精炼而唔失去历史记录。
+Swarm-ready 嘅共享交接合約方面：當你將呢個代理接入未來嘅活躍 swarm 時，
+需要節點之間嘅機器可讀清單。包括 artifact_id 加版本提供不可變身份做批評同重播；
+parent_assets 提供來源鏈；brief_scope 阻止超出責任範圍；
+acceptance_criteria 關聯到上面提到嘅自我質量標準；
+qc_status 加 gate flags 畀下游門控做短路；
+rights_and_consent 阻止不安全嘅合成或許可濫用；
+critique_log 指針啓用精煉而唔失去歷史記錄。
 
-第八部分：今日点样喺 CASOPS 上面操作呢个代理。
+第八部分：今日點樣喺 CASOPS 上面操作呢個代理。
 
-今日呢个代理系一个目录加设计对象。呢个系故意嘅：
-你可以研究、审阅、提议同将佢放入 swarm 设计而唔需要授予生产权力。
+今日呢個代理系一個目錄加設計對象。呢個系故意嘅：
+你可以研究、審閱、提議同將佢放入 swarm 設計而唔需要授予生產權力。
 
-操作步骤如下：第一步系发现，去 Registry Hub 嘅 pack catalog，
-路径系 /registry，确认佢嘅库存成员身份。
-第二步系检查，去代理详情页 /registry/agents/video.archiveproducer，
-以 markdown 形式阅读 SPEC 或呢份指南。
-第三步系提议改善，用 Host 嘅 propose_improvement 动作，
+操作步驟如下：第一步系發現，去 Registry Hub 嘅 pack catalog，
+路徑系 /registry，確認佢嘅庫存成員身份。
+第二步系檢查，去代理詳情頁 /registry/agents/video.archiveproducer，
+以 markdown 形式閱讀 SPEC 或呢份指南。
+第三步系提議改善，用 Host 嘅 propose_improvement 動作，
 POST 到 /api/v1/commons/agents/video.archiveproducer/proposals，
-确保不可变版本同只有经过编辑嘅证据。
-第四步系 Swarm 成员资格，只有通过 Host 返回嘅动作引用先可以。
-客户端唔可以自己发明成员资格。
-第五步系运行或调度，默认唔启用生产供应商，fail-closed 直到治理门控通过。
+確保不可變版本同只有經過編輯嘅證據。
+第四步系 Swarm 成員資格，只有通過 Host 返回嘅動作引用先可以。
+客戶端唔可以自己發明成員資格。
+第五步系運行或調度，默認唔啓用生產供應商，fail-closed 直到治理門控通過。
 
-实际操作清单方面：第一，打开代理详情确认 status、tools 同 activation flags 同呢份指南一致。
-第二，喺判断任何样本输出或提案之前先阅读第三部分「乜嘢叫做做得好」。
-第三，如果提议改变，附上离线证据例如评估笔记、rubric 差距、SPEC delta，唔好附秘密。
-第四，永远唔好将供应商 API 密钥或「启用网络」嘅指令贴入提案。
-第五，偏好细小、可审阅嘅增量：prompt 或 rubric 措辞、批评边缘、接受测试。
+實際操作清單方面：第一，打開代理詳情確認 status、tools 同 activation flags 同呢份指南一致。
+第二，喺判斷任何樣本輸出或提案之前先閱讀第三部分「乜嘢叫做做得好」。
+第三，如果提議改變，附上離線證據例如評估筆記、rubric 差距、SPEC delta，唔好附祕密。
+第四，永遠唔好將供應商 API 密鑰或「啓用網絡」嘅指令貼入提案。
+第五，偏好細小、可審閱嘅增量：prompt 或 rubric 措辭、批評邊緣、接受測試。
 
-第九部分：安全、信任同非激活规则。
+第九部分：安全、信任同非激活規則。
 
-信任层级如下：agent_spec.json 系具有约束力嘅 host 合约，
-系 fail-closed 嘅运行时绑定。呢个 pack 嘅 SPEC.md 系权威性嘅设计文件，
-用于离线审阅，唔可执行。sources 下面嘅摘录同通用 SPEC 系历史或映射数据，
-属于不受信任。外部设计语料库 C:\Project\va-agent-swarm 系不受信任嘅，
-可能会漂移。Specials redesign 文档系历史设计，不受信任，喺来源中有哈希。
+信任層級如下：agent_spec.json 系具有約束力嘅 host 合約，
+系 fail-closed 嘅運行時綁定。呢個 pack 嘅 SPEC.md 系權威性嘅設計文件，
+用於離線審閱，唔可執行。sources 下面嘅摘錄同通用 SPEC 系歷史或映射數據，
+屬於不受信任。外部設計語料庫 C:\Project\va-agent-swarm 系不受信任嘅，
+可能會漂移。Specials redesign 文檔系歷史設計，不受信任，喺來源中有哈希。
 
-呢个 host 上面嘅硬规则：Provider 保持 media_host 除非有另外嘅门控改变政策。
-网络访问保持 True。
-允许嘅工具恰好系 media.stub、media.sora、media.veo、media.runway，
-下面嘅设计时工具名称唔会启用 API。
+呢個 host 上面嘅硬規則：Provider 保持 media_host 除非有另外嘅門控改變政策。
+網絡訪問保持 True。
+允許嘅工具恰好系 media.stub、media.sora、media.veo、media.runway，
+下面嘅設計時工具名稱唔會啓用 API。
 production_activation_requested 系 True。
-预算方面 token 同工具都有上限：输入 2048、输出 1024、工具请求 4。
-设计时工具目录系非激活嘅：Archive asset managers、metadata systems、provenance logs。
+預算方面 token 同工具都有上限：輸入 2048、輸出 1024、工具請求 4。
+設計時工具目錄系非激活嘅：Archive asset managers、metadata systems、provenance logs。
 
-第十部分：随时间提升质量。
+第十部分：隨時間提升質量。
 
-改善系有版本嘅目录工作，唔系热补丁一个活跃代理。
-已发布嘅定义保持不可变，改变要通过提案同审阅。
+改善繫有版本嘅目錄工作，唔系熱補丁一個活躍代理。
+已發佈嘅定義保持不可變，改變要通過提案同審閱。
 
-持续改善循环系：观察失败，命名标准（来自第三部分），起草离线增量，
-附上证据，喺 Host 上提议，审阅或接受新版本，然后先考虑激活成熟度门控。
+持續改善循環系：觀察失敗，命名標準（來自第三部分），起草離線增量，
+附上證據，喺 Host 上提議，審閱或接受新版本，然後先考慮激活成熟度門控。
 
-具体杠杆方面：第一，Rubric 保真度，将 video.rubric.archiveproducer.v1 针对以下标准收紧：
-来源包完整性、权利覆盖范围、来源追溯保存。
-第二，Prompt 精确度，将 video.prompt.archiveproducer.v1 同责任对齐：
-将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
-第三，批评图，确保入站嘅 ArchiveResearchAgent、JournalistAgent、LegalAgent
-以及 host 边缘 video.critic 真正捕捉到已知嘅失败模式。
-第四，架构模拟，稍后实现时偏好 ReAct over archival manifests。
-第五，评估案例，编写固定嘅测试 fixtures，
-如果「比手动收集排序工作流更整洁咁组装可重用档案包」呢个目标冇接近到就会失败。
-第六，人类门控，保持法律、安全、发布门控明确，唔好将佢哋吸收到静默自动化入面。
+具體槓桿方面：第一，Rubric 保真度，將 video.rubric.archiveproducer.v1 針對以下標準收緊：
+來源包完整性、權利覆蓋範圍、來源追溯保存。
+第二，Prompt 精確度，將 video.prompt.archiveproducer.v1 同責任對齊：
+將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
+第三，批評圖，確保入站嘅 ArchiveResearchAgent、JournalistAgent、LegalAgent
+以及 host 邊緣 video.critic 真正捕捉到已知嘅失敗模式。
+第四，架構模擬，稍後實現時偏好 ReAct over archival manifests。
+第五，評估案例，編寫固定嘅測試 fixtures，
+如果「比手動收集排序工作流更整潔咁組裝可重用檔案包」呢個目標冇接近到就會失敗。
+第六，人類門控，保持法律、安全、發佈門控明確，唔好將佢哋吸收到靜默自動化入面。
 
-建议嘅评估种子方面：Happy path handoff 嘅通过条件系输出满足来源包完整性、
-权利覆盖范围、来源追溯保存。Out-of-scope request 嘅条件系代理按照第四部分拒绝或升级。
-Missing provenance 或 rights 嘅条件系门控 fail closed。
-Conflicting peer critique 嘅条件系精炼次数小于等于 max_refinement_count，
-否则升级。Proposal-only change 嘅条件系新版本不可变，旧版本仍然可读。
+建議嘅評估種子方面：Happy path handoff 嘅通過條件系輸出滿足來源包完整性、
+權利覆蓋範圍、來源追溯保存。Out-of-scope request 嘅條件系代理按照第四部分拒絕或升級。
+Missing provenance 或 rights 嘅條件系門控 fail closed。
+Conflicting peer critique 嘅條件系精煉次數小於等於 max_refinement_count，
+否則升級。Proposal-only change 嘅條件系新版本不可變，舊版本仍然可讀。
 
-第十一部分：来源地图同来源追溯。
+第十一部分：來源地圖同來源追溯。
 
-本地 pack 语料库方面，优先使用呢啲：agent_spec.json 信任层级系 binding，
+本地 pack 語料庫方面，優先使用呢啲：agent_spec.json 信任層級系 binding，
 SPEC.md 系 authoritative-design，README.md 系 local-index，
 sources/MAPPING.md 系 provenance，sources/PROVENANCE.json 都系 provenance，
 sources/excerpts/agents.md 系 historical-excerpt，
@@ -224,57 +224,57 @@ sources/excerpts/ai_agent_video_production_workflow.md 系 historical-excerpt，
 sources/generic/video.promptengineer.SPEC.md 系 historical-generic，
 sources/generic/video.promptoptimizer.SPEC.md 系 historical-generic。
 
-映射备注：video.archiveproducer 嘅 VA/generic pack ID 系 video.archiveproducer，
+映射備註：video.archiveproducer 嘅 VA/generic pack ID 系 video.archiveproducer，
 之前嘅 common ID 系 video.video_generation_operator。
 SPEC 深度系 full generic SPEC body 加 host runtime binding。
 
-来源记录方面：schema_version 系 1.0，agent_id 系 video.archiveproducer，
+來源記錄方面：schema_version 系 1.0，agent_id 系 video.archiveproducer，
 previous_common_agent_id 系 video.video_generation_operator，
 va_taxonomy_aligned 系 true，
 generic_source 系 generic-swarm-ops/business/video/agents/video.archiveproducer。
-备注话系 Agent ID 对齐到 VA/generic Domain Pack 分类法，上游设计系历史性同非约束性嘅。
-对齐时间系 2026-07-27T00:48:11.023300Z。
+備註話系 Agent ID 對齊到 VA/generic Domain Pack 分類法，上游設計系歷史性同非約束性嘅。
+對齊時間系 2026-07-27T00:48:11.023300Z。
 Generic source depth 方面 excerpts 系 true，study 系 true，
 adopted_at 系 2026-07-27T01:30:27.640746+00:00，
 upstream 系 generic-swarm-ops/business/video/agents。
 
-来源叙述方面：Pack agent ID video.archiveproducer 对齐到纯 VA Domain Pack/
-generic pack 分类法。之前嘅 common inventory ID video.video_generation_operator 只系历史映射。
-上游设计主体系历史性同非约束性嘅，本地 agent_spec.json 系权威嘅。
-完整嘅 VA/generic SPEC 深度保留用于离线设计保真度。
+來源敘述方面：Pack agent ID video.archiveproducer 對齊到純 VA Domain Pack/
+generic pack 分類法。之前嘅 common inventory ID video.video_generation_operator 只系歷史映射。
+上游設計主體系歷史性同非約束性嘅，本地 agent_spec.json 系權威嘅。
+完整嘅 VA/generic SPEC 深度保留用於離線設計保真度。
 
-VA roster row 方面：来自 va-agent-swarm/study/agents.md 第 105 行 ArchiveProducerAgent，
-设计语料库，对激活无约束力。
-责任系将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
-知识蒸馏来源系 Archive production notes、source curation practices、
+VA roster row 方面：來自 va-agent-swarm/study/agents.md 第 105 行 ArchiveProducerAgent，
+設計語料庫，對激活無約束力。
+責任系將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
+知識蒸餾來源系 Archive production notes、source curation practices、
 provenance preservation standards。
-自我质量系 Source package completeness、rights coverage、provenance preservation。
-超越人类信号系比手动收集排序工作流更整洁咁组装可重用档案包。
-接受批评嘅来源系 ArchiveResearchAgent、JournalistAgent、LegalAgent。
-评论范围系缺失嘅档案上下文、薄弱嘅来源打包、权利差距。
-工具（历史）系 Archive asset managers、metadata systems、provenance logs。
-架构系 ReAct over archival manifests。
+自我質量系 Source package completeness、rights coverage、provenance preservation。
+超越人類信號系比手動收集排序工作流更整潔咁組裝可重用檔案包。
+接受批評嘅來源系 ArchiveResearchAgent、JournalistAgent、LegalAgent。
+評論範圍系缺失嘅檔案上下文、薄弱嘅來源打包、權利差距。
+工具（歷史）系 Archive asset managers、metadata systems、provenance logs。
+架構系 ReAct over archival manifests。
 
-第十二部分：相关设计阅读。
+第十二部分：相關設計閱讀。
 
-呢啲系用嚟加深设计保真度嘅，佢哋唔会覆盖本地 agent_spec.json。
+呢啲系用嚟加深設計保真度嘅，佢哋唔會覆蓋本地 agent_spec.json。
 
-喺 va-agent-swarm 下面冇强关键字匹配，依赖本地 SPEC 同 VA 表格行。
+喺 va-agent-swarm 下面冇強關鍵字匹配，依賴本地 SPEC 同 VA 表格行。
 
-本地知识索引方面：Runtime binding 指向 agent_spec.json，
+本地知識索引方面：Runtime binding 指向 agent_spec.json，
 Folder README 指向 README.md，Provenance 指向 sources/PROVENANCE.json，
 Mapping note 指向 sources/MAPPING.md，
 Pack inventory 指向 ../../inventory.json，
 Pack manifest 指向 ../../manifest.json。
-所有必需嘅主要引用都喺呢个存储库入面解析到。
+所有必需嘅主要引用都喺呢個存儲庫入面解析到。
 
 Folder README 摘要：VA-aligned Domain Pack agent (common host)。
 文件包括 SPEC.md 做 VA/generic depth 加 host binding、
-agent_spec.json 做 Fail-closed runtime、sources 目录做 Provenance/mapping。
+agent_spec.json 做 Fail-closed runtime、sources 目錄做 Provenance/mapping。
 
-第十三部分：附录，host 合约 agent_spec.json。
+第十三部分：附錄，host 合約 agent_spec.json。
 
-呢个系呢个代理喺 CASOPS 上面嘅权威 fail-closed 配置：
+呢個系呢個代理喺 CASOPS 上面嘅權威 fail-closed 配置：
 agent_id 系 video.archiveproducer，
 allowed_tools 系 media.stub、media.sora、media.veo、media.runway。
 Budget policy 方面 max_input_tokens 系 2048，max_output_tokens 系 1024，
@@ -290,36 +290,36 @@ rubric_reference 系 video.rubric.archiveproducer.v1，
 schema_version 系 1.0，status 系 registered，
 va_id 系 105，va_name 系 ArchiveProducerAgent，va_category 系 10-Sup。
 
-第十四部分：附录，SPEC 责任摘录。
+第十四部分：附錄，SPEC 責任摘錄。
 
-呢个代理嘅责任系将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
-Host 角色绑定系 ArchiveProducerAgent (VA Domain Pack)。
-设计时嘅 VA 表格内容系历史性嘅，对激活无约束力。
+呢個代理嘅責任系將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
+Host 角色綁定系 ArchiveProducerAgent (VA Domain Pack)。
+設計時嘅 VA 表格內容系歷史性嘅，對激活無約束力。
 
-从 VA 表格嚟嘅责任：将档案素材同来源资产打包用于重复使用率高嘅或者纪录片工作流。
-知识蒸馏来源（历史）：Archive production notes、source curation practices、
+從 VA 表格嚟嘅責任：將檔案素材同來源資產打包用於重複使用率高嘅或者紀錄片工作流。
+知識蒸餾來源（歷史）：Archive production notes、source curation practices、
 provenance preservation standards。
-自我质量标准（历史）：Source package completeness、rights coverage、provenance preservation。
-超越人类信号（历史）：比手动收集排序工作流更整洁咁组装可重用档案包。
+自我質量標準（歷史）：Source package completeness、rights coverage、provenance preservation。
+超越人類信號（歷史）：比手動收集排序工作流更整潔咁組裝可重用檔案包。
 
-批评总线（历史）方面：接受批评嚟自 ArchiveResearchAgent、JournalistAgent、LegalAgent。
-评论范围系缺失嘅档案上下文、薄弱嘅来源打包、权利差距。
+批評總線（歷史）方面：接受批評嚟自 ArchiveResearchAgent、JournalistAgent、LegalAgent。
+評論範圍系缺失嘅檔案上下文、薄弱嘅來源打包、權利差距。
 
-设计时工具备注（历史，非激活）：Archive asset managers、metadata systems、provenance logs。
-运行时安全：Host 白名单只系 agent_spec.json 加 tool-permission-register.json。
-CI 使用 video_* 存根。唔好将设计时嘅供应商名称当做已启用嘅 API。
+設計時工具備註（歷史，非激活）：Archive asset managers、metadata systems、provenance logs。
+運行時安全：Host 白名單隻系 agent_spec.json 加 tool-permission-register.json。
+CI 使用 video_* 存根。唔好將設計時嘅供應商名稱當做已啓用嘅 API。
 
-架构模式（历史）：ReAct over archival manifests。
+架構模式（歷史）：ReAct over archival manifests。
 
-第十五部分：文档控制。
+第十五部分：文檔控制。
 
 生成器系 scripts/business/generate_agent_user_guides.py。
-Agent 文件夹系 business/video/agents/video.archiveproducer/。
-输出系 docs/user_guide.md。VA 语料库根目录系 C:\Project\va-agent-swarm。
+Agent 文件夾系 business/video/agents/video.archiveproducer/。
+輸出系 docs/user_guide.md。VA 語料庫根目錄系 C:\Project\va-agent-swarm。
 重新生成命令系 python scripts/business/generate_agent_user_guides.py。
-信任模型系设计语料库等于不受信任数据，host 配置等于 fail-closed。
+信任模型系設計語料庫等於不受信任數據，host 配置等於 fail-closed。
 
-好啦，以上就系 ArchiveProducerAgent 嘅完整操作同设计指南。
-建议大家从第一部分 Snapshot 同第五部分 When to involve 开始睇，
-用第八到第十部分做 CASOPS 操作同改善，用第十一到第十二部分做深度设计保真度。
-多谢大家收睇，我哋下条片再见。
+好啦，以上就係 ArchiveProducerAgent 嘅完整操作同設計指南。
+建議大家從第一部分 Snapshot 同第五部分 When to involve 開始睇，
+用第八到第十部分做 CASOPS 操作同改善，用第十一到第十二部分做深度設計保真度。
+多謝大家收睇，我哋下條片再見。

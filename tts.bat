@@ -1,4 +1,4 @@
-python tts.py business\specials\agents\specials.aesthetics-agent\docs\user_guide.script.hk.txt -o business\specials\agents\specials.aesthetics-agent\docs\user_guide.script.hk.mp3
+REM python tts.py business\specials\agents\specials.aesthetics-agent\docs\user_guide.script.hk.txt -o business\specials\agents\specials.aesthetics-agent\docs\user_guide.script.hk.mp3
 python tts.py business\specials\agents\specials.agent-loop-creator\docs\user_guide.script.hk.txt -o business\specials\agents\specials.agent-loop-creator\docs\user_guide.script.hk.mp3
 python tts.py business\specials\agents\specials.agentic-rag-agent\docs\user_guide.script.hk.txt -o business\specials\agents\specials.agentic-rag-agent\docs\user_guide.script.hk.mp3
 python tts.py business\specials\agents\specials.autotelic-agent\docs\user_guide.script.hk.txt -o business\specials\agents\specials.autotelic-agent\docs\user_guide.script.hk.mp3

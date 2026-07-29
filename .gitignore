@@ -5,7 +5,7 @@ external/docs/
 *.log
 .DS_Store
 .env
-
+*.mp3
 # Python backend local environments, caches, and build artifacts.
 backend/.venv/
 backend/.mypy_cache/
