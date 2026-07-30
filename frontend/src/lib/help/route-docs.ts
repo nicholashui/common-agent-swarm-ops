@@ -57,6 +57,7 @@ const STATIC_ROUTE_SEGMENTS = new Set([
   "notifications",
   "onboarding",
   "operations",
+  "org-chart",
   "profile",
   "registry",
   "settings",

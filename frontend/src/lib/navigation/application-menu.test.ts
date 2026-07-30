@@ -17,6 +17,7 @@ const EXPECTED_LABELS = [
   "Swarm Canvas",
   "Blueprints",
   "Registry Hub",
+  "Agent Org Chart",
   "Agent & Pattern Detail",
   "Activity",
   "Monitoring",
@@ -129,6 +130,18 @@ test("route active matching covers dashboard, canvas, and operations", () => {
   assert.equal(isMenuItemActive("/operations", monitoring), true);
 });
 
+test("org chart is active under /registry/org-chart and defers hub", () => {
+  const orgPath = "/registry/org-chart";
+  const orgItem = getApplicationMenuItem("registry-org-chart")!;
+  const hub = getApplicationMenuItem("registry-hub")!;
+
+  assert.equal(isMenuItemVisible(orgPath, orgItem, undefined), true);
+  assert.equal(isMenuItemActive(orgPath, orgItem), true);
+  assert.equal(isMenuItemActive(orgPath, hub), false);
+  assert.equal(isMenuItemActive("/registry", hub), true);
+  assert.equal(isMenuItemActive("/registry", orgItem), false);
+});
+
 test("menu item routes align with screen-manifest destinations", () => {
   const routesById: Record<string, string> = {
     dashboard: "/",
@@ -136,6 +149,7 @@ test("menu item routes align with screen-manifest destinations", () => {
     "swarm-canvas": "/canvas",
     blueprints: "/blueprints",
     "registry-hub": "/registry",
+    "registry-org-chart": "/registry/org-chart",
     activity: "/activity",
     monitoring: "/operations",
     "approvals-rollouts": "/operations",

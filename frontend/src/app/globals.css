@@ -3448,3 +3448,231 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .blueprints-home__body { grid-template-columns: 1fr; }
   .blueprints-home__detail { position: static; }
 }
+
+/* Registry Org Chart — fills main content area */
+.org-chart-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  color: #1c1917;
+}
+.org-chart-page__header {
+  display: grid;
+  gap: 12px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.org-chart-page__intro h1 {
+  margin: 4px 0 0;
+  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  line-height: 1.2;
+}
+.org-chart-page__lede {
+  margin: 8px 0 0;
+  max-width: 72ch;
+  color: #57534e;
+  line-height: 1.5;
+}
+.org-chart-page__lede code,
+.org-chart-page__footer code {
+  font-size: 0.92em;
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  background: #f5f5f4;
+  color: #44403c;
+}
+.org-chart-page__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: flex-end;
+  padding: 12px 14px;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  background: #fafaf9;
+}
+.org-chart-page__field {
+  display: grid;
+  gap: 4px;
+  min-width: min(280px, 100%);
+  font-size: 12px;
+  color: #57534e;
+}
+.org-chart-page__field select {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #d6d3d1;
+  border-radius: 10px;
+  background: #fff;
+  color: #1c1917;
+}
+.org-chart-page__toggle {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  font-size: 13px;
+  color: #44403c;
+  cursor: pointer;
+  user-select: none;
+}
+.org-chart-page__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+.org-chart-page__stats span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  color: #57534e;
+  font-size: 12px;
+}
+.org-chart-page__canvas {
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #e7e5e4;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+}
+.org-chart-page__footer {
+  flex: 0 0 auto;
+  margin: 0;
+  color: #78716c;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.org-chart-page__footer p { margin: 0; }
+
+.org-chart-flow {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #fafaf9 0%, #fff 40%);
+}
+.org-chart-flow .react-flow__controls {
+  border: 1px solid #e7e5e4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgb(28 25 23 / 6%);
+}
+.org-chart-flow .react-flow__controls-button {
+  background: #fff;
+  border-bottom-color: #e7e5e4;
+  fill: #44403c;
+}
+.org-chart-minimap {
+  border: 1px solid #e7e5e4 !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  background: #fafaf9 !important;
+}
+
+.org-chart-node {
+  display: grid;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 200px;
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 1px solid #d6d3d1;
+  border-radius: 12px;
+  background: #fff;
+  color: #1c1917;
+  box-shadow: 0 6px 18px rgb(28 25 23 / 5%);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+a.org-chart-node:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 10px 24px rgb(67 56 202 / 12%);
+}
+.org-chart-node--top {
+  border-color: #93c5fd;
+  background: linear-gradient(180deg, #eff6ff 0%, #fff 70%);
+}
+.org-chart-node--department {
+  border-color: #5eead4;
+  background: linear-gradient(180deg, #f0fdfa 0%, #fff 70%);
+}
+.org-chart-node--agent {
+  border-color: #e7e5e4;
+}
+.org-chart-node__title {
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.org-chart-node__subtitle {
+  font-size: 11px;
+  line-height: 1.3;
+  color: #78716c;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.org-chart-node__badge {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.org-chart-node__badge--dept {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+.org-chart-handle {
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  min-height: 6px !important;
+  border: none !important;
+  background: #a8a29e !important;
+  opacity: 0.65;
+}
+
+.org-chart-edge .react-flow__edge-path {
+  stroke: #a8a29e;
+  stroke-width: 1.5;
+}
+.org-chart-edge--management .react-flow__edge-path {
+  stroke: #2563eb;
+  stroke-width: 2;
+}
+.org-chart-edge--department .react-flow__edge-path {
+  stroke: #0f766e;
+  stroke-width: 1.75;
+}
+.org-chart-edge--member .react-flow__edge-path {
+  stroke: #a8a29e;
+  stroke-width: 1.25;
+}
+.org-chart-edge--critique .react-flow__edge-path {
+  stroke: #c026d3;
+  stroke-width: 1.25;
+  stroke-dasharray: 5 4;
+}
+
+@media (max-width: 760px) {
+  .org-chart-page__stats {
+    margin-left: 0;
+    width: 100%;
+  }
+}
