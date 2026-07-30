@@ -128,11 +128,82 @@ def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dic
     return paths
 
 
-def _config_sections(spec: dict, provenance: dict | None, mapping_note: str) -> list[dict]:
+def _sync_harness_docs(
+    agent_dir: Path, agent_id: str, docs_root: Path, spec: dict
+) -> None:
+    """Copy materialized prompt/skill markdown into public docs for help panel."""
+    if not _SAFE_AGENT_ID.match(agent_id):
+        return
+    dest_dir = docs_root / agent_id
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    pref = str(spec.get("prompt_reference") or "")
+    if pref:
+        src = agent_dir / "prompts" / f"{pref}.md"
+        if src.is_file():
+            try:
+                content = _sanitize_ui_copy(
+                    src.read_text(encoding="utf-8", errors="replace")
+                )
+                (dest_dir / "prompt.md").write_text(
+                    content, encoding="utf-8", newline="\n"
+                )
+            except OSError:
+                pass
+    skill = agent_dir / "skills" / "SKILL.md"
+    if skill.is_file():
+        try:
+            content = _sanitize_ui_copy(
+                skill.read_text(encoding="utf-8", errors="replace")
+            )
+            (dest_dir / "skill.md").write_text(content, encoding="utf-8", newline="\n")
+        except OSError:
+            pass
+    rref = str(spec.get("rubric_reference") or "")
+    if rref:
+        src = agent_dir / "rubrics" / f"{rref}.json"
+        if src.is_file():
+            try:
+                # Keep as fenced markdown so help panel can render
+                raw = src.read_text(encoding="utf-8", errors="replace")
+                md = (
+                    f"# Rubric — `{rref}`\n\n"
+                    f"```json\n{raw.strip()}\n```\n"
+                )
+                (dest_dir / "rubric.md").write_text(md, encoding="utf-8", newline="\n")
+            except OSError:
+                pass
+
+
+def _config_sections(
+    spec: dict,
+    provenance: dict | None,
+    mapping_note: str,
+    *,
+    agent_dir: Path | None = None,
+) -> list[dict]:
     model = spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
     budget = spec.get("budget_policy") if isinstance(spec.get("budget_policy"), dict) else {}
     critique = spec.get("critique_edges") if isinstance(spec.get("critique_edges"), dict) else {}
     tools = spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
+    does_not = spec.get("does_not_own") if isinstance(spec.get("does_not_own"), list) else []
+    improvement = (
+        spec.get("improvement") if isinstance(spec.get("improvement"), dict) else {}
+    )
+    has_prompt = False
+    has_rubric = False
+    has_skill = False
+    has_distill = False
+    has_catalog = False
+    if agent_dir is not None:
+        pref = str(spec.get("prompt_reference") or "")
+        rref = str(spec.get("rubric_reference") or "")
+        if pref:
+            has_prompt = (agent_dir / "prompts" / f"{pref}.md").is_file()
+        if rref:
+            has_rubric = (agent_dir / "rubrics" / f"{rref}.json").is_file()
+        has_skill = (agent_dir / "skills" / "SKILL.md").is_file()
+        has_distill = (agent_dir / "sources" / "DISTILLATION_PLAN.json").is_file()
+        has_catalog = (agent_dir / "sources" / "SOURCE_CATALOG.json").is_file()
     return [
         {
             "id": "runtime",
@@ -141,9 +212,20 @@ def _config_sections(spec: dict, provenance: dict | None, mapping_note: str) -> 
                 f"agent_id: {spec.get('agent_id', '')}",
                 f"status: {spec.get('status', '')}",
                 f"role: {spec.get('role', '')}",
+                f"va_name: {spec.get('va_name', '')}",
+                f"va_category: {spec.get('va_category', '')}",
                 f"schema_version: {spec.get('schema_version', '')}",
                 f"production_activation_requested: {spec.get('production_activation_requested', False)}",
             ],
+        },
+        {
+            "id": "responsibility",
+            "title": "Responsibility boundary",
+            "lines": (
+                [f"- {item}" for item in does_not[:12]]
+                if does_not
+                else ["does_not_own: (none listed)"]
+            ),
         },
         {
             "id": "model",
@@ -173,6 +255,19 @@ def _config_sections(spec: dict, provenance: dict | None, mapping_note: str) -> 
                 f"max_refinement_count: {spec.get('max_refinement_count', '')}",
                 f"critique_inputs: {json.dumps(critique.get('inputs', []), ensure_ascii=False)}",
                 f"critique_outputs: {json.dumps(critique.get('outputs', []), ensure_ascii=False)}",
+            ],
+        },
+        {
+            "id": "pack_harness",
+            "title": "Pack harness (improvement plan)",
+            "lines": [
+                f"prompt_materialized: {has_prompt}",
+                f"rubric_materialized: {has_rubric}",
+                f"skill_harness: {has_skill}",
+                f"distillation_plan: {has_distill}",
+                f"source_catalog: {has_catalog}",
+                f"improvement_wave: {improvement.get('wave', '')}",
+                f"improvement_updated_at: {improvement.get('updated_at', '')}",
             ],
         },
         {
@@ -231,12 +326,34 @@ def _load_pack(
                 mapping_note = ""
         excerpt = _spec_excerpt(agent_dir / "SPEC.md")
         doc_paths = _sync_agent_markdown(agent_dir, agent_id, docs_root)
+        # Also surface materialized prompt/rubric/skill into public docs when present
+        _sync_harness_docs(agent_dir, agent_id, docs_root, spec)
         status = str(spec.get("status") or ("draft" if pack == "specials" else "registered"))
         model = spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
         tools = spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
         description = excerpt or _sanitize_ui_copy(
             str(spec.get("role") or f"{pack} agent {agent_id}")
         )
+        va_category = str(spec.get("va_category") or pack)
+        pref = str(spec.get("prompt_reference") or "")
+        rref = str(spec.get("rubric_reference") or "")
+        has_prompt = bool(pref) and (agent_dir / "prompts" / f"{pref}.md").is_file()
+        has_rubric = bool(rref) and (agent_dir / "rubrics" / f"{rref}.json").is_file()
+        has_skill = (agent_dir / "skills" / "SKILL.md").is_file()
+        badges = [
+            pack,
+            status,
+            "self-contained",
+            "no-network" if model.get("network_access") is False else "network?",
+        ]
+        if has_prompt:
+            badges.append("prompt")
+        if has_rubric:
+            badges.append("rubric")
+        if has_skill:
+            badges.append("skill-harness")
+        if va_category and va_category != pack:
+            badges.append(va_category)
         records.append(
             {
                 "id": agent_id,
@@ -254,15 +371,12 @@ def _load_pack(
                 ),
                 "latency": "local",
                 "usage": f"Pack `{pack}` · self-contained folder",
-                "badges": [
-                    pack,
-                    status,
-                    "self-contained",
-                    "no-network" if model.get("network_access") is False else "network?",
-                ],
+                "badges": badges,
                 "domains": [pack],
-                "category": pack,
-                "architecture": "pack agent folder",
+                "category": va_category if pack == "video" else pack,
+                "architecture": "pack agent folder + harness"
+                if has_skill
+                else "pack agent folder",
                 "critiqueCompat": json.dumps(
                     spec.get("critique_edges") or {},
                     ensure_ascii=False,
@@ -274,9 +388,11 @@ def _load_pack(
                 "networkAccess": bool(model.get("network_access")),
                 "provider": str(model.get("provider") or ""),
                 "allowedTools": list(tools),
-                "promptReference": str(spec.get("prompt_reference") or ""),
-                "rubricReference": str(spec.get("rubric_reference") or ""),
-                "configSummaries": _config_sections(spec, provenance, mapping_note),
+                "promptReference": pref,
+                "rubricReference": rref,
+                "configSummaries": _config_sections(
+                    spec, provenance, mapping_note, agent_dir=agent_dir
+                ),
                 "specExcerpt": excerpt,
                 "folderPath": f"business/{pack}/agents/{agent_dir.name}",
                 "hasSpecMd": (agent_dir / "SPEC.md").is_file(),

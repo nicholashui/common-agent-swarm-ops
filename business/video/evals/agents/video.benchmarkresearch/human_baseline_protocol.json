@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.benchmarkresearch",
+  "va_name": "BenchmarkResearchAgent",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Faster + broader than ML-research team",
+  "self_quality_criteria": "Coverage of benchmarks; freshness ≤7 days",
+  "metric": {
+    "id": "time_to_delivery",
+    "name": "Time-to-delivery vs human",
+    "direction": "lower_is_better",
+    "unit": "relative_ratio",
+    "threshold_expression": "agent_mean < human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Faster + broader than ML-research team"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.benchmarkresearch/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_e6e253ae08",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_eefa4bdc66",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_27e409cec6",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_f3490e1b7b",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_bfb332a45f",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:34Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.benchmarkresearch/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:34Z",
+  "updated_at": "2026-07-30T14:45:34Z"
+}

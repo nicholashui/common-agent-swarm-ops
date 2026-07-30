@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.judge",
+  "recorded_at": "2026-07-30T14:19:41Z",
+  "protocol_snapshot": {
+    "schema_version": "1.0",
+    "agent_id": "video.judge",
+    "va_name": "JudgeAgent",
+    "status": "synthetic_checked",
+    "honesty": {
+      "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+      "synthetic_ci_allowed": true,
+      "synthetic_sets_met": false
+    },
+    "surpass_signal_design": "Higher κ than median human juror",
+    "self_quality_criteria": "Inter-rater κ vs expert panel ≥0.8",
+    "metric": {
+      "id": "agreement_kappa",
+      "name": "Agreement κ vs human juror",
+      "direction": "higher_is_better",
+      "unit": "kappa",
+      "threshold_expression": "agent_mean > human_mean",
+      "pairwise_win_rate_min": null,
+      "raw_signal": "Higher κ than median human juror"
+    },
+    "protocol": {
+      "n_human_trials_min": 5,
+      "n_agent_trials_min": 5,
+      "task_fixture": "business/video/evals/agents/video.judge/golden.json",
+      "blinding": "frozen_inputs",
+      "frozen_inputs": true,
+      "operators": [
+        "human_rater",
+        "pack_runtime_offline_agent"
+      ],
+      "recording": [
+        "trial_id",
+        "rater_or_runner",
+        "score_or_outcome",
+        "notes",
+        "timestamp"
+      ]
+    },
+    "human_baseline": {
+      "status": "captured",
+      "trials": [
+        {
+          "trial_id": "human_8f7bc6f579",
+          "rater_id": "synthetic_ci_rater",
+          "score": 74.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_76492578c4",
+          "rater_id": "synthetic_ci_rater",
+          "score": 75.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_dbca444bff",
+          "rater_id": "synthetic_ci_rater",
+          "score": 76.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_6ff753a293",
+          "rater_id": "synthetic_ci_rater",
+          "score": 77.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_f485d4e67d",
+          "rater_id": "synthetic_ci_rater",
+          "score": 78.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        }
+      ],
+      "aggregate": {
+        "n": 5,
+        "mean": 76.0,
+        "min": 74.0,
+        "max": 78.0,
+        "synthetic_any": true
+      },
+      "captured_at": "2026-07-30T14:19:30Z"
+    },
+    "agent_measurement": {
+      "status": "measured",
+      "trials": [
+        {
+          "trial_id": "agent_4e66eeb897",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:30Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_f03d5927ad",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:30Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_16785629ff",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:30Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_fed9055200",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:30Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_657ec17d54",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:30Z",
+          "synthetic": false,
+          "offline": true
+        }
+      ],
+      "aggregate": {
+        "n": 5,
+        "mean": 90.0,
+        "min": 90.0,
+        "max": 90.0
+      },
+      "measured_at": "2026-07-30T14:19:30Z",
+      "runner": "pack_runtime.offline"
+    },
+    "gate": {
+      "status": "synthetic_checked",
+      "met": false,
+      "synthetic": true,
+      "detail": "SYNTHETIC human data — pipeline check only; not a surpass claim. (agent_mean=90.0 >= human_mean=76.0)",
+      "evaluated_at": "2026-07-30T14:19:41Z",
+      "evidence_path": "business/video/evals/agents/video.judge/human_baseline_evidence.json",
+      "comparison": {
+        "human_mean": 76.0,
+        "agent_mean": 90.0,
+        "direction": "higher_is_better",
+        "raw_met": true
+      }
+    },
+    "generated_by": "scaffold_human_baselines_v1",
+    "generated_at": "2026-07-30T14:19:30Z",
+    "updated_at": "2026-07-30T14:19:41Z"
+  },
+  "claim_allowed_in_ui": false
+}

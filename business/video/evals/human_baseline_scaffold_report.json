@@ -1,0 +1,461 @@
+{
+  "count": 114,
+  "results": [
+    {
+      "agent_id": "video.accessibility",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.accessibilityoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.aiqaconsistency",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.analyst",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.animator_2d",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.archivemaster",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.archiveproducer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.archiveresearch",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.audiencesim",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.audiobooknarrator",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.avatardesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.awardsstrategist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.benchmarkresearch",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.brand",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.brandstrategist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.cameraoperator",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.casting",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.channelmanager",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.childrensauthor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.choreography",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.cinematographer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.citation",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.colorist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.comedywriter",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.comms",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.community",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.competitorintelligence",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.compliance",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.composer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.conceptartist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.continuity",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.copywriter",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.corrections",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.costoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.costumedesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.creativedirector",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.critic",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.crm",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.deepfakedetection",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.director",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.distributor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.dronepilot",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.editor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.emotionalarc",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.ethics",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.evaluationharness",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.factchecker",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.festivalstrategist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.finance",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.foodstylist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.gatekeeper",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.ideation",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.instructionaldesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.interviewsynthesis",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.journalist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.judge",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.labela_r",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.labeldigital",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.latencyoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.learnersim",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.legal",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.lipsync",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.lms",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.localizationqa",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.marketing",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.medicalillustrator",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.memory",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.moodboard",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.motiongraphics",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.mpa",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.mua_makeup",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.musicsupervisor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.musicvideodirector",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.narrativearc",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.novelty",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.orchestrator",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.performancemarketer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.personalizationengineer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.planner",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.producer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.productiondesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.promptengineer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.promptoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.realestatephoto",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.retentionoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.roasoptimizer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.router",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.safetyredteam",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.sales",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.screenwriter",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.seo",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.showrunner",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.signlanguageinterpreter",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.sme",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.socialmediastrategist",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.sounddesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.soundmixer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.sportsanalyst",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.standardseditor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.storyboard",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.styletransfer",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.talent",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.templatedesign",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.trailereditor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.travelcine",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.trendintelligence",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.trustsafety",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.ugccreator",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.ux",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.vfxsupervisor",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.voiceclone",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.voiceover",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.webresearch",
+      "status": "measured"
+    },
+    {
+      "agent_id": "video.worldbuilding",
+      "status": "measured"
+    }
+  ]
+}

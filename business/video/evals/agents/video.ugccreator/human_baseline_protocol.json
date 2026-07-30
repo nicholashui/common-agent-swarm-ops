@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.ugccreator",
+  "va_name": "UGCCreatorAgent",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Beats paid-creator avg ROAS at 0.1× cost",
+  "self_quality_criteria": "Hook-rate ≥30%; \"scripted\" detector < threshold",
+  "metric": {
+    "id": "cost_efficiency",
+    "name": "Cost efficiency vs human",
+    "direction": "lower_is_better",
+    "unit": "relative_cost",
+    "threshold_expression": "agent_mean < human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Beats paid-creator avg ROAS at 0.1× cost"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.ugccreator/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_38789f3f7e",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_42496a1a9a",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_053b09bae7",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_be75fd4bb1",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_855a1c129b",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:35Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.ugccreator/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:35Z",
+  "updated_at": "2026-07-30T14:45:35Z"
+}

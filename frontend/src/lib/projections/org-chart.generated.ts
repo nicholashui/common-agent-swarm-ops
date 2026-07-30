@@ -2149,6 +2149,26 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.accessibilityoptimizer",
+          "toId": "video.accessibility",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.accessibility",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.colorist",
+          "toId": "video.accessibility",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.soundmixer",
+          "toId": "video.accessibility",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.accessibility",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2159,12 +2179,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.accessibility",
+          "toId": "video.accessibilityoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.accessibilityoptimizer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.accessibilityoptimizer",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.accessibilityoptimizer",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.accessibilityoptimizer",
+          "toId": "video.colorist",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.aiqaconsistency",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.aiqaconsistency",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.vfxsupervisor",
           "toId": "video.aiqaconsistency",
           "kind": "critique_in"
         },
@@ -2174,7 +2224,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.aiqaconsistency",
+          "toId": "video.vfxsupervisor",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.analyst",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.analyst",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.performancemarketer",
+          "toId": "video.analyst",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.evaluationharness",
           "toId": "video.analyst",
           "kind": "critique_in"
         },
@@ -2189,12 +2259,52 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.animator_2d",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.lipsync",
+          "toId": "video.animator_2d",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.animator_2d",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.animator_2d",
+          "toId": "video.storyboard",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.animator_2d",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.archivemaster",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.distributor",
+          "toId": "video.archivemaster",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.colorist",
+          "toId": "video.archivemaster",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.soundmixer",
+          "toId": "video.archivemaster",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.gatekeeper",
           "toId": "video.archivemaster",
           "kind": "critique_in"
         },
@@ -2209,6 +2319,21 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.archiveresearch",
+          "toId": "video.archiveproducer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.journalist",
+          "toId": "video.archiveproducer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.archiveproducer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.archiveproducer",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2219,12 +2344,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.factchecker",
+          "toId": "video.archiveresearch",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.sme",
+          "toId": "video.archiveresearch",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.archiveresearch",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.archiveresearch",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.audiencesim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.audiencesim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.audiencesim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
+          "toId": "video.audiencesim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.judge",
           "toId": "video.audiencesim",
           "kind": "critique_in"
         },
@@ -2239,6 +2399,11 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.audiobooknarrator",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.audiobooknarrator",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2249,12 +2414,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.compliance",
+          "toId": "video.avatardesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.avatardesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.deepfakedetection",
+          "toId": "video.avatardesign",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.avatardesign",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.avatardesign",
+          "toId": "video.voiceclone",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.avatardesign",
+          "toId": "video.lipsync",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.awardsstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.awardsstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
           "toId": "video.awardsstrategist",
           "kind": "critique_in"
         },
@@ -2279,12 +2479,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.copywriter",
+          "toId": "video.brand",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.motiongraphics",
+          "toId": "video.brand",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
+          "toId": "video.brand",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brandstrategist",
+          "toId": "video.brand",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.brand",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
           "fromId": "video.critic",
+          "toId": "video.brandstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
+          "toId": "video.brandstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.screenwriter",
+          "toId": "video.brandstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
           "toId": "video.brandstrategist",
           "kind": "critique_in"
         },
@@ -2299,12 +2534,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.cinematographer",
+          "toId": "video.cameraoperator",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.cameraoperator",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.cameraoperator",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.casting",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.casting",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.showrunner",
+          "toId": "video.casting",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
           "toId": "video.casting",
           "kind": "critique_in"
         },
@@ -2314,7 +2574,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.casting",
+          "toId": "video.voiceclone",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.casting",
+          "toId": "video.avatardesign",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.channelmanager",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.channelmanager",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.seo",
+          "toId": "video.channelmanager",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
+          "toId": "video.channelmanager",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
           "toId": "video.channelmanager",
           "kind": "critique_in"
         },
@@ -2334,7 +2624,17 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.childrensauthor",
+          "toId": "video.animator_2d",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.choreography",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
           "toId": "video.choreography",
           "kind": "critique_in"
         },
@@ -2344,7 +2644,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.choreography",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.cinematographer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.cinematographer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.colorist",
+          "toId": "video.cinematographer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.vfxsupervisor",
           "toId": "video.cinematographer",
           "kind": "critique_in"
         },
@@ -2354,7 +2674,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.cinematographer",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.colorist",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.citation",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.citation",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.journalist",
           "toId": "video.citation",
           "kind": "critique_in"
         },
@@ -2364,7 +2704,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.citation",
+          "toId": "video.webresearch",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.colorist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.colorist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.colorist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
           "toId": "video.colorist",
           "kind": "critique_in"
         },
@@ -2374,7 +2734,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.colorist",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.comedywriter",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
+          "toId": "video.comedywriter",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.showrunner",
           "toId": "video.comedywriter",
           "kind": "critique_in"
         },
@@ -2384,7 +2759,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.comedywriter",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.comms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
+          "toId": "video.comms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.community",
+          "toId": "video.comms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.comms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
           "toId": "video.comms",
           "kind": "critique_in"
         },
@@ -2399,6 +2799,21 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.analyst",
+          "toId": "video.community",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.community",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.comms",
+          "toId": "video.community",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.community",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2409,8 +2824,23 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.brand",
+          "toId": "video.competitorintelligence",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.creativedirector",
+          "toId": "video.competitorintelligence",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.competitorintelligence",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.competitorintelligence",
+          "toId": "video.ideation",
           "kind": "critique_out"
         },
         {
@@ -2429,12 +2859,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.composer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.composer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.composer",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.composer",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.composer",
+          "toId": "video.sounddesign",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.conceptartist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.conceptartist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.productiondesign",
           "toId": "video.conceptartist",
           "kind": "critique_in"
         },
@@ -2444,7 +2904,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.conceptartist",
+          "toId": "video.storyboard",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.continuity",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.costumedesign",
+          "toId": "video.continuity",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.mua_makeup",
+          "toId": "video.continuity",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.aiqaconsistency",
+          "toId": "video.continuity",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.continuity",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.gatekeeper",
           "toId": "video.continuity",
           "kind": "critique_in"
         },
@@ -2459,12 +2949,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.brand",
+          "toId": "video.copywriter",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.performancemarketer",
+          "toId": "video.copywriter",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.copywriter",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.copywriter",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.corrections",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.standardseditor",
+          "toId": "video.corrections",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.corrections",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.channelmanager",
           "toId": "video.corrections",
           "kind": "critique_in"
         },
@@ -2479,12 +2999,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.router",
+          "toId": "video.costoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.finance",
+          "toId": "video.costoptimizer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.costoptimizer",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.costoptimizer",
+          "toId": "video.router",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.costumedesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.costumedesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.productiondesign",
           "toId": "video.costumedesign",
           "kind": "critique_in"
         },
@@ -2494,7 +3039,17 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.costumedesign",
+          "toId": "video.mua_makeup",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.creativedirector",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
           "toId": "video.creativedirector",
           "kind": "critique_in"
         },
@@ -2504,7 +3059,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.creativedirector",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.critic",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.critic",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
+          "toId": "video.critic",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.festivalstrategist",
+          "toId": "video.critic",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.judge",
           "toId": "video.critic",
           "kind": "critique_in"
         },
@@ -2519,12 +3099,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.personalizationengineer",
+          "toId": "video.crm",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.templatedesign",
+          "toId": "video.crm",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
+          "toId": "video.crm",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.crm",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
           "fromId": "video.critic",
+          "toId": "video.deepfakedetection",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.avatardesign",
+          "toId": "video.deepfakedetection",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.voiceclone",
+          "toId": "video.deepfakedetection",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.trustsafety",
+          "toId": "video.deepfakedetection",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.safetyredteam",
           "toId": "video.deepfakedetection",
           "kind": "critique_in"
         },
@@ -2539,12 +3154,67 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.screenwriter",
+          "toId": "video.director",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.director",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
+          "toId": "video.director",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.director",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.composer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.distributor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.sales",
+          "toId": "video.distributor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.archivemaster",
+          "toId": "video.distributor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.soundmixer",
+          "toId": "video.distributor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.colorist",
           "toId": "video.distributor",
           "kind": "critique_in"
         },
@@ -2559,12 +3229,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.cinematographer",
+          "toId": "video.dronepilot",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.safetyredteam",
+          "toId": "video.dronepilot",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.dronepilot",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.dronepilot",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.dronepilot",
+          "toId": "video.safetyredteam",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.editor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.editor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
+          "toId": "video.editor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.composer",
           "toId": "video.editor",
           "kind": "critique_in"
         },
@@ -2574,7 +3279,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.editor",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.emotionalarc",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.emotionalarc",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.emotionalarc",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.composer",
           "toId": "video.emotionalarc",
           "kind": "critique_in"
         },
@@ -2584,7 +3314,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.emotionalarc",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.emotionalarc",
+          "toId": "video.composer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.ethics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.standardseditor",
+          "toId": "video.ethics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.ethics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.ethics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.trustsafety",
+          "toId": "video.ethics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.safetyredteam",
           "toId": "video.ethics",
           "kind": "critique_in"
         },
@@ -2599,6 +3364,11 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.benchmarkresearch",
+          "toId": "video.evaluationharness",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.evaluationharness",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2609,12 +3379,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.sme",
+          "toId": "video.factchecker",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.standardseditor",
+          "toId": "video.factchecker",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.factchecker",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.factchecker",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.journalist",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.festivalstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.festivalstrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
           "toId": "video.festivalstrategist",
           "kind": "critique_in"
         },
@@ -2629,12 +3429,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.sme",
+          "toId": "video.finance",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.finance",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.finance",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.finance",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.finance",
+          "toId": "video.motiongraphics",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.foodstylist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.foodstylist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
           "toId": "video.foodstylist",
           "kind": "critique_in"
         },
@@ -2644,7 +3474,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.foodstylist",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.gatekeeper",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.gatekeeper",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.aiqaconsistency",
           "toId": "video.gatekeeper",
           "kind": "critique_in"
         },
@@ -2654,7 +3499,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.gatekeeper",
+          "toId": "video.orchestrator",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.ideation",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.creativedirector",
+          "toId": "video.ideation",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.novelty",
           "toId": "video.ideation",
           "kind": "critique_in"
         },
@@ -2664,7 +3524,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.ideation",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.ideation",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.instructionaldesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.sme",
+          "toId": "video.instructionaldesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
           "toId": "video.instructionaldesign",
           "kind": "critique_in"
         },
@@ -2674,7 +3554,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.instructionaldesign",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.instructionaldesign",
+          "toId": "video.animator_2d",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.interviewsynthesis",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
           "toId": "video.interviewsynthesis",
           "kind": "critique_in"
         },
@@ -2684,13 +3579,43 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.interviewsynthesis",
+          "toId": "video.sme",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.journalist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.journalist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.journalist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.standardseditor",
           "toId": "video.journalist",
           "kind": "critique_in"
         },
         {
           "fromId": "video.journalist",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.journalist",
+          "toId": "video.factchecker",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.journalist",
+          "toId": "video.screenwriter",
           "kind": "critique_out"
         },
         {
@@ -2704,7 +3629,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.judge",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.judge",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.labela_r",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.musicvideodirector",
+          "toId": "video.labela_r",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.musicsupervisor",
+          "toId": "video.labela_r",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.labeldigital",
           "toId": "video.labela_r",
           "kind": "critique_in"
         },
@@ -2719,6 +3669,21 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.musicvideodirector",
+          "toId": "video.labeldigital",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.labeldigital",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
+          "toId": "video.labeldigital",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.labeldigital",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2729,12 +3694,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.orchestrator",
+          "toId": "video.latencyoptimizer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.latencyoptimizer",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.latencyoptimizer",
+          "toId": "video.orchestrator",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.learnersim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.instructionaldesign",
+          "toId": "video.learnersim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.lms",
+          "toId": "video.learnersim",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
           "toId": "video.learnersim",
           "kind": "critique_in"
         },
@@ -2749,12 +3739,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.compliance",
+          "toId": "video.legal",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.journalist",
+          "toId": "video.legal",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.legal",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.mpa",
+          "toId": "video.legal",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.legal",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
           "fromId": "video.critic",
+          "toId": "video.lipsync",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.voiceclone",
+          "toId": "video.lipsync",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.animator_2d",
+          "toId": "video.lipsync",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.aiqaconsistency",
           "toId": "video.lipsync",
           "kind": "critique_in"
         },
@@ -2769,6 +3794,21 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.instructionaldesign",
+          "toId": "video.lms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
+          "toId": "video.lms",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.learnersim",
+          "toId": "video.lms",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.lms",
           "toId": "video.judge",
           "kind": "critique_out"
@@ -2779,12 +3819,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.brand",
+          "toId": "video.localizationqa",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.localizationqa",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.localizationqa",
+          "toId": "video.voiceclone",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.marketing",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.marketing",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.seo",
+          "toId": "video.marketing",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.copywriter",
+          "toId": "video.marketing",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.trailereditor",
           "toId": "video.marketing",
           "kind": "critique_in"
         },
@@ -2799,8 +3869,28 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.sme",
+          "toId": "video.medicalillustrator",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
+          "toId": "video.medicalillustrator",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.medicalillustrator",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.medicalillustrator",
+          "toId": "video.animator_2d",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.medicalillustrator",
+          "toId": "video.copywriter",
           "kind": "critique_out"
         },
         {
@@ -2819,12 +3909,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.moodboard",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.productiondesign",
+          "toId": "video.moodboard",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.moodboard",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.moodboard",
+          "toId": "video.conceptartist",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.motiongraphics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
+          "toId": "video.motiongraphics",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
           "toId": "video.motiongraphics",
           "kind": "critique_in"
         },
@@ -2834,7 +3949,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.motiongraphics",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.motiongraphics",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.mpa",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.mpa",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.mpa",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.ethics",
           "toId": "video.mpa",
           "kind": "critique_in"
         },
@@ -2849,12 +3989,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.cinematographer",
+          "toId": "video.mua_makeup",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.continuity",
+          "toId": "video.mua_makeup",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.mua_makeup",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
           "fromId": "video.critic",
+          "toId": "video.musicsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.composer",
+          "toId": "video.musicsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.trailereditor",
+          "toId": "video.musicsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.labela_r",
+          "toId": "video.musicsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
           "toId": "video.musicsupervisor",
           "kind": "critique_in"
         },
@@ -2869,12 +4039,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.labela_r",
+          "toId": "video.musicvideodirector",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.musicvideodirector",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.musicvideodirector",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.musicvideodirector",
+          "toId": "video.cinematographer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.narrativearc",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.screenwriter",
+          "toId": "video.narrativearc",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
           "toId": "video.narrativearc",
           "kind": "critique_in"
         },
@@ -2884,7 +4079,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.narrativearc",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.novelty",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.ideation",
+          "toId": "video.novelty",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.screenwriter",
           "toId": "video.novelty",
           "kind": "critique_in"
         },
@@ -2894,7 +4104,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.novelty",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.novelty",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.orchestrator",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.orchestrator",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.judge",
           "toId": "video.orchestrator",
           "kind": "critique_in"
         },
@@ -2909,12 +4139,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.analyst",
+          "toId": "video.performancemarketer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.finance",
+          "toId": "video.performancemarketer",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.performancemarketer",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.performancemarketer",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.personalizationengineer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.personalizationengineer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
           "toId": "video.personalizationengineer",
           "kind": "critique_in"
         },
@@ -2929,8 +4184,28 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.producer",
+          "toId": "video.planner",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.finance",
+          "toId": "video.planner",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.planner",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.planner",
+          "toId": "video.router",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.planner",
+          "toId": "video.orchestrator",
           "kind": "critique_out"
         },
         {
@@ -2944,7 +4219,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.producer",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.productiondesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.productiondesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
           "toId": "video.productiondesign",
           "kind": "critique_in"
         },
@@ -2954,7 +4244,17 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.productiondesign",
+          "toId": "video.conceptartist",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.promptengineer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
           "toId": "video.promptengineer",
           "kind": "critique_in"
         },
@@ -2964,7 +4264,17 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.promptengineer",
+          "toId": "video.aiqaconsistency",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.promptoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.promptengineer",
           "toId": "video.promptoptimizer",
           "kind": "critique_in"
         },
@@ -2974,7 +4284,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.promptoptimizer",
+          "toId": "video.promptengineer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.realestatephoto",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.realestatephoto",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.dronepilot",
           "toId": "video.realestatephoto",
           "kind": "critique_in"
         },
@@ -2984,7 +4309,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.realestatephoto",
+          "toId": "video.dronepilot",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.retentionoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.retentionoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
           "toId": "video.retentionoptimizer",
           "kind": "critique_in"
         },
@@ -2994,7 +4334,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.retentionoptimizer",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.retentionoptimizer",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.roasoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.performancemarketer",
+          "toId": "video.roasoptimizer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
           "toId": "video.roasoptimizer",
           "kind": "critique_in"
         },
@@ -3004,7 +4364,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.roasoptimizer",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.router",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.orchestrator",
+          "toId": "video.router",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.costoptimizer",
           "toId": "video.router",
           "kind": "critique_in"
         },
@@ -3014,7 +4389,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.router",
+          "toId": "video.planner",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.safetyredteam",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.ethics",
+          "toId": "video.safetyredteam",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
           "toId": "video.safetyredteam",
           "kind": "critique_in"
         },
@@ -3024,7 +4414,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.safetyredteam",
+          "toId": "video.avatardesign",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.safetyredteam",
+          "toId": "video.voiceclone",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.sales",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.producer",
+          "toId": "video.sales",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.distributor",
+          "toId": "video.sales",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
           "toId": "video.sales",
           "kind": "critique_in"
         },
@@ -3039,12 +4454,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.screenwriter",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.standardseditor",
+          "toId": "video.screenwriter",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.screenwriter",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.screenwriter",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.screenwriter",
+          "toId": "video.aiqaconsistency",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.seo",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.marketing",
+          "toId": "video.seo",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.copywriter",
+          "toId": "video.seo",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
           "toId": "video.seo",
           "kind": "critique_in"
         },
@@ -3059,8 +4509,38 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.comms",
+          "toId": "video.showrunner",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.audiencesim",
+          "toId": "video.showrunner",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.screenwriter",
+          "toId": "video.showrunner",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.showrunner",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.showrunner",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.showrunner",
+          "toId": "video.casting",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.showrunner",
+          "toId": "video.director",
           "kind": "critique_out"
         },
         {
@@ -3074,7 +4554,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.signlanguageinterpreter",
+          "toId": "video.voiceclone",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.signlanguageinterpreter",
+          "toId": "video.accessibility",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.sme",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
           "toId": "video.sme",
           "kind": "critique_in"
         },
@@ -3084,7 +4579,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.sme",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.sme",
+          "toId": "video.motiongraphics",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.socialmediastrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.analyst",
+          "toId": "video.socialmediastrategist",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
           "toId": "video.socialmediastrategist",
           "kind": "critique_in"
         },
@@ -3094,7 +4609,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.copywriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.socialmediastrategist",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.sounddesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.sounddesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.soundmixer",
           "toId": "video.sounddesign",
           "kind": "critique_in"
         },
@@ -3104,7 +4639,32 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.sounddesign",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.sounddesign",
+          "toId": "video.composer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.soundmixer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.editor",
+          "toId": "video.soundmixer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.sounddesign",
+          "toId": "video.soundmixer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
           "toId": "video.soundmixer",
           "kind": "critique_in"
         },
@@ -3114,7 +4674,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.soundmixer",
+          "toId": "video.sounddesign",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.soundmixer",
+          "toId": "video.composer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.sportsanalyst",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.sme",
+          "toId": "video.sportsanalyst",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.journalist",
           "toId": "video.sportsanalyst",
           "kind": "critique_in"
         },
@@ -3124,7 +4704,37 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.sportsanalyst",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.sportsanalyst",
+          "toId": "video.motiongraphics",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.standardseditor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.journalist",
+          "toId": "video.standardseditor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.standardseditor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.corrections",
+          "toId": "video.standardseditor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
           "toId": "video.standardseditor",
           "kind": "critique_in"
         },
@@ -3139,12 +4749,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.storyboard",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.storyboard",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.storyboard",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.storyboard",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.storyboard",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.styletransfer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.styletransfer",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.colorist",
           "toId": "video.styletransfer",
           "kind": "critique_in"
         },
@@ -3159,12 +4799,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.talent",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.casting",
+          "toId": "video.talent",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.talent",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.talent",
+          "toId": "video.director",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.templatedesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.personalizationengineer",
+          "toId": "video.templatedesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.ux",
+          "toId": "video.templatedesign",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.crm",
           "toId": "video.templatedesign",
           "kind": "critique_in"
         },
@@ -3179,12 +4849,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.trailereditor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.musicsupervisor",
+          "toId": "video.trailereditor",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.trailereditor",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.trailereditor",
+          "toId": "video.editor",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.trailereditor",
+          "toId": "video.composer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.travelcine",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.travelcine",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.dronepilot",
           "toId": "video.travelcine",
           "kind": "critique_in"
         },
@@ -3194,7 +4894,17 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.travelcine",
+          "toId": "video.dronepilot",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.trendintelligence",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.copywriter",
           "toId": "video.trendintelligence",
           "kind": "critique_in"
         },
@@ -3204,7 +4914,27 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.trendintelligence",
+          "toId": "video.ideation",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.trustsafety",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.trustsafety",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.deepfakedetection",
+          "toId": "video.trustsafety",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.safetyredteam",
           "toId": "video.trustsafety",
           "kind": "critique_in"
         },
@@ -3219,12 +4949,42 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.performancemarketer",
+          "toId": "video.ugccreator",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
+          "toId": "video.ugccreator",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.ugccreator",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.ugccreator",
+          "toId": "video.performancemarketer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.ux",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.templatedesign",
+          "toId": "video.ux",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.personalizationengineer",
+          "toId": "video.ux",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.accessibility",
           "toId": "video.ux",
           "kind": "critique_in"
         },
@@ -3239,12 +4999,47 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_in"
         },
         {
+          "fromId": "video.director",
+          "toId": "video.vfxsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.cinematographer",
+          "toId": "video.vfxsupervisor",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.aiqaconsistency",
+          "toId": "video.vfxsupervisor",
+          "kind": "critique_in"
+        },
+        {
           "fromId": "video.vfxsupervisor",
           "toId": "video.judge",
           "kind": "critique_out"
         },
         {
+          "fromId": "video.vfxsupervisor",
+          "toId": "video.promptengineer",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.voiceclone",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.compliance",
+          "toId": "video.voiceclone",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.legal",
+          "toId": "video.voiceclone",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.animator_2d",
           "toId": "video.voiceclone",
           "kind": "critique_in"
         },
@@ -3254,7 +5049,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.voiceclone",
+          "toId": "video.avatardesign",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.voiceover",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.director",
+          "toId": "video.voiceover",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.brand",
           "toId": "video.voiceover",
           "kind": "critique_in"
         },
@@ -3264,7 +5074,22 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.voiceover",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.webresearch",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
+          "toId": "video.webresearch",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.citation",
           "toId": "video.webresearch",
           "kind": "critique_in"
         },
@@ -3274,13 +5099,38 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "critique_out"
         },
         {
+          "fromId": "video.webresearch",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
           "fromId": "video.critic",
+          "toId": "video.worldbuilding",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.showrunner",
+          "toId": "video.worldbuilding",
+          "kind": "critique_in"
+        },
+        {
+          "fromId": "video.factchecker",
           "toId": "video.worldbuilding",
           "kind": "critique_in"
         },
         {
           "fromId": "video.worldbuilding",
           "toId": "video.judge",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.worldbuilding",
+          "toId": "video.screenwriter",
+          "kind": "critique_out"
+        },
+        {
+          "fromId": "video.worldbuilding",
+          "toId": "video.conceptartist",
           "kind": "critique_out"
         }
       ]

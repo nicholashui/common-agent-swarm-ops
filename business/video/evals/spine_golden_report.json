@@ -1,0 +1,729 @@
+{
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "results": [
+    {
+      "agent_id": "video.orchestrator",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.orchestrator",
+        "correlation_id": "corr_35f4719979c9",
+        "status": "ok",
+        "artifact": {
+          "type": "video.orchestrator.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for OrchestratorAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract",
+              "Per-shot craft generation (delegates to craft agents)"
+            ],
+            "allowed_tools": [
+              "media.stub"
+            ],
+            "mode": "offline_mock"
+          },
+          "summary": "video.orchestrator offline result for: Execute a minimal valid task for OrchestratorAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.orchestrator.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.orchestrator.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "DAG completion \u226599.5%",
+              "score": 90,
+              "weight": 0.3333
+            },
+            {
+              "id": "d2",
+              "name": "SLA adherence",
+              "score": 90,
+              "weight": 0.3333
+            },
+            {
+              "id": "d3",
+              "name": "deadlock = 0",
+              "score": 90,
+              "weight": 0.3334
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.orchestrator",
+            "to_id": "video.judge",
+            "correlation_id": "corr_35f4719979c9",
+            "artifact_ref": "artifact:video.orchestrator:corr_35f4719979c9"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.orchestrator.v1",
+          "rubric:video.rubric.orchestrator.v1",
+          "skill:video.orchestrator"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.orchestrator.v1",
+        "rubric_reference": "video.rubric.orchestrator.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.planner",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.planner",
+        "correlation_id": "corr_3a9d9345baa3",
+        "status": "ok",
+        "artifact": {
+          "type": "video.planner.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for PlannerAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.planner offline result for: Execute a minimal valid task for PlannerAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.planner.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.planner.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Plan validity (no missing gate)",
+              "score": 90,
+              "weight": 0.5
+            },
+            {
+              "id": "d2",
+              "name": "cost variance <10%",
+              "score": 90,
+              "weight": 0.5
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.planner",
+            "to_id": "video.judge",
+            "correlation_id": "corr_3a9d9345baa3",
+            "artifact_ref": "artifact:video.planner:corr_3a9d9345baa3"
+          },
+          {
+            "from_id": "video.planner",
+            "to_id": "video.router",
+            "correlation_id": "corr_3a9d9345baa3",
+            "artifact_ref": "artifact:video.planner:corr_3a9d9345baa3"
+          },
+          {
+            "from_id": "video.planner",
+            "to_id": "video.orchestrator",
+            "correlation_id": "corr_3a9d9345baa3",
+            "artifact_ref": "artifact:video.planner:corr_3a9d9345baa3"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.planner.v1",
+          "rubric:video.rubric.planner.v1",
+          "skill:video.planner"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.planner.v1",
+        "rubric_reference": "video.rubric.planner.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.router",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.router",
+        "correlation_id": "corr_5c7f0be45028",
+        "status": "ok",
+        "artifact": {
+          "type": "video.router.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for RouterAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract",
+              "Long-running multi-step craft execution"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.router offline result for: Execute a minimal valid task for RouterAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.router.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.router.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Routing accuracy \u226595% vs oracle",
+              "score": 90,
+              "weight": 0.5
+            },
+            {
+              "id": "d2",
+              "name": "cost within budget",
+              "score": 90,
+              "weight": 0.5
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.router",
+            "to_id": "video.judge",
+            "correlation_id": "corr_5c7f0be45028",
+            "artifact_ref": "artifact:video.router:corr_5c7f0be45028"
+          },
+          {
+            "from_id": "video.router",
+            "to_id": "video.planner",
+            "correlation_id": "corr_5c7f0be45028",
+            "artifact_ref": "artifact:video.router:corr_5c7f0be45028"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.router.v1",
+          "rubric:video.rubric.router.v1",
+          "skill:video.router"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.router.v1",
+        "rubric_reference": "video.rubric.router.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.judge",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.judge",
+        "correlation_id": "corr_0eb968c822a2",
+        "status": "ok",
+        "artifact": {
+          "type": "video.judge.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for JudgeAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract",
+              "Primary content generation"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.judge offline result for: Execute a minimal valid task for JudgeAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.judge.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.judge.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Inter-rater \u03ba vs expert panel \u22650.8",
+              "score": 90,
+              "weight": 1.0
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.judge",
+            "to_id": "video.judge",
+            "correlation_id": "corr_0eb968c822a2",
+            "artifact_ref": "artifact:video.judge:corr_0eb968c822a2"
+          },
+          {
+            "from_id": "video.judge",
+            "to_id": "video.director",
+            "correlation_id": "corr_0eb968c822a2",
+            "artifact_ref": "artifact:video.judge:corr_0eb968c822a2"
+          },
+          {
+            "from_id": "video.judge",
+            "to_id": "video.screenwriter",
+            "correlation_id": "corr_0eb968c822a2",
+            "artifact_ref": "artifact:video.judge:corr_0eb968c822a2"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.judge.v1",
+          "rubric:video.rubric.judge.v1",
+          "skill:video.judge"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.judge.v1",
+        "rubric_reference": "video.rubric.judge.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.gatekeeper",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.gatekeeper",
+        "correlation_id": "corr_6bbfb7794e6b",
+        "status": "ok",
+        "artifact": {
+          "type": "video.gatekeeper.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for GateKeeperAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.gatekeeper offline result for: Execute a minimal valid task for GateKeeperAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.gatekeeper.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.gatekeeper.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Zero leaked defects",
+              "score": 90,
+              "weight": 0.5
+            },
+            {
+              "id": "d2",
+              "name": "sign-off SLA \u226599%",
+              "score": 90,
+              "weight": 0.5
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.gatekeeper",
+            "to_id": "video.judge",
+            "correlation_id": "corr_6bbfb7794e6b",
+            "artifact_ref": "artifact:video.gatekeeper:corr_6bbfb7794e6b"
+          },
+          {
+            "from_id": "video.gatekeeper",
+            "to_id": "video.orchestrator",
+            "correlation_id": "corr_6bbfb7794e6b",
+            "artifact_ref": "artifact:video.gatekeeper:corr_6bbfb7794e6b"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.gatekeeper.v1",
+          "rubric:video.rubric.gatekeeper.v1",
+          "skill:video.gatekeeper"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.gatekeeper.v1",
+        "rubric_reference": "video.rubric.gatekeeper.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.critic",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.critic",
+        "correlation_id": "corr_1f7a9c504b61",
+        "status": "ok",
+        "artifact": {
+          "type": "video.critic.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for CriticAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.critic offline result for: Execute a minimal valid task for CriticAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.critic.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.critic.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Interpretive depth, consistency, reviewer-mode diversity",
+              "score": 90,
+              "weight": 1.0
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.critic",
+            "to_id": "video.judge",
+            "correlation_id": "corr_1f7a9c504b61",
+            "artifact_ref": "artifact:video.critic:corr_1f7a9c504b61"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.critic.v1",
+          "rubric:video.rubric.critic.v1",
+          "skill:video.critic"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.critic.v1",
+        "rubric_reference": "video.rubric.critic.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    },
+    {
+      "agent_id": "video.memory",
+      "passed": true,
+      "errors": [],
+      "run": {
+        "agent_id": "video.memory",
+        "correlation_id": "corr_c7fd33fe5db3",
+        "status": "ok",
+        "artifact": {
+          "type": "video.memory.offline_artifact",
+          "payload": {
+            "goal": "Execute a minimal valid task for MemoryAgent",
+            "inputs": {
+              "brief": "synthetic offline fixture \u2014 do not call live providers"
+            },
+            "refinement": 0,
+            "does_not_own": [
+              "Host credential storage",
+              "Silent production activation without fail-closed gates",
+              "Inventing action references for irreversible mutations",
+              "Owning other agents' exclusive craft outputs without handoff contract",
+              "Final creative approval"
+            ],
+            "allowed_tools": [],
+            "mode": "offline_mock"
+          },
+          "summary": "video.memory offline result for: Execute a minimal valid task for MemoryAgent"
+        },
+        "l1": {
+          "passed": true,
+          "checks": [
+            {
+              "id": "prompt_loaded",
+              "passed": true,
+              "detail": "video.prompt.memory.v1"
+            },
+            {
+              "id": "rubric_loaded",
+              "passed": true,
+              "detail": "video.rubric.memory.v1"
+            },
+            {
+              "id": "skill_harness",
+              "passed": true,
+              "detail": "skills/SKILL.md"
+            },
+            {
+              "id": "goal_present",
+              "passed": true,
+              "detail": "task goal non-empty"
+            },
+            {
+              "id": "distillation_scaffold",
+              "passed": true,
+              "detail": "SOURCE_CATALOG + DISTILLATION_PLAN"
+            }
+          ]
+        },
+        "l2": {
+          "score": 90.0,
+          "dimensions": [
+            {
+              "id": "d1",
+              "name": "Retrieval precision@5 \u22650.9",
+              "score": 90,
+              "weight": 0.5
+            },
+            {
+              "id": "d2",
+              "name": "freshness SLA",
+              "score": 90,
+              "weight": 0.5
+            }
+          ],
+          "passed": true,
+          "threshold": 85
+        },
+        "critiques_emitted": [],
+        "handoffs": [
+          {
+            "from_id": "video.memory",
+            "to_id": "video.judge",
+            "correlation_id": "corr_c7fd33fe5db3",
+            "artifact_ref": "artifact:video.memory:corr_c7fd33fe5db3"
+          }
+        ],
+        "evidence_refs": [
+          "prompt:video.prompt.memory.v1",
+          "rubric:video.rubric.memory.v1",
+          "skill:video.memory"
+        ],
+        "refinement_count": 0,
+        "notes": "Offline run using pack harness; inbound_critiques=0",
+        "prompt_reference": "video.prompt.memory.v1",
+        "rubric_reference": "video.rubric.memory.v1",
+        "skill_loaded": true,
+        "needs_hitl": false
+      }
+    }
+  ]
+}

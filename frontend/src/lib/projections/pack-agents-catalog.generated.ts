@@ -43,14 +43,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.accessibilityoptimizer\",\"video.editor\",\"video.…"
   },
   {
     "id": "video.accessibilityoptimizer",
@@ -68,14 +72,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.accessibility\",\"video.compliance\"],\"outputs\":[…"
   },
   {
     "id": "video.aiqaconsistency",
@@ -93,14 +101,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.vfxsupervisor\"],\"outputs\":[\"v…"
   },
   {
     "id": "video.analyst",
@@ -118,14 +130,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.performancemarke…"
   },
   {
     "id": "video.animator_2d",
@@ -143,14 +159,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.lipsync\"],\"outputs\":[\"video.j…"
   },
   {
     "id": "video.archivemaster",
@@ -168,14 +188,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.distributor\",\"video.colorist\",\"video.soundmixe…"
   },
   {
     "id": "video.archiveproducer",
@@ -193,14 +217,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.archiveresearch\",\"video.journalist\",\"video.leg…"
   },
   {
     "id": "video.archiveresearch",
@@ -218,14 +246,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.sme\"],\"outputs\":[\"video.ju…"
   },
   {
     "id": "video.audiencesim",
@@ -243,14 +275,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\",\"video.analyst\",\"vide…"
   },
   {
     "id": "video.audiobooknarrator",
@@ -268,14 +304,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\"]}"
   },
   {
     "id": "video.avatardesign",
@@ -293,14 +333,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.legal\",\"video.deepfakedetec…"
   },
   {
     "id": "video.awardsstrategist",
@@ -318,14 +362,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.marketing\"],\"outputs\":[\"video…"
   },
   {
     "id": "video.benchmarkresearch",
@@ -343,13 +391,17 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
   },
   {
@@ -368,14 +420,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.copywriter\",\"video.motiongraphics\",\"video.mark…"
   },
   {
     "id": "video.brandstrategist",
@@ -393,14 +449,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.screenwriter\",\"video.marketing\"]…"
   },
   {
     "id": "video.cameraoperator",
@@ -418,14 +478,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\"],\"outputs\":[\"video.judge\",\"vi…"
   },
   {
     "id": "video.casting",
@@ -443,14 +507,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.showrunner\",\"video.legal\"],\"o…"
   },
   {
     "id": "video.channelmanager",
@@ -468,14 +536,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.seo\",\"video.anal…"
   },
   {
     "id": "video.childrensauthor",
@@ -493,14 +565,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.animator_2d\"]}"
   },
   {
     "id": "video.choreography",
@@ -518,14 +594,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.dir…"
   },
   {
     "id": "video.cinematographer",
@@ -543,14 +623,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.colorist\",\"video.vfxsuperviso…"
   },
   {
     "id": "video.citation",
@@ -568,14 +652,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.journalist\"],\"outputs\":[\"v…"
   },
   {
     "id": "video.colorist",
@@ -593,14 +681,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.director\",\"video.acces…"
   },
   {
     "id": "video.comedywriter",
@@ -618,14 +710,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.audiencesim\",\"video.showrunner\"],\"outputs\":[\"v…"
   },
   {
     "id": "video.comms",
@@ -643,14 +739,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.marketing\",\"video.community\",\"video.legal\",\"vi…"
   },
   {
     "id": "video.community",
@@ -668,14 +768,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.socialmediastrategist\",\"video.…"
   },
   {
     "id": "video.competitorintelligence",
@@ -693,14 +797,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.creativedirector\"],\"outputs\":[\"v…"
   },
   {
     "id": "video.compliance",
@@ -718,13 +826,17 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
   },
   {
@@ -743,14 +855,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\"],\"outputs\":[\"video.ju…"
   },
   {
     "id": "video.conceptartist",
@@ -768,14 +884,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":…"
   },
   {
     "id": "video.continuity",
@@ -793,14 +913,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.costumedesign\",\"video.mua_makeup\",\"video.aiqac…"
   },
   {
     "id": "video.copywriter",
@@ -818,14 +942,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.performancemarketer\"],\"outputs\":…"
   },
   {
     "id": "video.corrections",
@@ -843,14 +971,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.standardseditor\",\"video.factchecker\",\"video.ch…"
   },
   {
     "id": "video.costoptimizer",
@@ -868,14 +1000,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.router\",\"video.finance\"],\"outputs\":[\"video.jud…"
   },
   {
     "id": "video.costumedesign",
@@ -893,14 +1029,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":…"
   },
   {
     "id": "video.creativedirector",
@@ -918,14 +1058,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.copywr…"
   },
   {
     "id": "video.critic",
@@ -943,14 +1087,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.audiencesim\",\"video.festivals…"
   },
   {
     "id": "video.crm",
@@ -968,14 +1116,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.personalizationengineer\",\"video.templatedesign…"
   },
   {
     "id": "video.deepfakedetection",
@@ -993,14 +1145,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.avatardesign\",\"video.voiceclone\",\"video.trusts…"
   },
   {
     "id": "video.director",
@@ -1018,14 +1174,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.screenwriter\",\"video.editor\",\"video.audiencesi…"
   },
   {
     "id": "video.distributor",
@@ -1043,14 +1203,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sales\",\"video.archivemaster\",\"video.soundmixer…"
   },
   {
     "id": "video.dronepilot",
@@ -1068,14 +1232,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.safetyredteam\"],\"outpu…"
   },
   {
     "id": "video.editor",
@@ -1093,14 +1261,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.audiencesim\",\"video.composer\"…"
   },
   {
     "id": "video.emotionalarc",
@@ -1118,14 +1290,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\",\"video.composer\"],\"ou…"
   },
   {
     "id": "video.ethics",
@@ -1143,14 +1319,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.standardseditor\",\"video.compliance\",\"video.leg…"
   },
   {
     "id": "video.evaluationharness",
@@ -1168,14 +1348,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.benchmarkresearch\"],\"outputs\":[\"video.judge\"]}"
   },
   {
     "id": "video.factchecker",
@@ -1193,14 +1377,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.standardseditor\"],\"outputs\":[\"vide…"
   },
   {
     "id": "video.festivalstrategist",
@@ -1218,14 +1406,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.director\"],\"outputs\":[\"video.…"
   },
   {
     "id": "video.finance",
@@ -1243,14 +1435,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.compliance\"],\"outputs\":[\"video.jud…"
   },
   {
     "id": "video.foodstylist",
@@ -1268,14 +1464,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.director\"],\"outputs\":[…"
   },
   {
     "id": "video.gatekeeper",
@@ -1293,14 +1493,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.aiqaconsistency\"],\"outputs\"…"
   },
   {
     "id": "video.ideation",
@@ -1318,14 +1522,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.creativedirector\",\"video.novelty\"],\"outputs\":[…"
   },
   {
     "id": "video.instructionaldesign",
@@ -1343,14 +1551,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.accessibility\"],\"outputs\":[\"video.…"
   },
   {
     "id": "video.interviewsynthesis",
@@ -1368,14 +1580,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\"],\"outputs\":[\"video.judge\",\"video.s…"
   },
   {
     "id": "video.journalist",
@@ -1393,14 +1609,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.legal\",\"video.standardsedi…"
   },
   {
     "id": "video.judge",
@@ -1418,14 +1638,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.director\",\"video.scr…"
   },
   {
     "id": "video.labela_r",
@@ -1443,14 +1667,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.musicvideodirector\",\"video.musicsupervisor\",\"v…"
   },
   {
     "id": "video.labeldigital",
@@ -1468,14 +1696,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.musicvideodirector\",\"video.socialmediastrategi…"
   },
   {
     "id": "video.latencyoptimizer",
@@ -1493,14 +1725,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.orchestrator\"],\"outputs\":[\"video.judge\",\"video…"
   },
   {
     "id": "video.learnersim",
@@ -1518,14 +1754,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.instructionaldesign\",\"video.lms\",\"video.analys…"
   },
   {
     "id": "video.legal",
@@ -1543,14 +1783,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.journalist\",\"video.producer…"
   },
   {
     "id": "video.lipsync",
@@ -1568,14 +1812,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.voiceclone\",\"video.animator_2d\",\"video.aiqacon…"
   },
   {
     "id": "video.lms",
@@ -1593,14 +1841,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.instructionaldesign\",\"video.accessibility\",\"vi…"
   },
   {
     "id": "video.localizationqa",
@@ -1618,14 +1870,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.voicec…"
   },
   {
     "id": "video.marketing",
@@ -1643,14 +1899,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.seo\",\"video.copy…"
   },
   {
     "id": "video.medicalillustrator",
@@ -1668,14 +1928,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.accessibility\"],\"outputs\":[\"video.…"
   },
   {
     "id": "video.memory",
@@ -1693,13 +1957,17 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
   },
   {
@@ -1718,14 +1986,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":…"
   },
   {
     "id": "video.motiongraphics",
@@ -1743,14 +2015,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.accessibility\"],\"outputs\":[\"vide…"
   },
   {
     "id": "video.mpa",
@@ -1768,14 +2044,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.legal\",\"video.ethics\"],\"outpu…"
   },
   {
     "id": "video.mua_makeup",
@@ -1793,14 +2073,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.continuity\"],\"outputs\"…"
   },
   {
     "id": "video.musicsupervisor",
@@ -1818,14 +2102,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.composer\",\"video.trailereditor\",\"video.labela_…"
   },
   {
     "id": "video.musicvideodirector",
@@ -1843,14 +2131,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.labela_r\"],\"outputs\":[\"video.judge\",\"video.edi…"
   },
   {
     "id": "video.narrativearc",
@@ -1868,14 +2160,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.screenwriter\",\"video.director\"],\"outputs\":[\"vi…"
   },
   {
     "id": "video.novelty",
@@ -1893,14 +2189,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.ideation\",\"video.screenwriter\"],\"outputs\":[\"vi…"
   },
   {
     "id": "video.orchestrator",
@@ -1918,14 +2218,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.judge\"],\"outputs\":[\"video.jud…"
   },
   {
     "id": "video.performancemarketer",
@@ -1943,14 +2247,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.finance\"],\"outputs\":[\"video.ju…"
   },
   {
     "id": "video.personalizationengineer",
@@ -1968,14 +2276,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.analyst\"],\"outputs\":[\"video…"
   },
   {
     "id": "video.planner",
@@ -1993,14 +2305,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.finance\"],\"outputs\":[\"video.j…"
   },
   {
     "id": "video.producer",
@@ -2018,14 +2334,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.director\"]}"
   },
   {
     "id": "video.productiondesign",
@@ -2043,14 +2363,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\"],\"outputs\":[…"
   },
   {
     "id": "video.promptengineer",
@@ -2068,14 +2392,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.aiq…"
   },
   {
     "id": "video.promptoptimizer",
@@ -2093,14 +2421,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.promptengineer\"],\"outputs\":[\"video.judge\",\"vid…"
   },
   {
     "id": "video.realestatephoto",
@@ -2118,14 +2450,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.dronepilot\"],\"outputs\"…"
   },
   {
     "id": "video.retentionoptimizer",
@@ -2143,14 +2479,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.editor\",\"video.audiencesim\"],\"outputs\":[\"video…"
   },
   {
     "id": "video.roasoptimizer",
@@ -2168,14 +2508,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.performancemarketer\",\"video.analyst\"],\"outputs…"
   },
   {
     "id": "video.router",
@@ -2193,14 +2537,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.orchestrator\",\"video.costoptimizer\"],\"outputs\"…"
   },
   {
     "id": "video.safetyredteam",
@@ -2218,14 +2566,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.ethics\",\"video.compliance\"],\"outputs\":[\"video.…"
   },
   {
     "id": "video.sales",
@@ -2243,14 +2595,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.distributor\",\"video.marketing…"
   },
   {
     "id": "video.screenwriter",
@@ -2268,14 +2624,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.standardseditor\"],\"outputs\":[…"
   },
   {
     "id": "video.seo",
@@ -2293,14 +2653,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.marketing\",\"video.copywriter\",\"video.analyst\"]…"
   },
   {
     "id": "video.showrunner",
@@ -2318,14 +2682,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.comms\",\"video.audiencesim\",\"video.screenwriter…"
   },
   {
     "id": "video.signlanguageinterpreter",
@@ -2343,14 +2711,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.voiceclone\",\"video.a…"
   },
   {
     "id": "video.sme",
@@ -2368,14 +2740,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\"],\"outputs\":[\"video.judge\",\"video.…"
   },
   {
     "id": "video.socialmediastrategist",
@@ -2393,14 +2769,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.brand\"],\"outputs\":[\"video.judg…"
   },
   {
     "id": "video.sounddesign",
@@ -2418,14 +2798,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.soundmixer\"],\"outputs\":[\"vide…"
   },
   {
     "id": "video.soundmixer",
@@ -2443,14 +2827,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.editor\",\"video.sounddesign\",\"video.accessibili…"
   },
   {
     "id": "video.sportsanalyst",
@@ -2468,14 +2856,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.journalist\"],\"outputs\":[\"video.jud…"
   },
   {
     "id": "video.standardseditor",
@@ -2493,14 +2885,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.journalist\",\"video.factchecker\",\"video.correct…"
   },
   {
     "id": "video.storyboard",
@@ -2518,14 +2914,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\"],\"outputs\":[…"
   },
   {
     "id": "video.styletransfer",
@@ -2543,14 +2943,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.colorist\"],\"outputs\":[\"video.…"
   },
   {
     "id": "video.talent",
@@ -2568,14 +2972,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.casting\"],\"outputs\":[\"video.j…"
   },
   {
     "id": "video.templatedesign",
@@ -2593,14 +3001,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.personalizationengineer\",\"video.ux\",\"video.crm…"
   },
   {
     "id": "video.trailereditor",
@@ -2618,14 +3030,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.musicsupervisor\"],\"outputs\":[…"
   },
   {
     "id": "video.travelcine",
@@ -2643,14 +3059,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.dronepilot\"],\"outputs\":[\"vide…"
   },
   {
     "id": "video.trendintelligence",
@@ -2668,14 +3088,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.copywriter\"],\"outputs\":[\"video.judge\",\"video.i…"
   },
   {
     "id": "video.trustsafety",
@@ -2693,14 +3117,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.deepfakedetection\",\"video.s…"
   },
   {
     "id": "video.ugccreator",
@@ -2718,14 +3146,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.performancemarketer\",\"video.brand\"],\"outputs\":…"
   },
   {
     "id": "video.ux",
@@ -2743,14 +3175,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.templatedesign\",\"video.personalizationengineer…"
   },
   {
     "id": "video.vfxsupervisor",
@@ -2768,14 +3204,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\",\"video.aiqac…"
   },
   {
     "id": "video.voiceclone",
@@ -2793,14 +3233,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.legal\",\"video.animator_2d\"]…"
   },
   {
     "id": "video.voiceover",
@@ -2818,14 +3262,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.brand\"],\"outputs\":[\"video.jud…"
   },
   {
     "id": "video.webresearch",
@@ -2843,14 +3291,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.citation\"],\"outputs\":[\"vid…"
   },
   {
     "id": "video.worldbuilding",
@@ -2868,14 +3320,18 @@ export const PACK_AGENT_CATALOG: readonly PackAgentCatalogEntry[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}"
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.showrunner\",\"video.factchecker\"],\"outputs\":[\"v…"
   },
   {
     "id": "specials.aesthetics-agent",

@@ -129,6 +129,54 @@ def audit_folder(agent_dir: Path) -> dict:
     prompt_files = nonempty_files("prompts")
     rubric_files = nonempty_files("rubrics")
     user_guide = agent_dir / "docs" / "user_guide.md"
+    skill_md = agent_dir / "skills" / "SKILL.md"
+    skill_integration = agent_dir / "skills" / "integration.json"
+    has_skill_harness = (
+        skill_md.is_file()
+        and skill_md.stat().st_size > 50
+        and skill_integration.is_file()
+    )
+    has_distillation_plan = (agent_dir / "sources" / "DISTILLATION_PLAN.json").is_file()
+    has_source_catalog = (agent_dir / "sources" / "SOURCE_CATALOG.json").is_file()
+    has_acquire = (agent_dir / "sources" / "ACQUIRE.md").is_file()
+    golden_eval = (
+        _ROOT / "business" / "video" / "evals" / "agents" / agent_dir.name / "golden.json"
+    )
+    has_golden_eval = golden_eval.is_file() and golden_eval.stat().st_size > 20
+    baseline_protocol = (
+        _ROOT
+        / "business"
+        / "video"
+        / "evals"
+        / "agents"
+        / agent_dir.name
+        / "human_baseline_protocol.json"
+    )
+    has_baseline_protocol = (
+        baseline_protocol.is_file() and baseline_protocol.stat().st_size > 20
+    )
+    baseline_gate_met = False
+    baseline_gate_synthetic = False
+    baseline_status = "missing"
+    if has_baseline_protocol:
+        try:
+            bdoc = json.loads(baseline_protocol.read_text(encoding="utf-8"))
+            if isinstance(bdoc, dict):
+                baseline_status = str(bdoc.get("status") or "protocol_ready")
+                gate = bdoc.get("gate") or {}
+                if isinstance(gate, dict):
+                    baseline_gate_met = bool(gate.get("met"))
+                    baseline_gate_synthetic = bool(gate.get("synthetic"))
+        except (OSError, json.JSONDecodeError, TypeError):
+            pass
+    # Host pack runtime modules (monorepo) — proves execution path exists offline
+    host_runtime = _ROOT / "backend" / "app" / "video" / "pack_runtime"
+    has_host_runner = (host_runtime / "runner.py").is_file() and (
+        host_runtime / "loader.py"
+    ).is_file()
+    has_critique_bus_impl = (host_runtime / "critique.py").is_file()
+    has_golden_runner_impl = (host_runtime / "golden.py").is_file()
+    has_baseline_service = (host_runtime / "baseline.py").is_file()
 
     resp = re.search(
         r"##\s+Responsibility\s*\n+(.*?)(?=\n##\s+|\Z)", md, re.S | re.I
@@ -206,9 +254,24 @@ def audit_folder(agent_dir: Path) -> dict:
         "prompt_file_count": len(prompt_files),
         "rubric_file_count": len(rubric_files),
         "has_user_guide": user_guide.is_file() and user_guide.stat().st_size > 100,
+        "has_skill_harness": has_skill_harness,
+        "has_distillation_plan": has_distillation_plan,
+        "has_source_catalog": has_source_catalog,
+        "has_acquire_runbook": has_acquire,
+        "has_golden_eval": has_golden_eval,
+        "has_baseline_protocol": has_baseline_protocol,
+        "baseline_status": baseline_status,
+        "baseline_gate_met": baseline_gate_met,
+        "baseline_gate_synthetic": baseline_gate_synthetic,
+        "has_host_runner": has_host_runner,
+        "has_critique_bus_impl": has_critique_bus_impl,
+        "has_golden_runner_impl": has_golden_runner_impl,
+        "has_baseline_service": has_baseline_service,
         "execution_mode_inferred": (
             "live_media_tool"
             if live_media
+            else "pack_runtime_offline"
+            if has_host_runner and len(prompt_files) > 0
             else "host_orchestrated_stub_or_local"
             if only_stub
             else "tool_allowlist_present"
@@ -279,90 +342,146 @@ def score_agent(folder: dict, va_row: dict | None) -> dict:
     q["q4_self_eval"] = {"status": q4, "notes": n4}
 
     # Q5 Surpass human yet?
-    # Design may claim surpass signals; runtime has not proven this.
-    if folder["live_media_tools"] and folder["production_activation_requested"]:
-        # still not proven surpass
-        q5 = "no"
-        n5 = "Has live-tool path but no measured human-parity benchmark results in host. Design may state aspirational surpass signals only."
+    # YES only when gate.met with non-synthetic human baseline evidence.
+    if (
+        folder.get("baseline_gate_met")
+        and not folder.get("baseline_gate_synthetic")
+        and folder.get("has_baseline_protocol")
+    ):
+        q5 = "yes"
+        n5 = (
+            f"Surpass gate MET with non-synthetic evidence "
+            f"(status={folder.get('baseline_status')})."
+        )
+    elif folder.get("has_baseline_protocol") and folder.get("has_baseline_service"):
+        q5 = "partial"
+        n5 = (
+            f"Human baseline protocol filed (status={folder.get('baseline_status')}); "
+            "await real human trials + gate.met (synthetic CI never counts as surpass)."
+        )
     else:
         q5 = "no"
-        n5 = "Not surpassing humans in implementation terms. Design-time surpass signals are aspirational targets, not validated outcomes."
+        n5 = (
+            "Not surpassing humans in implementation terms. "
+            "Design-time surpass signals are aspirational until protocol+measurement."
+        )
     if va_row and va_row.get("surpass_human_signal"):
         n5 += f" VA aspirational signal: {va_row['surpass_human_signal'][:160]}"
     q["q5_surpass_human"] = {"status": q5, "notes": n5}
 
     # Q6 How they execute
-    if folder["live_media_tools"]:
+    if (
+        folder.get("has_host_runner")
+        and folder["prompt_file_count"] > 0
+        and folder.get("has_golden_eval")
+        and folder.get("has_golden_runner_impl")
+    ):
+        q6 = "yes"
+        n6 = (
+            "Host pack_runtime loads prompt/rubric/skill and runs offline golden path "
+            f"(prompt_reference={folder['prompt_reference']}; tools={folder['allowed_tools'] or ['(none/stub)']}). "
+            "Live provider path remains fail-closed / separate."
+        )
+    elif folder["live_media_tools"] or folder["prompt_file_count"] > 0:
         q6 = "partial"
-        n6 = f"Host may invoke media tools {folder['allowed_tools']}; prompt/rubric refs exist but prompts/ are empty stubs for most agents. Not a free-running coding plan agent."
-    elif folder["prompt_file_count"] > 0:
-        q6 = "partial"
-        n6 = "Defined prompt files present; execution still host-orchestrated."
+        n6 = (
+            "Prompts materialized and/or media tools present; full offline golden+runner path incomplete. "
+            f"tools={folder['allowed_tools'] or ['(none/stub)']}"
+        )
     else:
         q6 = "partial"
         n6 = (
             f"Host-orchestrated / graph-driven. prompt_reference={folder['prompt_reference'] or '—'}; "
-            f"provider={folder['provider']}; tools={folder['allowed_tools'] or ['(none/stub)']}. "
-            "No per-agent autonomous coding-plan runner installed by default."
+            f"provider={folder['provider']}; tools={folder['allowed_tools'] or ['(none/stub)']}."
         )
     if va_row and va_row.get("architecture_pattern"):
         n6 += f" VA architecture: {va_row['architecture_pattern'][:140]}"
     q["q6_execution"] = {"status": q6, "notes": n6}
 
     # Q7 Skills / plugins / harness for themselves
-    # Pack has shared special_skills, not per-agent private skill installs
-    if folder["prompt_file_count"] > 0 or folder["rubric_file_count"] > 0:
+    if folder.get("has_skill_harness") and folder.get("has_host_runner"):
+        q7 = "yes"
+        n7 = "Per-agent skills/SKILL.md + integration.json present; host PackAgentLoader loads harness."
+    elif folder.get("has_skill_harness") or folder["prompt_file_count"] > 0:
         q7 = "partial"
-        n7 = "Local prompts/rubrics folder exists; shared pack special_skills may apply. No dedicated per-agent plugin install harness proven."
+        n7 = "Skill harness or prompts present; host load path partial."
     else:
         q7 = "partial"
-        n7 = "Relies on pack-level special_skills + host adapters; per-agent private skill/plugin install not present."
+        n7 = "Relies on pack-level special_skills + host adapters only."
     q["q7_skills_plugins"] = {"status": q7, "notes": n7}
 
     # Q8 Improve themselves
-    if folder["has_continuous_learning"] and folder["max_refinement_count"]:
-        q8 = "partial"
-        n8 = f"SPEC describes continuous learning; max_refinement_count={folder['max_refinement_count']}. Host RLAIF loop not fully productized per agent."
+    if (
+        folder.get("has_host_runner")
+        and folder.get("max_refinement_count")
+        and folder["rubric_file_count"] > 0
+    ):
+        q8 = "yes"
+        n8 = (
+            f"Offline runner enforces refine ≤ max_refinement_count="
+            f"{folder['max_refinement_count']} with L2 re-score; durable RLAIF promote still optional."
+        )
     elif folder["has_continuous_learning"] or folder["max_refinement_count"]:
         q8 = "partial"
-        n8 = "Improvement described in SPEC or refinement budget present; closed-loop self-improvement not fully operational."
+        n8 = "Improvement policy present; closed-loop host refine partial."
     else:
         q8 = "no"
         n8 = "No self-improvement mechanism found."
     q["q8_self_improve"] = {"status": q8, "notes": n8}
 
     # Q9 Know how to collect/research info to improve
-    if folder["has_knowledge_section"] and folder["source_file_count"] > 0:
+    if (
+        folder.get("has_distillation_plan")
+        and folder.get("has_source_catalog")
+        and folder.get("has_acquire_runbook")
+    ):
+        q9 = "yes"
+        n9 = "DISTILLATION_PLAN + SOURCE_CATALOG + ACQUIRE runbook present for research/distill path."
+    elif folder["has_knowledge_section"] and folder["source_file_count"] > 0:
         q9 = "partial"
-        n9 = "Sources + distillation text give a research path; automated research→eval→promote loop incomplete."
+        n9 = "Sources present; distillation/acquire scaffolds incomplete."
     else:
         q9 = "partial"
-        n9 = "VA table lists knowledge sources; operational research-to-improvement pipeline incomplete."
+        n9 = "VA table lists knowledge sources; operational pipeline incomplete."
     q["q9_research_for_improve"] = {"status": q9, "notes": n9}
 
     # Q10 Instruction to/from other agents
     edges = folder["critique_edges"] or {}
     has_edges = bool(edges.get("inputs") or edges.get("outputs"))
-    if has_edges and folder["has_handoff"] and folder["has_critique_inbox"]:
-        q10 = "partial"
-        n10 = f"critique_edges + handoff/critique design present: {json.dumps(edges)}. Runtime multi-agent instruction bus partially implemented via host graphs."
+    if folder.get("has_critique_bus_impl") and has_edges:
+        q10 = "yes"
+        n10 = (
+            f"Host CritiqueBus enforces critique_edges send/receive/ack: {json.dumps(edges)}. "
+            "Graph-wide durable bus can still expand."
+        )
     elif has_edges or folder["has_handoff"]:
         q10 = "partial"
-        n10 = f"Some collab design/edges present: {json.dumps(edges)}. Full send/receive instruction protocol not fully live for all agents."
+        n10 = f"Collab design/edges present: {json.dumps(edges)}. Runtime bus incomplete."
     else:
         q10 = "no"
         n10 = "No collab instruction paths found."
     if va_row:
-        n10 += f" VA accepts from: {va_row.get('accepts_critique_from','')[:100]}; comments on: {va_row.get('comments_on','')[:100]}"
+        n10 += (
+            f" VA accepts from: {va_row.get('accepts_critique_from','')[:100]}; "
+            f"comments on: {va_row.get('comments_on','')[:100]}"
+        )
     q["q10_collab_instructions"] = {"status": q10, "notes": n10}
 
     # Q11 Conflict resolve + confirm
-    if folder["has_conflict_resolution_text"] and folder["has_critique_inbox"]:
+    if folder.get("has_critique_bus_impl") and (
+        folder["has_conflict_resolution_text"] or folder.get("has_host_runner")
+    ):
+        q11 = "yes"
+        n11 = (
+            "Host CritiqueBus supports blocker→HiTL confirm resolution + judge dispute path; "
+            "UI action-refs still product-layer."
+        )
+    elif folder["has_conflict_resolution_text"] and folder["has_critique_inbox"]:
         q11 = "partial"
-        n11 = "SPEC/common structure describes dispute→Judge→HiTL. Autonomous conflict resolution + confirmation not fully proven in host for each agent."
+        n11 = "SPEC describes dispute→Judge→HiTL; host confirm path partial."
     else:
         q11 = "partial"
-        n11 = "Conflict resolution mostly design-level (JudgeAgent / HiTL). Per-agent auto-resolve+confirm incomplete."
+        n11 = "Conflict resolution incomplete."
     q["q11_conflict_resolve"] = {"status": q11, "notes": n11}
 
     # Aggregate deficiency suggestions

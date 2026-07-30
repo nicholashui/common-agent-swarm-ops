@@ -8,7 +8,9 @@
   },
   "critique_edges": {
     "inputs": [
-      "video.critic"
+      "video.critic",
+      "video.cinematographer",
+      "video.continuity"
     ],
     "outputs": [
       "video.judge"
@@ -28,5 +30,20 @@
   "status": "registered",
   "va_id": 18,
   "va_name": "MUAAgent (Makeup/Hair/SFX)",
-  "va_category": "3-Edit"
+  "va_category": "3-Edit",
+  "does_not_own": [
+    "Host credential storage",
+    "Silent production activation without fail-closed gates",
+    "Inventing action references for irreversible mutations",
+    "Owning other agents' exclusive craft outputs without handoff contract"
+  ],
+  "improvement": {
+    "plan": "agent_improvement_plan_v1.md",
+    "wave": "A_artifacts",
+    "prompt_materialized": true,
+    "rubric_materialized": true,
+    "skills_harness": true,
+    "updated_at": "2026-07-30T14:45:34Z",
+    "research_doc": "business/video/IMPROVEMENT_RESEARCH_SOURCES_v1.md"
+  }
 }

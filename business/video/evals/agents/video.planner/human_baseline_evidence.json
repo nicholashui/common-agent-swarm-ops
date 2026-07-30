@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.planner",
+  "recorded_at": "2026-07-30T14:19:41Z",
+  "protocol_snapshot": {
+    "schema_version": "1.0",
+    "agent_id": "video.planner",
+    "va_name": "PlannerAgent",
+    "status": "synthetic_checked",
+    "honesty": {
+      "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+      "synthetic_ci_allowed": true,
+      "synthetic_sets_met": false
+    },
+    "surpass_signal_design": "Tighter, cheaper plans than EP first pass (blind A/B)",
+    "self_quality_criteria": "Plan validity (no missing gate); cost variance <10%",
+    "metric": {
+      "id": "cost_efficiency",
+      "name": "Cost efficiency vs human",
+      "direction": "lower_is_better",
+      "unit": "relative_cost",
+      "threshold_expression": "agent_mean < human_mean",
+      "pairwise_win_rate_min": null,
+      "raw_signal": "Tighter, cheaper plans than EP first pass (blind A/B)"
+    },
+    "protocol": {
+      "n_human_trials_min": 5,
+      "n_agent_trials_min": 5,
+      "task_fixture": "business/video/evals/agents/video.planner/golden.json",
+      "blinding": "frozen_inputs",
+      "frozen_inputs": true,
+      "operators": [
+        "human_rater",
+        "pack_runtime_offline_agent"
+      ],
+      "recording": [
+        "trial_id",
+        "rater_or_runner",
+        "score_or_outcome",
+        "notes",
+        "timestamp"
+      ]
+    },
+    "human_baseline": {
+      "status": "captured",
+      "trials": [
+        {
+          "trial_id": "human_f5fd3d05c3",
+          "rater_id": "synthetic_ci_rater",
+          "score": 74.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_732646d3f3",
+          "rater_id": "synthetic_ci_rater",
+          "score": 75.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_e487deb809",
+          "rater_id": "synthetic_ci_rater",
+          "score": 76.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_966ea8e6d5",
+          "rater_id": "synthetic_ci_rater",
+          "score": 77.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        },
+        {
+          "trial_id": "human_6d1b6bbe82",
+          "rater_id": "synthetic_ci_rater",
+          "score": 78.0,
+          "notes": "Synthetic human trial for pipeline only — not a real rater",
+          "synthetic": true,
+          "timestamp": "2026-07-30T14:19:30Z"
+        }
+      ],
+      "aggregate": {
+        "n": 5,
+        "mean": 76.0,
+        "min": 74.0,
+        "max": 78.0,
+        "synthetic_any": true
+      },
+      "captured_at": "2026-07-30T14:19:30Z"
+    },
+    "agent_measurement": {
+      "status": "measured",
+      "trials": [
+        {
+          "trial_id": "agent_6c9d854ff3",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:31Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_426c6d549c",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:31Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_0735835a78",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:31Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_34098d76a9",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:31Z",
+          "synthetic": false,
+          "offline": true
+        },
+        {
+          "trial_id": "agent_6ab31fd31c",
+          "score": 90.0,
+          "status": "ok",
+          "l1_passed": true,
+          "refinement_count": 0,
+          "timestamp": "2026-07-30T14:19:31Z",
+          "synthetic": false,
+          "offline": true
+        }
+      ],
+      "aggregate": {
+        "n": 5,
+        "mean": 90.0,
+        "min": 90.0,
+        "max": 90.0
+      },
+      "measured_at": "2026-07-30T14:19:31Z",
+      "runner": "pack_runtime.offline"
+    },
+    "gate": {
+      "status": "synthetic_checked",
+      "met": false,
+      "synthetic": true,
+      "detail": "SYNTHETIC human data — pipeline check only; not a surpass claim. (agent_mean=90.0 < human_mean=76.0)",
+      "evaluated_at": "2026-07-30T14:19:41Z",
+      "evidence_path": "business/video/evals/agents/video.planner/human_baseline_evidence.json",
+      "comparison": {
+        "human_mean": 76.0,
+        "agent_mean": 90.0,
+        "direction": "lower_is_better",
+        "raw_met": false
+      }
+    },
+    "generated_by": "scaffold_human_baselines_v1",
+    "generated_at": "2026-07-30T14:19:31Z",
+    "updated_at": "2026-07-30T14:19:41Z"
+  },
+  "claim_allowed_in_ui": false
+}

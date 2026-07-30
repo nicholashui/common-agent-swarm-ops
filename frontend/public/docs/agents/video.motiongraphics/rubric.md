@@ -1,0 +1,68 @@
+# Rubric — `video.rubric.motiongraphics.v1`
+
+```json
+{
+  "schema_version": "1.0",
+  "rubric_id": "video.rubric.motiongraphics.v1",
+  "agent_id": "video.motiongraphics",
+  "title": "L2 craft rubric for MotionGraphicsAgent",
+  "pass_threshold": 85,
+  "max_score": 100,
+  "layers": {
+    "L1_spec": {
+      "description": "Machine validators: schema, format, required fields, policy allowlist",
+      "must_pass": true
+    },
+    "L2_rubric": {
+      "description": "LLM-as-Judge or scorer against dimensions below",
+      "pass_threshold": 85,
+      "dimensions": [
+        {
+          "id": "d1",
+          "name": "Typographic hierarchy",
+          "description": "Typographic hierarchy",
+          "weight": 0.3333,
+          "threshold_hint": null,
+          "score_min": 0,
+          "score_max": 100
+        },
+        {
+          "id": "d2",
+          "name": "brand compliance",
+          "description": "brand compliance",
+          "weight": 0.3333,
+          "threshold_hint": null,
+          "score_min": 0,
+          "score_max": 100
+        },
+        {
+          "id": "d3",
+          "name": "readability at thumbnail",
+          "description": "readability at thumbnail",
+          "weight": 0.3334,
+          "threshold_hint": null,
+          "score_min": 0,
+          "score_max": 100
+        }
+      ]
+    },
+    "L3_preference": {
+      "description": "Optional pairwise/arena preference when human or synthetic preference data exists",
+      "surpass_signal_design": "Wins agency RFP shootouts on speed + on-brand fidelity",
+      "note": "Do not claim surpass until measured baseline exists"
+    }
+  },
+  "refine_policy": {
+    "max_refinement_count": 3,
+    "on_fail": "refine_or_escalate_hitl"
+  },
+  "sources": {
+    "agents_md_self_quality_criteria": "Typographic hierarchy; brand compliance; readability at thumbnail",
+    "research": [
+      "LLM-as-Judge",
+      "Self-Refine",
+      "Constitutional AI"
+    ]
+  }
+}
+```

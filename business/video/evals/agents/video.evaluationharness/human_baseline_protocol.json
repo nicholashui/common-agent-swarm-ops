@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.evaluationharness",
+  "va_name": "EvaluationHarnessAgent",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Catches regressions faster than ML-eng rotation",
+  "self_quality_criteria": "Regression precision/recall; alert latency <1h",
+  "metric": {
+    "id": "time_to_delivery",
+    "name": "Time-to-delivery vs human",
+    "direction": "lower_is_better",
+    "unit": "relative_ratio",
+    "threshold_expression": "agent_mean < human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Catches regressions faster than ML-eng rotation"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.evaluationharness/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_288b919c8d",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_f029aacae7",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_db2e58299b",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_73b8f6ad1a",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_4cd5e20c98",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:35Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.evaluationharness/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:35Z",
+  "updated_at": "2026-07-30T14:45:35Z"
+}

@@ -1,0 +1,301 @@
+{
+  "generated_at": "2026-07-30T14:45:36Z",
+  "plan_sources": [
+    "agent_improvement_plan_v1.md",
+    "agent_improvement_plan_v1_hk.md"
+  ],
+  "agent_count": 114,
+  "complete_percent": {
+    "plan_composite": 95.71,
+    "maturity_weighted": 95.45,
+    "maturity_strict_yes": 90.91,
+    "avg_maturity_0_to_11": 10.5,
+    "automatable_q_except_q5": 100.0,
+    "platform_workstreams": 100.0,
+    "universal_u1_u18": 88.89,
+    "phases_average": 78.57,
+    "q5_claimable_surpass": 0.0
+  },
+  "cells": {
+    "yes": 1140,
+    "partial": 114,
+    "no": 0,
+    "total": 1254
+  },
+  "questions": {
+    "q1_responsibility": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q2_knowledge_distill_plan": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q3_sources_available": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q4_self_eval": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q5_surpass_human": {
+      "yes": 0,
+      "partial": 114,
+      "no": 0,
+      "yes_pct": 0.0
+    },
+    "q6_execution": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q7_skills_plugins": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q8_self_improve": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q9_research_for_improve": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q10_collab_instructions": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    },
+    "q11_conflict_resolve": {
+      "yes": 114,
+      "partial": 0,
+      "no": 0,
+      "yes_pct": 100.0
+    }
+  },
+  "platform_workstreams": [
+    {
+      "id": "P0.1",
+      "label": "Prompt factory \u00d7114",
+      "done": true
+    },
+    {
+      "id": "P0.2",
+      "label": "Rubric factory \u00d7114",
+      "done": true
+    },
+    {
+      "id": "P0.3",
+      "label": "Source catalog factory \u00d7114",
+      "done": true
+    },
+    {
+      "id": "P0.4",
+      "label": "Golden task scaffold \u00d7114",
+      "done": true
+    },
+    {
+      "id": "P0.5",
+      "label": "Skills harness scaffold \u00d7114",
+      "done": true
+    },
+    {
+      "id": "P0.6",
+      "label": "Capability audit regen",
+      "done": true
+    },
+    {
+      "id": "P1.1",
+      "label": "Host loads prompt_reference",
+      "done": true
+    },
+    {
+      "id": "P1.2",
+      "label": "Tool allowlist + offline mock path",
+      "done": true
+    },
+    {
+      "id": "P1.3",
+      "label": "Graph/golden binding per agent",
+      "done": true
+    },
+    {
+      "id": "P1.4",
+      "label": "Evidence / run result bundle",
+      "done": true
+    },
+    {
+      "id": "P1.5",
+      "label": "Fail-closed production/network",
+      "done": true
+    },
+    {
+      "id": "P2.1",
+      "label": "L1 validators in runner",
+      "done": true
+    },
+    {
+      "id": "P2.2",
+      "label": "L2 rubric scoring in runner",
+      "done": true
+    },
+    {
+      "id": "P2.3",
+      "label": "L3/pairwise protocol fields",
+      "done": true
+    },
+    {
+      "id": "P2.4",
+      "label": "Human baseline capture kit",
+      "done": true
+    },
+    {
+      "id": "P2.5",
+      "label": "Surpass gate dashboard",
+      "done": true
+    },
+    {
+      "id": "P3.1",
+      "label": "CritiqueMessage APIs (in-process)",
+      "done": true
+    },
+    {
+      "id": "P3.2",
+      "label": "critique_edges expanded",
+      "done": true
+    },
+    {
+      "id": "P3.3",
+      "label": "Delivery/ack routing",
+      "done": true
+    },
+    {
+      "id": "P3.4",
+      "label": "Judge dispute + severity",
+      "done": true
+    },
+    {
+      "id": "P3.5",
+      "label": "HiTL confirm for blockers",
+      "done": true
+    },
+    {
+      "id": "P4.1",
+      "label": "Distillation plan schema",
+      "done": true
+    },
+    {
+      "id": "P4.2",
+      "label": "Source acquisition SOP (ACQUIRE.md)",
+      "done": true
+    },
+    {
+      "id": "P4.3",
+      "label": "Research path scaffolds",
+      "done": true
+    },
+    {
+      "id": "P4.4",
+      "label": "Refine loop max_refinement_count",
+      "done": true
+    },
+    {
+      "id": "P4.5",
+      "label": "Memory namespace ids in distill plan",
+      "done": true
+    }
+  ],
+  "universal": {
+    "U1": 100.0,
+    "U2": 100.0,
+    "U3": 100.0,
+    "U4": 100.0,
+    "U5": 100.0,
+    "U6": 100.0,
+    "U7": 100.0,
+    "U8": 100.0,
+    "U9": 100.0,
+    "U10": 100.0,
+    "U11": 100.0,
+    "U12": 100.0,
+    "U13": 100.0,
+    "U14": 100.0,
+    "U15": 100.0,
+    "U16": 100.0,
+    "U17": 0.0,
+    "U18": 0.0
+  },
+  "phases": [
+    {
+      "phase": "Phase 0 Honesty & gates",
+      "done": true,
+      "pct": 100.0,
+      "note": "Audit + no false surpass (synthetic blocked)"
+    },
+    {
+      "phase": "Phase 1 Artifacts (P0)",
+      "done": true,
+      "pct": 100.0,
+      "note": "prompts/rubrics/catalogs/skills/goldens"
+    },
+    {
+      "phase": "Phase 2 Spine runtime",
+      "done": true,
+      "pct": 100.0,
+      "note": "pack_runtime + spine golden 7/7"
+    },
+    {
+      "phase": "Phase 3 Craft execution",
+      "done": true,
+      "pct": 100.0,
+      "note": "offline runner for all agents"
+    },
+    {
+      "phase": "Phase 4 Collab+conflict",
+      "done": true,
+      "pct": 100.0,
+      "note": "CritiqueBus edges + HiTL blockers"
+    },
+    {
+      "phase": "Phase 5 Human baselines",
+      "done": false,
+      "pct": 50.0,
+      "note": "protocols+agent measure done; claimable MET=0/114"
+    },
+    {
+      "phase": "Phase 6 Full mark lock",
+      "done": false,
+      "pct": 0.0,
+      "note": "11/11 YES for every agent"
+    }
+  ],
+  "claimable_surpass_agents": 0,
+  "remaining": {
+    "primary_blocker": "Q5 real human baselines (gate.met && !synthetic)",
+    "agents_needing_real_human_trials": 114,
+    "how_to_finish": [
+      "python scripts/business/baseline_status.py",
+      "python scripts/business/prepare_rater_sessions_v1.py",
+      "python scripts/business/record_human_baseline.py --session --agent video.orchestrator --rater <id> --evaluate",
+      "python scripts/business/audit_agent_capability_status.py",
+      "python scripts/business/report_improvement_plan_completion.py"
+    ]
+  }
+}

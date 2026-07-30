@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.sportsanalyst",
+  "va_name": "SportsAnalystAgent / TelestratorOp",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Beats ex-athlete on tactical-prediction",
+  "self_quality_criteria": "Play-call accuracy; on-screen clarity score",
+  "metric": {
+    "id": "craft_score",
+    "name": "Craft score vs human baseline",
+    "direction": "higher_is_better",
+    "unit": "score_0_100",
+    "threshold_expression": "agent_mean >= human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Beats ex-athlete on tactical-prediction"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.sportsanalyst/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_1610591db0",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_e45887dd33",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_10b12aecbd",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_6e1f795af0",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_01dfa0c22c",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:35Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.sportsanalyst/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:35Z",
+  "updated_at": "2026-07-30T14:45:35Z"
+}

@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.choreography",
+  "va_name": "ChoreographyAgent",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Wins blind preference vs choreographer drafts",
+  "self_quality_criteria": "Beat-sync accuracy; safety constraints; viral-pattern alignment",
+  "metric": {
+    "id": "craft_score",
+    "name": "Craft score vs human baseline",
+    "direction": "higher_is_better",
+    "unit": "score_0_100",
+    "threshold_expression": "agent_mean >= human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Wins blind preference vs choreographer drafts"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.choreography/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_4352e34b37",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_f2a749c882",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_c85c960f33",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_5436f1d056",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_948112992c",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:34Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:34Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.choreography/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:34Z",
+  "updated_at": "2026-07-30T14:45:34Z"
+}

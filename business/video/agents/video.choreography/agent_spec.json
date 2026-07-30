@@ -8,10 +8,12 @@
   },
   "critique_edges": {
     "inputs": [
-      "video.critic"
+      "video.critic",
+      "video.director"
     ],
     "outputs": [
-      "video.judge"
+      "video.judge",
+      "video.director"
     ]
   },
   "max_refinement_count": 3,
@@ -28,5 +30,20 @@
   "status": "registered",
   "va_id": 23,
   "va_name": "ChoreographyAgent",
-  "va_category": "5-Perf"
+  "va_category": "5-Perf",
+  "does_not_own": [
+    "Host credential storage",
+    "Silent production activation without fail-closed gates",
+    "Inventing action references for irreversible mutations",
+    "Owning other agents' exclusive craft outputs without handoff contract"
+  ],
+  "improvement": {
+    "plan": "agent_improvement_plan_v1.md",
+    "wave": "A_artifacts",
+    "prompt_materialized": true,
+    "rubric_materialized": true,
+    "skills_harness": true,
+    "updated_at": "2026-07-30T14:45:33Z",
+    "research_doc": "business/video/IMPROVEMENT_RESEARCH_SOURCES_v1.md"
+  }
 }

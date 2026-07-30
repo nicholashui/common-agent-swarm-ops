@@ -1,0 +1,2697 @@
+{
+  "generated_at": "2026-07-30T14:45:34Z",
+  "agents_md": "C:\\Project\\va-agent-swarm\\study\\agents.md",
+  "count": 114,
+  "dry_run": false,
+  "results": [
+    {
+      "agent_id": "video.accessibility",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.accessibility\\prompts\\video.prompt.accessibility.v1.md",
+      "rubric": "business\\video\\agents\\video.accessibility\\rubrics\\video.rubric.accessibility.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.accessibilityoptimizer",
+          "video.editor",
+          "video.colorist",
+          "video.soundmixer"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.accessibilityoptimizer",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.accessibilityoptimizer\\prompts\\video.prompt.accessibilityoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.accessibilityoptimizer\\rubrics\\video.rubric.accessibilityoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.accessibility",
+          "video.compliance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.colorist"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.aiqaconsistency",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.aiqaconsistency\\prompts\\video.prompt.aiqaconsistency.v1.md",
+      "rubric": "business\\video\\agents\\video.aiqaconsistency\\rubrics\\video.rubric.aiqaconsistency.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.vfxsupervisor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.vfxsupervisor"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.analyst",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.analyst\\prompts\\video.prompt.analyst.v1.md",
+      "rubric": "business\\video\\agents\\video.analyst\\rubrics\\video.rubric.analyst.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.socialmediastrategist",
+          "video.performancemarketer",
+          "video.evaluationharness"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.animator_2d",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.animator_2d\\prompts\\video.prompt.animator_2d.v1.md",
+      "rubric": "business\\video\\agents\\video.animator_2d\\rubrics\\video.rubric.animator_2d.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.lipsync"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.storyboard",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.archivemaster",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.archivemaster\\prompts\\video.prompt.archivemaster.v1.md",
+      "rubric": "business\\video\\agents\\video.archivemaster\\rubrics\\video.rubric.archivemaster.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.distributor",
+          "video.colorist",
+          "video.soundmixer",
+          "video.gatekeeper"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.archiveproducer",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.archiveproducer\\prompts\\video.prompt.archiveproducer.v1.md",
+      "rubric": "business\\video\\agents\\video.archiveproducer\\rubrics\\video.rubric.archiveproducer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.archiveresearch",
+          "video.journalist",
+          "video.legal"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.archiveresearch",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.archiveresearch\\prompts\\video.prompt.archiveresearch.v1.md",
+      "rubric": "business\\video\\agents\\video.archiveresearch\\rubrics\\video.rubric.archiveresearch.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.factchecker",
+          "video.sme"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.audiencesim",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.audiencesim\\prompts\\video.prompt.audiencesim.v1.md",
+      "rubric": "business\\video\\agents\\video.audiencesim\\rubrics\\video.rubric.audiencesim.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.editor",
+          "video.analyst",
+          "video.judge"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.audiobooknarrator",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.audiobooknarrator\\prompts\\video.prompt.audiobooknarrator.v1.md",
+      "rubric": "business\\video\\agents\\video.audiobooknarrator\\rubrics\\video.rubric.audiobooknarrator.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.avatardesign",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.avatardesign\\prompts\\video.prompt.avatardesign.v1.md",
+      "rubric": "business\\video\\agents\\video.avatardesign\\rubrics\\video.rubric.avatardesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.legal",
+          "video.deepfakedetection"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.voiceclone",
+          "video.lipsync"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.awardsstrategist",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.awardsstrategist\\prompts\\video.prompt.awardsstrategist.v1.md",
+      "rubric": "business\\video\\agents\\video.awardsstrategist\\rubrics\\video.rubric.awardsstrategist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.marketing"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.benchmarkresearch",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "research_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.benchmarkresearch\\prompts\\video.prompt.benchmarkresearch.v1.md",
+      "rubric": "business\\video\\agents\\video.benchmarkresearch\\rubrics\\video.rubric.benchmarkresearch.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.brand",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.brand\\prompts\\video.prompt.brand.v1.md",
+      "rubric": "business\\video\\agents\\video.brand\\rubrics\\video.rubric.brand.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.copywriter",
+          "video.motiongraphics",
+          "video.marketing",
+          "video.brandstrategist"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.brandstrategist",
+      "patterns": [
+        "Multi-agent debate",
+        "Agentic Graph",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.brandstrategist\\prompts\\video.prompt.brandstrategist.v1.md",
+      "rubric": "business\\video\\agents\\video.brandstrategist\\rubrics\\video.rubric.brandstrategist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand",
+          "video.screenwriter",
+          "video.marketing"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.cameraoperator",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.cameraoperator\\prompts\\video.prompt.cameraoperator.v1.md",
+      "rubric": "business\\video\\agents\\video.cameraoperator\\rubrics\\video.rubric.cameraoperator.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.cinematographer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.casting",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.casting\\prompts\\video.prompt.casting.v1.md",
+      "rubric": "business\\video\\agents\\video.casting\\rubrics\\video.rubric.casting.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.showrunner",
+          "video.legal"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.voiceclone",
+          "video.avatardesign"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.channelmanager",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.channelmanager\\prompts\\video.prompt.channelmanager.v1.md",
+      "rubric": "business\\video\\agents\\video.channelmanager\\rubrics\\video.rubric.channelmanager.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.socialmediastrategist",
+          "video.seo",
+          "video.analyst",
+          "video.marketing"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.childrensauthor",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.childrensauthor\\prompts\\video.prompt.childrensauthor.v1.md",
+      "rubric": "business\\video\\agents\\video.childrensauthor\\rubrics\\video.rubric.childrensauthor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.animator_2d"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.choreography",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.choreography\\prompts\\video.prompt.choreography.v1.md",
+      "rubric": "business\\video\\agents\\video.choreography\\rubrics\\video.rubric.choreography.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.cinematographer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.cinematographer\\prompts\\video.prompt.cinematographer.v1.md",
+      "rubric": "business\\video\\agents\\video.cinematographer\\rubrics\\video.rubric.cinematographer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.colorist",
+          "video.vfxsupervisor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director",
+          "video.colorist"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.citation",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.citation\\prompts\\video.prompt.citation.v1.md",
+      "rubric": "business\\video\\agents\\video.citation\\rubrics\\video.rubric.citation.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.factchecker",
+          "video.journalist"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.webresearch"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.colorist",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.colorist\\prompts\\video.prompt.colorist.v1.md",
+      "rubric": "business\\video\\agents\\video.colorist\\rubrics\\video.rubric.colorist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer",
+          "video.director",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.cinematographer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.comedywriter",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.comedywriter\\prompts\\video.prompt.comedywriter.v1.md",
+      "rubric": "business\\video\\agents\\video.comedywriter\\rubrics\\video.rubric.comedywriter.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.audiencesim",
+          "video.showrunner"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.comms",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.comms\\prompts\\video.prompt.comms.v1.md",
+      "rubric": "business\\video\\agents\\video.comms\\rubrics\\video.rubric.comms.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.marketing",
+          "video.community",
+          "video.legal",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.community",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.community\\prompts\\video.prompt.community.v1.md",
+      "rubric": "business\\video\\agents\\video.community\\rubrics\\video.rubric.community.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.analyst",
+          "video.socialmediastrategist",
+          "video.comms"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.competitorintelligence",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.competitorintelligence\\prompts\\video.prompt.competitorintelligence.v1.md",
+      "rubric": "business\\video\\agents\\video.competitorintelligence\\rubrics\\video.rubric.competitorintelligence.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand",
+          "video.creativedirector"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.ideation"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.compliance",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.compliance\\prompts\\video.prompt.compliance.v1.md",
+      "rubric": "business\\video\\agents\\video.compliance\\rubrics\\video.rubric.compliance.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.composer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.composer\\prompts\\video.prompt.composer.v1.md",
+      "rubric": "business\\video\\agents\\video.composer\\rubrics\\video.rubric.composer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.editor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.sounddesign"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.conceptartist",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.conceptartist\\prompts\\video.prompt.conceptartist.v1.md",
+      "rubric": "business\\video\\agents\\video.conceptartist\\rubrics\\video.rubric.conceptartist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.productiondesign"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.storyboard"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.continuity",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.continuity\\prompts\\video.prompt.continuity.v1.md",
+      "rubric": "business\\video\\agents\\video.continuity\\rubrics\\video.rubric.continuity.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.costumedesign",
+          "video.mua_makeup",
+          "video.aiqaconsistency",
+          "video.cinematographer",
+          "video.gatekeeper"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.copywriter",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.copywriter\\prompts\\video.prompt.copywriter.v1.md",
+      "rubric": "business\\video\\agents\\video.copywriter\\rubrics\\video.rubric.copywriter.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand",
+          "video.performancemarketer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.corrections",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.corrections\\prompts\\video.prompt.corrections.v1.md",
+      "rubric": "business\\video\\agents\\video.corrections\\rubrics\\video.rubric.corrections.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.standardseditor",
+          "video.factchecker",
+          "video.channelmanager"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.costoptimizer",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.costoptimizer\\prompts\\video.prompt.costoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.costoptimizer\\rubrics\\video.rubric.costoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.router",
+          "video.finance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.router"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.costumedesign",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.costumedesign\\prompts\\video.prompt.costumedesign.v1.md",
+      "rubric": "business\\video\\agents\\video.costumedesign\\rubrics\\video.rubric.costumedesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.productiondesign"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.mua_makeup"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.creativedirector",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.creativedirector\\prompts\\video.prompt.creativedirector.v1.md",
+      "rubric": "business\\video\\agents\\video.creativedirector\\rubrics\\video.rubric.creativedirector.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.critic",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "optimization_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.critic\\prompts\\video.prompt.critic.v1.md",
+      "rubric": "business\\video\\agents\\video.critic\\rubrics\\video.rubric.critic.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.audiencesim",
+          "video.festivalstrategist",
+          "video.judge"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.crm",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.crm\\prompts\\video.prompt.crm.v1.md",
+      "rubric": "business\\video\\agents\\video.crm\\rubrics\\video.rubric.crm.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.personalizationengineer",
+          "video.templatedesign",
+          "video.analyst"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.deepfakedetection",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.deepfakedetection\\prompts\\video.prompt.deepfakedetection.v1.md",
+      "rubric": "business\\video\\agents\\video.deepfakedetection\\rubrics\\video.rubric.deepfakedetection.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.avatardesign",
+          "video.voiceclone",
+          "video.trustsafety",
+          "video.safetyredteam"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.director",
+      "patterns": [
+        "Self-Refine",
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.director\\prompts\\video.prompt.director.v1.md",
+      "rubric": "business\\video\\agents\\video.director\\rubrics\\video.rubric.director.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.screenwriter",
+          "video.editor",
+          "video.audiencesim"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.cinematographer",
+          "video.screenwriter",
+          "video.composer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.distributor",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.distributor\\prompts\\video.prompt.distributor.v1.md",
+      "rubric": "business\\video\\agents\\video.distributor\\rubrics\\video.rubric.distributor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sales",
+          "video.archivemaster",
+          "video.soundmixer",
+          "video.colorist"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.dronepilot",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.dronepilot\\prompts\\video.prompt.dronepilot.v1.md",
+      "rubric": "business\\video\\agents\\video.dronepilot\\rubrics\\video.rubric.dronepilot.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer",
+          "video.safetyredteam"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.cinematographer",
+          "video.safetyredteam"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.editor",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.editor\\prompts\\video.prompt.editor.v1.md",
+      "rubric": "business\\video\\agents\\video.editor\\rubrics\\video.rubric.editor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.audiencesim",
+          "video.composer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director",
+          "video.cinematographer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.emotionalarc",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.emotionalarc\\prompts\\video.prompt.emotionalarc.v1.md",
+      "rubric": "business\\video\\agents\\video.emotionalarc\\rubrics\\video.rubric.emotionalarc.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.editor",
+          "video.composer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.composer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.ethics",
+      "patterns": [
+        "Constitutional AI",
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.ethics\\prompts\\video.prompt.ethics.v1.md",
+      "rubric": "business\\video\\agents\\video.ethics\\rubrics\\video.rubric.ethics.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.standardseditor",
+          "video.compliance",
+          "video.legal",
+          "video.trustsafety",
+          "video.safetyredteam"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.evaluationharness",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.evaluationharness\\prompts\\video.prompt.evaluationharness.v1.md",
+      "rubric": "business\\video\\agents\\video.evaluationharness\\rubrics\\video.rubric.evaluationharness.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.benchmarkresearch"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.factchecker",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.factchecker\\prompts\\video.prompt.factchecker.v1.md",
+      "rubric": "business\\video\\agents\\video.factchecker\\rubrics\\video.rubric.factchecker.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sme",
+          "video.standardseditor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.journalist"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.festivalstrategist",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.festivalstrategist\\prompts\\video.prompt.festivalstrategist.v1.md",
+      "rubric": "business\\video\\agents\\video.festivalstrategist\\rubrics\\video.rubric.festivalstrategist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.finance",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.finance\\prompts\\video.prompt.finance.v1.md",
+      "rubric": "business\\video\\agents\\video.finance\\rubrics\\video.rubric.finance.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sme",
+          "video.compliance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.motiongraphics"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.foodstylist",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.foodstylist\\prompts\\video.prompt.foodstylist.v1.md",
+      "rubric": "business\\video\\agents\\video.foodstylist\\rubrics\\video.rubric.foodstylist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.gatekeeper",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3",
+        "llm_usage"
+      ],
+      "prompt": "business\\video\\agents\\video.gatekeeper\\prompts\\video.prompt.gatekeeper.v1.md",
+      "rubric": "business\\video\\agents\\video.gatekeeper\\rubrics\\video.rubric.gatekeeper.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.aiqaconsistency"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.orchestrator"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.ideation",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.ideation\\prompts\\video.prompt.ideation.v1.md",
+      "rubric": "business\\video\\agents\\video.ideation\\rubrics\\video.rubric.ideation.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.creativedirector",
+          "video.novelty"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.instructionaldesign",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.instructionaldesign\\prompts\\video.prompt.instructionaldesign.v1.md",
+      "rubric": "business\\video\\agents\\video.instructionaldesign\\rubrics\\video.rubric.instructionaldesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sme",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.animator_2d"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.interviewsynthesis",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.interviewsynthesis\\prompts\\video.prompt.interviewsynthesis.v1.md",
+      "rubric": "business\\video\\agents\\video.interviewsynthesis\\rubrics\\video.rubric.interviewsynthesis.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.sme"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.journalist",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.journalist\\prompts\\video.prompt.journalist.v1.md",
+      "rubric": "business\\video\\agents\\video.journalist\\rubrics\\video.rubric.journalist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.factchecker",
+          "video.legal",
+          "video.standardseditor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.factchecker",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.judge",
+      "patterns": [
+        "LLM-as-Judge",
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3"
+      ],
+      "prompt": "business\\video\\agents\\video.judge\\prompts\\video.prompt.judge.v1.md",
+      "rubric": "business\\video\\agents\\video.judge\\rubrics\\video.rubric.judge.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.labela_r",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.labela_r\\prompts\\video.prompt.labela_r.v1.md",
+      "rubric": "business\\video\\agents\\video.labela_r\\rubrics\\video.rubric.labela_r.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.musicvideodirector",
+          "video.musicsupervisor",
+          "video.labeldigital"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.labeldigital",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.labeldigital\\prompts\\video.prompt.labeldigital.v1.md",
+      "rubric": "business\\video\\agents\\video.labeldigital\\rubrics\\video.rubric.labeldigital.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.musicvideodirector",
+          "video.socialmediastrategist",
+          "video.marketing"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.latencyoptimizer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.latencyoptimizer\\prompts\\video.prompt.latencyoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.latencyoptimizer\\rubrics\\video.rubric.latencyoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.orchestrator"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.orchestrator"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.learnersim",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.learnersim\\prompts\\video.prompt.learnersim.v1.md",
+      "rubric": "business\\video\\agents\\video.learnersim\\rubrics\\video.rubric.learnersim.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.instructionaldesign",
+          "video.lms",
+          "video.analyst"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.legal",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.legal\\prompts\\video.prompt.legal.v1.md",
+      "rubric": "business\\video\\agents\\video.legal\\rubrics\\video.rubric.legal.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.journalist",
+          "video.producer",
+          "video.mpa"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.lipsync",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.lipsync\\prompts\\video.prompt.lipsync.v1.md",
+      "rubric": "business\\video\\agents\\video.lipsync\\rubrics\\video.rubric.lipsync.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.voiceclone",
+          "video.animator_2d",
+          "video.aiqaconsistency"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.lms",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.lms\\prompts\\video.prompt.lms.v1.md",
+      "rubric": "business\\video\\agents\\video.lms\\rubrics\\video.rubric.lms.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.instructionaldesign",
+          "video.accessibility",
+          "video.learnersim"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.localizationqa",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.localizationqa\\prompts\\video.prompt.localizationqa.v1.md",
+      "rubric": "business\\video\\agents\\video.localizationqa\\rubrics\\video.rubric.localizationqa.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.voiceclone"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.marketing",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.marketing\\prompts\\video.prompt.marketing.v1.md",
+      "rubric": "business\\video\\agents\\video.marketing\\rubrics\\video.rubric.marketing.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.socialmediastrategist",
+          "video.seo",
+          "video.copywriter",
+          "video.trailereditor"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.medicalillustrator",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.medicalillustrator\\prompts\\video.prompt.medicalillustrator.v1.md",
+      "rubric": "business\\video\\agents\\video.medicalillustrator\\rubrics\\video.rubric.medicalillustrator.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sme",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.animator_2d",
+          "video.copywriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.memory",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3",
+        "agentic_rag"
+      ],
+      "prompt": "business\\video\\agents\\video.memory\\prompts\\video.prompt.memory.v1.md",
+      "rubric": "business\\video\\agents\\video.memory\\rubrics\\video.rubric.memory.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.moodboard",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.moodboard\\prompts\\video.prompt.moodboard.v1.md",
+      "rubric": "business\\video\\agents\\video.moodboard\\rubrics\\video.rubric.moodboard.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.productiondesign"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.conceptartist"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.motiongraphics",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.motiongraphics\\prompts\\video.prompt.motiongraphics.v1.md",
+      "rubric": "business\\video\\agents\\video.motiongraphics\\rubrics\\video.rubric.motiongraphics.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.brand",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter",
+          "video.editor"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.mpa",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.mpa\\prompts\\video.prompt.mpa.v1.md",
+      "rubric": "business\\video\\agents\\video.mpa\\rubrics\\video.rubric.mpa.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.legal",
+          "video.ethics"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.mua_makeup",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.mua_makeup\\prompts\\video.prompt.mua_makeup.v1.md",
+      "rubric": "business\\video\\agents\\video.mua_makeup\\rubrics\\video.rubric.mua_makeup.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer",
+          "video.continuity"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.musicsupervisor",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.musicsupervisor\\prompts\\video.prompt.musicsupervisor.v1.md",
+      "rubric": "business\\video\\agents\\video.musicsupervisor\\rubrics\\video.rubric.musicsupervisor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.composer",
+          "video.trailereditor",
+          "video.labela_r",
+          "video.legal"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.musicvideodirector",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.musicvideodirector\\prompts\\video.prompt.musicvideodirector.v1.md",
+      "rubric": "business\\video\\agents\\video.musicvideodirector\\rubrics\\video.rubric.musicvideodirector.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.labela_r"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.cinematographer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.narrativearc",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.narrativearc\\prompts\\video.prompt.narrativearc.v1.md",
+      "rubric": "business\\video\\agents\\video.narrativearc\\rubrics\\video.rubric.narrativearc.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.screenwriter",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.novelty",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.novelty\\prompts\\video.prompt.novelty.v1.md",
+      "rubric": "business\\video\\agents\\video.novelty\\rubrics\\video.rubric.novelty.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.ideation",
+          "video.screenwriter"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.copywriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.orchestrator",
+      "patterns": [
+        "Agentic Graph",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3",
+        "complex_problem_solution_process_model"
+      ],
+      "prompt": "business\\video\\agents\\video.orchestrator\\prompts\\video.prompt.orchestrator.v1.md",
+      "rubric": "business\\video\\agents\\video.orchestrator\\rubrics\\video.rubric.orchestrator.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.judge"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.performancemarketer",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.performancemarketer\\prompts\\video.prompt.performancemarketer.v1.md",
+      "rubric": "business\\video\\agents\\video.performancemarketer\\rubrics\\video.rubric.performancemarketer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.analyst",
+          "video.finance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.personalizationengineer",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.personalizationengineer\\prompts\\video.prompt.personalizationengineer.v1.md",
+      "rubric": "business\\video\\agents\\video.personalizationengineer\\rubrics\\video.rubric.personalizationengineer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.analyst"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.planner",
+      "patterns": [
+        "ReAct",
+        "Agentic Graph",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3",
+        "thinking_model"
+      ],
+      "prompt": "business\\video\\agents\\video.planner\\prompts\\video.prompt.planner.v1.md",
+      "rubric": "business\\video\\agents\\video.planner\\rubrics\\video.rubric.planner.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.finance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.router",
+          "video.orchestrator"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.producer",
+      "patterns": [
+        "ReAct",
+        "Agentic Graph",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.producer\\prompts\\video.prompt.producer.v1.md",
+      "rubric": "business\\video\\agents\\video.producer\\rubrics\\video.rubric.producer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.productiondesign",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.productiondesign\\prompts\\video.prompt.productiondesign.v1.md",
+      "rubric": "business\\video\\agents\\video.productiondesign\\rubrics\\video.rubric.productiondesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.cinematographer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.conceptartist"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.promptengineer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "llm_usage",
+        "optimization_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.promptengineer\\prompts\\video.prompt.promptengineer.v1.md",
+      "rubric": "business\\video\\agents\\video.promptengineer\\rubrics\\video.rubric.promptengineer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.aiqaconsistency"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.promptoptimizer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "optimization_agent",
+        "llm_usage"
+      ],
+      "prompt": "business\\video\\agents\\video.promptoptimizer\\prompts\\video.prompt.promptoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.promptoptimizer\\rubrics\\video.rubric.promptoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.promptengineer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.promptengineer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.realestatephoto",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.realestatephoto\\prompts\\video.prompt.realestatephoto.v1.md",
+      "rubric": "business\\video\\agents\\video.realestatephoto\\rubrics\\video.rubric.realestatephoto.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.cinematographer",
+          "video.dronepilot"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.dronepilot"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.retentionoptimizer",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.retentionoptimizer\\prompts\\video.prompt.retentionoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.retentionoptimizer\\rubrics\\video.rubric.retentionoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.editor",
+          "video.audiencesim"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.roasoptimizer",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.roasoptimizer\\prompts\\video.prompt.roasoptimizer.v1.md",
+      "rubric": "business\\video\\agents\\video.roasoptimizer\\rubrics\\video.rubric.roasoptimizer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.performancemarketer",
+          "video.analyst"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.router",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "agent_loop_v3",
+        "knowledge_router_agent",
+        "intent_analysis_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.router\\prompts\\video.prompt.router.v1.md",
+      "rubric": "business\\video\\agents\\video.router\\rubrics\\video.rubric.router.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.orchestrator",
+          "video.costoptimizer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.planner"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.safetyredteam",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.safetyredteam\\prompts\\video.prompt.safetyredteam.v1.md",
+      "rubric": "business\\video\\agents\\video.safetyredteam\\rubrics\\video.rubric.safetyredteam.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.ethics",
+          "video.compliance"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.avatardesign",
+          "video.voiceclone"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.sales",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.sales\\prompts\\video.prompt.sales.v1.md",
+      "rubric": "business\\video\\agents\\video.sales\\rubrics\\video.rubric.sales.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.producer",
+          "video.distributor",
+          "video.marketing"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.screenwriter",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "screenwriter_strategic_goal_achievement_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.screenwriter\\prompts\\video.prompt.screenwriter.v1.md",
+      "rubric": "business\\video\\agents\\video.screenwriter\\rubrics\\video.rubric.screenwriter.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.standardseditor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director",
+          "video.aiqaconsistency"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.seo",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.seo\\prompts\\video.prompt.seo.v1.md",
+      "rubric": "business\\video\\agents\\video.seo\\rubrics\\video.rubric.seo.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.marketing",
+          "video.copywriter",
+          "video.analyst"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.showrunner",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.showrunner\\prompts\\video.prompt.showrunner.v1.md",
+      "rubric": "business\\video\\agents\\video.showrunner\\rubrics\\video.rubric.showrunner.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.comms",
+          "video.audiencesim",
+          "video.screenwriter"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.casting",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.signlanguageinterpreter",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.signlanguageinterpreter\\prompts\\video.prompt.signlanguageinterpreter.v1.md",
+      "rubric": "business\\video\\agents\\video.signlanguageinterpreter\\rubrics\\video.rubric.signlanguageinterpreter.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.voiceclone",
+          "video.accessibility"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.sme",
+      "patterns": [
+        "Multi-agent debate",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.sme\\prompts\\video.prompt.sme.v1.md",
+      "rubric": "business\\video\\agents\\video.sme\\rubrics\\video.rubric.sme.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.factchecker"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.motiongraphics"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.socialmediastrategist",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.socialmediastrategist\\prompts\\video.prompt.socialmediastrategist.v1.md",
+      "rubric": "business\\video\\agents\\video.socialmediastrategist\\rubrics\\video.rubric.socialmediastrategist.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.analyst",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.copywriter",
+          "video.editor"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.sounddesign",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.sounddesign\\prompts\\video.prompt.sounddesign.v1.md",
+      "rubric": "business\\video\\agents\\video.sounddesign\\rubrics\\video.rubric.sounddesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.soundmixer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.composer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.soundmixer",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.soundmixer\\prompts\\video.prompt.soundmixer.v1.md",
+      "rubric": "business\\video\\agents\\video.soundmixer\\rubrics\\video.rubric.soundmixer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.editor",
+          "video.sounddesign",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.sounddesign",
+          "video.composer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.sportsanalyst",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.sportsanalyst\\prompts\\video.prompt.sportsanalyst.v1.md",
+      "rubric": "business\\video\\agents\\video.sportsanalyst\\rubrics\\video.rubric.sportsanalyst.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.sme",
+          "video.journalist"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.motiongraphics"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.standardseditor",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.standardseditor\\prompts\\video.prompt.standardseditor.v1.md",
+      "rubric": "business\\video\\agents\\video.standardseditor\\rubrics\\video.rubric.standardseditor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.journalist",
+          "video.factchecker",
+          "video.corrections",
+          "video.legal"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.storyboard",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.storyboard\\prompts\\video.prompt.storyboard.v1.md",
+      "rubric": "business\\video\\agents\\video.storyboard\\rubrics\\video.rubric.storyboard.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.cinematographer"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.styletransfer",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.styletransfer\\prompts\\video.prompt.styletransfer.v1.md",
+      "rubric": "business\\video\\agents\\video.styletransfer\\rubrics\\video.rubric.styletransfer.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.colorist"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.talent",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.talent\\prompts\\video.prompt.talent.v1.md",
+      "rubric": "business\\video\\agents\\video.talent\\rubrics\\video.rubric.talent.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.casting"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.director"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.templatedesign",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.templatedesign\\prompts\\video.prompt.templatedesign.v1.md",
+      "rubric": "business\\video\\agents\\video.templatedesign\\rubrics\\video.rubric.templatedesign.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.personalizationengineer",
+          "video.ux",
+          "video.crm"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.trailereditor",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.trailereditor\\prompts\\video.prompt.trailereditor.v1.md",
+      "rubric": "business\\video\\agents\\video.trailereditor\\rubrics\\video.rubric.trailereditor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.musicsupervisor"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.editor",
+          "video.composer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.travelcine",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.travelcine\\prompts\\video.prompt.travelcine.v1.md",
+      "rubric": "business\\video\\agents\\video.travelcine\\rubrics\\video.rubric.travelcine.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.dronepilot"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.dronepilot"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.trendintelligence",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.trendintelligence\\prompts\\video.prompt.trendintelligence.v1.md",
+      "rubric": "business\\video\\agents\\video.trendintelligence\\rubrics\\video.rubric.trendintelligence.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.copywriter"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.ideation"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.trustsafety",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.trustsafety\\prompts\\video.prompt.trustsafety.v1.md",
+      "rubric": "business\\video\\agents\\video.trustsafety\\rubrics\\video.rubric.trustsafety.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.deepfakedetection",
+          "video.safetyredteam"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.ugccreator",
+      "patterns": [
+        "Constitutional AI",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.ugccreator\\prompts\\video.prompt.ugccreator.v1.md",
+      "rubric": "business\\video\\agents\\video.ugccreator\\rubrics\\video.rubric.ugccreator.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.performancemarketer",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.performancemarketer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.ux",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.ux\\prompts\\video.prompt.ux.v1.md",
+      "rubric": "business\\video\\agents\\video.ux\\rubrics\\video.rubric.ux.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.templatedesign",
+          "video.personalizationengineer",
+          "video.accessibility"
+        ],
+        "outputs": [
+          "video.judge"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.vfxsupervisor",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agentic Graph",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.vfxsupervisor\\prompts\\video.prompt.vfxsupervisor.v1.md",
+      "rubric": "business\\video\\agents\\video.vfxsupervisor\\rubrics\\video.rubric.vfxsupervisor.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.cinematographer",
+          "video.aiqaconsistency"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.promptengineer"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.voiceclone",
+      "patterns": [
+        "Self-Refine",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.voiceclone\\prompts\\video.prompt.voiceclone.v1.md",
+      "rubric": "business\\video\\agents\\video.voiceclone\\rubrics\\video.rubric.voiceclone.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.compliance",
+          "video.legal",
+          "video.animator_2d"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.avatardesign"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.voiceover",
+      "patterns": [
+        "LLM-as-Judge",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.voiceover\\prompts\\video.prompt.voiceover.v1.md",
+      "rubric": "business\\video\\agents\\video.voiceover\\rubrics\\video.rubric.voiceover.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.director",
+          "video.brand"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.webresearch",
+      "patterns": [
+        "ReAct",
+        "Agent Skills"
+      ],
+      "bindings": [
+        "research_agent"
+      ],
+      "prompt": "business\\video\\agents\\video.webresearch\\prompts\\video.prompt.webresearch.v1.md",
+      "rubric": "business\\video\\agents\\video.webresearch\\rubrics\\video.rubric.webresearch.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.factchecker",
+          "video.citation"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter"
+        ]
+      },
+      "status": "improved"
+    },
+    {
+      "agent_id": "video.worldbuilding",
+      "patterns": [
+        "Reflexion",
+        "Agent Skills"
+      ],
+      "bindings": [],
+      "prompt": "business\\video\\agents\\video.worldbuilding\\prompts\\video.prompt.worldbuilding.v1.md",
+      "rubric": "business\\video\\agents\\video.worldbuilding\\rubrics\\video.rubric.worldbuilding.v1.json",
+      "dry_run": false,
+      "critique_edges": {
+        "inputs": [
+          "video.critic",
+          "video.showrunner",
+          "video.factchecker"
+        ],
+        "outputs": [
+          "video.judge",
+          "video.screenwriter",
+          "video.conceptartist"
+        ]
+      },
+      "status": "improved"
+    }
+  ]
+}

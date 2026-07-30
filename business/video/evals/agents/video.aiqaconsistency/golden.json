@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.aiqaconsistency",
+  "name": "video.aiqaconsistency offline golden scaffold",
+  "mode": "offline_mock",
+  "input": {
+    "goal": "Execute a minimal valid task for AIQAConsistencyAgent",
+    "inputs": {
+      "brief": "synthetic offline fixture \u2014 do not call live providers"
+    },
+    "constraints": {
+      "network": false,
+      "production": false
+    }
+  },
+  "expect": {
+    "output_status_in": [
+      "ok",
+      "needs_refine",
+      "needs_hitl"
+    ],
+    "l1_passed": true,
+    "artifact_required": true
+  },
+  "rubric_reference": "video.rubric.aiqaconsistency.v1",
+  "prompt_reference": "video.prompt.aiqaconsistency.v1",
+  "notes": "Scaffold from improvement plan Wave A; expand with real fixtures per craft."
+}

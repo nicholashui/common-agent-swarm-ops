@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "video.motiongraphics",
+  "va_name": "MotionGraphicsAgent",
+  "status": "measured",
+  "honesty": {
+    "rule": "Never claim human-surpass in UI without gate.met=true and synthetic=false",
+    "synthetic_ci_allowed": true,
+    "synthetic_sets_met": false
+  },
+  "surpass_signal_design": "Wins agency RFP shootouts on speed + on-brand fidelity",
+  "self_quality_criteria": "Typographic hierarchy; brand compliance; readability at thumbnail",
+  "metric": {
+    "id": "craft_score",
+    "name": "Craft score vs human baseline",
+    "direction": "higher_is_better",
+    "unit": "score_0_100",
+    "threshold_expression": "agent_mean >= human_mean",
+    "pairwise_win_rate_min": null,
+    "raw_signal": "Wins agency RFP shootouts on speed + on-brand fidelity"
+  },
+  "protocol": {
+    "n_human_trials_min": 5,
+    "n_agent_trials_min": 5,
+    "task_fixture": "business/video/evals/agents/video.motiongraphics/golden.json",
+    "blinding": "frozen_inputs",
+    "frozen_inputs": true,
+    "operators": [
+      "human_rater",
+      "pack_runtime_offline_agent"
+    ],
+    "recording": [
+      "trial_id",
+      "rater_or_runner",
+      "score_or_outcome",
+      "notes",
+      "timestamp"
+    ]
+  },
+  "human_baseline": {
+    "status": "pending",
+    "trials": [],
+    "aggregate": null,
+    "captured_at": null
+  },
+  "agent_measurement": {
+    "status": "measured",
+    "trials": [
+      {
+        "trial_id": "agent_417a887b26",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_d672fe30cd",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_f0f4924cda",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_646892a348",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      },
+      {
+        "trial_id": "agent_dbfdb74d40",
+        "score": 90.0,
+        "status": "ok",
+        "l1_passed": true,
+        "refinement_count": 0,
+        "timestamp": "2026-07-30T14:45:35Z",
+        "synthetic": false,
+        "offline": true
+      }
+    ],
+    "aggregate": {
+      "n": 5,
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    "measured_at": "2026-07-30T14:45:35Z",
+    "runner": "pack_runtime.offline"
+  },
+  "gate": {
+    "status": "not_run",
+    "met": false,
+    "synthetic": false,
+    "detail": "Awaiting human baseline + agent measurement",
+    "evaluated_at": null,
+    "evidence_path": "business/video/evals/agents/video.motiongraphics/human_baseline_evidence.json"
+  },
+  "generated_by": "scaffold_human_baselines_v1",
+  "generated_at": "2026-07-30T14:45:35Z",
+  "updated_at": "2026-07-30T14:45:35Z"
+}

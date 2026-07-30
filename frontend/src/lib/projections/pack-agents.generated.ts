@@ -64,14 +64,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.accessibilityoptimizer\",\"video.editor\",\"video.colorist\",\"video.soundmixer\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -86,8 +90,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.accessibility",
           "status: registered",
           "role: AccessibilityAgent (VA Domain Pack)",
+          "va_name: AccessibilityAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -116,8 +132,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.accessibility.v1",
           "rubric_reference: video.rubric.accessibility.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.accessibilityoptimizer\", \"video.editor\", \"video.colorist\", \"video.soundmixer\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -156,14 +185,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.accessibility\",\"video.compliance\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.colorist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -178,8 +211,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.accessibilityoptimizer",
           "status: registered",
           "role: AccessibilityOptimizerAgent (VA Domain Pack)",
+          "va_name: AccessibilityOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -208,8 +253,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.accessibilityoptimizer.v1",
           "rubric_reference: video.rubric.accessibilityoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.accessibility\", \"video.compliance\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.colorist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -248,14 +306,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.vfxsupervisor\"],\"outputs\":[\"video.judge\",\"video.vfxsupervisor\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -270,8 +332,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.aiqaconsistency",
           "status: registered",
           "role: AIQAConsistencyAgent (VA Domain Pack)",
+          "va_name: AIQAConsistencyAgent",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -300,8 +374,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.aiqaconsistency.v1",
           "rubric_reference: video.rubric.aiqaconsistency.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.vfxsupervisor\"]",
+          "critique_outputs: [\"video.judge\", \"video.vfxsupervisor\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -340,14 +427,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.performancemarketer\",\"video.evaluationharness\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -362,8 +453,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.analyst",
           "status: registered",
           "role: AnalystAgent (VA Domain Pack)",
+          "va_name: AnalystAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -392,8 +495,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.analyst.v1",
           "rubric_reference: video.rubric.analyst.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.socialmediastrategist\", \"video.performancemarketer\", \"video.evaluationharness\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -432,14 +548,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.lipsync\"],\"outputs\":[\"video.judge\",\"video.storyboard\",\"video.director\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -457,8 +577,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.animator_2d",
           "status: registered",
           "role: AnimatorAgent (2D/3D) (VA Domain Pack)",
+          "va_name: AnimatorAgent (2D/3D)",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -487,8 +619,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.animator_2d.v1",
           "rubric_reference: video.rubric.animator_2d.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.lipsync\"]",
+          "critique_outputs: [\"video.judge\", \"video.storyboard\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -527,14 +672,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.distributor\",\"video.colorist\",\"video.soundmixer\",\"video.gatekeeper\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -549,8 +698,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.archivemaster",
           "status: registered",
           "role: ArchiveMasterAgent (VA Domain Pack)",
+          "va_name: ArchiveMasterAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -579,8 +740,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.archivemaster.v1",
           "rubric_reference: video.rubric.archivemaster.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.distributor\", \"video.colorist\", \"video.soundmixer\", \"video.gatekeeper\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -619,14 +793,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.archiveresearch\",\"video.journalist\",\"video.legal\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -646,8 +824,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.archiveproducer",
           "status: registered",
           "role: ArchiveProducerAgent (VA Domain Pack)",
+          "va_name: ArchiveProducerAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -676,8 +866,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.archiveproducer.v1",
           "rubric_reference: video.rubric.archiveproducer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.archiveresearch\", \"video.journalist\", \"video.legal\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -716,14 +919,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.sme\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -738,8 +945,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.archiveresearch",
           "status: registered",
           "role: ArchiveResearchAgent (VA Domain Pack)",
+          "va_name: ArchiveResearchAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -768,8 +987,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.archiveresearch.v1",
           "rubric_reference: video.rubric.archiveresearch.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.factchecker\", \"video.sme\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -808,14 +1040,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\",\"video.analyst\",\"video.judge\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -830,8 +1066,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.audiencesim",
           "status: registered",
           "role: AudienceSimAgent (VA Domain Pack)",
+          "va_name: AudienceSimAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -860,8 +1108,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.audiencesim.v1",
           "rubric_reference: video.rubric.audiencesim.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.editor\", \"video.analyst\", \"video.judge\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -900,14 +1161,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -925,8 +1190,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.audiobooknarrator",
           "status: registered",
           "role: AudiobookNarratorAgent (VA Domain Pack)",
+          "va_name: AudiobookNarratorAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -955,8 +1232,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.audiobooknarrator.v1",
           "rubric_reference: video.rubric.audiobooknarrator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.director\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -995,14 +1285,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.legal\",\"video.deepfakedetection\"],\"outputs\":[\"video.judge\",\"video.voiceclone\",\"video.lipsync\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1017,8 +1311,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.avatardesign",
           "status: registered",
           "role: AvatarDesignAgent (VA Domain Pack)",
+          "va_name: AvatarDesignAgent",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1047,8 +1353,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.avatardesign.v1",
           "rubric_reference: video.rubric.avatardesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.legal\", \"video.deepfakedetection\"]",
+          "critique_outputs: [\"video.judge\", \"video.voiceclone\", \"video.lipsync\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1087,14 +1406,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.marketing\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1109,8 +1432,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.awardsstrategist",
           "status: registered",
           "role: AwardsStrategistAgent (VA Domain Pack)",
+          "va_name: AwardsStrategistAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1139,8 +1474,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.awardsstrategist.v1",
           "rubric_reference: video.rubric.awardsstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.marketing\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1179,13 +1527,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
@@ -1201,8 +1553,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.benchmarkresearch",
           "status: registered",
           "role: BenchmarkResearchAgent (VA Domain Pack)",
+          "va_name: BenchmarkResearchAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1233,6 +1597,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1271,14 +1648,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.copywriter\",\"video.motiongraphics\",\"video.marketing\",\"video.brandstrategist\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1293,8 +1674,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.brand",
           "status: registered",
           "role: BrandAgent (VA Domain Pack)",
+          "va_name: BrandAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1323,8 +1716,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.brand.v1",
           "rubric_reference: video.rubric.brand.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.copywriter\", \"video.motiongraphics\", \"video.marketing\", \"video.brandstrategist\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1363,14 +1769,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.screenwriter\",\"video.marketing\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1385,8 +1795,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.brandstrategist",
           "status: registered",
           "role: BrandStrategistAgent (VA Domain Pack)",
+          "va_name: BrandStrategistAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1415,8 +1837,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.brandstrategist.v1",
           "rubric_reference: video.rubric.brandstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.brand\", \"video.screenwriter\", \"video.marketing\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1455,14 +1890,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\"],\"outputs\":[\"video.judge\",\"video.cinematographer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1477,8 +1916,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.cameraoperator",
           "status: registered",
           "role: CameraOperatorAgent (VA Domain Pack)",
+          "va_name: CameraOperatorAgent",
+          "va_category: 2-Cam",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1507,8 +1958,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.cameraoperator.v1",
           "rubric_reference: video.rubric.cameraoperator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\"]",
+          "critique_outputs: [\"video.judge\", \"video.cinematographer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1547,14 +2011,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.showrunner\",\"video.legal\"],\"outputs\":[\"video.judge\",\"video.voiceclone\",\"video.avatardesign\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1569,8 +2037,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.casting",
           "status: registered",
           "role: CastingAgent (VA Domain Pack)",
+          "va_name: CastingAgent",
+          "va_category: 1-ATL",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1599,8 +2079,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.casting.v1",
           "rubric_reference: video.rubric.casting.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.showrunner\", \"video.legal\"]",
+          "critique_outputs: [\"video.judge\", \"video.voiceclone\", \"video.avatardesign\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1639,14 +2132,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.seo\",\"video.analyst\",\"video.marketing\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1661,8 +2158,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.channelmanager",
           "status: registered",
           "role: ChannelManagerAgent (VA Domain Pack)",
+          "va_name: ChannelManagerAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1691,8 +2200,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.channelmanager.v1",
           "rubric_reference: video.rubric.channelmanager.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.socialmediastrategist\", \"video.seo\", \"video.analyst\", \"video.marketing\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1731,14 +2253,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.animator_2d\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1753,8 +2279,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.childrensauthor",
           "status: registered",
           "role: ChildrensAuthorAgent (VA Domain Pack)",
+          "va_name: ChildrensAuthorAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1784,7 +2322,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "rubric_reference: video.rubric.childrensauthor.v1",
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_outputs: [\"video.judge\", \"video.animator_2d\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1823,14 +2374,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1845,8 +2400,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.choreography",
           "status: registered",
           "role: ChoreographyAgent (VA Domain Pack)",
+          "va_name: ChoreographyAgent",
+          "va_category: 5-Perf",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1875,8 +2442,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.choreography.v1",
           "rubric_reference: video.rubric.choreography.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\"]",
+          "critique_outputs: [\"video.judge\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -1915,14 +2495,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.colorist\",\"video.vfxsupervisor\"],\"outputs\":[\"video.judge\",\"video.director\",\"video.colorist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -1937,8 +2521,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.cinematographer",
           "status: registered",
           "role: CinematographerAgent (DoP) (VA Domain Pack)",
+          "va_name: CinematographerAgent (DoP)",
+          "va_category: 2-Cam",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -1967,8 +2563,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.cinematographer.v1",
           "rubric_reference: video.rubric.cinematographer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.colorist\", \"video.vfxsupervisor\"]",
+          "critique_outputs: [\"video.judge\", \"video.director\", \"video.colorist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -2007,14 +2616,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.journalist\"],\"outputs\":[\"video.judge\",\"video.webresearch\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2029,8 +2642,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.citation",
           "status: registered",
           "role: CitationAgent (VA Domain Pack)",
+          "va_name: CitationAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2059,8 +2684,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.citation.v1",
           "rubric_reference: video.rubric.citation.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.factchecker\", \"video.journalist\"]",
+          "critique_outputs: [\"video.judge\", \"video.webresearch\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:33Z"
         ]
       },
       {
@@ -2099,14 +2737,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.director\",\"video.accessibility\"],\"outputs\":[\"video.judge\",\"video.cinematographer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2121,8 +2763,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.colorist",
           "status: registered",
           "role: ColoristAgent (VA Domain Pack)",
+          "va_name: ColoristAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2151,8 +2805,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.colorist.v1",
           "rubric_reference: video.rubric.colorist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\", \"video.director\", \"video.accessibility\"]",
+          "critique_outputs: [\"video.judge\", \"video.cinematographer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2191,14 +2858,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.audiencesim\",\"video.showrunner\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2213,8 +2884,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.comedywriter",
           "status: registered",
           "role: ComedyWriterAgent (VA Domain Pack)",
+          "va_name: ComedyWriterAgent",
+          "va_category: 5-Perf",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2243,8 +2926,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.comedywriter.v1",
           "rubric_reference: video.rubric.comedywriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.audiencesim\", \"video.showrunner\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2283,14 +2979,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.marketing\",\"video.community\",\"video.legal\",\"video.brand\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2305,8 +3005,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.comms",
           "status: registered",
           "role: CommsAgent (VA Domain Pack)",
+          "va_name: CommsAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2335,8 +3047,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.comms.v1",
           "rubric_reference: video.rubric.comms.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.marketing\", \"video.community\", \"video.legal\", \"video.brand\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2375,14 +3100,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.socialmediastrategist\",\"video.comms\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2397,8 +3126,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.community",
           "status: registered",
           "role: CommunityAgent (VA Domain Pack)",
+          "va_name: CommunityAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2427,8 +3168,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.community.v1",
           "rubric_reference: video.rubric.community.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.analyst\", \"video.socialmediastrategist\", \"video.comms\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2467,14 +3221,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.creativedirector\"],\"outputs\":[\"video.judge\",\"video.ideation\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2489,8 +3247,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.competitorintelligence",
           "status: registered",
           "role: CompetitorIntelligenceAgent (VA Domain Pack)",
+          "va_name: CompetitorIntelligenceAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2519,8 +3289,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.competitorintelligence.v1",
           "rubric_reference: video.rubric.competitorintelligence.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.brand\", \"video.creativedirector\"]",
+          "critique_outputs: [\"video.judge\", \"video.ideation\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2559,13 +3342,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
@@ -2581,8 +3368,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.compliance",
           "status: registered",
           "role: ComplianceAgent (Legal) (VA Domain Pack)",
+          "va_name: ComplianceAgent (Legal)",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2613,6 +3412,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2651,14 +3463,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.sounddesign\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2673,8 +3489,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.composer",
           "status: registered",
           "role: ComposerAgent (VA Domain Pack)",
+          "va_name: ComposerAgent",
+          "va_category: 4-Snd",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2703,8 +3531,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.composer.v1",
           "rubric_reference: video.rubric.composer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.editor\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.sounddesign\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2743,14 +3584,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":[\"video.judge\",\"video.storyboard\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2765,8 +3610,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.conceptartist",
           "status: registered",
           "role: ConceptArtistAgent (VA Domain Pack)",
+          "va_name: ConceptArtistAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2795,8 +3652,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.conceptartist.v1",
           "rubric_reference: video.rubric.conceptartist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.productiondesign\"]",
+          "critique_outputs: [\"video.judge\", \"video.storyboard\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2835,14 +3705,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.costumedesign\",\"video.mua_makeup\",\"video.aiqaconsistency\",\"video.cinematographer\",\"video.gatekeeper\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2857,8 +3731,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.continuity",
           "status: registered",
           "role: ContinuityAgent (VA Domain Pack)",
+          "va_name: ContinuityAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2887,8 +3773,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.continuity.v1",
           "rubric_reference: video.rubric.continuity.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.costumedesign\", \"video.mua_makeup\", \"video.aiqaconsistency\", \"video.cinematographer\", \"video.gatekeeper\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -2927,14 +3826,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.performancemarketer\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -2949,8 +3852,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.copywriter",
           "status: registered",
           "role: CopywriterAgent (VA Domain Pack)",
+          "va_name: CopywriterAgent",
+          "va_category: 6-Dist",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -2979,8 +3894,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.copywriter.v1",
           "rubric_reference: video.rubric.copywriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.brand\", \"video.performancemarketer\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3019,14 +3947,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.standardseditor\",\"video.factchecker\",\"video.channelmanager\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3041,8 +3973,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.corrections",
           "status: registered",
           "role: CorrectionsAgent (VA Domain Pack)",
+          "va_name: CorrectionsAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3071,8 +4015,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.corrections.v1",
           "rubric_reference: video.rubric.corrections.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.standardseditor\", \"video.factchecker\", \"video.channelmanager\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3111,14 +4068,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.router\",\"video.finance\"],\"outputs\":[\"video.judge\",\"video.router\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3133,8 +4094,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.costoptimizer",
           "status: registered",
           "role: CostOptimizerAgent (VA Domain Pack)",
+          "va_name: CostOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3163,8 +4136,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.costoptimizer.v1",
           "rubric_reference: video.rubric.costoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.router\", \"video.finance\"]",
+          "critique_outputs: [\"video.judge\", \"video.router\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3203,14 +4189,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":[\"video.judge\",\"video.mua_makeup\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3225,8 +4215,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.costumedesign",
           "status: registered",
           "role: CostumeDesignAgent (VA Domain Pack)",
+          "va_name: CostumeDesignAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3255,8 +4257,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.costumedesign.v1",
           "rubric_reference: video.rubric.costumedesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.productiondesign\"]",
+          "critique_outputs: [\"video.judge\", \"video.mua_makeup\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3295,14 +4310,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.copywriter\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -3322,8 +4341,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.creativedirector",
           "status: registered",
           "role: CreativeDirectorAgent (VA Domain Pack)",
+          "va_name: CreativeDirectorAgent",
+          "va_category: 6-Dist",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3352,8 +4383,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.creativedirector.v1",
           "rubric_reference: video.rubric.creativedirector.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.brand\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3392,14 +4436,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.audiencesim\",\"video.festivalstrategist\",\"video.judge\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3414,8 +4462,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.critic",
           "status: registered",
           "role: CriticAgent (VA Domain Pack)",
+          "va_name: CriticAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3444,8 +4504,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.critic.v1",
           "rubric_reference: video.rubric.critic.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.audiencesim\", \"video.festivalstrategist\", \"video.judge\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3484,14 +4557,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.personalizationengineer\",\"video.templatedesign\",\"video.analyst\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3506,8 +4583,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.crm",
           "status: registered",
           "role: CRMAgent (VA Domain Pack)",
+          "va_name: CRMAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3536,8 +4625,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.crm.v1",
           "rubric_reference: video.rubric.crm.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.personalizationengineer\", \"video.templatedesign\", \"video.analyst\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3576,14 +4678,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.avatardesign\",\"video.voiceclone\",\"video.trustsafety\",\"video.safetyredteam\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3598,8 +4704,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.deepfakedetection",
           "status: registered",
           "role: DeepfakeDetectionAgent (VA Domain Pack)",
+          "va_name: DeepfakeDetectionAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3628,8 +4746,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.deepfakedetection.v1",
           "rubric_reference: video.rubric.deepfakedetection.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.avatardesign\", \"video.voiceclone\", \"video.trustsafety\", \"video.safetyredteam\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3668,14 +4799,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.screenwriter\",\"video.editor\",\"video.audiencesim\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.cinematographer\",\"video.screenwriter\",\"video.composer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3690,8 +4825,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.director",
           "status: registered",
           "role: DirectorAgent (VA Domain Pack)",
+          "va_name: DirectorAgent",
+          "va_category: 1-ATL",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3720,8 +4867,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.director.v1",
           "rubric_reference: video.rubric.director.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.screenwriter\", \"video.editor\", \"video.audiencesim\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.cinematographer\", \"video.screenwriter\", \"video.composer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3760,14 +4920,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sales\",\"video.archivemaster\",\"video.soundmixer\",\"video.colorist\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3782,8 +4946,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.distributor",
           "status: registered",
           "role: DistributorAgent (VA Domain Pack)",
+          "va_name: DistributorAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3812,8 +4988,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.distributor.v1",
           "rubric_reference: video.rubric.distributor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.sales\", \"video.archivemaster\", \"video.soundmixer\", \"video.colorist\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3852,14 +5041,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "2-Cam"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "2-Cam",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.safetyredteam\"],\"outputs\":[\"video.judge\",\"video.cinematographer\",\"video.safetyredteam\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -3874,8 +5067,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.dronepilot",
           "status: registered",
           "role: DronePilotAgent (VA Domain Pack)",
+          "va_name: DronePilotAgent",
+          "va_category: 2-Cam",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3904,8 +5109,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.dronepilot.v1",
           "rubric_reference: video.rubric.dronepilot.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\", \"video.safetyredteam\"]",
+          "critique_outputs: [\"video.judge\", \"video.cinematographer\", \"video.safetyredteam\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -3944,14 +5162,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.audiencesim\",\"video.composer\"],\"outputs\":[\"video.judge\",\"video.director\",\"video.cinematographer\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -3969,8 +5191,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.editor",
           "status: registered",
           "role: EditorAgent (VA Domain Pack)",
+          "va_name: EditorAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -3999,8 +5233,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.editor.v1",
           "rubric_reference: video.rubric.editor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.audiencesim\", \"video.composer\"]",
+          "critique_outputs: [\"video.judge\", \"video.director\", \"video.cinematographer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4039,14 +5286,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.editor\",\"video.composer\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.composer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4061,8 +5312,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.emotionalarc",
           "status: registered",
           "role: EmotionalArcAgent (VA Domain Pack)",
+          "va_name: EmotionalArcAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4091,8 +5354,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.emotionalarc.v1",
           "rubric_reference: video.rubric.emotionalarc.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.editor\", \"video.composer\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.composer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4131,14 +5407,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.standardseditor\",\"video.compliance\",\"video.legal\",\"video.trustsafety\",\"video.safetyredteam\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4153,8 +5433,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.ethics",
           "status: registered",
           "role: EthicsAgent (VA Domain Pack)",
+          "va_name: EthicsAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4183,8 +5475,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.ethics.v1",
           "rubric_reference: video.rubric.ethics.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.standardseditor\", \"video.compliance\", \"video.legal\", \"video.trustsafety\", \"video.safetyredteam\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4223,14 +5528,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.benchmarkresearch\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4245,8 +5554,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.evaluationharness",
           "status: registered",
           "role: EvaluationHarnessAgent (VA Domain Pack)",
+          "va_name: EvaluationHarnessAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4275,8 +5596,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.evaluationharness.v1",
           "rubric_reference: video.rubric.evaluationharness.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.benchmarkresearch\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4315,14 +5649,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.standardseditor\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.journalist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4337,8 +5675,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.factchecker",
           "status: registered",
           "role: FactCheckerAgent (VA Domain Pack)",
+          "va_name: FactCheckerAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4367,8 +5717,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.factchecker.v1",
           "rubric_reference: video.rubric.factchecker.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.sme\", \"video.standardseditor\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.journalist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4407,14 +5770,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.director\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4429,8 +5796,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.festivalstrategist",
           "status: registered",
           "role: FestivalStrategistAgent (VA Domain Pack)",
+          "va_name: FestivalStrategistAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4459,8 +5838,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.festivalstrategist.v1",
           "rubric_reference: video.rubric.festivalstrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.director\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4499,14 +5891,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.compliance\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.motiongraphics\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4521,8 +5917,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.finance",
           "status: registered",
           "role: FinanceAgent (VA Domain Pack)",
+          "va_name: FinanceAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4551,8 +5959,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.finance.v1",
           "rubric_reference: video.rubric.finance.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.sme\", \"video.compliance\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.motiongraphics\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4591,14 +6012,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4613,8 +6038,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.foodstylist",
           "status: registered",
           "role: FoodStylistAgent (VA Domain Pack)",
+          "va_name: FoodStylistAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4643,8 +6080,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.foodstylist.v1",
           "rubric_reference: video.rubric.foodstylist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\", \"video.director\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4683,14 +6133,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.aiqaconsistency\"],\"outputs\":[\"video.judge\",\"video.orchestrator\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4705,8 +6159,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.gatekeeper",
           "status: registered",
           "role: GateKeeperAgent (VA Domain Pack)",
+          "va_name: GateKeeperAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4735,8 +6201,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.gatekeeper.v1",
           "rubric_reference: video.rubric.gatekeeper.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.aiqaconsistency\"]",
+          "critique_outputs: [\"video.judge\", \"video.orchestrator\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4775,14 +6254,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.creativedirector\",\"video.novelty\"],\"outputs\":[\"video.judge\",\"video.copywriter\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4797,8 +6280,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.ideation",
           "status: registered",
           "role: IdeationAgent (VA Domain Pack)",
+          "va_name: IdeationAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4827,8 +6322,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.ideation.v1",
           "rubric_reference: video.rubric.ideation.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.creativedirector\", \"video.novelty\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4867,14 +6375,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.accessibility\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.animator_2d\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4889,8 +6401,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.instructionaldesign",
           "status: registered",
           "role: InstructionalDesignAgent (VA Domain Pack)",
+          "va_name: InstructionalDesignAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -4919,8 +6443,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.instructionaldesign.v1",
           "rubric_reference: video.rubric.instructionaldesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.sme\", \"video.accessibility\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.animator_2d\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -4959,14 +6496,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\"],\"outputs\":[\"video.judge\",\"video.sme\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -4981,8 +6522,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.interviewsynthesis",
           "status: registered",
           "role: InterviewSynthesisAgent (VA Domain Pack)",
+          "va_name: InterviewSynthesisAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5011,8 +6564,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.interviewsynthesis.v1",
           "rubric_reference: video.rubric.interviewsynthesis.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.compliance\"]",
+          "critique_outputs: [\"video.judge\", \"video.sme\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5051,14 +6617,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.legal\",\"video.standardseditor\"],\"outputs\":[\"video.judge\",\"video.factchecker\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5073,8 +6643,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.journalist",
           "status: registered",
           "role: JournalistAgent (VA Domain Pack)",
+          "va_name: JournalistAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5103,8 +6685,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.journalist.v1",
           "rubric_reference: video.rubric.journalist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.factchecker\", \"video.legal\", \"video.standardseditor\"]",
+          "critique_outputs: [\"video.judge\", \"video.factchecker\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5143,14 +6738,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.director\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5165,8 +6764,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.judge",
           "status: registered",
           "role: JudgeAgent (VA Domain Pack)",
+          "va_name: JudgeAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract",
+          "- Primary content generation"
         ]
       },
       {
@@ -5196,7 +6808,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "rubric_reference: video.rubric.judge.v1",
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_outputs: [\"video.judge\", \"video.director\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5235,14 +6860,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.musicvideodirector\",\"video.musicsupervisor\",\"video.labeldigital\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5257,8 +6886,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.labela_r",
           "status: registered",
           "role: LabelA&RAgent (VA Domain Pack)",
+          "va_name: LabelA&RAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5287,8 +6928,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.labela_r.v1",
           "rubric_reference: video.rubric.labela_r.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.musicvideodirector\", \"video.musicsupervisor\", \"video.labeldigital\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5327,14 +6981,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.musicvideodirector\",\"video.socialmediastrategist\",\"video.marketing\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5349,8 +7007,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.labeldigital",
           "status: registered",
           "role: LabelDigitalAgent (VA Domain Pack)",
+          "va_name: LabelDigitalAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5379,8 +7049,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.labeldigital.v1",
           "rubric_reference: video.rubric.labeldigital.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.musicvideodirector\", \"video.socialmediastrategist\", \"video.marketing\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5419,14 +7102,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.orchestrator\"],\"outputs\":[\"video.judge\",\"video.orchestrator\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5441,8 +7128,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.latencyoptimizer",
           "status: registered",
           "role: LatencyOptimizerAgent (VA Domain Pack)",
+          "va_name: LatencyOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5471,8 +7170,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.latencyoptimizer.v1",
           "rubric_reference: video.rubric.latencyoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.orchestrator\"]",
+          "critique_outputs: [\"video.judge\", \"video.orchestrator\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5511,14 +7223,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.instructionaldesign\",\"video.lms\",\"video.analyst\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5533,8 +7249,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.learnersim",
           "status: registered",
           "role: LearnerSimAgent (VA Domain Pack)",
+          "va_name: LearnerSimAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5563,8 +7291,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.learnersim.v1",
           "rubric_reference: video.rubric.learnersim.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.instructionaldesign\", \"video.lms\", \"video.analyst\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5603,14 +7344,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.journalist\",\"video.producer\",\"video.mpa\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5625,8 +7370,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.legal",
           "status: registered",
           "role: LegalAgent (VA Domain Pack)",
+          "va_name: LegalAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5655,8 +7412,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.legal.v1",
           "rubric_reference: video.rubric.legal.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.journalist\", \"video.producer\", \"video.mpa\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5695,14 +7465,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.voiceclone\",\"video.animator_2d\",\"video.aiqaconsistency\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5717,8 +7491,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.lipsync",
           "status: registered",
           "role: LipSyncAgent (VA Domain Pack)",
+          "va_name: LipSyncAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5747,8 +7533,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.lipsync.v1",
           "rubric_reference: video.rubric.lipsync.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.voiceclone\", \"video.animator_2d\", \"video.aiqaconsistency\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5787,14 +7586,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.instructionaldesign\",\"video.accessibility\",\"video.learnersim\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5809,8 +7612,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.lms",
           "status: registered",
           "role: LMSAgent (VA Domain Pack)",
+          "va_name: LMSAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5839,8 +7654,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.lms.v1",
           "rubric_reference: video.rubric.lms.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.instructionaldesign\", \"video.accessibility\", \"video.learnersim\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5879,14 +7707,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.voiceclone\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5901,8 +7733,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.localizationqa",
           "status: registered",
           "role: LocalizationQAAgent (Linguist) (VA Domain Pack)",
+          "va_name: LocalizationQAAgent (Linguist)",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -5931,8 +7775,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.localizationqa.v1",
           "rubric_reference: video.rubric.localizationqa.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.brand\"]",
+          "critique_outputs: [\"video.judge\", \"video.voiceclone\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -5971,14 +7828,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.socialmediastrategist\",\"video.seo\",\"video.copywriter\",\"video.trailereditor\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -5993,8 +7854,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.marketing",
           "status: registered",
           "role: MarketingAgent (VA Domain Pack)",
+          "va_name: MarketingAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6023,8 +7896,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.marketing.v1",
           "rubric_reference: video.rubric.marketing.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.socialmediastrategist\", \"video.seo\", \"video.copywriter\", \"video.trailereditor\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6063,14 +7949,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.accessibility\"],\"outputs\":[\"video.judge\",\"video.animator_2d\",\"video.copywriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6085,8 +7975,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.medicalillustrator",
           "status: registered",
           "role: MedicalIllustratorAgent (VA Domain Pack)",
+          "va_name: MedicalIllustratorAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6115,8 +8017,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.medicalillustrator.v1",
           "rubric_reference: video.rubric.medicalillustrator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.sme\", \"video.accessibility\"]",
+          "critique_outputs: [\"video.judge\", \"video.animator_2d\", \"video.copywriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6155,13 +8070,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
     "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
@@ -6177,8 +8096,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.memory",
           "status: registered",
           "role: MemoryAgent (VA Domain Pack)",
+          "va_name: MemoryAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract",
+          "- Final creative approval"
         ]
       },
       {
@@ -6209,6 +8141,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6247,14 +8192,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.productiondesign\"],\"outputs\":[\"video.judge\",\"video.conceptartist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6269,8 +8218,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.moodboard",
           "status: registered",
           "role: MoodBoardAgent (VA Domain Pack)",
+          "va_name: MoodBoardAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6299,8 +8260,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.moodboard.v1",
           "rubric_reference: video.rubric.moodboard.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.productiondesign\"]",
+          "critique_outputs: [\"video.judge\", \"video.conceptartist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6339,14 +8313,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.brand\",\"video.accessibility\"],\"outputs\":[\"video.judge\",\"video.copywriter\",\"video.editor\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -6364,8 +8342,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.motiongraphics",
           "status: registered",
           "role: MotionGraphicsAgent (VA Domain Pack)",
+          "va_name: MotionGraphicsAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6394,8 +8384,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.motiongraphics.v1",
           "rubric_reference: video.rubric.motiongraphics.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.brand\", \"video.accessibility\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\", \"video.editor\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6434,14 +8437,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.legal\",\"video.ethics\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6456,8 +8463,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.mpa",
           "status: registered",
           "role: MPAAgent (VA Domain Pack)",
+          "va_name: MPAAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6486,8 +8505,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.mpa.v1",
           "rubric_reference: video.rubric.mpa.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.legal\", \"video.ethics\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6526,14 +8558,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.continuity\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6548,8 +8584,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.mua_makeup",
           "status: registered",
           "role: MUAAgent (Makeup/Hair/SFX) (VA Domain Pack)",
+          "va_name: MUAAgent (Makeup/Hair/SFX)",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6578,8 +8626,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.mua_makeup.v1",
           "rubric_reference: video.rubric.mua_makeup.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\", \"video.continuity\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6618,14 +8679,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.composer\",\"video.trailereditor\",\"video.labela_r\",\"video.legal\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6640,8 +8705,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.musicsupervisor",
           "status: registered",
           "role: MusicSupervisorAgent (VA Domain Pack)",
+          "va_name: MusicSupervisorAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6670,8 +8747,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.musicsupervisor.v1",
           "rubric_reference: video.rubric.musicsupervisor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.composer\", \"video.trailereditor\", \"video.labela_r\", \"video.legal\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6710,14 +8800,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.labela_r\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.cinematographer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6732,8 +8826,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.musicvideodirector",
           "status: registered",
           "role: MusicVideoDirectorAgent (VA Domain Pack)",
+          "va_name: MusicVideoDirectorAgent",
+          "va_category: 5-Perf",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6762,8 +8868,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.musicvideodirector.v1",
           "rubric_reference: video.rubric.musicvideodirector.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.labela_r\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.cinematographer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6802,14 +8921,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.screenwriter\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6824,8 +8947,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.narrativearc",
           "status: registered",
           "role: NarrativeArcAgent (VA Domain Pack)",
+          "va_name: NarrativeArcAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6854,8 +8989,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.narrativearc.v1",
           "rubric_reference: video.rubric.narrativearc.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.screenwriter\", \"video.director\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6894,14 +9042,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.ideation\",\"video.screenwriter\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.copywriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -6916,8 +9068,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.novelty",
           "status: registered",
           "role: NoveltyAgent / Anti-Cliché Critic (VA Domain Pack)",
+          "va_name: NoveltyAgent / Anti-Cliché Critic",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -6946,8 +9110,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.novelty.v1",
           "rubric_reference: video.rubric.novelty.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.ideation\", \"video.screenwriter\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.copywriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -6986,14 +9163,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.judge\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -7010,8 +9191,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.orchestrator",
           "status: registered",
           "role: OrchestratorAgent (VA Domain Pack)",
+          "va_name: OrchestratorAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract",
+          "- Per-shot craft generation (delegates to craft agents)"
         ]
       },
       {
@@ -7040,8 +9234,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.orchestrator.v1",
           "rubric_reference: video.rubric.orchestrator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.judge\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7080,14 +9287,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.finance\"],\"outputs\":[\"video.judge\",\"video.copywriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7102,8 +9313,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.performancemarketer",
           "status: registered",
           "role: PerformanceMarketerAgent (VA Domain Pack)",
+          "va_name: PerformanceMarketerAgent",
+          "va_category: 6-Dist",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7132,8 +9355,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.performancemarketer.v1",
           "rubric_reference: video.rubric.performancemarketer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.analyst\", \"video.finance\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7172,14 +9408,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.analyst\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7194,8 +9434,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.personalizationengineer",
           "status: registered",
           "role: PersonalizationEngineerAgent (VA Domain Pack)",
+          "va_name: PersonalizationEngineerAgent",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7224,8 +9476,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.personalizationengineer.v1",
           "rubric_reference: video.rubric.personalizationengineer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.analyst\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7264,14 +9529,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.finance\"],\"outputs\":[\"video.judge\",\"video.router\",\"video.orchestrator\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7286,8 +9555,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.planner",
           "status: registered",
           "role: PlannerAgent (VA Domain Pack)",
+          "va_name: PlannerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7316,8 +9597,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.planner.v1",
           "rubric_reference: video.rubric.planner.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.finance\"]",
+          "critique_outputs: [\"video.judge\", \"video.router\", \"video.orchestrator\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7356,14 +9650,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7378,8 +9676,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.producer",
           "status: registered",
           "role: ProducerAgent / EP (VA Domain Pack)",
+          "va_name: ProducerAgent / EP",
+          "va_category: 1-ATL",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7409,7 +9719,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "rubric_reference: video.rubric.producer.v1",
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_outputs: [\"video.judge\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7448,14 +9771,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\"],\"outputs\":[\"video.judge\",\"video.conceptartist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7470,8 +9797,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.productiondesign",
           "status: registered",
           "role: ProductionDesignAgent (VA Domain Pack)",
+          "va_name: ProductionDesignAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7500,8 +9839,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.productiondesign.v1",
           "rubric_reference: video.rubric.productiondesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.cinematographer\"]",
+          "critique_outputs: [\"video.judge\", \"video.conceptartist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7540,14 +9892,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\"],\"outputs\":[\"video.judge\",\"video.aiqaconsistency\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -7567,8 +9923,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.promptengineer",
           "status: registered",
           "role: PromptEngineerAgent / GeneratorOperator (VA Domain Pack)",
+          "va_name: PromptEngineerAgent / GeneratorOperator",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7597,8 +9965,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.promptengineer.v1",
           "rubric_reference: video.rubric.promptengineer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\"]",
+          "critique_outputs: [\"video.judge\", \"video.aiqaconsistency\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7637,14 +10018,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.promptengineer\"],\"outputs\":[\"video.judge\",\"video.promptengineer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7659,8 +10044,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.promptoptimizer",
           "status: registered",
           "role: PromptOptimizerAgent (VA Domain Pack)",
+          "va_name: PromptOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7689,8 +10086,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.promptoptimizer.v1",
           "rubric_reference: video.rubric.promptoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.promptengineer\"]",
+          "critique_outputs: [\"video.judge\", \"video.promptengineer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7729,14 +10139,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.cinematographer\",\"video.dronepilot\"],\"outputs\":[\"video.judge\",\"video.dronepilot\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7751,8 +10165,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.realestatephoto",
           "status: registered",
           "role: RealEstatePhotoAgent / 3D Scan (VA Domain Pack)",
+          "va_name: RealEstatePhotoAgent / 3D Scan",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7781,8 +10207,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.realestatephoto.v1",
           "rubric_reference: video.rubric.realestatephoto.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.cinematographer\", \"video.dronepilot\"]",
+          "critique_outputs: [\"video.judge\", \"video.dronepilot\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7821,14 +10260,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.editor\",\"video.audiencesim\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7843,8 +10286,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.retentionoptimizer",
           "status: registered",
           "role: RetentionOptimizerAgent (VA Domain Pack)",
+          "va_name: RetentionOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7873,8 +10328,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.retentionoptimizer.v1",
           "rubric_reference: video.rubric.retentionoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.editor\", \"video.audiencesim\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -7913,14 +10381,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.performancemarketer\",\"video.analyst\"],\"outputs\":[\"video.judge\",\"video.copywriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -7935,8 +10407,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.roasoptimizer",
           "status: registered",
           "role: ROASOptimizerAgent (VA Domain Pack)",
+          "va_name: ROASOptimizerAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -7965,8 +10449,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.roasoptimizer.v1",
           "rubric_reference: video.rubric.roasoptimizer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.performancemarketer\", \"video.analyst\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8005,14 +10502,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.orchestrator\",\"video.costoptimizer\"],\"outputs\":[\"video.judge\",\"video.planner\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8027,8 +10528,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.router",
           "status: registered",
           "role: RouterAgent (VA Domain Pack)",
+          "va_name: RouterAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract",
+          "- Long-running multi-step craft execution"
         ]
       },
       {
@@ -8057,8 +10571,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.router.v1",
           "rubric_reference: video.rubric.router.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.orchestrator\", \"video.costoptimizer\"]",
+          "critique_outputs: [\"video.judge\", \"video.planner\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8097,14 +10624,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.ethics\",\"video.compliance\"],\"outputs\":[\"video.judge\",\"video.avatardesign\",\"video.voiceclone\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8119,8 +10650,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.safetyredteam",
           "status: registered",
           "role: SafetyRedTeamAgent (VA Domain Pack)",
+          "va_name: SafetyRedTeamAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8149,8 +10692,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.safetyredteam.v1",
           "rubric_reference: video.rubric.safetyredteam.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.ethics\", \"video.compliance\"]",
+          "critique_outputs: [\"video.judge\", \"video.avatardesign\", \"video.voiceclone\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8189,14 +10745,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.producer\",\"video.distributor\",\"video.marketing\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8211,8 +10771,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.sales",
           "status: registered",
           "role: SalesAgent (VA Domain Pack)",
+          "va_name: SalesAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8241,8 +10813,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.sales.v1",
           "rubric_reference: video.rubric.sales.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.producer\", \"video.distributor\", \"video.marketing\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8281,14 +10866,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.standardseditor\"],\"outputs\":[\"video.judge\",\"video.director\",\"video.aiqaconsistency\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8303,8 +10892,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.screenwriter",
           "status: registered",
           "role: ScreenwriterAgent (VA Domain Pack)",
+          "va_name: ScreenwriterAgent",
+          "va_category: 1-ATL",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8333,8 +10934,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.screenwriter.v1",
           "rubric_reference: video.rubric.screenwriter.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.standardseditor\"]",
+          "critique_outputs: [\"video.judge\", \"video.director\", \"video.aiqaconsistency\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8373,14 +10987,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.marketing\",\"video.copywriter\",\"video.analyst\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8395,8 +11013,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.seo",
           "status: registered",
           "role: SEOAgent (VA Domain Pack)",
+          "va_name: SEOAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8425,8 +11055,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.seo.v1",
           "rubric_reference: video.rubric.seo.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.marketing\", \"video.copywriter\", \"video.analyst\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8465,14 +11108,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "1-ATL"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "1-ATL",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.comms\",\"video.audiencesim\",\"video.screenwriter\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.casting\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8487,8 +11134,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.showrunner",
           "status: registered",
           "role: ShowrunnerAgent (VA Domain Pack)",
+          "va_name: ShowrunnerAgent",
+          "va_category: 1-ATL",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract",
+          "- Per-shot craft generation (delegates to craft agents)"
         ]
       },
       {
@@ -8517,8 +11177,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.showrunner.v1",
           "rubric_reference: video.rubric.showrunner.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.comms\", \"video.audiencesim\", \"video.screenwriter\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.casting\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8557,14 +11230,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\",\"video.voiceclone\",\"video.accessibility\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8579,8 +11256,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.signlanguageinterpreter",
           "status: registered",
           "role: SignLanguageInterpreterAgent (VA Domain Pack)",
+          "va_name: SignLanguageInterpreterAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8610,7 +11299,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "rubric_reference: video.rubric.signlanguageinterpreter.v1",
           "max_refinement_count: 3",
           "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_outputs: [\"video.judge\", \"video.voiceclone\", \"video.accessibility\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8649,14 +11351,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.motiongraphics\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8671,8 +11377,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.sme",
           "status: registered",
           "role: SMEAgent (Subject-Matter Expert) (VA Domain Pack)",
+          "va_name: SMEAgent (Subject-Matter Expert)",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8701,8 +11419,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.sme.v1",
           "rubric_reference: video.rubric.sme.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.factchecker\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.motiongraphics\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8741,14 +11472,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "6-Dist"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "6-Dist",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.analyst\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.copywriter\",\"video.editor\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8763,8 +11498,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.socialmediastrategist",
           "status: registered",
           "role: SocialMediaStrategistAgent (VA Domain Pack)",
+          "va_name: SocialMediaStrategistAgent",
+          "va_category: 6-Dist",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8793,8 +11540,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.socialmediastrategist.v1",
           "rubric_reference: video.rubric.socialmediastrategist.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.analyst\", \"video.brand\"]",
+          "critique_outputs: [\"video.judge\", \"video.copywriter\", \"video.editor\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8833,14 +11593,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.soundmixer\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.composer\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -8858,8 +11622,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.sounddesign",
           "status: registered",
           "role: SoundDesignAgent (VA Domain Pack)",
+          "va_name: SoundDesignAgent",
+          "va_category: 4-Snd",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8888,8 +11664,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.sounddesign.v1",
           "rubric_reference: video.rubric.sounddesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.soundmixer\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.composer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -8928,14 +11717,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.editor\",\"video.sounddesign\",\"video.accessibility\"],\"outputs\":[\"video.judge\",\"video.sounddesign\",\"video.composer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -8950,8 +11743,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.soundmixer",
           "status: registered",
           "role: SoundMixerAgent (Re-recording) (VA Domain Pack)",
+          "va_name: SoundMixerAgent (Re-recording)",
+          "va_category: 4-Snd",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -8980,8 +11785,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.soundmixer.v1",
           "rubric_reference: video.rubric.soundmixer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.editor\", \"video.sounddesign\", \"video.accessibility\"]",
+          "critique_outputs: [\"video.judge\", \"video.sounddesign\", \"video.composer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9020,14 +11838,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.sme\",\"video.journalist\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.motiongraphics\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9042,8 +11864,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.sportsanalyst",
           "status: registered",
           "role: SportsAnalystAgent / TelestratorOp (VA Domain Pack)",
+          "va_name: SportsAnalystAgent / TelestratorOp",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9072,8 +11906,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.sportsanalyst.v1",
           "rubric_reference: video.rubric.sportsanalyst.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.sme\", \"video.journalist\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.motiongraphics\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9112,14 +11959,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.journalist\",\"video.factchecker\",\"video.corrections\",\"video.legal\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9134,8 +11985,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.standardseditor",
           "status: registered",
           "role: StandardsEditorAgent (VA Domain Pack)",
+          "va_name: StandardsEditorAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9164,8 +12027,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.standardseditor.v1",
           "rubric_reference: video.rubric.standardseditor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.journalist\", \"video.factchecker\", \"video.corrections\", \"video.legal\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9204,14 +12080,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9226,8 +12106,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.storyboard",
           "status: registered",
           "role: StoryboardAgent (VA Domain Pack)",
+          "va_name: StoryboardAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9256,8 +12148,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.storyboard.v1",
           "rubric_reference: video.rubric.storyboard.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.cinematographer\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9296,14 +12201,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.colorist\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -9322,8 +12231,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.styletransfer",
           "status: registered",
           "role: StyleTransferAgent (VA Domain Pack)",
+          "va_name: StyleTransferAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9352,8 +12273,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.styletransfer.v1",
           "rubric_reference: video.rubric.styletransfer.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.colorist\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9392,14 +12326,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.casting\"],\"outputs\":[\"video.judge\",\"video.director\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9414,8 +12352,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.talent",
           "status: registered",
           "role: TalentAgent (On-camera) (VA Domain Pack)",
+          "va_name: TalentAgent (On-camera)",
+          "va_category: 5-Perf",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9444,8 +12394,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.talent.v1",
           "rubric_reference: video.rubric.talent.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.casting\"]",
+          "critique_outputs: [\"video.judge\", \"video.director\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9484,14 +12447,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.personalizationengineer\",\"video.ux\",\"video.crm\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9506,8 +12473,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.templatedesign",
           "status: registered",
           "role: TemplateDesignAgent (VA Domain Pack)",
+          "va_name: TemplateDesignAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9536,8 +12515,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.templatedesign.v1",
           "rubric_reference: video.rubric.templatedesign.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.personalizationengineer\", \"video.ux\", \"video.crm\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9576,14 +12568,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.musicsupervisor\"],\"outputs\":[\"video.judge\",\"video.editor\",\"video.composer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9598,8 +12594,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.trailereditor",
           "status: registered",
           "role: TrailerEditorAgent (VA Domain Pack)",
+          "va_name: TrailerEditorAgent",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9628,8 +12636,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.trailereditor.v1",
           "rubric_reference: video.rubric.trailereditor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.musicsupervisor\"]",
+          "critique_outputs: [\"video.judge\", \"video.editor\", \"video.composer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9668,14 +12689,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "7-Edu"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "7-Edu",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.dronepilot\"],\"outputs\":[\"video.judge\",\"video.dronepilot\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9690,8 +12715,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.travelcine",
           "status: registered",
           "role: TravelCineAgent (VA Domain Pack)",
+          "va_name: TravelCineAgent",
+          "va_category: 7-Edu",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9720,8 +12757,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.travelcine.v1",
           "rubric_reference: video.rubric.travelcine.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.dronepilot\"]",
+          "critique_outputs: [\"video.judge\", \"video.dronepilot\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9760,14 +12810,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.copywriter\"],\"outputs\":[\"video.judge\",\"video.ideation\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9782,8 +12836,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.trendintelligence",
           "status: registered",
           "role: TrendIntelligenceAgent (VA Domain Pack)",
+          "va_name: TrendIntelligenceAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9812,8 +12878,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.trendintelligence.v1",
           "rubric_reference: video.rubric.trendintelligence.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.copywriter\"]",
+          "critique_outputs: [\"video.judge\", \"video.ideation\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9852,14 +12931,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.deepfakedetection\",\"video.safetyredteam\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9874,8 +12957,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.trustsafety",
           "status: registered",
           "role: TrustSafetyAgent (VA Domain Pack)",
+          "va_name: TrustSafetyAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9904,8 +12999,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.trustsafety.v1",
           "rubric_reference: video.rubric.trustsafety.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.deepfakedetection\", \"video.safetyredteam\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -9944,14 +13052,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "5-Perf"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "5-Perf",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.performancemarketer\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.performancemarketer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -9966,8 +13078,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.ugccreator",
           "status: registered",
           "role: UGCCreatorAgent (VA Domain Pack)",
+          "va_name: UGCCreatorAgent",
+          "va_category: 5-Perf",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -9996,8 +13120,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.ugccreator.v1",
           "rubric_reference: video.rubric.ugccreator.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.performancemarketer\", \"video.brand\"]",
+          "critique_outputs: [\"video.judge\", \"video.performancemarketer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10036,14 +13173,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "10-Sup"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "10-Sup",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.templatedesign\",\"video.personalizationengineer\",\"video.accessibility\"],\"outputs\":[\"video.judge\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -10058,8 +13199,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.ux",
           "status: registered",
           "role: UXAgent (VA Domain Pack)",
+          "va_name: UXAgent",
+          "va_category: 10-Sup",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10088,8 +13241,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.ux.v1",
           "rubric_reference: video.rubric.ux.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
+          "critique_inputs: [\"video.critic\", \"video.templatedesign\", \"video.personalizationengineer\", \"video.accessibility\"]",
           "critique_outputs: [\"video.judge\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10128,14 +13294,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "3-Edit"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "3-Edit",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.cinematographer\",\"video.aiqaconsistency\"],\"outputs\":[\"video.judge\",\"video.promptengineer\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -10150,8 +13320,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.vfxsupervisor",
           "status: registered",
           "role: VFXSupervisorAgent (VA Domain Pack)",
+          "va_name: VFXSupervisorAgent",
+          "va_category: 3-Edit",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10180,8 +13362,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.vfxsupervisor.v1",
           "rubric_reference: video.rubric.vfxsupervisor.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.cinematographer\", \"video.aiqaconsistency\"]",
+          "critique_outputs: [\"video.judge\", \"video.promptengineer\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10220,14 +13415,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "8-AI"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "8-AI",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.compliance\",\"video.legal\",\"video.animator_2d\"],\"outputs\":[\"video.judge\",\"video.avatardesign\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -10245,8 +13444,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.voiceclone",
           "status: registered",
           "role: VoiceCloneAgent / LipSyncSpecialist (VA Domain Pack)",
+          "va_name: VoiceCloneAgent / LipSyncSpecialist",
+          "va_category: 8-AI",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10275,8 +13486,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.voiceclone.v1",
           "rubric_reference: video.rubric.voiceclone.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.compliance\", \"video.legal\", \"video.animator_2d\"]",
+          "critique_outputs: [\"video.judge\", \"video.avatardesign\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10315,14 +13539,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "network?"
+      "network?",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "4-Snd"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "4-Snd",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.director\",\"video.brand\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": true,
     "networkAccess": true,
     "provider": "media_host",
@@ -10340,8 +13568,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.voiceover",
           "status: registered",
           "role: VoiceOverAgent (VA Domain Pack)",
+          "va_name: VoiceOverAgent",
+          "va_category: 4-Snd",
           "schema_version: 1.0",
           "production_activation_requested: True"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10370,8 +13610,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.voiceover.v1",
           "rubric_reference: video.rubric.voiceover.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.director\", \"video.brand\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10410,14 +13663,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.factchecker\",\"video.citation\"],\"outputs\":[\"video.judge\",\"video.screenwriter\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -10432,8 +13689,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.webresearch",
           "status: registered",
           "role: WebResearchAgent (VA Domain Pack)",
+          "va_name: WebResearchAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10462,8 +13731,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.webresearch.v1",
           "rubric_reference: video.rubric.webresearch.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.factchecker\", \"video.citation\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10502,14 +13784,18 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
       "video",
       "registered",
       "self-contained",
-      "no-network"
+      "no-network",
+      "prompt",
+      "rubric",
+      "skill-harness",
+      "9-Meta"
     ],
     "domains": [
       "video"
     ],
-    "category": "video",
-    "architecture": "pack agent folder",
-    "critiqueCompat": "{\"inputs\":[\"video.critic\"],\"outputs\":[\"video.judge\"]}",
+    "category": "9-Meta",
+    "architecture": "pack agent folder + harness",
+    "critiqueCompat": "{\"inputs\":[\"video.critic\",\"video.showrunner\",\"video.factchecker\"],\"outputs\":[\"video.judge\",\"video.screenwriter\",\"video.conceptartist\"]}",
     "productionActivationRequested": false,
     "networkAccess": false,
     "provider": "local_deterministic",
@@ -10524,8 +13810,20 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: video.worldbuilding",
           "status: registered",
           "role: WorldBuildingAgent (VA Domain Pack)",
+          "va_name: WorldBuildingAgent",
+          "va_category: 9-Meta",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "- Host credential storage",
+          "- Silent production activation without fail-closed gates",
+          "- Inventing action references for irreversible mutations",
+          "- Owning other agents' exclusive craft outputs without handoff contract"
         ]
       },
       {
@@ -10554,8 +13852,21 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "prompt_reference: video.prompt.worldbuilding.v1",
           "rubric_reference: video.rubric.worldbuilding.v1",
           "max_refinement_count: 3",
-          "critique_inputs: [\"video.critic\"]",
-          "critique_outputs: [\"video.judge\"]"
+          "critique_inputs: [\"video.critic\", \"video.showrunner\", \"video.factchecker\"]",
+          "critique_outputs: [\"video.judge\", \"video.screenwriter\", \"video.conceptartist\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: True",
+          "rubric_materialized: True",
+          "skill_harness: True",
+          "distillation_plan: True",
+          "source_catalog: True",
+          "improvement_wave: A_artifacts",
+          "improvement_updated_at: 2026-07-30T14:45:34Z"
         ]
       },
       {
@@ -10616,8 +13927,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.aesthetics-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -10648,6 +13968,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.aesthetics-agent-input\"]",
           "critique_outputs: [\"spagent.aesthetics-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -10708,8 +14041,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.agent-loop-creator",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -10740,6 +14082,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.agent-loop-creator-input\"]",
           "critique_outputs: [\"spagent.agent-loop-creator-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -10800,8 +14155,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.agentic-rag-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -10832,6 +14196,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.agentic-rag-agent-input\"]",
           "critique_outputs: [\"spagent.agentic-rag-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -10892,8 +14269,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.autotelic-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -10924,6 +14310,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.autotelic-agent-input\"]",
           "critique_outputs: [\"spagent.autotelic-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -10984,8 +14383,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.complex-problem-solution-process-model",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11016,6 +14424,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.complex-problem-solution-process-model-input\"]",
           "critique_outputs: [\"spagent.complex-problem-solution-process-model-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11076,8 +14497,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.controller-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11108,6 +14538,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.controller-agent-input\"]",
           "critique_outputs: [\"spagent.controller-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11168,8 +14611,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.general-creative-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11200,6 +14652,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.general-creative-agent-input\"]",
           "critique_outputs: [\"spagent.general-creative-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11260,8 +14725,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.intent-analysis-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11292,6 +14766,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.intent-analysis-agent-input\"]",
           "critique_outputs: [\"spagent.intent-analysis-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11352,8 +14839,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.knowledge-router-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11384,6 +14880,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.knowledge-router-agent-input\"]",
           "critique_outputs: [\"spagent.knowledge-router-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11444,8 +14953,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.llm-usage",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11476,6 +14994,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.llm-usage-input\"]",
           "critique_outputs: [\"spagent.llm-usage-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11536,8 +15067,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.optimization-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11568,6 +15108,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.optimization-agent-input\"]",
           "critique_outputs: [\"spagent.optimization-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11628,8 +15181,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.planner-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11660,6 +15222,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.planner-agent-input\"]",
           "critique_outputs: [\"spagent.planner-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11720,8 +15295,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.podcast-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11752,6 +15336,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.podcast-agent-input\"]",
           "critique_outputs: [\"spagent.podcast-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11812,8 +15409,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.psychological-profile-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11844,6 +15450,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.psychological-profile-agent-input\"]",
           "critique_outputs: [\"spagent.psychological-profile-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11904,8 +15523,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.psychological-recommendation-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -11936,6 +15564,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.psychological-recommendation-agent-input\"]",
           "critique_outputs: [\"spagent.psychological-recommendation-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -11996,8 +15637,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.research-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -12028,6 +15678,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.research-agent-input\"]",
           "critique_outputs: [\"spagent.research-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -12088,8 +15751,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.screenwriter-strategic-goal-achievement-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -12120,6 +15792,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.screenwriter-strategic-goal-achievement-agent-input\"]",
           "critique_outputs: [\"spagent.screenwriter-strategic-goal-achievement-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -12180,8 +15865,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.strategic-goal-achievement-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -12212,6 +15906,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.strategic-goal-achievement-agent-input\"]",
           "critique_outputs: [\"spagent.strategic-goal-achievement-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
@@ -12272,8 +15979,17 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "agent_id: specials.techology-advisor-agent",
           "status: draft",
           "role: Special_Agent data-only configuration",
+          "va_name: ",
+          "va_category: ",
           "schema_version: 1.0",
           "production_activation_requested: False"
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "Responsibility boundary",
+        "lines": [
+          "does_not_own: (none listed)"
         ]
       },
       {
@@ -12304,6 +16020,19 @@ export const PACK_AGENTS: readonly PackAgentRecord[] = [
           "max_refinement_count: 1",
           "critique_inputs: [\"spagent.techology-advisor-agent-input\"]",
           "critique_outputs: [\"spagent.techology-advisor-agent-output\"]"
+        ]
+      },
+      {
+        "id": "pack_harness",
+        "title": "Pack harness (improvement plan)",
+        "lines": [
+          "prompt_materialized: False",
+          "rubric_materialized: False",
+          "skill_harness: False",
+          "distillation_plan: False",
+          "source_catalog: False",
+          "improvement_wave: ",
+          "improvement_updated_at: "
         ]
       },
       {
