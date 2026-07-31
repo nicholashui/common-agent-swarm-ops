@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 CitationAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,9 +154,9 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-9. Specialist Meta-Agents
+## 9. Specialist Meta-Agents
 
-9.1 Orchestration Agents
+### 9.1 Orchestration Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +167,7 @@ _The following is the complete category section from the master roster (includes
 | 57 | **GateKeeperAgent** | Phase transitions; verifies L1/L2/L3 criteria; signs C2PA | Stage-gate methodology; PGA Producers Mark; QMS audit | Zero leaked defects; sign-off SLA ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) | C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints | Constitutional AI (constitution = phase-gate criteria) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9; freshness SLA | Higher recall than producer's bible at scale | All agents (correction events) | All agents (stale facts) | Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models | Reflexion memory architecture (MemGPT extension) |
 
-9.2 Creative Agents
+### 9.2 Creative Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -180,7 +179,7 @@ _The following is the complete category section from the master roster (includes
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, over-fit outputs | TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings | Cliché-hit count; novelty score vs category prior | Catches more clichés than experienced script editor | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) | TV Tropes scraper; n-gram frequency DB; embedding novelty scorer | LLM-as-Judge (anti-cliché constitution) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve; suggests beats | Plutchik; affective-computing corpora; Cron *Story Genius* | Curve-fit to target; biosignal-proxy regression accuracy | Better retention prediction than NRG test-screening cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) | Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model | Self-Refine (emotional-arc curve as rubric target) |
 
-9.3 Research Agents
+### 9.3 Research Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -192,7 +191,7 @@ _The following is the complete category section from the master roster (includes
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-9.4 Optimization Agents
+### 9.4 Optimization Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -242,19 +241,19 @@ Self-Refine (format validator + source grader as rubric)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -278,7 +277,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -291,11 +290,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -305,13 +304,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -374,7 +373,7 @@ _Embedded from `corpus/study/research_agent_functional_specification.md`. Also s
 
 Research Agent Functional Specification
 
-1. Document Control
+## 1. Document Control
 
 - Document title: `Research Agent Functional Specification`
 - System name: `grok-research-agent`
@@ -397,7 +396,7 @@ The system is designed to:
 
 3. Scope
 
-3.1 In Scope
+### 3.1 In Scope
 
 - Command-line session lifecycle management
 - Persistent session state and artifact storage
@@ -411,7 +410,7 @@ The system is designed to:
 - Image-prompt generation from final report content
 - YouTube-script generation from final report or section drafts
 
-3.2 Out of Scope
+### 3.2 Out of Scope
 
 - Web UI, API server, or multi-user collaboration
 - Authentication, authorization, and role-based permissions
@@ -421,28 +420,28 @@ The system is designed to:
 - Guaranteed factual validation of LLM outputs
 - Binary document feeding in the `feed` command beyond best-effort text decoding
 
-4. Stakeholders, Roles, and External Actors
+## 4. Stakeholders, Roles, and External Actors
 
-4.1 Human User Roles
+### 4.1 Human User Roles
 
 - `Research Operator`: Starts sessions, approves or revises workflow outputs, selects curated sources, optionally chooses full offline collection, and runs auxiliary commands
 - `Reviewer/Study User`: Consumes generated report, drill pack, hypergraph, Mermaid output, image prompts, or YouTube script; this role is not technically distinct from the operator
 
-4.2 System Actors
+### 4.2 System Actors
 
 - `LLM Provider`: xAI Grok, accessed through the OpenAI-compatible API
 - `Remote Content Hosts`: Public websites and PDF endpoints referenced by curated sources
 - `Local Filesystem`: Stores sessions, state, outputs, external-doc artifacts, and knowledge-base artifacts
 - `Local Environment`: Provides `.env` or environment variables, `EDITOR`, and Python runtime
 
-4.3 Access Model
+### 4.3 Access Model
 
 - The system implements no internal user accounts and no permission model.
 - Any user who can execute the CLI and read/write the target sessions directory can operate the system fully.
 
-5. System Context and Architecture
+## 5. System Context and Architecture
 
-5.1 Core Modules
+### 5.1 Core Modules
 
 - `grok_research_agent.cli`
   - Parses CLI arguments
@@ -465,14 +464,14 @@ The system is designed to:
 - `grok_research_agent.prompts/*`
   - Defines output contracts and behavioral instructions for LLM calls
 
-5.2 Execution Model
+### 5.2 Execution Model
 
 - The product is a single-process CLI application.
 - Each command creates a new run directory under the target session.
 - Commands operate on files in the session directory and may also write run-local copies for traceability.
 - Long-lived state is file-based; there is no background daemon.
 
-6. Technology and Runtime Dependencies
+## 6. Technology and Runtime Dependencies
 
 - Python runtime: `>=3.11`
 - noted packages:
@@ -489,9 +488,9 @@ The system is designed to:
 - Packaged CLI entrypoint: `grok-research-agent = grok_research_agent.cli:main`
 - Convenience wrappers: root-level `main.py` and `cli.py` forward to packaged CLI entrypoint
 
-7. Configuration Specification
+## 7. Configuration Specification
 
-7.1 Environment Variables
+### 7.1 Environment Variables
 
 - `GROK_API_KEY`
   - noted for any command path that instantiates `GrokClient`
@@ -516,14 +515,14 @@ The system is designed to:
   - Used only during Phase 0 `edit` flow
   - If absent, selecting `edit` shall still create the editable temporary file, but no external editor is launched automatically
 
-7.2 `.env` Resolution
+### 7.2 `.env` Resolution
 
 - When the workflow constructs a default `GrokClient`, it shall attempt to load a `.env` file located two directory levels above the session directory.
 - If no `.env` exists there, the system shall continue using process environment variables only.
 
-8. User Interface Specification
+## 8. User Interface Specification
 
-8.1 Interface Type
+### 8.1 Interface Type
 
 - Primary interface: terminal/CLI
 - Rendering library: `rich`
@@ -532,14 +531,14 @@ The system is designed to:
   - Markdown content echoed to console in some phases
   - preview tables for discovery and full-collection selection
 
-8.2 Human Interaction Points
+### 8.2 Human Interaction Points
 
 - H0: scope confirmation
 - H1: curated-source approval
 - H2: draft approval or revision instruction
 - H3: full-source offline-copy selection
 
-8.3 Unattended Mode
+### 8.3 Unattended Mode
 
 - `--auto` shall bypass interactive prompts and drive the workflow to completion where possible.
 - In auto mode:
@@ -550,7 +549,7 @@ The system is designed to:
   - H3 selection is controlled by `--auto-full-collection` and defaults to `all`
 - Auto mode shall not call `input()`.
 
-9. User Roles and Permissions Specification
+## 9. User Roles and Permissions Specification
 
 Because the system has no identity or authorization layer, the functional permission model is:
 
@@ -559,9 +558,9 @@ Because the system has no identity or authorization layer, the functional permis
 - there are no restricted admin-only actions;
 - there is no audit or attribution model beyond file timestamps and artifact presence.
 
-10. CLI Command Functional Requirements
+## 10. CLI Command Functional Requirements
 
-10.1 Common Command Behavior
+### 10.1 Common Command Behavior
 
 - `FR-CLI-001`: All commands except `list-types` shall require `--sessions-dir`.
 - `FR-CLI-002`: Commands that need an existing session shall require `--session-id`.
@@ -570,7 +569,7 @@ Because the system has no identity or authorization layer, the functional permis
 - `FR-CLI-005`: The CLI shall return exit code `2` for unrecognized command dispatch or `argparse` validation failures.
 - `FR-CLI-006`: When `--trace-llm` is enabled, request and response content shall be printed in truncated, control-character-sanitized form.
 
-10.2 `start`
+### 10.2 `start`
 
 - `FR-START-001`: The system shall create a new session with topic, optional focus, optional external docs directory, and a persisted `mode`.
 - `FR-START-002`: The system shall print the created session ID.
@@ -578,81 +577,81 @@ Because the system has no identity or authorization layer, the functional permis
 - `FR-START-004`: The accepted `--mode` values shall be `report`, `compiler`, and `drill`.
 - `FR-START-005`: The selected `mode` shall be stored in session state but shall not alter runtime workflow behavior in the current implementation.
 
-10.3 `resume`
+### 10.3 `resume`
 
 - `FR-RESUME-001`: The system shall load the session and execute from `current_phase`.
 - `FR-RESUME-002`: In interactive mode, execution shall stop at the next human checkpoint or after a phase that explicitly instructs the user to resume again.
 - `FR-RESUME-003`: If `current_phase >= 8`, the system shall print `Session is complete.`
 
-10.4 `list-sessions`
+### 10.4 `list-sessions`
 
 - `FR-LIST-001`: The system shall list directories under `--sessions-dir` that contain `session.json`.
 - `FR-LIST-002`: The listing shall exclude non-directory entries and directories missing `session.json`.
 - `FR-LIST-003`: If no sessions exist, the system shall print `No sessions found.`
 
-10.5 `list-types`
+### 10.5 `list-types`
 
 - `FR-TYPES-001`: The system shall print `auto-hypergraph`.
 - `FR-TYPES-002`: No session directory argument shall be noted for this command.
 
-10.6 `update`
+### 10.6 `update`
 
 - `FR-UPDATE-001`: The system shall run discovery with `since_last_run=yes`.
 - `FR-UPDATE-002`: On completion, the system shall set `current_phase = 2`.
 - `FR-UPDATE-003`: The system shall instruct the user to resume in order to curate sources.
 
-10.7 `synthesize`
+### 10.7 `synthesize`
 
 - `FR-SYNTH-001`: The system shall force execution of Phase 5 synthesis regardless of current phase.
 - `FR-SYNTH-002`: Phase 5 prerequisites still apply; if notebook input is missing, synthesis shall not proceed.
 
-10.8 `compile`
+### 10.8 `compile`
 
 - `FR-COMPILE-001`: The CLI shall expose `--type auto-hypergraph`.
 - `FR-COMPILE-002`: The workflow shall accept `auto-hypergraph` and internally tolerate additional dormant auto-type strings, but only `auto-hypergraph` is exposed and supported end-to-end.
 - `FR-COMPILE-003`: The system shall compile from `04_master_notebook.md` when present and append any `03_extracted/*.md` content when present.
 - `FR-COMPILE-004`: If no notebook or extracted content exists, the system shall print `Missing notebook or extractions. Resume the session to generate them first.` and stop.
 
-10.9 `drill`
+### 10.9 `drill`
 
 - `FR-DRILL-001`: The only supported mode shall be `backward`.
 - `FR-DRILL-002`: If `core_concepts.json` is absent, the system shall attempt `compile` automatically.
 - `FR-DRILL-003`: If core concepts are still absent after compile, the system shall print `Missing core concepts. Run compile first.`
 
-10.10 `feed`
+### 10.10 `feed`
 
 - `FR-FEED-001`: The command shall require `--new-doc`.
 - `FR-FEED-002`: If the file does not exist or is not a regular file, the system shall print `File not found: <path>` and stop.
 - `FR-FEED-003`: The system shall copy the file into `knowledge_base/feed_docs/` with a timestamp prefix.
 - `FR-FEED-004`: If no `hypergraph.json` exists, the system shall invoke compile and then return without performing a merge update.
 
-10.11 `show`
+### 10.11 `show`
 
 - `FR-SHOW-001`: If `knowledge_base/hypergraph.json` does not exist, the system shall print `Missing hypergraph.json. Run compile first.`
 - `FR-SHOW-002`: Otherwise, the system shall generate `knowledge_base/hypergraph.mmd`.
 
-10.12 `generate-images`
+### 10.12 `generate-images`
 
 - `FR-IMG-001`: The command shall require `FINAL_REPORT.md`.
 - `FR-IMG-002`: If `FINAL_REPORT.md` is missing, the system shall print `Missing FINAL_REPORT.md`.
 - `FR-IMG-003`: On success, the system shall write `images_to_generate.md` in both the run directory and session directory.
 
-10.13 `youtube-script`
+### 10.13 `youtube-script`
 
 - `FR-YT-001`: The command shall require `FINAL_REPORT.md`.
 - `FR-YT-002`: If `FINAL_REPORT.md` is missing, the system shall print `Missing FINAL_REPORT.md`.
 - `FR-YT-003`: On success, the system shall write `Youtube_Script.md` in both the run directory and session directory.
 
-11. Session Management Specification
+## 11. Session Management Specification
 
-11.1 Session Identity
+### 11.1 Session Identity
 
 - `FR-SESSION-001`: Session IDs shall be generated from a slugified topic plus current date in `YYYYMMDD` format.
 - `FR-SESSION-002`: Slugification shall lowercase the topic, replace non-alphanumeric characters with `-`, collapse repeated hyphens, and strip leading/trailing hyphens.
 - `FR-SESSION-003`: If the slug exceeds the configured prefix length, the system shall trim it and append an 8-character SHA-1 digest suffix.
 - `FR-SESSION-004`: If a generated session directory already exists, the system shall append `-2`, `-3`, and so on until unique.
 
-11.2 Session State
+### 11.2 Session State
 
 The persisted `SessionState` shall contain:
 
@@ -676,39 +675,39 @@ The persisted `SessionState` shall contain:
 - `run_history`
 - `updated_at`
 
-11.3 Session Persistence Rules
+### 11.3 Session Persistence Rules
 
 - `FR-SESSION-005`: The system shall persist state to `session.json` encoded as UTF-8 JSON.
 - `FR-SESSION-006`: `updated_at` shall be refreshed on each `save_state()`.
 - `FR-SESSION-007`: The sessions directory and knowledge-base subdirectories shall be created automatically when saving.
 - `FR-SESSION-008`: `run_history` shall be initialized as an empty list but is not populated by current workflow code.
 
-11.4 Run Directory Rules
+### 11.4 Run Directory Rules
 
 - `FR-RUN-001`: Each command execution that creates a `WorkflowContext` shall create a new run directory under `runs/`.
 - `FR-RUN-002`: Run directory names shall use timestamp format `YYYYMMDD_HHMMSS_microseconds`.
 - `FR-RUN-003`: If a timestamp collision occurs, the system shall retry up to 1000 times.
 - `FR-RUN-004`: If a unique run directory cannot be created within 1000 attempts, the system shall raise `RuntimeError`.
 
-12. External Document Preprocessing Specification
+## 12. External Document Preprocessing Specification
 
-12.1 Feature Purpose
+### 12.1 Feature Purpose
 
 The external-doc subsystem ingests local reference documents before workflow execution and converts them into mandatory steering context that can influence scope, discovery, curation, extraction, and planning.
 
-12.2 Trigger Rules
+### 12.2 Trigger Rules
 
 - `FR-EXT-001`: External-doc preprocessing shall run automatically before workflow commands except `generate-images`, `youtube-script`, `compile`, `drill`, `feed`, and `show`.
 - `FR-EXT-002`: If `external_docs_dir` is blank or absent, preprocessing shall be skipped.
 - `FR-EXT-003`: If session state already marks preprocessing as `completed` and a summary exists, preprocessing shall not re-run automatically.
 
-12.3 Supported Inputs
+### 12.3 Supported Inputs
 
 - Supported suffixes: `.pdf`, `.docx`, `.txt`, `.md`
 - Discovery behavior: recursive under the provided root directory
 - Unsupported file types: ignored rather than errored
 
-12.4 Processing Rules
+### 12.4 Processing Rules
 
 - `FR-EXT-004`: Each supported file shall be read using type-appropriate logic.
 - `FR-EXT-005`: PDF extraction shall iterate pages and skip pages whose text extraction fails.
@@ -718,7 +717,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-EXT-009`: The processor shall extract key concepts, constraints, requirements, and algorithm insights from sentence-level heuristics.
 - `FR-EXT-010`: The processor shall compute a relevance score from topic/focus lexical overlap plus structural bonuses for relevant terms, extracted constraints, and extracted requirements.
 
-12.5 Aggregated Outputs
+### 12.5 Aggregated Outputs
 
 - `FR-EXT-011`: The system shall write:
   - `external_docs/manifest.json`
@@ -728,7 +727,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-EXT-013`: `context.md` shall include sections for key concepts, constraints, requirements, optional algorithm enhancement notes, and workflow guidance.
 - `FR-EXT-014`: If topic or focus text matches algorithm-oriented keywords, algorithm enhancement notes shall be included; otherwise they shall be omitted.
 
-12.6 Status Rules
+### 12.6 Status Rules
 
 - `FR-EXT-015`: If the external-doc root directory does not exist or is not a directory, status shall be set to `failed`, an explanatory error shall be stored in session state, and the workflow shall continue.
 - `FR-EXT-016`: If individual files fail, those files shall be marked `failed`, but aggregate processing shall continue.
@@ -737,14 +736,14 @@ The external-doc subsystem ingests local reference documents before workflow exe
   - `partial` when at least one file succeeds and at least one fails
   - `failed` when zero files succeed
 
-12.7 Prompt Injection Rules
+### 12.7 Prompt Injection Rules
 
 - `FR-EXT-018`: When available, external-doc summary content shall be appended to relevant prompts as mandatory steering/background material.
 - `FR-EXT-019`: External-doc context shall be truncated to phase-specific character budgets instead of causing failures.
 
-13. Research Workflow State Machine
+## 13. Research Workflow State Machine
 
-13.1 State Definitions
+### 13.1 State Definitions
 
 - Phase `0`: Scope generation and confirmation
 - Phase `1`: Discovery
@@ -756,20 +755,20 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - Phase `7`: Final polish
 - Phase `8`: Complete
 
-13.2 Interactive Progression Rules
+### 13.2 Interactive Progression Rules
 
 - `FR-STATE-001`: In interactive mode, the workflow shall process one phase or one human checkpoint per `resume` call according to `_run_until_human_step()`.
 - `FR-STATE-002`: Some phases end by instructing the user to resume later instead of continuing automatically.
 - `FR-STATE-003`: Phase transitions shall be persisted immediately when the code explicitly updates `current_phase`.
 
-13.3 Auto-Mode Progression Rules
+### 13.3 Auto-Mode Progression Rules
 
 - `FR-STATE-004`: In auto mode, the workflow shall loop until `current_phase >= 8`.
 - `FR-STATE-005`: Auto mode shall continue immediately across phases without requiring separate `resume` commands.
 
-14. Phase-by-Phase Functional Requirements
+## 14. Phase-by-Phase Functional Requirements
 
-14.1 Phase 0 - Scope Confirmation
+### 14.1 Phase 0 - Scope Confirmation
 
 - `FR-P0-001`: The system shall generate a Markdown scope summary using `scope_prompt.txt`.
 - `FR-P0-002`: The generated scope shall be written to `<run>/00_scope.md`.
@@ -781,14 +780,14 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P0-008`: `yes` shall save `00_scope_confirmed.md`, set `current_phase = 1`, save state, and instruct the user to resume.
 - `FR-P0-009`: If Grok client creation fails, the system shall print the error plus a `.env` guidance message and return without changing state.
 
-14.2 Phase 1 - Discovery
+### 14.2 Phase 1 - Discovery
 
 - `FR-P1-001`: The system shall render `discovery_prompt.txt` with topic, effective focus, and `since_last_run`.
 - `FR-P1-002`: Discovery output shall be written to both `<run>/01_discovery_table.md` and `<session>/01_discovery_table.md`.
 - `FR-P1-003`: The system shall not validate discovery table format before saving.
 - `FR-P1-004`: In normal interactive progression, completion of Phase 1 shall set `current_phase = 2` and instruct the user to resume for curation.
 
-14.3 Phase 2 - Curation and Gap Analysis
+### 14.3 Phase 2 - Curation and Gap Analysis
 
 - `FR-P2-001`: Phase 2 shall require `01_discovery_table.md`; if missing, the system shall print `Missing discovery table. Resume from Phase 1.` and stop.
 - `FR-P2-002`: The system shall print a preview table containing up to the first 80 non-empty lines of discovery output.
@@ -811,7 +810,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P2-013`: Phase advancement to `3` shall occur only when the approval input is exactly `approve`.
 - `FR-P2-014`: Any other approval response shall leave the session in Phase 2 and instruct the user to repeat curation later.
 
-14.4 Phase 3 - Extraction
+### 14.4 Phase 3 - Extraction
 
 - `FR-P3-001`: Phase 3 shall require `02_curated_sources.json`; if missing, the system shall print `Missing curated sources. Resume from Phase 2.`
 - `FR-P3-002`: If curated-source JSON exists but canonicalization produces an empty list, the system shall print `Curated sources file is invalid or empty. Resume from Phase 2 to re-curate sources.`
@@ -837,7 +836,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P3-017`: Successful source dossiers shall be assembled into `03_extracted/<nnn>.md` in both run and session directories.
 - `FR-P3-018`: On phase completion, the system shall write `<session>/03_extracted_index.txt` with a generation marker.
 
-14.5 Phase 4 - Notebook Assembly
+### 14.5 Phase 4 - Notebook Assembly
 
 - `FR-P4-001`: Phase 4 shall require existence of `<session>/03_extracted/`; otherwise it shall print `No extracted sources found in this run. Resume from Phase 3.`
 - `FR-P4-002`: The notebook shall include:
@@ -852,7 +851,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P4-004`: The notebook shall be written to both `<run>/04_master_notebook.md` and `<session>/04_master_notebook.md`.
 - `FR-P4-005`: In interactive progression, successful notebook generation shall set `current_phase = 5`.
 
-14.6 Phase 5 - Synthesis and Review
+### 14.6 Phase 5 - Synthesis and Review
 
 - `FR-P5-001`: Phase 5 shall require `04_master_notebook.md`; if missing, the system shall print `Missing notebook. Resume from Phase 4.`
 - `FR-P5-002`: The notebook shall be split into chunks of up to `70000` characters with `5000` overlap.
@@ -877,7 +876,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P5-015`: If revision generation times out, the prior draft shall remain authoritative and phase state shall not advance.
 - `FR-P5-016`: Successful revision output shall be stored as the next draft version and require another review cycle.
 
-14.7 Phase 6 - Full Offline Collection
+### 14.7 Phase 6 - Full Offline Collection
 
 - `FR-P6-001`: Phase 6 shall attempt to load curated sources from `02_curated_sources.json`.
 - `FR-P6-002`: If curated sources are absent, the system shall attempt heuristic URL recovery from `01_discovery_table.md`.
@@ -892,7 +891,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P6-011`: If a selected source cannot be fetched, that source shall be skipped without aborting the phase.
 - `FR-P6-012`: After writing at least the attempted full-collection outputs, the system shall set `current_phase = 7`, invoke final polish immediately, then set `current_phase = 8`.
 
-14.8 Phase 7 - Final Polish
+### 14.8 Phase 7 - Final Polish
 
 - `FR-P7-001`: Final polish shall require both `04_master_notebook.md` and at least one `05_draft_v*.md`; otherwise it shall print `Missing notebook or draft.`
 - `FR-P7-002`: The latest draft file by lexicographic version ordering shall be used as the report body source.
@@ -921,27 +920,27 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-P7-013`: The final report shall be written to both `<run>/FINAL_REPORT.md` and `<session>/FINAL_REPORT.md`.
 - `FR-P7-014`: The system shall then attempt image-prompt generation and YouTube-script generation.
 
-14.9 Phase 8 - Complete
+### 14.9 Phase 8 - Complete
 
 - `FR-P8-001`: A session with `current_phase >= 8` shall be treated as complete.
 - `FR-P8-002`: Resume on a completed session shall print `Session is complete.`
 
-15. Source Fetching and Transformation Specification
+## 15. Source Fetching and Transformation Specification
 
-15.1 URL Validation
+### 15.1 URL Validation
 
 - `FR-FETCH-001`: URLs shall be normalized before validation.
 - `FR-FETCH-002`: Only `http` and `https` URLs with a network location shall be accepted.
 - `FR-FETCH-003`: Invalid URLs shall raise `ValueError`.
 
-15.2 HTTP Fetch Rules
+### 15.2 HTTP Fetch Rules
 
 - `FR-FETCH-004`: HTTP fetches shall use a user agent string `grok-research-agent/0.1`.
 - `FR-FETCH-005`: Redirects shall be followed.
 - `FR-FETCH-006`: Timeout shall be split into connect timeout and read timeout.
 - `FR-FETCH-007`: Request timeouts shall raise `TimeoutError` with URL context.
 
-15.3 Content-Type Handling
+### 15.3 Content-Type Handling
 
 - `FR-FETCH-008`: PDF detection shall use either `Content-Type: application/pdf` or `.pdf` URL suffix.
 - `FR-FETCH-009`: PDF bundles shall return extracted text as raw, main, full, and analysis text.
@@ -951,14 +950,14 @@ The external-doc subsystem ingests local reference documents before workflow exe
   - `full_text` from full-page HTML text extraction
   - `analysis_text` as merged main/full text or fallback content
 
-15.4 HTML Text Normalization
+### 15.4 HTML Text Normalization
 
 - `FR-FETCH-012`: HTML extraction shall remove `script`, `style`, `noscript`, and `svg` tags.
 - `FR-FETCH-013`: Duplicate normalized lines shall be removed to reduce repeated boilerplate.
 
-16. Knowledge Compilation Specification
+## 16. Knowledge Compilation Specification
 
-16.1 Compiler Inputs and Outputs
+### 16.1 Compiler Inputs and Outputs
 
 - `FR-KB-001`: Compile shall use notebook content first and then append extracted source dossiers when available.
 - `FR-KB-002`: Hypergraph compilation shall use only the first `220000` characters of content.
@@ -970,24 +969,24 @@ The external-doc subsystem ingests local reference documents before workflow exe
   - `knowledge_base/auto_types/auto_hypergraph.json`
   - `knowledge_base/core_concepts.json`
 
-16.2 Hypergraph Contract
+### 16.2 Hypergraph Contract
 
 - `FR-KB-005`: Prompted hypergraph schema shall be:
 
-'''json
+```json
 {
   "nodes": [{"id": "N1", "label": "..."}],
   "hyperedges": [{"id": "E1", "nodes": ["N1", "N2", "N3"], "relation": "...", "evidence": "..."}]
 }
-'''
+```
 
 - `FR-KB-006`: If the LLM does not return valid JSON, the system shall persist a fallback JSON wrapper, typically `{ "raw": "<response>" }`, instead of failing the command.
 
-16.3 Core Concepts Contract
+### 16.3 Core Concepts Contract
 
 - `FR-KB-007`: Prompted core-concepts schema shall be:
 
-'''json
+```json
 {
   "core_concepts": [
     {
@@ -997,15 +996,15 @@ The external-doc subsystem ingests local reference documents before workflow exe
     }
   ]
 }
-'''
+```
 
 - `FR-KB-008`: The prompt requires exactly 7 concepts, but the implementation does not independently enforce the count after generation.
 
-16.4 Drill-Pack Contract
+### 16.4 Drill-Pack Contract
 
 - `FR-KB-009`: Drill-pack prompt output schema shall be:
 
-'''json
+```json
 {
   "drill_pack_markdown": "markdown string",
   "drill_questions": [
@@ -1021,12 +1020,12 @@ The external-doc subsystem ingests local reference documents before workflow exe
     }
   ]
 }
-'''
+```
 
 - `FR-KB-010`: If `drill_pack_markdown` is missing or blank, the system shall strip code fences from the raw response and use the remainder as Markdown output.
 - `FR-KB-011`: If the parsed JSON lacks `drill_questions`, the entire parsed object shall be written as `drill_questions.json`.
 
-16.5 Feed and Hypergraph Update
+### 16.5 Feed and Hypergraph Update
 
 - `FR-KB-012`: Feed shall read the new document using UTF-8 with replacement for decoding errors.
 - `FR-KB-013`: Feed merge prompts shall receive:
@@ -1034,7 +1033,7 @@ The external-doc subsystem ingests local reference documents before workflow exe
   - first `160000` characters of new document content
 - `FR-KB-014`: Updated hypergraph output shall overwrite both canonical hypergraph locations.
 
-16.6 Mermaid Rendering
+### 16.6 Mermaid Rendering
 
 - `FR-KB-015`: Mermaid output shall begin with `graph TD`.
 - `FR-KB-016`: Node rendering shall use up to the first `200` nodes.
@@ -1042,22 +1041,22 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-KB-018`: For hyperedges with more than two members, Mermaid rendering shall connect only the first two listed nodes.
 - `FR-KB-019`: Edge labels shall use `relation` or `label` when present.
 
-17. Final Report, Image Prompt, and YouTube Script Specification
+## 17. Final Report, Image Prompt, and YouTube Script Specification
 
-17.1 Final Report Output Contract
+### 17.1 Final Report Output Contract
 
 - `FR-OUT-001`: The final report shall be a Markdown document named `FINAL_REPORT.md`.
 - `FR-OUT-002`: The final report shall include explicit `## Executive Summary` and `## Source Catalog` sections.
 - `FR-OUT-003`: If knowledge-base content exists, the report shall also include `## Knowledge Base Overview`.
 - `FR-OUT-004`: The report shall end with a glossary section even if glossary generation timed out.
 
-17.2 Image Prompt Generation
+### 17.2 Image Prompt Generation
 
 - `FR-OUT-005`: Image prompts shall be generated from the complete final report.
 - `FR-OUT-006`: The prompt contract requests 5 to 10 image prompts emphasizing concrete mechanisms, workflows, architectures, comparisons, and evidence rather than generic concept art.
 - `FR-OUT-007`: If image-prompt generation times out during final polish, report creation shall still succeed.
 
-17.3 YouTube Script Generation
+### 17.3 YouTube Script Generation
 
 - `FR-OUT-008`: The system shall derive YouTube sections primarily from `05_section_drafts/` when available; otherwise it shall derive them from `FINAL_REPORT.md`.
 - `FR-OUT-009`: The following report sections shall be excluded from narration source selection:
@@ -1077,9 +1076,9 @@ The external-doc subsystem ingests local reference documents before workflow exe
 - `FR-OUT-013`: Short intro, section, or outro outputs shall be expanded by a secondary LLM call to hit minimum detail thresholds.
 - `FR-OUT-014`: If a generated section lacks a Markdown heading, the system shall prepend the noted heading automatically.
 
-18. Input and Output File Specification
+## 18. Input and Output File Specification
 
-18.1 Session Root Outputs
+### 18.1 Session Root Outputs
 
 The session root may contain:
 
@@ -1103,7 +1102,7 @@ The session root may contain:
 - `knowledge_base/`
 - `runs/`
 
-18.2 Knowledge Base Outputs
+### 18.2 Knowledge Base Outputs
 
 - `knowledge_base/hypergraph.json`
 - `knowledge_base/core_concepts.json`
@@ -1113,34 +1112,34 @@ The session root may contain:
 - `knowledge_base/auto_types/auto_hypergraph.json`
 - `knowledge_base/feed_docs/<timestamp>_<original_name>`
 
-18.3 Run-Scoped Outputs
+### 18.3 Run-Scoped Outputs
 
 - Each command execution that builds a workflow context may create run-local copies of generated artifacts for traceability and debugging.
 
-19. Validation Rules
+## 19. Validation Rules
 
-19.1 CLI Validation
+### 19.1 CLI Validation
 
 - noted flags shall be enforced by `argparse`.
 - Unsupported `compile --type` values exposed via CLI cannot pass parser validation.
 - Unsupported `drill --mode` values exposed via CLI cannot pass parser validation.
 
-19.2 Semantic Validation
+### 19.2 Semantic Validation
 
 - Curated-source validation is structural and best-effort, not strict schema validation via a dedicated validator.
 - Discovery output is not structurally validated.
 - Final report content is not semantically validated for factual correctness.
 - Core concept count is prompt-constrained but not post-validated.
 
-19.3 File Validation
+### 19.3 File Validation
 
 - `feed` validates file existence and regular-file status.
 - External docs validate root directory existence and supported suffixes.
 - Session listing validates presence of `session.json`.
 
-20. Error Handling and Recovery Specification
+## 20. Error Handling and Recovery Specification
 
-20.1 Grok API Errors
+### 20.1 Grok API Errors
 
 - `FR-ERR-001`: Missing API key shall raise `GrokError("Missing GROK_API_KEY in .env or environment")`.
 - `FR-ERR-002`: Quota/billing-related API errors shall be mapped to `GrokQuotaError` with actionable text.
@@ -1148,7 +1147,7 @@ The session root may contain:
 - `FR-ERR-004`: Non-timeout non-quota API failures shall be retried up to `5` times with exponential backoff capped at `30` seconds.
 - `FR-ERR-005`: Quota and timeout errors are not retried in `GrokClient.chat_text()` once mapped.
 
-20.2 LLM Timeout Tolerance
+### 20.2 LLM Timeout Tolerance
 
 - `FR-ERR-006`: Selected phases use `_llm_optional()` to convert LLM timeout failures into warnings and continue:
   - gap analysis
@@ -1164,27 +1163,27 @@ The session root may contain:
   - word-count retargeting
 - `FR-ERR-007`: When `_llm_optional()` handles a timeout, the system shall print a warning and continue unless the calling feature requires explicit output to proceed.
 
-20.3 Source Fetch Errors
+### 20.3 Source Fetch Errors
 
 - `FR-ERR-008`: Source fetch failures shall not abort the whole extraction or full-collection phase.
 - `FR-ERR-009`: A timed-out fetch shall raise `TimeoutError`; callers may log and skip the source.
 
-20.4 JSON Robustness
+### 20.4 JSON Robustness
 
 - `FR-ERR-010`: The system shall strip Markdown code fences when attempting to parse JSON-like model outputs.
 - `FR-ERR-011`: The system shall attempt direct parse, bracket-slice parse, and brace-slice parse before falling back to raw wrapper JSON.
 - `FR-ERR-012`: Invalid curated-source JSON shall trigger heuristic recovery from discovery links.
 
-20.5 Non-Fatal Degradation Rules
+### 20.5 Non-Fatal Degradation Rules
 
 - `FR-ERR-013`: Missing external docs shall not block the research workflow.
 - `FR-ERR-014`: Missing curated sources in Phase 6 shall downgrade to skip behavior rather than fatal failure.
 - `FR-ERR-015`: Missing hypergraph or core concepts shall produce instructional console messages rather than uncaught failures.
 - `FR-ERR-016`: Missing final report for image or YouTube generation shall produce instructional console messages.
 
-21. Integration Specifications
+## 21. Integration Specifications
 
-21.1 xAI Grok Integration
+### 21.1 xAI Grok Integration
 
 - Protocol: OpenAI-compatible chat completions API
 - Base URL: `[historical-url]
@@ -1192,7 +1191,7 @@ The session root may contain:
 - Message structure: one system message and one user message per call
 - Response handling: first completion choice message content or empty string
 
-21.2 Remote Web Integration
+### 21.2 Remote Web Integration
 
 - Protocol: HTTP/HTTPS GET
 - Redirects: enabled
@@ -1200,19 +1199,19 @@ The session root may contain:
 - SSL behavior: delegated to `requests`
 - Failure handling: errors bubble to caller or are caught per phase and downgraded to warnings where designed
 
-21.3 Local Document Integration
+### 21.3 Local Document Integration
 
 - External docs support `.pdf`, `.docx`, `.txt`, `.md`
 - Feed command support is broader at file-opening level but uses text decoding and is intended for textual documents
 
-22. Security and Privacy Requirements
+## 22. Security and Privacy Requirements
 
 - `FR-SEC-001`: API keys shall be read from environment or `.env`; the system shall not write them into session artifacts.
 - `FR-SEC-002`: Research session directories may store fetched remote content and locally processed external docs; those files shall be considered potentially sensitive.
 - `FR-SEC-003`: The system performs no secret redaction on fetched content before storage.
 - `FR-SEC-004`: The system performs no access control on session directories.
 
-23. Non-Functional Constraints with Functional Impact
+## 23. Non-Functional Constraints with Functional Impact
 
 - Local-first persistence means all critical artifacts must be inspectable on disk after each major step.
 - Resumability references `current_phase` and file presence rather than transaction logs or DB state.
@@ -1223,7 +1222,7 @@ The session root may contain:
   - section-evidence workers: `2`
 - Large text handling uses character-based truncation and chunking rather than token-precise segmentation.
 
-24. Current Implementation Notes and Known Functional Gaps
+## 24. Current Implementation Notes and Known Functional Gaps
 
 - `mode` is stored in session state but does not currently change system behavior.
 - `run_history` exists in the session schema but is not populated.
@@ -1233,7 +1232,7 @@ The session root may contain:
 - Mermaid generation simplifies hyperedges to pairwise links using only the first two members.
 - Discovery and final-report factual accuracy references model output and source quality; the system does not perform automated fact verification.
 
-25. Acceptance Criteria
+## 25. Acceptance Criteria
 
 The current implementation shall be considered functionally complete for its intended scope when all of the following are true:
 
@@ -1253,7 +1252,7 @@ The current implementation shall be considered functionally complete for its int
 - Show creates `hypergraph.mmd`.
 - External docs, when supplied, are processed into manifest, extracted summary, and context outputs without blocking the workflow on partial failures.
 
-26. Traceability Summary
+## 26. Traceability Summary
 
 This specification reflects the behavior implemented in:
 
@@ -1278,7 +1277,7 @@ _Embedded from `corpus/study/research_agent_technical_specification.md`. Also st
 
 Research Agent Technical Specification for Redevelopment
 
-1. Document Purpose
+## 1. Document Purpose
 
 This document is the redevelopment handoff specification for `grok-research-agent`. It is intended for a coding agent that must rebuild the project without needing additional clarifications. It defines:
 
@@ -1291,9 +1290,9 @@ This document is the redevelopment handoff specification for `grok-research-agen
 
 This specification is based on the current repository implementation and is written as a target-state redevelopment contract. Where the current code is ambiguous or under-specified, this document resolves that ambiguity and sets the redevelopment expectation explicitly.
 
-2. Project Context
+## 2. Project Context
 
-2.1 Product Summary
+### 2.1 Product Summary
 
 `grok-research-agent` is a local-first Python CLI that automates an eight-phase research workflow using Grok through the xAI OpenAI-compatible API. The system starts from a topic and optional focus area, performs structured scope refinement and source analysis, extracts evidence-preserving notes from curated sources, builds a master notebook, synthesizes a detailed research report, and optionally produces:
 
@@ -1303,7 +1302,7 @@ This specification is based on the current repository implementation and is writ
 - a YouTube narration script;
 - full offline copies of selected sources.
 
-2.2 Core Product Principles
+### 2.2 Core Product Principles
 
 The redevelopment must preserve these product principles:
 
@@ -1313,16 +1312,16 @@ The redevelopment must preserve these product principles:
 - `Resumable`: sessions can be resumed across multiple command executions without losing state.
 - `LLM-assisted, not opaque`: LLM outputs are persisted as intermediate and final artifacts so the user can inspect, review, and reuse them.
 
-2.3 Primary User
+### 2.3 Primary User
 
 - `Research Operator`: A technical user running the CLI locally to produce high-depth research outputs.
 
-2.4 Secondary Users
+### 2.4 Secondary Users
 
 - `Reviewer`: Consumes reports and structured outputs.
 - `Study User`: Uses drill packs and hypergraph outputs for learning.
 
-3. Redevelopment Objectives
+## 3. Redevelopment Objectives
 
 The coding agent must redevelop a production-quality equivalent of the current system with the following objectives:
 
@@ -1334,9 +1333,9 @@ The coding agent must redevelop a production-quality equivalent of the current s
 - harden the codebase for maintainability, testing, and deterministic file outputs;
 - document and validate all edge-case behavior defined in this specification.
 
-4. In-Scope and Out-of-Scope
+## 4. In-Scope and Out-of-Scope
 
-4.1 In Scope
+### 4.1 In Scope
 
 - Python CLI application
 - Session creation, persistence, listing, and resume flow
@@ -1353,7 +1352,7 @@ The coding agent must redevelop a production-quality equivalent of the current s
 - Unit, integration, and end-to-end automated tests
 - Packaging for local install via `pip install -e .`
 
-4.2 Out of Scope
+### 4.2 Out of Scope
 
 - Browser-based application as a noted deliverable
 - User accounts and authentication
@@ -1364,7 +1363,7 @@ The coding agent must redevelop a production-quality equivalent of the current s
 - Vector databases or retrieval indexes
 - GUI dashboards unless explicitly approved later
 
-5. Delivery Model
+## 5. Delivery Model
 
 - Application type: local command-line application
 - Runtime model: single-process, synchronous orchestration with bounded thread-pool concurrency
@@ -1372,11 +1371,11 @@ The coding agent must redevelop a production-quality equivalent of the current s
 - Packaging model: installable Python package with CLI entrypoint
 - Supported OS target for redevelopment acceptance: Windows PowerShell first, with code written to remain portable across macOS and Linux where practical
 
-6. Canonical Technical Stack
+## 6. Canonical Technical Stack
 
 The redevelopment may use the following baseline stack unless a deviation is explicitly approved. Versions below are redevelopment targets and must be pinned in project metadata or lock-equivalent artifacts.
 
-6.1 Language and Runtime
+### 6.1 Language and Runtime
 
 | Layer | noted Version |
 | --- | --- |
@@ -1384,7 +1383,7 @@ The redevelopment may use the following baseline stack unless a deviation is exp
 | setuptools | `69.5.1` |
 | wheel | `0.43.0` |
 
-6.2 Runtime Libraries
+### 6.2 Runtime Libraries
 
 | Package | noted Version | Purpose |
 | --- | --- | --- |
@@ -1400,7 +1399,7 @@ The redevelopment may use the following baseline stack unless a deviation is exp
 | `readability-lxml` | `0.8.1` | readable article extraction |
 | `chardet` | `5.2.0` | encoding compatibility; must remain `<6` |
 
-6.3 Development and QA Tooling
+### 6.3 Development and QA Tooling
 
 | Tool | noted Version | Purpose |
 | --- | --- | --- |
@@ -1409,7 +1408,7 @@ The redevelopment may use the following baseline stack unless a deviation is exp
 | `ruff` | `0.6.4` | linting and import hygiene |
 | `mypy` | `1.11.1` | static type checking |
 
-6.4 Packaging and Entry Points
+### 6.4 Packaging and Entry Points
 
 - Package name: `grok-research-agent`
 - CLI script: `grok-research-agent = grok_research_agent.cli:main`
@@ -1420,7 +1419,7 @@ The redevelopment may use the following baseline stack unless a deviation is exp
 
 The redevelopment must preserve or improve the following logical layout:
 
-'''text
+```text
 project-root/
   grok_research_agent/
     __init__.py
@@ -1439,7 +1438,7 @@ project-root/
   pyproject.toml
   README.md
   requirements.txt
-'''
+```
 
 The coding agent may add:
 
@@ -1453,11 +1452,11 @@ The coding agent may add:
 
 Additional modules are allowed if they improve separation of concerns, provided the public behavior remains consistent with this specification.
 
-8. Architecture Overview
+## 8. Architecture Overview
 
-8.1 High-Level Architecture
+### 8.1 High-Level Architecture
 
-'''mermaid
+```mermaid
 flowchart TD
     U[Research Operator] --> CLI[CLI Entrypoint]
     CLI --> SM[Session Manager]
@@ -1470,11 +1469,11 @@ flowchart TD
     WR --> FS
     GC --> XAI[xAI Grok API]
     WEB --> SRC[Remote Source Hosts]
-'''
+```
 
-8.2 Core Components
+### 8.2 Core Components
 
-8.2.1 CLI Layer
+#### 8.2.1 CLI Layer
 
 Responsibilities:
 
@@ -1484,7 +1483,7 @@ Responsibilities:
 - instantiate `WorkflowRunner`;
 - translate handled domain errors into exit codes.
 
-8.2.2 Session Manager
+#### 8.2.2 Session Manager
 
 Responsibilities:
 
@@ -1494,7 +1493,7 @@ Responsibilities:
 - create unique run directories;
 - provide canonical session and knowledge-base paths.
 
-8.2.3 Workflow Runner
+#### 8.2.3 Workflow Runner
 
 Responsibilities:
 
@@ -1505,7 +1504,7 @@ Responsibilities:
 - write run-scoped and session-scoped artifacts;
 - manage interactive and auto-mode behavior.
 
-8.2.4 Grok Client
+#### 8.2.4 Grok Client
 
 Responsibilities:
 
@@ -1515,7 +1514,7 @@ Responsibilities:
 - classify and map API failures to domain errors;
 - support request/response tracing.
 
-8.2.5 External Docs Processor
+#### 8.2.5 External Docs Processor
 
 Responsibilities:
 
@@ -1525,9 +1524,9 @@ Responsibilities:
 - generate steering summaries, constraints, requirements, and relevance signals;
 - write aggregated external context artifacts.
 
-8.3 Data Flow
+### 8.3 Data Flow
 
-'''mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant CLI
@@ -1553,9 +1552,9 @@ sequenceDiagram
     end
     Workflow-->>CLI: status/result
     CLI-->>User: console output and exit code
-'''
+```
 
-8.4 Third-Party Integrations
+### 8.4 Third-Party Integrations
 
 | Integration | Protocol | Purpose | Mandatory |
 | --- | --- | --- | --- |
@@ -1565,11 +1564,11 @@ sequenceDiagram
 
 No other integration is noted for redevelopment.
 
-9. Session and Persistence Model
+## 9. Session and Persistence Model
 
-9.1 Session Directory Layout
+### 9.1 Session Directory Layout
 
-'''text
+```text
 <sessions-dir>/
   <session-id>/
     session.json
@@ -1604,9 +1603,9 @@ No other integration is noted for redevelopment.
     runs/
       <run-id>/
         ...run-scoped copies...
-'''
+```
 
-9.2 Session State Schema
+### 9.2 Session State Schema
 
 The session state must include the following persisted fields:
 
@@ -1630,7 +1629,7 @@ The session state must include the following persisted fields:
 - `run_history: list[str]`
 - `updated_at: str`
 
-9.3 Session ID Rules
+### 9.3 Session ID Rules
 
 - Session ID is based on a slugified topic and current date.
 - Slug format:
@@ -1641,21 +1640,21 @@ The session state must include the following persisted fields:
 - If the slugified topic prefix exceeds the configured threshold, append an 8-character SHA-1 digest suffix.
 - If a session directory already exists, append `-2`, `-3`, etc. until unique.
 
-9.4 Run Directory Rules
+### 9.4 Run Directory Rules
 
 - Each command execution that invokes `WorkflowRunner.run()` must create a new run directory.
 - Run ID format: `YYYYMMDD_HHMMSS_microseconds`
 - On collision, retry until unique or fail after 1000 attempts.
 
-10. Configuration Requirements
+## 10. Configuration Requirements
 
-10.1 Mandatory Environment Variables
+### 10.1 Mandatory Environment Variables
 
 - `GROK_API_KEY`
   - noted;
   - must be non-empty after trim.
 
-10.2 Optional Environment Variables
+### 10.2 Optional Environment Variables
 
 - `GROK_MODEL`
   - default: `grok-3`
@@ -1670,15 +1669,15 @@ The session state must include the following persisted fields:
 - `EDITOR`
   - used during Phase 0 manual edit flow only
 
-10.3 `.env` Resolution
+### 10.3 `.env` Resolution
 
 - The workflow must attempt to load `.env` from the project root via the current relative resolution strategy.
 - If `.env` does not exist, environment variables remain the fallback.
 - Missing `GROK_API_KEY` must produce an actionable error message.
 
-11. CLI Command Specification
+## 11. CLI Command Specification
 
-11.1 Supported Commands
+### 11.1 Supported Commands
 
 - `start`
 - `resume`
@@ -1693,7 +1692,7 @@ The session state must include the following persisted fields:
 - `generate-images`
 - `youtube-script`
 
-11.2 Shared Flags
+### 11.2 Shared Flags
 
 The following flags must remain available where currently implemented:
 
@@ -1703,7 +1702,7 @@ The following flags must remain available where currently implemented:
 - `--trace-llm`
 - `--trace-llm-max-chars`
 
-11.3 noted Command Contracts
+### 11.3 noted Command Contracts
 
 `start`
 
@@ -1814,9 +1813,9 @@ Outputs:
 
 - `Youtube_Script.md`
 
-12. Workflow State Machine
+## 12. Workflow State Machine
 
-12.1 Phase List
+### 12.1 Phase List
 
 | Phase | Name | Human Interaction |
 | --- | --- | --- |
@@ -1830,7 +1829,7 @@ Outputs:
 | `7` | Final Polish | No |
 | `8` | Complete | No |
 
-12.2 Runtime Constants
+### 12.2 Runtime Constants
 
 These values must remain configurable in code and must default to:
 
@@ -1846,7 +1845,7 @@ These values must remain configurable in code and must default to:
 | `FINAL_REPORT_MAX_WORDS` | `10000` |
 | `FINAL_REPORT_TARGET_WORDS` | `9500` |
 
-12.3 Standard Report Sections
+### 12.3 Standard Report Sections
 
 The redeveloped system must preserve these section names exactly:
 
@@ -1857,9 +1856,9 @@ The redeveloped system must preserve these section names exactly:
 - `Limitations, Trade-offs, and Failure Modes`
 - `Open Questions and Future Directions`
 
-13. Functional Requirements by Feature
+## 13. Functional Requirements by Feature
 
-13.1 Phase 0: Scope Confirmation
+### 13.1 Phase 0: Scope Confirmation
 
 Requirements:
 
@@ -1886,7 +1885,7 @@ Edge cases:
 - blank or malformed focus content must not crash the phase;
 - missing `EDITOR` must not block the `edit` flow.
 
-13.2 Phase 1: Discovery
+### 13.2 Phase 1: Discovery
 
 Requirements:
 
@@ -1906,7 +1905,7 @@ Edge cases:
 - discovery output may be imperfect Markdown; the system still saves it;
 - timeouts or Grok fatal errors must surface cleanly.
 
-13.3 Phase 2: Curation and Gap Analysis
+### 13.3 Phase 2: Curation and Gap Analysis
 
 Requirements:
 
@@ -1939,7 +1938,7 @@ Edge cases:
 - URLs wrapped in punctuation or backticks must be normalized;
 - empty discovery files must not crash the system.
 
-13.4 Phase 3: Extraction
+### 13.4 Phase 3: Extraction
 
 Requirements:
 
@@ -1970,7 +1969,7 @@ Edge cases:
 - PDF sources are extracted and stored;
 - timeout during fetch or chunk extraction does not kill the entire phase.
 
-13.5 Phase 4: Notebook Assembly
+### 13.5 Phase 4: Notebook Assembly
 
 Requirements:
 
@@ -1991,7 +1990,7 @@ Acceptance criteria:
 - notebook contains source catalog and source dossiers;
 - session moves to Phase 5 in normal workflow progression.
 
-13.6 Phase 5: Synthesis and Review
+### 13.6 Phase 5: Synthesis and Review
 
 Requirements:
 
@@ -2019,7 +2018,7 @@ Edge cases:
 - notebook chunks may be empty and should produce a clear message;
 - review strings such as `add-section "Title"` pass through to revision prompt without local parser errors.
 
-13.7 Phase 6: Full Offline Collection
+### 13.7 Phase 6: Full Offline Collection
 
 Requirements:
 
@@ -2043,7 +2042,7 @@ Edge cases:
 - out-of-range indices are ignored;
 - fetch failures skip individual sources only.
 
-13.8 Phase 7: Final Polish
+### 13.8 Phase 7: Final Polish
 
 Requirements:
 
@@ -2075,7 +2074,7 @@ Edge cases:
 - glossary timeout inserts fallback bullet;
 - report body starting with `# ` removes duplicated title before final assembly.
 
-13.9 Compile
+### 13.9 Compile
 
 Requirements:
 
@@ -2095,7 +2094,7 @@ Edge cases:
 - invalid JSON response is still saved in wrapped fallback form instead of failing;
 - missing notebook/extractions prints a clear instruction and exits cleanly.
 
-13.10 Drill
+### 13.10 Drill
 
 Requirements:
 
@@ -2111,7 +2110,7 @@ Edge cases:
 
 - if core concepts still do not exist after compile, the command must exit with a clear message.
 
-13.11 Feed
+### 13.11 Feed
 
 Requirements:
 
@@ -2130,7 +2129,7 @@ Edge cases:
 - unreadable file contents must be loaded with replacement characters rather than crash where possible;
 - non-existent file prints a clear error and exits.
 
-13.12 Show
+### 13.12 Show
 
 Requirements:
 
@@ -2146,7 +2145,7 @@ Edge cases:
 
 - if hypergraph is missing, print an instructional message and exit.
 
-13.13 External Documentation Preprocessing
+### 13.13 External Documentation Preprocessing
 
 Requirements:
 
@@ -2164,7 +2163,7 @@ Acceptance criteria:
 - session state is updated with status and counts;
 - partial file failures do not abort the whole workflow.
 
-13.14 Image Prompt Generation
+### 13.14 Image Prompt Generation
 
 Requirements:
 
@@ -2175,7 +2174,7 @@ Acceptance criteria:
 
 - `images_to_generate.md` exists after success.
 
-13.15 YouTube Script Generation
+### 13.15 YouTube Script Generation
 
 Requirements:
 
@@ -2194,11 +2193,11 @@ Acceptance criteria:
 - `Youtube_Script.md` exists;
 - noted headings are present even if the model omits them initially.
 
-14. Output Contracts
+## 14. Output Contracts
 
-14.1 Curated Sources JSON Contract
+### 14.1 Curated Sources JSON Contract
 
-'''json
+```json
 [
   {
     "title": "Example Source",
@@ -2209,11 +2208,11 @@ Acceptance criteria:
     "priority": "High"
   }
 ]
-'''
+```
 
-14.2 Hypergraph JSON Contract
+### 14.2 Hypergraph JSON Contract
 
-'''json
+```json
 {
   "nodes": [
     { "id": "N1", "label": "Concept A" }
@@ -2227,21 +2226,21 @@ Acceptance criteria:
     }
   ]
 }
-'''
+```
 
 Fallback rule:
 
 - if valid JSON cannot be produced, save a wrapped fallback:
 
-'''json
+```json
 {
   "raw": "original model output"
 }
-'''
+```
 
-14.3 Core Concepts JSON Contract
+### 14.3 Core Concepts JSON Contract
 
-'''json
+```json
 {
   "core_concepts": [
     {
@@ -2251,11 +2250,11 @@ Fallback rule:
     }
   ]
 }
-'''
+```
 
-14.4 Drill Pack JSON Contract
+### 14.4 Drill Pack JSON Contract
 
-'''json
+```json
 {
   "drill_pack_markdown": "# Drill Pack",
   "drill_questions": [
@@ -2271,11 +2270,11 @@ Fallback rule:
     }
   ]
 }
-'''
+```
 
-15. Error Handling Specification
+## 15. Error Handling Specification
 
-15.1 Error Classes
+### 15.1 Error Classes
 
 The Grok integration layer must expose:
 
@@ -2283,18 +2282,18 @@ The Grok integration layer must expose:
 - `GrokTimeoutError`
 - `GrokQuotaError`
 
-15.2 Error Mapping Rules
+### 15.2 Error Mapping Rules
 
 - quota-like errors map to `GrokQuotaError`;
 - timeout-like errors map to `GrokTimeoutError`;
 - all other failures map to `GrokError`.
 
-15.3 Retry Rules
+### 15.3 Retry Rules
 
 - non-timeout, non-quota API failures retry up to 5 times;
 - exponential backoff must be used with cap at 30 seconds.
 
-15.4 Non-Fatal Degradation Rules
+### 15.4 Non-Fatal Degradation Rules
 
 The system must continue where feasible when these fail:
 
@@ -2310,7 +2309,7 @@ The system must continue where feasible when these fail:
 - YouTube intro/section/outro expansion;
 - word-count retargeting.
 
-15.5 Fatal Conditions
+### 15.5 Fatal Conditions
 
 The command must stop cleanly with a clear error or message when:
 
@@ -2319,37 +2318,37 @@ The command must stop cleanly with a clear error or message when:
 - invalid command-line arguments are supplied;
 - an existing session cannot be loaded.
 
-16. Performance Benchmarks
+## 16. Performance Benchmarks
 
 The redevelopment must satisfy the following performance and operational standards on a standard developer workstation with broadband internet:
 
-16.1 General Benchmarks
+### 16.1 General Benchmarks
 
 - session creation and `session.json` write: `< 1 second`
 - `list-sessions`: `< 1 second` for up to 500 session directories
 - run directory creation: `< 250 ms`
 - compile/show/feed metadata writes: `< 1 second` excluding LLM/network latency
 
-16.2 Concurrency Benchmarks
+### 16.2 Concurrency Benchmarks
 
 - web fetch fan-out must support up to 4 parallel source requests;
 - extraction chunk fan-out must support up to 2 parallel LLM extractions;
 - evidence-packet generation must support up to 2 parallel LLM calls per report section.
 
-16.3 Scalability Targets
+### 16.3 Scalability Targets
 
 - curated-source list size: at least 20 sources unless topic is niche;
 - notebook assembly must tolerate at least 20 extracted source dossiers;
 - external-doc preprocessing must handle at least 40 supported files without failure;
 - Mermaid rendering must tolerate at least 200 nodes and 400 edges/hyperedges.
 
-16.4 Degradation Expectations
+### 16.4 Degradation Expectations
 
 - performance degradation due to LLM latency is acceptable;
 - correctness and resilience must be prioritized over aggressive parallelism;
 - timeouts must degrade gracefully and preserve progress already written.
 
-17. Security Standards
+## 17. Security Standards
 
 The coding agent must implement the following security requirements:
 
@@ -2364,9 +2363,9 @@ The coding agent must implement the following security requirements:
 - avoid shelling out except the optional editor launch in Phase 0;
 - ensure failure paths do not dump secrets into logs or console output.
 
-18. UI/UX and Accessibility Requirements
+## 18. UI/UX and Accessibility Requirements
 
-18.1 UI Scope Clarification
+### 18.1 UI Scope Clarification
 
 The noted deliverable is CLI-first. A browser UI is not noted and must not replace the CLI workflow. The redevelopment must therefore focus on:
 
@@ -2374,7 +2373,7 @@ The noted deliverable is CLI-first. A browser UI is not noted and must not repla
 - Markdown artifact readability;
 - accessibility and usability of text-based outputs.
 
-18.2 CLI UX Requirements
+### 18.2 CLI UX Requirements
 
 - use `rich` for readable, structured terminal output;
 - keep prompts short, explicit, and action-oriented;
@@ -2383,7 +2382,7 @@ The noted deliverable is CLI-first. A browser UI is not noted and must not repla
 - ensure all interactive prompts can be understood without reading source code or docs;
 - avoid ambiguous status messages.
 
-18.3 Accessibility Requirements
+### 18.3 Accessibility Requirements
 
 Minimum accessibility target: `WCAG 2.1 AA` principles adapted to CLI and generated documentation.
 
@@ -2396,7 +2395,7 @@ Mandatory standards:
 - text outputs must avoid unnecessary ASCII art that breaks screen-reader flow;
 - errors must be descriptive and remediation-oriented.
 
-18.4 Responsive Design Standards
+### 18.4 Responsive Design Standards
 
 Because the mandatory product is CLI-only, responsive browser layout is not a noted implementation artifact. However:
 
@@ -2408,7 +2407,7 @@ Because the mandatory product is CLI-only, responsive browser layout is not a no
   - satisfy WCAG `2.1 AA`;
   - preserve feature parity with the CLI rather than replace it.
 
-18.5 Visual Design Guidelines
+### 18.5 Visual Design Guidelines
 
 For CLI and documentation outputs:
 
@@ -2418,9 +2417,9 @@ For CLI and documentation outputs:
 - final report and drill pack must be readable in GitHub-style Markdown renderers and plain editors;
 - prompt and report formatting must be deterministic enough for downstream automation.
 
-19. Testing Requirements
+## 19. Testing Requirements
 
-19.1 noted Test Categories
+### 19.1 noted Test Categories
 
 The coding agent must implement:
 
@@ -2428,7 +2427,7 @@ The coding agent must implement:
 - integration tests;
 - end-to-end workflow tests.
 
-19.2 Unit Test Coverage Requirements
+### 19.2 Unit Test Coverage Requirements
 
 At minimum, unit tests must cover:
 
@@ -2445,7 +2444,7 @@ At minimum, unit tests must cover:
 - Mermaid generation;
 - external-doc categorization and aggregation.
 
-19.3 Integration Test Requirements
+### 19.3 Integration Test Requirements
 
 Integration tests must cover:
 
@@ -2456,7 +2455,7 @@ Integration tests must cover:
 - external-doc preprocessing path;
 - timeout degradation behavior.
 
-19.4 End-to-End Test Requirements
+### 19.4 End-to-End Test Requirements
 
 At least one full happy-path E2E test must verify:
 
@@ -2472,7 +2471,7 @@ At least one auto-mode E2E test must verify:
 - workflow completes to Phase 8;
 - full offline copies are saved when auto full-collection is enabled.
 
-19.5 Edge-Case Tests
+### 19.5 Edge-Case Tests
 
 noted edge-case coverage:
 
@@ -2487,15 +2486,15 @@ noted edge-case coverage:
 - invalid feed document path
 - missing hypergraph for `show`
 
-19.6 Coverage Thresholds
+### 19.6 Coverage Thresholds
 
 - minimum line coverage: `85%`
 - minimum branch coverage for core orchestration modules: `75%`
 - test suite must pass on Windows PowerShell execution
 
-20. Quality Requirements
+## 20. Quality Requirements
 
-20.1 Code Quality Standards
+### 20.1 Code Quality Standards
 
 - no untyped public functions in core modules unless justified;
 - avoid duplicated orchestration logic;
@@ -2503,7 +2502,7 @@ noted edge-case coverage:
 - preserve ASCII-only source text unless an existing file requires Unicode;
 - add comments only where behavior is genuinely non-obvious.
 
-20.2 Lint and Type Gates
+### 20.2 Lint and Type Gates
 
 The coding agent must run and pass:
 
@@ -2511,13 +2510,13 @@ The coding agent must run and pass:
 - `mypy grok_research_agent`
 - `pytest -q`
 
-20.3 Diagnostics Gate
+### 20.3 Diagnostics Gate
 
 - modified files must be free of IDE diagnostics before final handoff.
 
-21. Acceptance Criteria by Deliverable
+## 21. Acceptance Criteria by Deliverable
 
-21.1 Core CLI Deliverable
+### 21.1 Core CLI Deliverable
 
 Accepted when:
 
@@ -2526,7 +2525,7 @@ Accepted when:
 - exit codes follow this specification;
 - local installation via `pip install -e .` works.
 
-21.2 Workflow Deliverable
+### 21.2 Workflow Deliverable
 
 Accepted when:
 
@@ -2534,7 +2533,7 @@ Accepted when:
 - auto mode completes without user input;
 - all phase outputs are generated in the correct directories.
 
-21.3 Knowledge Deliverable
+### 21.3 Knowledge Deliverable
 
 Accepted when:
 
@@ -2543,7 +2542,7 @@ Accepted when:
 - feed updates or initializes hypergraph;
 - show writes Mermaid output.
 
-21.4 External Docs Deliverable
+### 21.4 External Docs Deliverable
 
 Accepted when:
 
@@ -2552,7 +2551,7 @@ Accepted when:
 - manifest, extracted summary, and context Markdown are produced;
 - workflow continues through partial file failures.
 
-21.5 Final Content Deliverable
+### 21.5 Final Content Deliverable
 
 Accepted when:
 
@@ -2561,7 +2560,7 @@ Accepted when:
 - YouTube script exists and contains noted headings;
 - file naming is deterministic and matches this specification.
 
-22. Deliverable Milestones
+## 22. Deliverable Milestones
 
 The coding agent must complete redevelopment in the following milestone order.
 
@@ -2648,7 +2647,7 @@ Exit criteria:
 - quality gates pass;
 - final QA checklist is complete.
 
-23. Submission Requirements
+## 23. Submission Requirements
 
 Before handing redevelopment back, the coding agent must provide:
 
@@ -2670,24 +2669,24 @@ If any criterion is not met, the coding agent must:
 
 The coding agent must run, at minimum:
 
-'''bash
+```bash
 python -m pip install -e ".[dev]"
 ruff check .
 mypy grok_research_agent
 pytest -q
-'''
+```
 
 If coverage tooling is included:
 
-'''bash
+```bash
 pytest --cov=grok_research_agent --cov-report=term-missing
-'''
+```
 
-25. Quality Assurance Checklist
+## 25. Quality Assurance Checklist
 
 The coding agent must verify all items below before finalization.
 
-25.1 Functional QA
+### 25.1 Functional QA
 
 - [ ] All documented commands exist and parse correctly
 - [ ] Session creation works
@@ -2705,7 +2704,7 @@ The coding agent must verify all items below before finalization.
 - [ ] Feed works
 - [ ] Show works
 
-25.2 Reliability QA
+### 25.2 Reliability QA
 
 - [ ] Missing API key handled correctly
 - [ ] Missing prerequisite files handled with clear messages
@@ -2714,7 +2713,7 @@ The coding agent must verify all items below before finalization.
 - [ ] Invalid JSON responses are recovered or safely wrapped
 - [ ] Partial failures do not delete successful artifacts
 
-25.3 Code Quality QA
+### 25.3 Code Quality QA
 
 - [ ] Lint passes
 - [ ] Type checks pass
@@ -2723,14 +2722,14 @@ The coding agent must verify all items below before finalization.
 - [ ] File outputs follow naming contracts
 - [ ] No secrets written to repository files
 
-25.4 Documentation QA
+### 25.4 Documentation QA
 
 - [ ] README usage examples are valid
 - [ ] Installation steps are current
 - [ ] Command help matches implemented behavior
 - [ ] Prompt assets noted by runtime are included in package data
 
-26. Definition of Done
+## 26. Definition of Done
 
 Redevelopment is complete only when all of the following are true:
 
@@ -2742,7 +2741,7 @@ Redevelopment is complete only when all of the following are true:
 - no unresolved diagnostics remain in modified files;
 - the coding agent can hand off the work without requiring follow-up clarification.
 
-27. Non-Negotiable Implementation Constraints
+## 27. Non-Negotiable Implementation Constraints
 
 The coding agent must not violate the following:
 
@@ -2754,15 +2753,15 @@ The coding agent must not violate the following:
 - do not silently swallow fatal state/precondition errors;
 - do not break output file names or core JSON contracts.
 
-28. Recommended Implementation Sequence
+## 28. Recommended Implementation Sequence
 
 To minimize redevelopment risk, implement in this order:
 
 1. package and CLI parser
 2. session manager and path model
-3. Grok client and error mapping
+## 3. Grok client and error mapping
 4. workflow engine skeleton
-5. Phases 0 to 2
+## 5. Phases 0 to 2
 6. source fetch and extraction
 7. notebook and synthesis
 8. final polish, image prompts, YouTube script
@@ -2770,7 +2769,7 @@ To minimize redevelopment risk, implement in this order:
 10. external docs processor
 11. hardening, diagnostics cleanup, full test pass
 
-29. Handoff Note for the Coding Agent
+## 29. Handoff Note for the Coding Agent
 
 If a behavior in code conflicts with this document, this document governs the redevelopment target unless the repository owner provides an explicit override. The goal is not a loose approximation of the current project; the goal is a faithful, testable redevelopment with stronger engineering discipline and zero ambiguity in expected outcomes.
 
@@ -2785,7 +2784,7 @@ _Embedded from `corpus/study/agentic_rag_functional_specification.md`. Also stor
 Task: Build Ultra-Production-Grade Hybrid Agentic RAG System – Exhaustive Architectural & Implementation Specification (April 2026)
 
 ** Initial Prompt to task.md from Creator **
-'''
+```
 How to create backend services
 FIRST:
 Conduct a comprehensive analysis and research of the task.md file to fully understand all requirements, specifications, 
@@ -2816,7 +2815,7 @@ complete frontend project structure to the designated frontend folder. The final
 experience through thoughtful interaction design, consistent visual hierarchy, smooth animations, mobile-first responsive 
 design, and intuitive user workflows that minimize cognitive load while maximizing task completion efficiency.
 
-'''
+```
 **Task Owner:** Coding Agent  
 **Priority:** Critical  
 **Estimated Effort:** 10–14 days (MVP core in 6 days; full scale, hybrid integration, wiki compounding, observability & benchmarks in remaining days)  
@@ -2830,7 +2829,7 @@ The system **must**:
 
 This specification is the **definitive, deeply-rethought synthesis** of the entire conversation history after 10+ iterations of refinement: original Agentic RAG request → Karpathy Wiki comparison table → LightRAG enhancement → scale for 65k MD → repeated calls for deeper design details.
 
-1. Core Concepts from Paper (Exact Mapping – Non-Negotiable)
+## 1. Core Concepts from Paper (Exact Mapping – Non-Negotiable)
 
 **4 Core Agentic Design Patterns** (must be visible as explicit graph cycles/conditional edges):
 1. **Reflection** — Agents self-evaluate outputs (relevance, faithfulness, hallucination) using rubrics and iterate (Self-RAG style reflection tokens or grader loops).
@@ -2852,9 +2851,9 @@ This specification is the **definitive, deeply-rethought synthesis** of the enti
 - Superior to pure Karpathy Wiki (query-time agentic reasoning + optional write-back).
 - LightRAG adds fast relational power without heavy GraphRAG rebuild costs.
 
-2. Full System Architecture (Mermaid – Include & Render in README)
+## 2. Full System Architecture (Mermaid – Include & Render in README)
 
-'''mermaid
+```mermaid
 graph TD
     User[User Query via CLI/Streamlit] --> Router[Query Analyzer Router<br/>Adaptive Strategy Selection]
     Router --> Planner[Planner Agent<br/>Decompose + Multi-Hop Plan]
@@ -2877,13 +2876,13 @@ graph TD
         LRAG[LightRAG KG<br/>Entities, Relations, OpenSearch Backend]
     end
     WikiSynth --> WikiVault[wiki_output/ Vault<br/>index.md + log.md + concepts/]
-'''
+```
 
-3. Detailed Data Models (Pydantic v2 – noted)
+## 3. Detailed Data Models (Pydantic v2 – noted)
 
 Create `src/graph/state.py`:
 
-'''python
+```python
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional, Annotated, Literal
 from langgraph.graph.message import add_messages
@@ -2912,11 +2911,11 @@ class AgentState(BaseModel):
     wiki_output_path: Optional[str] = None
     lightrag_context: Optional[Dict] = None
     metadata: Dict = Field(default_factory=dict)  # tracing, timestamps, etc.
-'''
+```
 
 Use `checkpointer = MemorySaver()` (or AsyncSqliteSaver for production persistence).
 
-4. Per-Node Detailed Design (Contracts, Inputs/Outputs, Prompts)
+## 4. Per-Node Detailed Design (Contracts, Inputs/Outputs, Prompts)
 
 All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial dict` for state update.
 
@@ -2944,7 +2943,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - 2–4 few-shot examples (positive + negative).
 - Chain-of-thought encouragement for reflection/planning.
 
-5. Hybrid Retrieval & Indexing Design (65k MD Scale – Critical)
+## 5. Hybrid Retrieval & Indexing Design (65k MD Scale – Critical)
 
 **Ingestion Pipeline** (`src/ingestion/pipeline.py` – memory-safe, incremental):
 
@@ -2963,21 +2962,21 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - LightRAG: `mode="hybrid"` (low-level entities + high-level relations).
 - Adaptive: Router prefers LightRAG for queries with "compare", "how", "relation", "who connected to".
 
-6. Tools (Dynamic & Extensible)
+## 6. Tools (Dynamic & Extensible)
 
 - `hybrid_retrieve(query: str, use_lightrag: bool = True)`
 - `web_search_tavily`
 - `wiki_writer(markdown_content: str, title: str)`
 - Calculator, arXiv fetcher (bonus).
 
-7. Graph Construction (`src/graph/agentic_rag_graph.py`)
+## 7. Graph Construction (`src/graph/agentic_rag_graph.py`)
 
 - `StateGraph(AgentState)`
 - Add nodes + conditional edges for reflection (`should_continue_reflection` based on confidence/iterations).
 - Parallel tool execution where possible.
 - Full LangSmith tracing on every node (callbacks).
 
-8. UI, CLI, Evaluation & Production Features
+## 8. UI, CLI, Evaluation & Production Features
 
 - **Streamlit** (`app.py`): Chat interface + expandable reasoning trace (node-by-node with scores, docs, critiques) + "Save to Wiki" button.
 - **Typer CLI** (`cli.py`): `ingest --resume`, `query "..." [--hybrid] [--wiki] [--trace]`, `lint-corpus`, `eval`, `build-wiki`.
@@ -2986,7 +2985,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - **Docker**: Multi-container compose (app + Chroma + LightRAG OpenSearch + optional PostgreSQL).
 - **Error Handling**: Graceful fallbacks, retry logic, rate limiting.
 
-9. Phased Implementation Plan (Strict Order – With Checkpoints)
+## 9. Phased Implementation Plan (Strict Order – With Checkpoints)
 
 **Phase 0**: Project skeleton, requirements.txt, config, data models, prompts templates, Docker compose.  
 **Phase 1**: Ingestion pipeline – full 65k MD benchmark + incremental mode + LightRAG indexing.  
@@ -2997,7 +2996,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 **Phase 6**: Docker, tests, logging, security (API keys), README (diagrams, comparison table, benchmarks).  
 **Phase 7**: End-to-end stress testing (100 complex queries), latency/quality benchmarks, final polish.
 
-10. Success Criteria (Measurable & Verifiable)
+## 10. Success Criteria (Measurable & Verifiable)
 
 1. Full 65k MD corpus ingested incrementally without OOM or crashes; benchmark logged.
 2. Every complex query trace demonstrates **all 4 patterns** and **7 elements** visibly.
@@ -3007,7 +3006,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 6. Evaluation: faithfulness ≥0.92, answer relevancy ≥0.90, average latency <4s on consumer hardware.
 7. Code is clean, fully typed (Pydantic + mypy), documented, git-committed per phase.
 
-11. References & Recommended Starters
+## 11. References & Recommended Starters
 
 - Paper PDF: [historical-url]
 - YouTube Video: [historical-url]
@@ -3057,7 +3056,7 @@ This spec is ready for direct implementation or feeding into your N1ch01as Archi
 
 ---
 
-1. Purpose & Success Criteria
+## 1. Purpose & Success Criteria
 
 **Purpose**  
 Serve as the single, intelligent gateway between any requesting agent and the curated knowledge base. It must understand *who* is asking, *what* they need, and *why*, then deliver the optimal context pack with full reasoning.
@@ -3072,9 +3071,9 @@ Serve as the single, intelligent gateway between any requesting agent and the cu
 
 ---
 
-2. Architecture Overview
+## 2. Architecture Overview
 
-'''
+```
 Requesting Agent (e.g. Character Consistency Critic)
           ↓ (structured request)
 Knowledge Router Agent
@@ -3094,7 +3093,7 @@ Knowledge Base (5,000+ .md files)
    ├── Vector Store (embeddings + metadata filtering)
    ├── Knowledge Graph (nodes: techniques, tools, failure_modes, papers, agents; relations: improves, requires, common_failure, used_with)
    └── Optional Pre-computed Centroids per Domain/Agent Cluster
-'''
+```
 
 **Key Design Principles**
 - **Metadata First**: Hard constraints eliminate 70-80% of irrelevant files instantly.
@@ -3105,10 +3104,10 @@ Knowledge Base (5,000+ .md files)
 
 ---
 
-3. Input / Output Contract (Strict & Rich)
+## 3. Input / Output Contract (Strict & Rich)
 
 Input from Requesting Agent
-'''json
+```json
 {
   "request_id": "uuid-v4",
   "timestamp": "2026-06-06T15:02:00Z",
@@ -3133,10 +3132,10 @@ Input from Requesting Agent
     "multi_hop_expected": true
   }
 }
-'''
+```
 
 Output from Router
-'''json
+```json
 {
   "request_id": "...",
   "selected_knowledge": [
@@ -3174,25 +3173,25 @@ Output from Router
   },
   "suggested_next_actions": ["Request deeper graph traversal on 'prop_consistency'", "Flag file X for quality review"]
 }
-'''
+```
 
 ---
 
-4. Core Components (Detailed)
+## 4. Core Components (Detailed)
 
-4.1 Query Analyzer + Intent Classifier
+### 4.1 Query Analyzer + Intent Classifier
 - Parses task_description + required_concepts + previous_failures.
 - Extracts entities (tools: Seedance, Kling; concepts: character_consistency).
 - Classifies complexity and whether Planner is needed.
 - Uses lightweight reflection: “Is this query about a single technique or a full pipeline?”
 
-4.2 Planner (for High-Complexity / Pipeline Queries)
+### 4.2 Planner (for High-Complexity / Pipeline Queries)
 Inspired by RopMura: When `routing_hints.complexity == "pipeline"` or `multi_hop_expected == true`:
 - Decomposes into sub-tasks (e.g., 1. Character bible creation, 2. Shot-by-shot consistency rules, 3. Lighting-specific mitigations, 4. Tool-specific prompt patterns).
 - Routes sub-tasks iteratively or in parallel.
 - Uses Question Simplifier / Response Evaluator loop (max 4–5 rounds).
 
-4.3 Hybrid Retrieval Engine (The Heart)
+### 4.3 Hybrid Retrieval Engine (The Heart)
 **Layered Approach (in order):**
 
 1. **Metadata Hard Filters** (fast, deterministic, 70-80% reduction)
@@ -3215,14 +3214,14 @@ Inspired by RopMura: When `routing_hints.complexity == "pipeline"` or `multi_hop
    - Reflection step: “Are these passages actually useful for the downstream agent’s goal?” “Is anything critical missing?”
    - Can trigger corrective re-retrieval if quality low.
 
-4.4 Context Assembler
+### 4.4 Context Assembler
 - Options: raw top chunks | synthesized summary | structured knowledge pack (best for your critic-heavy agents).
 - For creative agents: often returns “Knowledge Pack” with sections like Best Practices, Failure Modes & Mitigations, Tool-Specific Notes, Prompt Templates.
 
-4.5 Explainer & Traceability
+### 4.5 Explainer & Traceability
 Every output includes a clear `reasoning_trace` (structured + natural language). This is non-negotiable for debugging and critic loops.
 
-4.6 Multi-Level Critic (Self-Improving Core)
+### 4.6 Multi-Level Critic (Self-Improving Core)
 Three levels:
 1. **Retrieval Critic**: Scores relevance, coverage of required_concepts, handling of previous_failures.
 2. **Routing Critic**: Judges whether the right files were chosen vs alternatives; suggests better tags or graph edges.
@@ -3232,7 +3231,7 @@ This turns the Router into a learning system over time.
 
 ---
 
-5. Particular Use Case Implementations
+## 5. Particular Use Case Implementations
 
 Use Case 1: Character Consistency Critic Agent
 **Request Example**: See Input contract above (wuxia fight scene).
@@ -3265,11 +3264,11 @@ Use Case 4: Shot Planning Agent (Script → Shot List → Generation)
 
 ---
 
-6. Knowledge Base Integration Requirements
+## 6. Knowledge Base Integration Requirements
 
 Every `.md` file **must** have rich frontmatter (this is non-negotiable for the Router to work well):
 
-'''yaml
+```yaml
 ---
 title: "..."
 category: ai_filmmaking | ai_agents | intersection_agentic_filmmaking
@@ -3282,7 +3281,7 @@ source_type: youtube | book | course | synthetic | research_paper
 date_added: 2026-05-20
 last_reviewed: 2026-06-01
 ---
-'''
+```
 
 **Recommended Additions for Scale**:
 - Pre-computed cluster_id or centroid_id per file
@@ -3290,7 +3289,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-7. Phased Implementation Roadmap
+## 7. Phased Implementation Roadmap
 
 **Phase 1 (MVP – 7–14 days)**
 - Metadata hard filters + basic vector search
@@ -3319,7 +3318,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-8. Evaluation Framework
+## 8. Evaluation Framework
 
 - **Offline**: Golden test set of 50–100 representative queries per major agent role. Measure precision@K, recall of required_concepts, critic scores.
 - **Online**: Track downstream agent success rate before/after Router improvements. Log critic scores and human spot-checks.
@@ -3328,7 +3327,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-9. Edge Cases & Mitigations
+## 9. Edge Cases & Mitigations
 
 - **Very broad query** → Planner forces decomposition + strict max_files.
 - **No good matches** → Router returns “Insufficient high-quality knowledge” + suggestions to expand corpus + low confidence flag.
@@ -3338,7 +3337,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-10. Tech Recommendations (Aligned with Your Stack)
+## 10. Tech Recommendations (Aligned with Your Stack)
 
 - **Orchestration**: LangGraph or your custom harness (excellent for stateful Planner + Router + Critic loops)
 - **Vector + Metadata**: LlamaIndex or Haystack with Qdrant/Pinecone (strong metadata filtering)
@@ -3349,7 +3348,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-11. Generalization to Any Domain
+## 11. Generalization to Any Domain
 
 This design is deliberately **domain-agnostic at the core**:
 - Replace `category` / `subcategory` / `agent_relevance` with your new domain’s taxonomy.
@@ -3407,7 +3406,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
 | 71 | **InterviewSynthesisAgent** | Conducts/synthesizes practitioner interviews into instruction-tuning data | Otter/Rev transcripts; consent forms; SAG-AFTRA/WGA interview consent templates | Inter-coder agreement on theme extraction; consent-chain integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards + new benchmarks | Papers-with-Code; HuggingFace leaderboards; AI conference proceedings | Coverage of active benchmarks; freshness ≤7 days | Faster + broader than human ML-research team | OptimizationAgents (any) | All AI-era agents (stale baselines) |
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -3417,14 +3416,14 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 
 
 From `corpus/study/agent_loop_v3.md` Copy: `sources/excerpts/agent_loop_v3.md`.
 
 
-1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
+### 1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
 - **Central Planner / Orchestrator / Supervisor** at top level.
 - Decomposes into sub-tasks → delegates to **specialized sub-agents** (Deep Researcher, Analyzer, Browser/Tool agents, Reporter, etc.).
 - Each sub-agent runs its **own loop** (ReAct-style or domain-optimized).
@@ -3439,7 +3438,7 @@ From `corpus/study/agent_loop_v3.md` Copy: `sources/excerpts/agent_loop_v3.md`.
 - **Performance evidence**: AgentOrchestra-style systems reach 89%+ on GAIA benchmark; sub-agents + self-evolution add double-digit gains; hierarchical routing improves scalability vs flat multi-agent.
 
 **Actionable Output Format** (example JSON or Markdown section):
-'''json
+```json
 {
   "task_id": "...",
   "objective": "...",
@@ -3449,14 +3448,14 @@ From `corpus/study/agent_loop_v3.md` Copy: `sources/excerpts/agent_loop_v3.md`.
   "initial_plan": ["Step 1: ...", "Step 2: ..."],
   "quality_gates": ["completeness > 90%", "no hallucinations", "structured output"]
 }
-'''
+```
 
 
 
 From `corpus/study/agent_loop_v2.md` Copy: `sources/excerpts/agent_loop_v2.md`.
 
 
-1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
+### 1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
 - **Central Planner / Orchestrator / Supervisor** at top level.
 - Decomposes into sub-tasks → delegates to **specialized sub-agents** (Deep Researcher, Analyzer, Browser/Tool agents, Reporter, etc.).
 - Each sub-agent runs its **own loop** (ReAct-style or domain-optimized).
@@ -3471,7 +3470,7 @@ From `corpus/study/agent_loop_v2.md` Copy: `sources/excerpts/agent_loop_v2.md`.
 - **Performance evidence**: AgentOrchestra-style systems reach 89%+ on GAIA benchmark; sub-agents + self-evolution add double-digit gains; hierarchical routing improves scalability vs flat multi-agent.
 
 **Actionable Output Format** (example JSON or Markdown section):
-'''json
+```json
 {
   "task_id": "...",
   "objective": "...",
@@ -3481,7 +3480,7 @@ From `corpus/study/agent_loop_v2.md` Copy: `sources/excerpts/agent_loop_v2.md`.
   "initial_plan": ["Step 1: ...", "Step 2: ..."],
   "quality_gates": ["completeness > 90%", "no hallucinations", "structured output"]
 }
-'''
+```
 
 
 
@@ -3527,7 +3526,7 @@ From `corpus/study/system_build_plan.md` Copy: `sources/excerpts/system_build_pl
 From `corpus/root/agent_loop_creator_v1.md` Copy: `sources/excerpts/agent_loop_creator_v1.md`.
 
 
-2.3 ReAct Foundations + Enhancements
+### 2.3 ReAct Foundations + Enhancements
 - **ReAct (Yao et al. ICLR 2023)**: Thought (reasoning trace) → Action (tool/delegate/finish) → Observation (grounded result) loop. 10-34% gains on interactive tasks vs pure CoT or acting. Our core: Strict structured decision output (Pydantic: thought, action_type, payload), structured Observation always.
 - **Enhancements Incorporated**:
   - **Reflexion** (Shinn et al.): Verbal self-critique on trajectories → improvement plans. Used in light reflection (every N steps) + full Phase 4.
@@ -3544,7 +3543,7 @@ From `corpus/root/agent_loop_creator_v1.md` Copy: `sources/excerpts/agent_loop_c
 From `corpus/root/agent_loop_creator_v2.md` Copy: `sources/excerpts/agent_loop_creator_v2.md`.
 
 
-2.3 ReAct Foundations + Enhancements
+### 2.3 ReAct Foundations + Enhancements
 - **ReAct (Yao et al. ICLR 2023)**: Thought (reasoning trace) → Action (tool/delegate/finish) → Observation (grounded result) loop. 10-34% gains on interactive tasks vs pure CoT or acting. Our core: Strict structured decision output (Pydantic: thought, action_type, payload), structured Observation always.
 - **Enhancements Incorporated**:
   - **Reflexion** (Shinn et al.): Verbal self-critique on trajectories → improvement plans. Used in light reflection (every N steps) + full Phase 4.
@@ -3588,7 +3587,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -3598,7 +3597,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 
 
@@ -3704,5 +3703,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.citation · v1 · 2026-07-13 -->
 
-```
 

@@ -58,7 +58,7 @@ export async function GET(request: Request): Promise<Response> {
     );
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const stored = parseOidcStateCookie(cookieStore.get("casops_oidc_state")?.value);
   if (!stored || stored.provider !== providerParam || stored.state !== returnedState) {
     const response = NextResponse.redirect(

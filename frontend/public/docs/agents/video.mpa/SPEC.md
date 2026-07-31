@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 MPAAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-10. Workflow Support Agents
+## 10. Workflow Support Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -231,19 +230,19 @@ Human-in-the-loop with structured packaging support
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -267,7 +266,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -280,11 +279,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -294,13 +293,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -366,7 +365,7 @@ From `corpus/study/SYSTEM_REFERENCE.md` Copy: `sources/excerpts/SYSTEM_REFERENCE
 | 30 | CreativeDirectorAgent | Campaign concept | — |
 | 31 | PerformanceMarketerAgent | Optimize ads for ROAS | — |
 
-'''
+```
 USER BRIEF
     │
     ▼
@@ -415,7 +414,7 @@ USER BRIEF
 │ Outputs: Platform-specific packages, campaigns, analytics            │
 │ Spec: optimization_agent_functional_specification.md                 │
 └─────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -531,7 +530,7 @@ From `corpus/study/human_video_production_workflow.md` Copy: `sources/excerpts/h
 From `corpus/study/agent_loop_v3.md` Copy: `sources/excerpts/agent_loop_v3.md`.
 
 
-1.2 Production xAI Multi-Agent Orchestration (2026)
+### 1.2 Production xAI Multi-Agent Orchestration (2026)
 - **grok-4.20-multi-agent** (or equivalent): Launches configurable teams (4 agents for quick/focused; 16 for deep/comprehensive).
 - **How the loop works**:
   - Server-side **realtime collaboration**: Multiple specialized agents run in parallel.
@@ -615,7 +614,7 @@ Major Problem Categories & Frequency/Significance
 From `corpus/study/agent_loop_v2.md` Copy: `sources/excerpts/agent_loop_v2.md`.
 
 
-1.2 Production xAI Multi-Agent Orchestration (2026)
+### 1.2 Production xAI Multi-Agent Orchestration (2026)
 - **grok-4.20-multi-agent** (or equivalent): Launches configurable teams (4 agents for quick/focused; 16 for deep/comprehensive).
 - **How the loop works**:
   - Server-side **realtime collaboration**: Multiple specialized agents run in parallel.
@@ -897,7 +896,7 @@ Measurable Success Criteria (for Coding Agent Verification)
 7. **Usability for Coding Agent / User**: Clean Python package (`agent_loop/`) with CLI (`python -m agent_loop.cli`), optional FastAPI server mode, comprehensive examples (research agent, coding project harness, self-improving meta-agent), full type hints + docstrings, pytest suite passing, MkDocs or rich README.
 8. **Integration**: Works with LiteLLM or direct clients (xAI, DeepSeek, OpenAI-compatible); optional LangGraph adapter; exports structured plans/todo for Grok Build / Cursor consumption; compatible with user's self-hosted OpenWebUI/Keycloak/Strapi patterns if extended to server mode.
 
-2.4 Final Architectural Decisions (Post-100x Rethink)
+### 2.4 Final Architectural Decisions (Post-100x Rethink)
 - **Loop Style**: Controlled custom ReAct (dataclass/Pydantic State + hash cycle detect + circuit breakers) as foundation. Hierarchical on top (Orchestrator decides delegate vs tool vs synthesize vs finish). Not flat multi-agent (central control beats coordination chaos per research).
 - **State**: `AgentState` (task_spec: TaskSpec, history: List[TraceEvent], todo: List[TodoItem] or todo_md_content, plan: Optional[Plan], memory_short: Summary + recent, memory_long: VectorStore + key_facts, versions: VersionRegistry, tracer: Tracer, budgets: Token/StepBudget, seen_hashes: set for cycles).
 - **Memory Strategy**: Structured `todo.md` / key_facts (primary, low token) + aggressive summarization (on context pressure or milestone) + optional vector (Chroma/FAISS) for semantic retrieval of past traces/versions/knowledge. Sub-agents get **sliced context + provenance only**.
@@ -923,7 +922,7 @@ Measurable Success Criteria (for Coding Agent Verification)
 7. **Usability for Coding Agent / User**: Clean Python package (`agent_loop/`) with CLI (`python -m agent_loop.cli`), optional FastAPI server mode, comprehensive examples (research agent, coding project harness, self-improving meta-agent), full type hints + docstrings, pytest suite passing, MkDocs or rich README.
 8. **Integration**: Works with LiteLLM or direct clients (xAI, DeepSeek, OpenAI-compatible); optional LangGraph adapter; exports structured plans/todo for Grok Build / Cursor consumption; compatible with user's self-hosted OpenWebUI/Keycloak/Strapi patterns if extended to server mode.
 
-2.4 Final Architectural Decisions (Post-100x Rethink)
+### 2.4 Final Architectural Decisions (Post-100x Rethink)
 - **Loop Style**: Controlled custom ReAct (dataclass/Pydantic State + hash cycle detect + circuit breakers) as foundation. Hierarchical on top (Orchestrator decides delegate vs tool vs synthesize vs finish). Not flat multi-agent (central control beats coordination chaos per research).
 - **State**: `AgentState` (task_spec: TaskSpec, history: List[TraceEvent], todo: List[TodoItem] or todo_md_content, plan: Optional[Plan], memory_short: Summary + recent, memory_long: VectorStore + key_facts, versions: VersionRegistry, tracer: Tracer, budgets: Token/StepBudget, seen_hashes: set for cycles).
 - **Memory Strategy**: Structured `todo.md` / key_facts (primary, low token) + aggressive summarization (on context pressure or milestone) + optional vector (Chroma/FAISS) for semantic retrieval of past traces/versions/knowledge. Sub-agents get **sliced context + provenance only**.
@@ -1123,7 +1122,7 @@ From `corpus/root/project_starter_0.2.md` Copy: `sources/excerpts/project_starte
 From `corpus/root/project_starter_0.3.md` Copy: `sources/excerpts/project_starter_0.3.md`.
 
 
-'''json
+```json
 {
   "schema_version": "1.0",
   "generated_from": "project_starter.md",
@@ -1471,7 +1470,7 @@ From `corpus/root/project_starter_0.4.md` Copy: `sources/excerpts/project_starte
 From `corpus/root/project_starter_0.5.md` Copy: `sources/excerpts/project_starter_0.5.md`.
 
 
-'''json
+```json
 {
   "schema_version": "1.0",
   "generated_from": "project_starter.md",
@@ -1850,7 +1849,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_management_ui.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT PLAYGROUND: DirectorAgent (#1)                           [Run ▶]     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -1944,7 +1943,7 @@ From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_mana
 │  [Save as Test Case]  [Add to Knowledge]  [Run Again]  [Try Different Model]│
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | Feature | Purpose |
 |---------|---------|
@@ -1964,7 +1963,7 @@ From `corpus/study/ui/production_scale_discovery.md` Copy: `sources/excerpts/pro
 
 Scale Guide Tab (visual comparison of production scales)
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  SCALE GUIDE — "What should I build?"                                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2021,9 +2020,9 @@ Scale Guide Tab (visual comparison of production scales)
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────┐
 │  PROJECT: "Coffee Shop Campaign" > INSPIRATION BOARD              │
 ├──────────────────────────────────────────────────────────────────┤
@@ -2045,7 +2044,7 @@ Scale Guide Tab (visual comparison of production scales)
 │  (Auto-fills brief with style cues from saved items)             │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | Method | How It Works | User Effort |
 |--------|-------------|-------------|
@@ -2077,7 +2076,7 @@ From `corpus/study/ui/project_creation_flow.md` Copy: `sources/excerpts/project_
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────┐
 │  CREATE NEW PROJECT                                    [×]        │
 ├──────────────────────────────────────────────────────────────────┤
@@ -2119,9 +2118,9 @@ From `corpus/study/ui/project_creation_flow.md` Copy: `sources/excerpts/project_
 │    launch a production.                                          │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PROJECT: "Brand Campaign Q3"                    [Archive] [Settings ⚙]     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2170,9 +2169,9 @@ From `corpus/study/ui/project_creation_flow.md` Copy: `sources/excerpts/project_
 │  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PROJECT: "Brand Campaign Q3" > ASSETS                                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2213,9 +2212,9 @@ From `corpus/study/ui/project_creation_flow.md` Copy: `sources/excerpts/project_
 │    in this project. Agents reference them without re-uploading.             │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────┐
 │  LAUNCH PRODUCTION                                        │
 ├──────────────────────────────────────────────────────────┤
@@ -2386,7 +2385,7 @@ From `corpus/study/ui/RETHINK_100_IMPROVEMENTS.md` Copy: `sources/excerpts/RETHI
 From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 
 
-'''text
+```text
 ROOT
 ├── Dashboard (Home)
 │   ├── Active Productions Grid
@@ -2466,7 +2465,7 @@ ROOT
     ├── Agent Glossary
     ├── Workflow Templates Guide
     └── API Reference
-'''
+```
 
 | Level | Mechanism | Example |
 |-------|-----------|---------|
@@ -2510,7 +2509,7 @@ ROOT
 - C2PA provenance badge
 - Click → opens Artifact Viewer in drawer (side-by-side compare, version history, full provenance chain)
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PROMPT LAB                                              Production: "Luna" │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2550,7 +2549,7 @@ ROOT
 │  └────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 [Brief]                                      S1: Brief Wizard
     │                                        S2: Template Selector
@@ -2618,7 +2617,7 @@ Upload old video → System analyzes (free) → Shows improvement plan →
   → User reviews/adjusts → Confirms → Agents regenerate improved version →
   → Side-by-side comparison → Deliver
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  REMAKE STUDIO — Analysis Complete                                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2758,9 +2757,9 @@ Upload old video → System analyzes (free) → Shows improvement plan →
 │  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  REMAKE COMPLETE — Side-by-Side Comparison                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2836,5 +2835,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.mpa · v1 · 2026-07-13 -->
 
-```
 

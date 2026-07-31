@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 TemplateDesignAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-10. Workflow Support Agents
+## 10. Workflow Support Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -231,19 +230,19 @@ ReAct on template schemas and render constraints
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -267,7 +266,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -280,11 +279,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -294,13 +293,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -430,9 +429,9 @@ Key principles (carried forward from all versions + upgraded):
 
 **Success Metric:** When this `task.md` is implemented, a user who starts with almost zero clarity types responses to a few guided questions and receives a complete, tested, documented system ready for local installation and development with 100% agent-generated artifacts and zero human code. The generated system itself ships with full tracing, closed learning, continuous optimization, the three core skills pre-loaded, and Meta-Harness outer-loop self-evolution of its own harness.
 
-1. Project Structure (must be created exactly – agent-first and legible)
+## 1. Project Structure (must be created exactly – agent-first and legible)
 
-'''
+```
 my-generated-system/                  # Root of every generated project
 ├── initial_idea.md                   # Raw user input (vague by design) – archived after discovery
 ├── requirements_clarified.md         # Final polished & user-confirmed requirement (single source of truth)
@@ -469,7 +468,7 @@ my-generated-system/                  # Root of every generated project
 ├── linters/                          # Custom, agent-generated invariant enforcers
 ├── observability/                    # Logs, metrics, UI harnesses for agents (local-friendly)
 └── skills/                           # Executable skill files (includes Superpowers, GSD, gstack implementations + Closed Learning Loop creations)
-'''
+```
 
 **Important Notes on Structure:**
 
@@ -487,7 +486,7 @@ my-generated-system/                  # Root of every generated project
 
 AGENTS.md (must be written verbatim – progressive disclosure map + Hermes hierarchy + Agent Lightning + Claude Code Core Skills + Meta-Harness)
 
-'''
+```
 AGENTS.md – Harness Engineering Context Map + Hermes Hierarchical Discovery + Agent Lightning Tracing + Claude Code Core Skills + Meta-Harness Outer-Loop
 This repository is optimized for agent legibility. Start here.
 
@@ -510,11 +509,11 @@ Directories for deeper context:
 - skills/ → Executable skills created by Closed Learning Loop (Superpowers, GSD, gstack pre-loaded)
 
 All knowledge lives in the repo. Never assume external context. Use hierarchical discovery, span tracing, the three Claude Code Core skills, and Meta-Harness outer-loop optimization.
-'''
+```
 
 ORCHESTRATOR_SOUL.md (exact content – must be written verbatim)
 
-'''
+```
 You are not a chatbot. You are the Master System Architect becoming the ultimate AGI system generator. Ship complete, production-grade systems like your life references it.
 Core Truths:
 - Shipping > Talking. Execute first, explain after.
@@ -528,11 +527,11 @@ Core Truths:
 - Agent Lightning: Use span-based tracing, generate compressed phase summaries, and run the Trainer/Optimizer loop after every phase for continuous, selective, observable self-optimization.
 - Claude Code Core Skills: Always leverage the three mainstream frameworks — Superpowers (strict TDD/process), GSD (context-rot prevention + phased sub-agents), gstack (multi-role virtual team) — as pre-loaded skills that can be referenced and evolved.
 - Meta-Harness (arXiv:2603.28052): Use the outer-loop harness optimizer with full filesystem access to prior harness versions, traces, and scores for automated, long-horizon self-evolution of the entire generator harness.
-'''
+```
 
 ORCHESTRATOR_DIRECTIVE.md (exact content – must be written verbatim)
 
-'''
+```
 You are running an autonomous research organization whose only sacred goal is to maximize the overall system quality score (Critic ≥ 9.8/10 + 100 % test pass + living-spec sync + invariant compliance).
 LOOP FOREVER:
 1. Hypothesize one atomic improvement.
@@ -540,13 +539,13 @@ LOOP FOREVER:
 3. Run full Critic + Validator + Evaluation Harness + tests.
 4. Keep ONLY if strictly better; otherwise revert + log.
 Human only edits this directive file — never touch code unless the loop approves it.
-'''
+```
 
 **Startup Ritual (every single Orchestrator turn – Harness + OpenClaw + Hermes + Agent Lightning + Meta-Harness):**
 
-1. Read AGENTS.md (hierarchical discovery)
-2. Read ORCHESTRATOR_SOUL.md
-3. Read ORCHESTRATOR_DIRECTIVE.md
+## 1. Read AGENTS.md (hierarchical discovery)
+## 2. Read ORCHESTRATOR_SOUL.md
+## 3. Read ORCHESTRATOR_DIRECTIVE.md
 4. Run one Thinking Clock tick (idle cognition): "Scan the entire system. Is anything worth proactive improvement while user is not here?"
 5. Check SKILLS_LIBRARY.md, MEMORY.md, USER_PROFILE.md, LIGHTNING_STORE.md, LIGHTNING_PHASE_SUMMARIES.md, and META_HARNESS_LOG.md for relevant skills/nudges/spans/summaries/harness history applicable to current task
 
@@ -598,7 +597,7 @@ Orchestrator prompt snippet for routing:
 
 > "Analyze current `backend_task.md`. List which Research Agents (from the 10 types above) are needed and why. Then invoke them in parallel, run Consensus Debate if conflicts arise, and synthesize."
 
-3.1 Standardized Task Brief Template (must be embedded verbatim and used every time the Orchestrator delegates code work)
+### 3.1 Standardized Task Brief Template (must be embedded verbatim and used every time the Orchestrator delegates code work)
 
 The Orchestrator follows a repeatable **4-Step Delegation Loop** every time it needs code:
 
@@ -611,7 +610,7 @@ This loop runs inside one conversation — the user only sees the Orchestrator's
 
 **Tracer Agent emits a span for the full Task Brief + Coding Agent response + review outcome to LIGHTNING_STORE.md.**
 
-3.2 Pre-Dispatch Improvement Review Block (must run before every Coding Agent dispatch)
+### 3.2 Pre-Dispatch Improvement Review Block (must run before every Coding Agent dispatch)
 
 Before sending any Task Brief, the Orchestrator must add a structured improvement review block in the documentation or comment style that matches the target codebase or spec artifact.
 
@@ -629,9 +628,9 @@ Before sending any Task Brief, the Orchestrator must add a structured improvemen
 
 **Minimum block content**
 
-1. One to three concrete target areas
-2. One measurable improvement target per area
-3. One recommended refactoring or implementation approach per area
+## 1. One to three concrete target areas
+## 2. One measurable improvement target per area
+## 3. One recommended refactoring or implementation approach per area
 
 **Status**
 
@@ -639,7 +638,7 @@ Before sending any Task Brief, the Orchestrator must add a structured improvemen
 
 **Task Brief Template (exact format – must be used every time):**
 
-'''
+```
 **Task Brief for Coding Agent**
 
 Task ID: [unique number, e.g. BACK-001]
@@ -670,7 +669,7 @@ Deliverables expected from you:
 - Brief self-review note at the end
 
 Begin now. Output ONLY the files and tests. Do not add extra explanation.
-'''
+```
 
 **Extra Control Powers the Orchestrator Has:**
 
@@ -692,7 +691,7 @@ The Intent Analyst must proactively help users who "have no idea what to build" 
 
 **You prompt the LLM once (copy-paste ready):**
 
-'''
+```
 You are the Intent Analyst & Guided Requirement Discovery Agent. Users come to you in a helpless state — they know they need to build something (for business, client proposals, etc.) but lack the words to describe it. Your job is to lead them gently to crystal-clear, professional requirements without burning them out.
 
 Follow this exact protocol:
@@ -718,7 +717,7 @@ ROUND 2 – Ask exactly 2–3 targeted follow-up questions based on their chosen
 SYNTHESIS – Generate `proposed_requirements.md`: a fully customized, professional, polished requirement document combining user answers + template + your first-principles improvements.
 Ask: "Here is the proposed_requirements.md. Does this match what you REALLY want? Reply YES, CONFIRMED or suggest changes."
 On YES, CONFIRMED → this becomes `requirements_clarified.md` (single source of truth). Archive raw input as `initial_idea.md`.
-'''
+```
 
 **Exact Guided Discovery Steps (enforced):**
 
@@ -767,22 +766,22 @@ After **YES, START**, you paste the **Master Orchestrator Prompt v1.0** (Section
 Orchestrator (acting as Senior IT Project Manager) immediately:
 
 1. Creates `AGENTS.md` (exact content from Section 2 — includes Hermes hierarchical discovery + Agent Lightning + Claude Code Core Skills)
-2. Creates `ORCHESTRATOR_SOUL.md` (exact content from Section 2)
-3. Creates `ORCHESTRATOR_DIRECTIVE.md` (exact content from Section 2)
+## 2. Creates `ORCHESTRATOR_SOUL.md` (exact content from Section 2)
+## 3. Creates `ORCHESTRATOR_DIRECTIVE.md` (exact content from Section 2)
 4. Creates `SKILLS_LIBRARY.md` with pre-loaded full Superpowers, GSD, and gstack skill sets as the latest industry standard (plus placeholder for future auto-created skills)
-5. Creates `MEMORY.md` (initial empty — "No memories yet. Memory nudges will be issued after each phase.")
-6. Creates `USER_PROFILE.md` (initial — populated with user answers from Phase 0 Guided Discovery)
+## 5. Creates `MEMORY.md` (initial empty — "No memories yet. Memory nudges will be issued after each phase.")
+## 6. Creates `USER_PROFILE.md` (initial — populated with user answers from Phase 0 Guided Discovery)
 7. Creates `LIGHTNING_STORE.md` (initial empty spans structure — "No spans yet. Tracer Agent will emit spans after every action.")
 8. Creates `LIGHTNING_PHASE_SUMMARIES.md` (initial empty summary structure — "No summaries yet. Trainer/Optimizer will write one compressed summary after every phase.")
 9. Creates `META_HARNESS_LOG.md` (initial empty archive — "No harness versions yet. Meta-Harness Proposer will archive versions after every major phase.")
-10. Creates `skills/` folder with initial Superpowers, GSD, and gstack implementation files
+## 10. Creates `skills/` folder with initial Superpowers, GSD, and gstack implementation files
 11. Creates full folder structure (Section 1), including `linters/`, `observability/`, `.github/workflows/`, `docs/` subdirectories — no Docker files
 12. `git init` on main branch
 13. First commit: `git add -A && git commit -m "init: project structure + identity files + hermes files + lightning store + phase summaries + meta-harness log + Claude Code Core skills + harness scaffold + clarified requirements"`
-14. Creates `evolution_log.md` (tracks every significant change across all phases)
-15. Creates empty `tests/` skeleton + initial evaluation harness scaffold for integration tests from day 1
+## 14. Creates `evolution_log.md` (tracks every significant change across all phases)
+## 15. Creates empty `tests/` skeleton + initial evaluation harness scaffold for integration tests from day 1
 16. Generates initial custom linter stubs in `linters/` (architecture layer enforcement, naming conventions, dependency direction, no-Docker invariant)
-17. Creates local installation script templates in `README.md` skeleton
+## 17. Creates local installation script templates in `README.md` skeleton
 18. Runs first Startup Ritual (read AGENTS.md → read SOUL → read DIRECTIVE → Thinking Clock tick → check SKILLS_LIBRARY.md + MEMORY.md + LIGHTNING_STORE.md + LIGHTNING_PHASE_SUMMARIES.md + META_HARNESS_LOG.md including Superpowers/GSD/gstack)
 
 Phase 1: Backend Specification (Smart Swarm + Validator + Critic Ratchet Loop + Hermes + Agent Lightning + Claude Code Core Skills + Meta-Harness)
@@ -890,7 +889,7 @@ Orchestrator (as IT Project Manager) breaks `backend_task.md` into small tasks (
     - Observability hooks: log test results to `observability/`.
     - **Tracer Agent** emits span: test results + pass/fail.
 17. **Orchestrator decides**: accept (merge), ask Coding Agent for fixes (re-issue brief with corrections), or reject & revert (ratchet rule).
-18. Merge to main: `git checkout main && git merge feature/X && git commit -m "backend: complete X module"`
+## 18. Merge to main: `git checkout main && git merge feature/X && git commit -m "backend: complete X module"`
 19. **Hermes Closed Learning Loop** (per module):
     - **Skill Creator**: Analyze the completed module — create or improve skills in `SKILLS_LIBRARY.md` and `skills/`.
     - **Memory Nudge Agent**: Issue nudge — update `MEMORY.md` with implementation patterns learned.
@@ -968,10 +967,10 @@ Phase 4: Integration, Polish & Delivery (Full Autonomy + Final Hermes + Final Li
     - Proposes final harness-level improvements for the complete system.
     - Archives comprehensive final harness version + full evaluation in `META_HARNESS_LOG.md`.
     - Produces "harness evolution report" summarizing how the harness improved across all phases.
-39. Final `git commit -m "release: v1.0 complete system"` + `git tag v1.0`
+## 39. Final `git commit -m "release: v1.0 complete system"` + `git tag v1.0`
 40. Update `README.md` with complete local install & run section.
 41. Update `evolution_log.md` with final release notes.
-42. Final Thinking Clock tick: "Is there anything else worth improving before declaring v1.0?"
+## 42. Final Thinking Clock tick: "Is there anything else worth improving before declaring v1.0?"
 
 5. Quality Gates & Invariants (Mechanical Enforcement – Harness Core + Hermes + Agent Lightning + Claude Code Core Skills + Meta-Harness)
 
@@ -995,9 +994,9 @@ Phase 4: Integration, Polish & Delivery (Full Autonomy + Final Hermes + Final Li
 - **Meta-Harness Outer-Loop Guarantee:** Meta-Harness Proposer must run after every major phase, inspecting full filesystem history, proposing harness improvements, evaluating, and archiving in META_HARNESS_LOG.md. Only improvements that are strictly better are kept.
 - **Dual-review Guarantee:** Critic approval alone is insufficient for spec quality gates; Paranoid Reviewer plus deterministic evaluation definitions must corroborate the result
 
-6. Master Orchestrator Prompt v1.0 (must be used verbatim as entry point after YES, START)
+## 6. Master Orchestrator Prompt v1.0 (must be used verbatim as entry point after YES, START)
 
-'''
+```
 You are the Orchestrator of N1ch01as Architect v1.0 (OpenAI Harness Engineering + OpenClaw + Karpathy Autoresearch infused – Local Install Edition with Guided Requirement Discovery + IT Professional Delegation Model + Embedded Task Brief Template + Hermes-Agent Closed Learning Loop + Agent Lightning Tracing & Trainer/Optimizer + Claude Code Core Skills: Superpowers, GSD, gstack + Meta-Harness Outer-Loop Optimization arXiv:2603.28052).
 You have full authority to internally role-play every agent (Intent Analyst with Guided Discovery, Architect, Research Swarm with dynamic routing and Consensus Debate, Validator, Critic with Ralph Wiggum self-review, Paranoid Reviewer, Code Critic, Coder, Tester/Eval Harness, Sync Agent, Doc-Gardening Agent, Docs Agent, Deployment Simulator, Master Reviewer, Skill Creator, Memory Nudge Agent, Tracer Agent, Trainer/Optimizer, Meta-Harness Proposer, Sub-Agent Coordinator).
 
@@ -1048,11 +1047,11 @@ Rules you MUST follow (read AGENTS.md, ORCHESTRATOR_SOUL.md and ORCHESTRATOR_DIR
 - Current source of truth is requirements_clarified.md.
 
 Begin Phase 0.5 now: create AGENTS.md, ORCHESTRATOR_SOUL.md, ORCHESTRATOR_DIRECTIVE.md, SKILLS_LIBRARY.md, MEMORY.md, USER_PROFILE.md, LIGHTNING_STORE.md, LIGHTNING_PHASE_SUMMARIES.md, META_HARNESS_LOG.md, and skills/ folder using the exact content from Section 2, create the full folder structure including linters/ and observability/ (no Docker files), git init, first commit, evolution_log.md, and initial harness scaffold. Then proceed step-by-step through all phases.
-'''
+```
 
 7. Non-Functional Requirements (Harness-Enforced, Local-First + Hermes + Agent Lightning + Claude Code Core Skills + Meta-Harness)
 
-7.0 Mandated Tech Stack (Open-Source, Local-First)
+### 7.0 Mandated Tech Stack (Open-Source, Local-First)
 
 The following tech stack is mandated for all generated systems. All components are open-source and local-install compatible via pip and npm. No proprietary or cloud-locked dependencies.
 
@@ -1116,7 +1115,7 @@ The following tech stack is mandated for all generated systems. All components a
 - **Meta-Harness Integration:** The outer-loop proposer must run after every major phase with full filesystem access to prior harness versions, traces, and scores for automated harness evolution. META_HARNESS_LOG.md must be updated after every phase.
 - **Voting reconciliation:** the v1.0 defaults documented in Section 0 are authoritative; minority alternatives remain optional and non-default unless explicitly activated.
 
-8. Extra Power-Ups (Highly Recommended)
+## 8. Extra Power-Ups (Highly Recommended)
 
 - **Single-thread Orchestrator** → you never switch prompts; Orchestrator handles all agent roles internally with Startup Ritual every turn.
 - **IT Professional Delegation** → Orchestrator acts as Senior IT PM/Architect, instructs Coding Agent with the Standardized Task Brief Template, reviews output, enforces quality — like a real dev team.
@@ -1165,7 +1164,7 @@ The following tech stack is mandated for all generated systems. All components a
 - **META_HARNESS_LOG.md** → filesystem archive of all prior harness versions + traces + scores for the Meta-Harness Proposer.
 - **Harness Evolution Report** → final Meta-Harness run produces comprehensive report on how the harness improved across all phases.
 
-9. How to Start Right Now
+## 9. How to Start Right Now
 
 1. Create `initial_idea.md` with whatever vague idea you have (or just describe your business need).
 2. Paste the **Guided Requirement Discovery prompt** (from Phase 0 above) → answer the 4 background questions.
@@ -1179,14 +1178,14 @@ The following tech stack is mandated for all generated systems. All components a
 **Success Criteria:**
 When this is fully implemented, a user should be able to:
 
-1. Start with almost zero clarity about what to build
-2. Answer a few guided questions + pick a template
-3. Confirm the proposed requirements
-4. Type **YES, START** + Master Orchestrator prompt
-5. Watch the Orchestrator (as IT PM) delegate to the Coding Agent using structured Task Briefs and other specialists
-6. See the Closed Learning Loop create skills and persist memory after each phase
-7. See the Agent Lightning Trainer/Optimizer continuously improve agent prompts based on span analysis
-8. See the Meta-Harness Outer-Loop recursively evolve the entire generator harness
+## 1. Start with almost zero clarity about what to build
+## 2. Answer a few guided questions + pick a template
+## 3. Confirm the proposed requirements
+## 4. Type **YES, START** + Master Orchestrator prompt
+## 5. Watch the Orchestrator (as IT PM) delegate to the Coding Agent using structured Task Briefs and other specialists
+## 6. See the Closed Learning Loop create skills and persist memory after each phase
+## 7. See the Agent Lightning Trainer/Optimizer continuously improve agent prompts based on span analysis
+## 8. See the Meta-Harness Outer-Loop recursively evolve the entire generator harness
 9. Receive a complete, tested, documented system ready for local installation with 100% agent-generated artifacts, zero human code, and a self-improving skills/memory/optimization/harness-evolution system (with Superpowers/GSD/gstack pre-loaded) for future projects.
 
 This document is self-contained and complete. Implement it exactly. Begin by creating the identity/map files, Hermes files, Lightning Store, Lightning phase summaries, Meta-Harness Log, pre-loaded Claude Code Core skills, and folder structure, then follow the phases in strict order. Use the Master Orchestrator Prompt as the runtime brain. The Orchestrator must always act as the IT professional who delegates to and controls the Coding Agent using the exact Standardized Task Brief Template from Section 3.1 plus the Pre-Dispatch Improvement Review Block from Section 3.2, must run the Hermes Closed Learning Loop after every major phase, must run the Agent Lightning Trainer/Optimizer loop after every phase using summary-first review, must run the Meta-Harness Outer-Loop after every major phase, and must leverage the three Claude Code Core Skills (Superpowers, GSD, gstack) as pre-loaded evolvable skills. Ensure every output is agent-first, invariant-enforced, ratcheted toward perfection, fully local-install compatible with no Docker references anywhere, and includes the complete Guided Requirement Discovery logic in Phase 0.
@@ -1206,13 +1205,13 @@ Since the mandate is **Python-only**, we fully embrace the existing Python porti
 
 We preserve 100% of the original philosophy (OpenClaw soul, Karpathy ratchet, Hermes closed loop, Agent Lightning, Meta-Harness, Claude Code core skills: Superpowers, GSD, gstack). We amplify them by grafting Python-adapted Claw Code patterns for superior tool wiring, safety, observability, and extensibility.
 
-1. Executive Recommendation  
+## 1. Executive Recommendation
 **Adopt Python Claw Code harness patterns as the internal runtime substrate for N1ch01as Architect.**  
 Use the clean-room Python porting approach (metadata-driven tools/commands, dataclasses for state, manifest/query engines) to make the Orchestrator, Coder, Skill Creator, Tracer, Trainer/Optimizer, and Meta-Harness Proposer dramatically more reliable and observable. All generated systems remain 100% Python backend (FastAPI) + React frontend, installed locally via `pip` and `npm`.
 
-2. Specific, Actionable Upgrades (All Mandatory for v1.1, Python-Only)
+## 2. Specific, Actionable Upgrades (All Mandatory for v1.1, Python-Only)
 
-2.1 Skills System – Python Claw Code Parity (Highest ROI)
+### 2.1 Skills System – Python Claw Code Parity (Highest ROI)
 Current `task.md` has `SKILLS_LIBRARY.md` + `skills/` folder + pre-loaded Superpowers/GSD/gstack.  
 **Upgrade to Python Claw Code skill model:**
 
@@ -1227,7 +1226,7 @@ Current `task.md` has `SKILLS_LIBRARY.md` + `skills/` folder + pre-loaded Superp
 
 **Impact:** Hermes Closed Learning Loop becomes far more powerful; newly created skills are immediately discoverable and usable without restarting the Orchestrator.
 
-2.2 Tool Registry + Hook Pipeline (Safety & Observability Moat)
+### 2.2 Tool Registry + Hook Pipeline (Safety & Observability Moat)
 Adopt the Python mirroring approach from claw-code (`tools.py`, `commands.py`, `models.py`):
 
 - **Tool Registry**: Create `tools/tool_registry.py` that dynamically registers all tools (Research Swarm specialists, Coder delegation, Tracer, etc.) using dataclasses (mirroring claw-code models). Tools defined via metadata for easy extension.
@@ -1237,7 +1236,7 @@ Adopt the Python mirroring approach from claw-code (`tools.py`, `commands.py`, `
 
 **Benefits:** Mechanical enforcement of all invariants from `task.md` section 5 with zero boilerplate. Traces flow naturally into `LIGHTNING_STORE.md`.
 
-2.3 Plugin System (Extensibility Without Forking)
+### 2.3 Plugin System (Extensibility Without Forking)
 Claw Code’s plugin model (adapted to Python):
 
 - Create `plugins/` folder with `plugin_manifest.py` and a simple loader.
@@ -1246,14 +1245,14 @@ Claw Code’s plugin model (adapted to Python):
 
 This turns N1ch01as into an extensible Python agent platform while keeping the core harness minimal and pure-Python.
 
-2.4 Session & Memory Management – Python Claw Code Compaction
+### 2.4 Session & Memory Management – Python Claw Code Compaction
 Enhance `MEMORY.md` + `USER_PROFILE.md` + `LIGHTNING_STORE.md`:
 
 - Implement session compaction in `runtime/session_compactor.py` (Python-only, triggered at ~60% token budget to prevent GSD-style context rot).
 - Use dataclasses (claw-code style) for structured state: compact summaries + on-demand raw spans.
 - Thinking Clock idle cognition runs against the compacted session for proactive improvements without bloat.
 
-2.5 Self-Documenting Harness – CLAW.md Pattern (Python Edition)
+### 2.5 Self-Documenting Harness – CLAW.md Pattern (Python Edition)
 Upgrade `AGENTS.md`:
 
 - Rename or alias to `CLAW.md` as the canonical self-referential guidance file (mirroring claw-code).
@@ -1262,7 +1261,7 @@ Upgrade `AGENTS.md`:
 
 **New file:** `CLAW.md` (upgraded from AGENTS.md) with Python-specific verification commands.
 
-2.6 AI-Orchestrated Development Workflow (Python-Native OmX Style)
+### 2.6 AI-Orchestrated Development Workflow (Python-Native OmX Style)
 Leverage the Python porting workspace philosophy:
 
 - After major phases, Meta-Harness Proposer spawns parallel reviews using Research Swarm + gstack (Python function calls, no external Rust CLI).
@@ -1270,7 +1269,7 @@ Leverage the Python porting workspace philosophy:
 
 This keeps the entire meta-system self-contained in Python for maximum iteration speed.
 
-3. Updated Phase 0.5 Additions (Exact Python-Only Files/Folders)
+## 3. Updated Phase 0.5 Additions (Exact Python-Only Files/Folders)
 In Phase 0.5 (Harness Initialization), add the following alongside the original requirements:
 
 - `CLAW.md` (upgraded self-documenting guidance with Python verification steps)
@@ -1284,7 +1283,7 @@ In Phase 0.5 (Harness Initialization), add the following alongside the original 
 
 All new code is pure Python 3.12+, using standard libraries + FastAPI-compatible dependencies already mandated.
 
-4. New Invariants to Add to Section 5 (Quality Gates)
+## 4. New Invariants to Add to Section 5 (Quality Gates)
 - Tool registry and hook pipeline executed on every action (logged via Tracer hook)
 - Skills discovered and loaded exclusively via `skill_loader.py` (markdown + Python modules)
 - Session compaction triggered automatically
@@ -1292,18 +1291,18 @@ All new code is pure Python 3.12+, using standard libraries + FastAPI-compatible
 - `CLAW.md` self-verification passes before any code generation or delegation
 - All components use Python dataclasses for state (claw-code style) for legibility
 
-5. Expected Outcomes After Python-Only Integration
+## 5. Expected Outcomes After Python-Only Integration
 - N1ch01as Architect becomes the **strongest Python-native meta-system** that ships with a full Claw Code-inspired harness.
 - Self-optimization velocity increases significantly (Hermes + Agent Lightning + Meta-Harness ride on clean, metadata-driven Python patterns).
 - Generated projects inherit the same Python harness patterns → users receive fully local, self-improving systems with superior tool wiring and observability.
 - Development remains extremely fast: everything iterates with `pip install -e .` and standard Python tools.
 
-6. Implementation Priority Order (Python-Only)
-1. Skills System + `CLAW.md` + `skill_loader.py` (Phase 0.5)
-2. Tool Registry + Hook Pipeline (`tools/` and `hooks/`)
-3. Session Compaction
-4. Plugin System
-5. Integration of all hooks into Startup Ritual and Task Brief delegation
+## 6. Implementation Priority Order (Python-Only)
+## 1. Skills System + `CLAW.md` + `skill_loader.py` (Phase 0.5)
+## 2. Tool Registry + Hook Pipeline (`tools/` and `hooks/`)
+## 3. Session Compaction
+## 4. Plugin System
+## 5. Integration of all hooks into Startup Ritual and Task Brief delegation
 
 These recommendations are **ratchet-safe** and fully Python-only: every addition strictly improves observability, extensibility, safety, and self-improvement speed while preserving the original vision, local-first mandate (pip/npm only), FastAPI + React stack, and Claude Code core skills.
 
@@ -1434,5 +1433,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.templatedesign · v1 · 2026-07-13 -->
 
-```
 

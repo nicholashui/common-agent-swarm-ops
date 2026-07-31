@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 CriticAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-10. Workflow Support Agents
+## 10. Workflow Support Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -231,19 +230,19 @@ Multi-agent debate as critic panel
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -267,7 +266,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -280,11 +279,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -294,13 +293,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -371,7 +370,7 @@ _Embedded from `corpus/study/aesthetics_agent_functional_specification.md`. Also
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 
 The **Aesthetics Agent** is the swarm's computational embodiment of "artiste sense." It does not *replace* human taste — it **amplifies, encodes, and propagates** it at superhuman speed across 114 agents.
 
@@ -395,7 +394,7 @@ The result is a single agent that other agents *cannot do their job without*: it
 
 ---
 
-2. Background: From "Artiste Sense" to Computational Aesthetics
+## 2. Background: From "Artiste Sense" to Computational Aesthetics
 
 The source document [`aesthetics_agents.md`](./aesthetics_agents.md) defines **"artiste sense"** as the intuitive, perceptual, and expressive sensitivity artists develop — an "eye" for composition, color harmony, rhythm, proportion, light/shadow, depth, and emotional resonance; a structural (3D) way of seeing; a psychological drive to express; and a grounded, iterative creative practice.
 
@@ -407,7 +406,7 @@ This specification accepts that framing as ground truth and answers the only que
 
 ---
 
-3. The Deep Rethink — Five Reframings
+## 3. The Deep Rethink — Five Reframings
 
 The act of "deeply rethinking" the guide produced five architectural commitments. Each is a deliberate departure from the naive "train a scorer" recipe.
 
@@ -428,7 +427,7 @@ Beauty divorced from the brief is noise. The aggregate quality is multiplied by 
 
 ---
 
-4. Formal Aesthetic Model
+## 4. Formal Aesthetic Model
 
 Let an artifact \( x \) (image or video clip) be evaluated under an aesthetic profile \( p \), an intent/brief \( b \), and an emotional target \( e \).
 
@@ -465,11 +464,11 @@ penalizing temporal instability (flicker, color drift, identity break — overla
 
 ---
 
-5. Architecture
+## 5. Architecture
 
 The Aesthetics Agent is a three-subsystem service sharing one profile store and one model registry.
 
-'''
+```
                          ┌───────────────────────────────────────────────┐
                          │              AESTHETICS AGENT                   │
                          │                                                 │
@@ -492,7 +491,7 @@ The Aesthetics Agent is a three-subsystem service sharing one profile store and 
                           AestheticVerdict (JSON)     Profile updates
                                    ▼                          ▼
                           CRITIQUE BUS  ──────▶  consuming agents (#6,#10,#15,#39,#46,#49…)
-'''
+```
 
 **5.1 The Critic (Perceive).** Ensemble of complementary backbones:
 - A fast **regression head** on a vision backbone (SigLIP / CLIP-ViT) — Aesthetic-Predictor-V2.5-style MLP for cheap first-pass screening at scale.
@@ -511,7 +510,7 @@ The Aesthetics Agent is a three-subsystem service sharing one profile store and 
 
 ---
 
-6. Aesthetic Dimensions (the Decomposed Rubric)
+## 6. Aesthetic Dimensions (the Decomposed Rubric)
 
 The Critic emits a score + confidence for each dimension. Profiles re-weight them; they are *never* collapsed before being logged.
 
@@ -532,10 +531,10 @@ The Critic emits a score + confidence for each dimension. Profiles re-weight the
 
 ---
 
-7. Functional Requirements
+## 7. Functional Requirements
 
 **7.1 Input (JSON).**
-'''json
+```json
 {
   "artifact_ref": "asset_id_or_uri",
   "media_type": "image | video_clip | frame_sequence",
@@ -546,10 +545,10 @@ The Critic emits a score + confidence for each dimension. Profiles re-weight the
   "constraints": { "aspect_ratio": "2.39:1", "color_space": "ACEScct", "deliverable": "HDR" },
   "budget": { "max_latency_ms": 800, "tier": "fast | deep" }
 }
-'''
+```
 
 **7.2 Output — `AestheticVerdict` (JSON + Markdown).**
-'''json
+```json
 {
   "artifact_ref": "asset_id_v2",
   "profile_id": "director_lynchian_v3",
@@ -572,7 +571,7 @@ The Critic emits a score + confidence for each dimension. Profiles re-weight the
   "escalate_to_hitl": false,
   "provenance": { "models": ["aesV2.5","grok-vision-4.x"], "ensemble_agreement": 0.86 }
 }
-'''
+```
 
 **7.3 Modes.**
 - `screen` — fast scalar gate for high-volume candidate culling (regression head only).
@@ -587,7 +586,7 @@ The Critic emits a score + confidence for each dimension. Profiles re-weight the
 
 ---
 
-8. Integration with the VA-Agent-Swarm
+## 8. Integration with the VA-Agent-Swarm
 
 This agent is **cross-cutting infrastructure**, registered alongside the Research Agent, GCA, and Optimization Agent in [`SYSTEM_REFERENCE.md`](./SYSTEM_REFERENCE.md) §4.
 
@@ -615,7 +614,7 @@ This agent is **cross-cutting infrastructure**, registered alongside the Researc
 
 ---
 
-9. The Three Operating Loops
+## 9. The Three Operating Loops
 
 **9.1 Critic Loop (evaluate).** `artifact → ensemble score → decompose → gate by intent/emotion → anti-hack check → AestheticVerdict`.
 
@@ -635,11 +634,11 @@ This agent is **cross-cutting infrastructure**, registered alongside the Researc
 
 ---
 
-10. Personalization: the `AestheticProfile`
+## 10. Personalization: the `AestheticProfile`
 
 A first-class, versioned, consent-governed object.
 
-'''json
+```json
 {
   "profile_id": "director_lynchian_v3",
   "owner": "consenting_entity_id",
@@ -652,7 +651,7 @@ A first-class, versioned, consent-governed object.
   "version": 3,
   "lineage": ["v1","v2","v3"]
 }
-'''
+```
 
 Profile types: **Director**, **Brand**, **Artist**, **Audience-Cohort** (links to [Psychological Recommendation](./psychological_recommendation_agent_functional_specification.md)), **Genre-prior**, **Neutral-baseline**. Profiles are composable (e.g., `brand_acme ⊕ genre_noir`) with documented precedence.
 
@@ -660,7 +659,7 @@ Profile types: **Director**, **Brand**, **Artist**, **Audience-Cohort** (links t
 
 ---
 
-11. Reward Hacking, Failure Modes & Defenses
+## 11. Reward Hacking, Failure Modes & Defenses
 
 The single greatest risk: when the Critic becomes a reward, generators learn to *fool the eye*, not *please it*.
 
@@ -678,7 +677,7 @@ The single greatest risk: when the Critic becomes a reward, generators learn to 
 
 ---
 
-12. Technical Architecture & Implementation Guidelines
+## 12. Technical Architecture & Implementation Guidelines
 
 - **Core classes:** `AestheticCritic`, `AttributeHead[]`, `EnsembleScorer`, `IntentGate`, `EmotionGate`, `AntiHackGuard`, `Aligner`, `PreferenceBuilder`, `TasteKeeper`, `AestheticProfile`, `AestheticsAgent` (facade).
 - **Models:** SigLIP/CLIP-ViT backbone + MLP regression head (fast tier, Aesthetic-Predictor-V2.5 lineage); VLM critic via swarm LLM providers (Grok-4.x vision / Gemini 2.5 Pro / GPT-4o); detector zoo (artifact, ΔE, depth, flow, FID/FVD, VBench-style).
@@ -689,7 +688,7 @@ The single greatest risk: when the Critic becomes a reward, generators learn to 
 
 ---
 
-13. Evaluation & Success Criteria
+## 13. Evaluation & Success Criteria
 
 | Criterion | Target |
 |---|---|
@@ -704,7 +703,7 @@ The single greatest risk: when the Critic becomes a reward, generators learn to 
 
 ---
 
-14. Limitations & Future Directions
+## 14. Limitations & Future Directions
 
 - **No genuine lived aesthetic.** The agent's "sense" is statistical and derivative; it has no spontaneity or personal impulse. It is an *amplifier* of human taste — best used in symbiosis, with HiTL on novel or low-confidence judgments.
 - **Taste is contested.** Even with explicit profiles, the corpus and rater pool carry bias; the agent surfaces *whose* taste it encodes rather than claiming universality.
@@ -713,7 +712,7 @@ The single greatest risk: when the Critic becomes a reward, generators learn to 
 
 ---
 
-15. References (Curated, 2024–2026)
+## 15. References (Curated, 2024–2026)
 
 Foundational & survey (from [`aesthetics_agents.md`](./aesthetics_agents.md)):
 - NIMA — Neural Image Assessment (CNN aesthetic-distribution prediction).
@@ -1287,7 +1286,7 @@ Theme 8 — Frontend & Human Experience (71–80)
 79. `RETHINK_100_IMPROVEMENTS.md` items triaged; criticals addressed.
 80. Production-scale discovery adapts the DAG to project complexity (S-tiers).
 
-15.2 Critical path
+### 15.2 Critical path
 `M0 → M2 → M3 → M5 → M6 → M7 → M8 → M9 → M12`. M1 feeds M2/M4; M4 supports M8; **M10 can parallelize from M3** in a worktree; M11 slots after M9. The single highest-leverage checkpoint is **G-M6** (vertical slice) — it converts architectural risk into a proven foundation.
 
 
@@ -1381,7 +1380,7 @@ The **Knowledge Router Agent** is the central intelligence layer that ensures ev
 - Continuous improvement: Routing accuracy improves over time via critic feedback and performance signals
 - Cost efficiency: Avoids over-retrieval; supports cost-aware routing
 
-'''
+```
 Requesting Agent (e.g. Character Consistency Critic)
           ↓ (structured request)
 Knowledge Router Agent
@@ -1401,7 +1400,7 @@ Knowledge Base (5,000+ .md files)
    ├── Vector Store (embeddings + metadata filtering)
    ├── Knowledge Graph (nodes: techniques, tools, failure_modes, papers, agents; relations: improves, requires, common_failure, used_with)
    └── Optional Pre-computed Centroids per Domain/Agent Cluster
-'''
+```
 
 **Key Design Principles**
 - **Metadata First**: Hard constraints eliminate 70-80% of irrelevant files instantly.
@@ -1411,7 +1410,7 @@ Knowledge Base (5,000+ .md files)
 - **Generalized + Extensible**: Core logic is domain-agnostic; domain packs and agent_relevance tags make it powerful for your AI Filmmaking + AI Agents corpus.
 
 Input from Requesting Agent
-'''json
+```json
 {
   "request_id": "uuid-v4",
   "timestamp": "2026-06-06T15:02:00Z",
@@ -1436,10 +1435,10 @@ Input from Requesting Agent
     "multi_hop_expected": true
   }
 }
-'''
+```
 
 Output from Router
-'''json
+```json
 {
   "request_id": "...",
   "selected_knowledge": [
@@ -1477,21 +1476,21 @@ Output from Router
   },
   "suggested_next_actions": ["Request deeper graph traversal on 'prop_consistency'", "Flag file X for quality review"]
 }
-'''
+```
 
 4. **LLM Ranker + Reflection** (Self-RAG / CRAG inspired)
    - Scores candidates on relevance to task + previous_failures + constraints.
    - Reflection step: “Are these passages actually useful for the downstream agent’s goal?” “Is anything critical missing?”
    - Can trigger corrective re-retrieval if quality low.
 
-4.4 Context Assembler
+### 4.4 Context Assembler
 - Options: raw top chunks | synthesized summary | structured knowledge pack (best for your critic-heavy agents).
 - For creative agents: often returns “Knowledge Pack” with sections like Best Practices, Failure Modes & Mitigations, Tool-Specific Notes, Prompt Templates.
 
-4.5 Explainer & Traceability
+### 4.5 Explainer & Traceability
 Every output includes a clear `reasoning_trace` (structured + natural language). This is non-negotiable for debugging and critic loops.
 
-4.6 Multi-Level Critic (Self-Improving Core)
+### 4.6 Multi-Level Critic (Self-Improving Core)
 Three levels:
 1. **Retrieval Critic**: Scores relevance, coverage of required_concepts, handling of previous_failures.
 2. **Routing Critic**: Judges whether the right files were chosen vs alternatives; suggests better tags or graph edges.
@@ -1506,7 +1505,7 @@ Use Case 1: Character Consistency Critic Agent
 - Returns structured pack: “Best reference sheet practices for Seedance + Kling”, “Lighting-induced color shift mitigations”, “Multi-shot coherence checklist”
 - Critic checks coverage of “previous_failures”
 
-'''yaml
+```yaml
 ---
 title: "..."
 category: ai_filmmaking | ai_agents | intersection_agentic_filmmaking
@@ -1519,7 +1518,7 @@ source_type: youtube | book | course | synthetic | research_paper
 date_added: 2026-05-20
 last_reviewed: 2026-06-01
 ---
-'''
+```
 
 **Phase 1 (MVP – 7–14 days)**
 - Metadata hard filters + basic vector search
@@ -1592,7 +1591,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system** that 
 - Inter-agent issues: Strong central Orchestrator with explicit decomposition/routing/contracts + structured handoff Observation schema (status, data, summary, confidence, issues, next_suggestions, provenance, trace_id). Circuit breakers per tool/role. Versioned shared state.
 - Interventions in paper (+9-15% gains): Better prompts/roles/topology + verification sections. Our system goes further with **runtime gates + evolution**.
 
-2.3 ReAct Foundations + Enhancements
+### 2.3 ReAct Foundations + Enhancements
 - **ReAct (Yao et al. ICLR 2023)**: Thought (reasoning trace) → Action (tool/delegate/finish) → Observation (grounded result) loop. 10-34% gains on interactive tasks vs pure CoT or acting. Our core: Strict structured decision output (Pydantic: thought, action_type, payload), structured Observation always.
 - **Enhancements Incorporated**:
   - **Reflexion** (Shinn et al.): Verbal self-critique on trajectories → improvement plans. Used in light reflection (every N steps) + full Phase 4.
@@ -1603,7 +1602,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system** that 
 
 **Rationale Summary**: This design directly attacks the #1 failure category (spec/design) via Phase 0 + living TaskSpec + critic. Closes verification gaps with mandatory gates + structured obs. Prevents loops/context rot with detection + summarization + structured state (todo.md pattern user prefers). Enables long-term robustness via TEA self-evolution. Leverages xAI strengths without ceding control. Matches user's iterative, spec-driven, production harness philosophy.
 
-3.1 High-Level Flow (Phases from agent_loop.md, Hardened)
+### 3.1 High-Level Flow (Phases from agent_loop.md, Hardened)
 1. **Phase 0: Initialization**
    - Parse instruction → generate/validate `TaskSpec` (Pydantic: objective, success_criteria: List[str], constraints: Dict, output_format, max_steps=50, token_budget=200k, quality_gates, initial_plan?).
    - Spec Validator + Critic (LLM): Check completeness, ambiguity, role clarity, termination conditions. Reject/revise if FM-1.x risks high.
@@ -1618,7 +1617,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system** that 
    - If fail gate: Trigger refinement (re-plan specific branch, re-delegate, or self-edit).
    - If pass: Proceed to polish or final.
 
-3.3 Key Modules to Implement (with Skeletons from attached + Enhancements)
+### 3.3 Key Modules to Implement (with Skeletons from attached + Enhancements)
 - **core/loop.py**: `controlled_react_loop` (enhance attached code with Pydantic, full state, MASFT-aware prompts, xAI hybrid hooks, progress tracking).
 - **reliability/circuit_breaker.py**: Enhanced class with metrics, per-tool/role instances, integration with safe_execute.
 - **reliability/verifier.py**: `verify_output` + `VERIFIER_PROMPT` tuned to catch FM-1.x/2.x/3.x (e.g., "Does this respect original task_spec and roles? Any premature termination or incomplete verification? Cross-check claims vs observations.").
@@ -1631,7 +1630,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system** that 
 
 **Coding Agent Workflow During Build**: After each phase/module, generate code → run internal critic (use verifier logic or separate reflection prompt) → fix issues → re-validate against gate criteria → proceed. Maintain `build_task.md` / `todo.md` internally. Log all to tracer for later self-evolution of the builder itself.
 
-6. Testing & Validation Strategy (Critical for Coding Agent)
+## 6. Testing & Validation Strategy (Critical for Coding Agent)
 
 **Recommended First Prompt to Coding Agent (copy-paste)**:
 "Read `agent_loop_creator.md` and `agent_loop.md` fully. Create the `agent_loop/` Python package scaffold with pyproject.toml, core Pydantic models (TaskSpec, StructuredObservation, etc.), basic LLM client, and a minimal working controlled ReAct loop that passes the Phase 0/1 verification gates. Use strict JSON schemas. Include initial failure_injection test skeleton for MASFT modes. Maintain todo.md during your work and apply critic/refinement to every generated module."
@@ -1678,7 +1677,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system (v3 Cog
 - Inter-agent issues: Strong central Orchestrator with explicit decomposition/routing/contracts + structured handoff Observation schema (status, data, summary, confidence, issues, next_suggestions, provenance, trace_id). Circuit breakers per tool/role. Versioned shared state.
 - Interventions in paper (+9-15% gains): Better prompts/roles/topology + verification sections. Our system goes further with **runtime gates + evolution**.
 
-2.3 ReAct Foundations + Enhancements
+### 2.3 ReAct Foundations + Enhancements
 - **ReAct (Yao et al. ICLR 2023)**: Thought (reasoning trace) → Action (tool/delegate/finish) → Observation (grounded result) loop. 10-34% gains on interactive tasks vs pure CoT or acting. Our core: Strict structured decision output (Pydantic: thought, action_type, payload), structured Observation always.
 - **Enhancements Incorporated**:
   - **Reflexion** (Shinn et al.): Verbal self-critique on trajectories → improvement plans. Used in light reflection (every N steps) + full Phase 4.
@@ -1689,7 +1688,7 @@ Implement a **controlled, hierarchical, ReAct-inspired agent loop system (v3 Cog
 
 **Rationale Summary**: This design directly attacks the #1 failure category (spec/design) via Phase 0 + living TaskSpec + critic. Closes verification gaps with mandatory gates + structured obs. Prevents loops/context rot with detection + summarization + structured state (todo.md pattern user prefers). Enables long-term robustness via TEA self-evolution. Leverages xAI strengths without ceding control. Matches user's iterative, spec-driven, production harness philosophy.
 
-3.1 High-Level Flow (Phases from agent_loop_v3.md, Hardened with Cognitive Layer)
+### 3.1 High-Level Flow (Phases from agent_loop_v3.md, Hardened with Cognitive Layer)
 1. **Phase 0: Initialization (Spec-Driven + Cognitive Setup)**
    - Parse instruction → generate/validate `TaskSpec` (Pydantic: objective, success_criteria: List[str], constraints: Dict, output_format, max_steps=50, token_budget=200k, quality_gates, initial_plan?, **cognitive_profile: Dict** e.g. {"enable_fast_path": true, "reflection_style": "aar_double_loop_5whys", "critic_modes": ["red_team", "paul_elder"], "cynefin_classification": "auto"}).
    - Spec Validator + Critic (LLM): Check completeness, ambiguity, role clarity, termination conditions. Reject/revise if FM-1.x risks high. **Run Premortem Analysis**: "Assume this spec/plan fails spectacularly — identify top causes and mitigations; merge into living spec, success_criteria, todo, and quality_gates."
@@ -1866,7 +1865,7 @@ From `corpus/root/project_starter_0.2.md` Copy: `sources/excerpts/project_starte
 - [ ] Self-review / critic  
 - [ ] Skill suggestion lifecycle
 
-13. Phase 7 — Self-Evaluation and Critic Routine
+## 13. Phase 7 — Self-Evaluation and Critic Routine
 
 - **Actor/Solver:** Implements the task.  
 - **Critic:** Reviews correctness, simplicity, spec adherence, security, performance, maintainability.  
@@ -1962,9 +1961,9 @@ for critic in critics:
                 artifact=event.artifact_id,
                 producer_agent=event.agent_id
             )
-'''
+```
 
-'''text
+```text
 USER clicks [▶ LAUNCH]
          │
          ▼
@@ -2030,7 +2029,7 @@ USER clicks [▶ LAUNCH]
 │  └─────────────────────────────────────────────────────┘    │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -2078,7 +2077,7 @@ From `corpus/study/ui/RETHINK_100_IMPROVEMENTS.md` Copy: `sources/excerpts/RETHI
 From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  CRITIQUE FEED              Filter: [All Agents ▼] [All Phases ▼] [All ▼]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2115,9 +2114,9 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │  └───────────────────────────────────────────────────────────────────────┘  │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  QUALITY DASHBOARD                                                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2150,7 +2149,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │  └────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | Component | Usage | Variants |
 |-----------|-------|----------|
@@ -2185,7 +2184,7 @@ interface CritiqueMessage {
   status: 'open'|'accepted'|'rejected'|'resolved';
   humanResponse?: string;
 }
-'''
+```
 
 
 
@@ -2249,5 +2248,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.critic · v1 · 2026-07-13 -->
 
-```
 

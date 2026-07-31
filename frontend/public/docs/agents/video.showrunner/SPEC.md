@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 ShowrunnerAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-1. Above-the-Line Agents
+## 1. Above-the-Line Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -202,19 +201,19 @@ Multi-agent debate (Du 2023) + MemoryAgent retrieval
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -238,7 +237,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -251,11 +250,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -265,13 +264,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -594,11 +593,11 @@ Using [Behavior Change Wheel]([historical-url] to analyze audience behavior tran
 - **Tools Needed:** Google Docs, timer, notebook
 
 **Action Breakdown using [Task Decomposition]([historical-url]
-1. Open Google Docs (2 minutes)
-2. Set 30-minute timer (1 minute)
-3. Write down three core questions (5 minutes)
-4. Free-write answers (20 minutes)
-5. Quick review and mark key points (2 minutes)
+## 1. Open Google Docs (2 minutes)
+## 2. Set 30-minute timer (1 minute)
+## 3. Write down three core questions (5 minutes)
+## 4. Free-write answers (20 minutes)
+## 5. Quick review and mark key points (2 minutes)
 
 **Follow-up Question:** "Ideation" is too broad. What will I do today? Where will I sit? What tools will I use?
 
@@ -667,10 +666,10 @@ Open-Source Framework Implementation Guide
 - [Story Spine Framework]([historical-url] - Personal story structuring
 
 **Implementation Steps:**
-1. Use Five Whys to deeply explore root motivations
-2. Use Values Assessment to verify consistency between motivations and values
-3. Use Story Spine to turn motivations into stories
-4. Use Motivation Mapping to create a motivation intensity map
+## 1. Use Five Whys to deeply explore root motivations
+## 2. Use Values Assessment to verify consistency between motivations and values
+## 3. Use Story Spine to turn motivations into stories
+## 4. Use Motivation Mapping to create a motivation intensity map
 
 
 
@@ -682,10 +681,10 @@ Open-Source Framework Implementation Guide
 - [Customer Journey Mapping]([historical-url] - Customer Journey Mapping
 
 **Implementation Steps:**
-1. Create an Empathy Map to understand audience emotions
-2. Generate detailed User Personas
-3. Analyze audience Jobs-to-be-Done
-4. Map Customer Journey to identify touchpoints
+## 1. Create an Empathy Map to understand audience emotions
+## 2. Generate detailed User Personas
+## 3. Analyze audience Jobs-to-be-Done
+## 4. Map Customer Journey to identify touchpoints
 
 
 
@@ -697,10 +696,10 @@ Open-Source Framework Implementation Guide
 - [Risk Assessment Toolkit]([historical-url] - Risk assessment
 
 **Implementation Steps:**
-1. Use Constraints Canvas to define constraints
-2. Design Creative Process that meets the constraints
-3. Conduct Resource Planning to ensure feasibility
-4. Perform Risk Assessment to prevent issues
+## 1. Use Constraints Canvas to define constraints
+## 2. Design Creative Process that meets the constraints
+## 3. Conduct Resource Planning to ensure feasibility
+## 4. Perform Risk Assessment to prevent issues
 
 
 
@@ -712,10 +711,10 @@ Open-Source Framework Implementation Guide
 - [Mindfulness Integration]([historical-url] - Mindfulness integration
 
 **Implementation Steps:**
-1. Use Emotional Design Toolkit to design emotional experiences
-2. Establish body sensation connections through Somatic Tools
-3. Learn Emotion Regulation to cope with negative emotions
-4. Integrate Mindfulness to enhance awareness
+## 1. Use Emotional Design Toolkit to design emotional experiences
+## 2. Establish body sensation connections through Somatic Tools
+## 3. Learn Emotion Regulation to cope with negative emotions
+## 4. Integrate Mindfulness to enhance awareness
 
 
 
@@ -727,10 +726,10 @@ Open-Source Framework Implementation Guide
 - [Feedback Loop Design]([historical-url] - Feedback loop design
 
 **Implementation Steps:**
-1. Design Impact Canvas to define impact levels
-2. Use Behavior Change Wheel to analyze change mechanisms
-3. Calculate SROI to quantify social value
-4. Establish Feedback Loops for continuous improvement
+## 1. Design Impact Canvas to define impact levels
+## 2. Use Behavior Change Wheel to analyze change mechanisms
+## 3. Calculate SROI to quantify social value
+## 4. Establish Feedback Loops for continuous improvement
 
 
 
@@ -743,11 +742,11 @@ Open-Source Framework Implementation Guide
 - [Retrospective Toolkit]([historical-url] - Review and Improvement
 
 **Implementation Steps:**
-1. Use GTD to establish an action management system
-2. Set up OKR to track progress
-3. Use Kanban to visualize workflow
-4. Apply Pomodoro to enhance focus
-5. Conduct regular Retrospectives for continuous improvement
+## 1. Use GTD to establish an action management system
+## 2. Set up OKR to track progress
+## 3. Use Kanban to visualize workflow
+## 4. Apply Pomodoro to enhance focus
+## 5. Conduct regular Retrospectives for continuous improvement
 
 Learning Points and Application Guide
 
@@ -804,7 +803,7 @@ Use the following open-source tool combination to diagnose your goal:
 **Tool:** [Five Whys Digital Template]([historical-url]
 
 **Usage:**
-'''markdown
+```markdown
 Five Whys Analysis
 Goal: [Your goal]
 1. Why do I want this? [First layer reason]
@@ -814,7 +813,7 @@ Goal: [Your goal]
 5. Why is that fundamental? [Root cause]
 
 Root Motivation: [Core motivation discovered]
-'''
+```
 
 
 
@@ -822,7 +821,7 @@ Root Motivation: [Core motivation discovered]
 **Tool:** [Empathy Map Canvas]([historical-url]
 
 **JSON Template:**
-'''json
+```json
 {
   "persona_name": "Specific persona name",
   "demographics": {
@@ -837,7 +836,7 @@ Root Motivation: [Core motivation discovered]
   "pains": ["Pain points"],
   "gains": ["Gain points"]
 }
-'''
+```
 
 
 
@@ -845,7 +844,7 @@ Root Motivation: [Core motivation discovered]
 **Tool:** [GTD Next Action Template]([historical-url]
 
 **Template Format:**
-'''markdown
+```markdown
 Next Action Definition
 - **Action**: [Specific action description]
 - **Context**: @[Environment/Tool requirements]
@@ -853,7 +852,7 @@ Next Action Definition
 - **Energy**: [noted energy level: High/Medium/Low]
 - **Outcome**: [Expected outcome]
 - **Success Criteria**: [Success criteria]
-'''
+```
 
 
 
@@ -861,10 +860,10 @@ Next Action Definition
 **Tool:** [OKR Tracking Sheet]([historical-url]
 
 **CSV Format:**
-'''csv
+```csv
 Objective,Key Result 1,KR1 Target,KR1 Current,Key Result 2,KR2 Target,KR2 Current,Key Result 3,KR3 Target,KR3 Current
 [Objective Description],[Key Result 1],[Target Value],[Current Value],[Key Result 2],[Target Value],[Current Value],[Key Result 3],[Target Value],[Current Value]
-'''
+```
 
 **Practice 2: Framework Integration Deepening Workshop**
 Use open-source tools for a structured 30-minute deepening dialogue:
@@ -875,34 +874,34 @@ Use open-source tools for a structured 30-minute deepening dialogue:
 
 **First 10 Minutes: Motivation Mining**  
 **Tool:** [Motivation Archaeology Toolkit]([historical-url]  
-'''bash
+```bash
 Install the tool
 git clone [historical-url]
 cd archaeology
 python motivation_digger.py --goal "your goal"
-'''
+```
 
 **Execution Steps:**  
-1. Use Story Spine to structure personal experiences  
-2. Apply Values Alignment Checker to verify consistency  
-3. Run Emotional Intensity Mapper to measure motivation intensity  
+## 1. Use Story Spine to structure personal experiences
+## 2. Apply Values Alignment Checker to verify consistency
+## 3. Run Emotional Intensity Mapper to measure motivation intensity
 
 **Middle 10 Minutes: Audience Specification**  
 **Tool:** [Persona Builder CLI]([historical-url]  
-'''bash
+```bash
 Quickly generate user personas
 npm install -g persona-builder-cli
 persona-builder --interactive --template empathy-map
-'''
+```
 
 **Execution Steps:**  
-1. Fill in each quadrant of the Empathy Map  
-2. Generate User Journey Map  
-3. Create Pain Points & Gain Points analysis  
+## 1. Fill in each quadrant of the Empathy Map
+## 2. Generate User Journey Map
+## 3. Create Pain Points & Gain Points analysis
 
 **Last 10 Minutes: Action Planning**  
 **Tool:** [Action Planner Pro]([historical-url]  
-'''python
+```python
 Python script for quick planning
 from action_planner import GTDProcessor, PomodoroTimer
 
@@ -915,7 +914,7 @@ Set priorities
 prioritized = planner.eisenhower_matrix(tasks)
 Create time blocks
 schedule = timer.create_time_blocks(prioritized)
-'''
+```
 
 **Practice 3: AI-Assisted Quality Assessment System**  
 Use open-source AI tools to automatically evaluate answer quality:
@@ -926,7 +925,7 @@ Use open-source AI tools to automatically evaluate answer quality:
 **Main Tool:** [Answer Quality Analyzer]([historical-url]
 
 **Installation and Usage:**
-'''bash
+```bash
 Clone the assessment tool
 git clone [historical-url]
 cd analyzer
@@ -936,10 +935,10 @@ pip install -r requirements.txt
 
 Run assessment
 python assess_answer.py --input "your answer" --criteria all
-'''
+```
 
 **Assessment Dimensions and Algorithms:**
-'''python
+```python
 Assessment configuration file config.yaml
 assessment_criteria:
   specificity:
@@ -966,10 +965,10 @@ assessment_criteria:
     weight: 0.15
     algorithm: "conviction_strength_meter"
     threshold: 0.75  # Conviction threshold
-'''
+```
 
 **Automated Report Generation:**
-'''json
+```json
 {
   "overall_score": 22,
   "grade": "Excellent",
@@ -990,7 +989,7 @@ assessment_criteria:
     }
   }
 }
-'''
+```
 
 
 
@@ -998,7 +997,7 @@ assessment_criteria:
 **Tool:** [Goal Coherence Validator]([historical-url]
 
 **Multi-dimensional Consistency Check:**
-'''python
+```python
 from coherence_validator import GoalValidator
 
 validator = GoalValidator()
@@ -1014,7 +1013,7 @@ result = validator.check_coherence({
 print(result.coherence_score)  # 0-100 consistency score
 print(result.conflict_areas)   # conflict areas identification
 print(result.alignment_suggestions)  # alignment suggestions
-'''
+```
 
 **Practice 4: Intelligent Obstacle Prediction and Response System**
 Use AI-driven obstacle analysis and response strategy generation:
@@ -1025,16 +1024,16 @@ Use AI-driven obstacle analysis and response strategy generation:
 **Tool:** [Obstacle Prediction AI]([historical-url]
 
 **Installation and Configuration:**
-'''bash
+```bash
 Install the prediction engine
 pip install obstacle-predictor
 
 Configure personal profile
 obstacle-predictor init --profile personal
-'''
+```
 
 **Intelligent Analysis Script:**
-'''python
+```python
 from obstacle_predictor import ObstacleAnalyzer, StrategyGenerator
 
 Initialize analyzer
@@ -1059,10 +1058,10 @@ for obstacle in obstacles:
     strategies = strategy_gen.generate_strategies(obstacle, goal_data)
     print(f"Obstacle: {obstacle}")
     print(f"Strategies: {strategies}")
-'''
+```
 
 **Prediction Result Example:**
-'''json
+```json
 {
   "predicted_obstacles": [
     {
@@ -1085,7 +1084,7 @@ for obstacle in obstacles:
     }
   ]
 }
-'''
+```
 
 
 
@@ -1093,7 +1092,7 @@ for obstacle in obstacles:
 **Tool:** [Scenario Simulator]([historical-url]
 
 **Virtual Reality Training:**
-'''python
+```python
 from scenario_simulator import VRTrainer, EmotionalStateTracker
 
 trainer = VRTrainer()
@@ -1115,7 +1114,7 @@ for scenario in scenarios:
     print(f"應對效果：{result.effectiveness}")
     print(f"情感狀態：{emotional_state}")
     print(f"改進建議：{result.improvement_tips}")
-'''
+```
 
 
 
@@ -1123,7 +1122,7 @@ for scenario in scenarios:
 **Tool:** [Resilience Builder Toolkit]([historical-url]
 
 **Automated Encouragement System:**
-'''python
+```python
 from resilience_builder import MotivationGenerator, PersonalizedAffirmations
 
 基於個人特質生成鼓勵語句
@@ -1143,7 +1142,7 @@ motivational_reminders = motivation_gen.create_reminders(personal_profile)
 print("個人化鼓勵語句：")
 for affirmation in affirmations:
     print(f"- {affirmation}")
-'''
+```
 
 **Continuous Improvement Tips:**
 - Review your answers weekly to see if adjustments are needed
@@ -1163,7 +1162,7 @@ Open Source Framework Ecosystem Integration
 **Main Framework:** [Continuous Improvement Engine]([historical-url]
 
 **Automated Improvement Process:**
-'''python
+```python
 from kaizen_engine import ImprovementCycle, MetricsCollector, InsightGenerator
 
 建立改進循環
@@ -1185,7 +1184,7 @@ next_cycle_adjustments = cycle.plan_next_iteration(improvement_suggestions)
 
 print("本週改進建議：", improvement_suggestions)
 print("下週調整計劃：", next_cycle_adjustments)
-'''
+```
 
 
 
@@ -1200,7 +1199,7 @@ print("下週調整計劃：", next_cycle_adjustments)
 - Community support network
 
 **API Integration Example:**
-'''javascript
+```javascript
 // Integration with API from various frameworks
 const goalTracker = new GoalTrackerAPI();
 
@@ -1219,7 +1218,7 @@ goalTracker.notifications.schedule({
     trigger: 'low_energy_detected',
     content: personalizedAffirmations
 });
-'''
+```
 
 
 
@@ -1233,7 +1232,7 @@ goalTracker.notifications.schedule({
 - Real-time mutual assistance network
 
 **Community API Usage:**
-'''python
+```python
 from goal_community import AccountabilityMatcher, WisdomCrowdsourcing
 
 Find accountability partner
@@ -1255,7 +1254,7 @@ community_advice = crowdsourcing.get_advice({
 
 print(f"匹配的問責夥伴：{partner.name}")
 print(f"社群建議：{community_advice}")
-'''
+```
 
 
 
@@ -1263,7 +1262,7 @@ print(f"社群建議：{community_advice}")
 **Tool:** [Goal Success Predictor]([historical-url]
 
 **Machine Learning Models:**
-'''python
+```python
 from goal_predictor import SuccessPredictor, OptimizationEngine
 
 Train personalized prediction model
@@ -1294,7 +1293,7 @@ optimization_plan = optimizer.suggest_improvements(
 
 print(f"成功概率：{success_probability:.2%}")
 print(f"優化建議：{optimization_plan}")
-'''
+```
 
 
 
@@ -1302,7 +1301,7 @@ print(f"優化建議：{optimization_plan}")
 **Tool:** [Goal Analytics Dashboard]([historical-url]
 
 **Real-time Monitoring Panel:**
-'''html
+```html
 <!-- Embedded Dashboard -->
 <div id="goal-dashboard">
     <goal-progress-chart 
@@ -1325,7 +1324,7 @@ print(f"優化建議：{optimization_plan}")
         update-interval="daily">
     </success-probability-meter>
 </div>
-'''
+```
 
 
 
@@ -1333,7 +1332,7 @@ print(f"優化建議：{optimization_plan}")
 **System:** [Adaptive Learning Pathways]([historical-url]
 
 **Personalized Learning Recommendations:**
-'''python
+```python
 from adaptive_learning import PathwayRecommender, SkillGapAnalyzer
 
 recommender = PathwayRecommender()
@@ -1356,7 +1355,7 @@ learning_path = recommender.create_pathway({
 print("推薦學習路徑：")
 for step in learning_path:
     print(f"- {step.title}: {step.duration} ({step.format})")
-'''
+```
 
 Framework Implementation Success Factors
 
@@ -1404,7 +1403,7 @@ Complete Screenwriting Workflow with Open Source Frameworks
 
 📋 Workflow Overview
 
-'''
+```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Six-Stage Screenwriting Workflow               │
 ├─────────────────────────────────────────────────────────────────┤
@@ -1415,7 +1414,7 @@ Complete Screenwriting Workflow with Open Source Frameworks
 │  └───┘      └───┘      └───┘      └───┘      └───┘      └───┘  │
 │   1 week      1 week      1 week      1 week     6-8 weeks    2-4 weeks  │
 └─────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -1432,10 +1431,10 @@ Open Source Tool Combination
 
 
 
-1.1 Motivation Mining Tool
+### 1.1 Motivation Mining Tool
 **Tool: [Obsidian]([historical-url] - Knowledge Management and Mind Mapping
 
-'''bash
+```bash
 Install Obsidian (cross-platform)
 Windows: Download [historical-url]
 Or use Scoop
@@ -1444,10 +1443,10 @@ scoop install obsidian
 Create screenplay project repository
 mkdir screenplay-project
 cd screenplay-project
-'''
+```
 
 **Obsidian Template Setup:**
-'''markdown
+```markdown
 Motivation Exploration Journal Template
 
 date: {{date}}
@@ -1470,24 +1469,24 @@ Story Seed
 - One-sentence summary:
 - Core emotion:
 - Potential theme:
-'''
+```
 
 
 
-1.2 Story Ideation Tool
+### 1.2 Story Ideation Tool
 **Tool: [Logseq]([historical-url] - Outliner-style thinking tool
 
-'''bash
+```bash
 Install Logseq
 Windows
 winget install Logseq.Logseq
 
 Or download AppImage (Linux)
 wget [historical-url]
-'''
+```
 
 **Story Seed Collection Template:**
-'''markdown
+```markdown
 - Story seed #screenplay #idea
   - Trigger event:: Breakdown after watching a family movie late at night
   - Core emotions:: Loneliness, entrapment, desire for connection
@@ -1496,14 +1495,14 @@ wget [historical-url]
   - Unique perspective:: From the child's view caught between parents
   - Possible structure:: Nonlinear, memory fragments
   - Reference works:: 《乘風破浪》《陽光普照》
-'''
+```
 
 
 
-1.3 Emotion Intensity Measurement
+### 1.3 Emotion Intensity Measurement
 **Tool: [Day One]([historical-url] (open-source alternative: Bloom)** - Emotion Journal
 
-'''python
+```python
 情感強度追蹤腳本
 emotion_tracker.py
 
@@ -1543,12 +1542,12 @@ tracker.log_emotion(
     intensity=9,
     body_sensation="胸口緊縮、眼眶濕潤"
 )
-'''
+```
 
-1.3 Emotion Intensity Measurement
+### 1.3 Emotion Intensity Measurement
 **Tool: [Day One]([historical-url] (open-source alternative: Bloom)** - emotion journal
 
-'''python
+```python
 Emotion intensity tracking script
 Stage 1 Deliverables
 - [ ] 3-5 story seeds
@@ -1572,16 +1571,16 @@ Open Source Tool Combination
 2.1 Audience Research Tools
 **Tool: [Miro]([historical-url] Open Source Alternative - [Excalidraw]([historical-url]
 
-'''bash
+```bash
 Run Excalidraw locally
 git clone [historical-url]
 cd excalidraw
 npm install
 npm start
-'''
+```
 
 **Empathy Map Template (JSON format):**
-'''json
+```json
 {
   "empathy_map": {
     "persona_name": "Ah Hin",
@@ -1624,7 +1623,7 @@ npm start
     ]
   }
 }
-'''
+```
 
 
 
@@ -1650,16 +1649,16 @@ Open Source Tool Combination
 3.1 Story Structure Tools
 **Tool: [Trelby]([historical-url] - Open-source screenplay writing software
 
-'''bash
+```bash
 Linux installation
 sudo apt-get install trelby
 
 Windows - Download installer
 [historical-url]
-'''
+```
 
 **Three-Act Structure Template:**
-'''
+```
                     Screenplay Structure Design
     ┌─────────────────────────────────────────────┐
     │                                             │
@@ -1675,7 +1674,7 @@ Windows - Download installer
     │      ↓              ↓              ↓        │
     │   Pages 1-25     Pages 26-75     Pages 76-100│
     └─────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -1701,15 +1700,15 @@ Open Source Tool Combination
 4.1 Emotion Curve Tool
 **Tool: [Plottr]([historical-url] Open Source Alternative - [Manuskript]([historical-url]
 
-'''bash
+```bash
 Install Manuskript
 pip install manuskript
 or
 flatpak install flathub io.github.olivierkes.manuskript
-'''
+```
 
 **Emotion Curve Design (Python Visualization):**
-'''python
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -1731,7 +1730,7 @@ ax.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('emotion_curve.png', dpi=150)
 plt.show()
-'''
+```
 
 
 
@@ -1759,14 +1758,14 @@ Open Source Tool Combination
 5.1 Screenwriting Software
 **Main Tools: [Fountain]([historical-url] + VS Code**
 
-'''bash
+```bash
 Install editor with Fountain syntax support
 VS Code extension
 code --install-extension piersdeseilligny.fountain
-'''
+```
 
 **Fountain Syntax Example:**
-'''fountain
+```fountain
 Title: Beneath the Mask
 Credit: Written by
 Author: [Your Name]
@@ -1791,14 +1790,14 @@ Okay, I'll revise it again.
 Her hand grips the mouse tightly, knuckles turning white.
 
 CUT TO:
-'''
+```
 
 
 
 5.2 Writing Progress Tracking
 **Tool: Custom Tracker**
 
-'''python
+```python
 writing_tracker.py
 import json
 from datetime import datetime, timedelta
@@ -1856,7 +1855,7 @@ tracker = ScreenwritingTracker("Under the Mask", target_pages=100)
 tracker.log_session(pages_written=3, duration_minutes=60, mood='focused', 
                    notes='Completed the first scene, feeling good')
 print(tracker.generate_report())
-'''
+```
 
 
 
@@ -1882,25 +1881,25 @@ Open Source Tool Combination
 6.1 Self-Proofreading Tool
 **Tool: [LanguageTool]([historical-url]
 
-'''bash
+```bash
 Install LanguageTool
 Docker method
 docker pull erikvl87/languagetool
 docker run -d -p 8010:8010 erikvl87/languagetool
-'''
+```
 
 
 
 6.2 Final Output Tool
 **Tool: [Afterwriting]([historical-url]
 
-'''bash
+```bash
 Install Afterwriting CLI
 npm install -g afterwriting
 
 Convert Fountain to PDF
 afterwriting --source screenplay.fountain --pdf --config config.json
-'''
+```
 
 
 
@@ -2606,7 +2605,7 @@ The effectiveness of the self-questioning framework is built on a solid foundati
 
 **Motivation Hierarchy Model:**
 
-'''
+```
                     Motivation Pyramid
     ┌─────────────────────────────────────┐
     │           Self-Actualization Motivation              │ ← Deepest Layer
@@ -2624,14 +2623,14 @@ The effectiveness of the self-questioning framework is built on a solid foundati
     │           Survival and Basic Needs             │ ← Surface Layer
     │      (Income, living essentials)                │
     └─────────────────────────────────────┘
-'''
+```
 
 **Motivation Archaeology Techniques:**
 
 **Technique 1: Timeline Retrospective Method**
-'''markdown
+```markdown
 Motivation Timeline Template
-'''
+```
 
 
 
@@ -2673,7 +2672,7 @@ Sometimes, behind our surface motivations lie deeper "shadow motivations":
 | "I want freedom" | Past experiences of being controlled, fear of commitment | "What does freedom mean to you? What are you avoiding?" |
 
 **Technique 3: Values Alignment Detection**
-'''python
+```python
 Values Alignment Assessment Tool
 def assess_value_alignment(goal, core_values):
     """
@@ -2695,7 +2694,7 @@ def assess_value_alignment(goal, core_values):
     ]
     # Actual implementation requires user responses to these questions
     return alignment_score, conflicts, recommendations
-'''
+```
 
 
 
@@ -2703,7 +2702,7 @@ def assess_value_alignment(goal, core_values):
 
 **Four Dimensions of Audience Understanding:**
 
-'''
+```
               Audience Understanding Matrix
     ┌────────────────┬────────────────┐
     │   Explicit Needs │   Implicit Needs │
@@ -2714,13 +2713,13 @@ def assess_value_alignment(goal, core_values):
     │   Points        │   (Subconscious)│
     │ (Observable)    │                 │
     └────────────────┴────────────────┘
-'''
+```
 
 **Deep Audience Persona Template:**
 
-'''markdown
+```markdown
 Deep Audience Persona: [Persona Name]
-'''
+```
 
 
 
@@ -2791,7 +2790,7 @@ Connection with Your Audience
 
 **Method Selection Decision Tree:**
 
-'''
+```
                     Method Selection Decision Process
                           │
                           ▼
@@ -2815,13 +2814,13 @@ Connection with Your Audience
     - Free Writing      - Deliberate Practice      - OKR Framework
     - Mind Mapping        - Spaced Repetition      - Agile Methods
     - Prototyping      - Mentor Guidance      - Project Management
-'''
+```
 
 **Personalized Method Design Framework:**
 
-'''markdown
+```markdown
 My Method Design Worksheet
-'''
+```
 
 
 
@@ -2876,7 +2875,7 @@ Part Three: Time Design
    - Shallow work sessions:
    - Rest and recovery sessions:
 
-'''
+```
 
 **Constraint Transformation Techniques:**
 
@@ -2894,7 +2893,7 @@ Part Three: Time Design
 
 **Emotional Map Technique:**
 
-'''
+```
                 Emotional Journey Map
     
     Emotional Intensity
@@ -2911,15 +2910,15 @@ Part Three: Time Design
         │
      0  ├────┬────┬────┬────┬────┬────► Time
             Start  Attempt  Setback  Adjustment  Breakthrough  Completion
-'''
+```
 
 **Emotional Rehearsal Technique:**
 
 This is a powerful psychological preparation technique that helps you pre-experience the emotions after achieving your goal:
 
-'''markdown
+```markdown
 Emotional Rehearsal Exercise
-'''
+```
 
 
 
@@ -2960,7 +2959,7 @@ Step 4: Body Anchoring (2 minutes)
 Step 5: Record (5 minutes)
 Write down everything you just experienced
 
-'''
+```
 
 **Emotional Resilience Building:**
 
@@ -2975,11 +2974,11 @@ Write down everything you just experienced
 
 **Emotional Journal Template:**
 
-'''markdown
+```markdown
 Daily Emotional Journal
 
 Date: ___________
-'''
+```
 
 
 
@@ -3010,7 +3009,7 @@ What is this emotion trying to tell me?
 
 Tomorrow's Intention
 What emotion do I want to start tomorrow with?
-'''
+```
 
 
 
@@ -3018,7 +3017,7 @@ What emotion do I want to start tomorrow with?
 
 **Influence Ripple Model:**
 
-'''
+```
                     Influence Ripple Diagram
     
                         ┌─────────────────────┐
@@ -3043,13 +3042,13 @@ What emotion do I want to start tomorrow with?
                         │  │  └─────────┘  │  │
                         │  └───────────────┘  │
                         └─────────────────────┘
-'''
+```
 
 **Influence Measurement Framework:**
 
-'''markdown
+```markdown
 Influence Measurement Worksheet
-'''
+```
 
 
 
@@ -3081,13 +3080,13 @@ Layer 4: Ripple Effect (Indirect Impact)
 | Ripple Effect | Observation Indicators | Time Frame |
 |----------|----------|----------|
 | | | |
-'''
+```
 
 **Impact Story Collection:**
 
-'''markdown
+```markdown
 Impact Story Template
-'''
+```
 
 
 
@@ -3126,7 +3125,7 @@ Results
 Reference
 "___________"
 — [Anonymous Description]
-'''
+```
 
 **Negative Impact Prevention Checklist:**
 
@@ -3144,7 +3143,7 @@ Reference
 
 **Execution System Architecture:**
 
-'''
+```
                 Execution System Pyramid
     
                     ┌───────┐
@@ -3164,13 +3163,13 @@ Reference
          /          │ 行動  │          \
         /           └───────┘           \
        ─────────────────────────────────────
-'''
+```
 
 **SMART+ Goal Setting:**
 
-'''markdown
+```markdown
 SMART+ Goal Setting Worksheet
-'''
+```
 
 
 
@@ -3217,7 +3216,7 @@ T - Time-bound (Time-bound)
 
 **Obstacle Prevention Matrix:**
 
-'''
+```
                 Obstacle Prevention Matrix
     
               │  Predictable  │  Unpredictable
@@ -3229,7 +3228,7 @@ T - Time-bound (Time-bound)
     External   │  Risk        │  Flexible
     Obstacles  │  Management  │  Design
     (Environmental) │ Strategy C │ Strategy D
-'''
+```
 
 **Strategy Details:**
 
@@ -3242,11 +3241,11 @@ T - Time-bound (Time-bound)
 
 **Weekly Review Template:**
 
-'''markdown
+```markdown
 Weekly Review
 
 Date: ___________
-'''
+```
 
 
 
@@ -3294,7 +3293,7 @@ Date: ___________
 
 🙏 Gratitude
 This week I am grateful for:
-'''
+```
 
 
 
@@ -3319,7 +3318,7 @@ Goal Management and Tracking Tools
 
 Reflection and Self-Exploration Tool
 
-'''python
+```python
 自我提問自動化腳本
 self_inquiry_bot.py
 
@@ -3417,9 +3416,9 @@ Case 2: Skill Goal — "Learning Programming"
 
 **Phase 3: Method Design**
 
-'''markdown
+```markdown
 Method Design Worksheet
-'''
+```
 
 
 
@@ -3432,10 +3431,10 @@ Self-Recognition
 
 Method Selection
 After evaluation, the "Project-Driven Learning Method" is selected:
-1. Choose a small project you want to do
-2. Learn the knowledge noted to complete the project
-3. Learn while doing, look up issues as they arise
-4. After completion, review what has been learned
+## 1. Choose a small project you want to do
+## 2. Learn the knowledge noted to complete the project
+## 3. Learn while doing, look up issues as they arise
+## 4. After completion, review what has been learned
 
 
 
@@ -3464,7 +3463,7 @@ First Project
   - Week 2: Add CSS styles
   - Week 3: Implement JavaScript functionality
   - Week 4: Optimize and deploy
-'''
+```
 
 
 
@@ -3474,9 +3473,9 @@ Case 3: Personal Growth Goal — "Overcoming Social Anxiety"
 
 **Emotional Rehearsal Practice Record:**
 
-'''markdown
+```markdown
 Emotional Rehearsal: Me After Overcoming Social Anxiety
-'''
+```
 
 
 
@@ -3531,9 +3530,9 @@ Case 4: Creative Goal — "Write a Novel"
 
 **Stage 5: Influence Design**
 
-'''markdown
+```markdown
 Influence Design Worksheet
-'''
+```
 
 
 
@@ -3592,7 +3591,7 @@ Potential Negative Impacts and Prevention
 | Readers misinterpreting the author's intent | Explain the creative intent in the afterword |
 | Triggering readers' trauma | Add content warnings at the beginning |
 | Being overly commercialized in interpretation | Maintain the authenticity of the creation |
-'''
+```
 
 🎓 Advanced Techniques and Expert Strategies
 
@@ -3602,7 +3601,7 @@ Technique 1: Dual-Track Thinking Method
 
 Examine your goal from two perspectives simultaneously:
 
-'''
+```
         Rational Track                Emotional Track
     ┌─────────────┐            ┌─────────────┐
     │ Is this rational? │            │ Does this excite me?│
@@ -3619,13 +3618,13 @@ Examine your goal from two perspectives simultaneously:
               │ Rational +  │
               │ Emotional   │
               └─────────────┘
-'''
+```
 
 **Practice Method:**
-1. First, explore with the emotional track (without criticism)
-2. Then, evaluate with the rational track (without suppressing emotions)
-3. Find the intersection of the two
-4. If there's conflict, deeply explore the root of the conflict
+## 1. First, explore with the emotional track (without criticism)
+## 2. Then, evaluate with the rational track (without suppressing emotions)
+## 3. Find the intersection of the two
+## 4. If there's conflict, deeply explore the root of the conflict
 
 
 
@@ -3646,9 +3645,9 @@ Technique 3: Role-Playing Method
 
 View your goal from the perspective of different roles:
 
-'''markdown
+```markdown
 Role-Playing Exercise
-'''
+```
 
 
 
@@ -3688,9 +3687,9 @@ Technique 4: Obstacle Rehearsal Method
 
 Anticipate and "experience" potential obstacles in advance:
 
-'''markdown
+```markdown
 Obstacle Rehearsal Exercise
-'''
+```
 
 
 
@@ -3743,9 +3742,9 @@ Select appropriate framework activities based on your energy state:
 
 After completing the exploration of the six stages, use this integration template to connect all insights:
 
-'''markdown
+```markdown
 Goal Integration Declaration
-'''
+```
 
 
 
@@ -3792,7 +3791,7 @@ My first step is [specific action], which I will start on [time].
 
 Signature: ___________
 Date: ___________
-'''
+```
 
 
 
@@ -3806,11 +3805,11 @@ Self-Assessment Scale
 
 After completing the six-stage framework, use this scale to assess your readiness level:
 
-'''markdown
+```markdown
 Goal Readiness Assessment
 
 Please rate each item (1-5 points, 5 points highest)
-'''
+```
 
 
 
@@ -3871,7 +3870,7 @@ Score Interpretation
 - 60-74 points: Generally prepared, but some areas need strengthening
 - 45-59 points: Needs more exploration, recommend reviewing low-scoring areas
 - Below 45 points: Recommend starting over with the framework, may need more time
-'''
+```
 
 
 
@@ -3939,7 +3938,7 @@ From `corpus/study/SYSTEM_REFERENCE.md` Copy: `sources/excerpts/SYSTEM_REFERENCE
 | **Psychological Profiling** | 100 creator profiles with MBTI, motivations, fears, creative parameters | CastingAgent, TalentAgent, PersonalizationEngineerAgent, UGCCreatorAgent | [psychological_profile_agent_functional_specifications.md](./psychological_profile_agent_functional_specifications.md) |
 | **Psychological Recommendation** | Psychology-based preference prediction (Big Five, emotional state) | AudienceSimAgent, PerformanceMarketerAgent, PersonalizationEngineerAgent | [psychological_recommendation_agent_functional_specification.md](./psychological_recommendation_agent_functional_specification.md) |
 | **Complex Problem Solving** | WHAT/WHY/HOW/DO/REVIEW structured methodology | All diagnostic agents (FactCheckerAgent, SMEAgent, JudgeAgent, OptimizationAgent) | [complex_problem_solution_process_model.md](./complex_problem_solution_process_model.md) |
-| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](./common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
+| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](/docs/assets/common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
 
 
 
@@ -4114,7 +4113,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 | S23 | Team / Permissions | Human-in-the-loop configuration | Admin |
 | S24 | Series Bible Editor | Long-running episodic memory | ShowrunnerAgent, WorldBuildingAgent |
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT REGISTRY                    Search: [____________]  Filter: [All ▼]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -4139,7 +4138,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │                                                                             │
 │  Click any row → opens Agent Detail Card with full capabilities table       │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -4207,5 +4206,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.showrunner · v1 · 2026-07-13 -->
 
-```
 

@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 PlannerAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,9 +154,9 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-9. Specialist Meta-Agents
+## 9. Specialist Meta-Agents
 
-9.1 Orchestration Agents
+### 9.1 Orchestration Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +167,7 @@ _The following is the complete category section from the master roster (includes
 | 57 | **GateKeeperAgent** | Phase transitions; verifies L1/L2/L3 criteria; signs C2PA | Stage-gate methodology; PGA Producers Mark; QMS audit | Zero leaked defects; sign-off SLA ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) | C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints | Constitutional AI (constitution = phase-gate criteria) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9; freshness SLA | Higher recall than producer's bible at scale | All agents (correction events) | All agents (stale facts) | Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models | Reflexion memory architecture (MemGPT extension) |
 
-9.2 Creative Agents
+### 9.2 Creative Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -180,7 +179,7 @@ _The following is the complete category section from the master roster (includes
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, over-fit outputs | TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings | Cliché-hit count; novelty score vs category prior | Catches more clichés than experienced script editor | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) | TV Tropes scraper; n-gram frequency DB; embedding novelty scorer | LLM-as-Judge (anti-cliché constitution) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve; suggests beats | Plutchik; affective-computing corpora; Cron *Story Genius* | Curve-fit to target; biosignal-proxy regression accuracy | Better retention prediction than NRG test-screening cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) | Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model | Self-Refine (emotional-arc curve as rubric target) |
 
-9.3 Research Agents
+### 9.3 Research Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -192,7 +191,7 @@ _The following is the complete category section from the master roster (includes
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-9.4 Optimization Agents
+### 9.4 Optimization Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -242,19 +241,19 @@ ReAct (decompose → estimate → validate → emit DAG)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -278,7 +277,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -291,11 +290,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -305,13 +304,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -382,7 +381,7 @@ _Embedded from `corpus/study/intent_analysis_agent_functional_specification.md`.
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 
 The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**.  
 
@@ -406,7 +405,7 @@ Journalists, analysts, researchers, educators, content moderators, legal teams, 
 
 ---
 
-2. Background, Motivation & Research Foundation
+## 2. Background, Motivation & Research Foundation
 
 **Original Motivation (from user history)**  
 Language serves communication, but always with purpose, hidden intent, multiple angles, and moral implications. The 6-phase DIA provides a repeatable algorithm.
@@ -427,11 +426,11 @@ These findings directly upgrade the original framework into a **scientifically g
 
 ---
 
-3. System Architecture (High-Level)
+## 3. System Architecture (High-Level)
 
 **Modular, Agentic Design** (Grok-4.3 native)
 
-'''
+```
 User Input (Text + Optional Context)
           ↓
 Phase 0: Context Analyzer Agent
@@ -449,7 +448,7 @@ Phase 5: Judgment Engine (Multi-Criteria Scorer + Ethical Auditor)
 Phase 6: Synthesizer & Action Recommender
           ↓
 Structured JSON Output + Human-Readable Report + Visualizations
-'''
+```
 
 **Core Components**  
 - **LLM Backbone**: Grok-4.3 (reasoning mode configurable: low/medium/high) via xAI API.  
@@ -464,7 +463,7 @@ Every phase produces typed artifacts (JSON) that feed the next. Full traceabilit
 
 ---
 
-4. Detailed Functional Requirements – 6 Phases (v2.0 Enhanced)
+## 4. Detailed Functional Requirements – 6 Phases (v2.0 Enhanced)
 
 Phase 0: Context Analyzer
 **Inputs**: Raw text, optional metadata (sender, platform, date, prior messages).  
@@ -504,12 +503,12 @@ Phase 4: Hidden Agenda & Multi-Angle Dissection (Major Upgrade)
 
 Phase 5: Behavioral Judgment Engine
 **6 Core Dimensions** (1–10 or 0–1) + 2 new:
-1. Truthfulness
-2. Ethical Impact (harm, autonomy, power imbalance)
-3. Effectiveness (stated + hidden goals)
-4. Clarity & Cooperation (Grice)
-5. Social Value (understanding vs division)
-6. Transparency
+## 1. Truthfulness
+## 2. Ethical Impact (harm, autonomy, power imbalance)
+## 3. Effectiveness (stated + hidden goals)
+## 4. Clarity & Cooperation (Grice)
+## 5. Social Value (understanding vs division)
+## 6. Transparency
 7. **Benevolence** (new – AI-specific)
 8. **Cultural Appropriateness** (new – from multi-task pragmatic models)
 
@@ -522,9 +521,9 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-5. Data Models & Output Schema (JSON)
+## 5. Data Models & Output Schema (JSON)
 
-'''json
+```json
 {
   "analysis_id": "uuid",
   "input_text": "...",
@@ -559,11 +558,11 @@ Optional: Counter-argument generator or “how to respond” module.
   "processing_time_ms": 12400,
   "model": "grok-4.3-reasoning-high"
 }
-'''
+```
 
 ---
 
-6. Non-Functional Requirements
+## 6. Non-Functional Requirements
 
 - **Performance**: <15s for <5k token text on Grok-4.3 high reasoning; parallel phase execution.  
 - **Scalability**: Stateless API; batch mode for enterprise (1000s of texts).  
@@ -574,7 +573,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-7. Implementation Roadmap
+## 7. Implementation Roadmap
 
 **Phase 1 (Weeks 1–4)**: Prompt-engineered prototype on Grok-4.3 (all 6 phases + PIC + basic multi-agent). Structured output validation.  
 **Phase 2 (Months 2–3)**: Fine-tune lightweight speech act classifier on public datasets; integrate classical NLP metrics.  
@@ -589,7 +588,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-8. Evaluation Framework
+## 8. Evaluation Framework
 
 - **Automatic**: F1 on speech act datasets, PIC accuracy lift, Grice violation detection correlation with human labels.  
 - **Human**: Expert linguist agreement (Cohen’s κ > 0.75 target).  
@@ -598,7 +597,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-9. Limitations & Future Work
+## 9. Limitations & Future Work
 
 **Current Limitations**  
 - English-dominant (mitigate with multilingual PIC prompts).  
@@ -613,7 +612,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-10. References (Key Sources)
+## 10. References (Key Sources)
 
 - Pragmatics in the Era of Large Language Models: A Survey (arXiv:2502.12378)  
 - Pragmatic Inference Chain (PIC) (arXiv:2503.01539)  
@@ -1311,7 +1310,7 @@ The effectiveness of the self-questioning framework is built on a solid foundati
 
 **Motivation Hierarchy Model:**
 
-'''
+```
                     Motivation Pyramid
     ┌─────────────────────────────────────┐
     │           Self-Actualization Motivation              │ ← Deepest Layer
@@ -1329,14 +1328,14 @@ The effectiveness of the self-questioning framework is built on a solid foundati
     │           Survival and Basic Needs             │ ← Surface Layer
     │      (Income, living essentials)                │
     └─────────────────────────────────────┘
-'''
+```
 
 **Motivation Archaeology Techniques:**
 
 **Technique 1: Timeline Retrospective Method**
-'''markdown
+```markdown
 Motivation Timeline Template
-'''
+```
 
 
 
@@ -1378,7 +1377,7 @@ Sometimes, behind our surface motivations lie deeper "shadow motivations":
 | "I want freedom" | Past experiences of being controlled, fear of commitment | "What does freedom mean to you? What are you avoiding?" |
 
 **Technique 3: Values Alignment Detection**
-'''python
+```python
 Values Alignment Assessment Tool
 def assess_value_alignment(goal, core_values):
     """
@@ -1400,7 +1399,7 @@ def assess_value_alignment(goal, core_values):
     ]
     # Actual implementation requires user responses to these questions
     return alignment_score, conflicts, recommendations
-'''
+```
 
 
 
@@ -1408,7 +1407,7 @@ def assess_value_alignment(goal, core_values):
 
 **Four Dimensions of Audience Understanding:**
 
-'''
+```
               Audience Understanding Matrix
     ┌────────────────┬────────────────┐
     │   Explicit Needs │   Implicit Needs │
@@ -1419,13 +1418,13 @@ def assess_value_alignment(goal, core_values):
     │   Points        │   (Subconscious)│
     │ (Observable)    │                 │
     └────────────────┴────────────────┘
-'''
+```
 
 **Deep Audience Persona Template:**
 
-'''markdown
+```markdown
 Deep Audience Persona: [Persona Name]
-'''
+```
 
 
 
@@ -1496,7 +1495,7 @@ Connection with Your Audience
 
 **Method Selection Decision Tree:**
 
-'''
+```
                     Method Selection Decision Process
                           │
                           ▼
@@ -1520,30 +1519,30 @@ Connection with Your Audience
     - Free Writing      - Deliberate Practice      - OKR Framework
     - Mind Mapping        - Spaced Repetition      - Agile Methods
     - Prototyping      - Mentor Guidance      - Project Management
-'''
+```
 
 **Personalized Method Design Framework:**
 
-'''markdown
+```markdown
 My Method Design Worksheet
-'''
+```
 
 
 
 Part 1: Self-Awareness
-1. What is my learning style?  
+## 1. What is my learning style?
    □ Visual (needs to see)  
    □ Auditory (needs to hear)  
    □ Kinesthetic (needs to do)  
    □ Read/Write (needs to record)  
 
-2. What is my work rhythm?  
+## 2. What is my work rhythm?
    □ Morning type (efficient in the morning)  
    □ Night type (efficient at night)  
    □ Steady type (balanced throughout the day)  
    □ Burst type (short-term high intensity)  
 
-3. What is my source of motivation?  
+## 3. What is my source of motivation?
    □ Intrinsic motivation (self-satisfaction)  
    □ Extrinsic motivation (rewards/recognition)  
    □ Social motivation (with others)  
@@ -1552,18 +1551,18 @@ Part 1: Self-Awareness
 
 
 Part 2: Environment Design
-1. What is my ideal work environment?
+## 1. What is my ideal work environment?
    - Location:
    - Sound:
    - Lighting:
    - Temperature:
 
-2. What tools do I need?
+## 2. What tools do I need?
    - Essential tools:
    - Auxiliary tools:
    - Optional tools:
 
-3. What support systems do I need?
+## 3. What support systems do I need?
    - Accountability partner:
    - Mentor/Coach:
    - Community/Group:
@@ -1571,7 +1570,7 @@ Part 2: Environment Design
 
 
 Part Three: Time Design
-1. How much time can I commit each week?
+## 1. How much time can I commit each week?
    - Ideal time: ___ hours
    - Minimum time: ___ hours
    - Best time slots: ___
@@ -1581,7 +1580,7 @@ Part Three: Time Design
    - Shallow work sessions:
    - Rest and recovery sessions:
 
-'''
+```
 
 **Constraint Transformation Techniques:**
 
@@ -1599,7 +1598,7 @@ Part Three: Time Design
 
 **Emotional Map Technique:**
 
-'''
+```
                 Emotional Journey Map
     
     Emotional Intensity
@@ -1616,15 +1615,15 @@ Part Three: Time Design
         │
      0  ├────┬────┬────┬────┬────┬────► Time
             Start  Attempt  Setback  Adjustment  Breakthrough  Completion
-'''
+```
 
 **Emotional Rehearsal Technique:**
 
 This is a powerful psychological preparation technique that helps you pre-experience the emotions after achieving your goal:
 
-'''markdown
+```markdown
 Emotional Rehearsal Exercise
-'''
+```
 
 
 
@@ -1665,7 +1664,7 @@ Step 4: Body Anchoring (2 minutes)
 Step 5: Record (5 minutes)
 Write down everything you just experienced
 
-'''
+```
 
 **Emotional Resilience Building:**
 
@@ -1680,11 +1679,11 @@ Write down everything you just experienced
 
 **Emotional Journal Template:**
 
-'''markdown
+```markdown
 Daily Emotional Journal
 
 Date: ___________
-'''
+```
 
 
 
@@ -1715,7 +1714,7 @@ What is this emotion trying to tell me?
 
 Tomorrow's Intention
 What emotion do I want to start tomorrow with?
-'''
+```
 
 
 
@@ -1723,7 +1722,7 @@ What emotion do I want to start tomorrow with?
 
 **Influence Ripple Model:**
 
-'''
+```
                     Influence Ripple Diagram
     
                         ┌─────────────────────┐
@@ -1748,13 +1747,13 @@ What emotion do I want to start tomorrow with?
                         │  │  └─────────┘  │  │
                         │  └───────────────┘  │
                         └─────────────────────┘
-'''
+```
 
 **Influence Measurement Framework:**
 
-'''markdown
+```markdown
 Influence Measurement Worksheet
-'''
+```
 
 
 
@@ -1786,13 +1785,13 @@ Layer 4: Ripple Effect (Indirect Impact)
 | Ripple Effect | Observation Indicators | Time Frame |
 |----------|----------|----------|
 | | | |
-'''
+```
 
 **Impact Story Collection:**
 
-'''markdown
+```markdown
 Impact Story Template
-'''
+```
 
 
 
@@ -1831,7 +1830,7 @@ Results
 Reference
 "___________"
 — [Anonymous Description]
-'''
+```
 
 **Negative Impact Prevention Checklist:**
 
@@ -1849,7 +1848,7 @@ Reference
 
 **Execution System Architecture:**
 
-'''
+```
                 Execution System Pyramid
     
                     ┌───────┐
@@ -1869,13 +1868,13 @@ Reference
          /          │ 行動  │          \
         /           └───────┘           \
        ─────────────────────────────────────
-'''
+```
 
 **SMART+ Goal Setting:**
 
-'''markdown
+```markdown
 SMART+ Goal Setting Worksheet
-'''
+```
 
 
 
@@ -1922,7 +1921,7 @@ T - Time-bound (Time-bound)
 
 **Obstacle Prevention Matrix:**
 
-'''
+```
                 Obstacle Prevention Matrix
     
               │  Predictable  │  Unpredictable
@@ -1934,7 +1933,7 @@ T - Time-bound (Time-bound)
     External   │  Risk        │  Flexible
     Obstacles  │  Management  │  Design
     (Environmental) │ Strategy C │ Strategy D
-'''
+```
 
 **Strategy Details:**
 
@@ -1947,11 +1946,11 @@ T - Time-bound (Time-bound)
 
 **Weekly Review Template:**
 
-'''markdown
+```markdown
 Weekly Review
 
 Date: ___________
-'''
+```
 
 
 
@@ -1999,7 +1998,7 @@ Date: ___________
 
 🙏 Gratitude
 This week I am grateful for:
-'''
+```
 
 
 
@@ -2024,7 +2023,7 @@ Goal Management and Tracking Tools
 
 Reflection and Self-Exploration Tool
 
-'''python
+```python
 自我提問自動化腳本
 self_inquiry_bot.py
 
@@ -2122,9 +2121,9 @@ Case 2: Skill Goal — "Learning Programming"
 
 **Phase 3: Method Design**
 
-'''markdown
+```markdown
 Method Design Worksheet
-'''
+```
 
 
 
@@ -2169,7 +2168,7 @@ First Project
   - Week 2: Add CSS styles
   - Week 3: Implement JavaScript functionality
   - Week 4: Optimize and deploy
-'''
+```
 
 
 
@@ -2179,9 +2178,9 @@ Case 3: Personal Growth Goal — "Overcoming Social Anxiety"
 
 **Emotional Rehearsal Practice Record:**
 
-'''markdown
+```markdown
 Emotional Rehearsal: Me After Overcoming Social Anxiety
-'''
+```
 
 
 
@@ -2236,9 +2235,9 @@ Case 4: Creative Goal — "Write a Novel"
 
 **Stage 5: Influence Design**
 
-'''markdown
+```markdown
 Influence Design Worksheet
-'''
+```
 
 
 
@@ -2297,7 +2296,7 @@ Potential Negative Impacts and Prevention
 | Readers misinterpreting the author's intent | Explain the creative intent in the afterword |
 | Triggering readers' trauma | Add content warnings at the beginning |
 | Being overly commercialized in interpretation | Maintain the authenticity of the creation |
-'''
+```
 
 🎓 Advanced Techniques and Expert Strategies
 
@@ -2307,7 +2306,7 @@ Technique 1: Dual-Track Thinking Method
 
 Examine your goal from two perspectives simultaneously:
 
-'''
+```
         Rational Track                Emotional Track
     ┌─────────────┐            ┌─────────────┐
     │ Is this rational? │            │ Does this excite me?│
@@ -2324,7 +2323,7 @@ Examine your goal from two perspectives simultaneously:
               │ Rational +  │
               │ Emotional   │
               └─────────────┘
-'''
+```
 
 **Practice Method:**
 1. First, explore with the emotional track (without criticism)
@@ -2351,9 +2350,9 @@ Technique 3: Role-Playing Method
 
 View your goal from the perspective of different roles:
 
-'''markdown
+```markdown
 Role-Playing Exercise
-'''
+```
 
 
 
@@ -2393,9 +2392,9 @@ Technique 4: Obstacle Rehearsal Method
 
 Anticipate and "experience" potential obstacles in advance:
 
-'''markdown
+```markdown
 Obstacle Rehearsal Exercise
-'''
+```
 
 
 
@@ -2448,9 +2447,9 @@ Select appropriate framework activities based on your energy state:
 
 After completing the exploration of the six stages, use this integration template to connect all insights:
 
-'''markdown
+```markdown
 Goal Integration Declaration
-'''
+```
 
 
 
@@ -2497,7 +2496,7 @@ My first step is [specific action], which I will start on [time].
 
 Signature: ___________
 Date: ___________
-'''
+```
 
 
 
@@ -2511,11 +2510,11 @@ Self-Assessment Scale
 
 After completing the six-stage framework, use this scale to assess your readiness level:
 
-'''markdown
+```markdown
 Goal Readiness Assessment
 
 Please rate each item (1-5 points, 5 points highest)
-'''
+```
 
 
 
@@ -2576,7 +2575,7 @@ Score Interpretation
 - 60-74 points: Generally prepared, but some areas need strengthening
 - 45-59 points: Needs more exploration, recommend reviewing low-scoring areas
 - Below 45 points: Recommend starting over with the framework, may need more time
-'''
+```
 
 
 
@@ -2935,7 +2934,7 @@ SIPA classifies components using:
 
 Classification output must include:
 
-'''yaml
+```yaml
 component_id: CMP-auth-service
 name: Auth Service
 primary_type: common_component
@@ -2947,13 +2946,13 @@ evidence:
   - specs/auth.md#overview
   - specs/security.md#session-management
 needs_human_review: true
-'''
+```
 
 ---
 
 6. System Architecture
 
-'''mermaid
+```mermaid
 flowchart TD
     A[Spec Corpus] --> B[Ingestion & Indexing]
     B --> C[Hybrid Retriever]
@@ -2999,7 +2998,7 @@ flowchart TD
     O --> P[Implementation Feedback]
     P --> Q[Memory Update + Impact Analysis]
     Q --> F
-'''
+```
 
 ---
 
@@ -3231,9 +3230,9 @@ Inputs may include:
 
 Output:
 
-'''text
+```text
 constitution.md
-'''
+```
 
 This aligns with current Spec Kit practice, where a constitution can govern subsequent specification, planning, and implementation artifacts. ([github.com]([historical-url]
 
@@ -3281,9 +3280,9 @@ The Master Orchestrator:
 
 Output:
 
-'''text
+```text
 plans/master_plan.md
-'''
+```
 
 noted sections:
 
@@ -3315,14 +3314,14 @@ For each component:
 
 Output examples:
 
-'''text
+```text
 plans/architecture_core_platform.md
 plans/feature_spec_student_dashboard.md
 plans/component_spec_auth_service.md
 plans/domain_model_user_progress.md
 plans/integration_spec_lms_sync.md
 plans/security_spec_auth_and_sessions.md
-'''
+```
 
 ---
 
@@ -3332,7 +3331,7 @@ The Task Decomposer creates implementation tasks from approved plans.
 
 Task format:
 
-'''markdown
+```markdown
 - [ ] T042 [P] Build StudentDashboardHeader
   - **Component:** Student Dashboard
   - **Source:** feature_spec_student_dashboard.md#ui-header
@@ -3345,7 +3344,7 @@ Task format:
     - Unit render states.
     - E2E dropdown interaction.
   - **Context excerpt:** See linked source section.
-'''
+```
 
 ---
 
@@ -3377,7 +3376,7 @@ SIPA then:
 
 Every sub-planner receives a context package:
 
-'''yaml
+```yaml
 context_package_id: CTX-feature-student-dashboard-v1
 component_id: CMP-student-dashboard
 planner_type: feature_ui
@@ -3400,7 +3399,7 @@ compression:
   method: extractive_then_abstractive
   preserve_quotes: true
   preserve_requirement_ids: true
-'''
+```
 
 9.2 Retrieval Modes
 
@@ -3429,7 +3428,7 @@ compression:
 
 Every major output claim should map to evidence:
 
-'''yaml
+```yaml
 claim_id: CLM-architecture-012
 claim: "Auth Service owns session creation and refresh-token rotation."
 artifact: component_spec_auth_service.md
@@ -3440,7 +3439,7 @@ evidence:
     quote: "..."
 confidence: 0.93
 status: supported
-'''
+```
 
 ---
 
@@ -3461,7 +3460,7 @@ status: supported
 
 10.2 Critique Schema
 
-'''json
+```json
 {
   "artifact_id": "feature_spec_student_dashboard",
   "overall_verdict": "refine",
@@ -3484,7 +3483,7 @@ status: supported
   ],
   "recommended_next_action": "targeted_refinement"
 }
-'''
+```
 
 10.3 Optional SIPA Arena Evaluator
 
@@ -3570,7 +3569,7 @@ These requirements follow MCP’s own security posture around user consent, tool
 
 12.1 Core Artifact Frontmatter
 
-'''yaml
+```yaml
 ---
 artifact_id: string
 type: master_plan | architecture | feature_ui | common_component | domain_model | integration | security | task_list | critique
@@ -3589,11 +3588,11 @@ dependencies: []
 review_required: boolean
 approved_by: string | null
 ---
-'''
+```
 
 12.2 Requirement Record
 
-'''yaml
+```yaml
 requirement_id: REQ-001
 text: "Users must be able to reset their password by email."
 source:
@@ -3605,11 +3604,11 @@ component_refs:
   - CMP-auth-service
   - CMP-email-service
 status: active
-'''
+```
 
 12.3 Decision Record
 
-'''yaml
+```yaml
 decision_id: ADR-004
 title: "Use refresh-token rotation"
 status: proposed
@@ -3625,11 +3624,11 @@ consequences:
     - requires token-family invalidation logic
 evidence:
   - specs/security.md#token-policy
-'''
+```
 
 12.4 Task Record
 
-'''yaml
+```yaml
 task_id: T042
 title: "Implement refresh-token rotation"
 component_id: CMP-auth-service
@@ -3646,7 +3645,7 @@ tests:
   - "unit"
   - "integration"
 human_review_required: true
-'''
+```
 
 ---
 
@@ -3821,13 +3820,13 @@ Add:
 
 SIPA should write:
 
-'''text
+```text
 plans/
 tasks/
 AGENTS.md
 .cursor/rules/
 .claude/commands/
-'''
+```
 
 Generated `AGENTS.md` should include:
 
@@ -4171,7 +4170,7 @@ The taxonomy is versioned and can be extended (new types inherit a base template
 
 5. Full System Architecture (Hierarchical Multi-Agent)
 
-'''
+```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
 │                              Master Orchestrator / Meta-Planner                               │
 │  • High-level goal + corpus index intake                                                      │
@@ -4221,7 +4220,7 @@ The taxonomy is versioned and can be extended (new types inherit a base template
                             │ • Context excerpts       │
                             │ • Sequencing & deps      │
                             └──────────────────────────┘
-'''
+```
 
 **Supporting Infrastructure (shared services)**:
 - **Corpus Indexer & RAG Engine** (LlamaIndex/Haystack or custom): Semantic chunking, embeddings, hybrid search (vector + keyword + optional Knowledge Graph), passage compression, metadata tagging (requirement IDs, component tags, section paths).
@@ -4336,7 +4335,7 @@ Phase 1: High-Level Decomposition & Master Plan
 6. Spawns sub-planners for priority modules (parallel where independent).
 
 **Example Master Plan Excerpt** (abbreviated):
-'''markdown
+```markdown
 ---
 type: master_plan
 version: 1.0
@@ -4356,7 +4355,7 @@ Phase 2: UI Features (Student/Teacher Dashboards)
 Dependencies
 Core Domain → Auth Service → All UI features
 ...
-'''
+```
 
 Phase 2: Scoped Type-Aware Planning + Critic Loops (Core Loop)
 For each module in priority order (or parallel):
@@ -4398,7 +4397,7 @@ Phase 3: Granular Task Generation
 - Sequenced and dependency-aware.
 
 **Example Task**:
-'''markdown
+```markdown
 - [ ] Task UI-042: Build StudentDashboardHeader component
   **From**: feature_spec_student_dashboard.md v1.3 (sections 2.1, 4.3) + architecture_core_ui.md contracts
   **Acceptance**:
@@ -4407,7 +4406,7 @@ Phase 3: Granular Task Generation
   - Responsive on mobile (Tailwind breakpoints)
   **Context Excerpt**: [paste or link key paragraphs]
   **Suggested Tests**: Unit for rendering states; E2E for dropdown interaction
-'''
+```
 
 Phase 4: Implementation, Feedback & Living Update
 - Tasks + plans fed to coder agents (your harness, Grok Build plan-search-build + Arena eval, parallel workers, etc.).
@@ -4428,7 +4427,7 @@ Phase 4: Implementation, Feedback & Living Update
 All artifacts use consistent YAML frontmatter + Markdown sections. Enforced via Pydantic or equivalent.
 
 **Core Frontmatter Schema** (example):
-'''yaml
+```yaml
 ---
 type: master_plan | architecture | feature_ui | common_component | task_list | critique
 component: string
@@ -4441,7 +4440,7 @@ last_refined: ISO date
 status: draft | in_review | approved | implemented
 tags: list (security-critical, etc.)
 ---
-'''
+```
 
 **Full Output Schemas** (high-level):
 - Master Plan: Roadmap sections, phase breakdowns, module inventory with types, dependency graph, risk register, initial traceability matrix.
@@ -4496,7 +4495,7 @@ All outputs are designed to be both human-readable and machine-consumable (for d
 6. **ATAM / Tradeoff Critic** (Architecture-heavy): Identifies quality attribute scenarios, trade-offs, risks; produces lightweight mismatch or risk register.
 
 **Feedback Format** (structured for patch application):
-'''json
+```json
 {
   "overall_verdict": "pass | refine | escalate",
   "traceability_score": 0.87,
@@ -4506,7 +4505,7 @@ All outputs are designed to be both human-readable and machine-consumable (for d
   "strengths": [...],
   "recommended_next_action": "..."
 }
-'''
+```
 
 **Refinement Loop**:
 - Critic feedback → Sub-planner receives it + relevant memory + instruction to apply minimal targeted patches only.
@@ -4602,7 +4601,7 @@ Full templates should be version-controlled alongside SIPA.
 - **Integration**: File watchers or CLI commands that output to `plans/` and `tasks/` directories consumable by your harness. Expose as MCP/tool or simple API if needed for multi-agent setups.
 
 **Code Structure Sketch** (high-level):
-'''
+```
 sipa/
 ├── indexer/          # corpus ingestion, chunking, embedding, graph
 ├── agents/
@@ -4619,7 +4618,7 @@ sipa/
 ├── prompts/          # system prompts, few-shot libraries
 ├── utils/            # diagram gen, traceability validator, patch applier
 └── main.py / cli.py  # entrypoints, incremental runner
-'''
+```
 
 Start with a notebook or single-file prototype for rapid iteration, then refactor into the package.
 
@@ -4913,7 +4912,7 @@ Phase 0: Initialization (Spec-Driven Setup)
 5. Decide architecture: Flat ReAct (simple) vs Hierarchical (complex research/coding) vs Hybrid. Also set initial `cognitive_profile` flags from Cynefin + task type (enable_fast_path, reflection_style, etc.).
 
 **Actionable Output Format** (example JSON or Markdown section):
-'''json
+```json
 {
   "task_id": "...",
   "objective": "...",
@@ -4923,7 +4922,7 @@ Phase 0: Initialization (Spec-Driven Setup)
   "initial_plan": ["Step 1: ...", "Step 2: ..."],
   "quality_gates": ["completeness > 90%", "no hallucinations", "structured output"]
 }
-'''
+```
 
 Phase 1: Core Iteration Loop (ReAct-Inspired, Controlled)
 While not terminated:
@@ -4971,7 +4970,7 @@ Use one circuit breaker per tool type or per sub-agent role. Integrate with the 
 
 **Code Example: Minimal Controlled ReAct Loop with Cycle Detection (Python)**
 
-'''python
+```python
 import hashlib
 from typing import Any, Dict, List
 from dataclasses import dataclass, field
@@ -5204,11 +5203,11 @@ def safe_invoke_sub_agent(payload: dict, max_retries: int = 2, circuit_breaker: 
                 }
             time.sleep(1)
     return {"status": "error", "error": "Sub-agent max retries exceeded", "circuit_state": cb.state}
-'''
+```
 
 **Code Example: Lightweight Verifier / Critic Agent (Prompt + Schema) — v3 Enhanced with Critic Modes + Paul-Elder Standards**
 
-'''python
+```python
 VERIFIER_PROMPT = """
 You are a strict, skeptical Verifier / Critic Agent operating in {critic_mode} mode.
 Given the original task_spec and the candidate_output, 
@@ -5244,11 +5243,11 @@ def verify_output(candidate: dict, task_spec: dict, llm, critic_mode: str = "sta
     result = llm.generate(prompt, output_schema=...)  # force JSON
     # Optional: if critic_mode == "ensemble": run red_team + paul_elder in parallel and aggregate
     return result
-'''
+```
 
 **Code Example: Simple Self-Evolution / Reflection Step (Trace → Edit → Validate)**
 
-'''python
+```python
 def self_evolve_component(component_name: str, trace: List[dict], llm, version_manager):
     """Minimal TextGrad / reflection-style evolution"""
     diagnosis = llm.generate(
@@ -5263,7 +5262,7 @@ def self_evolve_component(component_name: str, trace: List[dict], llm, version_m
             version_manager.register(new_version, parent=component_name)
             return new_version
     return None  # no change or rollback
-'''
+```
 
 **Termination Conditions** (checked every iteration or at gates):
 - Success criteria met + quality gate passed.
@@ -5388,7 +5387,7 @@ Phase 5: Termination & Output
 
 6. Quick-Start Pseudocode Skeleton (Python-like)
 
-'''python
+```python
 def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
     state = initialize_state(task_instruction)  # spec, plan, todo, memory, tracer
     orchestrator = get_llm(role="orchestrator")
@@ -5422,7 +5421,7 @@ def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
             state = reflect_and_evolve(state)  # critique + version updates
     
     return handle_termination(state)
-'''
+```
 
 Sub-agent invoke follows the same pattern recursively (narrower scope).
 
@@ -5496,7 +5495,7 @@ Core Design Principles
 
 System Boundaries
 
-'''
+```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │  USER / CLIENT BRIEF                                                     │
 └───────────┬─────────────────────────────────────────────────────────────┘
@@ -5518,7 +5517,7 @@ System Boundaries
 │  LLM Providers: Grok-4.x, Gemini 2.5 Pro, GPT-4o, Claude 4             │
 │  Tool Access: Sora 2, Veo 3.1, Runway Gen-4, ElevenLabs, DaVinci, etc. │
 └─────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 > **Full architecture details:** [ui/architecture_communication.md](./ui/architecture_communication.md)
 
@@ -5716,7 +5715,7 @@ These specifications define capabilities that are shared across multiple agents 
 | **Psychological Profiling** | 100 creator profiles with MBTI, motivations, fears, creative parameters | CastingAgent, TalentAgent, PersonalizationEngineerAgent, UGCCreatorAgent | [psychological_profile_agent_functional_specifications.md](./psychological_profile_agent_functional_specifications.md) |
 | **Psychological Recommendation** | Psychology-based preference prediction (Big Five, emotional state) | AudienceSimAgent, PerformanceMarketerAgent, PersonalizationEngineerAgent | [psychological_recommendation_agent_functional_specification.md](./psychological_recommendation_agent_functional_specification.md) |
 | **Complex Problem Solving** | WHAT/WHY/HOW/DO/REVIEW structured methodology | All diagnostic agents (FactCheckerAgent, SMEAgent, JudgeAgent, OptimizationAgent) | [complex_problem_solution_process_model.md](./complex_problem_solution_process_model.md) |
-| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](./common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
+| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](/docs/assets/common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
 
 ---
 
@@ -5724,7 +5723,7 @@ These specifications define capabilities that are shared across multiple agents 
 
 6.1 Production Pipeline (End-to-End)
 
-'''
+```
 USER BRIEF
     │
     ▼
@@ -5773,7 +5772,7 @@ USER BRIEF
 │ Outputs: Platform-specific packages, campaigns, analytics            │
 │ Spec: optimization_agent_functional_specification.md                 │
 └─────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 6.2 Workflow Variants (by Video Type)
@@ -5823,7 +5822,7 @@ Every agent communicates via a **Shared Artifact Handoff Contract** (machine-rea
 
 All agents communicate critique via a structured JSON bus:
 
-'''json
+```json
 {
   "from_agent": "EditorAgent",
   "to_agent": "DirectorAgent",
@@ -5834,7 +5833,7 @@ All agents communicate critique via a structured JSON bus:
   "rubric_score": 0.72,
   "timestamp": "2026-05-27T10:30:00Z"
 }
-'''
+```
 
 
 ---
@@ -5985,7 +5984,7 @@ A worked end-to-end example of the system applied to a 60-second cinematic short
   </tr>
 </table>
 
-> If a thumbnail does not render, click it to open the full SVG. Diagrams follow the same visual language as [common-agent-structure.svg](./common-agent-structure.svg).
+> If a thumbnail does not render, click it to open the full SVG. Diagrams follow the same visual language as [common-agent-structure.svg](/docs/assets/common-agent-structure.svg).
 
 ---
 
@@ -5995,46 +5994,46 @@ A worked end-to-end example of the system applied to a 60-second cinematic short
 
 These must exist before any production agent can function:
 
-'''
-1. Agentic RAG System          ← Knowledge backbone for all agents
+```
+## 1. Agentic RAG System          ← Knowledge backbone for all agents
    └── agentic_rag_functional_specification.md
 
-2. Orchestration Runtime        ← DAG execution, routing, state
+## 2. Orchestration Runtime        ← DAG execution, routing, state
    └── agents.md §9 (OrchestratorAgent, PlannerAgent, RouterAgent)
 
-3. Research Agent               ← Knowledge acquisition service
+## 3. Research Agent               ← Knowledge acquisition service
    └── research_agent_functional_specification.md
    └── research_agent_technical_specification.md
 
-4. Coding Agent                 ← Builds all other agents
+## 4. Coding Agent                 ← Builds all other agents
    └── coding_agent_functional_specification.md
 
-5. LLM Usage Dashboard          ← Cost monitoring from day one
+## 5. LLM Usage Dashboard          ← Cost monitoring from day one
    └── llm_usage_functional_specification.md
-'''
+```
 
 11.2 Intelligence Layer (Build Second)
 
 These provide reasoning capabilities that production agents consume:
 
-'''
-6. Deep Intent Analysis (DIA)   ← Parses user briefs into structured intents
+```
+## 6. Deep Intent Analysis (DIA)   ← Parses user briefs into structured intents
    └── intent_analysis_agent_functional_specification.md
 
-7. General Creative Agent (GCA) ← Creative ideation engine
+## 7. General Creative Agent (GCA) ← Creative ideation engine
    └── general_creative_agent_functional_specification.md
    └── general_creative_agent_technical_specification.md
 
-8. Process Optimization Agent   ← Workflow improvement engine
+## 8. Process Optimization Agent   ← Workflow improvement engine
    └── optimization_agent_functional_specification.md
    └── optimization_agent_technical_specification.md
 
-9. Strategic Goal Achievement   ← Goal clarification for all planning
+## 9. Strategic Goal Achievement   ← Goal clarification for all planning
    └── strategic_goal_achievement_agent_functional_specification.md
 
-10. Complex Problem Solving     ← Diagnostic reasoning framework
+## 10. Complex Problem Solving     ← Diagnostic reasoning framework
     └── complex_problem_solution_process_model.md
-'''
+```
 
 11.3 Production Layer (Build Third)
 
@@ -6042,20 +6041,20 @@ The 52 core production agents (1–52) from the master roster, activated per wor
 
 11.4 Enhancement Layer (Build Fourth)
 
-'''
-11. Psychological Profiling     ← Personalizes creator/audience modeling
+```
+## 11. Psychological Profiling     ← Personalizes creator/audience modeling
     └── psychological_profile_agent_functional_specifications.md
 
-12. Psychological Recommendation ← Audience preference prediction
+## 12. Psychological Recommendation ← Audience preference prediction
     └── psychological_recommendation_agent_functional_specification.md
 
-13. Podcast Agent               ← Audio-first production variant
+## 13. Podcast Agent               ← Audio-first production variant
     └── podcast_agent_functional_specifcation.md
-'''
+```
 
 11.5 Dependency Graph
 
-'''
+```
                     ┌─────────────────┐
                     │  Coding Agent   │ ← Builds everything
                     └────────┬────────┘
@@ -6082,7 +6081,7 @@ The 52 core production agents (1–52) from the master roster, activated per wor
     │  + Goal Framework             │
     │  + Psychological Profiling    │
     └───────────────────────────────┘
-'''
+```
 
 ---
 
@@ -6348,7 +6347,7 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
 
 2.9.5 How the Specialist Meta-Agents Compose
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -6358,7 +6357,7 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 > **Composition rule**: Craft agents (§2.1–2.8) do the work. Meta-agents (§2.9) shape *how* the work is done — orchestration agents run the graph, creative agents widen the search space, research agents ground every claim, optimization agents tighten cost / latency / quality / safety on every iteration.
 
@@ -6573,7 +6572,7 @@ How an Agent Knows It Surpasses Human Pros
 
 All inter-agent critique flows over a shared **CritiqueMessage** JSON schema. This is the universal mechanism by which any agent can comment on any other agent's work and any agent can ingest critique to revise.
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -6586,7 +6585,7 @@ All inter-agent critique flows over a shared **CritiqueMessage** JSON schema. Th
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 **Acceptance rules:**
 1. **Blocker** severity halts the DAG until resolved.
@@ -6895,7 +6894,7 @@ These are **decisions, not options**. Record any deviation as an ADR. Versions a
 
 4.1 Top-level layout
 
-'''text
+```text
 upstream-va-design/                      # repo root (build target; specs live in study/)
 ├── CLAUDE.md                        # root project memory (Appendix A)
 ├── BUILD_PROGRESS.md                # living milestone + hardening checklist (you maintain)
@@ -6950,7 +6949,7 @@ upstream-va-design/                      # repo root (build target; specs live i
 │   └── harness/                     # VBench/EvalCrafter/CLIP-T/FVD runners (wrap providers)
 │
 └── tests/                           # cross-package integration + E2E + contract tests
-'''
+```
 
 4.2 Build order of the scaffold (M0 produces this skeleton, empty but compiling)
 
@@ -6968,7 +6967,7 @@ This is the most important section. **Everything downstream imports from `packag
 
 A single Pydantic v2 model carried with every artifact between phases. Fields map 1:1 to the spec table.
 
-'''python
+```python
 packages/contracts/artifact.py
 from enum import Enum
 from pydantic import BaseModel, Field
@@ -7019,7 +7018,7 @@ class Artifact(BaseModel):
     qc_status: QCStatus = QCStatus()
     target_channels: list[str] = []
     provenance_manifest: ProvenanceManifest = ProvenanceManifest()
-'''
+```
 
 **Contract tests (write first):** round-trip JSON serialization; backward-compat schema snapshot test (fails if a field is removed/renamed without a version bump); `parent_assets` form a valid DAG (no cycles); every released artifact has a non-empty `provenance_manifest`.
 
@@ -7027,7 +7026,7 @@ class Artifact(BaseModel):
 
 Verbatim from [`ai_agent_video_production_workflow.md`](./ai_agent_video_production_workflow.md) §6. This is how any agent comments on any other.
 
-'''python
+```python
 packages/contracts/critique.py
 from enum import Enum
 from pydantic import BaseModel
@@ -7053,7 +7052,7 @@ class CritiqueMessage(BaseModel):
     must_resolve_before: str | None = None   # phase id
     rubric_score: float | None = None
     timestamp: str
-'''
+```
 
 **Acceptance rules (implement in `agent-core`, test exhaustively):**
 - `blocker` → halts the DAG node until resolved (Temporal signal / LangGraph interrupt).
@@ -7065,7 +7064,7 @@ class CritiqueMessage(BaseModel):
 
 Every one of the 114 agents is an instance of `BaseAgent` (G3). Source: [`common-agent-structure.svg/html`](./common-agent-structure.html) and the per-agent spec tables (responsibility, knowledge source, self-quality, surpass signal, critique in/out).
 
-'''python
+```python
 packages/agent-core/base.py  (sketch — full impl in M2/M6)
 class AgentConfig(BaseModel):
     id: str; name: str; category: str
@@ -7085,13 +7084,13 @@ class BaseAgent:
     async def accept_critique(self, msg: CritiqueMessage) -> None: ...
     async def emit_critique(self, target, finding) -> CritiqueMessage: ...
     def provenance(self) -> ProvenanceManifest: ...
-'''
+```
 
 The base class wires in: LLM gateway (metered), RAG client, MemoryAgent, event-bus emit, provenance signing, OTel span. **No agent subclass reimplements these.** Specializations differ only by `AgentConfig`.
 
 5.4 Provider interfaces (mockable)
 
-'''python
+```python
 packages/providers/base.py
 class Provider(Protocol):
     def capabilities(self) -> set[str]: ...
@@ -7102,7 +7101,7 @@ class Provider(Protocol):
 class MediaGenProvider(Provider): ...      # Sora/Veo/Runway/Kling/Seedance
 class MockGenProvider(MediaGenProvider):   # returns deterministic placeholder media + fake metrics for CI
     ...
-'''
+```
 
 **Rule:** CI and all unit/integration tests use mocks. A single nightly "live-smoke" job hits real providers behind a budget cap (§10.2).
 
@@ -7140,7 +7139,7 @@ Each milestone below specifies: **Goal · references · Build (files) · Claude 
 
 Milestone dependency graph
 
-'''text
+```text
 M0 Bootstrap ──► M1 RAG ──► M2 Orchestration ──► M3 LLM Gateway+Router+CostDash
                                   │                       │
                                   ▼                       ▼
@@ -7161,7 +7160,7 @@ M0 Bootstrap ──► M1 RAG ──► M2 Orchestration ──► M3 LLM Gatewa
                                   M11 Enhancement (psych, podcast, personalization)
                                               ▼
                                   M12 Hardening, scale, security, launch (the §14 100-point pass)
-'''
+```
 
 ---
 
@@ -7196,5 +7195,4 @@ M1 — Foundation: Agentic RAG (Knowledge Backbone)
 
 **Build (`packages/rag`):**
 - Ingestion 
-```
 

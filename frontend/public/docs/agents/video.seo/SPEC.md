@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 SEOAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-10. Workflow Support Agents
+## 10. Workflow Support Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -231,19 +230,19 @@ ReAct with search-intent validation
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -267,7 +266,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -280,11 +279,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -294,13 +293,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -369,7 +368,7 @@ I. Core Conceptual Framework
 
 
 
-1.1 Why Are Psychological Factors Needed?
+### 1.1 Why Are Psychological Factors Needed?
 Traditional recommendation systems primarily rely on viewing history and collaborative filtering, but incorporating psychological analysis can:
 
 - Explain "why" a certain movie is recommended, providing explainable recommendations to help users understand the recommendation logic.
@@ -382,14 +381,14 @@ Additionally, psychological factors can handle situational changes, such as user
 
 
 
-1.2 Overall System Flow
-'''
+### 1.2 Overall System Flow
+```
 User data collection (viewing history, reviews, surveys) → Psychological feature extraction (personality prediction, sentiment analysis) → AI model training (integrating psychological features) → Preference prediction (multi-modal fusion) → Recommendation explanation and feedback loop
-'''
+```
 
 
 
-1.3 New: Empirical Foundation of Psychology in Recommendation Systems
+### 1.3 New: Empirical Foundation of Psychology in Recommendation Systems
 According to the paper list (Psychology-based RecSys GitHub), multiple studies confirm that integrating Big Five personality traits can improve recommendation performance. For example, one study showed that for users high in extraversion, the click-through rate for recommending movies with social themes increased by 15%. Additionally, emotion-based recommendation systems (such as those using the PAD model) reduced RMSE by 0.05-0.1 on the MovieLens dataset.
 
 
@@ -398,7 +397,7 @@ II. Classification of Psychological Factors
 
 
 
-2.1 Basics: Big Five Personality Model
+### 2.1 Basics: Big Five Personality Model
 This is the most widely used personality framework, consisting of five dimensions (refer to the Personality and Recommender Systems paper):
 **Extraversion**
 - High scorers: Prefer social themes, romantic comedies, group interaction plots (e.g., Friends style).
@@ -428,7 +427,7 @@ How to integrate using open-source frameworks: Use the yashsmehta/personality-pr
 
 
 
-2.2 Advanced Factors
+### 2.2 Advanced Factors
 **Need for Cognition**
 - **Definition**: The extent to which individuals prefer engaging in cognitive effort.
 - **Influence**:
@@ -474,11 +473,11 @@ III. Open-Source Frameworks and Tools Ecosystem
 
 
 
-3.1 Core Framework for Recommendation Systems
+### 3.1 Core Framework for Recommendation Systems
 **TensorFlow Recommenders (TFRS)**
 TFRS is a library for building recommendation system models, supporting the entire recommendation system workflow: data preparation, model formulation, training, evaluation, and deployment[[1]]([historical-url] How to integrate custom user features like personality traits: Use Big Five scores as part of the user embedding.
 
-'''python
+```python
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import tensorflow_recommenders as tfrs
@@ -535,13 +534,13 @@ Training
 model = MovielensModel()
 model.compile(optimizer=tf.keras.optimizers.Adagrad(0.1))
 model.fit(ratings.batch(4096), epochs=3)
-'''
+```
 This allows personality features to influence embeddings, improving personalization.
 
 **LightFM - Hybrid Recommendation System**
 LightFM is a Python implementation of a hybrid recommendation algorithm that integrates item and user metadata into traditional matrix factorization algorithms, enabling recommendations to generalize to new items (via item features) and new users (via user features)[[1]]([historical-url] Documentation shows that user/item features like psychological attributes can be added.
 
-'''python
+```python
 from lightfm import LightFM
 from lightfm.data import Dataset
 from scipy.sparse import csr_matrix
@@ -572,13 +571,13 @@ model.fit(interactions, user_features=user_features, item_features=item_features
 Prediction
 scores = model.predict(user_id, np.arange(n_movies), user_features=user_features, item_features=item_features)
 top_items = movie_ids[np.argsort(-scores)[:10]]
-'''
+```
 This uses warp-kos loss to optimize implicit feedback, suitable for psychological features.
 
 **Surprise - Collaborative Filtering Dedicated**
 The Surprise library focuses on collaborative filtering and can be extended with custom algorithms to integrate psychological factors[[surprise.readthedocs.io]].
 
-'''python
+```python
 from surprise import SVD, Dataset, Reader
 from surprise.model_selection import cross_validate
 from surprise import AlgoBase
@@ -612,16 +611,16 @@ reader = Reader(rating_scale=(1, 5))
 data = Dataset.load_from_df(df[['user_id', 'movie_id', 'rating']], reader)
 algo = PsychologySVD()
 cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=5)
-'''
+```
 
 
 
-3.2 Psychology Analysis Tools
+### 3.2 Psychology Analysis Tools
 
 **Personality Prediction Framework**
 Uses TensorFlow and PyTorch to explore automated personality detection based on language models, supporting the Essays dataset with Big Five personality trait labels[[2]]([historical-url]
 
-'''python
+```python
 使用預訓練BERT進行人格預測
 from transformers import BertModel, BertTokenizer
 import torch
@@ -651,9 +650,9 @@ class PersonalityPredictor(torch.nn.Module):
             'openness': torch.sigmoid(self.openness_head(output)),
             'conscientiousness': torch.sigmoid(self.conscientiousness_head(output))
         }
-'''
+```
 
-'''python
+```python
 from transformers import BertTokenizer, BertModel
 import torch
 
@@ -669,11 +668,11 @@ def predict_personality(text):
 
 應用：從用戶評論預測，輸入LightFM user_features
 user_personality = predict_personality(user_reviews)
-'''
+```
 **Emotion Analysis Integration**
 Psychological research shows that people's preferences or emotional states are influenced by the emotions of the majority (herd mentality), making it particularly important to mine the emotions in user reviews[[2]]([historical-url]
 
-'''python
+```python
 from transformers import pipeline
 import pandas as pd
 
@@ -705,9 +704,9 @@ def enhance_movie_profile_with_emotions(movie_id, reviews):
         movie_attributes[movie_id]['positive_emotional_impact'] = True
         
     return movie_attributes[movie_id]
-'''
+```
 Uses PSO optimization fusion (from paper)
-'''python
+```python
 from transformers import pipeline
 from pyswarms.single.global_best import GlobalBestPSO
 import numpy as np
@@ -727,16 +726,16 @@ PSO優化
 bounds = [(0,1), (0,1)]
 optimizer = GlobalBestPSO(n_particles=10, dimensions=2, bounds=bounds)
 cost, pos = optimizer.optimize(objective, iters=20)
-'''
+```
 Integrate into recommendations, adjust movie attributes.
 
 
 
-3.3 Multi-Modal Deep Learning Architecture
+### 3.3 Multi-Modal Deep Learning Architecture
 
 Uses graph convolutional neural network (GCN) to build a collaborative filtering recommendation model, and integrates IoT and convolutional networks to optimize animated movie recommendations for cross-cultural dissemination[[3]]([historical-url] The paper emphasizes cultural psychological factors and uses a dynamic attention mechanism to adjust weights.
 
-'''python
+```python
 import tensorflow as tf
 from tensorflow.keras import layers
 
@@ -803,10 +802,10 @@ class MultiModalMovieRecommender(tf.keras.Model):
         # 預測
         prediction = self.fusion_layer(combined)
         return prediction
-'''
+```
 
 Simplified GCN integration with psychology
-'''python
+```python
 import tensorflow as tf
 from tensorflow.keras.layers import Dense, Dropout
 
@@ -834,15 +833,15 @@ class GCNRecommender(tf.keras.Model):
         return tf.concat([x, psych], axis=-1)
 
 使用MovieLens圖結構，adj_matrix為用戶-電影連接
-'''
+```
 
 IV. Complete System Implementation Example
 
 
 
-4.1 Data Preprocessing Pipeline
+### 4.1 Data Preprocessing Pipeline
 
-'''python
+```python
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
@@ -922,20 +921,20 @@ class PsychologyAwareDataPipeline:
         similarity = cosine_similarity(user_vector.reshape(1, -1), 
                                      movie_vector.reshape(1, -1))[0][0]
         return similarity
-'''
+```
 Cultural feature processing, from GCN paper.
-'''python
+```python
 def process_cultural_data(user_data):
     cultural_dims = ['individualism', 'power_distance']  # Hofstede dimensions
     user_data[cultural_dims] = scaler.fit_transform(user_data[cultural_dims])
     return user_data
-'''
+```
 
 
 
-4.2 Advanced Model Architecture
+### 4.2 Advanced Model Architecture
 
-'''python
+```python
 class PsychologyEnhancedRecommender:
     def __init__(self, config):
         self.config = config
@@ -1028,18 +1027,18 @@ class PsychologyEnhancedRecommender:
         
         model = tf.keras.Model(inputs=inputs, outputs=context_weight)
         return model
-'''
+```
 Attention mechanism, from the paper.
-'''python
+```python
 Add in _build_psychology_model
 attention = tf.keras.layers.Attention()([concat, concat])  # self-attention
-'''
+```
 
 
 
-4.3 Real-time Recommendation Service
+### 4.3 Real-time Recommendation Service
 
-'''python
+```python
 import redis
 import json
 from fastapi import FastAPI, HTTPException
@@ -1182,15 +1181,15 @@ async def get_recommendations(user_request: UserRequest):
         return {"status": "success", "recommendations": recommendations}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-'''
+```
 
 Integrate BCI or IoT, but keep open source, use redis for cache.
 
 
 
-4.4 Evaluation and Optimization
+### 4.4 Evaluation and Optimization
 
-'''python
+```python
 class PsychologyAwareEvaluator:
     def __init__(self):
         self.metrics = {}
@@ -1264,7 +1263,7 @@ class PsychologyAwareEvaluator:
             }
             
         return ablation_results
-'''
+```
 Fairness evaluation, moved forward from FairnessAware section.
 
 
@@ -1273,9 +1272,9 @@ V. Advanced Optimization and Innovation Directions
 
 
 
-5.1 Neuroscience Integration
+### 5.1 Neuroscience Integration
 
-'''python
+```python
 class NeuroscienceEnhancedRecommender:
     def __init__(self):
         self.eeg_processor = self._init_eeg_processor()
@@ -1313,16 +1312,16 @@ class NeuroscienceEnhancedRecommender:
         else:
             # Maintain current genre
             return self._get_similar_movies(movie_id)
-'''
+```
 Uses OpenBCI open-source hardware to simulate EEG processing.
 
 
 
-5.2 Cross-Cultural Adaptation System
+### 5.2 Cross-Cultural Adaptation System
 
 The psychological and emotional experiences of audiences from different cultural backgrounds have a significant impact on film dissemination. Within the framework of cross-cultural communication theory, it emphasizes elucidating the information transmission and meaning construction processes between different cultures[[3]]([historical-url]
 
-'''python
+```python
 class CrossCulturalRecommender:
     def __init__(self):
         self.cultural_models = self._load_cultural_models()
@@ -1368,20 +1367,20 @@ class CrossCulturalRecommender:
         # Weighted average
         return np.average(list(fit_scores.values()), 
                          weights=[0.4, 0.3, 0.3])
-'''
+```
 From GCN paper, add Hofstede cultural dimension calculation.
-'''python
+```python
 def _match_cultural_dimension(movie_val, user_val):
     return 1 - abs(movie_val - user_val) / max_val
-'''
+```
 
 
 
-5.3 Real-Time Emotion Adaptive Recommendation
+### 5.3 Real-Time Emotion Adaptive Recommendation
 
 The system uses facial expressions and text analysis to detect user emotions. It employs the ResNet50 model for facial expression recognition, achieving 73% accuracy[[9]]([historical-url]
 
-'''python
+```python
 class EmotionAdaptiveRecommender:
     def __init__(self):
         self.emotion_detector = self._load_emotion_models()
@@ -1432,18 +1431,18 @@ class EmotionAdaptiveRecommender:
             'therapeutic_value': self._calculate_therapeutic_value(current_emotion, movie_emotion)
         }
         return journey
-'''
+```
 
 From emotion research papers, add CRF for AST.
 Use the pycrfsuite open-source library to implement emotion transition matrices.
 
-6. Deployment and Production Environment Best Practices
+## 6. Deployment and Production Environment Best Practices
 
 
 
-6.1 Microservices Architecture
+### 6.1 Microservices Architecture
 
-'''yaml
+```yaml
 docker-compose.yml
 version: '3.8'
 
@@ -1512,13 +1511,13 @@ services:
 volumes:
   postgres_data:
   redis_data:
-'''
+```
 
 
 
-6.2 Monitoring and Observability
+### 6.2 Monitoring and Observability
 
-'''python
+```python
 from prometheus_client import Counter, Histogram, Gauge
 import logging
 from opentelemetry import trace
@@ -1568,13 +1567,13 @@ class ObservableRecommender:
                 self.logger.error(f"Prediction failed: {e}", exc_info=True)
                 span.record_exception(e)
                 raise
-'''
+```
 
 
 
-6.3 A/B Testing Framework
+### 6.3 A/B Testing Framework
 
-'''python
+```python
 class PsychologyAwareABTester:
     def __init__(self):
         self.experiments = {}
@@ -1644,15 +1643,15 @@ class PsychologyAwareABTester:
         }
         
         return analysis
-'''
+```
 
-7. Case Studies and Best Practices
+## 7. Case Studies and Best Practices
 
 
 
-7.1 Netflix-Style Psychology Recommendation System
+### 7.1 Netflix-Style Psychology Recommendation System
 
-'''python
+```python
 class NetflixStylePsychologyRecommender:
     def __init__(self):
         self.row_generators = {
@@ -1728,13 +1727,13 @@ class NetflixStylePsychologyRecommender:
             })
         
         return personality_rows
-'''
+```
 
 
 
-7.2 Real Case: Spotify-Style Emotional Radio
+### 7.2 Real Case: Spotify-Style Emotional Radio
 
-'''python
+```python
 class EmotionRadioRecommender:
     def __init__(self):
         self.emotion_profiles = self._load_emotion_profiles()
@@ -1782,20 +1781,20 @@ class EmotionRadioRecommender:
             
         path.append(end)
         return path
-'''
+```
 Movie recommendation based on RAG, from Medium article, using LangChain open source.
-'''python
+```python
 from langchain import LLMChain
 Build RAG for personality-aware query
-'''
+```
 
 VIII. Research Frontiers and Future Directions
 
 
 
-8.1 Applications of Quantum Computing in Recommendation Systems
+### 8.1 Applications of Quantum Computing in Recommendation Systems
 
-'''python
+```python
 Conceptual example - Quantum recommendation system
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit.library import TwoLocal
@@ -1835,13 +1834,13 @@ class QuantumRecommender:
         """Calculate similarity using quantum states"""
         # This is conceptual code; actual implementation requires more complex quantum algorithms
         pass
-'''
+```
 
 
 
-8.2 Brain-Computer Interface (BCI) Integration
+### 8.2 Brain-Computer Interface (BCI) Integration
 
-'''python
+```python
 class BCIMovieRecommender:
     def __init__(self):
         self.bci_device = self._init_bci()
@@ -1881,13 +1880,13 @@ class BCIMovieRecommender:
         enjoyment_score = self.enjoyment_model.predict(features.reshape(1, -1))[0]
         
         return enjoyment_score
-'''
+```
 
 
 
-8.3 Recommendation Systems in the Metaverse
+### 8.3 Recommendation Systems in the Metaverse
 
-'''python
+```python
 class MetaverseRecommender:
     def __init__(self):
         self.vr_tracker = self._init_vr_tracking()
@@ -1938,16 +1937,16 @@ class MetaverseRecommender:
             self.adjust_vr_intensity(movie_id, 'decrease')
             
         return engagement_data
-'''
+```
 LLM-enhanced personality simulator, from arxiv paper.
 
 Nine, Ethical Considerations and Responsible AI
 
 
 
-9.1 Bias Detection and Mitigation
+### 9.1 Bias Detection and Mitigation
 
-'''python
+```python
 class FairnessAwareRecommender:
     def __init__(self):
         self.bias_detector = BiasDetector()
@@ -2009,13 +2008,13 @@ class FairnessAwareRecommender:
         }
         
         return report
-'''
+```
 
 
 
-9.2 Explainability Framework
+### 9.2 Explainability Framework
 
-'''python
+```python
 class ExplainableRecommender:
     def __init__(self):
         self.explainer = ModelExplainer()
@@ -2072,16 +2071,16 @@ class ExplainableRecommender:
         
         plt.tight_layout()
         return fig
-'''
+```
 Use the aif360 open-source library to detect bias.
 
-10. Complete Implementation Roadmap
+## 10. Complete Implementation Roadmap
 
 
 
-10.1 Phase 1: Infrastructure (1-2 months)
+### 10.1 Phase 1: Infrastructure (1-2 months)
 
-'''python
+```python
 Project structure
 movie_psychology_recommender/
 ├── data/
@@ -2135,11 +2134,11 @@ movie_psychology_recommender/
     ├── api_documentation.md
     ├── psychological_framework.md
     └── deployment_guide.md
-'''
+```
 
 
 
-10.2 Phase Two: Psychology Integration (2-3 Months)
+### 10.2 Phase Two: Psychology Integration (2-3 Months)
 
 **Key Task List:**
 
@@ -2152,11 +2151,11 @@ movie_psychology_recommender/
 
 
 
-10.3 Phase Three: Production Deployment (3-4 months)
+### 10.3 Phase Three: Production Deployment (3-4 months)
 
 **Deployment Checklist:**
 
-'''yaml
+```yaml
 production_readiness:
   scalability:
     - [ ] Support 100,000+ concurrent users
@@ -2182,7 +2181,7 @@ production_readiness:
     - [ ] Model compression (reduce 80% size)
     - [ ] Edge computing deployment
     - [ ] Cache strategy optimization
-'''
+```
 
 Conclusion
 
@@ -2242,17 +2241,17 @@ Learn more:
 41. [PsychologyRS_Paper_List]([historical-url]
 42. [Building an Advanced Movie Recommendation System with RAG]([historical-url]
 
-11. Advanced Psychology Models and Application Extensions
+## 11. Advanced Psychology Models and Application Extensions
 
 
 
-11.1 Motivation Psychology Integration
+### 11.1 Motivation Psychology Integration
 
 **Self-Determination Theory (Self-Determination Theory, SDT)**
 
 Self-Determination Theory emphasizes three basic psychological needs: autonomy, competence, and relatedness. These needs can be used to predict users' movie preferences.
 
-'''python
+```python
 class SDTMovieRecommender:
     def __init__(self):
         self.sdt_analyzer = SDTAnalyzer()
@@ -2290,11 +2289,11 @@ class SDTMovieRecommender:
             recommendations.extend(self._get_relatedness_movies())
         
         return recommendations
-'''
+```
 
 **Maslow's Hierarchy of Needs Theory Application**
 
-'''python
+```python
 class MaslowRecommender:
     def __init__(self):
         self.need_levels = [
@@ -2334,13 +2333,13 @@ class MaslowRecommender:
             'fulfillment': primary_recs,
             'growth': growth_recs
         }
-'''
+```
 
 
 
-11.2 Cognitive Bias Aware Recommender
+### 11.2 Cognitive Bias Aware Recommender
 
-'''python
+```python
 class CognitiveBiasAwareRecommender:
     def __init__(self):
         self.bias_detectors = self._init_bias_detectors()
@@ -2379,13 +2378,13 @@ class CognitiveBiasAwareRecommender:
             counter_recs.extend(self._get_hidden_gems())
         
         return counter_recs
-'''
+```
 
 
 
-11.3 Flow State Optimization Recommendations
+### 11.3 Flow State Optimization Recommendations
 
-'''python
+```python
 class FlowStateRecommender:
     def __init__(self):
         self.flow_analyzer = FlowStateAnalyzer()
@@ -2426,13 +2425,13 @@ class FlowStateRecommender:
         # Sort and return movies with the highest flow potential
         flow_scores.sort(key=lambda x: x[1], reverse=True)
         return [movie for movie, score in flow_scores[:20]]
-'''
+```
 
 
 
-11.4 Narrative Psychology Integration
+### 11.4 Narrative Psychology Integration
 
-'''python
+```python
 class NarrativePsychologyRecommender:
     def __init__(self):
         self.narrative_analyzer = NarrativeAnalyzer()
@@ -2486,15 +2485,15 @@ class NarrativePsychologyRecommender:
             recommendations.extend(movies)
         
         return sorted(recommendations, key=lambda x: x['therapeutic_value'], reverse=True)
-'''
+```
 
-12. Social Psychology Factors Integration
+## 12. Social Psychology Factors Integration
 
 
 
-12.1 Application of Social Identity Theory
+### 12.1 Application of Social Identity Theory
 
-'''python
+```python
 class SocialIdentityRecommender:
     def __init__(self):
         self.identity_analyzer = SocialIdentityAnalyzer()
@@ -2548,13 +2547,13 @@ class SocialIdentityRecommender:
             return 'gen_x'
         else:
             return 'boomer'
-'''
+```
 
 
 
-12.2 Group Dynamics Recommendation
+### 12.2 Group Dynamics Recommendation
 
-'''python
+```python
 class GroupDynamicsRecommender:
     def __init__(self):
         self.group_analyzer = GroupDynamicsAnalyzer()
@@ -2616,13 +2615,13 @@ class GroupDynamicsRecommender:
             scored_movies.append((movie, final_score))
         
         return sorted(scored_movies, key=lambda x: x[1], reverse=True)[:10]
-'''
+```
 
 
 
-12.3 Application of Social Comparison Theory
+### 12.3 Application of Social Comparison Theory
 
-'''python
+```python
 class SocialComparisonRecommender:
     def __init__(self):
         self.comparison_analyzer = SocialComparisonAnalyzer()
@@ -2653,15 +2652,15 @@ class SocialComparisonRecommender:
             recommendations.extend(self._get_self_affirming_movies())
         
         return recommendations
-'''
+```
 
 Thirteen, Developmental Psychology Perspective
 
 
 
-13.1 Life Cycle Stage Recommendations
+### 13.1 Life Cycle Stage Recommendations
 
-'''python
+```python
 class LifeStageRecommender:
     def __init__(self):
         self.life_stage_analyzer = LifeStageAnalyzer()
@@ -2728,13 +2727,13 @@ class LifeStageRecommender:
             ])
         
         return self._get_movies_by_recommendations(recommendations)
-'''
+```
 
 
 
-13.2 Attachment Theory Integration
+### 13.2 Attachment Theory Integration
 
-'''python
+```python
 class AttachmentStyleRecommender:
     def __init__(self):
         self.attachment_analyzer = AttachmentAnalyzer()
@@ -2797,7 +2796,7 @@ class AttachmentStyleRecommender:
             recommendations = self._get_safe_relationship_movies()
         
         return recommendations
-'''
+```
 
 
 
@@ -2805,9 +2804,9 @@ Fourteen, Clinical Psychology Applications
 
 
 
-14.1 Mental Health Aware Recommendation
+### 14.1 Mental Health Aware Recommendation
 
-'''python
+```python
 class MentalHealthAwareRecommender:
     def __init__(self):
         self.mental_health_detector = MentalHealthIndicatorDetector()
@@ -2871,13 +2870,13 @@ class MentalHealthAwareRecommender:
             recommendations = self._add_mental_health_resources(recommendations)
         
         return recommendations
-'''
+```
 
 
 
-14.2 Cinema Therapy Integration
+### 14.2 Cinema Therapy Integration
 
-'''python
+```python
 class CinemaTherapyRecommender:
     def __init__(self):
         self.therapy_database = CinemaTherapyDatabase()
@@ -2952,13 +2951,13 @@ class CinemaTherapyRecommender:
         }
         
         return base_questions + goal_specific_questions.get(goal, [])
-'''
+```
 
 
 
-14.3 Positive Psychology Integration
+### 14.3 Positive Psychology Integration
 
-'''python
+```python
 class PositivePsychologyRecommender:
     def __init__(self):
         self.perma_analyzer = PERMAAnalyzer()
@@ -3022,15 +3021,15 @@ class PositivePsychologyRecommender:
         self.record_wellbeing_impact(user_id, movie_id, impact)
         
         return impact
-'''
+```
 
 Fifteen, Advanced Technical Implementation
 
 
 
-15.1 Federated Learning Privacy Protection
+### 15.1 Federated Learning Privacy Protection
 
-'''python
+```python
 import tensorflow_federated as tff
 
 class FederatedPsychologyRecommender:
@@ -3083,13 +3082,13 @@ class FederatedPsychologyRecommender:
         prediction = self.server_predict(encrypted_embedding, movie_features)
         
         return prediction
-'''
+```
 
 
 
-15.2 Differential Privacy Implementation
+### 15.2 Differential Privacy Implementation
 
-'''python
+```python
 import tensorflow_privacy as tfp
 
 class DifferentialPrivacyRecommender:
@@ -3144,13 +3143,13 @@ class DifferentialPrivacyRecommender:
             delta=delta
         )
         return eps
-'''
+```
 
 
 
-15.3 Causal Inference Integration
+### 15.3 Causal Inference Integration
 
-'''python
+```python
 from causalml.inference.meta import BaseSRegressor, BaseTRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 
@@ -3218,13 +3217,13 @@ class CausalPsychologyRecommender:
                 })
         
         return counterfactuals
-'''
+```
 
 
 
-15.4 Reinforcement Learning Dynamic Recommendation
+### 15.4 Reinforcement Learning Dynamic Recommendation
 
-'''python
+```python
 import gym
 import numpy as np
 from stable_baselines3 import PPO, DQN
@@ -3319,13 +3318,13 @@ class MovieRecommendationEnv(gym.Env):
         }
         
         return response
-'''
+```
 
 
 
-15.5 Deep Integration of Graph Neural Networks
+### 15.5 Deep Integration of Graph Neural Networks
 
-'''python
+```python
 import torch
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv, GATConv, SAGEConv
@@ -3397,15 +3396,15 @@ class PsychologyGNN(torch.nn.Module):
     def predict(self, user_emb, movie_emb):
         combined = torch.cat([user_emb, movie_emb], dim=-1)
         return self.predictor(combined)
-'''
+```
 
-16. Real-World Application Scenarios and Cases
+## 16. Real-World Application Scenarios and Cases
 
 
 
-16.1 Streaming Platform Integration Solution
+### 16.1 Streaming Platform Integration Solution
 
-'''python
+```python
 class StreamingPlatformIntegration:
     def __init__(self, platform_api):
         self.platform_api = platform_api
@@ -3468,13 +3467,13 @@ class StreamingPlatformIntegration:
             })
         
         return rows
-'''
+```
 
 
 
-16.2 Educational Platform Application
+### 16.2 Educational Platform Application
 
-'''python
+```python
 class EducationalMovieRecommender:
     def __init__(self):
         self.learning_analyzer = LearningStyleAnalyzer()
@@ -3536,13 +3535,13 @@ class EducationalMovieRecommender:
                 'further_reading': self._get_related_resources(movie, objective)
             }
         }
-'''
+```
 
 
 
-16.3 Corporate Training Applications
+### 16.3 Corporate Training Applications
 
-'''python
+```python
 class CorporateTrainingRecommender:
     def __init__(self):
         self.competency_analyzer = CompetencyAnalyzer()
@@ -3604,15 +3603,15 @@ class CorporateTrainingRecommender:
                 })
         
         return playlist
-'''
+```
 
 Seventeen, Data Collection and Annotation Strategy
 
 
 
-17.1 Psychological Characteristics Data Collection
+### 17.1 Psychological Characteristics Data Collection
 
-'''python
+```python
 class PsychologyDataCollector:
     def __init__(self):
         self.survey_engine = SurveyEngine()
@@ -3698,13 +3697,13 @@ class PsychologyDataCollector:
         inferred['neuroticism'] = horror_avoidance * 0.5
         
         return inferred
-'''
+```
 
 
 
-17.2 Movie Psychology Attribute Annotation
+### 17.2 Movie Psychology Attribute Annotation
 
-'''python
+```python
 class MoviePsychologyAnnotator:
     def __init__(self):
         self.nlp_analyzer = NLPAnalyzer()
@@ -3789,15 +3788,15 @@ class MoviePsychologyAnnotator:
         )
         
         return self._aggregate_crowdsource_responses(responses)
-'''
+```
 
-18. System Testing and Quality Assurance
+## 18. System Testing and Quality Assurance
 
 
 
-18.1 Psychology Validity Testing
+### 18.1 Psychology Validity Testing
 
-'''python
+```python
 class PsychologyValidityTester:
     def __init__(self):
         self.statistical_analyzer = StatisticalAnalyzer()
@@ -3865,13 +3864,13 @@ class PsychologyValidityTester:
         }
         
         return metrics
-'''
+```
 
 
 
-18.2 User Experience Testing
+### 18.2 User Experience Testing
 
-'''python
+```python
 class UXTester:
     def __init__(self):
         self.survey_engine = SurveyEngine()
@@ -3940,13 +3939,13 @@ class UXTester:
         }
         
         return analysis
-'''
+```
 
 
 
-18.3 Bias and Fairness Testing
+### 18.3 Bias and Fairness Testing
 
-'''python
+```python
 class FairnessTester:
     def __init__(self):
         self.fairness_metrics = FairnessMetrics()
@@ -4017,17 +4016,17 @@ class FairnessTester:
         }
         
         return report
-'''
+```
 
 Nineteen, Future Research Directions
 
 
 
-19.1 Emerging Technology Integration
+### 19.1 Emerging Technology Integration
 
 **Large Language Model (LLM) Integration**
 
-'''python
+```python
 class LLMEnhancedRecommender:
     def __init__(self):
         self.llm_client = OpenAIClient()  # 或其他LLM
@@ -4084,11 +4083,11 @@ class LLMEnhancedRecommender:
         insight = await self.llm_client.generate(prompt)
         
         return insight
-'''
+```
 
 **Multimodal Emotion Computing**
 
-'''python
+```python
 class MultimodalEmotionComputer:
     def __init__(self):
         self.text_analyzer = TextEmotionAnalyzer()
@@ -4137,13 +4136,13 @@ class MultimodalEmotionComputer:
         }
         
         return fused
-'''
+```
 
 
 
-19.2 Cross-Domain Application Extensions
+### 19.2 Cross-Domain Application Extensions
 
-'''python
+```python
 class CrossDomainPsychologyRecommender:
     def __init__(self):
         self.domain_adapters = {
@@ -4196,13 +4195,13 @@ class CrossDomainPsychologyRecommender:
                 }
         
         return cross_domain_recommendations
-'''
+```
 
 
 
-19.3 Personalized Mental Health Support
+### 19.3 Personalized Mental Health Support
 
-'''python
+```python
 class MentalHealthSupportRecommender:
     def __init__(self):
         self.mental_health_db = MentalHealthMovieDatabase()
@@ -4268,13 +4267,13 @@ class MentalHealthSupportRecommender:
         }
         
         return guide
-'''
+```
 
 Twenty, Summary and Outlook
 
 
 
-20.1 Core Points Review
+### 20.1 Core Points Review
 
 This guide covers the complete ecosystem of the psychology-based AI movie recommendation system:
 
@@ -4304,9 +4303,9 @@ This guide covers the complete ecosystem of the psychology-based AI movie recomm
 
 
 
-20.2 Implementation Recommendations
+### 20.2 Implementation Recommendations
 
-'''python
+```python
 class ImplementationRoadmap:
     def __init__(self):
         self.phases = self._define_phases()
@@ -4373,11 +4372,11 @@ class ImplementationRoadmap:
     
     def get_current_phase_tasks(self, current_phase):
         return self.phases.get(current_phase, {}).get('tasks', [])
-'''
+```
 
 
 
-20.3 Future Outlook
+### 20.3 Future Outlook
 
 The future development directions of the psychology AI movie recommendation system include:
 
@@ -4435,9 +4434,9 @@ Twenty-One, Integration of Neuropsychology and Brain Science
 
 
 
-21.1 Application of Neuroaesthetics in Movie Recommendations
+### 21.1 Application of Neuroaesthetics in Movie Recommendations
 
-'''python
+```python
 class NeuroaestheticsRecommender:
     def __init__(self):
         self.aesthetic_analyzer = AestheticResponseAnalyzer()
@@ -4487,13 +4486,13 @@ class NeuroaestheticsRecommender:
             self._get_movie_visual_complexity(m) for m in watched_movies
         ]
         return np.mean(complexity_scores) if complexity_scores else 0.5
-'''
+```
 
 
 
-21.2 Mirror Neuron Theory Application
+### 21.2 Mirror Neuron Theory Application
 
-'''python
+```python
 class MirrorNeuronRecommender:
     def __init__(self):
         self.empathy_analyzer = EmpathyAnalyzer()
@@ -4535,13 +4534,13 @@ class MirrorNeuronRecommender:
             'narrative_style': ['multiple_perspectives', 'unreliable_narrator'],
             'themes': ['cultural_diversity', 'social_issues', 'marginalized_voices']
         })
-'''
+```
 
 
 
-21.3 Memory and Nostalgia Psychology
+### 21.3 Memory and Nostalgia Psychology
 
-'''python
+```python
 class NostalgiaRecommender:
     def __init__(self):
         self.nostalgia_analyzer = NostalgiaAnalyzer()
@@ -4587,15 +4586,15 @@ class NostalgiaRecommender:
             'tone': ['warm', 'hopeful', 'comforting'],
             'themes': ['childhood', 'family', 'friendship', 'simpler_times']
         })
-'''
+```
 
 Twenty-Two, Emotional Regulation Strategy Integration
 
 
 
-22.1 Application of Emotion Regulation Theory
+### 22.1 Application of Emotion Regulation Theory
 
-'''python
+```python
 class EmotionRegulationRecommender:
     def __init__(self):
         self.regulation_analyzer = EmotionRegulationAnalyzer()
@@ -4639,13 +4638,13 @@ class EmotionRegulationRecommender:
             'themes': ['perspective_shift', 'growth_mindset', 'overcoming_adversity'],
             'narrative_style': ['transformative_arc', 'redemption']
         })
-'''
+```
 
 
 
-22.2 Emotional Contagion and Social Emotional Learning
+### 22.2 Emotional Contagion and Social Emotional Learning
 
-'''python
+```python
 class EmotionalContagionRecommender:
     def __init__(self):
         self.contagion_analyzer = EmotionalContagionAnalyzer()
@@ -4688,13 +4687,13 @@ class EmotionalContagionRecommender:
             'character_emotions': ['happiness', 'hope', 'love', 'triumph'],
             'ending_type': ['positive', 'hopeful']
         })
-'''
+```
 
 
 
-22.3 Stress Coping and Resilience
+### 22.3 Stress Coping and Resilience
 
-'''python
+```python
 class ResilienceRecommender:
     def __init__(self):
         self.resilience_analyzer = ResilienceAnalyzer()
@@ -4739,7 +4738,7 @@ class ResilienceRecommender:
             'character_arc': ['growth', 'transformation', 'triumph_over_adversity'],
             'tone': ['hopeful', 'uplifting', 'inspiring']
         })
-'''
+```
 
 
 
@@ -4900,7 +4899,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 From `corpus/study/ui/video_remake_enhancement.md` Copy: `sources/excerpts/video_remake_enhancement.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  REMAKE STUDIO — Analysis Complete                                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -5040,7 +5039,7 @@ From `corpus/study/ui/video_remake_enhancement.md` Copy: `sources/excerpts/video
 │  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -5105,5 +5104,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.seo · v1 · 2026-07-13 -->
 
-```
 

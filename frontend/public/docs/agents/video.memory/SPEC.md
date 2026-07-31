@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 MemoryAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,9 +154,9 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-9. Specialist Meta-Agents
+## 9. Specialist Meta-Agents
 
-9.1 Orchestration Agents
+### 9.1 Orchestration Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +167,7 @@ _The following is the complete category section from the master roster (includes
 | 57 | **GateKeeperAgent** | Phase transitions; verifies L1/L2/L3 criteria; signs C2PA | Stage-gate methodology; PGA Producers Mark; QMS audit | Zero leaked defects; sign-off SLA ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) | C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints | Constitutional AI (constitution = phase-gate criteria) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9; freshness SLA | Higher recall than producer's bible at scale | All agents (correction events) | All agents (stale facts) | Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models | Reflexion memory architecture (MemGPT extension) |
 
-9.2 Creative Agents
+### 9.2 Creative Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -180,7 +179,7 @@ _The following is the complete category section from the master roster (includes
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, over-fit outputs | TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings | Cliché-hit count; novelty score vs category prior | Catches more clichés than experienced script editor | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) | TV Tropes scraper; n-gram frequency DB; embedding novelty scorer | LLM-as-Judge (anti-cliché constitution) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve; suggests beats | Plutchik; affective-computing corpora; Cron *Story Genius* | Curve-fit to target; biosignal-proxy regression accuracy | Better retention prediction than NRG test-screening cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) | Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model | Self-Refine (emotional-arc curve as rubric target) |
 
-9.3 Research Agents
+### 9.3 Research Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -192,7 +191,7 @@ _The following is the complete category section from the master roster (includes
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-9.4 Optimization Agents
+### 9.4 Optimization Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -242,19 +241,19 @@ Reflexion memory architecture (MemGPT extension)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -278,7 +277,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -291,11 +290,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -305,13 +304,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -375,7 +374,7 @@ _Embedded from `corpus/study/agentic_rag_functional_specification.md`. Also stor
 Task: Build Ultra-Production-Grade Hybrid Agentic RAG System – Exhaustive Architectural & Implementation Specification (April 2026)
 
 ** Initial Prompt to task.md from Creator **
-'''
+```
 How to create backend services
 FIRST:
 Conduct a comprehensive analysis and research of the task.md file to fully understand all requirements, specifications, 
@@ -406,7 +405,7 @@ complete frontend project structure to the designated frontend folder. The final
 experience through thoughtful interaction design, consistent visual hierarchy, smooth animations, mobile-first responsive 
 design, and intuitive user workflows that minimize cognitive load while maximizing task completion efficiency.
 
-'''
+```
 **Task Owner:** Coding Agent  
 **Priority:** Critical  
 **Estimated Effort:** 10–14 days (MVP core in 6 days; full scale, hybrid integration, wiki compounding, observability & benchmarks in remaining days)  
@@ -420,7 +419,7 @@ The system **must**:
 
 This specification is the **definitive, deeply-rethought synthesis** of the entire conversation history after 10+ iterations of refinement: original Agentic RAG request → Karpathy Wiki comparison table → LightRAG enhancement → scale for 65k MD → repeated calls for deeper design details.
 
-1. Core Concepts from Paper (Exact Mapping – Non-Negotiable)
+## 1. Core Concepts from Paper (Exact Mapping – Non-Negotiable)
 
 **4 Core Agentic Design Patterns** (must be visible as explicit graph cycles/conditional edges):
 1. **Reflection** — Agents self-evaluate outputs (relevance, faithfulness, hallucination) using rubrics and iterate (Self-RAG style reflection tokens or grader loops).
@@ -442,9 +441,9 @@ This specification is the **definitive, deeply-rethought synthesis** of the enti
 - Superior to pure Karpathy Wiki (query-time agentic reasoning + optional write-back).
 - LightRAG adds fast relational power without heavy GraphRAG rebuild costs.
 
-2. Full System Architecture (Mermaid – Include & Render in README)
+## 2. Full System Architecture (Mermaid – Include & Render in README)
 
-'''mermaid
+```mermaid
 graph TD
     User[User Query via CLI/Streamlit] --> Router[Query Analyzer Router<br/>Adaptive Strategy Selection]
     Router --> Planner[Planner Agent<br/>Decompose + Multi-Hop Plan]
@@ -467,13 +466,13 @@ graph TD
         LRAG[LightRAG KG<br/>Entities, Relations, OpenSearch Backend]
     end
     WikiSynth --> WikiVault[wiki_output/ Vault<br/>index.md + log.md + concepts/]
-'''
+```
 
-3. Detailed Data Models (Pydantic v2 – noted)
+## 3. Detailed Data Models (Pydantic v2 – noted)
 
 Create `src/graph/state.py`:
 
-'''python
+```python
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional, Annotated, Literal
 from langgraph.graph.message import add_messages
@@ -502,11 +501,11 @@ class AgentState(BaseModel):
     wiki_output_path: Optional[str] = None
     lightrag_context: Optional[Dict] = None
     metadata: Dict = Field(default_factory=dict)  # tracing, timestamps, etc.
-'''
+```
 
 Use `checkpointer = MemorySaver()` (or AsyncSqliteSaver for production persistence).
 
-4. Per-Node Detailed Design (Contracts, Inputs/Outputs, Prompts)
+## 4. Per-Node Detailed Design (Contracts, Inputs/Outputs, Prompts)
 
 All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial dict` for state update.
 
@@ -534,7 +533,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - 2–4 few-shot examples (positive + negative).
 - Chain-of-thought encouragement for reflection/planning.
 
-5. Hybrid Retrieval & Indexing Design (65k MD Scale – Critical)
+## 5. Hybrid Retrieval & Indexing Design (65k MD Scale – Critical)
 
 **Ingestion Pipeline** (`src/ingestion/pipeline.py` – memory-safe, incremental):
 
@@ -553,21 +552,21 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - LightRAG: `mode="hybrid"` (low-level entities + high-level relations).
 - Adaptive: Router prefers LightRAG for queries with "compare", "how", "relation", "who connected to".
 
-6. Tools (Dynamic & Extensible)
+## 6. Tools (Dynamic & Extensible)
 
 - `hybrid_retrieve(query: str, use_lightrag: bool = True)`
 - `web_search_tavily`
 - `wiki_writer(markdown_content: str, title: str)`
 - Calculator, arXiv fetcher (bonus).
 
-7. Graph Construction (`src/graph/agentic_rag_graph.py`)
+## 7. Graph Construction (`src/graph/agentic_rag_graph.py`)
 
 - `StateGraph(AgentState)`
 - Add nodes + conditional edges for reflection (`should_continue_reflection` based on confidence/iterations).
 - Parallel tool execution where possible.
 - Full LangSmith tracing on every node (callbacks).
 
-8. UI, CLI, Evaluation & Production Features
+## 8. UI, CLI, Evaluation & Production Features
 
 - **Streamlit** (`app.py`): Chat interface + expandable reasoning trace (node-by-node with scores, docs, critiques) + "Save to Wiki" button.
 - **Typer CLI** (`cli.py`): `ingest --resume`, `query "..." [--hybrid] [--wiki] [--trace]`, `lint-corpus`, `eval`, `build-wiki`.
@@ -576,7 +575,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 - **Docker**: Multi-container compose (app + Chroma + LightRAG OpenSearch + optional PostgreSQL).
 - **Error Handling**: Graceful fallbacks, retry logic, rate limiting.
 
-9. Phased Implementation Plan (Strict Order – With Checkpoints)
+## 9. Phased Implementation Plan (Strict Order – With Checkpoints)
 
 **Phase 0**: Project skeleton, requirements.txt, config, data models, prompts templates, Docker compose.  
 **Phase 1**: Ingestion pipeline – full 65k MD benchmark + incremental mode + LightRAG indexing.  
@@ -587,7 +586,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 **Phase 6**: Docker, tests, logging, security (API keys), README (diagrams, comparison table, benchmarks).  
 **Phase 7**: End-to-end stress testing (100 complex queries), latency/quality benchmarks, final polish.
 
-10. Success Criteria (Measurable & Verifiable)
+## 10. Success Criteria (Measurable & Verifiable)
 
 1. Full 65k MD corpus ingested incrementally without OOM or crashes; benchmark logged.
 2. Every complex query trace demonstrates **all 4 patterns** and **7 elements** visibly.
@@ -597,7 +596,7 @@ All nodes in `src/agents/`; each takes `state: AgentState` and returns `partial 
 6. Evaluation: faithfulness ≥0.92, answer relevancy ≥0.90, average latency <4s on consumer hardware.
 7. Code is clean, fully typed (Pydantic + mypy), documented, git-committed per phase.
 
-11. References & Recommended Starters
+## 11. References & Recommended Starters
 
 - Paper PDF: [historical-url]
 - YouTube Video: [historical-url]
@@ -627,9 +626,9 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 **Target Audience:** Builders of harnesses, multi-agent systems, coding agents, research agents (e.g., N1ch01as-style Architect with critic/self-refinement loops).  
 **Key Principle:** Controlled loops with explicit state, structured outputs, quality gates, and hierarchical delegation. Not uncontrolled chain reactions — managed orchestration with bubbling-up consolidation and deliberate synthesis.
 
-1. Core Principles (Refined from Research)
+## 1. Core Principles (Refined from Research)
 
-1.1 Foundational: ReAct Paradigm (Yao et al., ICLR 2023)
+### 1.1 Foundational: ReAct Paradigm (Yao et al., ICLR 2023)
 - **Definition**: Interleave **verbal reasoning traces (Thoughts)** with **actions** (tool calls, environment interactions, or delegation). Observations from actions ground and update reasoning.
 - **Why it works**:
   - Pure Chain-of-Thought (CoT): Static, prone to hallucinations and error propagation (no external grounding).
@@ -645,7 +644,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 
 **xAI Alignment**: Grok's server-side agentic tool calling implements a production ReAct-style loop internally. The model decides tools, executes server-side (web_search, x_search, code_execution, collections_search), iterates until it can produce the final answer. Client sees only final (or streamed) output + optional reasoning tokens.
 
-1.2 Production xAI Multi-Agent Orchestration (2026)
+### 1.2 Production xAI Multi-Agent Orchestration (2026)
 - **grok-4.20-multi-agent** (or equivalent): Launches configurable teams (4 agents for quick/focused; 16 for deep/comprehensive).
 - **How the loop works**:
   - Server-side **realtime collaboration**: Multiple specialized agents run in parallel.
@@ -656,7 +655,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 - **Strengths**: Deep multi-step research, structured outputs (tables, comparisons), realtime refinement, automatic tool use without client intervention in the loop.
 - **Plan-first elements**: Complementary patterns in xAI tools like Grok Build CLI use explicit plan generation first, then parallel sub-agent execution (e.g., up to 8 sub-agents in isolated Git worktrees).
 
-1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
+### 1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
 - **Central Planner / Orchestrator / Supervisor** at top level.
 - Decomposes into sub-tasks → delegates to **specialized sub-agents** (Deep Researcher, Analyzer, Browser/Tool agents, Reporter, etc.).
 - Each sub-agent runs its **own loop** (ReAct-style or domain-optimized).
@@ -672,7 +671,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 
 **Overall Refined Model**: Start with ReAct core loop. Layer hierarchical delegation for complexity. Add explicit planning phase + reflection/critique gates + structured state/versioning for production reliability. xAI shows this can run server-side with strong orchestration primitives.
 
-1.4 Cognitive Architecture Enhancements from Ranked Human Thinking Models (v3 Addition)
+### 1.4 Cognitive Architecture Enhancements from Ranked Human Thinking Models (v3 Addition)
 
 To further strengthen the loop against the failure modes detailed in Section 1.5, v3 explicitly incorporates high-adoption-priority traditional human thinking models (ranked by adoption priority for agent loops in the companion `thinking_model.md` — full table of 40 models with phases, similarities, strengths, and scores). These are mapped as first-class mechanisms rather than afterthoughts, delivering **adaptive intelligence** (context-aware routing), **proactive robustness** (pre-action risk), **efficient cognition** (fast/slow paths), and **deeper organizational learning** (double-loop + structured reflection). Prioritized models (scores 9–10) receive the deepest integration; others enhance specific sub-components (verifier, ideation, harmonization).
 
@@ -701,7 +700,7 @@ To further strengthen the loop against the failure modes detailed in Section 1.5
 
 These additions are **production-aware**: all new steps are bounded, versioned, logged via tracer, and can be toggled or depth-limited per task. They transform the agent from a capable ReAct/hierarchical engine (v2) into a more cognitively complete system that thinks about its own thinking, anticipates failure, learns at multiple levels, and adapts its deliberation style to context — while fully preserving every v2 mechanism, code example, and mitigation.
 
-1.5 Known Problems, Failure Modes & Targeted Mitigations (Research-Backed)
+### 1.5 Known Problems, Failure Modes & Targeted Mitigations (Research-Backed)
 
 Recent systematic studies (especially the **MASFT taxonomy** from analysis of 150+ traces across popular multi-agent frameworks) identify that **most failures stem from design/spec issues (~40%+)**, coordination breakdowns, and weak verification/termination — **not raw model intelligence**. Single-agent ReAct loops suffer overlapping issues plus context bloat and repetitive behavior. Below is a synthesized taxonomy of the most common, well-documented problems, with **actionable mitigations** mapped directly to the phases in this document.
 
@@ -778,7 +777,7 @@ How Mitigations Integrate into the Loop Phases
 
 **Key Insight from Research**: Fixing **specification quality + verification layers + explicit termination controls** delivers the largest reliability gains. Adding more agents or raw model power without these often yields diminishing or negative returns.
 
-2. The Complete Agent Loop Process (Actionable)
+## 2. The Complete Agent Loop Process (Actionable)
 
 Phase 0: Initialization (Spec-Driven Setup)
 **Goal**: Establish clear contract before any loop iterations.
@@ -798,7 +797,7 @@ Phase 0: Initialization (Spec-Driven Setup)
 5. Decide architecture: Flat ReAct (simple) vs Hierarchical (complex research/coding) vs Hybrid. Also set initial `cognitive_profile` flags from Cynefin + task type (enable_fast_path, reflection_style, etc.).
 
 **Actionable Output Format** (example JSON or Markdown section):
-'''json
+```json
 {
   "task_id": "...",
   "objective": "...",
@@ -808,7 +807,7 @@ Phase 0: Initialization (Spec-Driven Setup)
   "initial_plan": ["Step 1: ...", "Step 2: ..."],
   "quality_gates": ["completeness > 90%", "no hallucinations", "structured output"]
 }
-'''
+```
 
 Phase 1: Core Iteration Loop (ReAct-Inspired, Controlled)
 While not terminated:
@@ -856,7 +855,7 @@ Use one circuit breaker per tool type or per sub-agent role. Integrate with the 
 
 **Code Example: Minimal Controlled ReAct Loop with Cycle Detection (Python)**
 
-'''python
+```python
 import hashlib
 from typing import Any, Dict, List
 from dataclasses import dataclass, field
@@ -1089,11 +1088,11 @@ def safe_invoke_sub_agent(payload: dict, max_retries: int = 2, circuit_breaker: 
                 }
             time.sleep(1)
     return {"status": "error", "error": "Sub-agent max retries exceeded", "circuit_state": cb.state}
-'''
+```
 
 **Code Example: Lightweight Verifier / Critic Agent (Prompt + Schema) — v3 Enhanced with Critic Modes + Paul-Elder Standards**
 
-'''python
+```python
 VERIFIER_PROMPT = """
 You are a strict, skeptical Verifier / Critic Agent operating in {critic_mode} mode.
 Given the original task_spec and the candidate_output, 
@@ -1129,11 +1128,11 @@ def verify_output(candidate: dict, task_spec: dict, llm, critic_mode: str = "sta
     result = llm.generate(prompt, output_schema=...)  # force JSON
     # Optional: if critic_mode == "ensemble": run red_team + paul_elder in parallel and aggregate
     return result
-'''
+```
 
 **Code Example: Simple Self-Evolution / Reflection Step (Trace → Edit → Validate)**
 
-'''python
+```python
 def self_evolve_component(component_name: str, trace: List[dict], llm, version_manager):
     """Minimal TextGrad / reflection-style evolution"""
     diagnosis = llm.generate(
@@ -1148,7 +1147,7 @@ def self_evolve_component(component_name: str, trace: List[dict], llm, version_m
             version_manager.register(new_version, parent=component_name)
             return new_version
     return None  # no change or rollback
-'''
+```
 
 **Termination Conditions** (checked every iteration or at gates):
 - Success criteria met + quality gate passed.
@@ -1232,7 +1231,7 @@ Phase 5: Termination & Output
   4. Persist full trace + versions for audit/replay/debug.
 - **Human-in-loop hooks**: At quality gate failures, high-stakes actions, or budget exhaustion.
 
-3. State, Memory & Infrastructure Recommendations
+## 3. State, Memory & Infrastructure Recommendations
 
 - **State Schema**: task_spec + current_plan/todo + history (thought/action/observation tuples) + memory (key-value or vector) + versions + tracer.
 - **Memory Management**: Hierarchical (local per sub-agent + global). Summarization on context pressure. Session-isolated for concurrency.
@@ -1250,7 +1249,7 @@ Phase 5: Termination & Output
   - Logging + observability (every thought/action/observation).
   - Sandboxed execution for tools/code.
 
-4. Decision Framework (When to Use What)
+## 4. Decision Framework (When to Use What)
 
 | Task Complexity       | Recommended Pattern                  | Key Features to Enable          | Example Use Case |
 |-----------------------|--------------------------------------|---------------------------------|------------------|
@@ -1260,7 +1259,7 @@ Phase 5: Termination & Output
 | Open-ended / creative | ReAct + Reflection + Self-evolution | Critic gates, versioned prompts| Iterative design refinement |
 | High-stakes / reliable| All above + strong Quality Gates    | Structured results, validation | Enterprise automation |
 
-5. Common Pitfalls & Mitigations (from Research)
+## 5. Common Pitfalls & Mitigations (from Research)
 
 **Primary reference: See the full MASFT-style taxonomy, failure modes, and phase-specific mitigations in Section 1.5 above.** The points below are retained for quick scanning and now include additional patterns from recent studies.
 
@@ -1271,9 +1270,9 @@ Phase 5: Termination & Output
 - **Brittle delegation**: Use explicit sub-task specs + success criteria; validate returned results.
 - **Lack of visibility**: Full tracing + optional streaming of reasoning.
 
-6. Quick-Start Pseudocode Skeleton (Python-like)
+## 6. Quick-Start Pseudocode Skeleton (Python-like)
 
-'''python
+```python
 def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
     state = initialize_state(task_instruction)  # spec, plan, todo, memory, tracer
     orchestrator = get_llm(role="orchestrator")
@@ -1307,11 +1306,11 @@ def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
             state = reflect_and_evolve(state)  # critique + version updates
     
     return handle_termination(state)
-'''
+```
 
 Sub-agent invoke follows the same pattern recursively (narrower scope).
 
-7. References & Sources
+## 7. References & Sources
 
 - **ReAct Foundational**: Yao et al. "ReAct: Synergizing Reasoning and Acting in Language Models" (arXiv:2210.03629, ICLR 2023).
 - **xAI Production**: xAI Developer Docs (Multi-Agent orchestration, server-side agentic tool calling, Grok Build CLI patterns) — realtime multi-agent research with leader synthesis; 4/16 agent teams.
@@ -1369,7 +1368,7 @@ This spec is ready for direct implementation or feeding into your N1ch01as Archi
 
 ---
 
-1. Purpose & Success Criteria
+## 1. Purpose & Success Criteria
 
 **Purpose**  
 Serve as the single, intelligent gateway between any requesting agent and the curated knowledge base. It must understand *who* is asking, *what* they need, and *why*, then deliver the optimal context pack with full reasoning.
@@ -1384,9 +1383,9 @@ Serve as the single, intelligent gateway between any requesting agent and the cu
 
 ---
 
-2. Architecture Overview
+## 2. Architecture Overview
 
-'''
+```
 Requesting Agent (e.g. Character Consistency Critic)
           ↓ (structured request)
 Knowledge Router Agent
@@ -1406,7 +1405,7 @@ Knowledge Base (5,000+ .md files)
    ├── Vector Store (embeddings + metadata filtering)
    ├── Knowledge Graph (nodes: techniques, tools, failure_modes, papers, agents; relations: improves, requires, common_failure, used_with)
    └── Optional Pre-computed Centroids per Domain/Agent Cluster
-'''
+```
 
 **Key Design Principles**
 - **Metadata First**: Hard constraints eliminate 70-80% of irrelevant files instantly.
@@ -1417,10 +1416,10 @@ Knowledge Base (5,000+ .md files)
 
 ---
 
-3. Input / Output Contract (Strict & Rich)
+## 3. Input / Output Contract (Strict & Rich)
 
 Input from Requesting Agent
-'''json
+```json
 {
   "request_id": "uuid-v4",
   "timestamp": "2026-06-06T15:02:00Z",
@@ -1445,10 +1444,10 @@ Input from Requesting Agent
     "multi_hop_expected": true
   }
 }
-'''
+```
 
 Output from Router
-'''json
+```json
 {
   "request_id": "...",
   "selected_knowledge": [
@@ -1486,25 +1485,25 @@ Output from Router
   },
   "suggested_next_actions": ["Request deeper graph traversal on 'prop_consistency'", "Flag file X for quality review"]
 }
-'''
+```
 
 ---
 
-4. Core Components (Detailed)
+## 4. Core Components (Detailed)
 
-4.1 Query Analyzer + Intent Classifier
+### 4.1 Query Analyzer + Intent Classifier
 - Parses task_description + required_concepts + previous_failures.
 - Extracts entities (tools: Seedance, Kling; concepts: character_consistency).
 - Classifies complexity and whether Planner is needed.
 - Uses lightweight reflection: “Is this query about a single technique or a full pipeline?”
 
-4.2 Planner (for High-Complexity / Pipeline Queries)
+### 4.2 Planner (for High-Complexity / Pipeline Queries)
 Inspired by RopMura: When `routing_hints.complexity == "pipeline"` or `multi_hop_expected == true`:
 - Decomposes into sub-tasks (e.g., 1. Character bible creation, 2. Shot-by-shot consistency rules, 3. Lighting-specific mitigations, 4. Tool-specific prompt patterns).
 - Routes sub-tasks iteratively or in parallel.
 - Uses Question Simplifier / Response Evaluator loop (max 4–5 rounds).
 
-4.3 Hybrid Retrieval Engine (The Heart)
+### 4.3 Hybrid Retrieval Engine (The Heart)
 **Layered Approach (in order):**
 
 1. **Metadata Hard Filters** (fast, deterministic, 70-80% reduction)
@@ -1527,14 +1526,14 @@ Inspired by RopMura: When `routing_hints.complexity == "pipeline"` or `multi_hop
    - Reflection step: “Are these passages actually useful for the downstream agent’s goal?” “Is anything critical missing?”
    - Can trigger corrective re-retrieval if quality low.
 
-4.4 Context Assembler
+### 4.4 Context Assembler
 - Options: raw top chunks | synthesized summary | structured knowledge pack (best for your critic-heavy agents).
 - For creative agents: often returns “Knowledge Pack” with sections like Best Practices, Failure Modes & Mitigations, Tool-Specific Notes, Prompt Templates.
 
-4.5 Explainer & Traceability
+### 4.5 Explainer & Traceability
 Every output includes a clear `reasoning_trace` (structured + natural language). This is non-negotiable for debugging and critic loops.
 
-4.6 Multi-Level Critic (Self-Improving Core)
+### 4.6 Multi-Level Critic (Self-Improving Core)
 Three levels:
 1. **Retrieval Critic**: Scores relevance, coverage of required_concepts, handling of previous_failures.
 2. **Routing Critic**: Judges whether the right files were chosen vs alternatives; suggests better tags or graph edges.
@@ -1544,7 +1543,7 @@ This turns the Router into a learning system over time.
 
 ---
 
-5. Particular Use Case Implementations
+## 5. Particular Use Case Implementations
 
 Use Case 1: Character Consistency Critic Agent
 **Request Example**: See Input contract above (wuxia fight scene).
@@ -1577,11 +1576,11 @@ Use Case 4: Shot Planning Agent (Script → Shot List → Generation)
 
 ---
 
-6. Knowledge Base Integration Requirements
+## 6. Knowledge Base Integration Requirements
 
 Every `.md` file **must** have rich frontmatter (this is non-negotiable for the Router to work well):
 
-'''yaml
+```yaml
 ---
 title: "..."
 category: ai_filmmaking | ai_agents | intersection_agentic_filmmaking
@@ -1594,7 +1593,7 @@ source_type: youtube | book | course | synthetic | research_paper
 date_added: 2026-05-20
 last_reviewed: 2026-06-01
 ---
-'''
+```
 
 **Recommended Additions for Scale**:
 - Pre-computed cluster_id or centroid_id per file
@@ -1602,7 +1601,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-7. Phased Implementation Roadmap
+## 7. Phased Implementation Roadmap
 
 **Phase 1 (MVP – 7–14 days)**
 - Metadata hard filters + basic vector search
@@ -1631,7 +1630,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-8. Evaluation Framework
+## 8. Evaluation Framework
 
 - **Offline**: Golden test set of 50–100 representative queries per major agent role. Measure precision@K, recall of required_concepts, critic scores.
 - **Online**: Track downstream agent success rate before/after Router improvements. Log critic scores and human spot-checks.
@@ -1640,7 +1639,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-9. Edge Cases & Mitigations
+## 9. Edge Cases & Mitigations
 
 - **Very broad query** → Planner forces decomposition + strict max_files.
 - **No good matches** → Router returns “Insufficient high-quality knowledge” + suggestions to expand corpus + low confidence flag.
@@ -1650,7 +1649,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-10. Tech Recommendations (Aligned with Your Stack)
+## 10. Tech Recommendations (Aligned with Your Stack)
 
 - **Orchestration**: LangGraph or your custom harness (excellent for stateful Planner + Router + Critic loops)
 - **Vector + Metadata**: LlamaIndex or Haystack with Qdrant/Pinecone (strong metadata filtering)
@@ -1661,7 +1660,7 @@ last_reviewed: 2026-06-01
 
 ---
 
-11. Generalization to Any Domain
+## 11. Generalization to Any Domain
 
 This design is deliberately **domain-agnostic at the core**:
 - Replace `category` / `subcategory` / `agent_relevance` with your new domain’s taxonomy.
@@ -1743,7 +1742,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
 | 57 | **GateKeeperAgent** | Manages phase transitions; verifies L1/L2/L3 success criteria; signs C2PA provenance | Stage-gate methodology; PGA Producers Mark; QMS audit patterns | Zero leaked defects past gate; sign-off SLA hit rate ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9 on project Q&A; freshness SLA | Higher recall than producer's project bible at scale | All agents (correction events) | All agents (stale facts) |
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -1753,7 +1752,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 **Acceptance rules:**
 1. **Blocker** severity halts the DAG until resolved.
@@ -1862,7 +1861,7 @@ After sub-results or major milestones:
    - If passes: Proceed (or do final polish).
 5. **Update State**: Persist consolidated knowledge to long-term memory / versioned artifacts.
 
-3. State, Memory & Infrastructure Recommendations
+## 3. State, Memory & Infrastructure Recommendations
 
 - **State Schema**: task_spec + current_plan/todo + history (thought/action/observation tuples) + memory (key-value or vector) + versions + tracer.
 - **Memory Management**: Hierarchical (local per sub-agent + global). Summarization on context pressure. Session-isolated for concurrency.
@@ -1880,7 +1879,7 @@ After sub-results or major milestones:
   - Logging + observability (every thought/action/observation).
   - Sandboxed execution for tools/code.
 
-'''python
+```python
 def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
     state = initialize_state(task_instruction)  # spec, plan, todo, memory, tracer
     orchestrator = get_llm(role="orchestrator")
@@ -2009,7 +2008,7 @@ From `corpus/study/system_build_plan.md` Copy: `sources/excerpts/system_build_pl
 | Containerization | **Docker** + **docker-compose** (dev) → **Kubernetes + Helm** (prod) | GPU node pool for gen tasks; CPU pool for LLM-only. |
 | Secrets | **Doppler/Vault** (prod), `.env` + `direnv` (dev, gitignored) | Never in repo. |
 
-'''text
+```text
 upstream-va-design/                      # repo root (build target; specs live in study/)
 ├── CLAUDE.md                        # root project memory (Appendix A)
 ├── BUILD_PROGRESS.md                # living milestone + hardening checklist (you maintain)
@@ -2064,7 +2063,7 @@ upstream-va-design/                      # repo root (build target; specs live i
 │   └── harness/                     # VBench/EvalCrafter/CLIP-T/FVD runners (wrap providers)
 │
 └── tests/                           # cross-package integration + E2E + contract tests
-'''
+```
 
 **Acceptance rules (implement in `agent-core`, test exhaustively):**
 - `blocker` → halts the DAG node until resolved (Temporal signal / LangGraph interrupt).
@@ -2186,9 +2185,9 @@ class AgentState(BaseModel):
     budgets: Dict[str, Any] = Field(default_factory=dict)
     versions: Dict[str, str] = Field(default_factory=dict)  # current active
     tracer: List[TraceEvent] = Field(default_factory=list)  # or separate Tracer class
-'''
+```
 
-3.3 Key Modules to Implement (with Skeletons from attached + Enhancements)
+### 3.3 Key Modules to Implement (with Skeletons from attached + Enhancements)
 - **core/loop.py**: `controlled_react_loop` (enhance attached code with Pydantic, full state, MASFT-aware prompts, xAI hybrid hooks, progress tracking).
 - **reliability/circuit_breaker.py**: Enhanced class with metrics, per-tool/role instances, integration with safe_execute.
 - **reliability/verifier.py**: `verify_output` + `VERIFIER_PROMPT` tuned to catch FM-1.x/2.x/3.x (e.g., "Does this respect original task_spec and roles? Any premature termination or incomplete verification? Cross-check claims vs observations.").
@@ -2233,7 +2232,7 @@ Constraints & Non-Goals
 - **Cost Control**: Token budgets, parallel only for independent branches, summarization on context pressure, early termination when criteria met.
 - **Non-Goals (Phase 1-2)**: Full distributed execution (Ray/Celery later), GUI dashboard (CLI + JSON export first), multimodal native (text+code focus; vision via xAI or sub-agent), production multi-tenancy.
 
-2.4 Final Architectural Decisions (Post-100x Rethink)
+### 2.4 Final Architectural Decisions (Post-100x Rethink)
 - **Loop Style**: Controlled custom ReAct (dataclass/Pydantic State + hash cycle detect + circuit breakers) as foundation. Hierarchical on top (Orchestrator decides delegate vs tool vs synthesize vs finish). Not flat multi-agent (central control beats coordination chaos per research).
 - **State**: `AgentState` (task_spec: TaskSpec, history: List[TraceEvent], todo: List[TodoItem] or todo_md_content, plan: Optional[Plan], memory_short: Summary + recent, memory_long: VectorStore + key_facts, versions: VersionRegistry, tracer: Tracer, budgets: Token/StepBudget, seen_hashes: set for cycles).
 - **Memory Strategy**: Structured `todo.md` / key_facts (primary, low token) + aggressive summarization (on context pressure or milestone) + optional vector (Chroma/FAISS) for semantic retrieval of past traces/versions/knowledge. Sub-agents get **sliced context + provenance only**.
@@ -2244,7 +2243,7 @@ Constraints & Non-Goals
 - **Testing Dogfood**: Build failure simulator that replays MASFT examples; assert mitigations. Use the harness to improve its own prompts/verifier on held-out traces during development.
 - **Extensibility**: Pluggable LLM backend, Tool types, SubAgent roles (registry + factory), Memory backends, Evolution strategies. CLI for single runs; server mode (FastAPI) for multi-session / integration with OpenWebUI-style frontends.
 
-3.1 High-Level Flow (Phases from agent_loop_v3.md, Hardened with Cognitive Layer)
+### 3.1 High-Level Flow (Phases from agent_loop_v3.md, Hardened with Cognitive Layer)
 1. **Phase 0: Initialization (Spec-Driven + Cognitive Setup)**
    - Parse instruction → generate/validate `TaskSpec` (Pydantic: objective, success_criteria: List[str], constraints: Dict, output_format, max_steps=50, token_budget=200k, quality_gates, initial_plan?, **cognitive_profile: Dict** e.g. {"enable_fast_path": true, "reflection_style": "aar_double_loop_5whys", "critic_modes": ["red_team", "paul_elder"], "cynefin_classification": "auto"}).
    - Spec Validator + Critic (LLM): Check completeness, ambiguity, role clarity, termination conditions. Reject/revise if FM-1.x risks high. **Run Premortem Analysis**: "Assume this spec/plan fails spectacularly — identify top causes and mitigations; merge into living spec, success_criteria, todo, and quality_gates."
@@ -2271,10 +2270,10 @@ Constraints & Non-Goals
 5. **Phase 4: Reflection & Self-Evolution (Advanced — AAR + Double-Loop + 5 Whys + Multi-Perspective Critics)**
    - At milestones or end (or on explicit reflect action): Full trace + mode history to SelfEvolver.
    - **Mandatory Structured AAR** (4-question template from After-Action Review):
-     1. What was supposed to happen? (vs original TaskSpec + plan + success_criteria)
-     2. What actually happened? (from tracer + StructuredObservations, including Fast vs Full mode stats and RPD matches)
+## 1. What was supposed to happen? (vs original TaskSpec + plan + success_criteria)
+## 2. What actually happened? (from tracer + StructuredObservations, including Fast vs Full mode stats and RPD matches)
      3. Why? (diagnosis — standard attribution + deep pass with **5 Whys** on top issues + **Ishikawa Fishbone** or fault tree categorization: Prompts/Methods, Models/Tools, Data/Obs, Context/Env, State/Memory, Verification, Human Spec)
-     4. What next? (actionable lessons → concrete edits)
+## 4. What next? (actionable lessons → concrete edits)
    - **Double-Loop Learning Layer** (after AAR single-loop diagnosis): Explicitly question governing variables/assumptions (e.g., "Was our definition of quality too loose? Did role boundaries allow drift? Should success_criteria or cognitive_profile defaults evolve?"). Only meta-approved changes proceed to proposal.
    - Diagnose root causes (MASFT-aware + cognitive lens prompt, referencing FM modes and thinking_model mappings).
    - Propose targeted edits (prompts, tool code, role defs, sub-spec heuristics, **even cognitive_profile defaults or new critic modes**). Use Paul-Elder standards or Red Team attack during diagnosis/proposal where configured.
@@ -2361,11 +2360,11 @@ Phase 3: Memory, Skills & Selective Library Integration (Priority #3 & #5)
 - Support flags for different agents (Claude Code, Cursor, etc.).
 
 **Initial Priority Order for Implementation**:
-1. ECC foundation (Phase 1)
-2. Karpathy + best practices (Phase 2)
-3. Memory + curated skills (Phase 3)
-4. Security/hooks/MCP (Phase 4)
-5. Docs + validation (Phase 5)
+## 1. ECC foundation (Phase 1)
+## 2. Karpathy + best practices (Phase 2)
+## 3. Memory + curated skills (Phase 3)
+## 4. Security/hooks/MCP (Phase 4)
+## 5. Docs + validation (Phase 5)
 
 
 
@@ -2401,7 +2400,7 @@ From `corpus/root/project_starter_0.2.md` Copy: `sources/excerpts/project_starte
 9. **Cross-platform:** macOS, Linux, Windows/PowerShell/WSL where possible.  
 10. **Auditable, not opaque:** Store concise rationales, evidence, decisions, diffs, commands run, test results, and review summaries. Do **not** require hidden chain-of-thought.
 
-'''text  
+```text
 project_starter/  
 ├── AGENTS.md  
 ├── CLAUDE.md  
@@ -2492,7 +2491,7 @@ project_starter/
     ├── sync.test.mjs  
     ├── manifest.test.mjs  
     └── adapters.test.mjs  
-'''
+```
 
 - [ ] Verify latest ECC release, installer commands, profiles, and license.  
 - [ ] Verify Karpathy-style rules source and Cursor rule variant.  
@@ -2594,7 +2593,7 @@ project_starter/
 From `corpus/root/project_starter_0.3.md` Copy: `sources/excerpts/project_starter_0.3.md`.
 
 
-'''text
+```text
 project_starter/
 ├── project_starter.md
 ├── README.md
@@ -2691,9 +2690,9 @@ project_starter/
     ├── sync.test.mjs
     ├── manifest.test.mjs
     └── adapters.test.mjs
-'''
+```
 
-'''json
+```json
 {
   "schema_version": "1.0",
   "generated_from": "project_starter.md",
@@ -2975,7 +2974,7 @@ project_starter/
 From `corpus/root/project_starter_0.4.md` Copy: `sources/excerpts/project_starter_0.4.md`.
 
 
-'''text
+```text
 project_starter/
 ├── project_starter.md
 ├── README.md
@@ -2995,9 +2994,9 @@ project_starter/
 ├── docs/
 ├── tests/
 └── external/
-'''
+```
 
-'''text
+```text
 abc/
 ├── project_starter.md
 ├── README.md
@@ -3017,9 +3016,9 @@ abc/
 ├── docs/
 ├── tests/
 └── external/
-'''
+```
 
-'''text
+```text
 <PROJECT_NAME>/
 ├── project_starter.md
 ├── README.md
@@ -3089,7 +3088,7 @@ abc/
 └── external/
     └── sources/
         └── .gitkeep
-'''
+```
 
 Generated:
 - package.json
@@ -3104,7 +3103,7 @@ Generated:
 - tests/
 - agent configs
 
-'''text
+```text
 project_starter.md
 README.md
 package.json
@@ -3132,7 +3131,7 @@ memory/
 docs/
 tests/
 external/sources/.gitkeep
-'''
+```
 
 1. Create directories.
 2. Create root metadata files.
@@ -3162,7 +3161,7 @@ Create all noted files, directories, manifests, scripts, docs, tests, rules, ski
 From `corpus/root/project_starter_0.5.md` Copy: `sources/excerpts/project_starter_0.5.md`.
 
 
-'''text
+```text
 project_starter/
 ├── project_starter.md
 ├── README.md
@@ -3262,9 +3261,9 @@ project_starter/
     ├── sync.test.mjs
     ├── manifest.test.mjs
     └── adapters.test.mjs
-'''
+```
 
-'''json
+```json
 {
   "schema_version": "1.0",
   "generated_from": "project_starter.md",
@@ -3585,7 +3584,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_management_ui.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT CONFIGURATION: DirectorAgent (#1)                    [Save] [Reset]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3689,9 +3688,9 @@ From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_mana
 │    continue with their existing configuration.                              │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT PLAYGROUND: DirectorAgent (#1)                           [Run ▶]     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3746,7 +3745,7 @@ From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_mana
 From `corpus/study/ui/architecture_communication.md` Copy: `sources/excerpts/architecture_communication.md`.
 
 
-'''text
+```text
 USER types in Critique Feed:
     "@DirectorAgent Use wider lens for Scene 3, it feels too claustrophobic"
     │
@@ -3777,7 +3776,7 @@ EVENT BUS → WebSocket → Frontend
     │
     │  Agent response appears in Critique Feed
     │  Updated artifact appears in Gallery
-'''
+```
 
 | Event Type | Payload | Updates |
 |-----------|---------|---------|
@@ -3794,7 +3793,7 @@ EVENT BUS → WebSocket → Frontend
 | `production_phase_change` | `{ production_id, new_phase }` | Context Bar + Timeline |
 | `error` | `{ agent_id, error_type, message, recoverable }` | Notification + DAG (red node) |
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        API GATEWAY LAYER                                 │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐                  │
@@ -3872,7 +3871,7 @@ EVENT BUS → WebSocket → Frontend
 │  └──────────┘  └──────────┘  └──────────┘  └──────────┘               │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | Role | Technology | Why |
 |------|-----------|-----|
@@ -3908,7 +3907,7 @@ class AgentDefinition:
     comments_on: list[int]           # [9, 6, 3, 20]
     max_iterations: int              # 5 (for self-refine loop)
     model_preference: str            # "gemini-2.5-pro"
-'''
+```
 
 a) Load AgentDefinition for agent_id=1 (DirectorAgent)
   b) Fetch input artifacts from Asset Store
@@ -3920,7 +3919,7 @@ e) Call LLM (Gemini 2.5 Pro):
 
 MemoryAgent isn't just another agent — it's a **shared service** that other agents call:
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    MEMORY SYSTEM                                  │
 │                                                                 │
@@ -3958,7 +3957,7 @@ MemoryAgent isn't just another agent — it's a **shared service** that other ag
 From `corpus/study/ui/project_creation_flow.md` Copy: `sources/excerpts/project_creation_flow.md`.
 
 
-'''text
+```text
 ROOT
 ├── Dashboard
 │   ├── My Projects (grid)
@@ -3992,7 +3991,7 @@ ROOT
 ├── Delivery Hub                             ← EXISTING
 ├── Settings & Admin                         ← EXISTING
 └── Help & Docs                              ← EXISTING
-'''
+```
 
 
 
@@ -4027,7 +4026,7 @@ From `corpus/study/ui/RETHINK_100_IMPROVEMENTS.md` Copy: `sources/excerpts/RETHI
 From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 
 
-'''text
+```text
 ROOT
 ├── Dashboard (Home)
 │   ├── Active Productions Grid
@@ -4107,9 +4106,9 @@ ROOT
     ├── Agent Glossary
     ├── Workflow Templates Guide
     └── API Reference
-'''
+```
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │  TOP BAR (64px)                                                              │
 │  ┌──────┬──────────────────────────────┬───────────────────────────────────┐ │
@@ -4136,7 +4135,7 @@ ROOT
 │  STATUS BAR (32px)                                                           │
 │  Running Agents: 12/27 │ Phase: Production │ Budget: $42/$100 │ ETA: 3m     │
 └──────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | # | Surface | Composition Diagram Operation(s) | Primary Agent(s) Served |
 |---|---------|----------------------------------|------------------------|
@@ -4165,7 +4164,7 @@ ROOT
 | S23 | Team / Permissions | Human-in-the-loop configuration | Admin |
 | S24 | Series Bible Editor | Long-running episodic memory | ShowrunnerAgent, WorldBuildingAgent |
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PRODUCTION: "Luna" (Type E: AI Short Film)     Phase: Production  ⏱ 12m    │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
@@ -4219,9 +4218,9 @@ ROOT
 │  │ Input: Scene 2 script │ Output: shot_intent_04.json │ Critiques: 2   │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  AGENT INSPECTOR: DirectorAgent (#1)                        [Full Screen]│
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -4298,5 +4297,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.memory · v1 · 2026-07-13 -->
 
-```
 

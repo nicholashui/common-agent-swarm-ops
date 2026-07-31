@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 BrandStrategistAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-10. Workflow Support Agents
+## 10. Workflow Support Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -231,19 +230,19 @@ Multi-agent debate with BrandAgent and CreativeDirectorAgent
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -267,7 +266,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -280,11 +279,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -294,13 +293,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -1030,7 +1029,7 @@ The effectiveness of the self-questioning framework is built on a solid foundati
 
 **Motivation Hierarchy Model:**
 
-'''
+```
                     Motivation Pyramid
     ┌─────────────────────────────────────┐
     │           Self-Actualization Motivation              │ ← Deepest Layer
@@ -1048,14 +1047,14 @@ The effectiveness of the self-questioning framework is built on a solid foundati
     │           Survival and Basic Needs             │ ← Surface Layer
     │      (Income, living essentials)                │
     └─────────────────────────────────────┘
-'''
+```
 
 **Motivation Archaeology Techniques:**
 
 **Technique 1: Timeline Retrospective Method**
-'''markdown
+```markdown
 Motivation Timeline Template
-'''
+```
 
 
 
@@ -1097,7 +1096,7 @@ Sometimes, behind our surface motivations lie deeper "shadow motivations":
 | "I want freedom" | Past experiences of being controlled, fear of commitment | "What does freedom mean to you? What are you avoiding?" |
 
 **Technique 3: Values Alignment Detection**
-'''python
+```python
 Values Alignment Assessment Tool
 def assess_value_alignment(goal, core_values):
     """
@@ -1119,7 +1118,7 @@ def assess_value_alignment(goal, core_values):
     ]
     # Actual implementation requires user responses to these questions
     return alignment_score, conflicts, recommendations
-'''
+```
 
 
 
@@ -1127,7 +1126,7 @@ def assess_value_alignment(goal, core_values):
 
 **Four Dimensions of Audience Understanding:**
 
-'''
+```
               Audience Understanding Matrix
     ┌────────────────┬────────────────┐
     │   Explicit Needs │   Implicit Needs │
@@ -1138,13 +1137,13 @@ def assess_value_alignment(goal, core_values):
     │   Points        │   (Subconscious)│
     │ (Observable)    │                 │
     └────────────────┴────────────────┘
-'''
+```
 
 **Deep Audience Persona Template:**
 
-'''markdown
+```markdown
 Deep Audience Persona: [Persona Name]
-'''
+```
 
 
 
@@ -1215,7 +1214,7 @@ Connection with Your Audience
 
 **Method Selection Decision Tree:**
 
-'''
+```
                     Method Selection Decision Process
                           │
                           ▼
@@ -1239,30 +1238,30 @@ Connection with Your Audience
     - Free Writing      - Deliberate Practice      - OKR Framework
     - Mind Mapping        - Spaced Repetition      - Agile Methods
     - Prototyping      - Mentor Guidance      - Project Management
-'''
+```
 
 **Personalized Method Design Framework:**
 
-'''markdown
+```markdown
 My Method Design Worksheet
-'''
+```
 
 
 
 Part 1: Self-Awareness
-1. What is my learning style?  
+## 1. What is my learning style?
    □ Visual (needs to see)  
    □ Auditory (needs to hear)  
    □ Kinesthetic (needs to do)  
    □ Read/Write (needs to record)  
 
-2. What is my work rhythm?  
+## 2. What is my work rhythm?
    □ Morning type (efficient in the morning)  
    □ Night type (efficient at night)  
    □ Steady type (balanced throughout the day)  
    □ Burst type (short-term high intensity)  
 
-3. What is my source of motivation?  
+## 3. What is my source of motivation?
    □ Intrinsic motivation (self-satisfaction)  
    □ Extrinsic motivation (rewards/recognition)  
    □ Social motivation (with others)  
@@ -1271,18 +1270,18 @@ Part 1: Self-Awareness
 
 
 Part 2: Environment Design
-1. What is my ideal work environment?
+## 1. What is my ideal work environment?
    - Location:
    - Sound:
    - Lighting:
    - Temperature:
 
-2. What tools do I need?
+## 2. What tools do I need?
    - Essential tools:
    - Auxiliary tools:
    - Optional tools:
 
-3. What support systems do I need?
+## 3. What support systems do I need?
    - Accountability partner:
    - Mentor/Coach:
    - Community/Group:
@@ -1290,7 +1289,7 @@ Part 2: Environment Design
 
 
 Part Three: Time Design
-1. How much time can I commit each week?
+## 1. How much time can I commit each week?
    - Ideal time: ___ hours
    - Minimum time: ___ hours
    - Best time slots: ___
@@ -1300,7 +1299,7 @@ Part Three: Time Design
    - Shallow work sessions:
    - Rest and recovery sessions:
 
-'''
+```
 
 **Constraint Transformation Techniques:**
 
@@ -1318,7 +1317,7 @@ Part Three: Time Design
 
 **Emotional Map Technique:**
 
-'''
+```
                 Emotional Journey Map
     
     Emotional Intensity
@@ -1335,15 +1334,15 @@ Part Three: Time Design
         │
      0  ├────┬────┬────┬────┬────┬────► Time
             Start  Attempt  Setback  Adjustment  Breakthrough  Completion
-'''
+```
 
 **Emotional Rehearsal Technique:**
 
 This is a powerful psychological preparation technique that helps you pre-experience the emotions after achieving your goal:
 
-'''markdown
+```markdown
 Emotional Rehearsal Exercise
-'''
+```
 
 
 
@@ -1384,7 +1383,7 @@ Step 4: Body Anchoring (2 minutes)
 Step 5: Record (5 minutes)
 Write down everything you just experienced
 
-'''
+```
 
 **Emotional Resilience Building:**
 
@@ -1399,11 +1398,11 @@ Write down everything you just experienced
 
 **Emotional Journal Template:**
 
-'''markdown
+```markdown
 Daily Emotional Journal
 
 Date: ___________
-'''
+```
 
 
 
@@ -1434,7 +1433,7 @@ What is this emotion trying to tell me?
 
 Tomorrow's Intention
 What emotion do I want to start tomorrow with?
-'''
+```
 
 
 
@@ -1442,7 +1441,7 @@ What emotion do I want to start tomorrow with?
 
 **Influence Ripple Model:**
 
-'''
+```
                     Influence Ripple Diagram
     
                         ┌─────────────────────┐
@@ -1467,13 +1466,13 @@ What emotion do I want to start tomorrow with?
                         │  │  └─────────┘  │  │
                         │  └───────────────┘  │
                         └─────────────────────┘
-'''
+```
 
 **Influence Measurement Framework:**
 
-'''markdown
+```markdown
 Influence Measurement Worksheet
-'''
+```
 
 
 
@@ -1505,13 +1504,13 @@ Layer 4: Ripple Effect (Indirect Impact)
 | Ripple Effect | Observation Indicators | Time Frame |
 |----------|----------|----------|
 | | | |
-'''
+```
 
 **Impact Story Collection:**
 
-'''markdown
+```markdown
 Impact Story Template
-'''
+```
 
 
 
@@ -1550,7 +1549,7 @@ Results
 Reference
 "___________"
 — [Anonymous Description]
-'''
+```
 
 **Negative Impact Prevention Checklist:**
 
@@ -1568,7 +1567,7 @@ Reference
 
 **Execution System Architecture:**
 
-'''
+```
                 Execution System Pyramid
     
                     ┌───────┐
@@ -1588,13 +1587,13 @@ Reference
          /          │ 行動  │          \
         /           └───────┘           \
        ─────────────────────────────────────
-'''
+```
 
 **SMART+ Goal Setting:**
 
-'''markdown
+```markdown
 SMART+ Goal Setting Worksheet
-'''
+```
 
 
 
@@ -1641,7 +1640,7 @@ T - Time-bound (Time-bound)
 
 **Obstacle Prevention Matrix:**
 
-'''
+```
                 Obstacle Prevention Matrix
     
               │  Predictable  │  Unpredictable
@@ -1653,7 +1652,7 @@ T - Time-bound (Time-bound)
     External   │  Risk        │  Flexible
     Obstacles  │  Management  │  Design
     (Environmental) │ Strategy C │ Strategy D
-'''
+```
 
 **Strategy Details:**
 
@@ -1666,11 +1665,11 @@ T - Time-bound (Time-bound)
 
 **Weekly Review Template:**
 
-'''markdown
+```markdown
 Weekly Review
 
 Date: ___________
-'''
+```
 
 
 
@@ -1718,7 +1717,7 @@ Date: ___________
 
 🙏 Gratitude
 This week I am grateful for:
-'''
+```
 
 
 
@@ -1743,7 +1742,7 @@ Goal Management and Tracking Tools
 
 Reflection and Self-Exploration Tool
 
-'''python
+```python
 自我提問自動化腳本
 self_inquiry_bot.py
 
@@ -1841,9 +1840,9 @@ Case 2: Skill Goal — "Learning Programming"
 
 **Phase 3: Method Design**
 
-'''markdown
+```markdown
 Method Design Worksheet
-'''
+```
 
 
 
@@ -1888,7 +1887,7 @@ First Project
   - Week 2: Add CSS styles
   - Week 3: Implement JavaScript functionality
   - Week 4: Optimize and deploy
-'''
+```
 
 
 
@@ -1898,9 +1897,9 @@ Case 3: Personal Growth Goal — "Overcoming Social Anxiety"
 
 **Emotional Rehearsal Practice Record:**
 
-'''markdown
+```markdown
 Emotional Rehearsal: Me After Overcoming Social Anxiety
-'''
+```
 
 
 
@@ -1955,9 +1954,9 @@ Case 4: Creative Goal — "Write a Novel"
 
 **Stage 5: Influence Design**
 
-'''markdown
+```markdown
 Influence Design Worksheet
-'''
+```
 
 
 
@@ -2016,7 +2015,7 @@ Potential Negative Impacts and Prevention
 | Readers misinterpreting the author's intent | Explain the creative intent in the afterword |
 | Triggering readers' trauma | Add content warnings at the beginning |
 | Being overly commercialized in interpretation | Maintain the authenticity of the creation |
-'''
+```
 
 🎓 Advanced Techniques and Expert Strategies
 
@@ -2026,7 +2025,7 @@ Technique 1: Dual-Track Thinking Method
 
 Examine your goal from two perspectives simultaneously:
 
-'''
+```
         Rational Track                Emotional Track
     ┌─────────────┐            ┌─────────────┐
     │ Is this rational? │            │ Does this excite me?│
@@ -2043,7 +2042,7 @@ Examine your goal from two perspectives simultaneously:
               │ Rational +  │
               │ Emotional   │
               └─────────────┘
-'''
+```
 
 **Practice Method:**
 1. First, explore with the emotional track (without criticism)
@@ -2070,9 +2069,9 @@ Technique 3: Role-Playing Method
 
 View your goal from the perspective of different roles:
 
-'''markdown
+```markdown
 Role-Playing Exercise
-'''
+```
 
 
 
@@ -2112,9 +2111,9 @@ Technique 4: Obstacle Rehearsal Method
 
 Anticipate and "experience" potential obstacles in advance:
 
-'''markdown
+```markdown
 Obstacle Rehearsal Exercise
-'''
+```
 
 
 
@@ -2167,9 +2166,9 @@ Select appropriate framework activities based on your energy state:
 
 After completing the exploration of the six stages, use this integration template to connect all insights:
 
-'''markdown
+```markdown
 Goal Integration Declaration
-'''
+```
 
 
 
@@ -2216,7 +2215,7 @@ My first step is [specific action], which I will start on [time].
 
 Signature: ___________
 Date: ___________
-'''
+```
 
 
 
@@ -2230,11 +2229,11 @@ Self-Assessment Scale
 
 After completing the six-stage framework, use this scale to assess your readiness level:
 
-'''markdown
+```markdown
 Goal Readiness Assessment
 
 Please rate each item (1-5 points, 5 points highest)
-'''
+```
 
 
 
@@ -2295,7 +2294,7 @@ Score Interpretation
 - 60-74 points: Generally prepared, but some areas need strengthening
 - 45-59 points: Needs more exploration, recommend reviewing low-scoring areas
 - Below 45 points: Recommend starting over with the framework, may need more time
-'''
+```
 
 
 
@@ -2475,5 +2474,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.brandstrategist · v1 · 2026-07-13 -->
 
-```
 

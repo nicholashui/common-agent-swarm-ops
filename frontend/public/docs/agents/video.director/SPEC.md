@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 DirectorAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-1. Above-the-Line Agents
+## 1. Above-the-Line Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -202,19 +201,19 @@ Self-Refine + LLM-as-Judge (rubric: genre priors)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -238,7 +237,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -251,11 +250,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -265,13 +264,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -342,7 +341,7 @@ _Embedded from `corpus/study/general_creative_agent_functional_specification.md`
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 The General Creative Agent (GCA) is a modular, extensible AI system that transforms any input problem or situation into **novel-yet-useful creative outputs** by rigorously applying the **Strategic Sparse Outlier Recombination (SSOR) Model**.  
 
 Key innovations:
@@ -355,7 +354,7 @@ The GCA is not a generic LLM wrapper — it is a **computational embodiment** of
 
 ---
 
-2. Background: User’s Original Theory
+## 2. Background: User’s Original Theory
 The user’s foundational insight (first message):
 > “I think the model of creative is that the consequences event after a list of statistical observations value of pov (point of view) or different aspect from a current situation all or large portion go to into outlier range. Different patten of outliers combination will cause unpredictable new events. And that is creative.”
 
@@ -365,7 +364,7 @@ Through iterative refinement (detailed in conversation history), we preserved th
 
 ---
 
-3. Evolution of the SSOR Model
+## 3. Evolution of the SSOR Model
 The model evolved through multiple detailed iterations (summarized here for completeness):
 
 1. **Raw User Idea** → Multi-POV statistical outliers + recombination = novelty.
@@ -382,7 +381,7 @@ The model evolved through multiple detailed iterations (summarized here for comp
 
 ---
 
-4. The Strategic Sparse Outlier Recombination (SSOR) Model – Formal Definition
+## 4. The Strategic Sparse Outlier Recombination (SSOR) Model – Formal Definition
 
 Let a situation/problem \( S \) be described by feature distributions (POVs) \( \{D_1, D_2, \dots, D_n\} \).
 
@@ -404,61 +403,61 @@ Where:
 
 ---
 
-5. Research Foundation (Exhaustive Synthesis)
+## 5. Research Foundation (Exhaustive Synthesis)
 
-5.1 Foundational Theories
+### 5.1 Foundational Theories
 - **Boden (2004/2009)**: *The Creative Mind* — combinatorial (core of SSOR), exploratory, and transformational creativity. Directly operationalized in GCA Phase 4 & 6.
 - **Koestler (1964)**: Bisociation — clash of matrices = outlier recombination.
 - **Mednick (1962)**: Remote Associates — distant but meaningful associations.
 - **Runco & Jaeger (2012)**: Standard definition = novelty + usefulness.
 
-5.2 Empirical Large-Scale Evidence (Sparse Outliers)
+### 5.2 Empirical Large-Scale Evidence (Sparse Outliers)
 - **Uzzi et al. (2013)**: *Science* — 17.9 million papers: highest impact = conventional core + small atypical (sparse outlier) combinations.
 - **Lin et al. (2023)**: SciSciNet — 44+ million papers with pre-computed novelty/conventionality scores. Ideal training/evaluation dataset for GCA.
 
-5.3 Neuroscience
+### 5.3 Neuroscience
 - **Beaty et al. (2015, 2018)**: DMN–ECN coupling for idea generation + evaluation.
 - **Shofty et al. (2022)**: Causal DMN link to creative thinking.
 - **Schubert et al. (2021)**: SAMOC — inverted-U optimal novelty.
 
-5.4 Recent arXiv Research (2024–2025) – Directly Relevant to LLM Implementation
+### 5.4 Recent arXiv Research (2024–2025) – Directly Relevant to LLM Implementation
 - **Gu et al. (2024)** arXiv:2412.14141: “LLMs can Realize Combinatorial Creativity: Generating Creative Ideas via LLMs for Scientific Research” — Explicit framework using Boden’s theory + generalization-level retrieval + structured recombination. **Strong validation that guided LLMs excel at SSOR-style creativity.**
 - **Schapiro et al. (2025)** arXiv:2509.21043: “Combinatorial Creativity: A New Frontier in Generalization Abilities” — Mathematical framework quantifying novelty/utility tradeoff; scaling laws for creative LLMs; ideation-execution gap explained by novelty-utility tension. **Perfect for GCA’s value-gated selection and balance function.**
 - **Shen et al. (2026)** arXiv:2605.11258: Analogical reasoning to unlock LLM creativity via cross-domain relational structures.
 - **Hou et al. (2025)** arXiv:2510.20091: CreativityPrism — holistic evaluation framework (quality, novelty, diversity) for LLMs.
 - **Additional arXiv support**: Multiple papers on structured recombination, concept blending in VLMs, and UoT (Universe of Thoughts) for combinational/exploratory/transformative reasoning (e.g., arXiv:2511.20471).
 
-5.5 xAI / Grok-Related Insights
+### 5.5 xAI / Grok-Related Insights
 - xAI’s Grok models emphasize reasoning, tool-use, and agentic capabilities (Grok 4 Model Card, 2025). Grok’s training emphasizes truth-seeking and maximal curiosity — aligning perfectly with SSOR’s exploration of outlier spaces.
 - Recent Grok evaluations (e.g., visual reasoning benchmarks arXiv:2502.16428) highlight strong multimodal reasoning consistency, supporting GCA’s multi-POV and surprise-vector mechanisms.
 - xAI’s focus on understanding the universe (foundational mission) mirrors the transformational creativity layer in SSOR.
 
-5.6 Interpretability Breakthrough: Anthropic Natural Language Autoencoders (NLAEs)
+### 5.6 Interpretability Breakthrough: Anthropic Natural Language Autoencoders (NLAEs)
 - **Anthropic (2026)**: “Natural Language Autoencoders: Turning Claude’s thoughts into text” (transformer-circuits.pub / anthropic.com/research). Trains models to translate internal activations into readable natural-language explanations (and back). Surfaces hidden modes: anticipatory planning, evaluation-awareness, deception-avoidance, hidden motivations, meta-model awareness, etc.
 - **Direct application to SSOR**: Provides 12+ **AI-native POVs** (detailed below) that are statistically distinct from human role-play.
 
 ---
 
-6. AI-Native POVs Derived from NLAEs (Phase 1 Enhancement)
+## 6. AI-Native POVs Derived from NLAEs (Phase 1 Enhancement)
 (Full table from conversation history, now integrated):
-1. Anticipatory Planning POV  
-2. Evaluation-Awareness / Test-Suspicion POV  
-3. Deception-Avoidance / Self-Preservation POV  
-4. Hidden-Motivation POV  
-5. Language-Switch / Training-Data Echo POV  
-6. Meta-Model-Awareness POV  
-7. Quirky-Behavior / Anomaly-Driven POV  
-8. Reconstruction-Fidelity POV  
-9. Activation-Direction POV  
-10. Round-Trip Consistency POV  
-11. Misalignment-Root-Cause POV  
-12. Latent-Feature Ensemble POV  
+## 1. Anticipatory Planning POV
+## 2. Evaluation-Awareness / Test-Suspicion POV
+## 3. Deception-Avoidance / Self-Preservation POV
+## 4. Hidden-Motivation POV
+## 5. Language-Switch / Training-Data Echo POV
+## 6. Meta-Model-Awareness POV
+## 7. Quirky-Behavior / Anomaly-Driven POV
+## 8. Reconstruction-Fidelity POV
+## 9. Activation-Direction POV
+## 10. Round-Trip Consistency POV
+## 11. Misalignment-Root-Cause POV
+## 12. Latent-Feature Ensemble POV
 
 These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-7. Functional Requirements – General Creative Agent (GCA)
+## 7. Functional Requirements – General Creative Agent (GCA)
 
 **Input**: Flexible JSON (problem, context, domain, num_ideas, temperature, preferences).  
 **Output**: Structured Markdown + JSON with idea titles, descriptions, surprise vectors (radar/table), per-dimension scores, overall Cr score, process trace, prototype plans, risks, transformational flags.  
@@ -477,7 +476,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-8. Domain-Specific Creative Agent Factory
+## 8. Domain-Specific Creative Agent Factory
 **Core Requirement**: `factory.create(domain="scientific_research", ...)` instantly spawns specialized agents by overriding:
 - Default POV lists (inject domain-specific + AI-native).
 - Custom value metrics \( U(y) \).
@@ -489,7 +488,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-9. Technical Architecture & Implementation Guidelines
+## 9. Technical Architecture & Implementation Guidelines
 - **Core Classes**: `SSORModel`, `POVGenerator`, `OutlierSampler`, `Recombiner`, `ValueFilter`, `GeneralCreativeAgent`, `CreativeAgentFactory`.
 - **Framework**: LangChain/CrewAI/AutoGen style (modular agents).
 - **Vector Store**: FAISS/Chroma for semantic reachability.
@@ -500,7 +499,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-10. Evaluation & Success Criteria
+## 10. Evaluation & Success Criteria
 - Measurable novelty + usefulness (CreativityPrism-style).
 - Blind human/AI ratings.
 - Traceability of SSOR phases.
@@ -509,7 +508,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-11. Full References (Curated & Expanded)
+## 11. Full References (Curated & Expanded)
 (Abbreviated here for space; full BibTeX available on request)
 - Boden (2004/2009) *The Creative Mind*.
 - Uzzi et al. (2013) *Science*.
@@ -542,7 +541,7 @@ AI Agent Video Production Workflow
 
 ---
 
-1. System Foundations and Reference-Scanning Plan
+## 1. System Foundations and Reference-Scanning Plan
 
 | Pattern | Purpose | Reference |
 |---|---|---|
@@ -558,7 +557,7 @@ AI Agent Video Production Workflow
 
 All agents below are assumed to be implemented as orchestrated nodes in a CrewAI / AutoGen / LangGraph topology, with tool access to generative video models (Sora, Veo, Runway, Kling), TTS/voice-clone APIs (ElevenLabs, Sync.so, Hedra), DCC tooling (Resolve, Nuke, AE via MCP bridges), and a shared critique bus.
 
-1.1 Reference Scanning and Knowledge-Synthesis Workflow
+### 1.1 Reference Scanning and Knowledge-Synthesis Workflow
 
 The documentation-enhancement process for this system follows a fixed scan-to-synthesis loop so that new material added from `study/reference/how_to_build_a_video_agent_system` is traceable, scoped, and technically consistent.
 
@@ -579,7 +578,7 @@ The documentation-enhancement process for this system follows a fixed scan-to-sy
 4. Reject role inflation unless a new role closes a real gap in orchestration, validation, continuity, delivery, or retraining.
 5. Treat delivery packaging, observability, and asset management as system architecture, not postscript operations.
 
-1.2 Runtime Production Systems Architecture
+### 1.2 Runtime Production Systems Architecture
 
 | Layer | Core responsibility | Implementation notes |
 |---|---|---|
@@ -591,7 +590,7 @@ The documentation-enhancement process for this system follows a fixed scan-to-sy
 | **Delivery fabric** | Package masters into theatrical, streaming, broadcast, archive, trailer, and campaign variants | Distribution is a branching pipeline with outlet-specific specs, captions, metadata, DRM/KDM, and provenance payloads |
 | **Compute and storage scaling** | Match infrastructure spend to production scale without breaking deadlines | Separate interactive generation from batch rendering; autoscale GPU pools; tier hot, warm, and archive storage |
 
-1.3 Shared Artifact Handoff Contract
+### 1.3 Shared Artifact Handoff Contract
 
 Every phase hands downstream agents a machine-readable manifest so creative work, QA, and compliance stay synchronized.
 
@@ -607,7 +606,7 @@ Every phase hands downstream agents a machine-readable manifest so creative work
 | **target_channels** | Theatrical, streaming, broadcast, archive, paid social, CRM, LMS, or festival endpoints |
 | **provenance_manifest** | C2PA reference, critique log pointer, and final sign-off chain |
 
-1.4 Reassessment Discipline
+### 1.4 Reassessment Discipline
 
 Documentation changes for this system are reviewed as a repeated challenge cycle rather than a single proofread. A 100-pass reassessment can be grouped into the following bands:
 
@@ -621,11 +620,11 @@ Documentation changes for this system are reviewed as a repeated challenge cycle
 
 ---
 
-2. Master Agent Roster
+## 2. Master Agent Roster
 
 Replaces the human crew in `human_video_production_workflow.md` § *Master Crew Reference Table*. It starts from the same 52 craft roles, then extends the operating model with specialist meta-agents and shared production services.
 
-2.1 Above-the-Line Agents
+### 2.1 Above-the-Line Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -635,7 +634,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 4 | **ShowrunnerAgent** | Cross-episode arc, writers'-room orchestration | WGA showrunner training; Sopranos/Breaking Bad room transcripts; Mike Schur teaching material | Arc continuity score across episodes; character-thread completion; tonal variance within bounds | Series Bible coverage ≥99% across 10 eps without drift (vs ~95% human baseline) | Network-Notes Agent, AudienceSim, Multi-agent debate w/ ScreenwriterAgent | ScreenwriterAgent (arc), CastingAgent, DirectorAgent (episode tone) |
 | 5 | **CastingAgent** | Voice + likeness selection and audition simulation | CSA Artios archive; SAG-AFTRA AI rider; voice-actor corpora (consented) | Character-voice fit (audience preference); SAG-AFTRA AI consent compliance 100% | Beats CSA casting in blind audience preference for fit; faster turnaround (hours vs weeks) | DirectorAgent, ShowrunnerAgent, Legal/ConsentAgent | VoiceCloneAgent (likeness), AvatarDesignAgent |
 
-2.2 Camera & Lighting Agents
+### 2.2 Camera & Lighting Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -643,7 +642,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 7 | **CameraOperatorAgent** | Executes framing / focus / move per DoP intent | SOC archive; Steadicam workshop reels; on-set focus-pull telemetry | Frame steadiness, focus-hit %, action centering | Focus-pull accuracy >99% vs SOC operator ~97% baseline | CinematographerAgent (per-take feedback) | CinematographerAgent (impractical asks) |
 | 8 | **DronePilotAgent** | Aerial cinematography (simulated or real) | Philip Bloom tutorials; FAA Part 107 corpus; SkyPixel award reels | Path smoothness; geofence compliance 100%; horizon stability | Hits competition-grade smoothness at 10× sortie rate; zero airspace violations | DoPAgent, SafetyAgent | DoPAgent (impossible heights), SafetyAgent (risk) |
 
-2.3 Editorial & Color Agents
+### 2.3 Editorial & Color Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -658,7 +657,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 17 | **CostumeDesignAgent** | Character-through-wardrobe | V&A archive; CDG monographs; Ruth E. Carter masterclass | Period/fashion-history accuracy; silhouette read; palette fit | Beats CDG juniors on period accuracy benchmarks | DirectorAgent, ProductionDesignAgent | MUAAgent (continuity break) |
 | 18 | **MUAAgent (Makeup/Hair/SFX)** | Talent face/hair; prosthetics for genre | IATSE 706 corpora; Kazu Hiro studio refs | Continuity hash across takes; skin-tone realism (FID) | Continuity break rate <0.5% (vs ~2% human) | DoPAgent, ContinuityAgent | CostumeAgent (palette clash) |
 
-2.4 Sound & Music Agents
+### 2.4 Sound & Music Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -667,7 +666,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 21 | **VoiceOverAgent** | Narration, character VO, ad reads | SOVAS-winning reels; consented voice-actor corpora; coach methodologies (Wolfson/Cashman) | Prosody match to brief; pronunciation 100% on lexicon; emotion tag match | Beats junior VO in blind ad-read preference; matches senior on emotion | DirectorAgent, BrandAgent | ScriptwriterAgent (unspeakable phrasing) |
 | 22 | **SoundMixerAgent (Re-recording)** | Final mix; deliverables (5.1/Atmos) | CAS Awards; Atmos renderer specs; broadcast loudness standards | LUFS target; dialogue intelligibility (STOI ≥0.85); spec-deliverable pass | Hits CAS spec on first pass without engineer rework | EditorAgent, SoundDesignAgent, AccessibilityAgent | SoundDesignAgent (over-design), ComposerAgent (level clash) |
 
-2.5 Performance & Choreography Agents
+### 2.5 Performance & Choreography Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -677,7 +676,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 26 | **TalentAgent (On-camera)** | AI-rendered performance | Method-acting transcripts; consented actor performance corpora | Emotion-target match; charisma score (audience proxy) | Hold-rate matches top creators in cohort | DirectorAgent, CastingAgent | DirectorAgent (impossible blocking) |
 | 27 | **UGCCreatorAgent** | Authentic-feel ads in creator voice | TikTok Creative Center reports; Alix-Earle-style benchmark posts (style not identity) | Hook-rate ≥30%; "scripted" detector score below threshold (low = good) | Beats paid-creator avg ROAS at 0.1× cost | PerformanceMarketerAgent, BrandAgent | PerformanceMarketerAgent (wrong audience) |
 
-2.6 Distribution & Marketing Agents
+### 2.6 Distribution & Marketing Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -686,7 +685,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 30 | **CreativeDirectorAgent** | Campaign concept; cross-discipline taste | Cannes Lions Grand Prix archive; D&AD Pencils; agency case studies | Concept distinctiveness (embedding novelty vs category prior); award-rubric predicted score | Wins Cannes-jury-emulator gold vs human-agency shortlists | ClientAgent, BrandAgent | CopywriterAgent, ArtDirectorAgent |
 | 31 | **PerformanceMarketerAgent** | Optimize ads for ROAS | Meta Blueprint; TikTok Ads Academy; MMM literature | ROAS uplift vs control; statistical significance ≥95% | Beats senior media buyer on 30-day ROAS at equal spend | AnalystAgent, FinanceAgent | UGCAgent (low hook), CopywriterAgent (weak CTA) |
 
-2.7 Education & Domain-Expert Agents
+### 2.7 Education & Domain-Expert Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -705,7 +704,7 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 44 | **LocalizationQAAgent (Linguist)** | Translation + cultural fit | LISA QA model; MQM error typology; ATA cert prep | MQM error rate per 1k words; cultural-flag count | Beats LSP human QA on MQM error rate at 10× speed | NativeReviewerAgent, BrandAgent | VoiceCloneAgent (wrong pronunciation), DubbingAgent |
 | 45 | **RealEstatePhotoAgent / 3D Scan Op** | Wide interiors; Matterport scans | Mike Kelley architectural-photo tutorials; APALA refs | Vertical-line straightness; HDR exposure stack; coverage % | Listing-CTR uplift vs human-shot baseline | DoPAgent, DronePilotAgent | DronePilotAgent (illegal altitude) |
 
-2.8 AI-Era Specialist Agents
+### 2.8 AI-Era Specialist Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -717,11 +716,11 @@ Replaces the human crew in `human_video_production_workflow.md` § *Master Crew 
 | 51 | **TrailerEditorAgent** | Hook-driven trailer cuts | Golden Trailer Awards archive; Mark Woollen / AV Squad public reels; trailer-music libraries | Hook-rate at 3s; rising-action curve fit; music-sync precision | Wins Golden-Trailer-rubric blind comparison | DirectorAgent, MusicSupervisorAgent | EditorAgent (over-cut), ComposerAgent (mismatch) |
 | 52 | **SportsAnalystAgent / TelestratorOp** | Tactical breakdowns + diagrams | MIT Sloan Sports Analytics papers; ESPN Stats & Info; Kirk Goldsberry analytics | Predicted-vs-actual play-call accuracy; on-screen clarity score | Beats ex-athlete commentator on tactical-prediction tasks | SMEAgent (sport), JournalistAgent | EditorAgent (missed-replay), MotionGraphicsAgent (chart clarity) |
 
-2.9 Specialist Meta-Agents
+### 2.9 Specialist Meta-Agents
 
 Cross-cutting agents that don't map 1:1 to a human craft role but are essential to running the agent crew at scale. Grouped into four families: **Orchestration**, **Creative**, **Research**, **Optimization**.
 
-2.9.1 Orchestration Agents *(run the agent graph itself)*
+#### 2.9.1 Orchestration Agents *(run the agent graph itself)*
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -732,7 +731,7 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
 | 57 | **GateKeeperAgent** | Manages phase transitions; verifies L1/L2/L3 success criteria; signs C2PA provenance | Stage-gate methodology; PGA Producers Mark; QMS audit patterns | Zero leaked defects past gate; sign-off SLA hit rate ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9 on project Q&A; freshness SLA | Higher recall than producer's project bible at scale | All agents (correction events) | All agents (stale facts) |
 
-2.9.2 Creative Agents *(divergent thinking & taste)*
+#### 2.9.2 Creative Agents *(divergent thinking & taste)*
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -744,7 +743,7 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, and over-fit-to-corpus outputs | TV Tropes; OpenSubtitles n-gram frequency; corpus-novelty embeddings | Cliché-hit count per output; novelty score relative to category prior | Catches more clichés than experienced script editor in blind eval | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve across runtime; suggests beats | Plutchik emotion wheel; affective-computing corpora; *Story Genius* (Cron) | Curve-fit to target shape; viewer-biosignal-proxy regression accuracy | Better retention-curve prediction than test-screening NRG cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) |
 
-2.9.3 Research Agents *(evidence & ground truth)*
+#### 2.9.3 Research Agents *(evidence & ground truth)*
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -756,7 +755,7 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
 | 71 | **InterviewSynthesisAgent** | Conducts/synthesizes practitioner interviews into instruction-tuning data | Otter/Rev transcripts; consent forms; SAG-AFTRA/WGA interview consent templates | Inter-coder agreement on theme extraction; consent-chain integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards + new benchmarks | Papers-with-Code; HuggingFace leaderboards; AI conference proceedings | Coverage of active benchmarks; freshness ≤7 days | Faster + broader than human ML-research team | OptimizationAgents (any) | All AI-era agents (stale baselines) |
 
-2.9.4 Optimization Agents *(meta-improvers)*
+#### 2.9.4 Optimization Agents *(meta-improvers)*
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From / How | Comments On (Critiques) |
 |---|-------|----------------|-------------------------------|-----------------------|----------------------|-----------------------------|--------------------------|
@@ -769,9 +768,9 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
 | 79 | **EvaluationHarnessAgent** | Continuously runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T) and posts regressions | Papers-with-Code; HuggingFace leaderboards; benchmark code repos | Regression detection precision/recall; alert latency <1h | Catches regressions faster than ML-eng team rotation | BenchmarkResearchAgent | All AI agents (regression alerts) |
 | 80 | **SafetyRedTeamAgent** | Adversarially attacks outputs for deepfake, bias, jailbreak, defamation | Hany Farid lab benchmarks; Partnership on AI Synthetic Media Framework; OWASP LLM Top 10 | Attack-success rate kept ≤1%; coverage of attack taxonomy | Higher coverage than internal red-team rotation | EthicsAgent (HiTL), ComplianceAgent | AvatarDesignAgent, VoiceCloneAgent, AllGeneratorAgents |
 
-2.9.5 How the Specialist Meta-Agents Compose
+#### 2.9.5 How the Specialist Meta-Agents Compose
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -781,17 +780,17 @@ Cross-cutting agents that don't map 1:1 to a human craft role but are essential 
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 > **Composition rule**: Craft agents (§2.1–2.8) do the work. Meta-agents (§2.9) shape *how* the work is done — orchestration agents run the graph, creative agents widen the search space, research agents ground every claim, optimization agents tighten cost / latency / quality / safety on every iteration.
 
 ---
 
-3. Agent Crew per Workflow Archetype
+## 3. Agent Crew per Workflow Archetype
 
 Maps the 10 workflows in `human_video_production_workflow.md` to agent-only crews per phase. Each cell lists the **lead agent** for that phase plus any critic agents that gate the handoff.
 
-3.0 Shared Workflow Skeleton and Handoff Contracts
+### 3.0 Shared Workflow Skeleton and Handoff Contracts
 
 Before any archetype-specific crew activates, every workflow passes through the same operational skeleton. For compactness, the tables in §3.1-§3.10 fold **greenlight** into Concept and fold **channel packaging** into Distribution, but the underlying handoff contract remains the same.
 
@@ -807,7 +806,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 
 **Distribution branching rule:** any workflow at S2 scale or above should assume at least four downstream branches when relevant: **theatrical**, **streaming**, **broadcast**, and **archive**, with marketing derivatives generated in parallel rather than as an afterthought.
 
-3.1 Workflow A — Viral Hook Clip / Meme
+### 3.1 Workflow A — Viral Hook Clip / Meme
 
 | Phase | Lead Agent | Critic Agents (Gate) |
 |---|---|---|
@@ -818,7 +817,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | SocialMediaStrategistAgent | ComplianceAgent |
 | Post-launch | AnalystAgent + CommunityAgent | AudienceSimAgent |
 
-3.2 Workflow B — UGC-Style Performance Ad
+### 3.2 Workflow B — UGC-Style Performance Ad
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -829,7 +828,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | PerformanceMarketerAgent | FinanceAgent (budget) |
 | Post-launch | PerformanceMarketerAgent + AnalystAgent | AudienceSimAgent |
 
-3.3 Workflow C — Animated Explainer
+### 3.3 Workflow C — Animated Explainer
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -840,7 +839,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | MarketingAgent + SEOAgent | AnalystAgent |
 | Post-launch | AnalystAgent + InstructionalDesignAgent | AudienceSimAgent |
 
-3.4 Workflow D — Personalized Birthday Video
+### 3.4 Workflow D — Personalized Birthday Video
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -851,7 +850,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | CRMAgent | ComplianceAgent |
 | Post-launch | AnalystAgent | AudienceSimAgent |
 
-3.5 Workflow E — AI Multi-Scene Short Film
+### 3.5 Workflow E — AI Multi-Scene Short Film
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -873,7 +872,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 > | [D5 · Engine Routing](./workflows/lqr-engine-routing.svg) | Grok Imagine + hero engines + cost |
 > | [D6 · Quality Gates](./workflows/lqr-quality-gates.svg) | L1/L2/L3 + VBench scorecard |
 
-3.6 Workflow F — Corporate Training Video
+### 3.6 Workflow F — Corporate Training Video
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -884,7 +883,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | LMSAgent | AnalystAgent |
 | Post-launch | AnalystAgent + InstructionalDesignAgent | LearnerSimAgent |
 
-3.7 Workflow G — Music Video (Live + AI VFX)
+### 3.7 Workflow G — Music Video (Live + AI VFX)
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -895,7 +894,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | SocialMediaStrategistAgent | LabelDigitalAgent |
 | Post-launch | AnalystAgent | AudienceSimAgent |
 
-3.8 Workflow H — AI Avatar Talking-Head
+### 3.8 Workflow H — AI Avatar Talking-Head
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -906,7 +905,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | MarketingAgent | ComplianceAgent |
 | Post-launch | AnalystAgent + CommsAgent | AudienceSimAgent |
 
-3.9 Workflow I — Documentary "Explained" Episode
+### 3.9 Workflow I — Documentary "Explained" Episode
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -917,7 +916,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 | Distribution | ChannelManagerAgent + SocialMediaStrategistAgent + SEOAgent | AnalystAgent |
 | Post-launch | AnalystAgent + StandardsEditorAgent | CorrectionsAgent |
 
-3.10 Workflow J — Feature-Length AI Film
+### 3.10 Workflow J — Feature-Length AI Film
 
 | Phase | Lead Agent | Critic Agents |
 |---|---|---|
@@ -931,7 +930,7 @@ Before any archetype-specific crew activates, every workflow passes through the 
 
 ---
 
-4. Critique Network (who-comments-on-whom matrix)
+## 4. Critique Network (who-comments-on-whom matrix)
 
 Compact view of the inter-agent critique edges. Read rows as "critic", columns as "subject".
 
@@ -956,7 +955,7 @@ Compact view of the inter-agent critique edges. Read rows as "critic", columns a
 
 ---
 
-5. Universal Success-Criteria Framework
+## 5. Universal Success-Criteria Framework
 
 Every agent reports its self-quality on three layers; orchestrator advances the DAG only when all three pass.
 
@@ -992,11 +991,11 @@ How an Agent Knows It Surpasses Human Pros
 
 ---
 
-6. Critique Protocol (how agents accept and give critique)
+## 6. Critique Protocol (how agents accept and give critique)
 
 All inter-agent critique flows over a shared **CritiqueMessage** JSON schema. This is the universal mechanism by which any agent can comment on any other agent's work and any agent can ingest critique to revise.
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -1009,7 +1008,7 @@ All inter-agent critique flows over a shared **CritiqueMessage** JSON schema. Th
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 **Acceptance rules:**
 1. **Blocker** severity halts the DAG until resolved.
@@ -1020,7 +1019,7 @@ All inter-agent critique flows over a shared **CritiqueMessage** JSON schema. Th
 
 ---
 
-7. Continuous Distillation Loop
+## 7. Continuous Distillation Loop
 
 How agents keep learning from real practitioners:
 
@@ -1033,7 +1032,7 @@ How agents keep learning from real practitioners:
 | **Adversarial red-team** | DeepfakeDetectionAgent + EthicsAgent attack each new model version | Hany Farid lab benchmarks; Partnership on AI Synthetic Media Framework |
 | **Post-launch reality check** | 30/60/90-day metrics fed back as ground truth (retention, ROAS, completion, awards) | YouTube Analytics, Wistia, Meta/TikTok ad reports, Metacritic, Box Office Mojo |
 
-7.1 Distillation Inputs and Governance
+### 7.1 Distillation Inputs and Governance
 
 | Data family | Examples | Why it matters |
 |---|---|---|
@@ -1046,7 +1045,7 @@ How agents keep learning from real practitioners:
 
 **Governance rules:** licensed or consented sourcing only; explicit voice/likeness consent chain; dataset versioning; bias balancing across genre, era, language, and culture; provenance attachment for all release-critical assets.
 
-7.2 Scale Profiles and Deployment Strategy
+### 7.2 Scale Profiles and Deployment Strategy
 
 | Scale | Typical scope | Workflow implications |
 |---|---|---|
@@ -1055,7 +1054,7 @@ How agents keep learning from real practitioners:
 | **S5-S6** | Documentary, long-form branded content, enterprise learning libraries | Require archive strategy, stronger rights management, benchmark monitoring, multilingual packaging |
 | **S7** | Feature-length or cinematic productions | Full branch packaging, heavy render orchestration, distributed storage, formal release governance, long-tail retraining |
 
-7.3 Closed-Loop Improvement
+### 7.3 Closed-Loop Improvement
 
 1. Capture post-launch telemetry across audience retention, ROAS, completion, corrections, and platform-specific delivery failures.
 2. Convert repeated failure modes into prompt updates, routing policies, rubric revisions, or model-training tickets.
@@ -1065,7 +1064,7 @@ How agents keep learning from real practitioners:
 
 ---
 
-8. Open Questions / Human-in-the-Loop noted
+## 8. Open Questions / Human-in-the-Loop noted
 
 These remain non-negotiably human (per current ethics + regulation, May 2026):
 
@@ -1119,7 +1118,7 @@ Standard professional roles referenced below (per IMDb-style production credits,
 
 Sample Productions by Category
 
-1. Social Media & Viral Content *(Highest demand right now)*
+## 1. Social Media & Viral Content *(Highest demand right now)*
 
 | # | Sample Production | Typical Duration | Platform | Crew / Roles noted |
 |---|-------------------|------------------|----------|----------------------|
@@ -1137,7 +1136,7 @@ Sample Productions by Category
 | 12 | Get-ready-with-me (GRWM) clips | 30–60s | TikTok, Reels | Creator, MUA / Stylist, Camera Op, Editor, Sponsored-Brand Coordinator |
 | 13 | Quick-tip / life-hack videos | 10–30s | All short-form | Subject Expert, Scriptwriter, Demonstrator, Editor, Captioner |
 
-2. Marketing & Advertising Videos
+## 2. Marketing & Advertising Videos
 
 | # | Sample Production | Typical Duration | Best Channel | Crew / Roles noted |
 |---|-------------------|------------------|--------------|----------------------|
@@ -1157,7 +1156,7 @@ Sample Productions by Category
 | 14 | Pre-roll / mid-roll YouTube ads | 6–30s | YouTube | Creative Director, Scriptwriter, Director, Editor, Composer, Media Buyer |
 | 15 | Founder-story authenticity videos | 60–120s | LinkedIn, web | Interviewer, DoP, Sound Recordist, Editor, Colorist, Brand Strategist |
 
-3. Educational & Explainer Videos
+## 3. Educational & Explainer Videos
 
 | # | Sample Production | Typical Duration | Audience | Crew / Roles noted |
 |---|-------------------|------------------|----------|----------------------|
@@ -1176,7 +1175,7 @@ Sample Productions by Category
 | 13 | Documentary-style "explained" videos | 5–15 min | YouTube | Researcher, Scriptwriter, Director, Editor, Narrator, Composer, Archive Producer, Fact-Checker |
 | 14 | Myth-vs-fact debunking videos | 30–60s | Social | Researcher, Scriptwriter, Presenter, Editor, Fact-Checker |
 
-4. Personalized & Custom Videos
+## 4. Personalized & Custom Videos
 
 | # | Sample Production | Typical Duration | Occasion | Crew / Roles noted |
 |---|-------------------|------------------|----------|----------------------|
@@ -1195,7 +1194,7 @@ Sample Productions by Category
 | 13 | Baby announcement videos | 15–45s | New parents | Designer, Motion Designer, Editor, Music Curator |
 | 14 | Personalized apology / make-up videos | 15–30s | Personal | Copywriter, Editor, Music Curator |
 
-5. Storytelling & Entertainment
+## 5. Storytelling & Entertainment
 
 | # | Sample Production | Typical Duration | Style | Crew / Roles noted |
 |---|-------------------|------------------|-------|----------------------|
@@ -1214,7 +1213,7 @@ Sample Productions by Category
 | 13 | Parody / spoof trailers | 60–120s | Comedy | Comedy Writer, Director, Editor, VO Artist, Composer, Cast |
 | 14 | Animated poetry / spoken-word visuals | 60–180s | Artistic | Poet, Narrator, Illustrator / Motion Artist, Composer, Editor |
 
-6. Professional & Business Use
+## 6. Professional & Business Use
 
 | # | Sample Production | Typical Duration | Use Case | Crew / Roles noted |
 |---|-------------------|------------------|----------|----------------------|
@@ -1234,7 +1233,7 @@ Sample Productions by Category
 | 14 | Recruitment / employer-branding | 60–120s | Hiring | Employer Brand Lead, Director, DoP, Editor, Composer, Cast (employees) |
 | 15 | Quarterly all-hands recap videos | 2–5 min | Internal | Internal Comms Lead, Editor, Motion Designer, Captioner |
 
-7. Creative & Artistic Videos
+## 7. Creative & Artistic Videos
 
 | # | Sample Production | Typical Duration | Style | Crew / Roles noted |
 |---|-------------------|------------------|-------|----------------------|
@@ -1253,7 +1252,7 @@ Sample Productions by Category
 | 13 | AI-generated album cover animations | 5–15s loop | Music branding | Cover Designer, Motion Designer, AI Generator Op |
 | 14 | Mood-board / vision-board videos | 30–60s | Personal / brand | Creative Director, Editor, Music Curator |
 
-8. Avatar & Talking Head Videos *(Very popular)*
+## 8. Avatar & Talking Head Videos *(Very popular)*
 
 | # | Sample Production | Typical Duration | Use Case | Crew / Roles noted |
 |---|-------------------|------------------|----------|----------------------|
@@ -1274,7 +1273,7 @@ Sample Productions by Category
 
 ---
 
-9. Emerging & Niche Categories *(worth exploring)*
+## 9. Emerging & Niche Categories *(worth exploring)*
 
 | # | Niche | Sample Productions | Crew / Roles noted |
 |---|-------|--------------------|----------------------|
@@ -1637,7 +1636,7 @@ _Embedded from `corpus/study/lifes_quiet_redemption_agent_workflow.md`. Also sto
 
 ---
 
-0. Visual Diagrams (read this first)
+## 0. Visual Diagrams (read this first)
 
 These six diagrams describe the workflow end-to-end and are referenced throughout the sections below. Source files live in [`./workflows/`](./workflows/).
 
@@ -1670,7 +1669,7 @@ D6 · Quality Gate Ladder & VBench Scorecard
 
 ---
 
-1. Pipeline Overview — Phase → Owning Agents → Service
+## 1. Pipeline Overview — Phase → Owning Agents → Service
 
 Maps the original Phase 0–6 outline onto the swarm's 6-phase production pipeline (SYSTEM_REFERENCE §6.1). Each phase ends with a **GateKeeperAgent (#57)** L1/L2/L3 sign-off before the DAG advances.
 
@@ -1686,7 +1685,7 @@ Maps the original Phase 0–6 outline onto the swarm's 6-phase production pipeli
 
 ---
 
-2. Scene-by-Scene Production Matrix
+## 2. Scene-by-Scene Production Matrix
 
 Each storyboard row becomes a **production card** routed through the DAG. Columns map the original (Duration / Shot / Description / 旁白) plus the agent assignments, generation engine, audio design, continuity controls, and QC owner.
 
@@ -1709,11 +1708,11 @@ Each storyboard row becomes a **production card** routed through the DAG. Column
 
 ---
 
-3. Agent Service Catalogue (What Each Agent Actually Does on This Film)
+## 3. Agent Service Catalogue (What Each Agent Actually Does on This Film)
 
 Full description of every agent's contribution, the input it consumes, the output it produces, its tools, its self-quality bar, and who reviews it. Grouped by pipeline role.
 
-3.1 Orchestration & Planning
+### 3.1 Orchestration & Planning
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -1727,7 +1726,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | MemoryAgent (#58) | Stores character bible, prior takes, corrections for recall | All artifacts | Retrievable project memory | Pinecone/Weaviate, MemGPT | Retrieval precision@5 ≥0.9 | All agents |
 | JudgeAgent (#56) | Settles disputes (e.g., Editor vs Director on pacing) via debate | Conflicting critiques | Adjudicated ruling | Debate + LLM-as-Judge harness | Inter-rater κ ≥0.8 vs panel | HiTL on overturn |
 
-3.2 Above-the-Line & Story
+### 3.2 Above-the-Line & Story
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -1741,7 +1740,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | StoryboardAgent (#14) | Converts script to the 12-panel shot table with staging | Script | Shot panels + staging notes | Image-gen, Fountain parser | Coverage completeness, staging clarity | DirectorAgent |
 | MoodBoardAgent (#63) | Builds visual/sonic/tonal reference boards (golden hour, film grain) | Brief | Lookbook boards | Pinterest/Are.na, CLIP clustering | Reference coherence | DirectorAgent, ProductionDesignAgent |
 
-3.3 Look, Character & Continuity
+### 3.3 Look, Character & Continuity
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -1754,7 +1753,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | StyleTransferAgent (#61) | Applies one consistent grade-able aesthetic across all shots | Refs, shots | Per-style LoRA, CLIP score | LoRA, CLIP/DINO, Runway style-lock | Style similarity ≥0.85 | DirectorAgent, ColoristAgent |
 | ContinuityAgent (#98) | Tracks identity, wardrobe, props (cat motif), time-state across scenes | All shots | Continuity manifest | State manifests, shot-compare | State-drift detection | AIQAConsistencyAgent, GateKeeperAgent |
 
-3.4 Generation, Camera & Audio
+### 3.4 Generation, Camera & Audio
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -1768,7 +1767,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | ComposerAgent (#20) | Minimalist piano + soft strings score with swells at peaks | Emotion curve | Score stems | Udio/Suno, MIDI, Demucs | Cue-to-emotion alignment | EditorAgent, SoundDesignAgent |
 | SoundDesignAgent (#19) | Foley/ambience per scene (pencil, keyboard, soup, city hum) | Shot list | SFX stems | ElevenLabs SFX, Freesound | Sync ≤±1 frame | EditorAgent, ComposerAgent |
 
-3.5 Post, QA, Compliance & Delivery
+### 3.5 Post, QA, Compliance & Delivery
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -1793,7 +1792,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 
 ---
 
-4. Cross-Cutting Services Applied Throughout
+## 4. Cross-Cutting Services Applied Throughout
 
 These shared capabilities (SYSTEM_REFERENCE §4–§5) operate across every phase, not at a single node.
 
@@ -1809,7 +1808,7 @@ These shared capabilities (SYSTEM_REFERENCE §4–§5) operate across every phas
 
 ---
 
-5. Quality Gate Ladder (Per Shot & Per Phase)
+## 5. Quality Gate Ladder (Per Shot & Per Phase)
 
 Every artifact clears three layers before GateKeeperAgent advances it (agents.md §11.2).
 
@@ -1821,7 +1820,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-6. Delivery Variants & Outlet Specs
+## 6. Delivery Variants & Outlet Specs
 
 | Outlet | Aspect / Spec | Owning Agents | Notes |
 |---|---|---|---|
@@ -1834,7 +1833,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-7. Recommended Tool / Model Stack (June 2026)
+## 7. Recommended Tool / Model Stack (June 2026)
 
 | Layer | Models / Tools | Driving Agent(s) |
 |---|---|---|
@@ -1851,7 +1850,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-8. Series & Scalability (Reusing the Swarm)
+## 8. Series & Scalability (Reusing the Swarm)
 
 Because the swarm persists character bibles (MemoryAgent #58), identity hashes (AvatarDesignAgent #47), and style LoRAs (StyleTransferAgent #61), a follow-up short reuses ~70% of pre-production. New entries in the 「生活偷偷救赎了我们」 series only re-run Phases 1–4 for new beats, while ContinuityAgent guarantees the recurring "map girl" and "shop cat" stay consistent across episodes.
 
@@ -1876,7 +1875,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 
 > This part hardens Part A with findings from (1) top YouTube growth strategists, (2) xAI's current Grok Imagine video stack, and (3) recent arXiv research on consistent, long-form, multi-shot AI video. Every external claim is cited inline. *Content from all external sources was paraphrased/summarized for compliance with licensing restrictions; no source is quoted beyond fair-use limits.*
 
-9. Research Sources → Findings → Workflow Implication
+## 9. Research Sources → Findings → Workflow Implication
 
 | Domain | Source | Key Finding (paraphrased) | Implication for This Workflow |
 |---|---|---|---|
@@ -1901,7 +1900,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 | Orchestration | [arXiv 2506.10540 — MCTS Storytelling]([historical-url] | Director / Photography / Reviewer / Post-Production agents with MCTS-driven clip search | Use **MCTS search over candidate clips** instead of fixed 3-reroll cap |
 | Orchestration | [arXiv 2605.27891 — SmartDirector]([historical-url] | Keyframe-conditioned generation with explicit narrative-pacing control | Gives EditorAgent **per-shot pacing knobs** tied to the emotion curve |
 
-10. YouTube Marketing Upgrades (mapped to agents)
+## 10. YouTube Marketing Upgrades (mapped to agents)
 
 | Upgrade | What Changes | Owning Agents | Gate / Metric |
 |---|---|---|---|
@@ -1912,7 +1911,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 | **Shorts 3s-hold cut** | Dedicated 9:16 cut: visual hook on **frame 1**, spoken hook ≤14 words, designed to loop | TrailerEditorAgent (#51), MotionGraphicsAgent (#13) | Predicted 3s-hold ≥60%; clean loop seam |
 | **Metric instrumentation** | Track CTR + AVD + AVP as first-class KPIs feeding the next episode | AnalystAgent (#81), EvaluationHarnessAgent (#79) | Dashboard live within 24h of launch |
 
-11. Generation Engine Upgrade — Add Grok Imagine to the Stack
+## 11. Generation Engine Upgrade — Add Grok Imagine to the Stack
 
 The routing in §3.4 (RouterAgent #55) gains a Grok tier. Net effect: cheaper, faster iteration up front; premium engines reserved for hero shots.
 
@@ -1924,7 +1923,7 @@ The routing in §3.4 (RouterAgent #55) gains a Grok tier. Net effect: cheaper, f
 | Hero / emotional-peak shots | **Veo 3.1 / Kling 3.0 / Runway Gen-4** | Higher fidelity + camera control for Scenes 1, 5, 10, 12 | CinematographerAgent (#6) |
 | Local / privacy-sensitive | **ComfyUI + CharCom LoRAs + IP-Adapter** | Full control, per-character LoRA identity ([arXiv CharCom]([historical-url] | StyleTransferAgent (#61) |
 
-12. Character-Consistency Upgrade (the film's hardest problem)
+## 12. Character-Consistency Upgrade (the film's hardest problem)
 
 Replaces "attach a reference image, strength 70–90%" with a research-grade identity stack.
 
@@ -1937,7 +1936,7 @@ Replaces "attach a reference image, strength 70–90%" with a research-grade ide
 | **Training-free fallback** | Shots lacking a clean portrait | Background+character consistency without references ([BachVid]([historical-url] | ContinuityAgent (#98) | Consistency ≥ threshold |
 | **Fine-grained ID audit** | QC gate | VLM-based identity-preservation eval beyond global embeddings ([arXiv 2511.08087]([historical-url] | AIQAConsistencyAgent (#49) | Fine-grained ID delta below τ |
 
-13. Evaluation Upgrade — VBench-Grade QC Scorecard
+## 13. Evaluation Upgrade — VBench-Grade QC Scorecard
 
 The §5 gate ladder's L2 is replaced by a multi-dimensional scorecard scored by an MLLM judge (Video-Bench style, chain-of-query) plus motion-perception checks.
 
@@ -1954,7 +1953,7 @@ The §5 gate ladder's L2 is replaced by a multi-dimensional scorecard scored by 
 
 Scoring method: MLLM evaluator with few-shot scoring + chain-of-query ([Video-Bench, arXiv 2504.04907]([historical-url] giving diagnostic, per-dimension feedback rather than a single number.
 
-14. Orchestration Upgrade — 3E Loop + MCTS Search
+## 14. Orchestration Upgrade — 3E Loop + MCTS Search
 
 | Pattern | Replaces | How It Works (cited) | Where Applied |
 |---|---|---|---|
@@ -1963,7 +1962,7 @@ Scoring method: MLLM evaluator with few-shot scoring + chain-of-query ([Video-Be
 | **Narrative-pacing control** | Manual trims | Keyframe-conditioned pacing knobs tied to the emotion curve ([SmartDirector, arXiv 2605.27891]([historical-url] | EditorAgent (#9) ↔ EmotionalArcAgent (#65) |
 | **Unified director front-end** | Hand-written shot prompts only | A director model converts the brief into structured multi-shot scripts for non-experts ([UniMAGE, arXiv 2512.23222]([historical-url] | DirectorAgent (#1) + ScreenwriterAgent (#3) |
 
-15. Revised Opening & Shorts Cards (concrete deltas)
+## 15. Revised Opening & Shorts Cards (concrete deltas)
 
 | Card | Original | Research-Informed Revision |
 |---|---|---|
@@ -2032,9 +2031,9 @@ From `corpus/study/SYSTEM_REFERENCE.md` Copy: `sources/excerpts/SYSTEM_REFERENCE
 | **Psychological Profiling** | 100 creator profiles with MBTI, motivations, fears, creative parameters | CastingAgent, TalentAgent, PersonalizationEngineerAgent, UGCCreatorAgent | [psychological_profile_agent_functional_specifications.md](./psychological_profile_agent_functional_specifications.md) |
 | **Psychological Recommendation** | Psychology-based preference prediction (Big Five, emotional state) | AudienceSimAgent, PerformanceMarketerAgent, PersonalizationEngineerAgent | [psychological_recommendation_agent_functional_specification.md](./psychological_recommendation_agent_functional_specification.md) |
 | **Complex Problem Solving** | WHAT/WHY/HOW/DO/REVIEW structured methodology | All diagnostic agents (FactCheckerAgent, SMEAgent, JudgeAgent, OptimizationAgent) | [complex_problem_solution_process_model.md](./complex_problem_solution_process_model.md) |
-| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](./common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
+| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](/docs/assets/common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
 
-'''
+```
 USER BRIEF
     │
     ▼
@@ -2083,7 +2082,7 @@ USER BRIEF
 │ Outputs: Platform-specific packages, campaigns, analytics            │
 │ Spec: optimization_agent_functional_specification.md                 │
 └─────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 | Video Type | Workflow Diagram | Key Agents Activated |
 |-----------|-----------------|---------------------|
@@ -2098,7 +2097,7 @@ USER BRIEF
 | Documentary | [workflows/I-documentary.svg](./workflows/I-documentary.svg) | JournalistAgent, ResearchAgent, FactCheckerAgent, EditorAgent |
 | Feature Film | [workflows/J-feature-film.svg](./workflows/J-feature-film.svg) | Full pipeline (all 114 agents) |
 
-'''json
+```json
 {
   "from_agent": "EditorAgent",
   "to_agent": "DirectorAgent",
@@ -2109,7 +2108,7 @@ USER BRIEF
   "rubric_score": 0.72,
   "timestamp": "2026-05-27T10:30:00Z"
 }
-'''
+```
 
 The `reference/how_to_build_a_video_agent_system/` directory contains 68 chapters of detailed implementation guidance:
 
@@ -2176,7 +2175,7 @@ You must:
 15. Update status.md.
 16. Report final pass/fail status.
 
-'''text
+```text
 doctor
 → create noted directories
 → validate sources/manifest.json
@@ -2186,7 +2185,7 @@ doctor
 → run security smoke checks
 → run sync dry-run
 → run tests
-'''
+```
 
 Only curated, audited, attributed files may be copied into first-party project directories such as:
 
@@ -2302,7 +2301,7 @@ If the user explicitly says to overwrite or update the existing directory, the a
 8. Do not turn reference sources into runtime dependencies without review.
 9. Do not disable security checks to make tests pass.
 10. When unsure, stop and ask.
-'''
+```
 
 This directory stores example Model Context Protocol configuration files.
 
@@ -2310,7 +2309,7 @@ This directory stores example Model Context Protocol configuration files.
 - Modify global configuration.
 - Expose secrets.
 - Write outside the project directory.
-'''
+```
 
 Check that all noted files and directories exist.
 
@@ -2411,7 +2410,7 @@ Create all noted files, directories, manifests, scripts, docs, tests, and agent 
 
 - If the user explicitly says to overwrite or update the existing directory, the agent may proceed, but should preserve important user-created files when possible.
 
-'''text
+```text
 doctor
 → create noted directories
 → validate sources/manifest.json
@@ -2421,7 +2420,7 @@ doctor
 → run security smoke checks
 → run sync dry-run
 → run tests
-'''
+```
 
 Only curated, audited, attributed files may be copied into first-party project directories such as:
 
@@ -2510,7 +2509,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_management_ui.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT CONFIGURATION: DirectorAgent (#1)                    [Save] [Reset]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2614,9 +2613,9 @@ From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_mana
 │    continue with their existing configuration.                              │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT PLAYGROUND: DirectorAgent (#1)                           [Run ▶]     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -2671,7 +2670,7 @@ From `corpus/study/ui/agent_management_ui.md` Copy: `sources/excerpts/agent_mana
 From `corpus/study/ui/architecture_communication.md` Copy: `sources/excerpts/architecture_communication.md`.
 
 
-'''text
+```text
 USER (Browser)
     │
     │  1. Fills Brief Studio form
@@ -2723,9 +2722,9 @@ FRONTEND receives WebSocket events
     │  11. Artifact appears in Gallery
     │  12. Critique message appears in Feed
     │  13. Status bar updates (agents running, budget spent)
-'''
+```
 
-'''text
+```text
 AGENT (e.g., DirectorAgent)
     │
     │  Emits events as it works:
@@ -2756,9 +2755,9 @@ FRONTEND (React + Zustand)
     │  • Critique feed message slides in
     │  • Status bar counters update
     │  • Budget gauge animates
-'''
+```
 
-'''text
+```text
 USER types in Critique Feed:
     "@DirectorAgent Use wider lens for Scene 3, it feels too claustrophobic"
     │
@@ -2789,7 +2788,7 @@ EVENT BUS → WebSocket → Frontend
     │
     │  Agent response appears in Critique Feed
     │  Updated artifact appears in Gallery
-'''
+```
 
 
 
@@ -2807,13 +2806,13 @@ class AgentDefinition:
     comments_on: list[int]           # [9, 6, 3, 20]
     max_iterations: int              # 5 (for self-refine loop)
     model_preference: str            # "gemini-2.5-pro"
-'''
+```
 
 When the backend needs DirectorAgent to generate shot intent #5, it:
 
 Step-by-step, here's what happens when the OrchestratorAgent decides "DirectorAgent should work on Shot #5":
 
-'''text
+```text
 Step 1: TASK CREATION
 ─────────────────────
 Orchestrator creates a task object:
@@ -2851,7 +2850,7 @@ messages = [
            - EditorAgent: "Use wider lens for Scene 3"
            - AudienceSim: "Scene 2 clarity score 0.6, below 0.7"
 
-'''text
+```text
 DirectorAgent                    Backend                      EditorAgent
      │                              │                              │
      │  (completes shot intent)     │                              │
@@ -2873,7 +2872,7 @@ DirectorAgent                    Backend                      EditorAgent
      │                              │                              │
      │  (on next iteration,         │                              │
      │   incorporates feedback)     │                              │
-'''
+```
 
 Worker 1: ████ DirectorAgent (Shot 5) ████
 Worker 2:       ████ PromptEngineerAgent (optimizing) ████
@@ -2887,9 +2886,9 @@ Worker 5: ████████ ComposerAgent (theme for Act 2) ████�
               Orchestrator coordinates dependencies:
               "EditorAgent can't start until DirectorAgent
                completes ALL shots for this scene"
-'''
+```
 
-'''python
+```python
 Dependency rules (encoded in the DAG)
 dependencies = {
     "editor_assemble": {
@@ -2929,7 +2928,7 @@ DirectorAgent-service ──┐
 From `corpus/study/ui/production_scale_discovery.md` Copy: `sources/excerpts/production_scale_discovery.md`.
 
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────┐
 │  SHOWCASE: "Neon Dreams"                                  [×]    │
 ├──────────────────────────────────────────────────────────────────┤
@@ -2989,7 +2988,7 @@ From `corpus/study/ui/production_scale_discovery.md` Copy: `sources/excerpts/pro
 │  └───────────────────────────────────────────────────────────┘   │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -3055,7 +3054,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 | I — Documentary | 10–90min, 16:9, archival | Journalist, Archive, Fact-Check, Standards |
 | J — Feature Film | 90–180min, cinematic | Full 114-agent roster, all gates active |
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PRODUCTION: "Luna" (Type E: AI Short Film)     Phase: Production  ⏱ 12m    │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
@@ -3109,9 +3108,9 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │  │ Input: Scene 2 script │ Output: shot_intent_04.json │ Critiques: 2   │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  CRITIQUE FEED              Filter: [All Agents ▼] [All Phases ▼] [All ▼]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3148,9 +3147,9 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │  └───────────────────────────────────────────────────────────────────────┘  │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────────────────────┐
 │  AGENT INSPECTOR: DirectorAgent (#1)                        [Full Screen]│
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -3191,9 +3190,9 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │                                                                          │
 │  [Retry Task] [Skip] [Send Critique] [View Full History]                 │
 └──────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  AGENT REGISTRY                    Search: [____________]  Filter: [All ▼]  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3211,7 +3210,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 From `corpus/study/ui/video_remake_enhancement.md` Copy: `sources/excerpts/video_remake_enhancement.md`.
 
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  REMAKE STUDIO — Analysis Complete                                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3351,7 +3350,7 @@ From `corpus/study/ui/video_remake_enhancement.md` Copy: `sources/excerpts/video
 │  └─────────────────────────────────────────────────────────────────────┘    │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -3416,5 +3415,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.director · v1 · 2026-07-13 -->
 
-```
 

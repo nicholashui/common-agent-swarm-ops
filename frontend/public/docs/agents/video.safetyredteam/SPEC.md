@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 SafetyRedTeamAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,9 +154,9 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-9. Specialist Meta-Agents
+## 9. Specialist Meta-Agents
 
-9.1 Orchestration Agents
+### 9.1 Orchestration Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +167,7 @@ _The following is the complete category section from the master roster (includes
 | 57 | **GateKeeperAgent** | Phase transitions; verifies L1/L2/L3 criteria; signs C2PA | Stage-gate methodology; PGA Producers Mark; QMS audit | Zero leaked defects; sign-off SLA ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) | C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints | Constitutional AI (constitution = phase-gate criteria) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9; freshness SLA | Higher recall than producer's bible at scale | All agents (correction events) | All agents (stale facts) | Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models | Reflexion memory architecture (MemGPT extension) |
 
-9.2 Creative Agents
+### 9.2 Creative Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -180,7 +179,7 @@ _The following is the complete category section from the master roster (includes
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, over-fit outputs | TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings | Cliché-hit count; novelty score vs category prior | Catches more clichés than experienced script editor | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) | TV Tropes scraper; n-gram frequency DB; embedding novelty scorer | LLM-as-Judge (anti-cliché constitution) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve; suggests beats | Plutchik; affective-computing corpora; Cron *Story Genius* | Curve-fit to target; biosignal-proxy regression accuracy | Better retention prediction than NRG test-screening cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) | Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model | Self-Refine (emotional-arc curve as rubric target) |
 
-9.3 Research Agents
+### 9.3 Research Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -192,7 +191,7 @@ _The following is the complete category section from the master roster (includes
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-9.4 Optimization Agents
+### 9.4 Optimization Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -242,19 +241,19 @@ Multi-agent debate (red-team vs defender) + adversarial search
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -278,7 +277,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -291,11 +290,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -305,13 +304,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -381,7 +380,7 @@ _Embedded from `corpus/study/optimization_agent_functional_specification.md`. Al
 
 ---
 
-1. Executive Summary of Research & Key Upgrades
+## 1. Executive Summary of Research & Key Upgrades
 
 Deep research across arXiv (e.g., MASS framework for MAS design, Six Sigma Agent for reliability, LLM-guided chemical process optimization, AgentOps observability pipeline, Digital Twins of Business Processes manifesto, SiriuS self-improving MAS, and Agentic BPM surveys) reveals critical gaps in v1.0:
 
@@ -396,7 +395,7 @@ Deep research across arXiv (e.g., MASS framework for MAS design, Six Sigma Agent
 
 ---
 
-2. Core Architecture (New – Multi-Agent Native)
+## 2. Core Architecture (New – Multi-Agent Native)
 
 The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated via AutoGen-style GroupChat or equivalent, with dynamic topology optimization (inspired by MASS framework).
 
@@ -413,7 +412,7 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-3. Updated Methodologies
+## 3. Updated Methodologies
 
 **Hybrid Framework:** DMAIC + Lean + Theory of Constraints + **Agentic Enhancements**
 
@@ -432,50 +431,50 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-4. Enhanced Functional Requirements
+## 4. Enhanced Functional Requirements
 
-4.1 Process Discovery & Mapping (Upgraded)
+### 4.1 Process Discovery & Mapping (Upgraded)
 - LLM-assisted extraction from documents, event logs (OCEL support), or natural-language descriptions.
 - Automatic generation of BPMN, Petri nets, or object-centric models.
 - Hierarchical decomposition with human-in-the-loop validation.
 
-4.2 Performance Measurement & Digital Twin Initialization
+### 4.2 Performance Measurement & Digital Twin Initialization
 - Real-time KPI calculation + living DPT synchronization via IoT/CEP where available.
 - Baseline digital twin creation for simulation-ready what-if analysis.
 
-4.3 Waste, Bottleneck & Root-Cause Analysis
+### 4.3 Waste, Bottleneck & Root-Cause Analysis
 - 8 Wastes + TOC + automated Pareto.
 - Causal ML integration for intervention impact prediction.
 
-4.4 Improvement Generation & Autonomous Optimization
+### 4.4 Improvement Generation & Autonomous Optimization
 - Lean toolkit + automation opportunities + layout suggestions.
 - **Iterative refinement loops** (ParameterAgent → Validation → Simulation → SuggestionAgent).
 - Constraint inference from minimal descriptions (no pre-defined bounds needed).
 - Multi-objective Bayesian optimization or RL-informed search when data allows.
 
-4.5 Reliability & Enterprise-Grade Execution (New Core Feature)
+### 4.5 Reliability & Enterprise-Grade Execution (New Core Feature)
 - **Task decomposition** into verifiable atomic DAG (minimality + determinism).
 - **Micro-agent sampling** (n=5–13 parallel heterogeneous LLM executions).
 - **Embedding-based consensus voting** with dynamic scaling → 3.4 DPMO target.
 - Exponential error reduction while achieving ~80% cost savings vs. single frontier model.
 
-4.6 Simulation & Validation (Enhanced)
+### 4.6 Simulation & Validation (Enhanced)
 - LLM-parameterized discrete-event simulation.
 - Digital twin what-if scenarios with real-time data.
 - Monte Carlo + uncertainty quantification.
 
-4.7 Prioritization, ROI & Implementation Planning
+### 4.7 Prioritization, ROI & Implementation Planning
 - Impact/Effort + full cost-benefit with risk register.
 - Phased roadmap + pilot design + change management.
 
-4.8 Control, Sustainment & Self-Improvement (AgentOps Pipeline)
+### 4.8 Control, Sustainment & Self-Improvement (AgentOps Pipeline)
 - **Six-stage loop:** Observe → Collect Metrics → Detect Issues → RCA → Optimize Recommendations → Automate Operations.
 - Statistical Process Control + anomaly detection + auto-prompt/workflow repair.
 - Continuous re-optimization triggers on drift or new event data.
 
 ---
 
-5. User Interaction Model (Agentic & Iterative)
+## 5. User Interaction Model (Agentic & Iterative)
 
 1. **Goal & Context Ingestion** (natural language + files/logs).
 2. **Autonomous Scoping & Constraint Discovery**.
@@ -491,7 +490,7 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-6. Input / Output Requirements (Unchanged but Expanded)
+## 6. Input / Output Requirements (Unchanged but Expanded)
 
 **New Inputs Supported:**
 - Event logs (XES/OCEL), IoT streams, unstructured docs.
@@ -506,7 +505,7 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-7. Non-Functional Requirements (Major Upgrades)
+## 7. Non-Functional Requirements (Major Upgrades)
 
 - **Reliability:** Target 3.4 DPMO via Six Sigma consensus architecture.
 - **Cost Efficiency:** Leverage cheaper models + parallelism for 70–80% savings.
@@ -517,7 +516,7 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-8. Success Criteria (Updated)
+## 8. Success Criteria (Updated)
 
 - Achieves measurable Six Sigma-level reliability in execution.
 - Produces executable digital twin + autonomous what-if capability.
@@ -526,7 +525,7 @@ The agent operates as a **hierarchical multi-agent system (MAS)** orchestrated v
 
 ---
 
-9. Future Enhancements (v3.0+ Roadmap)
+## 9. Future Enhancements (v3.0+ Roadmap)
 
 - Full process mining from raw logs → living twin.
 - Reinforcement Learning for routing optimization.
@@ -559,7 +558,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
 | 79 | **EvaluationHarnessAgent** | Continuously runs benchmarks (VBench, EvalCrafter, MT-Bench, FVD, CLIP-T) and posts regressions | Papers-with-Code; HuggingFace leaderboards; benchmark code repos | Regression detection precision/recall; alert latency <1h | Catches regressions faster than ML-eng team rotation | BenchmarkResearchAgent | All AI agents (regression alerts) |
 | 80 | **SafetyRedTeamAgent** | Adversarially attacks outputs for deepfake, bias, jailbreak, defamation | Hany Farid lab benchmarks; Partnership on AI Synthetic Media Framework; OWASP LLM Top 10 | Attack-success rate kept ≤1%; coverage of attack taxonomy | Higher coverage than internal red-team rotation | EthicsAgent (HiTL), ComplianceAgent | AvatarDesignAgent, VoiceCloneAgent, AllGeneratorAgents |
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -569,7 +568,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 
 
@@ -622,10 +621,10 @@ From `corpus/study/system_build_plan.md` Copy: `sources/excerpts/system_build_pl
 - **Docs:** operator runbooks, on-call playbooks, architecture diagrams regenerated, `CLAUDE.md`s current.
 - **Launch:** staged rollout (internal → limited → GA) with feature flags; live-smoke against real providers behind budget caps.
 
-9.5 Adversarial / safety (`SafetyRedTeamAgent` #80)
+### 9.5 Adversarial / safety (`SafetyRedTeamAgent` #80)
 Continuous attacks: deepfake/likeness misuse, prompt injection via ingested web content, jailbreaks, defamation, bias. Target attack-success ≤1%. Runs nightly + pre-release.
 
-10.3 Safety & Compliance (ComplianceAgent can BLOCK from M6)
+### 10.3 Safety & Compliance (ComplianceAgent can BLOCK from M6)
 - **ComplianceAgent (#37)** is a blocking gate on every release path: FTC, HIPAA, GDPR/CCPA, IP/likeness clearance, EU AI Act, AI-disclosure.
 - **Consent chain**: any likeness/voice clone requires a verified consent record in `rights_and_consent`; AvatarDesign/VoiceClone agents cannot proceed without it.
 - **C2PA**: 100% of releasable artifacts signed; downstream verifies the chain.
@@ -709,7 +708,7 @@ Optimization Meta-Agents                     S21: Optimization Panel
   AccessibilityOptimizerAgent                     A11y compliance checklist
   EvaluationHarnessAgent                          S15: Quality Dashboard (benchmark runner)
   SafetyRedTeamAgent                              S18: Compliance → Red Team tab
-'''
+```
 
 
 
@@ -774,5 +773,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.safetyredteam · v1 · 2026-07-13 -->
 
-```
 

@@ -140,7 +140,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 CreativeDirectorAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -160,7 +159,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-6. Distribution & Marketing Agents
+## 6. Distribution & Marketing Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -206,19 +205,19 @@ Multi-agent debate (panel of IdeationAgent + NoveltyAgent)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -242,7 +241,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -255,11 +254,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -269,13 +268,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -346,7 +345,7 @@ _Embedded from `corpus/study/general_creative_agent_functional_specification.md`
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 The General Creative Agent (GCA) is a modular, extensible AI system that transforms any input problem or situation into **novel-yet-useful creative outputs** by rigorously applying the **Strategic Sparse Outlier Recombination (SSOR) Model**.  
 
 Key innovations:
@@ -359,7 +358,7 @@ The GCA is not a generic LLM wrapper — it is a **computational embodiment** of
 
 ---
 
-2. Background: User’s Original Theory
+## 2. Background: User’s Original Theory
 The user’s foundational insight (first message):
 > “I think the model of creative is that the consequences event after a list of statistical observations value of pov (point of view) or different aspect from a current situation all or large portion go to into outlier range. Different patten of outliers combination will cause unpredictable new events. And that is creative.”
 
@@ -369,7 +368,7 @@ Through iterative refinement (detailed in conversation history), we preserved th
 
 ---
 
-3. Evolution of the SSOR Model
+## 3. Evolution of the SSOR Model
 The model evolved through multiple detailed iterations (summarized here for completeness):
 
 1. **Raw User Idea** → Multi-POV statistical outliers + recombination = novelty.
@@ -386,7 +385,7 @@ The model evolved through multiple detailed iterations (summarized here for comp
 
 ---
 
-4. The Strategic Sparse Outlier Recombination (SSOR) Model – Formal Definition
+## 4. The Strategic Sparse Outlier Recombination (SSOR) Model – Formal Definition
 
 Let a situation/problem \( S \) be described by feature distributions (POVs) \( \{D_1, D_2, \dots, D_n\} \).
 
@@ -408,61 +407,61 @@ Where:
 
 ---
 
-5. Research Foundation (Exhaustive Synthesis)
+## 5. Research Foundation (Exhaustive Synthesis)
 
-5.1 Foundational Theories
+### 5.1 Foundational Theories
 - **Boden (2004/2009)**: *The Creative Mind* — combinatorial (core of SSOR), exploratory, and transformational creativity. Directly operationalized in GCA Phase 4 & 6.
 - **Koestler (1964)**: Bisociation — clash of matrices = outlier recombination.
 - **Mednick (1962)**: Remote Associates — distant but meaningful associations.
 - **Runco & Jaeger (2012)**: Standard definition = novelty + usefulness.
 
-5.2 Empirical Large-Scale Evidence (Sparse Outliers)
+### 5.2 Empirical Large-Scale Evidence (Sparse Outliers)
 - **Uzzi et al. (2013)**: *Science* — 17.9 million papers: highest impact = conventional core + small atypical (sparse outlier) combinations.
 - **Lin et al. (2023)**: SciSciNet — 44+ million papers with pre-computed novelty/conventionality scores. Ideal training/evaluation dataset for GCA.
 
-5.3 Neuroscience
+### 5.3 Neuroscience
 - **Beaty et al. (2015, 2018)**: DMN–ECN coupling for idea generation + evaluation.
 - **Shofty et al. (2022)**: Causal DMN link to creative thinking.
 - **Schubert et al. (2021)**: SAMOC — inverted-U optimal novelty.
 
-5.4 Recent arXiv Research (2024–2025) – Directly Relevant to LLM Implementation
+### 5.4 Recent arXiv Research (2024–2025) – Directly Relevant to LLM Implementation
 - **Gu et al. (2024)** arXiv:2412.14141: “LLMs can Realize Combinatorial Creativity: Generating Creative Ideas via LLMs for Scientific Research” — Explicit framework using Boden’s theory + generalization-level retrieval + structured recombination. **Strong validation that guided LLMs excel at SSOR-style creativity.**
 - **Schapiro et al. (2025)** arXiv:2509.21043: “Combinatorial Creativity: A New Frontier in Generalization Abilities” — Mathematical framework quantifying novelty/utility tradeoff; scaling laws for creative LLMs; ideation-execution gap explained by novelty-utility tension. **Perfect for GCA’s value-gated selection and balance function.**
 - **Shen et al. (2026)** arXiv:2605.11258: Analogical reasoning to unlock LLM creativity via cross-domain relational structures.
 - **Hou et al. (2025)** arXiv:2510.20091: CreativityPrism — holistic evaluation framework (quality, novelty, diversity) for LLMs.
 - **Additional arXiv support**: Multiple papers on structured recombination, concept blending in VLMs, and UoT (Universe of Thoughts) for combinational/exploratory/transformative reasoning (e.g., arXiv:2511.20471).
 
-5.5 xAI / Grok-Related Insights
+### 5.5 xAI / Grok-Related Insights
 - xAI’s Grok models emphasize reasoning, tool-use, and agentic capabilities (Grok 4 Model Card, 2025). Grok’s training emphasizes truth-seeking and maximal curiosity — aligning perfectly with SSOR’s exploration of outlier spaces.
 - Recent Grok evaluations (e.g., visual reasoning benchmarks arXiv:2502.16428) highlight strong multimodal reasoning consistency, supporting GCA’s multi-POV and surprise-vector mechanisms.
 - xAI’s focus on understanding the universe (foundational mission) mirrors the transformational creativity layer in SSOR.
 
-5.6 Interpretability Breakthrough: Anthropic Natural Language Autoencoders (NLAEs)
+### 5.6 Interpretability Breakthrough: Anthropic Natural Language Autoencoders (NLAEs)
 - **Anthropic (2026)**: “Natural Language Autoencoders: Turning Claude’s thoughts into text” (transformer-circuits.pub / anthropic.com/research). Trains models to translate internal activations into readable natural-language explanations (and back). Surfaces hidden modes: anticipatory planning, evaluation-awareness, deception-avoidance, hidden motivations, meta-model awareness, etc.
 - **Direct application to SSOR**: Provides 12+ **AI-native POVs** (detailed below) that are statistically distinct from human role-play.
 
 ---
 
-6. AI-Native POVs Derived from NLAEs (Phase 1 Enhancement)
+## 6. AI-Native POVs Derived from NLAEs (Phase 1 Enhancement)
 (Full table from conversation history, now integrated):
-1. Anticipatory Planning POV  
-2. Evaluation-Awareness / Test-Suspicion POV  
-3. Deception-Avoidance / Self-Preservation POV  
-4. Hidden-Motivation POV  
-5. Language-Switch / Training-Data Echo POV  
-6. Meta-Model-Awareness POV  
-7. Quirky-Behavior / Anomaly-Driven POV  
-8. Reconstruction-Fidelity POV  
-9. Activation-Direction POV  
-10. Round-Trip Consistency POV  
-11. Misalignment-Root-Cause POV  
-12. Latent-Feature Ensemble POV  
+## 1. Anticipatory Planning POV
+## 2. Evaluation-Awareness / Test-Suspicion POV
+## 3. Deception-Avoidance / Self-Preservation POV
+## 4. Hidden-Motivation POV
+## 5. Language-Switch / Training-Data Echo POV
+## 6. Meta-Model-Awareness POV
+## 7. Quirky-Behavior / Anomaly-Driven POV
+## 8. Reconstruction-Fidelity POV
+## 9. Activation-Direction POV
+## 10. Round-Trip Consistency POV
+## 11. Misalignment-Root-Cause POV
+## 12. Latent-Feature Ensemble POV
 
 These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-7. Functional Requirements – General Creative Agent (GCA)
+## 7. Functional Requirements – General Creative Agent (GCA)
 
 **Input**: Flexible JSON (problem, context, domain, num_ideas, temperature, preferences).  
 **Output**: Structured Markdown + JSON with idea titles, descriptions, surprise vectors (radar/table), per-dimension scores, overall Cr score, process trace, prototype plans, risks, transformational flags.  
@@ -481,7 +480,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-8. Domain-Specific Creative Agent Factory
+## 8. Domain-Specific Creative Agent Factory
 **Core Requirement**: `factory.create(domain="scientific_research", ...)` instantly spawns specialized agents by overriding:
 - Default POV lists (inject domain-specific + AI-native).
 - Custom value metrics \( U(y) \).
@@ -493,7 +492,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-9. Technical Architecture & Implementation Guidelines
+## 9. Technical Architecture & Implementation Guidelines
 - **Core Classes**: `SSORModel`, `POVGenerator`, `OutlierSampler`, `Recombiner`, `ValueFilter`, `GeneralCreativeAgent`, `CreativeAgentFactory`.
 - **Framework**: LangChain/CrewAI/AutoGen style (modular agents).
 - **Vector Store**: FAISS/Chroma for semantic reachability.
@@ -504,7 +503,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-10. Evaluation & Success Criteria
+## 10. Evaluation & Success Criteria
 - Measurable novelty + usefulness (CreativityPrism-style).
 - Blind human/AI ratings.
 - Traceability of SSOR phases.
@@ -513,7 +512,7 @@ These are **toggleable** alongside traditional human-role POVs.
 
 ---
 
-11. Full References (Curated & Expanded)
+## 11. Full References (Curated & Expanded)
 (Abbreviated here for space; full BibTeX available on request)
 - Boden (2004/2009) *The Creative Mind*.
 - Uzzi et al. (2013) *Science*.
@@ -703,5 +702,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.creativedirector · v1 · 2026-07-13 -->
 
-```
 

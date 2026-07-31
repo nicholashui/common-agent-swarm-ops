@@ -10,14 +10,20 @@ import {
   type SessionClaims,
 } from "./local-auth";
 
-export function readSessionClaimsFromCookies(): SessionClaims | null {
-  const store = cookies();
+export async function readSessionClaimsFromCookies(): Promise<SessionClaims | null> {
+  // Next.js 15+/16: cookies() is async (Promise store).
+  const store = await cookies();
+  if (!store || typeof store.get !== "function") {
+    throw new Error(
+      "next/headers cookies() did not resolve to a store with .get(); delete frontend/.next and restart npm run dev.",
+    );
+  }
   const value = store.get(FRONTEND_SESSION_COOKIE)?.value;
   return decodeSessionCookie(value);
 }
 
-export function readPublicSessionFromCookies(): PublicSessionView {
-  return toPublicSessionView(readSessionClaimsFromCookies());
+export async function readPublicSessionFromCookies(): Promise<PublicSessionView> {
+  return toPublicSessionView(await readSessionClaimsFromCookies());
 }
 
 export function buildSessionCookieOptions(claims: SessionClaims): {

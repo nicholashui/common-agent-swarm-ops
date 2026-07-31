@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 GateKeeperAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,9 +154,9 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-9. Specialist Meta-Agents
+## 9. Specialist Meta-Agents
 
-9.1 Orchestration Agents
+### 9.1 Orchestration Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +167,7 @@ _The following is the complete category section from the master roster (includes
 | 57 | **GateKeeperAgent** | Phase transitions; verifies L1/L2/L3 criteria; signs C2PA | Stage-gate methodology; PGA Producers Mark; QMS audit | Zero leaked defects; sign-off SLA ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) | C2PA signing (c2patool); JSON schema validators; rubric evaluation endpoints | Constitutional AI (constitution = phase-gate criteria) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9; freshness SLA | Higher recall than producer's bible at scale | All agents (correction events) | All agents (stale facts) | Pinecone/Weaviate/Qdrant vector DB; MemGPT-style hierarchical memory; embedding models | Reflexion memory architecture (MemGPT extension) |
 
-9.2 Creative Agents
+### 9.2 Creative Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -180,7 +179,7 @@ _The following is the complete category section from the master roster (includes
 | 64 | **NoveltyAgent / Anti-Cliché Critic** | Flags tropes, clichés, over-fit outputs | TV Tropes; OpenSubtitles n-gram freq; corpus-novelty embeddings | Cliché-hit count; novelty score vs category prior | Catches more clichés than experienced script editor | IdeationAgent, ScreenwriterAgent | ScreenwriterAgent (trope-stuffed), CopywriterAgent (templated) | TV Tropes scraper; n-gram frequency DB; embedding novelty scorer | LLM-as-Judge (anti-cliché constitution) |
 | 65 | **EmotionalArcAgent** | Maps valence/arousal curve; suggests beats | Plutchik; affective-computing corpora; Cron *Story Genius* | Curve-fit to target; biosignal-proxy regression accuracy | Better retention prediction than NRG test-screening cards | DirectorAgent, EditorAgent, ComposerAgent | EditorAgent (flat middle), ComposerAgent (cue mismatch) | Sentiment/emotion classifiers (GoEmotions); retention-curve predictor; biosignal proxy model | Self-Refine (emotional-arc curve as rubric target) |
 
-9.3 Research Agents
+### 9.3 Research Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -192,7 +191,7 @@ _The following is the complete category section from the master roster (includes
 | 71 | **InterviewSynthesisAgent** | Synthesizes practitioner interviews into data | Otter/Rev transcripts; consent forms; SAG/WGA templates | Inter-coder agreement on themes; consent integrity | Faster + richer theme extraction than qualitative researcher | ResearchPIAgent (HiTL), ComplianceAgent | SMEAgent (mis-summarized expert) | Otter.ai/Rev API (transcription); thematic coding models; consent-management DB | Reflexion (interviewer refines questions based on theme gaps) |
 | 72 | **BenchmarkResearchAgent** | Monitors VBench, EvalCrafter, MT-Bench, FVD, CLIP-T leaderboards | Papers-with-Code; HuggingFace leaderboards; conference proceedings | Coverage of benchmarks; freshness ≤7 days | Faster + broader than ML-research team | OptimizationAgents (any) | All AI agents (stale baselines) | Papers-with-Code API; HuggingFace Hub API; arXiv RSS; VBench leaderboard scraper | ReAct (poll leaderboards → detect change → alert) |
 
-9.4 Optimization Agents
+### 9.4 Optimization Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -242,19 +241,19 @@ Constitutional AI (constitution = phase-gate criteria)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -278,7 +277,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -291,11 +290,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -305,13 +304,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -382,7 +381,7 @@ _Embedded from `corpus/study/intent_analysis_agent_functional_specification.md`.
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 
 The **Deep Intent Analysis Framework (DIA) v2.0** is a complete, design-complete (non-active), modular system for systematically decoding any text’s **purpose**, **hidden agenda**, **multi-angle perspectives**, **illocutionary force**, and **ethical/behavioral quality**.  
 
@@ -406,7 +405,7 @@ Journalists, analysts, researchers, educators, content moderators, legal teams, 
 
 ---
 
-2. Background, Motivation & Research Foundation
+## 2. Background, Motivation & Research Foundation
 
 **Original Motivation (from user history)**  
 Language serves communication, but always with purpose, hidden intent, multiple angles, and moral implications. The 6-phase DIA provides a repeatable algorithm.
@@ -427,11 +426,11 @@ These findings directly upgrade the original framework into a **scientifically g
 
 ---
 
-3. System Architecture (High-Level)
+## 3. System Architecture (High-Level)
 
 **Modular, Agentic Design** (Grok-4.3 native)
 
-'''
+```
 User Input (Text + Optional Context)
           ↓
 Phase 0: Context Analyzer Agent
@@ -449,7 +448,7 @@ Phase 5: Judgment Engine (Multi-Criteria Scorer + Ethical Auditor)
 Phase 6: Synthesizer & Action Recommender
           ↓
 Structured JSON Output + Human-Readable Report + Visualizations
-'''
+```
 
 **Core Components**  
 - **LLM Backbone**: Grok-4.3 (reasoning mode configurable: low/medium/high) via xAI API.  
@@ -464,7 +463,7 @@ Every phase produces typed artifacts (JSON) that feed the next. Full traceabilit
 
 ---
 
-4. Detailed Functional Requirements – 6 Phases (v2.0 Enhanced)
+## 4. Detailed Functional Requirements – 6 Phases (v2.0 Enhanced)
 
 Phase 0: Context Analyzer
 **Inputs**: Raw text, optional metadata (sender, platform, date, prior messages).  
@@ -504,12 +503,12 @@ Phase 4: Hidden Agenda & Multi-Angle Dissection (Major Upgrade)
 
 Phase 5: Behavioral Judgment Engine
 **6 Core Dimensions** (1–10 or 0–1) + 2 new:
-1. Truthfulness
-2. Ethical Impact (harm, autonomy, power imbalance)
-3. Effectiveness (stated + hidden goals)
-4. Clarity & Cooperation (Grice)
-5. Social Value (understanding vs division)
-6. Transparency
+## 1. Truthfulness
+## 2. Ethical Impact (harm, autonomy, power imbalance)
+## 3. Effectiveness (stated + hidden goals)
+## 4. Clarity & Cooperation (Grice)
+## 5. Social Value (understanding vs division)
+## 6. Transparency
 7. **Benevolence** (new – AI-specific)
 8. **Cultural Appropriateness** (new – from multi-task pragmatic models)
 
@@ -522,9 +521,9 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-5. Data Models & Output Schema (JSON)
+## 5. Data Models & Output Schema (JSON)
 
-'''json
+```json
 {
   "analysis_id": "uuid",
   "input_text": "...",
@@ -559,11 +558,11 @@ Optional: Counter-argument generator or “how to respond” module.
   "processing_time_ms": 12400,
   "model": "grok-4.3-reasoning-high"
 }
-'''
+```
 
 ---
 
-6. Non-Functional Requirements
+## 6. Non-Functional Requirements
 
 - **Performance**: <15s for <5k token text on Grok-4.3 high reasoning; parallel phase execution.  
 - **Scalability**: Stateless API; batch mode for enterprise (1000s of texts).  
@@ -574,7 +573,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-7. Implementation Roadmap
+## 7. Implementation Roadmap
 
 **Phase 1 (Weeks 1–4)**: Prompt-engineered prototype on Grok-4.3 (all 6 phases + PIC + basic multi-agent). Structured output validation.  
 **Phase 2 (Months 2–3)**: Fine-tune lightweight speech act classifier on public datasets; integrate classical NLP metrics.  
@@ -589,7 +588,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-8. Evaluation Framework
+## 8. Evaluation Framework
 
 - **Automatic**: F1 on speech act datasets, PIC accuracy lift, Grice violation detection correlation with human labels.  
 - **Human**: Expert linguist agreement (Cohen’s κ > 0.75 target).  
@@ -598,7 +597,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-9. Limitations & Future Work
+## 9. Limitations & Future Work
 
 **Current Limitations**  
 - English-dominant (mitigate with multilingual PIC prompts).  
@@ -613,7 +612,7 @@ Optional: Counter-argument generator or “how to respond” module.
 
 ---
 
-10. References (Key Sources)
+## 10. References (Key Sources)
 
 - Pragmatics in the Era of Large Language Models: A Survey (arXiv:2502.12378)  
 - Pragmatic Inference Chain (PIC) (arXiv:2503.01539)  
@@ -696,29 +695,29 @@ Major Improvements
 
 Table of Contents
 
-1. Executive Summary
-2. Core Problem
-3. Research Foundation
-4. Design Principles
-5. Component Taxonomy
-6. System Architecture
-7. Agent Roles
-8. End-to-End Workflow
-9. Context Engineering, RAG, and Memory
-10. Critic/Evaluator Subsystem
-11. Security and Trust Model
-12. Data Models and Schemas
-13. Output Artifacts
-14. Implementation Roadmap
-15. Tool and Harness Integration
-16. Metrics and Success Criteria
-17. Risks and Mitigations
-18. Future Roadmap
-19. References
+## 1. Executive Summary
+## 2. Core Problem
+## 3. Research Foundation
+## 4. Design Principles
+## 5. Component Taxonomy
+## 6. System Architecture
+## 7. Agent Roles
+## 8. End-to-End Workflow
+## 9. Context Engineering, RAG, and Memory
+## 10. Critic/Evaluator Subsystem
+## 11. Security and Trust Model
+## 12. Data Models and Schemas
+## 13. Output Artifacts
+## 14. Implementation Roadmap
+## 15. Tool and Harness Integration
+## 16. Metrics and Success Criteria
+## 17. Risks and Mitigations
+## 18. Future Roadmap
+## 19. References
 
 ---
 
-1. Executive Summary
+## 1. Executive Summary
 
 SIPA is a hierarchical, context-engineered, multi-agent planning system for turning large software specification corpora into implementation-ready plans and tasks.
 
@@ -758,7 +757,7 @@ The result is a planner that reduces context size for downstream coding agents w
 
 ---
 
-2. Core Problem
+## 2. Core Problem
 
 Large software specs break AI coding workflows in predictable ways:
 
@@ -787,27 +786,27 @@ SIPA exists to solve these problems before coding begins.
 
 ---
 
-3. Research Foundation
+## 3. Research Foundation
 
-3.1 Spec-Driven Development
+### 3.1 Spec-Driven Development
 
 GitHub Spec Kit treats specifications as the center of AI-assisted development and ships a core flow of **Spec → Plan → Tasks → Implement**. It also provides Markdown artifacts, quality checklists, and cross-artifact analysis, making it a strong workflow model for SIPA’s output structure. ([github.github.com]([historical-url]
 
 SIPA extends this model for **pre-existing massive corpora**, not just greenfield features. It adds corpus indexing, type-aware planning, traceability enforcement, and critic loops.
 
-3.2 MAAD and Requirements-to-Architecture Planning
+### 3.2 MAAD and Requirements-to-Architecture Planning
 
 MAAD proposes four specialized agents — Analyst, Modeler, Designer, and Evaluator — to convert requirements into multi-view architectural blueprints with quality assessments. It uses RAG for architecture standards and patterns, hierarchical memory for design history, and an evaluator for structured quality reports. ([arxiv.org]([historical-url]
 
 SIPA adopts MAAD most directly for the Architecture Sub-Planner, then generalizes the same analyst/designer/evaluator structure across other component types.
 
-3.3 Hierarchical Multi-Agent Orchestration
+### 3.3 Hierarchical Multi-Agent Orchestration
 
 AgentOrchestra’s current formulation introduces TEA, a Tool-Environment-Agent protocol that treats agents, tools, environments, prompts, memory, and outputs as versioned lifecycle-managed resources. It also uses a central planner coordinating specialized sub-agents. ([arxiv.org]([historical-url]
 
 SIPA adopts the practical lesson: orchestration should not be “agents chatting.” It should be explicit state, typed handoffs, versioned artifacts, and lifecycle-aware execution.
 
-3.4 Multi-Agent Software Engineering Patterns
+### 3.4 Multi-Agent Software Engineering Patterns
 
 The LLM-based multi-agent systems survey identifies role specialization, SDLC coverage, agent synergy, and trustworthy autonomous software engineering as major research directions. ([arxiv.org]([historical-url]
 
@@ -817,7 +816,7 @@ SWE-agent demonstrates that the interface between agent and computer materially 
 
 SWE-Search supports the value of self-evaluation and iterative refinement for repository-level software tasks. ([proceedings.iclr.cc]([historical-url]
 
-3.5 Context Engineering
+### 3.5 Context Engineering
 
 Modern agent design increasingly treats context engineering as a first-class discipline. LangChain’s current framework groups context strategies into **write, select, compress, and isolate**, which SIPA adopts as its core context model. ([langchain.com]([historical-url]
 
@@ -828,13 +827,13 @@ SIPA applies this as follows:
 - **Compress:** Summarize and extract with source-preserving compression.
 - **Isolate:** Give each sub-planner a scoped context window rather than the entire corpus.
 
-3.6 GraphRAG and Corpus Sensemaking
+### 3.6 GraphRAG and Corpus Sensemaking
 
 GraphRAG combines text extraction, network analysis, LLM prompting, and summarization to understand text datasets. Microsoft’s GraphRAG project is especially relevant for corpus-wide themes and dependency discovery. ([microsoft.com]([historical-url]
 
 SIPA uses graph retrieval optionally, but the architecture is designed so a simpler hybrid vector/BM25 retriever can be used first.
 
-3.7 Architecture Standards
+### 3.7 Architecture Standards
 
 SIPA’s architecture outputs are aligned with:
 
@@ -843,7 +842,7 @@ SIPA’s architecture outputs are aligned with:
 - **ATAM** for reasoning about quality-attribute tradeoffs and architectural risks. ([sei.cmu.edu]([historical-url]
 - **Kruchten 4+1 views** for multi-perspective architecture description. ([scirp.org]([historical-url]
 
-3.8 Security Research and Agentic Risk
+### 3.8 Security Research and Agentic Risk
 
 NCSC warns that current LLMs do not enforce a true boundary between data and instructions, so prompt injection should be treated as an inherent residual risk that must be reduced through system design and impact limitation. ([ncsc.gov.uk]([historical-url]
 
@@ -855,7 +854,7 @@ SIPA therefore treats security as a core subsystem, not a postscript.
 
 ---
 
-4. Design Principles
+## 4. Design Principles
 
 1. **Type-aware planning**
    - Every component gets the planning style it actually needs.
@@ -889,7 +888,7 @@ SIPA therefore treats security as a core subsystem, not a postscript.
 
 ---
 
-5. Component Taxonomy
+## 5. Component Taxonomy
 
 The taxonomy controls:
 
@@ -901,7 +900,7 @@ The taxonomy controls:
 - Human-review requirement
 - Task decomposition style
 
-5.1 Primary Component Types
+### 5.1 Primary Component Types
 
 | Type | Detail Level | Retrieval Strategy | Output Emphasis | Example |
 |---|---:|---|---|---|
@@ -917,7 +916,7 @@ The taxonomy controls:
 | AI / Agent Workflow | High-rigor | Agent instructions, tools, memory, data access | Agent state machine, tool policy, eval harness | Coding agent, RAG assistant |
 | Documentation / DevEx | Medium | Onboarding docs, workflows, developer feedback | Quickstarts, AGENTS.md, conventions | Contributor guide, module README |
 
-5.2 Secondary Tags
+### 5.2 Secondary Tags
 
 Secondary tags modify critic gates and output sections:
 
@@ -935,7 +934,7 @@ Secondary tags modify critic gates and output sections:
 - `experimental`
 - `mvp-critical`
 
-5.3 Classification Rules
+### 5.3 Classification Rules
 
 SIPA classifies components using:
 
@@ -948,7 +947,7 @@ SIPA classifies components using:
 
 Classification output must include:
 
-'''yaml
+```yaml
 component_id: CMP-auth-service
 name: Auth Service
 primary_type: common_component
@@ -960,13 +959,13 @@ evidence:
   - specs/auth.md#overview
   - specs/security.md#session-management
 needs_human_review: true
-'''
+```
 
 ---
 
-6. System Architecture
+## 6. System Architecture
 
-'''mermaid
+```mermaid
 flowchart TD
     A[Spec Corpus] --> B[Ingestion & Indexing]
     B --> C[Hybrid Retriever]
@@ -1012,13 +1011,13 @@ flowchart TD
     O --> P[Implementation Feedback]
     P --> Q[Memory Update + Impact Analysis]
     Q --> F
-'''
+```
 
 ---
 
-7. Agent Roles
+## 7. Agent Roles
 
-7.1 Master Orchestrator
+### 7.1 Master Orchestrator
 
 **Purpose:** Own the global plan, decomposition, dependencies, and coordination.
 
@@ -1043,7 +1042,7 @@ flowchart TD
 
 ---
 
-7.2 Architecture Sub-Planner
+### 7.2 Architecture Sub-Planner
 
 **Purpose:** Produce strategic architecture plans.
 
@@ -1068,7 +1067,7 @@ flowchart TD
 
 ---
 
-7.3 Feature/UI Sub-Planner
+### 7.3 Feature/UI Sub-Planner
 
 **Purpose:** Produce detailed, scoped implementation specs for user-facing behavior.
 
@@ -1091,7 +1090,7 @@ flowchart TD
 
 ---
 
-7.4 Common Component Sub-Planner
+### 7.4 Common Component Sub-Planner
 
 **Purpose:** Produce contract-first shared component specs.
 
@@ -1113,7 +1112,7 @@ flowchart TD
 
 ---
 
-7.5 Data/Domain Sub-Planner
+### 7.5 Data/Domain Sub-Planner
 
 **Purpose:** Produce domain model and data lifecycle specifications.
 
@@ -1134,7 +1133,7 @@ flowchart TD
 
 ---
 
-7.6 Integration Sub-Planner
+### 7.6 Integration Sub-Planner
 
 **Purpose:** Produce robust integration and adapter specs.
 
@@ -1155,7 +1154,7 @@ flowchart TD
 
 ---
 
-7.7 Security/Compliance Sub-Planner
+### 7.7 Security/Compliance Sub-Planner
 
 **Purpose:** Produce security-sensitive plans and controls.
 
@@ -1177,7 +1176,7 @@ flowchart TD
 
 ---
 
-7.8 Critic/Evaluator
+### 7.8 Critic/Evaluator
 
 **Purpose:** Prevent bad plans from becoming implementation tasks.
 
@@ -1202,7 +1201,7 @@ flowchart TD
 
 ---
 
-7.9 Task Decomposer
+### 7.9 Task Decomposer
 
 **Purpose:** Convert approved specs into small, executable tasks.
 
@@ -1225,7 +1224,7 @@ flowchart TD
 
 ---
 
-8. End-to-End Workflow
+## 8. End-to-End Workflow
 
 Phase 0 — Project Constitution
 
@@ -1244,9 +1243,9 @@ Inputs may include:
 
 Output:
 
-'''text
+```text
 constitution.md
-'''
+```
 
 This aligns with current Spec Kit practice, where a constitution can govern subsequent specification, planning, and implementation artifacts. ([github.com]([historical-url]
 
@@ -1294,9 +1293,9 @@ The Master Orchestrator:
 
 Output:
 
-'''text
+```text
 plans/master_plan.md
-'''
+```
 
 noted sections:
 
@@ -1328,14 +1327,14 @@ For each component:
 
 Output examples:
 
-'''text
+```text
 plans/architecture_core_platform.md
 plans/feature_spec_student_dashboard.md
 plans/component_spec_auth_service.md
 plans/domain_model_user_progress.md
 plans/integration_spec_lms_sync.md
 plans/security_spec_auth_and_sessions.md
-'''
+```
 
 ---
 
@@ -1345,7 +1344,7 @@ The Task Decomposer creates implementation tasks from approved plans.
 
 Task format:
 
-'''markdown
+```markdown
 - [ ] T042 [P] Build StudentDashboardHeader
   - **Component:** Student Dashboard
   - **Source:** feature_spec_student_dashboard.md#ui-header
@@ -1358,7 +1357,7 @@ Task format:
     - Unit render states.
     - E2E dropdown interaction.
   - **Context excerpt:** See linked source section.
-'''
+```
 
 ---
 
@@ -1384,13 +1383,13 @@ SIPA then:
 
 ---
 
-9. Context Engineering, RAG, and Memory
+## 9. Context Engineering, RAG, and Memory
 
-9.1 Context Package Structure
+### 9.1 Context Package Structure
 
 Every sub-planner receives a context package:
 
-'''yaml
+```yaml
 context_package_id: CTX-feature-student-dashboard-v1
 component_id: CMP-student-dashboard
 planner_type: feature_ui
@@ -1413,9 +1412,9 @@ compression:
   method: extractive_then_abstractive
   preserve_quotes: true
   preserve_requirement_ids: true
-'''
+```
 
-9.2 Retrieval Modes
+### 9.2 Retrieval Modes
 
 | Mode | Purpose |
 |---|---|
@@ -1427,7 +1426,7 @@ compression:
 | Local neighborhood | Closely related chunks |
 | Reranked hybrid | Default production mode |
 
-9.3 Memory Types
+### 9.3 Memory Types
 
 | Memory | Scope | Examples |
 |---|---|---|
@@ -1438,11 +1437,11 @@ compression:
 | Evidence | Source-grounding | chunk IDs, citations, excerpts |
 | Security | Trust and permissions | approved tools, blocked actions |
 
-9.4 Evidence Ledger
+### 9.4 Evidence Ledger
 
 Every major output claim should map to evidence:
 
-'''yaml
+```yaml
 claim_id: CLM-architecture-012
 claim: "Auth Service owns session creation and refresh-token rotation."
 artifact: component_spec_auth_service.md
@@ -1453,13 +1452,13 @@ evidence:
     quote: "..."
 confidence: 0.93
 status: supported
-'''
+```
 
 ---
 
-10. Critic/Evaluator Subsystem
+## 10. Critic/Evaluator Subsystem
 
-10.1 Quality Gates
+### 10.1 Quality Gates
 
 | Gate | noted For | Pass Threshold |
 |---|---|---:|
@@ -1472,9 +1471,9 @@ status: supported
 | Security review | tagged artifacts | no high findings |
 | Human approval | strategic/high-risk | explicit approval |
 
-10.2 Critique Schema
+### 10.2 Critique Schema
 
-'''json
+```json
 {
   "artifact_id": "feature_spec_student_dashboard",
   "overall_verdict": "refine",
@@ -1497,9 +1496,9 @@ status: supported
   ],
   "recommended_next_action": "targeted_refinement"
 }
-'''
+```
 
-10.3 Optional SIPA Arena Evaluator
+### 10.3 Optional SIPA Arena Evaluator
 
 SIPA can run multiple competing planner outputs and evaluate them using the same rubric.
 
@@ -1517,9 +1516,9 @@ This is independent of any external vendor feature. Official xAI documentation v
 
 ---
 
-11. Security and Trust Model
+## 11. Security and Trust Model
 
-11.1 Core Security Assumptions
+### 11.1 Core Security Assumptions
 
 1. Retrieved documents may contain malicious instructions.
 2. Tool descriptions may be untrusted.
@@ -1528,7 +1527,7 @@ This is independent of any external vendor feature. Official xAI documentation v
 5. Human approval is only useful if the UI shows the actual action, not merely the agent’s summary.
 6. High-impact operations require deterministic controls outside the LLM.
 
-11.2 Trust Levels
+### 11.2 Trust Levels
 
 | Trust Level | Meaning | Example |
 |---|---|---|
@@ -1539,7 +1538,7 @@ This is independent of any external vendor feature. Official xAI documentation v
 | untrusted | user/tool/retrieved content with possible injection | arbitrary webpage |
 | hostile-test | adversarial fixture | red-team prompt |
 
-11.3 Tool Permission Policy
+### 11.3 Tool Permission Policy
 
 | Action | Default |
 |---|---|
@@ -1553,7 +1552,7 @@ This is independent of any external vendor feature. Official xAI documentation v
 | Install packages | human approval noted |
 | Update memory | allowed only through memory sanitizer |
 
-11.4 Prompt-Injection Controls
+### 11.4 Prompt-Injection Controls
 
 SIPA must:
 
@@ -1565,7 +1564,7 @@ SIPA must:
 - Log source-to-claim mappings.
 - Require human approval for high-impact actions.
 
-11.5 MCP Controls
+### 11.5 MCP Controls
 
 If SIPA exposes MCP tools:
 
@@ -1579,11 +1578,11 @@ These requirements follow MCP’s own security posture around user consent, tool
 
 ---
 
-12. Data Models and Schemas
+## 12. Data Models and Schemas
 
-12.1 Core Artifact Frontmatter
+### 12.1 Core Artifact Frontmatter
 
-'''yaml
+```yaml
 ---
 artifact_id: string
 type: master_plan | architecture | feature_ui | common_component | domain_model | integration | security | task_list | critique
@@ -1602,11 +1601,11 @@ dependencies: []
 review_required: boolean
 approved_by: string | null
 ---
-'''
+```
 
-12.2 Requirement Record
+### 12.2 Requirement Record
 
-'''yaml
+```yaml
 requirement_id: REQ-001
 text: "Users must be able to reset their password by email."
 source:
@@ -1618,11 +1617,11 @@ component_refs:
   - CMP-auth-service
   - CMP-email-service
 status: active
-'''
+```
 
-12.3 Decision Record
+### 12.3 Decision Record
 
-'''yaml
+```yaml
 decision_id: ADR-004
 title: "Use refresh-token rotation"
 status: proposed
@@ -1638,11 +1637,11 @@ consequences:
     - requires token-family invalidation logic
 evidence:
   - specs/security.md#token-policy
-'''
+```
 
-12.4 Task Record
+### 12.4 Task Record
 
-'''yaml
+```yaml
 task_id: T042
 title: "Implement refresh-token rotation"
 component_id: CMP-auth-service
@@ -1659,115 +1658,115 @@ tests:
   - "unit"
   - "integration"
 human_review_required: true
-'''
+```
 
 ---
 
-13. Output Artifacts
+## 13. Output Artifacts
 
-13.1 `master_plan.md`
-
-noted sections:
-
-1. Executive summary
-2. Scope and non-goals
-3. Corpus summary
-4. Component inventory
-5. Component classification table
-6. Dependency graph
-7. Implementation phases
-8. MVP slice
-9. Risk register
-10. Traceability skeleton
-11. Open questions
-12. Approval checklist
-13. Changelog
-
-13.2 Architecture Spec
+### 13.1 `master_plan.md`
 
 noted sections:
 
-1. Architecture scope
-2. Stakeholders and concerns
-3. ASRs and NFRs
-4. C4 context/container/component views
-5. Runtime scenarios
-6. Deployment view
+## 1. Executive summary
+## 2. Scope and non-goals
+## 3. Corpus summary
+## 4. Component inventory
+## 5. Component classification table
+## 6. Dependency graph
+## 7. Implementation phases
+## 8. MVP slice
+## 9. Risk register
+## 10. Traceability skeleton
+## 11. Open questions
+## 12. Approval checklist
+## 13. Changelog
+
+### 13.2 Architecture Spec
+
+noted sections:
+
+## 1. Architecture scope
+## 2. Stakeholders and concerns
+## 3. ASRs and NFRs
+## 4. C4 context/container/component views
+## 5. Runtime scenarios
+## 6. Deployment view
 7. ADRs
-8. Interface catalog
-9. Quality attribute scenarios
-10. Tradeoff analysis
+## 8. Interface catalog
+## 9. Quality attribute scenarios
+## 10. Tradeoff analysis
 11. Risks
-12. Traceability matrix
+## 12. Traceability matrix
 
-13.3 Feature/UI Spec
+### 13.3 Feature/UI Spec
 
 noted sections:
 
-1. Feature summary
-2. User stories
-3. User flows
-4. UI states
-5. Acceptance criteria
-6. Validation matrix
-7. Error and edge cases
-8. API/data dependencies
-9. Accessibility notes
-10. Analytics/events
-11. Test scenarios
-12. Traceability matrix
+## 1. Feature summary
+## 2. User stories
+## 3. User flows
+## 4. UI states
+## 5. Acceptance criteria
+## 6. Validation matrix
+## 7. Error and edge cases
+## 8. API/data dependencies
+## 9. Accessibility notes
+## 10. Analytics/events
+## 11. Test scenarios
+## 12. Traceability matrix
 
-13.4 Common Component Spec
+### 13.4 Common Component Spec
 
 noted sections:
 
 1. Purpose
 2. Scope
-3. Public interface
-4. Data contracts
-5. Invariants
-6. Configuration
-7. Extension points
-8. Error handling
-9. Performance expectations
-10. Security considerations
-11. Usage examples
-12. Test strategy
-13. Traceability matrix
+## 3. Public interface
+## 4. Data contracts
+## 5. Invariants
+## 6. Configuration
+## 7. Extension points
+## 8. Error handling
+## 9. Performance expectations
+## 10. Security considerations
+## 11. Usage examples
+## 12. Test strategy
+## 13. Traceability matrix
 
-13.5 Security Spec
+### 13.5 Security Spec
 
 noted sections:
 
 1. Assets
 2. Actors
-3. Trust boundaries
-4. Data flows
+## 3. Trust boundaries
+## 4. Data flows
 5. Threats
 6. Controls
-7. Residual risks
-8. Approval requirements
-9. Monitoring
-10. Audit evidence
-11. Traceability matrix
+## 7. Residual risks
+## 8. Approval requirements
+## 9. Monitoring
+## 10. Audit evidence
+## 11. Traceability matrix
 
-13.6 Task List
+### 13.6 Task List
 
 noted sections:
 
-1. Task overview
-2. Execution order
-3. Parallelizable tasks
-4. Critical path
-5. Task checklist
-6. Test checklist
-7. Review checklist
-8. Rollback notes
-9. Source links
+## 1. Task overview
+## 2. Execution order
+## 3. Parallelizable tasks
+## 4. Critical path
+## 5. Task checklist
+## 6. Test checklist
+## 7. Review checklist
+## 8. Rollback notes
+## 9. Source links
 
 ---
 
-14. Implementation Roadmap
+## 14. Implementation Roadmap
 
 Phase 1 — Safe MVP
 
@@ -1828,19 +1827,19 @@ Add:
 
 ---
 
-15. Tool and Harness Integration
+## 15. Tool and Harness Integration
 
-15.1 Cursor / Claude Code / Kiro / Similar Tools
+### 15.1 Cursor / Claude Code / Kiro / Similar Tools
 
 SIPA should write:
 
-'''text
+```text
 plans/
 tasks/
 AGENTS.md
 .cursor/rules/
 .claude/commands/
-'''
+```
 
 Generated `AGENTS.md` should include:
 
@@ -1850,7 +1849,7 @@ Generated `AGENTS.md` should include:
 - test expectations
 - source-of-truth order
 
-15.2 Grok Build
+### 15.2 Grok Build
 
 Official xAI docs verify that Grok Build supports plan mode, headless scripting, custom models, skills/plugins, MCP servers, and parallel subagents. ([x.ai]([historical-url]
 
@@ -1862,7 +1861,7 @@ SIPA integration pattern:
 4. Implementation proceeds only after approval.
 5. SIPA ingests diffs and test results.
 
-15.3 MCP/API Mode
+### 15.3 MCP/API Mode
 
 SIPA can expose:
 
@@ -1878,9 +1877,9 @@ All write or destructive operations require authorization.
 
 ---
 
-16. Metrics and Success Criteria
+## 16. Metrics and Success Criteria
 
-16.1 Retrieval Metrics
+### 16.1 Retrieval Metrics
 
 - Context precision
 - Context recall
@@ -1890,7 +1889,7 @@ All write or destructive operations require authorization.
 - Evidence sufficiency
 - Unsupported claim rate
 
-16.2 Artifact Metrics
+### 16.2 Artifact Metrics
 
 - Traceability score
 - Source-fidelity score
@@ -1901,7 +1900,7 @@ All write or destructive operations require authorization.
 - Security score
 - Human review time
 
-16.3 Downstream Metrics
+### 16.3 Downstream Metrics
 
 - Task completion rate
 - Rework rate
@@ -1911,7 +1910,7 @@ All write or destructive operations require authorization.
 - Average task context size
 - Time from spec change to updated tasks
 
-16.4 MVP Success Thresholds
+### 16.4 MVP Success Thresholds
 
 - Traceability ≥ 0.85 for MVP, ≥ 0.90 for production.
 - No high-severity critic findings on approved artifacts.
@@ -1921,7 +1920,7 @@ All write or destructive operations require authorization.
 
 ---
 
-17. Risks and Mitigations
+## 17. Risks and Mitigations
 
 | Risk | Mitigation |
 |---|---|
@@ -1940,7 +1939,7 @@ All write or destructive operations require authorization.
 
 ---
 
-18. Future Roadmap
+## 18. Future Roadmap
 
 1. Full GraphRAG impact analysis.
 2. Multimodal ingestion for UI mocks and architecture diagrams.
@@ -1955,7 +1954,7 @@ All write or destructive operations require authorization.
 
 ---
 
-19. References
+## 19. References
 
 - MAAD — requirements-to-architecture multi-agent design with Analyst, Modeler, Designer, Evaluator, RAG, hierarchical memory, and quality evaluation. ([arxiv.org]([historical-url]
 - AgentOrchestra / TEA Protocol — lifecycle-aware hierarchical multi-agent orchestration. ([arxiv.org]([historical-url]
@@ -2015,9 +2014,9 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 **Target Audience:** Builders of harnesses, multi-agent systems, coding agents, research agents (e.g., N1ch01as-style Architect with critic/self-refinement loops).  
 **Key Principle:** Controlled loops with explicit state, structured outputs, quality gates, and hierarchical delegation. Not uncontrolled chain reactions — managed orchestration with bubbling-up consolidation and deliberate synthesis.
 
-1. Core Principles (Refined from Research)
+## 1. Core Principles (Refined from Research)
 
-1.1 Foundational: ReAct Paradigm (Yao et al., ICLR 2023)
+### 1.1 Foundational: ReAct Paradigm (Yao et al., ICLR 2023)
 - **Definition**: Interleave **verbal reasoning traces (Thoughts)** with **actions** (tool calls, environment interactions, or delegation). Observations from actions ground and update reasoning.
 - **Why it works**:
   - Pure Chain-of-Thought (CoT): Static, prone to hallucinations and error propagation (no external grounding).
@@ -2033,7 +2032,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 
 **xAI Alignment**: Grok's server-side agentic tool calling implements a production ReAct-style loop internally. The model decides tools, executes server-side (web_search, x_search, code_execution, collections_search), iterates until it can produce the final answer. Client sees only final (or streamed) output + optional reasoning tokens.
 
-1.2 Production xAI Multi-Agent Orchestration (2026)
+### 1.2 Production xAI Multi-Agent Orchestration (2026)
 - **grok-4.20-multi-agent** (or equivalent): Launches configurable teams (4 agents for quick/focused; 16 for deep/comprehensive).
 - **How the loop works**:
   - Server-side **realtime collaboration**: Multiple specialized agents run in parallel.
@@ -2044,7 +2043,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 - **Strengths**: Deep multi-step research, structured outputs (tables, comparisons), realtime refinement, automatic tool use without client intervention in the loop.
 - **Plan-first elements**: Complementary patterns in xAI tools like Grok Build CLI use explicit plan generation first, then parallel sub-agent execution (e.g., up to 8 sub-agents in isolated Git worktrees).
 
-1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
+### 1.3 Hierarchical + Self-Evolving (AgentOrchestra / Surveys 2025-2026)
 - **Central Planner / Orchestrator / Supervisor** at top level.
 - Decomposes into sub-tasks → delegates to **specialized sub-agents** (Deep Researcher, Analyzer, Browser/Tool agents, Reporter, etc.).
 - Each sub-agent runs its **own loop** (ReAct-style or domain-optimized).
@@ -2060,7 +2059,7 @@ Refined Agent Loop: Hierarchical, ReAct-Inspired, Production-Grade Design
 
 **Overall Refined Model**: Start with ReAct core loop. Layer hierarchical delegation for complexity. Add explicit planning phase + reflection/critique gates + structured state/versioning for production reliability. xAI shows this can run server-side with strong orchestration primitives.
 
-1.4 Cognitive Architecture Enhancements from Ranked Human Thinking Models (v3 Addition)
+### 1.4 Cognitive Architecture Enhancements from Ranked Human Thinking Models (v3 Addition)
 
 To further strengthen the loop against the failure modes detailed in Section 1.5, v3 explicitly incorporates high-adoption-priority traditional human thinking models (ranked by adoption priority for agent loops in the companion `thinking_model.md` — full table of 40 models with phases, similarities, strengths, and scores). These are mapped as first-class mechanisms rather than afterthoughts, delivering **adaptive intelligence** (context-aware routing), **proactive robustness** (pre-action risk), **efficient cognition** (fast/slow paths), and **deeper organizational learning** (double-loop + structured reflection). Prioritized models (scores 9–10) receive the deepest integration; others enhance specific sub-components (verifier, ideation, harmonization).
 
@@ -2089,7 +2088,7 @@ To further strengthen the loop against the failure modes detailed in Section 1.5
 
 These additions are **production-aware**: all new steps are bounded, versioned, logged via tracer, and can be toggled or depth-limited per task. They transform the agent from a capable ReAct/hierarchical engine (v2) into a more cognitively complete system that thinks about its own thinking, anticipates failure, learns at multiple levels, and adapts its deliberation style to context — while fully preserving every v2 mechanism, code example, and mitigation.
 
-1.5 Known Problems, Failure Modes & Targeted Mitigations (Research-Backed)
+### 1.5 Known Problems, Failure Modes & Targeted Mitigations (Research-Backed)
 
 Recent systematic studies (especially the **MASFT taxonomy** from analysis of 150+ traces across popular multi-agent frameworks) identify that **most failures stem from design/spec issues (~40%+)**, coordination breakdowns, and weak verification/termination — **not raw model intelligence**. Single-agent ReAct loops suffer overlapping issues plus context bloat and repetitive behavior. Below is a synthesized taxonomy of the most common, well-documented problems, with **actionable mitigations** mapped directly to the phases in this document.
 
@@ -2166,7 +2165,7 @@ How Mitigations Integrate into the Loop Phases
 
 **Key Insight from Research**: Fixing **specification quality + verification layers + explicit termination controls** delivers the largest reliability gains. Adding more agents or raw model power without these often yields diminishing or negative returns.
 
-2. The Complete Agent Loop Process (Actionable)
+## 2. The Complete Agent Loop Process (Actionable)
 
 Phase 0: Initialization (Spec-Driven Setup)
 **Goal**: Establish clear contract before any loop iterations.
@@ -2186,7 +2185,7 @@ Phase 0: Initialization (Spec-Driven Setup)
 5. Decide architecture: Flat ReAct (simple) vs Hierarchical (complex research/coding) vs Hybrid. Also set initial `cognitive_profile` flags from Cynefin + task type (enable_fast_path, reflection_style, etc.).
 
 **Actionable Output Format** (example JSON or Markdown section):
-'''json
+```json
 {
   "task_id": "...",
   "objective": "...",
@@ -2196,7 +2195,7 @@ Phase 0: Initialization (Spec-Driven Setup)
   "initial_plan": ["Step 1: ...", "Step 2: ..."],
   "quality_gates": ["completeness > 90%", "no hallucinations", "structured output"]
 }
-'''
+```
 
 Phase 1: Core Iteration Loop (ReAct-Inspired, Controlled)
 While not terminated:
@@ -2244,7 +2243,7 @@ Use one circuit breaker per tool type or per sub-agent role. Integrate with the 
 
 **Code Example: Minimal Controlled ReAct Loop with Cycle Detection (Python)**
 
-'''python
+```python
 import hashlib
 from typing import Any, Dict, List
 from dataclasses import dataclass, field
@@ -2477,11 +2476,11 @@ def safe_invoke_sub_agent(payload: dict, max_retries: int = 2, circuit_breaker: 
                 }
             time.sleep(1)
     return {"status": "error", "error": "Sub-agent max retries exceeded", "circuit_state": cb.state}
-'''
+```
 
 **Code Example: Lightweight Verifier / Critic Agent (Prompt + Schema) — v3 Enhanced with Critic Modes + Paul-Elder Standards**
 
-'''python
+```python
 VERIFIER_PROMPT = """
 You are a strict, skeptical Verifier / Critic Agent operating in {critic_mode} mode.
 Given the original task_spec and the candidate_output, 
@@ -2517,11 +2516,11 @@ def verify_output(candidate: dict, task_spec: dict, llm, critic_mode: str = "sta
     result = llm.generate(prompt, output_schema=...)  # force JSON
     # Optional: if critic_mode == "ensemble": run red_team + paul_elder in parallel and aggregate
     return result
-'''
+```
 
 **Code Example: Simple Self-Evolution / Reflection Step (Trace → Edit → Validate)**
 
-'''python
+```python
 def self_evolve_component(component_name: str, trace: List[dict], llm, version_manager):
     """Minimal TextGrad / reflection-style evolution"""
     diagnosis = llm.generate(
@@ -2536,7 +2535,7 @@ def self_evolve_component(component_name: str, trace: List[dict], llm, version_m
             version_manager.register(new_version, parent=component_name)
             return new_version
     return None  # no change or rollback
-'''
+```
 
 **Termination Conditions** (checked every iteration or at gates):
 - Success criteria met + quality gate passed.
@@ -2620,7 +2619,7 @@ Phase 5: Termination & Output
   4. Persist full trace + versions for audit/replay/debug.
 - **Human-in-loop hooks**: At quality gate failures, high-stakes actions, or budget exhaustion.
 
-3. State, Memory & Infrastructure Recommendations
+## 3. State, Memory & Infrastructure Recommendations
 
 - **State Schema**: task_spec + current_plan/todo + history (thought/action/observation tuples) + memory (key-value or vector) + versions + tracer.
 - **Memory Management**: Hierarchical (local per sub-agent + global). Summarization on context pressure. Session-isolated for concurrency.
@@ -2638,7 +2637,7 @@ Phase 5: Termination & Output
   - Logging + observability (every thought/action/observation).
   - Sandboxed execution for tools/code.
 
-4. Decision Framework (When to Use What)
+## 4. Decision Framework (When to Use What)
 
 | Task Complexity       | Recommended Pattern                  | Key Features to Enable          | Example Use Case |
 |-----------------------|--------------------------------------|---------------------------------|------------------|
@@ -2648,7 +2647,7 @@ Phase 5: Termination & Output
 | Open-ended / creative | ReAct + Reflection + Self-evolution | Critic gates, versioned prompts| Iterative design refinement |
 | High-stakes / reliable| All above + strong Quality Gates    | Structured results, validation | Enterprise automation |
 
-5. Common Pitfalls & Mitigations (from Research)
+## 5. Common Pitfalls & Mitigations (from Research)
 
 **Primary reference: See the full MASFT-style taxonomy, failure modes, and phase-specific mitigations in Section 1.5 above.** The points below are retained for quick scanning and now include additional patterns from recent studies.
 
@@ -2659,9 +2658,9 @@ Phase 5: Termination & Output
 - **Brittle delegation**: Use explicit sub-task specs + success criteria; validate returned results.
 - **Lack of visibility**: Full tracing + optional streaming of reasoning.
 
-6. Quick-Start Pseudocode Skeleton (Python-like)
+## 6. Quick-Start Pseudocode Skeleton (Python-like)
 
-'''python
+```python
 def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
     state = initialize_state(task_instruction)  # spec, plan, todo, memory, tracer
     orchestrator = get_llm(role="orchestrator")
@@ -2695,11 +2694,11 @@ def agent_loop(task_instruction, tools, sub_agent_registry, max_steps=50):
             state = reflect_and_evolve(state)  # critique + version updates
     
     return handle_termination(state)
-'''
+```
 
 Sub-agent invoke follows the same pattern recursively (narrower scope).
 
-7. References & Sources
+## 7. References & Sources
 
 - **ReAct Foundational**: Yao et al. "ReAct: Synergizing Reasoning and Acting in Language Models" (arXiv:2210.03629, ICLR 2023).
 - **xAI Production**: xAI Developer Docs (Multi-Agent orchestration, server-side agentic tool calling, Grok Build CLI patterns) — realtime multi-agent research with leader synthesis; 4/16 agent teams.
@@ -2751,7 +2750,7 @@ Table of Contents
 
 ---
 
-1. System Overview
+## 1. System Overview
 
 The **VA-Agent-Swarm** is a hierarchical multi-agent system (MAS) designed to fully automate (or augment) professional video production — from initial creative brief through final delivery across all distribution channels. The system comprises **114 specialized agents** organized into 10 functional categories, supported by dedicated infrastructure agents, a shared critique bus, and a unified orchestration runtime.
 
@@ -2769,7 +2768,7 @@ Core Design Principles
 
 System Boundaries
 
-'''
+```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │  USER / CLIENT BRIEF                                                     │
 └───────────┬─────────────────────────────────────────────────────────────┘
@@ -2791,14 +2790,14 @@ System Boundaries
 │  LLM Providers: Grok-4.x, Gemini 2.5 Pro, GPT-4o, Claude 4             │
 │  Tool Access: Sora 2, Veo 3.1, Runway Gen-4, ElevenLabs, DaVinci, etc. │
 └─────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 > **Full architecture details:** [ui/architecture_communication.md](./ui/architecture_communication.md)
 
 
 ---
 
-2. Architecture Layers
+## 2. Architecture Layers
 
 The system is organized into **7 runtime layers** that every agent participates in:
 
@@ -2816,11 +2815,11 @@ The system is organized into **7 runtime layers** that every agent participates 
 
 ---
 
-3. Agent Categories & Specification Map
+## 3. Agent Categories & Specification Map
 
 The 114 agents are organized into 10 categories. Below, each category links to the master roster AND to any dedicated deep-specification documents that provide implementation-level detail.
 
-3.1 Above-the-Line Agents (1–5)
+### 3.1 Above-the-Line Agents (1–5)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2833,7 +2832,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 **Roster reference:** [agents.md](./agents.md) §1
 
 
-3.2 Camera & Lighting Agents (6–8)
+### 3.2 Camera & Lighting Agents (6–8)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2843,7 +2842,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 
 **Roster reference:** [agents.md](./agents.md) §2
 
-3.3 Editorial & Color Agents (9–18)
+### 3.3 Editorial & Color Agents (9–18)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2860,7 +2859,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 
 **Roster reference:** [agents.md](./agents.md) §3
 
-3.4 Sound & Music Agents (19–22)
+### 3.4 Sound & Music Agents (19–22)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2871,7 +2870,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 
 **Roster reference:** [agents.md](./agents.md) §4
 
-3.5 Performance & Choreography Agents (23–27)
+### 3.5 Performance & Choreography Agents (23–27)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2884,7 +2883,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 **Roster reference:** [agents.md](./agents.md) §5
 
 
-3.6 Distribution & Marketing Agents (28–31)
+### 3.6 Distribution & Marketing Agents (28–31)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2895,7 +2894,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 
 **Roster reference:** [agents.md](./agents.md) §6
 
-3.7 Education & Domain-Expert Agents (32–45)
+### 3.7 Education & Domain-Expert Agents (32–45)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2916,7 +2915,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 
 **Roster reference:** [agents.md](./agents.md) §7
 
-3.8 AI-Era Specialist Agents (46–52)
+### 3.8 AI-Era Specialist Agents (46–52)
 
 | # | Agent | Role | Deep Specification |
 |---|-------|------|--------------------|
@@ -2931,7 +2930,7 @@ The 114 agents are organized into 10 categories. Below, each category links to t
 **Roster reference:** [agents.md](./agents.md) §8
 
 
-3.9 Specialist Meta-Agents (53–80)
+### 3.9 Specialist Meta-Agents (53–80)
 
 These agents manage orchestration, quality, continuity, and system-level concerns:
 
@@ -2945,7 +2944,7 @@ These agents manage orchestration, quality, continuity, and system-level concern
 
 **Roster reference:** [agents.md](./agents.md) §9
 
-3.10 Workflow Support Agents (81–114)
+### 3.10 Workflow Support Agents (81–114)
 
 These agents provide production infrastructure services:
 
@@ -2959,7 +2958,7 @@ These agents provide production infrastructure services:
 
 ---
 
-4. Infrastructure & Support Agents
+## 4. Infrastructure & Support Agents
 
 These cross-cutting agents have their own **deep functional and technical specifications** because they serve the entire system:
 
@@ -2978,7 +2977,7 @@ These cross-cutting agents have their own **deep functional and technical specif
 
 ---
 
-5. Cross-Cutting Capabilities
+## 5. Cross-Cutting Capabilities
 
 These specifications define capabilities that are shared across multiple agents or apply system-wide:
 
@@ -2989,15 +2988,15 @@ These specifications define capabilities that are shared across multiple agents 
 | **Psychological Profiling** | 100 creator profiles with MBTI, motivations, fears, creative parameters | CastingAgent, TalentAgent, PersonalizationEngineerAgent, UGCCreatorAgent | [psychological_profile_agent_functional_specifications.md](./psychological_profile_agent_functional_specifications.md) |
 | **Psychological Recommendation** | Psychology-based preference prediction (Big Five, emotional state) | AudienceSimAgent, PerformanceMarketerAgent, PersonalizationEngineerAgent | [psychological_recommendation_agent_functional_specification.md](./psychological_recommendation_agent_functional_specification.md) |
 | **Complex Problem Solving** | WHAT/WHY/HOW/DO/REVIEW structured methodology | All diagnostic agents (FactCheckerAgent, SMEAgent, JudgeAgent, OptimizationAgent) | [complex_problem_solution_process_model.md](./complex_problem_solution_process_model.md) |
-| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](./common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
+| **Common Agent Structure** | Shared architectural pattern for all agents | All 114 agents | [common-agent-structure.svg](/docs/assets/common-agent-structure.svg) + [common-agent-structure.html](./common-agent-structure.html) |
 
 ---
 
-6. Workflow Integration
+## 6. Workflow Integration
 
-6.1 Production Pipeline (End-to-End)
+### 6.1 Production Pipeline (End-to-End)
 
-'''
+```
 USER BRIEF
     │
     ▼
@@ -3046,10 +3045,10 @@ USER BRIEF
 │ Outputs: Platform-specific packages, campaigns, analytics            │
 │ Spec: optimization_agent_functional_specification.md                 │
 └─────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
-6.2 Workflow Variants (by Video Type)
+### 6.2 Workflow Variants (by Video Type)
 
 Each video type follows a customized path through the agent DAG. Visual workflows are available as SVGs:
 
@@ -3066,7 +3065,7 @@ Each video type follows a customized path through the agent DAG. Visual workflow
 | Documentary | [workflows/I-documentary.svg](./workflows/I-documentary.svg) | JournalistAgent, ResearchAgent, FactCheckerAgent, EditorAgent |
 | Feature Film | [workflows/J-feature-film.svg](./workflows/J-feature-film.svg) | Full pipeline (all 114 agents) |
 
-6.3 Human Baseline Comparison
+### 6.3 Human Baseline Comparison
 
 The system is designed as a direct AI replacement/augmentation of the human production workflow:
 
@@ -3074,7 +3073,7 @@ The system is designed as a direct AI replacement/augmentation of the human prod
 
 ---
 
-7. Data Flow & Handoff Contracts
+## 7. Data Flow & Handoff Contracts
 
 Every agent communicates via a **Shared Artifact Handoff Contract** (machine-readable JSON manifest):
 
@@ -3092,11 +3091,11 @@ Every agent communicates via a **Shared Artifact Handoff Contract** (machine-rea
 
 > **Full contract spec:** [ai_agent_video_production_workflow.md](./ai_agent_video_production_workflow.md) §1.3
 
-7.1 Critique Bus Protocol
+### 7.1 Critique Bus Protocol
 
 All agents communicate critique via a structured JSON bus:
 
-'''json
+```json
 {
   "from_agent": "EditorAgent",
   "to_agent": "DirectorAgent",
@@ -3107,12 +3106,12 @@ All agents communicate critique via a structured JSON bus:
   "rubric_score": 0.72,
   "timestamp": "2026-05-27T10:30:00Z"
 }
-'''
+```
 
 
 ---
 
-8. UI & Communication Layer
+## 8. UI & Communication Layer
 
 The frontend provides human operators with visibility and control over the agent swarm:
 
@@ -3129,9 +3128,9 @@ The frontend provides human operators with visibility and control over the agent
 
 ---
 
-9. Technology Stack Reference
+## 9. Technology Stack Reference
 
-9.1 LLM Providers (for Agent Reasoning)
+### 9.1 LLM Providers (for Agent Reasoning)
 
 | Provider | Models | Primary Use |
 |----------|--------|------------|
@@ -3141,7 +3140,7 @@ The frontend provides human operators with visibility and control over the agent
 | Anthropic | Claude 4 | Safety, constitutional AI agents |
 | Open-source | Qwen2.5, Wan 2.6 | Cost optimization, local inference |
 
-9.2 Video Generation Models
+### 9.2 Video Generation Models
 
 > **Full reference (50 models ranked):** [video_generation_techology_should_learn_now.md](./video_generation_techology_should_learn_now.md)
 
@@ -3154,7 +3153,7 @@ The frontend provides human operators with visibility and control over the agent
 | 6 | Sora 2 (OpenAI) | Narrative/physics storytelling |
 | 8 | Runway Gen-4.5 | Professional creative control, VFX |
 
-9.3 Audio/Voice Tools
+### 9.3 Audio/Voice Tools
 
 | Tool | Purpose |
 |------|---------|
@@ -3163,7 +3162,7 @@ The frontend provides human operators with visibility and control over the agent
 | Udio/Suno | Music generation |
 | Dolby Atmos Renderer | Spatial audio mixing |
 
-9.4 Infrastructure
+### 9.4 Infrastructure
 
 | Component | Technology |
 |-----------|-----------|
@@ -3179,9 +3178,9 @@ The frontend provides human operators with visibility and control over the agent
 
 ---
 
-10. Reference Material Index
+## 10. Reference Material Index
 
-10.1 Deep Implementation Reference (68 Chapters)
+### 10.1 Deep Implementation Reference (68 Chapters)
 
 The `reference/how_to_build_a_video_agent_system/` directory contains 68 chapters of detailed implementation guidance:
 
@@ -3197,7 +3196,7 @@ The `reference/how_to_build_a_video_agent_system/` directory contains 68 chapter
 
 > **Location:** [reference/how_to_build_a_video_agent_system/](./reference/how_to_build_a_video_agent_system/)
 
-10.2 Complete Document Inventory
+### 10.2 Complete Document Inventory
 
 Functional Specifications (English)
 
@@ -3241,7 +3240,7 @@ Chinese (香港繁體) Translations
 
 All major documents have `_hk.md` counterparts providing Hong Kong Traditional Chinese translations. These follow the same naming pattern (e.g., `agents_hk.md`, `optimization_agent_functional_specification_hk.md`).
 
-10.3 Workflow Diagram Gallery — "Life's Quiet Redemption" (Worked Example)
+### 10.3 Workflow Diagram Gallery — "Life's Quiet Redemption" (Worked Example)
 
 A worked end-to-end example of the system applied to a 60-second cinematic short. The six diagrams below (in [`./workflows/`](./workflows/)) visualize how the 114-agent swarm, the gate ladder, and the 2026 engine/research upgrades come together. Full write-up: [lifes_quiet_redemption_agent_workflow.md](./lifes_quiet_redemption_agent_workflow.md) ([香港繁體](./lifes_quiet_redemption_agent_workflow_hk.md)).
 
@@ -3258,17 +3257,17 @@ A worked end-to-end example of the system applied to a 60-second cinematic short
   </tr>
 </table>
 
-> If a thumbnail does not render, click it to open the full SVG. Diagrams follow the same visual language as [common-agent-structure.svg](./common-agent-structure.svg).
+> If a thumbnail does not render, click it to open the full SVG. Diagrams follow the same visual language as [common-agent-structure.svg](/docs/assets/common-agent-structure.svg).
 
 ---
 
-11. Implementation Priority & Dependencies
+## 11. Implementation Priority & Dependencies
 
-11.1 Foundation Layer (Build First)
+### 11.1 Foundation Layer (Build First)
 
 These must exist before any production agent can function:
 
-'''
+```
 1. Agentic RAG System          ← Knowledge backbone for all agents
    └── agentic_rag_functional_specification.md
 
@@ -3284,13 +3283,13 @@ These must exist before any production agent can function:
 
 5. LLM Usage Dashboard          ← Cost monitoring from day one
    └── llm_usage_functional_specification.md
-'''
+```
 
-11.2 Intelligence Layer (Build Second)
+### 11.2 Intelligence Layer (Build Second)
 
 These provide reasoning capabilities that production agents consume:
 
-'''
+```
 6. Deep Intent Analysis (DIA)   ← Parses user briefs into structured intents
    └── intent_analysis_agent_functional_specification.md
 
@@ -3307,15 +3306,15 @@ These provide reasoning capabilities that production agents consume:
 
 10. Complex Problem Solving     ← Diagnostic reasoning framework
     └── complex_problem_solution_process_model.md
-'''
+```
 
-11.3 Production Layer (Build Third)
+### 11.3 Production Layer (Build Third)
 
 The 52 core production agents (1–52) from the master roster, activated per workflow type.
 
-11.4 Enhancement Layer (Build Fourth)
+### 11.4 Enhancement Layer (Build Fourth)
 
-'''
+```
 11. Psychological Profiling     ← Personalizes creator/audience modeling
     └── psychological_profile_agent_functional_specifications.md
 
@@ -3324,11 +3323,11 @@ The 52 core production agents (1–52) from the master roster, activated per wor
 
 13. Podcast Agent               ← Audio-first production variant
     └── podcast_agent_functional_specifcation.md
-'''
+```
 
-11.5 Dependency Graph
+### 11.5 Dependency Graph
 
-'''
+```
                     ┌─────────────────┐
                     │  Coding Agent   │ ← Builds everything
                     └────────┬────────┘
@@ -3355,11 +3354,11 @@ The 52 core production agents (1–52) from the master roster, activated per wor
     │  + Goal Framework             │
     │  + Psychological Profiling    │
     └───────────────────────────────┘
-'''
+```
 
 ---
 
-12. How to Use This Document
+## 12. How to Use This Document
 
 1. **Starting a new implementation?** → Begin with §11 (Priority & Dependencies), then follow the Foundation → Intelligence → Production → Enhancement sequence. For a concrete, step-by-step build (milestones M0–M12, acceptance gates, and a 100-point hardening checklist) targeting the **Claude Code** build agent, follow [system_build_plan.md](./system_build_plan.md).
 
@@ -3395,7 +3394,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
 | 57 | **GateKeeperAgent** | Manages phase transitions; verifies L1/L2/L3 success criteria; signs C2PA provenance | Stage-gate methodology; PGA Producers Mark; QMS audit patterns | Zero leaked defects past gate; sign-off SLA hit rate ≥99% | Lower escaped-defect rate than human QA lead | ComplianceAgent, AIQAConsistencyAgent | OrchestratorAgent (premature advance) |
 | 58 | **MemoryAgent** | Episodic + long-term project memory; retrieval for any agent | Reflexion (Shinn 2023); MemGPT; vector-DB best practices | Retrieval precision@5 ≥0.9 on project Q&A; freshness SLA | Higher recall than producer's project bible at scale | All agents (correction events) | All agents (stale facts) |
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents from §2.1–2.8)
                   ▲                  │                                       │
                   │                  ▼                                       ▼
@@ -3405,7 +3404,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
              [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
              [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelligenceAgent · CompetitorIntelligenceAgent · CitationAgent · InterviewSynthesisAgent · BenchmarkResearchAgent
              [Optimization meta:] PromptOptimizerAgent · CostOptimizerAgent · LatencyOptimizerAgent · RetentionOptimizerAgent · ROASOptimizerAgent · AccessibilityOptimizerAgent · EvaluationHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 
 
@@ -3479,7 +3478,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 From `corpus/study/system_build_plan.md` Copy: `sources/excerpts/system_build_plan.md`.
 
 
-'''text
+```text
 M0 Bootstrap ──► M1 RAG ──► M2 Orchestration ──► M3 LLM Gateway+Router+CostDash
                                   │                       │
                                   ▼                       ▼
@@ -3500,7 +3499,7 @@ M0 Bootstrap ──► M1 RAG ──► M2 Orchestration ──► M3 LLM Gatewa
                                   M11 Enhancement (psych, podcast, personalization)
                                               ▼
                                   M12 Hardening, scale, security, launch (the §14 100-point pass)
-'''
+```
 
 **Build:**
 - `packages/eventbus`: typed Redis Streams pub/sub; topic contract (§5.7); replayable; at-least-once + idempotency keys.
@@ -3525,7 +3524,7 @@ M0 Bootstrap ──► M1 RAG ──► M2 Orchestration ──► M3 LLM Gatewa
 
 **Tests:** Judge inter-rater agreement κ≥0.8 vs a fixture human-panel; GateKeeper blocks a seeded defect; SafetyRedTeam attack-success ≤1% on the seeded attack set; EvaluationHarness detects an injected regression <1h; AudienceSim L3 win-rate computed on a golden pair.
 
-10.4 The non-negotiable release predicate
+### 10.4 The non-negotiable release predicate
 An artifact is releasable **iff**: `L1==pass AND L2>=85 AND L3>=threshold AND all(Q1..Q6) AND compliance==clear AND c2pa_signed AND budget_ok`. Encode this as a single `qc.release_ok(artifact)` function; the GateKeeperAgent calls only this.
 
 Theme 4 — Quality Mesh (31–40)
@@ -3580,7 +3579,7 @@ From `corpus/study/agents.md` Copy: `sources/excerpts/agents.md`.
 From `corpus/study/ui/architecture_communication.md` Copy: `sources/excerpts/architecture_communication.md`.
 
 
-'''text
+```text
 USER sees Gate Approval Dialog
     │
     │  Reviews criteria checklist + artifacts
@@ -3610,14 +3609,14 @@ ORCHESTRATION ENGINE (LangGraph)
 NEXT PHASE AGENTS activate
     │
     │  (cycle continues)
-'''
+```
 
 
 
 From `corpus/study/ui/backend_agent_management.md` Copy: `sources/excerpts/backend_agent_management.md`.
 
 
-'''text
+```text
 USER clicks [▶ LAUNCH]
          │
          ▼
@@ -3683,7 +3682,7 @@ USER clicks [▶ LAUNCH]
 │  └─────────────────────────────────────────────────────┘    │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -3726,7 +3725,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 | S23 | Team / Permissions | Human-in-the-loop configuration | Admin |
 | S24 | Series Bible Editor | Long-running episodic memory | ShowrunnerAgent, WorldBuildingAgent |
 
-'''text
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │  PRODUCTION: "Luna" (Type E: AI Short Film)     Phase: Production  ⏱ 12m    │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
@@ -3780,7 +3779,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │  │ Input: Scene 2 script │ Output: shot_intent_04.json │ Critiques: 2   │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 **DAG Interactions:**
 - Click node → opens Agent Inspector in Detail Drawer
@@ -3790,7 +3789,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 - Right-click node → context menu: Retry, Skip, Inspect, View Critiques
 - Drag to pan, scroll to zoom, Ctrl+click to multi-select
 
-'''text
+```text
 ┌──────────────────────────────────────────────────────────┐
 │  GATE APPROVAL — Phase: Pre-Production → Production       │
 ├──────────────────────────────────────────────────────────┤
@@ -3820,7 +3819,7 @@ From `corpus/study/ui/ui_design.md` Copy: `sources/excerpts/ui_design.md`.
 │                                                          │
 │  C2PA: Signing as [user@org]  ☑ Attach provenance       │
 └──────────────────────────────────────────────────────────┘
-'''
+```
 
 Step 1: ARRIVE AT DASHBOARD
    │
@@ -3957,5 +3956,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.gatekeeper · v1 · 2026-07-13 -->
 
-```
 

@@ -138,7 +138,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 SoundDesignAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -158,7 +157,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-4. Sound & Music Agents
+## 4. Sound & Music Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -204,19 +203,19 @@ ReAct (search SFX lib → validate sync → mix)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -240,7 +239,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -253,11 +252,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -267,13 +266,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -346,7 +345,7 @@ The core of the entire workflow lies in balancing time management, content creat
 
  
 
-1. Preparation Phase: Foundation for Program Success
+## 1. Preparation Phase: Foundation for Program Success
 
 The preparation phase is the most critical part of the entire radio production process, typically starting one to two days before the program airs. The quality of this phase directly determines the program's success, as thorough preparation not only ensures the richness and accuracy of the content but also allows the host to remain calm and professional when facing unexpected situations.
 
@@ -362,7 +361,7 @@ Preparation for audience interaction is equally important. Modern radio programs
 
  
 
-2. Execution Phase: Perfect Integration of Creativity and Technology
+## 2. Execution Phase: Perfect Integration of Creativity and Technology
 
 The execution phase is the climax of the entire broadcast production process and the moment that most tests the host's comprehensive abilities. In this stage, all preparatory work is transformed into actual program content, and the host must perfectly blend pre-planned content with real-time events within limited time, creating a broadcast experience that is both in-depth and engaging.
 
@@ -382,7 +381,7 @@ Crisis management ability is a core skill that every broadcast host must possess
 
  
 
-3. Ending Phase: The Art of Perfect Closure
+## 3. Ending Phase: The Art of Perfect Closure
 
 Although the ending phase is relatively short in duration, its importance cannot be underestimated. A brilliant conclusion not only draws a perfect close to the entire program but also leaves a lasting impression in the listeners' minds, prompting them to look forward to the next episode. The work in this phase includes not only the on-site conclusion of the program but also subsequent production and file management tasks.
 
@@ -400,7 +399,7 @@ The post-production phase also involves considerations for multi-platform distri
 
  
 
-4. Follow-up Phase: Continuous Improvement Cycle
+## 4. Follow-up Phase: Continuous Improvement Cycle
 
 The follow-up phase is the most easily overlooked link in the entire broadcast production process, yet it is the most critical for long-term success. The work in this phase not only determines the final quality of the current program but also lays the foundation for the improvement and development of future programs. Excellent broadcast professionals understand that every program is an opportunity for learning and growth, and systematic follow-up work is a necessary condition for achieving this growth.
 
@@ -426,7 +425,7 @@ The improvement mechanisms in the modern broadcast industry typically adopt the 
 
  
 
-1. Professional Growth at the Individual Level
+## 1. Professional Growth at the Individual Level
 
 Improvements at the individual level form the foundation of the entire improvement system, as the quality of a radio program ultimately references the host's personal abilities and performance. This improvement not only includes enhancing technical skills but also involves refining knowledge structures, optimizing thinking patterns, and building a personal brand.
 
@@ -442,7 +441,7 @@ Health management holds special importance for radio hosts. The vocal cords are 
 
  
 
-2. Collaborative Development at the Team and Organizational Levels
+## 2. Collaborative Development at the Team and Organizational Levels
 
 Improvement mechanisms at the team level recognize that broadcast programs are the result of collective creation, requiring close coordination among multiple professional roles. This improvement not only focuses on enhancing individual capabilities but also emphasizes optimizing team collaboration efficiency, perfecting communication mechanisms, and stimulating collective creativity. Successful broadcast teams often have clear role divisions, smooth communication channels, and shared quality standards.
 
@@ -464,7 +463,7 @@ Mentorship systems play an important role in talent development. Senior broadcas
 
  
 
-3. Strategic Thinking for Systemic Improvements
+## 3. Strategic Thinking for Systemic Improvements
 
 The systemic improvement mechanism goes beyond localized optimizations at the individual and team levels, instead considering and implementing improvement strategies from the perspective of the entire organization and industry. This macro perspective recognizes that the success of the broadcasting industry does not depend solely on the performance of individual programs or hosts, but requires the establishment of a comprehensive institutional system, standardized processes, and long-term development strategies.
 
@@ -528,7 +527,7 @@ The generation of program outlines demonstrates the AI's creative thinking abili
 
  
 
-2. Script and Content Generation Agent: AI Master of Creative Writing (Script and Content Generation Agent - SCG)
+## 2. Script and Content Generation Agent: AI Master of Creative Writing (Script and Content Generation Agent - SCG)
 
 The Script and Content Generation Agent (Script and Content Generation Agent - SCG) represents the latest achievement of AI in the field of creative writing. This agent not only generates fluent and accurate text but also infuses emotion, humor, and personality, creating truly engaging broadcast content.
 
@@ -542,7 +541,7 @@ Designing interview questions requires deep logical thinking and psychological i
 
  
 
-3. Rehearsal and Simulation Agent: The Perfectionist Quality Guardian (Rehearsal and Simulation Agent - RSA)
+## 3. Rehearsal and Simulation Agent: The Perfectionist Quality Guardian (Rehearsal and Simulation Agent - RSA)
 
 The Rehearsal and Simulation Agent (Rehearsal and Simulation Agent - RSA) is a key component of system quality assurance. It ensures that every program meets the highest quality standards through multiple simulations and tests in a virtual environment. This agent embodies AI's advantages in Quality Control (Quality Control - QC) and Risk Management (Risk Management).
 
@@ -556,7 +555,7 @@ The iterative optimization mechanism allows the agent to learn and improve from 
 
  
 
-4. Host Execution Agent: The Art of Virtual Host Performance (Host Execution Agent - HEA)
+## 4. Host Execution Agent: The Art of Virtual Host Performance (Host Execution Agent - HEA)
 
 The Host Execution Agent (Host Execution Agent - HEA) is the part of the entire system that directly faces the audience. It needs to transform text scripts into vivid voice performances, creating a realistic and engaging hosting experience. This agent integrates the most advanced speech synthesis technology (Text-to-Speech - TTS) and affective computing capabilities (Affective Computing).
 
@@ -570,7 +569,7 @@ Multi-style adaptability enables the same agent to handle different types of pro
 
  
 
-5. Listener Interaction Agent: Intelligent Community Management Expert (Listener Interaction Agent - LIA)
+## 5. Listener Interaction Agent: Intelligent Community Management Expert (Listener Interaction Agent - LIA)
 
 The Listener Interaction Agent (LIA) represents the latest achievements of AI in social intelligence and real-time communication. This agent not only handles a large volume of audience inputs but also understands the emotions, intentions, and needs within them, providing personalized and meaningful responses. In the modern media environment, audience engagement and interaction have become key factors in a program's success, making the importance of this agent self-evident.
 
@@ -586,7 +585,7 @@ Personalized response generation is an advanced feature of this agent. It can ge
 
  
 
-6. Post-Production and Analytics Agent: Intelligent Analyst for Data Insights (Post-Production and Analytics Agent - PAA)
+## 6. Post-Production and Analytics Agent: Intelligent Analyst for Data Insights (Post-Production and Analytics Agent - PAA)
 
 The Post-Production and Analytics Agent (PAA) is the data center and intelligent analysis engine of the entire system. It not only handles the technical post-production work for the program but also takes on the important tasks of data collection, analysis, and insight generation. The results of this agent's work provide a scientific basis for the continuous optimization and strategic decision-making of the entire system.
 
@@ -602,7 +601,7 @@ Report generation and visualization functions enable complex data analysis resul
 
  
 
-7. Improvement and Optimization Agent: Continuous Learning Intelligent Coach (Improvement and Optimization Agent - IOA)
+## 7. Improvement and Optimization Agent: Continuous Learning Intelligent Coach (Improvement and Optimization Agent - IOA)
 
 The Improvement and Optimization Agent (IOA) is the self-evolution engine of the entire AI system, embodying the core principles of machine learning and artificial intelligence: learning from experience and continuously improving. This agent not only analyzes the system's performance but also proactively identifies improvement opportunities and implements optimization strategies.
 
@@ -638,7 +637,7 @@ The new workflow is fully automated with agentic characteristics, where agents c
 
  
 
-1. Preparation Phase (Automated Planning and Content Creation)
+## 1. Preparation Phase (Automated Planning and Content Creation)
 **Trigger**: Scheduled or administrator-specified topic
 
 **Agent Workflow**:
@@ -652,7 +651,7 @@ The new workflow is fully automated with agentic characteristics, where agents c
 
  
 
-2. Execution Phase (Live or Pre-recorded Broadcasting)
+## 2. Execution Phase (Live or Pre-recorded Broadcasting)
 **Trigger**: Broadcast time arrives
 
 **Agent Workflow**:
@@ -667,7 +666,7 @@ The new workflow is fully automated with agentic characteristics, where agents c
 
  
 
-3. Ending Phase (Wrap-up and Archiving)
+## 3. Ending Phase (Wrap-up and Archiving)
 **Trigger**: Host agent issues program end signal
 
 **Agent Workflow**:
@@ -680,7 +679,7 @@ The new workflow is fully automated with agentic characteristics, where agents c
 
  
 
-4. Follow-up and Improvement Phase (Data-Driven Optimization)
+## 4. Follow-up and Improvement Phase (Data-Driven Optimization)
 **Trigger**: Immediately after broadcast or at fixed intervals
 
 **Agent Workflow**:
@@ -767,7 +766,7 @@ Mainstream AI Agent Open Source Framework Comparison
 
  
 
-1. LangChain and LangGraph
+## 1. LangChain and LangGraph
 **Features**:
 - The most mature AI agent ecosystem, with a rich tool chain
 - LangGraph provides graph-based state management, suitable for complex workflows
@@ -781,7 +780,7 @@ Mainstream AI Agent Open Source Framework Comparison
 - Comprehensive error handling and retry mechanism
 
 **Implementation Example**:
-'''python
+```python
 from langchain.agents import AgentExecutor
 from langchain.tools import Tool
 from langgraph import StateGraph
@@ -795,11 +794,11 @@ Script generation node
 def script_node(state):
     # Generate script based on research data
     return {"script": llm.generate_script(state["research_data"])}
-'''
+```
 
  
 
-2. CrewAI (CrewAI Framework)
+## 2. CrewAI (CrewAI Framework)
 **Features**:
 - Framework designed for multi-agent collaboration (Multi-Agent Collaboration Framework)
 - Role-oriented agent design (Role-oriented Agent Design), with each agent having clear responsibilities
@@ -812,7 +811,7 @@ def script_node(state):
 - Supports knowledge sharing and collaboration between agents (Knowledge Sharing and Collaboration)
 
 **Implementation Example**:
-'''python
+```python
 from crewai import Agent, Task, Crew
 
 Define research agent
@@ -828,11 +827,11 @@ scriptwriter = Agent(
     goal='創作吸引人的廣播內容',
     backstory='資深廣播編劇，了解聽眾心理'
 )
-'''
+```
 
  
 
-3. Microsoft AutoGen (now integrated into Agent Framework)
+## 3. Microsoft AutoGen (now integrated into Agent Framework)
 **Features**:
 - Conversational multi-agent system developed by Microsoft
 - Supports complex conversations and negotiations between agents
@@ -846,7 +845,7 @@ scriptwriter = Agent(
 
  
 
-4. Semantic Kernel
+## 4. Semantic Kernel
 **Features**:
 - Microsoft's enterprise-grade AI orchestration framework
 - Emphasizes plugin architecture and skill composition
@@ -878,7 +877,7 @@ Audio Processing Frameworks and Tools
 
  
 
-1. Speech-to-Text (STT) Solutions
+## 1. Speech-to-Text (STT) Solutions
 **OpenAI Whisper**:
 - Open-source, high-accuracy speech recognition model
 - Supports multiple languages and dialects
@@ -890,7 +889,7 @@ Audio Processing Frameworks and Tools
 - Supports speech sentiment analysis
 
 **Implementation Integration**:
-'''python
+```python
 import whisper
 from deepgram import Deepgram
 
@@ -903,11 +902,11 @@ dg_client = Deepgram(api_key)
 response = dg_client.transcription.sync_prerecorded(
     source, {"language": "zh-TW", "punctuate": True}
 )
-'''
+```
 
  
 
-2. Text-to-Speech (TTS) Solutions
+## 2. Text-to-Speech (TTS) Solutions
 **ElevenLabs**:
 - High-quality AI voice synthesis
 - Supports voice cloning and emotional expression
@@ -924,7 +923,7 @@ response = dg_client.transcription.sync_prerecorded(
 - Integrates with other Azure services
 
 **Implementation Integration**:
-'''python
+```python
 from elevenlabs import generate, set_api_key
 import azure.cognitiveservices.speech as speechsdk
 
@@ -940,7 +939,7 @@ Azure TTS
 speech_config = speechsdk.SpeechConfig(subscription="key", region="region")
 synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
 result = synthesizer.speak_text_async("歡迎收聽今天的節目").get()
-'''
+```
 
  
 
@@ -948,7 +947,7 @@ Complete System Architecture Implementation Recommendations
 
  
 
-1. Technology Stack Selection
+## 1. Technology Stack Selection
 **Core Framework**: LangGraph + CrewAI Hybrid Architecture
 - LangGraph handles Complex State Management
 - CrewAI manages Agent Role and Collaboration Management
@@ -970,8 +969,8 @@ Complete System Architecture Implementation Recommendations
 
  
 
-2. System Architecture Diagram
-'''
+## 2. System Architecture Diagram
+```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Research Agent│───▶│   Script Agent  │───▶│   Rehearsal Agent│
 │  (LangChain)    │    │  (CrewAI)       │    │  (LangGraph)    │
@@ -989,11 +988,11 @@ Complete System Architecture Implementation Recommendations
 │   Agent         │    │  (Analytics)    │    │ (ML Optimizer)  │
 │  (Audio Edit)   │    └─────────────────┘    └─────────────────┘
 └─────────────────┘
-'''
+```
 
  
 
-3. Development Phase Recommendations
+## 3. Development Phase Recommendations
 **Phase 1: Basic Agent Development**
 - Implement single agent functionality (research, scripting, TTS)
 - Establish basic data flow
@@ -1020,14 +1019,14 @@ Open Source Project Reference
 
  
 
-1. Complete Solution
+## 1. Complete Solution
 **podcast-ai-Host** (hypothetical project):
-'''bash
+```bash
 git clone [historical-url]
 cd podcast-ai-host
 pip install -r requirements.txt
 python setup.py install
-'''
+```
 
 **Core Components**:
 - `agents/`: Various AI agent implementations
@@ -1038,7 +1037,7 @@ python setup.py install
 
  
 
-2. Related Open-Source Projects
+## 2. Related Open-Source Projects
 **Rhasspy**: Open-source voice assistant platform
 - Complete STT/TTS pipeline
 - Supports offline operation
@@ -1060,7 +1059,7 @@ Implementation Best Practices
 
  
 
-1. Performance Optimization
+## 1. Performance Optimization
 **Parallel Processing**:
 - Use asyncio to handle concurrent tasks
 - GPU acceleration for audio processing
@@ -1073,7 +1072,7 @@ Implementation Best Practices
 
  
 
-2. Reliability Assurance
+## 2. Reliability Assurance
 **Error Handling**:
 - Multi-level error recovery
 - Graceful degradation mechanism
@@ -1086,7 +1085,7 @@ Implementation Best Practices
 
  
 
-3. Scalability Design
+## 3. Scalability Design
 **Microservices Architecture**:
 - Agent service-oriented deployment
 - API gateway management
@@ -1106,14 +1105,14 @@ Real-Time Voice Processing Technology
 
  
 
-1. Low-Latency Audio Pipeline
+## 1. Low-Latency Audio Pipeline
 **WebRTC Integration**:
 - Real-time audio streaming processing
 - Automatic echo cancellation and noise suppression
 - Support for multi-party audio conferencing
 
 **Audio Buffer Optimization**:
-'''python
+```python
 import pyaudio
 import numpy as np
 from collections import deque
@@ -1133,11 +1132,11 @@ class LowLatencyAudioProcessor:
     def noise_reduction(self, audio):
         # 使用 spectral subtraction 降噪
         return np.clip(audio * 0.8, -1.0, 1.0)
-'''
+```
 
  
 
-2. Intelligent Audio Analysis
+## 2. Intelligent Audio Analysis
 **Emotion Recognition**:
 - Real-time speech emotion analysis
 - Audience engagement assessment
@@ -1154,9 +1153,9 @@ Multimodal Content Generation
 
  
 
-1. Visual Content Integration
+## 1. Visual Content Integration
 **Automatic Image Generation**:
-'''python
+```python
 from diffusers import StableDiffusionPipeline
 import torch
 
@@ -1171,7 +1170,7 @@ class VisualContentAgent:
         prompt = f"廣播節目封面，主題：{episode_topic}，專業設計，高品質"
         image = self.pipe(prompt).images[0]
         return image
-'''
+```
 
 **Dynamic Visualization**:
 - Real-time generation of program-related images
@@ -1180,7 +1179,7 @@ class VisualContentAgent:
 
  
 
-2. Cross-Platform Content Adaptation
+## 2. Cross-Platform Content Adaptation
 **Multi-Format Output**:
 - Audio Podcast
 - Video Live Stream
@@ -1193,9 +1192,9 @@ Advanced AI Agent Capabilities
 
  
 
-1. Learning Agent
+## 1. Learning Agent
 **Reinforcement Learning Integration**:
-'''python
+```python
 import gym
 from stable_baselines3 import PPO
 
@@ -1212,7 +1211,7 @@ class AdaptiveHostAgent:
     def calculate_reward(self, feedback):
         # 將聽眾反饋轉換為強化學習獎勵
         return (feedback - 3.0) / 2.0  # 標準化到 [-1, 1]
-'''
+```
 
 **Personalized Content Recommendation**:
 - Content recommendation based on listener history
@@ -1221,14 +1220,14 @@ class AdaptiveHostAgent:
 
  
 
-2. Predictive Analytics
+## 2. Predictive Analytics
 **Trend Prediction**:
 - Social media trend analysis
 - News event impact prediction
 - Audience behavior pattern recognition
 
 **Content Effect Prediction**:
-'''python
+```python
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
@@ -1245,7 +1244,7 @@ class ContentEffectPredictor:
             'host_energy': content_features['energy_level']
         }])
         return self.model.predict(features)[0]
-'''
+```
 
  
 
@@ -1253,9 +1252,9 @@ Enterprise-Grade Deployment Architecture
 
  
 
-1. Cloud Native Architecture
+## 1. Cloud Native Architecture
 **Kubernetes Deployment Configuration**:
-'''yaml
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1286,7 +1285,7 @@ spec:
             secretKeyRef:
               name: api-secrets
               key: openai-key
-'''
+```
 
 **Service Mesh Integration**:
 - Istio service governance
@@ -1295,9 +1294,9 @@ spec:
 
  
 
-2. Data Pipeline Architecture
+## 2. Data Pipeline Architecture
 **Apache Kafka Integration**:
-'''python
+```python
 from kafka import KafkaProducer, KafkaConsumer
 import json
 
@@ -1315,7 +1314,7 @@ class AudioStreamProcessor:
             'metadata': {'sample_rate': 16000}
         }
         self.producer.send('audio-stream', message)
-'''
+```
 
 **Real-time Data Processing**:
 - Apache Spark Streaming
@@ -1328,9 +1327,9 @@ Security and Compliance
 
  
 
-1. Content Safety
+## 1. Content Safety
 **Automatic Content Moderation**:
-'''python
+```python
 from transformers import pipeline
 
 class ContentModerator:
@@ -1347,7 +1346,7 @@ class ContentModerator:
         if toxicity_score > 0.7:
             return False, "內容可能包含不當言論"
         return True, "內容安全"
-'''
+```
 
 **Privacy Protection**:
 - End-to-end encryption
@@ -1356,7 +1355,7 @@ class ContentModerator:
 
  
 
-2. Intellectual Property Rights Protection
+## 2. Intellectual Property Rights Protection
 **Music Copyright Detection**:
 - Automatic music recognition
 - Copyright clearance confirmation
@@ -1373,9 +1372,9 @@ Performance Monitoring and Optimization
 
  
 
-1. Real-time Monitoring System
+## 1. Real-time Monitoring System
 **Prometheus + Grafana Integration**:
-'''python
+```python
 from prometheus_client import Counter, Histogram, start_http_server
 import time
 
@@ -1391,7 +1390,7 @@ class MonitoringAgent:
     def process_with_monitoring(self, func, *args, **kwargs):
         REQUEST_COUNT.inc()
         return func(*args, **kwargs)
-'''
+```
 
 **Automated Alerts**:
 - Anomaly detection algorithm
@@ -1400,14 +1399,14 @@ class MonitoringAgent:
 
  
 
-2. Performance Optimization Strategies
+## 2. Performance Optimization Strategies
 **Model Optimization**:
 - Quantization and pruning techniques
 - Model distillation
 - Edge computing deployment
 
 **Caching Strategies**:
-'''python
+```python
 import redis
 from functools import wraps
 
@@ -1428,7 +1427,7 @@ def cache_result(expiration=3600):
             return result
         return wrapper
     return decorator
-'''
+```
 
  
 
@@ -1436,7 +1435,7 @@ Future Development Trends
 
  
 
-1. Emerging Technology Integration
+## 1. Emerging Technology Integration
 - Complex optimization problem solving
 - Machine learning acceleration
 
@@ -1446,7 +1445,7 @@ Future Development Trends
 
  
 
-2. Industry Ecosystem Development
+## 2. Industry Ecosystem Development
 **Standardized Protocols**:
 - Cross-platform interoperability
 - Open API standards
@@ -1459,7 +1458,7 @@ Future Development Trends
 
  
 
-3. Social Impact and Ethical Considerations
+## 3. Social Impact and Ethical Considerations
 **AI Ethics Framework**:
 - Transparency and explainability
 - Fairness and unbiasedness
@@ -1490,7 +1489,7 @@ From `corpus/study/SYSTEM_REFERENCE.md` Copy: `sources/excerpts/SYSTEM_REFERENCE
 | 21 | VoiceOverAgent | Narration, character VO | [podcast_agent_functional_specifcation.md](./podcast_agent_functional_specifcation.md) (shared patterns) |
 | 22 | SoundMixerAgent | Final mix; 5.1/Atmos deliverables | — |
 
-'''
+```
 USER BRIEF
     │
     ▼
@@ -1539,7 +1538,7 @@ USER BRIEF
 │ Outputs: Platform-specific packages, campaigns, analytics            │
 │ Spec: optimization_agent_functional_specification.md                 │
 └─────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 
 
@@ -1717,7 +1716,7 @@ Step 8: POST-RELEASE (optional)
    ├── RetentionOptimizerAgent / ROASOptimizerAgent analyze
    ├── Analytics Panel shows results
    └── Learnings feed back into MemoryAgent for future productions
-'''
+```
 
 
 
@@ -1782,5 +1781,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.sounddesign · v1 · 2026-07-13 -->
 
-```
 

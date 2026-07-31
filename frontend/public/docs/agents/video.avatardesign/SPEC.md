@@ -135,7 +135,6 @@ Authoritative fail-closed host configuration:
 
 ### VA Domain Pack specification body (historical and non-binding)
 
-```text
 AvatarDesignAgent
 
 > **Self-contained agent definition** for host `upstream-generic-pack`. Body text is embedded from in-pack corpus and upstream-va-design when available. Do not require external repos to understand this agent.
@@ -155,7 +154,7 @@ Category roster section (full, from agents.md)
 _The following is the complete category section from the master roster (includes peers in the same craft category)._
 
 
-8. AI-Era Specialist Agents
+## 8. AI-Era Specialist Agents
 
 | # | Agent | Responsibility | Knowledge Distillation Source | Self-Quality Criteria | Surpass-Human Signal | Accepts Critique From | Comments On | Tool Access | Architecture Pattern |
 |---|---|---|---|---|---|---|---|---|---|
@@ -204,19 +203,19 @@ Constitutional AI (consent + identity constitution)
 
 Common structure of an AI agent (full §11 from agents.md)
 
-11. Common Structure of an AI Agent
+## 11. Common Structure of an AI Agent
 
 Every agent — regardless of category — implements this skeleton. Derived from the source document's architecture patterns (§1), critique protocol (§6), and universal success-criteria framework (§5), enriched with current (2026) tooling research.
 
-11.1 Architecture Diagram
+### 11.1 Architecture Diagram
 
 The diagram below presents the common agent as a professional operating architecture rather than a simple component sketch. It shows how **orchestration**, the **input contract**, **knowledge and tool surfaces**, the internal **plan → act → self-review** loop, **traceability and provenance controls**, the **3-layer quality gate** (Spec → Rubric → Preference), **release packaging**, **peer critique**, **human escalation**, and **continuous improvement** work together as one governed system.
 
-![Professional common AI agent architecture diagram](./common-agent-structure.svg)
+![Professional common AI agent architecture diagram](/docs/assets/common-agent-structure.svg)
 
-> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](./common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
+> **Tip:** view the diagram fullscreen on GitHub by clicking it, or download [`common-agent-structure.svg`](/docs/assets/common-agent-structure.svg) directly. The SVG is designed as a presentation-grade reference for architecture reviews and implementation planning.
 
-11.2 Component Reference Table
+### 11.2 Component Reference Table
 
 | # | Component | Purpose | Mechanism / Implementation Notes |
 |---|---|---|---|
@@ -240,7 +239,7 @@ The diagram below presents the common agent as a professional operating architec
 
 CritiqueMessage Schema (Universal)
 
-'''json
+```json
 {
   "critique_id": "uuid",
   "from_agent": "EditorAgent",
@@ -253,11 +252,11 @@ CritiqueMessage Schema (Universal)
   "rubric_reference": "Murch Rule of Six §3",
   "must_resolve_before": "phase_4_review"
 }
-'''
+```
 
 Composition Diagram
 
-'''text
+```text
 [Brief] ──► PlannerAgent ──► OrchestratorAgent ──► RouterAgent ──► (52 craft agents §1–§8)
                  ▲                  │                                       │
                  │                  ▼                                       ▼
@@ -267,13 +266,13 @@ Composition Diagram
             [Creative meta:] IdeationAgent · NarrativeArcAgent · StyleTransferAgent · MoodBoardAgent · NoveltyAgent · EmotionalArcAgent
             [Research meta:] WebResearchAgent · ArchiveResearchAgent · TrendIntelAgent · CompetitorIntelAgent · CitationAgent · InterviewSynthAgent · BenchmarkResearchAgent
             [Optimization meta:] PromptOptimizerAgent · CostOptimizer · LatencyOptimizer · RetentionOptimizer · ROASOptimizer · AccessibilityOptimizer · EvalHarnessAgent · SafetyRedTeamAgent
-'''
+```
 
 ---
 
 Shared references (from agents.md §12)
 
-12. References
+## 12. References
 
 Foundational Papers (Architecture Patterns)
 
@@ -346,7 +345,7 @@ _Embedded from `corpus/study/lifes_quiet_redemption_agent_workflow.md`. Also sto
 
 ---
 
-0. Visual Diagrams (read this first)
+## 0. Visual Diagrams (read this first)
 
 These six diagrams describe the workflow end-to-end and are referenced throughout the sections below. Source files live in [`./workflows/`](./workflows/).
 
@@ -379,7 +378,7 @@ D6 · Quality Gate Ladder & VBench Scorecard
 
 ---
 
-1. Pipeline Overview — Phase → Owning Agents → Service
+## 1. Pipeline Overview — Phase → Owning Agents → Service
 
 Maps the original Phase 0–6 outline onto the swarm's 6-phase production pipeline (SYSTEM_REFERENCE §6.1). Each phase ends with a **GateKeeperAgent (#57)** L1/L2/L3 sign-off before the DAG advances.
 
@@ -395,7 +394,7 @@ Maps the original Phase 0–6 outline onto the swarm's 6-phase production pipeli
 
 ---
 
-2. Scene-by-Scene Production Matrix
+## 2. Scene-by-Scene Production Matrix
 
 Each storyboard row becomes a **production card** routed through the DAG. Columns map the original (Duration / Shot / Description / 旁白) plus the agent assignments, generation engine, audio design, continuity controls, and QC owner.
 
@@ -418,11 +417,11 @@ Each storyboard row becomes a **production card** routed through the DAG. Column
 
 ---
 
-3. Agent Service Catalogue (What Each Agent Actually Does on This Film)
+## 3. Agent Service Catalogue (What Each Agent Actually Does on This Film)
 
 Full description of every agent's contribution, the input it consumes, the output it produces, its tools, its self-quality bar, and who reviews it. Grouped by pipeline role.
 
-3.1 Orchestration & Planning
+### 3.1 Orchestration & Planning
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -436,7 +435,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | MemoryAgent (#58) | Stores character bible, prior takes, corrections for recall | All artifacts | Retrievable project memory | Pinecone/Weaviate, MemGPT | Retrieval precision@5 ≥0.9 | All agents |
 | JudgeAgent (#56) | Settles disputes (e.g., Editor vs Director on pacing) via debate | Conflicting critiques | Adjudicated ruling | Debate + LLM-as-Judge harness | Inter-rater κ ≥0.8 vs panel | HiTL on overturn |
 
-3.2 Above-the-Line & Story
+### 3.2 Above-the-Line & Story
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -450,7 +449,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | StoryboardAgent (#14) | Converts script to the 12-panel shot table with staging | Script | Shot panels + staging notes | Image-gen, Fountain parser | Coverage completeness, staging clarity | DirectorAgent |
 | MoodBoardAgent (#63) | Builds visual/sonic/tonal reference boards (golden hour, film grain) | Brief | Lookbook boards | Pinterest/Are.na, CLIP clustering | Reference coherence | DirectorAgent, ProductionDesignAgent |
 
-3.3 Look, Character & Continuity
+### 3.3 Look, Character & Continuity
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -463,7 +462,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | StyleTransferAgent (#61) | Applies one consistent grade-able aesthetic across all shots | Refs, shots | Per-style LoRA, CLIP score | LoRA, CLIP/DINO, Runway style-lock | Style similarity ≥0.85 | DirectorAgent, ColoristAgent |
 | ContinuityAgent (#98) | Tracks identity, wardrobe, props (cat motif), time-state across scenes | All shots | Continuity manifest | State manifests, shot-compare | State-drift detection | AIQAConsistencyAgent, GateKeeperAgent |
 
-3.4 Generation, Camera & Audio
+### 3.4 Generation, Camera & Audio
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -477,7 +476,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 | ComposerAgent (#20) | Minimalist piano + soft strings score with swells at peaks | Emotion curve | Score stems | Udio/Suno, MIDI, Demucs | Cue-to-emotion alignment | EditorAgent, SoundDesignAgent |
 | SoundDesignAgent (#19) | Foley/ambience per scene (pencil, keyboard, soup, city hum) | Shot list | SFX stems | ElevenLabs SFX, Freesound | Sync ≤±1 frame | EditorAgent, ComposerAgent |
 
-3.5 Post, QA, Compliance & Delivery
+### 3.5 Post, QA, Compliance & Delivery
 
 | Agent (#) | Service on This Film | Consumes | Produces | Tools | Self-Quality Bar | Critiqued By |
 |---|---|---|---|---|---|---|
@@ -502,7 +501,7 @@ Full description of every agent's contribution, the input it consumes, the outpu
 
 ---
 
-4. Cross-Cutting Services Applied Throughout
+## 4. Cross-Cutting Services Applied Throughout
 
 These shared capabilities (SYSTEM_REFERENCE §4–§5) operate across every phase, not at a single node.
 
@@ -518,7 +517,7 @@ These shared capabilities (SYSTEM_REFERENCE §4–§5) operate across every phas
 
 ---
 
-5. Quality Gate Ladder (Per Shot & Per Phase)
+## 5. Quality Gate Ladder (Per Shot & Per Phase)
 
 Every artifact clears three layers before GateKeeperAgent advances it (agents.md §11.2).
 
@@ -530,7 +529,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-6. Delivery Variants & Outlet Specs
+## 6. Delivery Variants & Outlet Specs
 
 | Outlet | Aspect / Spec | Owning Agents | Notes |
 |---|---|---|---|
@@ -543,7 +542,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-7. Recommended Tool / Model Stack (June 2026)
+## 7. Recommended Tool / Model Stack (June 2026)
 
 | Layer | Models / Tools | Driving Agent(s) |
 |---|---|---|
@@ -560,7 +559,7 @@ Every artifact clears three layers before GateKeeperAgent advances it (agents.md
 
 ---
 
-8. Series & Scalability (Reusing the Swarm)
+## 8. Series & Scalability (Reusing the Swarm)
 
 Because the swarm persists character bibles (MemoryAgent #58), identity hashes (AvatarDesignAgent #47), and style LoRAs (StyleTransferAgent #61), a follow-up short reuses ~70% of pre-production. New entries in the 「生活偷偷救赎了我们」 series only re-run Phases 1–4 for new beats, while ContinuityAgent guarantees the recurring "map girl" and "shop cat" stay consistent across episodes.
 
@@ -585,7 +584,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 
 > This part hardens Part A with findings from (1) top YouTube growth strategists, (2) xAI's current Grok Imagine video stack, and (3) recent arXiv research on consistent, long-form, multi-shot AI video. Every external claim is cited inline. *Content from all external sources was paraphrased/summarized for compliance with licensing restrictions; no source is quoted beyond fair-use limits.*
 
-9. Research Sources → Findings → Workflow Implication
+## 9. Research Sources → Findings → Workflow Implication
 
 | Domain | Source | Key Finding (paraphrased) | Implication for This Workflow |
 |---|---|---|---|
@@ -610,7 +609,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 | Orchestration | [arXiv 2506.10540 — MCTS Storytelling]([historical-url] | Director / Photography / Reviewer / Post-Production agents with MCTS-driven clip search | Use **MCTS search over candidate clips** instead of fixed 3-reroll cap |
 | Orchestration | [arXiv 2605.27891 — SmartDirector]([historical-url] | Keyframe-conditioned generation with explicit narrative-pacing control | Gives EditorAgent **per-shot pacing knobs** tied to the emotion curve |
 
-10. YouTube Marketing Upgrades (mapped to agents)
+## 10. YouTube Marketing Upgrades (mapped to agents)
 
 | Upgrade | What Changes | Owning Agents | Gate / Metric |
 |---|---|---|---|
@@ -621,7 +620,7 @@ PART B — Research-Informed Quality Upgrades (June 2026)
 | **Shorts 3s-hold cut** | Dedicated 9:16 cut: visual hook on **frame 1**, spoken hook ≤14 words, designed to loop | TrailerEditorAgent (#51), MotionGraphicsAgent (#13) | Predicted 3s-hold ≥60%; clean loop seam |
 | **Metric instrumentation** | Track CTR + AVD + AVP as first-class KPIs feeding the next episode | AnalystAgent (#81), EvaluationHarnessAgent (#79) | Dashboard live within 24h of launch |
 
-11. Generation Engine Upgrade — Add Grok Imagine to the Stack
+## 11. Generation Engine Upgrade — Add Grok Imagine to the Stack
 
 The routing in §3.4 (RouterAgent #55) gains a Grok tier. Net effect: cheaper, faster iteration up front; premium engines reserved for hero shots.
 
@@ -633,7 +632,7 @@ The routing in §3.4 (RouterAgent #55) gains a Grok tier. Net effect: cheaper, f
 | Hero / emotional-peak shots | **Veo 3.1 / Kling 3.0 / Runway Gen-4** | Higher fidelity + camera control for Scenes 1, 5, 10, 12 | CinematographerAgent (#6) |
 | Local / privacy-sensitive | **ComfyUI + CharCom LoRAs + IP-Adapter** | Full control, per-character LoRA identity ([arXiv CharCom]([historical-url] | StyleTransferAgent (#61) |
 
-12. Character-Consistency Upgrade (the film's hardest problem)
+## 12. Character-Consistency Upgrade (the film's hardest problem)
 
 Replaces "attach a reference image, strength 70–90%" with a research-grade identity stack.
 
@@ -646,7 +645,7 @@ Replaces "attach a reference image, strength 70–90%" with a research-grade ide
 | **Training-free fallback** | Shots lacking a clean portrait | Background+character consistency without references ([BachVid]([historical-url] | ContinuityAgent (#98) | Consistency ≥ threshold |
 | **Fine-grained ID audit** | QC gate | VLM-based identity-preservation eval beyond global embeddings ([arXiv 2511.08087]([historical-url] | AIQAConsistencyAgent (#49) | Fine-grained ID delta below τ |
 
-13. Evaluation Upgrade — VBench-Grade QC Scorecard
+## 13. Evaluation Upgrade — VBench-Grade QC Scorecard
 
 The §5 gate ladder's L2 is replaced by a multi-dimensional scorecard scored by an MLLM judge (Video-Bench style, chain-of-query) plus motion-perception checks.
 
@@ -663,7 +662,7 @@ The §5 gate ladder's L2 is replaced by a multi-dimensional scorecard scored by 
 
 Scoring method: MLLM evaluator with few-shot scoring + chain-of-query ([Video-Bench, arXiv 2504.04907]([historical-url] giving diagnostic, per-dimension feedback rather than a single number.
 
-14. Orchestration Upgrade — 3E Loop + MCTS Search
+## 14. Orchestration Upgrade — 3E Loop + MCTS Search
 
 | Pattern | Replaces | How It Works (cited) | Where Applied |
 |---|---|---|---|
@@ -672,7 +671,7 @@ Scoring method: MLLM evaluator with few-shot scoring + chain-of-query ([Video-Be
 | **Narrative-pacing control** | Manual trims | Keyframe-conditioned pacing knobs tied to the emotion curve ([SmartDirector, arXiv 2605.27891]([historical-url] | EditorAgent (#9) ↔ EmotionalArcAgent (#65) |
 | **Unified director front-end** | Hand-written shot prompts only | A director model converts the brief into structured multi-shot scripts for non-experts ([UniMAGE, arXiv 2512.23222]([historical-url] | DirectorAgent (#1) + ScreenwriterAgent (#3) |
 
-15. Revised Opening & Shorts Cards (concrete deltas)
+## 15. Revised Opening & Shorts Cards (concrete deltas)
 
 | Card | Original | Research-Informed Revision |
 |---|---|---|
@@ -806,7 +805,7 @@ From `corpus/study/ai_agent_video_production_workflow.md` Copy: `sources/excerpt
 From `corpus/study/system_build_plan.md` Copy: `sources/excerpts/system_build_plan.md`.
 
 
-10.3 Safety & Compliance (ComplianceAgent can BLOCK from M6)
+### 10.3 Safety & Compliance (ComplianceAgent can BLOCK from M6)
 - **ComplianceAgent (#37)** is a blocking gate on every release path: FTC, HIPAA, GDPR/CCPA, IP/likeness clearance, EU AI Act, AI-disclosure.
 - **Consent chain**: any likeness/voice clone requires a verified consent record in `rights_and_consent`; AvatarDesign/VoiceClone agents cannot proceed without it.
 - **C2PA**: 100% of releasable artifacts signed; downstream verifies the chain.
@@ -916,5 +915,4 @@ Live primary-source expansion remains a residual for score 100 on S3 where depth
 
 <!-- migration_capability_research · video.avatardesign · v1 · 2026-07-13 -->
 
-```
 

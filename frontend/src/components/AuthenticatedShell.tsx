@@ -15,10 +15,10 @@ import { getServerSessionSignal } from "../lib/session/server-session";
 import { DemoModeBanner } from "./DemoModeBanner";
 import { ShellNavigation } from "./ShellNavigation";
 
-export function AuthenticatedShell({
+export async function AuthenticatedShell({
   children,
-}: Readonly<{ children: ReactNode }>): JSX.Element {
-  const sessionSignal = getServerSessionSignal();
+}: Readonly<{ children: ReactNode }>): Promise<JSX.Element> {
+  const sessionSignal = await getServerSessionSignal();
 
   // Fail-closed browser gate: AppShell routes require a signed session cookie.
   // Public entry remains /login (and /api/auth/*) only.

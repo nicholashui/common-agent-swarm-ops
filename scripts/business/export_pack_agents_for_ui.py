@@ -35,6 +35,129 @@ def _sanitize_ui_copy(text: str) -> str:
     return out
 
 
+# Subsection numbers like "11.1 Architecture Diagram" (no trailing dot after last digit).
+_SUBSECTION_HEADING = re.compile(r"^(\d+\.\d+(?:\.\d+)*)\s+(\S.*)$")
+# Top-level bare sections like "11. Common Structure of an AI Agent"
+# (title-ish: capital start, no sentence terminator — real OL items usually end with . or ;).
+_TOP_SECTION_HEADING = re.compile(r"^(\d+)\.\s+([A-Z].{8,120})$")
+# Fenced dump: language "text" wrapping multi-page historical body (not a short snippet).
+_TEXT_FENCE_OPEN = re.compile(r"^```text\s*$")
+_FENCE_CLOSE = re.compile(r"^```\s*$")
+# Historical body used '''json inside ```text because nested triple-backticks were awkward.
+_TRIPLE_SINGLE_FENCE = re.compile(r"^'''([a-zA-Z0-9_-]*)\s*$")
+
+
+def _unwrap_long_text_fences(lines: list[str], *, min_body_lines: int = 12) -> list[str]:
+    """Unwrap ```text dumps that hold whole markdown documents as plain monospaced blocks.
+
+    Pack SPECs historically embed the VA design body inside one ```text … ``` fence so the
+    file stays 'quoted historical'. The agent detail UI must render real markdown (tables,
+    headings, images) — not a single black code block of thousands of lines.
+    """
+    out: list[str] = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+        if _TEXT_FENCE_OPEN.match(line):
+            # Peek body until matching close
+            j = i + 1
+            body: list[str] = []
+            while j < n and not _FENCE_CLOSE.match(lines[j]):
+                body.append(lines[j])
+                j += 1
+            # j is close fence or EOF
+            if len(body) >= min_body_lines:
+                out.extend(body)
+                i = j + 1 if j < n else n
+                continue
+            # Short ```text sample — keep as real fence
+            out.append(line)
+            out.extend(body)
+            if j < n:
+                out.append(lines[j])
+                i = j + 1
+            else:
+                i = n
+            continue
+        out.append(line)
+        i += 1
+    return out
+
+
+def _convert_triple_single_fences(lines: list[str]) -> list[str]:
+    """Turn '''lang / ''' pairs into proper markdown fences."""
+    out: list[str] = []
+    for line in lines:
+        m = _TRIPLE_SINGLE_FENCE.match(line)
+        if m:
+            lang = m.group(1) or ""
+            out.append(f"```{lang}" if lang else "```")
+        else:
+            out.append(line)
+    return out
+
+
+def _promote_numbered_section_headings(lines: list[str]) -> list[str]:
+    """Promote bare '11. Title' / '11.1 Title' lines to markdown headings.
+
+    Avoids ordered-list mis-parse for design-doc section titles.
+    """
+    out: list[str] = []
+    in_fence = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            out.append(line)
+            continue
+        if in_fence:
+            out.append(line)
+            continue
+
+        sub = _SUBSECTION_HEADING.match(stripped)
+        if sub:
+            # "11.1" → 2 numeric parts → ### ; "5.2.1" → ####
+            parts = sub.group(1).count(".") + 1
+            level = min(max(parts + 1, 3), 4)
+            out.append(f"{'#' * level} {sub.group(1)} {sub.group(2).strip()}")
+            continue
+
+        top = _TOP_SECTION_HEADING.match(stripped)
+        if top:
+            title = top.group(2).strip()
+            # Real procedure steps usually end with . or ; or contain mid-sentence clauses.
+            if title.endswith((".", ";", ":")) or ";" in title:
+                out.append(line)
+            else:
+                out.append(f"## {top.group(1)}. {title}")
+            continue
+
+        out.append(line)
+    return out
+
+
+def _rewrite_common_structure_assets(text: str) -> str:
+    """Point common-agent-structure.svg at the shared public docs asset."""
+    return re.sub(
+        r"\((?:\./)?common-agent-structure\.svg\)",
+        "(/docs/assets/common-agent-structure.svg)",
+        text,
+    )
+
+
+def _prepare_markdown_for_ui(text: str) -> str:
+    """Transform pack markdown so the lightweight UI renderer shows structured content."""
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    lines = normalized.split("\n")
+    lines = _unwrap_long_text_fences(lines)
+    lines = _convert_triple_single_fences(lines)
+    lines = _promote_numbered_section_headings(lines)
+    body = "\n".join(lines)
+    body = _rewrite_common_structure_assets(body)
+    return _sanitize_ui_copy(body)
+
+
 def _strip_markdown_to_plain(text: str) -> str:
     """Collapse markdown to a short plain-text blurb (cards / insight strips)."""
     body = text
@@ -103,7 +226,13 @@ def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dic
         if not src.is_file():
             continue
         try:
-            content = _sanitize_ui_copy(src.read_text(encoding="utf-8", errors="replace"))
+            raw = src.read_text(encoding="utf-8", errors="replace")
+            # SPEC historical bodies are fenced as ```text; unwrap for UI rendering.
+            content = (
+                _prepare_markdown_for_ui(raw)
+                if name == "SPEC.md"
+                else _sanitize_ui_copy(raw)
+            )
         except OSError:
             continue
         (dest_dir / name).write_text(content, encoding="utf-8", newline="\n")
@@ -126,6 +255,34 @@ def _sync_agent_markdown(agent_dir: Path, agent_id: str, docs_root: Path) -> dic
         paths["userGuideDocPath"] = f"/docs/agents/{agent_id}/user_guide.md"
         break
     return paths
+
+
+def _ensure_shared_doc_assets(docs_root: Path) -> None:
+    """Copy shared study SVGs referenced from prepared SPECs into public/docs/assets."""
+    assets_dir = docs_root.parent / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    dest = assets_dir / "common-agent-structure.svg"
+    if dest.is_file() and dest.stat().st_size > 0:
+        return
+    candidates = [
+        _ROOT / "business" / "video" / "corpus" / "study" / "common-agent-structure.svg",
+        _ROOT
+        / "business"
+        / "video"
+        / "agents"
+        / "video.director"
+        / "sources"
+        / "study"
+        / "common-agent-structure.svg",
+    ]
+    for src in candidates:
+        if not src.is_file():
+            continue
+        try:
+            dest.write_bytes(src.read_bytes())
+            return
+        except OSError:
+            continue
 
 
 def _sync_harness_docs(
@@ -414,6 +571,7 @@ def main(argv: list[str] | None = None) -> int:
     root = args.project_root.resolve()
     docs_root = root / "frontend" / "public" / "docs" / "agents"
     docs_root.mkdir(parents=True, exist_ok=True)
+    _ensure_shared_doc_assets(docs_root)
     video = _load_pack(root / "business" / "video" / "agents", pack="video", docs_root=docs_root)
     specials = _load_pack(
         root / "business" / "specials" / "agents",

@@ -7,6 +7,6 @@ export const dynamic = "force-dynamic";
 export async function GET(): Promise<Response> {
   return NextResponse.json({
     ok: true,
-    session: readPublicSessionFromCookies(),
+    session: await readPublicSessionFromCookies(),
   });
 }
