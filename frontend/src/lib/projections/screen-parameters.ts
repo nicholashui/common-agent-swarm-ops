@@ -77,6 +77,14 @@ import {
   type OnboardingLandingView,
 } from "./onboarding-landing";
 import {
+  ORG_CHART_PAYLOAD,
+  type OrgChartPayload,
+} from "./org-chart.generated";
+import {
+  AGENT_WORKFLOW_PAYLOAD,
+  type AgentWorkflowPayload,
+} from "./agent-workflow.generated";
+import {
   LOCAL_PROFILE_LANDING,
   type ProfileLandingView,
 } from "./profile-landing";
@@ -113,6 +121,8 @@ export type ScreenParameterKey =
   | "monitoring"
   | "notifications"
   | "onboarding"
+  | "orgChart"
+  | "agentWorkflow"
   | "profile"
   | "registry"
   | "settings"
@@ -137,6 +147,8 @@ export interface ScreenParameterMap {
   readonly monitoring: MonitoringLandingView;
   readonly notifications: NotificationsLandingView;
   readonly onboarding: OnboardingLandingView;
+  readonly orgChart: OrgChartPayload;
+  readonly agentWorkflow: AgentWorkflowPayload;
   readonly profile: ProfileLandingView;
   readonly registry: RegistryLandingView;
   readonly settings: SettingsLandingView;
@@ -168,6 +180,8 @@ export const SCREEN_PARAMETER_DEFAULTS: ScreenParameterMap = Object.freeze({
   monitoring: LOCAL_MONITORING_LANDING,
   notifications: LOCAL_NOTIFICATIONS_LANDING,
   onboarding: LOCAL_ONBOARDING_LANDING,
+  orgChart: ORG_CHART_PAYLOAD,
+  agentWorkflow: AGENT_WORKFLOW_PAYLOAD,
   profile: LOCAL_PROFILE_LANDING,
   registry: LOCAL_REGISTRY_LANDING,
   settings: LOCAL_SETTINGS_LANDING,

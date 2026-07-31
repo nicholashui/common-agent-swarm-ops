@@ -6,7 +6,6 @@ import json
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
-
 from unittest.mock import patch
 
 from hypothesis import example, given, settings, strategies as st

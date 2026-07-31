@@ -70,6 +70,13 @@ class LocalToolAdapter(Protocol):
     def execute(self, arguments: Mapping[str, ToolInputValue]) -> LocalAdapterResult:
         """Execute deterministic local behavior using safe data-only arguments."""
 
+    @property
+    def retained_effects(self) -> tuple[ToolEffect, ...]:
+        """Expose immutable effect evidence retained by the adapter."""
+
+    def retain_tool_effect(self, effect: ToolEffect) -> None:
+        """Retain one broker-created effect."""
+
 
 class ToolEffectRetainer(Protocol):
     """Optional broker-owned capability for retaining completed effect evidence."""

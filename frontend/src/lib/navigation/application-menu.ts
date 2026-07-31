@@ -86,7 +86,12 @@ export const APPLICATION_MENU_GROUPS: readonly ApplicationMenuGroup[] = [
   {
     id: "common",
     label: "Common",
-    itemIds: ["registry-hub", "registry-org-chart", "agent-pattern-detail"],
+    itemIds: [
+      "registry-hub",
+      "registry-org-chart",
+      "registry-agent-workflow",
+      "agent-pattern-detail",
+    ],
   },
   {
     id: "operate",
@@ -173,7 +178,11 @@ export const APPLICATION_MENU_ITEMS: readonly ApplicationMenuItem[] = [
     activeExactPaths: ["/registry"],
     activePathPrefixes: ["/registry"],
     deferActiveToScopedChildren: true,
-    scopedChildPrefixes: ["/registry/agents/", "/registry/org-chart"],
+    scopedChildPrefixes: [
+      "/registry/agents/",
+      "/registry/org-chart",
+      "/registry/agent-workflow",
+    ],
   },
   {
     id: "registry-org-chart",
@@ -185,6 +194,17 @@ export const APPLICATION_MENU_ITEMS: readonly ApplicationMenuItem[] = [
     visibility: "always",
     activeExactPaths: ["/registry/org-chart"],
     activePathPrefixes: ["/registry/org-chart"],
+  },
+  {
+    id: "registry-agent-workflow",
+    label: "Agent Workflow",
+    href: "/registry/agent-workflow",
+    icon: "registry",
+    groupId: "common",
+    tone: "common",
+    visibility: "always",
+    activeExactPaths: ["/registry/agent-workflow"],
+    activePathPrefixes: ["/registry/agent-workflow"],
   },
   {
     id: "agent-pattern-detail",

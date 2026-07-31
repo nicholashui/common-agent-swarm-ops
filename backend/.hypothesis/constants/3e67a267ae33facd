@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\pack_runtime\critique.py
+# hypothesis_version: 6.151.12
+
+['%Y-%m-%dT%H:%M:%SZ', 'artifact_ref', 'blocker', 'claim', 'claim required', 'correlation_id', 'created_at', 'critique', 'evidence_refs', 'from_id', 'kind', 'major', 'message_id', 'minor', 'nit', 'requires_hitl', 'resolution', 'severity', 'to_id']

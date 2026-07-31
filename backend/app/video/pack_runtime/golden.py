@@ -74,15 +74,19 @@ class PackGoldenRunner:
                 agent_id=agent_id, passed=False, run=None, errors=["golden not object"]
             )
 
-        input_block = doc.get("input") if isinstance(doc.get("input"), dict) else {}
-        expect = doc.get("expect") if isinstance(doc.get("expect"), dict) else {}
+        raw_input = doc.get("input")
+        input_block: dict[str, Any] = raw_input if isinstance(raw_input, dict) else {}
+        raw_expect = doc.get("expect")
+        expect: dict[str, Any] = raw_expect if isinstance(raw_expect, dict) else {}
         goal = str(input_block.get("goal") or f"golden task for {agent_id}")
-        constraints = input_block.get("constraints")
-        if not isinstance(constraints, dict):
-            constraints = {"network": False, "production": False}
-        inputs = input_block.get("inputs")
-        if not isinstance(inputs, dict):
-            inputs = {}
+        raw_constraints = input_block.get("constraints")
+        constraints: dict[str, Any] = (
+            raw_constraints
+            if isinstance(raw_constraints, dict)
+            else {"network": False, "production": False}
+        )
+        raw_inputs = input_block.get("inputs")
+        inputs: dict[str, Any] = raw_inputs if isinstance(raw_inputs, dict) else {}
 
         errors: list[str] = []
         try:
@@ -92,7 +96,7 @@ class PackGoldenRunner:
                 inputs=inputs,
                 constraints=constraints,
             )
-        except Exception as exc:  # noqa: BLE001 — suite continues
+        except Exception as exc:
             return PackGoldenCaseResult(
                 agent_id=agent_id, passed=False, run=None, errors=[str(exc)]
             )
@@ -102,9 +106,10 @@ class PackGoldenRunner:
             errors.append(f"status {run.status} not in {allowed_status}")
         if expect.get("l1_passed", True) and not run.l1.get("passed"):
             errors.append("L1 not passed")
-        if expect.get("artifact_required", True):
-            if not run.artifact or not run.artifact.get("summary"):
-                errors.append("artifact missing")
+        if expect.get("artifact_required", True) and (
+            not run.artifact or not run.artifact.get("summary")
+        ):
+            errors.append("artifact missing")
         if not run.skill_loaded:
             errors.append("skill not loaded")
         if not run.prompt_reference:
@@ -133,9 +138,5 @@ class PackGoldenRunner:
     def run_all_with_goldens(self) -> PackGoldenSuiteResult:
         if not self._evals_root.is_dir():
             return PackGoldenSuiteResult(total=0, passed=0, failed=0, results=[])
-        ids = sorted(
-            p.parent.name
-            for p in self._evals_root.glob("*/golden.json")
-            if p.is_file()
-        )
+        ids = sorted(p.parent.name for p in self._evals_root.glob("*/golden.json") if p.is_file())
         return self.run_many(ids)

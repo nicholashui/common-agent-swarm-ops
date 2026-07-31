@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any
 from uuid import uuid4
@@ -31,7 +31,7 @@ class CritiqueMessage:
     kind: str = "critique"  # critique | instruction | dispute | resolution
     requires_hitl: bool = False
     created_at: str = field(
-        default_factory=lambda: datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        default_factory=lambda: datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     )
 
     def to_dict(self) -> dict[str, Any]:
@@ -80,9 +80,7 @@ class CritiqueBus:
                 f"critique edge denied: {from_id} → {to_id} not in outputs {list(allowed_outputs)}"
             )
         sev = (
-            severity
-            if isinstance(severity, CritiqueSeverity)
-            else CritiqueSeverity(str(severity))
+            severity if isinstance(severity, CritiqueSeverity) else CritiqueSeverity(str(severity))
         )
         requires_hitl = sev is CritiqueSeverity.BLOCKER
         msg = CritiqueMessage(

@@ -7,7 +7,7 @@
  * @must Use pack-generated hierarchy only; specials excluded.
  * @mustnot Invent management relationships outside generated org-chart payload.
  */
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Background,
@@ -25,15 +25,16 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
-import {
-  ORG_CHART_PAYLOAD,
-  type OrgChartPackGroup,
+import type {
+  OrgChartPackGroup,
+  OrgChartPayload,
 } from "../lib/projections/org-chart.generated";
 import {
   buildOrgChartLayout,
   listOrgChartGroups,
   type OrgChartFlowNodeData,
 } from "../lib/projections/org-chart-layout";
+import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 type OrgFlowNode = Node<OrgChartFlowNodeData, "orgNode">;
 
@@ -144,25 +145,47 @@ function OrgChartCanvas({
 }
 
 export function OrgChartHome({
-  payload = ORG_CHART_PAYLOAD,
+  view,
+  onAction,
+  statusMessage: externalStatus,
 }: Readonly<{
-  payload?: typeof ORG_CHART_PAYLOAD;
+  view: OrgChartPayload;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  statusMessage?: string;
 }>): JSX.Element {
-  const groups = useMemo(() => listOrgChartGroups(payload), [payload]);
+  const groups = useMemo(() => listOrgChartGroups(view), [view]);
   const [packId, setPackId] = useState(() => groups[0]?.packId ?? "");
   const [showCritique, setShowCritique] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | undefined>();
+
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+  const feedback = externalStatus ?? statusMessage;
 
   const activeGroup = useMemo(
-    () => groups.find((g) => g.packId === packId) ?? groups[0],
+    () => groups.find((group) => group.packId === packId) ?? groups[0],
     [groups, packId],
   );
 
-  const onPackChange = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setPackId(event.target.value);
-    },
-    [],
-  );
+  const onPackChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    setPackId(event.target.value);
+    announce(`Agent group changed to ${event.target.value}.`);
+  };
+
+  const onCritiqueChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const isVisible = event.target.checked;
+    setShowCritique(isVisible);
+    announce(
+      `Critique interconnections ${isVisible ? "shown" : "hidden"}.`,
+    );
+  };
 
   if (!activeGroup) {
     return (
@@ -216,7 +239,7 @@ export function OrgChartHome({
             <input
               type="checkbox"
               checked={showCritique}
-              onChange={(e) => setShowCritique(e.target.checked)}
+              onChange={onCritiqueChange}
             />
             <span>Show critique interconnections</span>
           </label>
@@ -229,6 +252,7 @@ export function OrgChartHome({
               <span>{activeGroup.critiqueEdges.length} critique links</span>
             ) : null}
           </div>
+          {feedback ? <p role="status">{feedback}</p> : null}
         </div>
       </header>
 
@@ -240,7 +264,7 @@ export function OrgChartHome({
 
       <footer className="org-chart-page__footer">
         <p>
-          Source: <code>{payload.source}</code> · Pack{" "}
+          Source: <code>{view.source}</code> · Pack{" "}
           <code>{activeGroup.folderPath}</code> · Click an agent node to open
           Registry detail.
         </p>

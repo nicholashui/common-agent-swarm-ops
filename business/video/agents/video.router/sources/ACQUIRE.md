@@ -19,3 +19,19 @@ Agent-capability registry; benchmark history (cost/quality/latency)
 3. Place fixtures under `excerpts/` or `study/`.
 4. Update `MAPPING.md` with path mapping.
 5. Set `next_review_at` in `DISTILLATION_PLAN.json`.
+
+## RETHINK_100_MODELS
+
+Design-time model landscape from RETHINK_100 (do **not** download weights into the pack).
+
+- Seedance 2.0 (design-time only)
+- Wan 2.6 (design-time only)
+- Vidu Q2/Q3 (design-time only)
+- Grok Imagine Video (design-time only)
+- Hailuo 2.3 (design-time only)
+- Kling 2.6/3.0 variants (design-time only)
+- Seedance multi-camera (design-time only)
+- Flux 1.1 Pro Ultra (design-time only)
+- SD 3.5 self-hosted path (design-time only)
+
+Runtime remains host allow-list + production gates. See corpus `study/ui/RETHINK_100_IMPROVEMENTS.md`.

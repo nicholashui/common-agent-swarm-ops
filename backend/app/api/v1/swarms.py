@@ -24,7 +24,9 @@ from app.api.v1.schemas import (
 router = APIRouter(prefix="/swarms", tags=["swarms"])
 
 
-def _denied(correlation_id: str, message: str = "Protected resource access is not permitted.") -> None:
+def _denied(
+    correlation_id: str, message: str = "Protected resource access is not permitted."
+) -> None:
     raise PublicApiException(
         status_code=status.HTTP_403_FORBIDDEN,
         error=PublicError(
@@ -48,7 +50,9 @@ def _conflict(correlation_id: str, message: str) -> None:
     )
 
 
-def _swarm_payload(facade: ProductFacadeService, context: AuthenticatedRequestContext, swarm: Any) -> dict[str, Any]:
+def _swarm_payload(
+    facade: ProductFacadeService, context: AuthenticatedRequestContext, swarm: Any
+) -> dict[str, Any]:
     return {
         "id": swarm.swarm_id,
         "name": swarm.name,
@@ -170,9 +174,7 @@ async def validate_swarm(
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
     """Validate graph provenance without executing a run."""
-    result = facade.validate_swarm(
-        context.organization_id, swarm_id, request.action_reference_id
-    )
+    result = facade.validate_swarm(context.organization_id, swarm_id, request.action_reference_id)
     if result is None:
         _denied(str(context.correlation_id), "Validate requires an eligible validate_swarm action.")
     assert result is not None
@@ -239,7 +241,10 @@ async def start_swarm_run(
         correlation_id=context.correlation_id,
     )
     if result is None:
-        _denied(str(context.correlation_id), "Run requires an eligible run_swarm action and a non-empty graph.")
+        _denied(
+            str(context.correlation_id),
+            "Run requires an eligible run_swarm action and a non-empty graph.",
+        )
     assert result is not None
     return result
 

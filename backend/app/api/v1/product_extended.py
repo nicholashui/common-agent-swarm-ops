@@ -15,7 +15,9 @@ from app.api.v1.schemas import PublicError, StrictSchema
 router = APIRouter(tags=["product-extended"])
 
 
-def _denied(correlation_id: str, message: str = "Protected resource access is not permitted.") -> None:
+def _denied(
+    correlation_id: str, message: str = "Protected resource access is not permitted."
+) -> None:
     raise PublicApiException(
         status_code=status.HTTP_403_FORBIDDEN,
         error=PublicError(
@@ -226,9 +228,7 @@ async def test_provider(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
-    result = facade.test_provider(
-        context.organization_id, provider_id, request.action_reference_id
-    )
+    result = facade.test_provider(context.organization_id, provider_id, request.action_reference_id)
     if result is None:
         _denied(str(context.correlation_id))
     assert result is not None
@@ -276,9 +276,7 @@ async def rotate_secret(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
-    result = facade.rotate_secret(
-        context.organization_id, secret_id, request.action_reference_id
-    )
+    result = facade.rotate_secret(context.organization_id, secret_id, request.action_reference_id)
     if result is None:
         _denied(str(context.correlation_id))
     assert result is not None
@@ -292,9 +290,7 @@ async def reveal_secret(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
-    result = facade.reveal_secret(
-        context.organization_id, secret_id, request.action_reference_id
-    )
+    result = facade.reveal_secret(context.organization_id, secret_id, request.action_reference_id)
     if result is None:
         _denied(str(context.correlation_id))
     assert result is not None
@@ -384,9 +380,7 @@ async def audit_integrity(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
-    result = facade.audit_integrity_check(
-        context.organization_id, request.action_reference_id
-    )
+    result = facade.audit_integrity_check(context.organization_id, request.action_reference_id)
     if result is None:
         _denied(str(context.correlation_id))
     assert result is not None

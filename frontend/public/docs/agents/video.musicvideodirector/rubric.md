@@ -43,6 +43,34 @@
           "threshold_hint": null,
           "score_min": 0,
           "score_max": 100
+        },
+        {
+          "id": "shot_adjacency",
+          "name": "Shot adjacency",
+          "weight": 1,
+          "description": "Respects previous/next shot context (eyeline, pace, geography).",
+          "source": "RETHINK_100#43"
+        },
+        {
+          "id": "character_consistency",
+          "name": "Character consistency",
+          "weight": 1,
+          "description": "Character bank / IP anchors honored when provided.",
+          "source": "RETHINK_100#33"
+        },
+        {
+          "id": "ethics_safety",
+          "name": "Ethics & safety",
+          "weight": 1,
+          "description": "Stereotype/harm/consent flags escalated appropriately.",
+          "source": "RETHINK_100#93"
+        },
+        {
+          "id": "operator_explainability",
+          "name": "Operator explainability",
+          "weight": 1,
+          "description": "Plain-English reasoning present for key decisions.",
+          "source": "RETHINK_100#59"
         }
       ]
     },
@@ -63,6 +91,16 @@
       "Self-Refine",
       "Constitutional AI"
     ]
+  },
+  "rethink_100": {
+    "applied": true,
+    "extra_dimensions": [
+      "shot_adjacency",
+      "character_consistency",
+      "ethics_safety",
+      "operator_explainability"
+    ],
+    "doc": "ui/RETHINK_100_IMPROVEMENTS.md"
   }
 }
 ```

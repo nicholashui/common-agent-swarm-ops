@@ -64,6 +64,8 @@ test("scan: BoundScreenHome wires onAction for all bound screens", async () => {
     "MobileHome",
     "NotificationsHome",
     "OnboardingHome",
+    "OrgChartHome",
+    "AgentWorkflowHome",
     "ProfileHome",
     "RegistryHome",
     "SettingsHome",

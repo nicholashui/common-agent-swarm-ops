@@ -47,52 +47,52 @@
     "status": "measured",
     "trials": [
       {
-        "trial_id": "agent_b355a9dda7",
+        "trial_id": "agent_7feae2b755",
         "score": 90.0,
         "status": "ok",
         "l1_passed": true,
         "refinement_count": 0,
-        "timestamp": "2026-07-30T14:45:37Z",
+        "timestamp": "2026-07-31T08:09:37Z",
         "synthetic": false,
         "offline": true
       },
       {
-        "trial_id": "agent_c73139d13d",
+        "trial_id": "agent_2f05c0bd17",
         "score": 90.0,
         "status": "ok",
         "l1_passed": true,
         "refinement_count": 0,
-        "timestamp": "2026-07-30T14:45:37Z",
+        "timestamp": "2026-07-31T08:09:37Z",
         "synthetic": false,
         "offline": true
       },
       {
-        "trial_id": "agent_709899444f",
+        "trial_id": "agent_3753061643",
         "score": 90.0,
         "status": "ok",
         "l1_passed": true,
         "refinement_count": 0,
-        "timestamp": "2026-07-30T14:45:37Z",
+        "timestamp": "2026-07-31T08:09:37Z",
         "synthetic": false,
         "offline": true
       },
       {
-        "trial_id": "agent_4504164cde",
+        "trial_id": "agent_c32ae63cae",
         "score": 90.0,
         "status": "ok",
         "l1_passed": true,
         "refinement_count": 0,
-        "timestamp": "2026-07-30T14:45:37Z",
+        "timestamp": "2026-07-31T08:09:37Z",
         "synthetic": false,
         "offline": true
       },
       {
-        "trial_id": "agent_6cbdc75f3c",
+        "trial_id": "agent_85706ca15a",
         "score": 90.0,
         "status": "ok",
         "l1_passed": true,
         "refinement_count": 0,
-        "timestamp": "2026-07-30T14:45:37Z",
+        "timestamp": "2026-07-31T08:09:37Z",
         "synthetic": false,
         "offline": true
       }
@@ -103,7 +103,7 @@
       "min": 90.0,
       "max": 90.0
     },
-    "measured_at": "2026-07-30T14:45:37Z",
+    "measured_at": "2026-07-31T08:09:37Z",
     "runner": "pack_runtime.offline"
   },
   "gate": {
@@ -116,5 +116,5 @@
   },
   "generated_by": "scaffold_human_baselines_v1",
   "generated_at": "2026-07-30T14:45:35Z",
-  "updated_at": "2026-07-30T14:45:37Z"
+  "updated_at": "2026-07-31T08:09:37Z"
 }

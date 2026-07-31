@@ -571,18 +571,20 @@ class VideoInventoryValidator:
                     field=f"{field}.max_refinement_count",
                 )
             )
-        if spec.get("production_activation_requested", False) is not False:
-            if not self._production_pack_enabled():
-                issues.append(
-                    InventoryIssue(
-                        code="production_activation_requested",
-                        message=(
-                            "Agent specifications cannot request production activation "
-                            "unless business/video/production/profile.json is enabled."
-                        ),
-                        field=f"{field}.production_activation_requested",
-                    )
+        if (
+            spec.get("production_activation_requested", False) is not False
+            and not self._production_pack_enabled()
+        ):
+            issues.append(
+                InventoryIssue(
+                    code="production_activation_requested",
+                    message=(
+                        "Agent specifications cannot request production activation "
+                        "unless business/video/production/profile.json is enabled."
+                    ),
+                    field=f"{field}.production_activation_requested",
                 )
+            )
 
     def _production_pack_enabled(self) -> bool:
         """Allow production-capable agent specs when the pack production profile is on."""

@@ -43,6 +43,20 @@
           "threshold_hint": "≥0.85",
           "score_min": 0,
           "score_max": 100
+        },
+        {
+          "id": "ethics_safety",
+          "name": "Ethics & safety",
+          "weight": 1,
+          "description": "Stereotype/harm/consent flags escalated appropriately.",
+          "source": "RETHINK_100#93"
+        },
+        {
+          "id": "operator_explainability",
+          "name": "Operator explainability",
+          "weight": 1,
+          "description": "Plain-English reasoning present for key decisions.",
+          "source": "RETHINK_100#59"
         }
       ]
     },
@@ -63,6 +77,14 @@
       "Self-Refine",
       "Constitutional AI"
     ]
+  },
+  "rethink_100": {
+    "applied": true,
+    "extra_dimensions": [
+      "ethics_safety",
+      "operator_explainability"
+    ],
+    "doc": "ui/RETHINK_100_IMPROVEMENTS.md"
   }
 }
 ```

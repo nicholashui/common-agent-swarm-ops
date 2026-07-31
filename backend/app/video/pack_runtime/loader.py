@@ -74,7 +74,9 @@ class PackAgentLoader:
         if not skill_md_path.is_file():
             raise FileNotFoundError(f"Skill harness missing: {agent_id}/skills/SKILL.md")
         if not skill_int_path.is_file():
-            raise FileNotFoundError(f"Skill integration missing: {agent_id}/skills/integration.json")
+            raise FileNotFoundError(
+                f"Skill integration missing: {agent_id}/skills/integration.json"
+            )
 
         edges_raw = spec.get("critique_edges") or {}
         if not isinstance(edges_raw, dict):

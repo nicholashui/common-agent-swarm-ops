@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\swarms.py
+# hypothesis_version: 6.151.12
+
+['/running', '/swarms', '/{swarm_id}', '/{swarm_id}/exports', '/{swarm_id}/graph', '/{swarm_id}/members', '/{swarm_id}/pins', '/{swarm_id}/runs', '/{swarm_id}/validate', 'actions', 'as_of', 'authorization_denied', 'compose_action', 'conflict', 'created_at', 'edges', 'freshness', 'id', 'issues', 'items', 'last_run_id', 'live', 'members', 'name', 'nodes', 'ok', 'pattern_ref', 'pins', 'policy', 'revision', 'state', 'status', 'swarm_id', 'swarms', 'updated_at', 'validation']

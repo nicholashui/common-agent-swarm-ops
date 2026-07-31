@@ -11,17 +11,17 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from app.video.pack_runtime.paths import EVALS_AGENTS_ROOT, SPINE_AGENT_IDS
+from app.video.pack_runtime.paths import EVALS_AGENTS_ROOT
 from app.video.pack_runtime.runner import PackAgentRunner
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def protocol_path(agent_id: str, evals_root: Path = EVALS_AGENTS_ROOT) -> Path:
@@ -258,7 +258,11 @@ class HumanBaselineService:
             "evaluated_at": None,
             "evidence_path": f"business/video/evals/agents/{agent_id}/human_baseline_evidence.json",
         }
-        proto["status"] = "measured" if (proto.get("agent_measurement") or {}).get("status") == "measured" else "protocol_ready"
+        proto["status"] = (
+            "measured"
+            if (proto.get("agent_measurement") or {}).get("status") == "measured"
+            else "protocol_ready"
+        )
         self.save(proto)
         return proto
 
@@ -296,7 +300,9 @@ class HumanBaselineService:
         hb["status"] = "captured" if len(scores) >= min_n else "partial"
         hb["captured_at"] = _utc_now()
         if proto.get("status") == "protocol_ready":
-            proto["status"] = "baseline_captured" if hb["status"] == "captured" else "protocol_ready"
+            proto["status"] = (
+                "baseline_captured" if hb["status"] == "captured" else "protocol_ready"
+            )
         self.save(proto)
         return proto
 
@@ -315,7 +321,7 @@ class HumanBaselineService:
         for i in range(n):
             run = self._runner.run(
                 agent_id,
-                goal=f"{goal} [trial {i+1}/{n}]",
+                goal=f"{goal} [trial {i + 1}/{n}]",
                 correlation_id=f"base_{agent_id}_{uuid4().hex[:8]}",
                 constraints={"network": False, "production": False},
             )

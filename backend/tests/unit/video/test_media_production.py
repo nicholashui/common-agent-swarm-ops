@@ -7,20 +7,19 @@ from pathlib import Path
 
 import pytest
 
-from app.adapters.media_live import LiveMediaAdapter, default_live_media_adapters
 from app.adapters import default_local_adapters
+from app.adapters.media_live import LiveMediaAdapter, default_live_media_adapters
 from app.governance.adapter_execution import broker_invocation
 from app.video.media_production import (
     MediaGenerationRequest,
     MediaProviderId,
     generate_media,
-    is_video_production_enabled,
     resolve_credential,
 )
 
 
 def test_default_adapters_include_live_media_providers() -> None:
-    ids = {getattr(a, "adapter_id") for a in default_local_adapters()}
+    ids = {adapter.adapter_id for adapter in default_local_adapters()}
     assert "media.stub" in ids
     assert "media.sora" in ids
     assert "media.veo" in ids
@@ -29,7 +28,9 @@ def test_default_adapters_include_live_media_providers() -> None:
     assert len(default_live_media_adapters()) == 4
 
 
-def test_generate_media_disabled_without_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_generate_media_disabled_without_env(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     profile = tmp_path / "production" / "profile.json"
     profile.parent.mkdir(parents=True)
     profile.write_text(json.dumps({"enabled": True}), encoding="utf-8")
@@ -90,9 +91,7 @@ def test_generate_media_live_success_with_transport(
     assert resolve_credential(MediaProviderId.SORA) is not None
 
 
-def test_live_adapter_execute_under_broker(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_live_adapter_execute_under_broker(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     profile = tmp_path / "production" / "profile.json"
     profile.parent.mkdir(parents=True)
     profile.write_text(json.dumps({"enabled": True}), encoding="utf-8")

@@ -6,6 +6,7 @@ Fail-closed: no live providers; offline mock execution only unless explicitly ex
 from app.video.pack_runtime.baseline import GateResult, HumanBaselineService, build_protocol
 from app.video.pack_runtime.critique import CritiqueBus, CritiqueMessage, CritiqueSeverity
 from app.video.pack_runtime.golden import PackGoldenRunner, PackGoldenSuiteResult
+from app.video.pack_runtime.knowledge import build_knowledge_usage
 from app.video.pack_runtime.loader import PackAgentBundle, PackAgentLoader
 from app.video.pack_runtime.runner import PackAgentRunner, PackAgentRunResult
 
@@ -21,5 +22,6 @@ __all__ = [
     "PackAgentRunner",
     "PackGoldenRunner",
     "PackGoldenSuiteResult",
+    "build_knowledge_usage",
     "build_protocol",
 ]

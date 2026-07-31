@@ -125,7 +125,9 @@ def resolve_credential(provider: MediaProviderId) -> ProviderCredential | None:
 
 def credential_status() -> dict[str, bool]:
     """Public-safe map of which providers have credentials configured."""
-    return {provider.value: resolve_credential(provider) is not None for provider in MediaProviderId}
+    return {
+        provider.value: resolve_credential(provider) is not None for provider in MediaProviderId
+    }
 
 
 def _default_transport(
@@ -133,7 +135,7 @@ def _default_transport(
 ) -> tuple[int, bytes]:
     request = urllib.request.Request(url, data=body, headers=dict(headers), method="POST")
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310 — host allowlist
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             return int(response.status), response.read()
     except urllib.error.HTTPError as error:
         return int(error.code), error.read() if error.fp else b""
@@ -282,4 +284,7 @@ PROVIDER_BY_ADAPTER_ID: dict[str, MediaProviderId] = {
     adapter_id: provider for provider, adapter_id in ADAPTER_ID_BY_PROVIDER.items()
 }
 
-PRODUCTION_MEDIA_TOOL_IDS: tuple[str, ...] = tuple(ADAPTER_ID_BY_PROVIDER.values()) + ("media.stub",)
+PRODUCTION_MEDIA_TOOL_IDS: tuple[str, ...] = (
+    *ADAPTER_ID_BY_PROVIDER.values(),
+    "media.stub",
+)

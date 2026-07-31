@@ -21,7 +21,6 @@ from app.api.v1.dependencies import (
     reject_client_authority_fields,
     set_authenticated_request_context,
 )
-from app.models.identifiers import ActorId, CorrelationId, OrganizationId, new_correlation_id
 from app.api.v1.errors import (
     PUBLIC_ENVELOPE_HEADER,
     PublicApiException,
@@ -56,7 +55,7 @@ from app.models.control_plane import (
     OutboxRecord,
     ReplayRecoveryOutcome,
 )
-from app.models.identifiers import CorrelationId, OrganizationId
+from app.models.identifiers import ActorId, CorrelationId, OrganizationId, new_correlation_id
 from app.repositories.control_plane import InMemoryControlPlaneDatabase
 
 API_V1_PREFIX = "/api/v1"
@@ -250,16 +249,12 @@ def is_public_api_path(path: str) -> bool:
 
 
 def _local_dev_trust_enabled() -> bool:
-    """Local stack trust for browser→Host via FE rewrite (never production default)."""
-    flag = os.environ.get("CASOPS_DEV_TRUST", "").strip().lower()
-    if flag in {"1", "true", "yes", "on"}:
-        return True
-    if flag in {"0", "false", "no", "off"}:
-        return False
-    # Default on only when not marked production.
-    return os.environ.get("CASOPS_ENV", os.environ.get("ENV", "")).strip().lower() not in {
-        "production",
-        "prod",
+    """Enable local browser trust only through an explicit development opt-in."""
+    return os.environ.get("CASOPS_DEV_TRUST", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
     }
 
 

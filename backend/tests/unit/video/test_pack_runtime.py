@@ -87,6 +87,49 @@ def test_offline_runner_spine_agent_ok() -> None:
     assert result.prompt_reference.startswith("video.prompt.")
 
 
+def test_offline_runner_reports_all_knowledge_usage_not_only_rethink() -> None:
+    """After a run, knowledge_usage lists harness + sources + optional rethink items."""
+    result = PackAgentRunner().run(
+        "video.director",
+        goal="Shot intent with knowledge provenance",
+        constraints={"network": False, "production": False},
+    )
+    ku = result.knowledge_usage
+    assert ku.get("schema_version") == "pack.knowledge_usage.v1"
+    assert ku.get("agent_id") == "video.director"
+    assert ku.get("correlation_id") == result.correlation_id
+    summary = ku.get("summary") or {}
+    assert summary.get("total_assets", 0) >= 8
+    assert summary.get("bound_count", 0) >= 4
+    index = ku.get("index") or {}
+    assert index.get("prompt_reference")
+    assert index.get("rubric_reference")
+    assert "bound_asset_ids" in index
+    kinds = {a.get("kind") for a in (ku.get("assets") or [])}
+    # All knowledge surfaces, not only rethink
+    assert "prompt" in kinds
+    assert "rubric" in kinds
+    assert "skill" in kinds
+    assert "agent_spec" in kinds
+    assert "source_catalog" in kinds or "distillation_plan" in kinds
+    # Director received RETHINK item #1 among others
+    rethink_ids = index.get("rethink_item_ids") or []
+    assert 1 in rethink_ids
+    rethink_assets = [
+        a for a in (ku.get("assets") or []) if a.get("kind") == "rethink_item"
+    ]
+    assert any(a.get("item_id") == 1 for a in rethink_assets)
+    # Compact summary also on artifact for UAT
+    payload = (result.artifact or {}).get("payload") or {}
+    assert "knowledge_usage_summary" in payload
+    assert "knowledge_index" in payload
+    assert any(r.startswith("knowledge_usage:") for r in result.evidence_refs)
+    # Result serializes knowledge_usage
+    as_dict = result.to_dict()
+    assert "knowledge_usage" in as_dict
+    assert as_dict["knowledge_usage"]["summary"]["total_assets"] >= 8
+
+
 def test_offline_runner_fail_closed_on_network_constraint() -> None:
     result = PackAgentRunner().run(
         "video.memory",

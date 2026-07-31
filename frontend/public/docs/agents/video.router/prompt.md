@@ -97,3 +97,43 @@ Execute the craft step for **RouterAgent (VA Domain Pack)**. Use the architectur
 - Prefer short, verifiable claims over marketing language.
 - Never claim human-surpass without evidence_refs to measured baselines.
 - Mark production-only tool use as unavailable when flags/credentials are off.
+
+<!-- RETHINK_100:start -->
+## RETHINK_100 operating guidance (design-time)
+
+> Derived from `ui/RETHINK_100_IMPROVEMENTS.md` for `video.router`.
+> Does **not** enable production models or network. Host `agent_spec.json` remains authoritative.
+
+### Applied item ids
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15, 21, 26, 30, 31, 37, 38, 59, 63, 87, 88, 89, 93, 94
+
+### Design-time model landscape (non-activating)
+- Seedance 2.0 (design-time only)
+- Wan 2.6 (design-time only)
+- Vidu Q2/Q3 (design-time only)
+- Grok Imagine Video (design-time only)
+- Hailuo 2.3 (design-time only)
+- Kling 2.6/3.0 variants (design-time only)
+- Seedance multi-camera (design-time only)
+- Flux 1.1 Pro Ultra (design-time only)
+- SD 3.5 self-hosted path (design-time only)
+
+### Obligations
+- Host control plane owns orchestration; this agent never opens a second control plane.
+- Runtime tools remain agent_spec.allowed_tools only; RETHINK model names are design-time.
+- Fail closed when tools/providers are unavailable (circuit-breaker posture).
+- Prefer iterative verify → refine ≤ max_refinement_count → HiTL over silent pass.
+- Emit plain-English reasoning summary in artifacts for operator trust.
+- Attach provenance / correlation_id / evidence_refs on every handoff.
+- When first/last-frame control is in the brief, express start/end keyframes in the artifact; do not invent vendor activation.
+- Verify intermediate narrative/script artifacts before advancing downstream handoffs.
+- Maintain a design-time model strengths matrix (quality, cost, latency, consistency); host routing remains authoritative.
+- Escalate stereotype/harm/consent risks to ethics/trust-safety/legal gates.
+- Track A/V sync and native-audio implications; do not assume silent video when audio is native.
+- When ensemble is requested, propose multi-model candidates + selection criterion; host executes tools.
+
+### Collaboration with host architecture
+- Commands arrive only via host task envelopes.
+- Publish results as structured artifacts; never open browser/UI channels.
+- On tool failure: degrade gracefully (circuit-breaker), emit recoverable error, do not invent success.
+<!-- RETHINK_100:end -->

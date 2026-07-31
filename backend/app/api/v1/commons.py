@@ -25,7 +25,9 @@ from app.api.v1.schemas import (
 router = APIRouter(prefix="/commons", tags=["commons"])
 
 
-def _denied(correlation_id: str, message: str = "Protected resource access is not permitted.") -> None:
+def _denied(
+    correlation_id: str, message: str = "Protected resource access is not permitted."
+) -> None:
     raise PublicApiException(
         status_code=status.HTTP_403_FORBIDDEN,
         error=PublicError(
@@ -283,9 +285,7 @@ async def list_agent_rollouts(
     limit: Annotated[int, Query(ge=1, le=100)] = 50,
 ) -> dict[str, Any]:
     """List rollouts for one agent (org-scoped)."""
-    return facade.list_rollouts(
-        context.organization_id, agent_id=agent_id, limit=limit
-    )
+    return facade.list_rollouts(context.organization_id, agent_id=agent_id, limit=limit)
 
 
 @router.get("/patterns")

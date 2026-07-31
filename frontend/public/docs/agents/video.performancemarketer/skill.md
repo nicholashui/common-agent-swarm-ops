@@ -34,3 +34,27 @@ Shared pack special_skills (optional): (none required)
 ## Tests
 - Offline golden: `business/video/evals/agents/video.performancemarketer/golden.json`
 - Must not require live network for L1 pass when tools are mocked.
+
+<!-- RETHINK_100:start -->
+## RETHINK_100 harness notes
+
+Source: `business/video/corpus/study/ui/RETHINK_100_IMPROVEMENTS.md` (applied ids: 15, 21, 26, 30, 31, 37, 38, 50, 59, 63, 67, 72, 73, 74, 82, 83, 85, 87, 88, 92…).
+
+### Fail-closed
+- Do not treat design-time model names as enabled APIs.
+- Runtime: `allowed_tools` + host production flags only.
+
+### Operator-facing quality
+- Host control plane owns orchestration; this agent never opens a second control plane.
+- Runtime tools remain agent_spec.allowed_tools only; RETHINK model names are design-time.
+- Fail closed when tools/providers are unavailable (circuit-breaker posture).
+- Prefer iterative verify → refine ≤ max_refinement_count → HiTL over silent pass.
+- Emit plain-English reasoning summary in artifacts for operator trust.
+- Attach provenance / correlation_id / evidence_refs on every handoff.
+- Verify intermediate narrative/script artifacts before advancing downstream handoffs.
+- When metrics exist, surface retention/ROAS hypotheses with confidence — never fabricate live analytics.
+
+### Evidence
+- Machine record: `sources/RETHINK_100_APPLIED.json`
+- Agent: `video.performancemarketer`
+<!-- RETHINK_100:end -->

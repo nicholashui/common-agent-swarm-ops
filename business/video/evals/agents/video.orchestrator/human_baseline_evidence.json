@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "agent_id": "video.orchestrator",
-  "recorded_at": "2026-07-30T14:45:37Z",
+  "recorded_at": "2026-07-31T08:09:37Z",
   "protocol_snapshot": {
     "schema_version": "1.0",
     "agent_id": "video.orchestrator",
@@ -45,44 +45,44 @@
       "status": "captured",
       "trials": [
         {
-          "trial_id": "human_0518d4b95f",
+          "trial_id": "human_5d4f16eb60",
           "rater_id": "synthetic_ci",
           "score": 70.0,
           "notes": "ci only",
           "synthetic": true,
-          "timestamp": "2026-07-30T14:45:37Z"
+          "timestamp": "2026-07-31T08:09:37Z"
         },
         {
-          "trial_id": "human_c84f132bfd",
+          "trial_id": "human_264bd70c05",
           "rater_id": "synthetic_ci",
           "score": 71.0,
           "notes": "ci only",
           "synthetic": true,
-          "timestamp": "2026-07-30T14:45:37Z"
+          "timestamp": "2026-07-31T08:09:37Z"
         },
         {
-          "trial_id": "human_39b0853196",
+          "trial_id": "human_d79a1b33b9",
           "rater_id": "synthetic_ci",
           "score": 72.0,
           "notes": "ci only",
           "synthetic": true,
-          "timestamp": "2026-07-30T14:45:37Z"
+          "timestamp": "2026-07-31T08:09:37Z"
         },
         {
-          "trial_id": "human_a22af8c708",
+          "trial_id": "human_513047976c",
           "rater_id": "synthetic_ci",
           "score": 73.0,
           "notes": "ci only",
           "synthetic": true,
-          "timestamp": "2026-07-30T14:45:37Z"
+          "timestamp": "2026-07-31T08:09:37Z"
         },
         {
-          "trial_id": "human_944e81247c",
+          "trial_id": "human_bcd2800333",
           "rater_id": "synthetic_ci",
           "score": 74.0,
           "notes": "ci only",
           "synthetic": true,
-          "timestamp": "2026-07-30T14:45:37Z"
+          "timestamp": "2026-07-31T08:09:37Z"
         }
       ],
       "aggregate": {
@@ -92,58 +92,58 @@
         "max": 74.0,
         "synthetic_any": true
       },
-      "captured_at": "2026-07-30T14:45:37Z"
+      "captured_at": "2026-07-31T08:09:37Z"
     },
     "agent_measurement": {
       "status": "measured",
       "trials": [
         {
-          "trial_id": "agent_b355a9dda7",
+          "trial_id": "agent_7feae2b755",
           "score": 90.0,
           "status": "ok",
           "l1_passed": true,
           "refinement_count": 0,
-          "timestamp": "2026-07-30T14:45:37Z",
+          "timestamp": "2026-07-31T08:09:37Z",
           "synthetic": false,
           "offline": true
         },
         {
-          "trial_id": "agent_c73139d13d",
+          "trial_id": "agent_2f05c0bd17",
           "score": 90.0,
           "status": "ok",
           "l1_passed": true,
           "refinement_count": 0,
-          "timestamp": "2026-07-30T14:45:37Z",
+          "timestamp": "2026-07-31T08:09:37Z",
           "synthetic": false,
           "offline": true
         },
         {
-          "trial_id": "agent_709899444f",
+          "trial_id": "agent_3753061643",
           "score": 90.0,
           "status": "ok",
           "l1_passed": true,
           "refinement_count": 0,
-          "timestamp": "2026-07-30T14:45:37Z",
+          "timestamp": "2026-07-31T08:09:37Z",
           "synthetic": false,
           "offline": true
         },
         {
-          "trial_id": "agent_4504164cde",
+          "trial_id": "agent_c32ae63cae",
           "score": 90.0,
           "status": "ok",
           "l1_passed": true,
           "refinement_count": 0,
-          "timestamp": "2026-07-30T14:45:37Z",
+          "timestamp": "2026-07-31T08:09:37Z",
           "synthetic": false,
           "offline": true
         },
         {
-          "trial_id": "agent_6cbdc75f3c",
+          "trial_id": "agent_85706ca15a",
           "score": 90.0,
           "status": "ok",
           "l1_passed": true,
           "refinement_count": 0,
-          "timestamp": "2026-07-30T14:45:37Z",
+          "timestamp": "2026-07-31T08:09:37Z",
           "synthetic": false,
           "offline": true
         }
@@ -154,7 +154,7 @@
         "min": 90.0,
         "max": 90.0
       },
-      "measured_at": "2026-07-30T14:45:37Z",
+      "measured_at": "2026-07-31T08:09:37Z",
       "runner": "pack_runtime.offline"
     },
     "gate": {
@@ -162,7 +162,7 @@
       "met": false,
       "synthetic": true,
       "detail": "SYNTHETIC human data — pipeline check only; not a surpass claim. (agent_mean=90.0 < human_mean=72.0)",
-      "evaluated_at": "2026-07-30T14:45:37Z",
+      "evaluated_at": "2026-07-31T08:09:37Z",
       "evidence_path": "business/video/evals/agents/video.orchestrator/human_baseline_evidence.json",
       "comparison": {
         "human_mean": 72.0,
@@ -173,7 +173,7 @@
     },
     "generated_by": "scaffold_human_baselines_v1",
     "generated_at": "2026-07-30T14:45:35Z",
-    "updated_at": "2026-07-30T14:45:37Z"
+    "updated_at": "2026-07-31T08:09:37Z"
   },
   "claim_allowed_in_ui": false
 }

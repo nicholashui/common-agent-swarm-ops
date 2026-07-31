@@ -1,14 +1,14 @@
 import { AppShell } from "../../../components/AppShell";
-import { OrgChartHome } from "../../../components/OrgChartHome";
+import { BoundScreenHome } from "../../../components/screen/BoundScreenHome";
 
 /**
  * Registry Org Chart — non-special business pack hierarchy (e.g. business/video).
- * Fills the main content area under the Registry menu.
+ * Stored projection parameters and action handling are bound below the shell.
  */
 export default function Page(): JSX.Element {
   return (
     <AppShell>
-      <OrgChartHome />
+      <BoundScreenHome screen="orgChart" />
     </AppShell>
   );
 }

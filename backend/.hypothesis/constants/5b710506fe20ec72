@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\product_ops.py
+# hypothesis_version: 6.151.12
+
+[100, '/activity', '/activity/insights', '/approvals', 'approval_id', 'as_of', 'cached', 'categories', 'category', 'compose_action', 'correlation_id', 'created_at', 'event_count', 'freshness', 'gate_status', 'impact', 'isoformat', 'items', 'limit', 'live', 'next_cursor', 'note', 'page', 'pending', 'product-ops', 'risk_tier', 'run_id', 'state', 'total_agents']

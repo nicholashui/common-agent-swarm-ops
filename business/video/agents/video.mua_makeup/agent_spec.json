@@ -44,6 +44,11 @@
     "rubric_materialized": true,
     "skills_harness": true,
     "updated_at": "2026-07-30T14:45:34Z",
-    "research_doc": "business/video/IMPROVEMENT_RESEARCH_SOURCES_v1.md"
+    "research_doc": "business/video/IMPROVEMENT_RESEARCH_SOURCES_v1.md",
+    "rethink_100": true,
+    "rethink_doc": "ui/RETHINK_100_IMPROVEMENTS.md",
+    "rethink_item_count": 19,
+    "rethink_applied_at": "2026-07-31T06:22:31Z",
+    "rethink_record": "sources/RETHINK_100_APPLIED.json"
   }
 }

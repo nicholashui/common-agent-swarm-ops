@@ -49,7 +49,9 @@ class LiveMediaAdapter:
     def execute(self, arguments: Mapping[str, ToolInputValue]) -> LocalAdapterResult:
         """Invoke host media generation for this provider."""
         require_broker_invocation()
-        prompt = _as_str(arguments.get("prompt") or arguments.get("text") or arguments.get("script"))
+        prompt = _as_str(
+            arguments.get("prompt") or arguments.get("text") or arguments.get("script")
+        )
         model = _as_str(arguments.get("model")) or None
         voice_id = _as_str(arguments.get("voice_id")) or None
         duration = _as_int(arguments.get("duration_seconds") or arguments.get("duration"))
@@ -64,8 +66,7 @@ class LiveMediaAdapter:
         )
         # Digest includes outcome so broker evidence reflects success/failure.
         digest_input = (
-            f"{self.adapter_id}|{self.version}|{result.outcome}|"
-            f"{canonical_tool_input(arguments)}"
+            f"{self.adapter_id}|{self.version}|{result.outcome}|{canonical_tool_input(arguments)}"
         )
         return LocalAdapterResult(
             outcome=result.outcome,

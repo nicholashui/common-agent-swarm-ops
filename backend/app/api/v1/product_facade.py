@@ -206,9 +206,15 @@ class ProductFacadeService:
                 agent_id = str(spec.get("agent_id") or agent_dir.name)
                 if not _SAFE_ID.match(agent_id):
                     continue
-                model = spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
-                tools = spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
-                status = str(spec.get("status") or ("draft" if pack == "specials" else "registered"))
+                model = (
+                    spec.get("model_policy") if isinstance(spec.get("model_policy"), dict) else {}
+                )
+                tools = (
+                    spec.get("allowed_tools") if isinstance(spec.get("allowed_tools"), list) else []
+                )
+                status = str(
+                    spec.get("status") or ("draft" if pack == "specials" else "registered")
+                )
                 description = ""
                 spec_md = agent_dir / "SPEC.md"
                 if spec_md.is_file():
@@ -695,8 +701,7 @@ class ProductFacadeService:
             "created_at": record.created_at.isoformat(),
             "production_activation": False,
             "note": (
-                "Sandbox/canary only. Failed criteria block promotion; "
-                "no silent production apply."
+                "Sandbox/canary only. Failed criteria block promotion; no silent production apply."
             ),
         }
 
@@ -713,11 +718,7 @@ class ProductFacadeService:
         evidence_refs: list[str],
         action_reference_id: str,
     ) -> ProposalRecord | None:
-        kind = (
-            "propose_improvement"
-            if target_type == "agent"
-            else "propose_pattern"
-        )
+        kind = "propose_improvement" if target_type == "agent" else "propose_pattern"
         action = self.consume_action(
             organization_id=organization_id,
             action_reference_id=action_reference_id,
@@ -876,9 +877,7 @@ class ProductFacadeService:
             )
         return record
 
-    def get_swarm(
-        self, organization_id: OrganizationId, swarm_id: str
-    ) -> SwarmRecord | None:
+    def get_swarm(self, organization_id: OrganizationId, swarm_id: str) -> SwarmRecord | None:
         with self._lock:
             record = self._swarms.get(swarm_id)
             if record is None or record.organization_id != str(organization_id):
@@ -1149,9 +1148,7 @@ class ProductFacadeService:
         limit: int = 50,
     ) -> dict[str, Any]:
         with self._lock:
-            rows = [
-                a for a in self._activity if a.organization_id == str(organization_id)
-            ]
+            rows = [a for a in self._activity if a.organization_id == str(organization_id)]
         rows = list(reversed(rows))
         start = int(cursor) if cursor and cursor.isdigit() else 0
         limit = max(1, min(limit, 100))
@@ -1196,8 +1193,7 @@ class ProductFacadeService:
             rows = [
                 s
                 for s in self._swarms.values()
-                if s.organization_id == str(organization_id)
-                and s.status in {"queued", "running"}
+                if s.organization_id == str(organization_id) and s.status in {"queued", "running"}
             ]
         return [
             {
@@ -1328,7 +1324,11 @@ class ProductFacadeService:
         return None
 
     def contribute_knowledge(
-        self, organization_id: OrganizationId, actor_id: ActorId, action_reference_id: str, payload: dict[str, Any]
+        self,
+        organization_id: OrganizationId,
+        actor_id: ActorId,
+        action_reference_id: str,
+        payload: dict[str, Any],
     ) -> dict[str, Any] | None:
         self.ensure_extended_stores()
         action = self.consume_action(
@@ -1679,10 +1679,9 @@ class ProductFacadeService:
                 )
             count = 0
             for row in rows:
-                if not ids or row["id"] in ids:
-                    if not row.get("read"):
-                        row["read"] = True
-                        count += 1
+                if (not ids or row["id"] in ids) and not row.get("read"):
+                    row["read"] = True
+                    count += 1
             return {"marked": count}
 
     def get_preferences(self, organization_id: OrganizationId, actor_id: ActorId) -> dict[str, Any]:
@@ -1943,6 +1942,7 @@ class ProductFacadeService:
 
 _FACADE: ProductFacadeService | None = None
 _FACADE_LOCK = threading.Lock()
+
 
 def get_product_facade() -> ProductFacadeService:
     global _FACADE

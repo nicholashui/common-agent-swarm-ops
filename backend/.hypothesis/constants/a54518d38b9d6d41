@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\main.py
+# hypothesis_version: 6.151.12
+
+[200, 204, 205, 300, 304, 404, '*', '/api/v1', '0', '0.1.0', '1', 'CASOPS_DEV_TRUST', 'CASOPS_ENV', 'ENV', 'X-Correlation-ID', '_state', 'actor-local-dev', 'application/json', 'body', 'body_iterator', 'code', 'content-length', 'content-type', 'control_plane:*', 'detail', 'false', 'http', 'ingress_guard', 'message', 'no', 'off', 'on', 'org-local-dev', 'outbox', 'prod', 'production', 'registry.propose', 'registry.read', 'swarm.read', 'swarm.write', 'true', 'x-correlation-id', 'yes']

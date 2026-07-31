@@ -34,3 +34,27 @@ Shared pack special_skills (optional): agent_loop_v3, complex_problem_solution_p
 ## Tests
 - Offline golden: `business/video/evals/agents/video.orchestrator/golden.json`
 - Must not require live network for L1 pass when tools are mocked.
+
+<!-- RETHINK_100:start -->
+## RETHINK_100 harness notes
+
+Source: `business/video/corpus/study/ui/RETHINK_100_IMPROVEMENTS.md` (applied ids: 6, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 36…).
+
+### Fail-closed
+- Do not treat design-time model names as enabled APIs.
+- Runtime: `allowed_tools` + host production flags only.
+
+### Operator-facing quality
+- Host control plane owns orchestration; this agent never opens a second control plane.
+- Runtime tools remain agent_spec.allowed_tools only; RETHINK model names are design-time.
+- Fail closed when tools/providers are unavailable (circuit-breaker posture).
+- Prefer iterative verify → refine ≤ max_refinement_count → HiTL over silent pass.
+- Emit plain-English reasoning summary in artifacts for operator trust.
+- Attach provenance / correlation_id / evidence_refs on every handoff.
+- Verify intermediate narrative/script artifacts before advancing downstream handoffs.
+- Escalate stereotype/harm/consent risks to ethics/trust-safety/legal gates.
+
+### Evidence
+- Machine record: `sources/RETHINK_100_APPLIED.json`
+- Agent: `video.orchestrator`
+<!-- RETHINK_100:end -->

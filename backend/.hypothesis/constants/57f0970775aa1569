@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\pack_runtime\paths.py
+# hypothesis_version: 6.151.12
+
+['agents', 'business', 'evals', 'special_skills', 'video', 'video.critic', 'video.gatekeeper', 'video.judge', 'video.memory', 'video.orchestrator', 'video.planner', 'video.router']

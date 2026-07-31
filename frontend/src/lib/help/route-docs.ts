@@ -58,6 +58,7 @@ const STATIC_ROUTE_SEGMENTS = new Set([
   "onboarding",
   "operations",
   "org-chart",
+  "agent-workflow",
   "profile",
   "registry",
   "settings",

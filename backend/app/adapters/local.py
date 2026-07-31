@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.adapters.base import DeterministicLocalAdapter
+from app.governance.tool_broker import LocalToolAdapter
 
 LOCAL_ADAPTER_VERSION = "1.0.0"
 
@@ -56,7 +57,7 @@ class StubMediaAdapter(DeterministicLocalAdapter):
         super().__init__("media.stub", LOCAL_ADAPTER_VERSION, "stub_media_created")
 
 
-def default_local_adapters() -> tuple[object, ...]:
+def default_local_adapters() -> tuple[LocalToolAdapter, ...]:
     """Create the Host adapter allow-list including live media providers.
 
     Live media adapters (Sora/Veo/Runway/ElevenLabs) are always registered as

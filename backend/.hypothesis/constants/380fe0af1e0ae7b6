@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\pack_runtime\golden.py
+# hypothesis_version: 6.151.12
+
+['*/golden.json', 'L1 not passed', 'agent_id', 'artifact missing', 'artifact_required', 'constraints', 'errors', 'expect', 'failed', 'goal', 'golden not object', 'golden.json', 'input', 'inputs', 'l1_passed', 'needs_hitl', 'needs_refine', 'network', 'ok', 'output_status_in', 'passed', 'production', 'results', 'run', 'skill not loaded', 'summary', 'total', 'utf-8']

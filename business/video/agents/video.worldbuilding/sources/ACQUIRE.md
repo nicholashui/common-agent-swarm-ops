@@ -19,3 +19,11 @@ Tolkien; *Worldbuilding* (Adams); fan-wikis; series-bible leaks
 3. Place fixtures under `excerpts/` or `study/`.
 4. Update `MAPPING.md` with path mapping.
 5. Set `next_review_at` in `DISTILLATION_PLAN.json`.
+
+## RETHINK_100_MODELS
+
+Design-time model landscape from RETHINK_100 (do **not** download weights into the pack).
+
+- Wan 2.6 (design-time only)
+
+Runtime remains host allow-list + production gates. See corpus `study/ui/RETHINK_100_IMPROVEMENTS.md`.

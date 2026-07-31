@@ -18,6 +18,7 @@ const EXPECTED_LABELS = [
   "Blueprints",
   "Registry Hub",
   "Agent Org Chart",
+  "Agent Workflow",
   "Agent & Pattern Detail",
   "Activity",
   "Monitoring",
@@ -130,6 +131,15 @@ test("route active matching covers dashboard, canvas, and operations", () => {
   assert.equal(isMenuItemActive("/operations", monitoring), true);
 });
 
+test("agent workflow is active under /registry/agent-workflow and defers hub", () => {
+  const path = "/registry/agent-workflow";
+  const item = getApplicationMenuItem("registry-agent-workflow")!;
+  const hub = getApplicationMenuItem("registry-hub")!;
+  assert.equal(isMenuItemActive(path, item), true);
+  assert.equal(isMenuItemActive(path, hub), false);
+  assert.equal(isMenuItemActive("/registry", hub), true);
+});
+
 test("org chart is active under /registry/org-chart and defers hub", () => {
   const orgPath = "/registry/org-chart";
   const orgItem = getApplicationMenuItem("registry-org-chart")!;
@@ -150,6 +160,7 @@ test("menu item routes align with screen-manifest destinations", () => {
     blueprints: "/blueprints",
     "registry-hub": "/registry",
     "registry-org-chart": "/registry/org-chart",
+    "registry-agent-workflow": "/registry/agent-workflow",
     activity: "/activity",
     monitoring: "/operations",
     "approvals-rollouts": "/operations",

@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\api\v1\events.py
+# hypothesis_version: 6.151.12
+
+[2000, ',', '/events/stream', 'Cache-Control', 'activity:new', 'as_of', 'correlation_id', 'degraded', 'delayed', 'delayed_or_degraded', 'event_replay_policy', 'event_replay_service', 'event_type', 'events', 'freshness', 'no-cache', 'occurred_at', 'payload', 'projection_service', 'recovery', 'redacted_payload', 'sequence', 'stream.connected', 'subject_reference', 'text/event-stream', 'topic', 'topics', 'unavailable']

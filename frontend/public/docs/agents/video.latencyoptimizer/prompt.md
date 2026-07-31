@@ -96,3 +96,33 @@ Execute the craft step for **LatencyOptimizerAgent (VA Domain Pack)**. Use the a
 - Prefer short, verifiable claims over marketing language.
 - Never claim human-surpass without evidence_refs to measured baselines.
 - Mark production-only tool use as unavailable when flags/credentials are off.
+
+<!-- RETHINK_100:start -->
+## RETHINK_100 operating guidance (design-time)
+
+> Derived from `ui/RETHINK_100_IMPROVEMENTS.md` for `video.latencyoptimizer`.
+> Does **not** enable production models or network. Host `agent_spec.json` remains authoritative.
+
+### Applied item ids
+10, 11, 15, 17, 21, 26, 30, 31, 37, 38, 59, 63, 64, 87, 88, 93, 94
+
+### Design-time model landscape (non-activating)
+- (no additional gen models for this role beyond host allow-list)
+
+### Obligations
+- Host control plane owns orchestration; this agent never opens a second control plane.
+- Runtime tools remain agent_spec.allowed_tools only; RETHINK model names are design-time.
+- Fail closed when tools/providers are unavailable (circuit-breaker posture).
+- Prefer iterative verify → refine ≤ max_refinement_count → HiTL over silent pass.
+- Emit plain-English reasoning summary in artifacts for operator trust.
+- Attach provenance / correlation_id / evidence_refs on every handoff.
+- Verify intermediate narrative/script artifacts before advancing downstream handoffs.
+- Maintain a design-time model strengths matrix (quality, cost, latency, consistency); host routing remains authoritative.
+- Escalate stereotype/harm/consent risks to ethics/trust-safety/legal gates.
+- When ensemble is requested, propose multi-model candidates + selection criterion; host executes tools.
+
+### Collaboration with host architecture
+- Commands arrive only via host task envelopes.
+- Publish results as structured artifacts; never open browser/UI channels.
+- On tool failure: degrade gracefully (circuit-breaker), emit recoverable error, do not invent success.
+<!-- RETHINK_100:end -->

@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from typing import Any, cast
 
 import pytest
 from fastapi.testclient import TestClient
+from httpx import Response
 
 from app.api.v1.dependencies import AuthenticatedRequestContext, get_authenticated_request_context
 from app.api.v1.product_facade import reset_product_facade_for_tests
@@ -16,17 +18,17 @@ ORG_ID = OrganizationId("org-ext")
 CORRELATION_ID = CorrelationId("corr-ext")
 
 
-def body(response) -> dict:
-    payload = response.json()
-    if isinstance(payload, dict) and "data" in payload and "meta" in payload:
-        return payload["data"]
+def body(response: Response) -> dict[str, Any]:
+    payload = cast(dict[str, Any], response.json())
+    if "data" in payload and "meta" in payload:
+        return cast(dict[str, Any], payload["data"])
     return payload
 
 
-def action_id(bootstrap: dict, kind: str) -> str:
-    for a in bootstrap["actions"]:
-        if a["kind"] == kind:
-            return a["id"]
+def action_id(bootstrap: dict[str, Any], kind: str) -> str:
+    for action in cast(list[dict[str, Any]], bootstrap["actions"]):
+        if action["kind"] == kind:
+            return str(action["id"])
     raise AssertionError(f"missing action kind {kind}")
 
 
@@ -87,7 +89,11 @@ def test_knowledge_settings_finance_audit_profile(client: TestClient) -> None:
 
     integ = client.post(
         "/api/v1/audit/integrity-checks",
-        json={"action_reference_id": action_id(body(client.get("/api/v1/developer/actions")), "audit_integrity")},
+        json={
+            "action_reference_id": action_id(
+                body(client.get("/api/v1/developer/actions")), "audit_integrity"
+            )
+        },
     )
     assert integ.status_code == 200
     assert body(integ)["status"] == "passed"

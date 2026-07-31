@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from typing import Any, cast
 
 import pytest
-from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from httpx import Response
 
 from app.api.v1.dependencies import AuthenticatedRequestContext, get_authenticated_request_context
 from app.api.v1.product_facade import reset_product_facade_for_tests
@@ -17,11 +18,11 @@ ORG_ID = OrganizationId("org-product")
 CORRELATION_ID = CorrelationId("corr-product")
 
 
-def body(response) -> dict:
+def body(response: Response) -> dict[str, Any]:
     """Unwrap optional public envelope {data, meta} used by Host middleware."""
-    payload = response.json()
-    if isinstance(payload, dict) and "data" in payload and "meta" in payload:
-        return payload["data"]
+    payload = cast(dict[str, Any], response.json())
+    if "data" in payload and "meta" in payload:
+        return cast(dict[str, Any], payload["data"])
     return payload
 
 

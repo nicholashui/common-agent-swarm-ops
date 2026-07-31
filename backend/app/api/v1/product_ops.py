@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Any
-
 from datetime import UTC, datetime
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, Query
 
@@ -65,9 +64,7 @@ async def list_approvals_inbox(
     """Approvals inbox from Host-held pending operations; detail via GET /approvals/{id}."""
     items: list[dict[str, Any]] = []
     for approval_id in services.list_pending_approval_ids(context.organization_id):
-        gate = services.get_approval(
-            context.organization_id, approval_id, context.correlation_id
-        )
+        gate = services.get_approval(context.organization_id, approval_id, context.correlation_id)
         if gate.is_success and gate.value is not None:
             g = gate.value
             items.append(

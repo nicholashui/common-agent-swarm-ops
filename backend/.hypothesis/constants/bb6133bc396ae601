@@ -1,0 +1,4 @@
+# file: C:\Project\common-agent-swarm-ops\backend\app\video\pack_runtime\loader.py
+# hypothesis_version: 6.151.12
+
+['ACQUIRE.md', 'SKILL.md', 'SOURCE_CATALOG.json', 'agent_id', 'agent_spec.json', 'allowed_tools', 'bindings.json', 'critique_edges', 'does_not_own', 'inputs', 'integration.json', 'max_refinement_count', 'outputs', 'prompt_reference', 'prompts', 'rubric_reference', 'rubrics', 'skill_id', 'skills', 'sources', 'special_skills', 'utf-8']

@@ -30,6 +30,8 @@ export type BoundScreenKey =
   | "mobile"
   | "notifications"
   | "onboarding"
+  | "orgChart"
+  | "agentWorkflow"
   | "profile"
   | "registry"
   | "settings";
@@ -102,6 +104,14 @@ const OnboardingHome = lazyHome(
   () => import("../OnboardingHome"),
   "OnboardingHome",
 );
+const OrgChartHome = lazyHome(
+  () => import("../OrgChartHome"),
+  "OrgChartHome",
+);
+const AgentWorkflowHome = lazyHome(
+  () => import("../AgentWorkflowHome"),
+  "AgentWorkflowHome",
+);
 const ProfileHome = lazyHome(() => import("../ProfileHome"), "ProfileHome");
 const RegistryHome = lazyHome(() => import("../RegistryHome"), "RegistryHome");
 const SettingsHome = lazyHome(() => import("../SettingsHome"), "SettingsHome");
@@ -146,6 +156,10 @@ export function BoundScreenHome({
       return <BoundNotificationsHome />;
     case "onboarding":
       return <BoundOnboardingHome />;
+    case "orgChart":
+      return <BoundOrgChartHome />;
+    case "agentWorkflow":
+      return <BoundAgentWorkflowHome />;
     case "profile":
       return <BoundProfileHome />;
     case "registry":
@@ -364,6 +378,34 @@ function BoundOnboardingHome(): JSX.Element {
   return (
     <BoundShell status={bridge.runtime.status}>
       <OnboardingHome
+        view={view}
+        onAction={bridge.onAction}
+        statusMessage={bridge.statusMessage}
+      />
+    </BoundShell>
+  );
+}
+
+function BoundOrgChartHome(): JSX.Element {
+  const view = useScreenParameters("orgChart");
+  const bridge = useScreenActionBridge();
+  return (
+    <BoundShell status={bridge.runtime.status}>
+      <OrgChartHome
+        view={view}
+        onAction={bridge.onAction}
+        statusMessage={bridge.statusMessage}
+      />
+    </BoundShell>
+  );
+}
+
+function BoundAgentWorkflowHome(): JSX.Element {
+  const view = useScreenParameters("agentWorkflow");
+  const bridge = useScreenActionBridge();
+  return (
+    <BoundShell status={bridge.runtime.status}>
+      <AgentWorkflowHome
         view={view}
         onAction={bridge.onAction}
         statusMessage={bridge.statusMessage}
