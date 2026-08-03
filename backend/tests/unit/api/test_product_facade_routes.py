@@ -92,6 +92,54 @@ def test_agent_detail_and_proposal_flow(client: TestClient) -> None:
     assert again.status_code == 403
 
 
+def test_composer_ai_recommend_and_materialize(client: TestClient) -> None:
+    rec = client.post(
+        "/api/v1/composer/recommend",
+        json={"goal": "YouTube wuxia cinematic pipeline with verification"},
+    )
+    assert rec.status_code == 200
+    body_rec = body(rec)
+    assert body_rec["mode"] == "ai_pick"
+    assert body_rec["pattern"]["id"]
+    assert len(body_rec["slots"]) >= 3
+    assert all(s.get("agent_id") for s in body_rec["slots"])
+
+    mat = client.post(
+        "/api/v1/composer/materialize",
+        json={
+            "goal": "YouTube wuxia cinematic pipeline with verification",
+            "swarm_name": "AI Wuxia Crew",
+        },
+    )
+    assert mat.status_code == 200
+    body_mat = body(mat)
+    assert body_mat["swarm_id"]
+    assert body_mat["member_count"] >= 3
+    assert body_mat["canvas_path"].startswith("/swarms/")
+    detail = body(client.get(f"/api/v1/swarms/{body_mat['swarm_id']}"))
+    assert len(detail["members"]) >= 3
+
+
+def test_list_swarms_includes_drafts(client: TestClient) -> None:
+    empty = client.get("/api/v1/swarms")
+    assert empty.status_code == 200
+    assert body(empty)["items"] == []
+
+    create = client.post(
+        "/api/v1/swarms",
+        json={"name": "Listable draft"},
+    )
+    assert create.status_code == 201
+    swarm_id = body(create)["swarm_id"]
+
+    listed = body(client.get("/api/v1/swarms"))
+    assert len(listed["items"]) >= 1
+    row = next(i for i in listed["items"] if i["id"] == swarm_id)
+    assert row["name"] == "Listable draft"
+    assert row["status"] == "draft"
+    assert row["member_count"] == 0
+
+
 def test_swarm_create_member_run_activity(client: TestClient) -> None:
     create = client.post(
         "/api/v1/swarms",

@@ -8,6 +8,7 @@ import {
   proposeAgentImprovement,
   startAgentRollout,
 } from "../api/product-commons";
+import { addAgentToSwarmDraft } from "../api/product-swarms";
 import type { InteractionRuntime } from "./interaction-runtime";
 
 export type ScreenUiAction =
@@ -38,6 +39,13 @@ export type ScreenUiAction =
       readonly kind: "commons.propose";
       readonly agentId: string;
       readonly summary?: string;
+    }
+  | {
+      readonly kind: "commons.add_to_swarm";
+      readonly agentId: string;
+      readonly swarmName?: string;
+      /** When set, add into this existing draft instead of creating a new one. */
+      readonly swarmId?: string;
     }
   | {
       readonly kind: "commons.rollout_ab";
@@ -172,6 +180,28 @@ export async function performScreenAction(
       }
       runtime.setSuccess(
         `Proposal ${result.proposalId} ${result.status} for ${result.targetId}.`,
+      );
+      return true;
+    }
+    case "commons.add_to_swarm": {
+      runtime.setInfo(
+        action.swarmId
+          ? `Adding ${action.agentId} to swarm ${action.swarmId}…`
+          : `Adding ${action.agentId} to a new swarm draft…`,
+      );
+      const result = await addAgentToSwarmDraft(action.agentId, {
+        swarmName: action.swarmName,
+        swarmId: action.swarmId,
+      });
+      if (!result.ok) {
+        runtime.setError(result.message);
+        return false;
+      }
+      runtime.setSuccess(
+        `Added ${result.agentId} to swarm draft ${result.swarmId} ` +
+          `(${result.swarmName}, rev ${result.revision}, node ${result.nodeId}` +
+          `${result.createdSwarm ? ", new draft" : ", existing draft"}). ` +
+          "Click more agents to keep adding to this draft; production stays fail-closed.",
       );
       return true;
     }

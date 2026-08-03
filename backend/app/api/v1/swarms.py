@@ -103,6 +103,22 @@ async def create_swarm(
     )
 
 
+@router.get("")
+async def list_swarms(
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """List all organization-owned swarm drafts and runs (in-memory façade; lost on process restart)."""
+    from datetime import UTC, datetime
+
+    return {
+        "items": facade.list_swarms(context.organization_id),
+        "compose_action": facade.issue_compose_action(context.organization_id),
+        "freshness": {"as_of": datetime.now(UTC).isoformat(), "state": "live"},
+        "note": "Façade swarms are process-local. Restart clears drafts.",
+    }
+
+
 @router.get("/running")
 async def list_running_swarms(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],

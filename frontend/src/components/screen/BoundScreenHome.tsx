@@ -6,6 +6,7 @@
  * instead of one 6MB+ all-homes client graph.
  */
 import type { ComponentType, ReactNode } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
@@ -477,13 +478,95 @@ export function BoundAgentDetailHome({
 export function BoundSwarmCanvasHome({
   swarmId,
 }: Readonly<{ swarmId: string }>): JSX.Element {
-  void swarmId;
-  const view = useScreenParameters("canvas");
+  return <BoundLiveSwarmCanvas swarmId={swarmId} />;
+}
+
+/**
+ * Loads Host swarm draft by id and overlays real members onto canvas projection.
+ * Menu /canvas still uses the static demo landing; this route is for live drafts.
+ */
+function BoundLiveSwarmCanvas({
+  swarmId,
+}: Readonly<{ swarmId: string }>): JSX.Element {
+  const baseView = useScreenParameters("canvas");
   const bridge = useScreenActionBridge();
+  const [liveView, setLiveView] = useState(baseView);
+  const [loadNote, setLoadNote] = useState<string>(
+    `Loading Host swarm ${swarmId}…`,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const { getSwarm } = await import("../../lib/api/product-swarms");
+      const result = await getSwarm(swarmId);
+      if (cancelled) return;
+      if (!result.ok) {
+        setLoadNote(result.message);
+        setLiveView({
+          ...baseView,
+          swarmName: `Missing: ${swarmId}`,
+          patternBadge: "Host draft not found",
+          commonsSummary: "0 members · process-local façade",
+          nodes: [],
+          groups: [],
+          edges: [],
+          footerNote: result.message,
+        });
+        return;
+      }
+      const { swarm } = result;
+      const memberNodes =
+        swarm.members.length > 0
+          ? swarm.members
+          : swarm.nodes
+              .filter((n) => n.agentId)
+              .map((n) => ({
+                nodeId: n.id,
+                agentId: n.agentId ?? n.id,
+                agentVersion: n.agentVersion ?? "current",
+              }));
+      const nodes = memberNodes.map((m, index) => ({
+        id: m.nodeId || `node_${index}`,
+        label: m.agentId,
+        kind: "common" as const,
+        versionLabel: m.agentVersion || "current",
+        status: "idle" as const,
+        statusLabel: "Draft member",
+        metrics: "Host draft · not run",
+        linked: true,
+      }));
+      setLiveView({
+        ...baseView,
+        swarmName: swarm.name,
+        patternBadge: swarm.patternRef
+          ? `Pattern: ${swarm.patternRef}`
+          : `Status: ${swarm.status} · rev ${swarm.revision}`,
+        commonsSummary: `${memberNodes.length} member(s) on Host draft ${swarm.id}`,
+        nodes,
+        groups: [],
+        edges: [],
+        footerNote: `Live Host draft ${swarm.id} · revision ${swarm.revision} · ${swarm.status}. Façade is process-local (restart clears drafts). Production stays fail-closed.`,
+      });
+      setLoadNote(
+        `Loaded draft ${swarm.id}: ${swarm.name} (${memberNodes.length} member(s), rev ${swarm.revision}).`,
+      );
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [baseView, swarmId]);
+
   return (
     <BoundShell status={bridge.runtime.status}>
+      <p className="bound-swarm-canvas__banner" role="status">
+        {loadNote}{" "}
+        <a className="registry-home__linkish" href="/registry">
+          ← Registry drafts
+        </a>
+      </p>
       <CanvasHome
-        view={view}
+        view={liveView}
         onAction={bridge.onAction}
         statusMessage={bridge.statusMessage}
       />

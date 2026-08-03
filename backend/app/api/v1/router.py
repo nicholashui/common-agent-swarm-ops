@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends
 from app.api.v1.adoption import router as adoption_router
 from app.api.v1.approvals import router as approvals_router
 from app.api.v1.commons import router as commons_router
+from app.api.v1.composer import router as composer_router
 from app.api.v1.definitions import router as definitions_router
 from app.api.v1.dependencies import (
     AuthenticatedRequestContext,
@@ -42,6 +43,7 @@ def create_public_api_router() -> APIRouter:
     router.include_router(va_router)
     # Product façade for redesigned UI (commons registry, swarms, activity, extended).
     router.include_router(commons_router)
+    router.include_router(composer_router)
     router.include_router(swarms_router)
     router.include_router(product_ops_router)
     router.include_router(product_extended_router)

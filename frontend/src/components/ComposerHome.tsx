@@ -1,12 +1,12 @@
 "use client";
 
 /**
- * @duty ComposerHome — swarm composer projection (ui_03)
- * @role Compose/pin/draft swarm graph intents via projection + onAction bridge.
- * @controls Compose form controls, pin/draft actions, governed stubs fail-closed.
- * @must Route mutations through screen actions; show host feedback only.
- * @mustnot Invent topology or run authority in the browser.
- * @redesign docs/frontend_redesign/ui_03_swarm_composer.md
+ * @duty ComposerHome — ACC Swarm Composer (ui_03 redesign)
+ * @role Requirements in → AI binds available agents → workflow diagram out.
+ * @controls Spec chat, AI plan, HITL conflicts only, materialize → Canvas.
+ * @must AI-pick mainly; human only for needs_hitl; closed-world agent ids.
+ * @mustnot Invent production activation or human agent shopping as primary path.
+ * @redesign docs/frontend_redesign/ui_03_swarm_composer_acc_preview.svg
  */
 import React, {
   useEffect,
@@ -22,31 +22,48 @@ import Link from "next/link";
 import {
   buildLocalAssistantReply,
   type ComposerChatMessage,
-  type ComposerGraphStyle,
   type ComposerLandingView,
   type ComposerPatternCard,
+  type ComposerSample,
 } from "../lib/projections/composer-landing";
-import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import {
+  buildComposerWorkflowGraph,
+  type ComposerWorkflowGraph,
+} from "../lib/projections/composer-workflow";
+import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+type ActiveRec = {
+  readonly patternId: string;
+  readonly patternName: string;
+  readonly version: string;
+  readonly rationale: string;
+  readonly metrics: string;
+  readonly slots: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly version: string;
+    readonly verified?: boolean;
+    readonly agentId?: string;
+  }[];
+};
+
+type StepId = 1 | 2 | 3 | 4 | 5;
 
 export function ComposerHome({
   view,
   onAction,
   statusMessage: externalStatus,
+  onNavigate,
 }: Readonly<{
   view: ComposerLandingView;
   onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
   statusMessage?: string;
+  onNavigate?: (path: string) => void;
 }>): JSX.Element {
   const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [goal, setGoal] = useState("");
-  const [activeFilter, setActiveFilter] = useState(view.activeFilter);
-  const [selectedPatternId, setSelectedPatternId] = useState(
-    view.patterns.find((pattern) => pattern.recommended)?.id ??
-      view.patterns[0]?.id,
-  );
-  const [query, setQuery] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const feedback = externalStatus ?? statusMessage;
   const announce = (message: string): void => {
@@ -57,122 +74,347 @@ export function ComposerHome({
     setStatusMessage(message);
   };
   const [architectOpen, setArchitectOpen] = useState(true);
-  const [patternsOpen, setPatternsOpen] = useState(false);
   const [messages, setMessages] = useState<readonly ComposerChatMessage[]>(
     view.messages,
   );
-  const patternRefs = useRef(new Map<string, HTMLLIElement | null>());
+  const [lastGoal, setLastGoal] = useState("");
+  const [aiBusy, setAiBusy] = useState(false);
+  const [humanResolutions, setHumanResolutions] = useState<
+    Record<string, string>
+  >({});
+  const [pendingHitlIds, setPendingHitlIds] = useState<readonly string[]>([]);
+  const [activeRec, setActiveRec] = useState<ActiveRec | null>(null);
+  const [lastCanvasPath, setLastCanvasPath] = useState<string | null>(null);
+  const [decisionStatus, setDecisionStatus] = useState<
+    "idle" | "ai_resolved" | "needs_hitl"
+  >("idle");
+  const [step, setStep] = useState<StepId>(1);
+  const [samplesOpen, setSamplesOpen] = useState(false);
   const architectPanelId = useId();
+  const samplesDialogTitleId = useId();
+  const samplesCloseRef = useRef<HTMLButtonElement | null>(null);
 
-  const filteredPatterns = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return view.patterns.filter((pattern) => {
-      const matchesQuery =
-        q.length === 0 ||
-        pattern.name.toLowerCase().includes(q) ||
-        pattern.whenToUse.toLowerCase().includes(q);
-      const matchesFilter =
-        activeFilter === "All domains" ||
-        pattern.domainTags.includes(activeFilter);
-      return matchesQuery && matchesFilter;
-    });
-  }, [activeFilter, query, view.patterns]);
+  const workflowGraph: ComposerWorkflowGraph = useMemo(
+    () =>
+      buildComposerWorkflowGraph(
+        activeRec?.slots ?? [],
+        activeRec?.patternName,
+      ),
+    [activeRec],
+  );
 
-  const selectedPattern =
-    view.patterns.find((pattern) => pattern.id === selectedPatternId) ??
-    filteredPatterns[0] ??
-    view.patterns[0];
+  const samples = view.samples ?? [];
 
   useEffect(() => {
-    const latestRec = [...messages]
-      .reverse()
-      .find((message) => message.recommendation)?.recommendation;
-    if (!latestRec) return;
-    setSelectedPatternId(latestRec.patternId);
-    const node = patternRefs.current.get(latestRec.patternId);
-    node?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }, [messages]);
+    if (!samplesOpen) return;
+    samplesCloseRef.current?.focus();
+    const onKey = (event: globalThis.KeyboardEvent): void => {
+      if (event.key === "Escape") {
+        setSamplesOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [samplesOpen]);
 
-  const applyChip = (chip: string): void => {
-    setGoal(chip);
-    announce(L(labels, "goal_chip_applied_chip"));
-  };
-
-  const selectPattern = (patternId: string): void => {
-    setSelectedPatternId(patternId);
-    const pattern = view.patterns.find((entry) => entry.id === patternId);
-    if (pattern) {
-      setSwarmName(`Untitled Swarm from ${pattern.name}`);
+  const loadSample = (sample: ComposerSample, runPlan: boolean): void => {
+    setGoal(sample.body);
+    setStep(1);
+    setSamplesOpen(false);
+    announce(
+      runPlan
+        ? `Loaded sample “${sample.label}” and running AI plan…`
+        : `Loaded sample “${sample.label}” into requirements. Review text, then AI plan.`,
+    );
+    if (runPlan) {
+      void handleAiPlan(undefined, sample.body);
     }
   };
 
-  const instantiatePattern = (pattern: ComposerPatternCard): void => {
-    selectPattern(pattern.id);
+  const setRecFromSlots = (
+    rec: {
+      pattern?: {
+        id: string;
+        name: string;
+        versionLabel: string;
+        rationale: string;
+      } | null;
+      slots: readonly {
+        id: string;
+        label: string;
+        version: string;
+        verified: boolean;
+        agentId: string;
+      }[];
+    },
+    metrics: string,
+  ): ActiveRec => {
+    const active: ActiveRec = {
+      patternId: rec.pattern?.id ?? "ai-workflow",
+      patternName: rec.pattern?.name ?? "AI workflow",
+      version: rec.pattern?.versionLabel ?? "1.0",
+      rationale: rec.pattern?.rationale ?? "AI pick from available agents.",
+      metrics,
+      slots: rec.slots.map((s) => ({
+        id: s.id,
+        label: s.label,
+        version: s.version,
+        verified: s.verified,
+        agentId: s.agentId,
+      })),
+    };
+    setActiveRec(active);
+    setSwarmName(`AI · ${active.patternName}`);
+    return active;
+  };
+
+  const appendHitlMessage = (rec: {
+    openQuestions: readonly {
+      id: string;
+      kind: string;
+      severity: string;
+      question: string;
+      options: readonly { id: string; label: string }[];
+    }[];
+    note: string;
+  }): void => {
+    setDecisionStatus("needs_hitl");
+    setStep(2);
+    setPendingHitlIds(rec.openQuestions.map((q) => q.id));
     setMessages((current) => [
       ...current,
       {
-        id: `inst-${Date.now()}`,
-        role: "user",
-        text: `Start with common pattern ${pattern.name} v${pattern.version}.`,
-      },
-      {
-        id: `inst-a-${Date.now()}`,
+        id: `hitl-${Date.now()}`,
         role: "assistant",
-        text: "Pattern selected from browser:",
-        recommendation: {
-          patternId: pattern.id,
-          patternName: pattern.name,
-          version: pattern.version,
-          rationale: pattern.whenToUse,
-          metrics: pattern.metrics,
-          slots: [
-            { id: "slot-a", label: "Slot A", version: "Common" },
-            { id: "slot-b", label: "Slot B", version: "Common" },
-            {
-              id: "slot-v",
-              label: "Verifier",
-              version: "Common",
-              verified: true,
-            },
-          ],
+        text: "AI cannot determine a safe solution yet — human resolution required (not agent picking):",
+        hitl: {
+          questions: rec.openQuestions.map((q) => ({
+            id: q.id,
+            kind: q.kind,
+            severity: q.severity,
+            question: q.question,
+            options: q.options,
+          })),
         },
       },
     ]);
     setStatusMessage(
-      `Instantiated ${pattern.name} into chat recommendation (local preview).`,
+      rec.note ||
+        "Answer the conflict question(s) — AI continues after resolutions.",
     );
-    setPatternsOpen(false);
   };
 
-  const handleSend = (event?: FormEvent): void => {
+  const materializeAndOpen = async (
+    goalText?: string,
+    resolutions?: Record<string, string>,
+  ): Promise<void> => {
+    const g = (goalText ?? lastGoal).trim();
+    if (!g) {
+      setStatusMessage("Send a goal/spec first so AI can pick the workflow.");
+      return;
+    }
+    if (aiBusy) return;
+    setAiBusy(true);
+    setStep(4);
+    setStatusMessage("AI materializing draft swarm…");
+    try {
+      const { materializeAiComposition } = await import(
+        "../lib/api/product-composer"
+      );
+      const result = await materializeAiComposition(g, {
+        swarmName,
+        humanResolutions: resolutions ?? humanResolutions,
+      });
+      if (!result.ok) {
+        setStatusMessage(result.message);
+        return;
+      }
+      if (result.decisionStatus === "needs_hitl") {
+        appendHitlMessage(result.recommendation);
+        return;
+      }
+      setPendingHitlIds([]);
+      setDecisionStatus("ai_resolved");
+      setStep(5);
+      const active = setRecFromSlots(
+        result.recommendation,
+        `${result.memberCount} members · materialize · draft only`,
+      );
+      setLastCanvasPath(result.canvasPath);
+      setMessages((current) => [
+        ...current,
+        {
+          id: `mat-${Date.now()}`,
+          role: "assistant",
+          text: "AI resolved and materialised workflow:",
+          recommendation: {
+            patternId: active.patternId,
+            patternName: active.patternName,
+            version: active.version,
+            rationale: active.rationale,
+            metrics: active.metrics,
+            slots: active.slots,
+          },
+        },
+      ]);
+      setStatusMessage(
+        `AI draft ${result.swarmId} ready (${result.memberCount} members). Opening canvas…`,
+      );
+      if (onNavigate) {
+        onNavigate(result.canvasPath);
+      } else if (typeof window !== "undefined") {
+        window.location.assign(result.canvasPath);
+      }
+    } catch (error) {
+      setStatusMessage(
+        error instanceof Error ? error.message : "Materialize failed.",
+      );
+    } finally {
+      setAiBusy(false);
+    }
+  };
+
+  /** AI plan: recommend only so the workflow diagram stays on screen. */
+  const handleAiPlan = async (
+    event?: FormEvent,
+    goalOverride?: string,
+    resolutions?: Record<string, string>,
+  ): Promise<void> => {
     event?.preventDefault();
-    const trimmed = goal.trim();
+    const trimmed = (goalOverride ?? goal).trim();
     if (trimmed.length === 0) {
       announce(L(labels, "enter_a_goal_before_sending"));
       return;
     }
-    const userMessage: ComposerChatMessage = {
-      id: `u-${Date.now()}`,
-      role: "user",
-      text: trimmed,
-    };
-    const assistant = buildLocalAssistantReply(trimmed, view.patterns);
-    setMessages((current) => [...current, userMessage, assistant]);
-    setGoal("");
+    if (aiBusy) return;
+    setAiBusy(true);
+    setLastGoal(trimmed);
+    if (!resolutions) {
+      setHumanResolutions({});
+      setPendingHitlIds([]);
+    }
+    setStep(2);
+    if (!goalOverride || goalOverride === goal) {
+      setMessages((current) => [
+        ...current,
+        { id: `u-${Date.now()}`, role: "user", text: trimmed },
+      ]);
+      if (!goalOverride) setGoal("");
+    }
     setStatusMessage(
-      "Local preview recommendation appended. Browse patterns or load the canvas draft.",
+      "AI planning workflow from available agents (closed world)…",
     );
+    try {
+      const { recommendComposition } = await import(
+        "../lib/api/product-composer"
+      );
+      const result = await recommendComposition(trimmed, {
+        humanResolutions: resolutions ?? humanResolutions,
+      });
+      if (!result.ok) {
+        const fallback = buildLocalAssistantReply(trimmed, view.patterns);
+        setMessages((current) => [...current, fallback]);
+        if (fallback.recommendation) {
+          setActiveRec({
+            patternId: fallback.recommendation.patternId,
+            patternName: fallback.recommendation.patternName,
+            version: fallback.recommendation.version,
+            rationale: fallback.recommendation.rationale,
+            metrics: fallback.recommendation.metrics,
+            slots: fallback.recommendation.slots,
+          });
+          setDecisionStatus("ai_resolved");
+          setStep(3);
+        }
+        setStatusMessage(result.message);
+        return;
+      }
+      if (result.recommendation.decisionStatus === "needs_hitl") {
+        appendHitlMessage(result.recommendation);
+        return;
+      }
+      setPendingHitlIds([]);
+      setDecisionStatus("ai_resolved");
+      setStep(3);
+      const active = setRecFromSlots(
+        result.recommendation,
+        `${result.recommendation.slots.length} agents · AI pick · draft ready`,
+      );
+      setMessages((current) => [
+        ...current,
+        {
+          id: `ai-${Date.now()}`,
+          role: "assistant",
+          text: "AI pick complete — workflow ready (not human agent shopping):",
+          recommendation: {
+            patternId: active.patternId,
+            patternName: active.patternName,
+            version: active.version,
+            rationale: active.rationale,
+            metrics: active.metrics,
+            slots: active.slots,
+          },
+        },
+      ]);
+      setStatusMessage(
+        `AI selected ${active.patternName} with ${active.slots.length} agents. Review diagram, then Accept AI → Canvas.`,
+      );
+    } catch (error) {
+      setStatusMessage(
+        error instanceof Error ? error.message : "AI plan failed.",
+      );
+    } finally {
+      setAiBusy(false);
+    }
+  };
+
+  const resolveHitlOption = (questionId: string, optionId: string): void => {
+    const next = { ...humanResolutions, [questionId]: optionId };
+    setHumanResolutions(next);
+    setMessages((current) => [
+      ...current,
+      {
+        id: `res-${Date.now()}`,
+        role: "user",
+        text: `Resolved ${questionId} → ${optionId}`,
+      },
+    ]);
+    const stillOpen = pendingHitlIds.filter((id) => id !== questionId);
+    setPendingHitlIds(stillOpen);
+    if (stillOpen.length === 0 && lastGoal) {
+      void handleAiPlan(undefined, lastGoal, next);
+    } else {
+      setStatusMessage(
+        `Recorded ${questionId}. ${stillOpen.length} conflict(s) still open.`,
+      );
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>): void => {
     if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
       event.preventDefault();
-      handleSend();
+      void handleAiPlan();
     }
   };
 
+  const hitlOpen = pendingHitlIds.length;
+  const aiSelectedPattern =
+    view.patterns.find((p) => p.id === activeRec?.patternId) ??
+    view.patterns.find((p) =>
+      activeRec?.patternName
+        ? p.name
+            .toLowerCase()
+            .includes(activeRec.patternName.toLowerCase().slice(0, 12))
+        : false,
+    ) ??
+    view.patterns.find((p) => p.recommended) ??
+    view.patterns[0];
+
   return (
-    <section aria-label={L(labels, "swarm_composer")} className="composer-home">
+    <section
+      aria-label={L(labels, "swarm_composer")}
+      className="composer-home composer-home--acc"
+    >
       <header className="composer-home__toolbar">
         <div className="composer-home__toolbar-main">
           <label className="composer-home__name">
@@ -183,32 +425,106 @@ export function ComposerHome({
               value={swarmName}
             />
           </label>
+          {decisionStatus === "ai_resolved" ? (
+            <span className="composer-home__pill composer-home__pill--ok">
+              AI resolved
+            </span>
+          ) : null}
+          {decisionStatus === "needs_hitl" ? (
+            <span className="composer-home__pill composer-home__pill--hitl">
+              needs_hitl
+            </span>
+          ) : null}
+          <span className="composer-home__pill composer-home__pill--ai">
+            AI-pick mainly
+          </span>
         </div>
         <div className="composer-home__toolbar-actions">
           <button
             className="composer-home__ghost"
-            onClick={() => announce(L(labels, "save_draft_requires_an_authorized_compose_contra"))}
+            onClick={() =>
+              announce(L(labels, "save_draft_requires_an_authorized_compose_contra"))
+            }
             type="button"
           >
             Save Draft
           </button>
           <button
-            className="composer-home__ghost"
-            onClick={() => announce(L(labels, "load_template_requires_an_authorized_template_pr"))}
+            className="composer-home__primary"
+            disabled={aiBusy || !lastGoal}
+            onClick={() => void materializeAndOpen()}
             type="button"
           >
-            Load Template
+            Accept AI → Canvas
           </button>
-          <Link aria-label={L(labels, "close_composer")} className="composer-home__close" href="/">
+          <Link
+            aria-label={L(labels, "close_composer")}
+            className="composer-home__close"
+            href="/"
+          >
             ✕
           </Link>
         </div>
       </header>
 
       <div className="composer-home__intro">
+        <p className="composer-home__eyebrow">{view.eyebrow}</p>
         <h1>{view.title}</h1>
         <p>{view.description}</p>
       </div>
+
+      <ol className="composer-home__steps" aria-label="Composition process">
+        {(
+          [
+            [1, "Requirements"],
+            [2, "AI plan & bind"],
+            [3, "Workflow diagram"],
+            [4, "Materialize draft"],
+            [5, "Canvas inspect"],
+          ] as const
+        ).map(([n, label], index, all) => (
+          <li
+            className={
+              step >= n
+                ? step === n
+                  ? "composer-home__step composer-home__step--active"
+                  : "composer-home__step composer-home__step--done"
+                : "composer-home__step"
+            }
+            key={n}
+          >
+            <span className="composer-home__step-inner">
+              {n === 1 ? (
+                <button
+                  aria-haspopup="dialog"
+                  aria-expanded={samplesOpen}
+                  className="composer-home__samples-trigger composer-home__samples-trigger--step"
+                  onClick={() => setSamplesOpen(true)}
+                  title="Sample requirements (load into UI)"
+                  type="button"
+                >
+                  <span aria-hidden="true" className="composer-home__samples-icon">
+                    ▦
+                  </span>
+                  <span className="visually-hidden">
+                    Open sample requirements
+                  </span>
+                </button>
+              ) : null}
+              <span className="composer-home__step-n" aria-hidden="true">
+                {n}
+              </span>
+              <span className="composer-home__step-label">{label}</span>
+            </span>
+            {index < all.length - 1 ? (
+              <span aria-hidden="true" className="composer-home__step-sep">
+                →
+              </span>
+            ) : null}
+          </li>
+        ))}
+        <li className="composer-home__step-meta">HITL: {hitlOpen} open</li>
+      </ol>
 
       {feedback ? (
         <p className="composer-home__status" role="status">
@@ -216,8 +532,12 @@ export function ComposerHome({
         </p>
       ) : null}
 
-      <div className="composer-home__layout">
-        <section aria-label={L(labels, "chat_composer")} className="composer-home__chat panel">
+      <div className="composer-home__layout composer-home__layout--acc">
+        {/* ── LEFT: requirements thread ── */}
+        <section
+          aria-label={L(labels, "chat_composer")}
+          className="composer-home__chat panel"
+        >
           <div className="composer-home__architect">
             <button
               aria-controls={architectPanelId}
@@ -241,6 +561,7 @@ export function ComposerHome({
             </button>
           </div>
 
+          <p className="composer-home__section-label">Requirements</p>
           <div className="composer-home__messages" role="log">
             {messages.map((message) =>
               message.role === "user" ? (
@@ -259,29 +580,53 @@ export function ComposerHome({
                   </span>
                   <div className="composer-home__assistant-body">
                     {message.text ? <p>{message.text}</p> : null}
+                    {message.hitl ? (
+                      <article className="composer-home__hitl">
+                        <p className="composer-home__slots-label">
+                          Human required — AI conflict resolution
+                        </p>
+                        {message.hitl.questions.map((q) => (
+                          <div className="composer-home__hitl-q" key={q.id}>
+                            <p>
+                              <strong>{q.severity}</strong> · {q.question}
+                            </p>
+                            <div className="composer-home__hitl-options">
+                              {q.options.map((opt) => (
+                                <button
+                                  className="composer-home__primary composer-home__primary--small"
+                                  disabled={
+                                    aiBusy || Boolean(humanResolutions[q.id])
+                                  }
+                                  key={opt.id}
+                                  onClick={() =>
+                                    resolveHitlOption(q.id, opt.id)
+                                  }
+                                  type="button"
+                                >
+                                  {opt.label}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </article>
+                    ) : null}
                     {message.recommendation ? (
                       <article className="composer-home__rec">
-                        <button
-                          className="composer-home__rec-card"
-                          onClick={() =>
-                            selectPattern(message.recommendation!.patternId)
-                          }
-                          type="button"
-                        >
+                        <div className="composer-home__rec-card">
                           <strong>
-                            {message.recommendation.patternName} v
-                            {message.recommendation.version}
+                            {message.recommendation.patternName}{" "}
+                            <span className="composer-home__badge">
+                              AI selected pattern
+                            </span>
                           </strong>
-                          <span className="composer-home__badge">
-                            Recommended for goal
-                          </span>
                           <p>{message.recommendation.rationale}</p>
                           <p className="composer-home__metrics">
                             {message.recommendation.metrics}
                           </p>
-                        </button>
+                        </div>
                         <p className="composer-home__slots-label">
-                          Suggested Common Agent slots
+                          AI-bound Common Agent slots
                         </p>
                         <ul className="composer-home__slots">
                           {message.recommendation.slots.map((slot) => (
@@ -294,40 +639,43 @@ export function ComposerHome({
                               key={slot.id}
                             >
                               <span aria-hidden="true" />
-                              {slot.label} · {slot.version}
+                              {slot.label}
+                              {slot.agentId ? ` · ${slot.agentId}` : ""} ·{" "}
+                              {slot.version}
                             </li>
                           ))}
                         </ul>
                         <div className="composer-home__rec-actions">
-                          <Link className="composer-home__primary" href="/canvas">
-                            Load into Canvas →
-                          </Link>
+                          <button
+                            className="composer-home__primary"
+                            disabled={aiBusy || !lastGoal}
+                            onClick={() => void materializeAndOpen()}
+                            type="button"
+                          >
+                            Accept AI → Canvas
+                          </button>
                           <button
                             className="composer-home__ghost"
+                            disabled={aiBusy || !lastGoal}
                             onClick={() =>
-                              setStatusMessage(
-                                "Fork & Customize requires an authorized fork action.",
-                              )
+                              void handleAiPlan(undefined, lastGoal)
                             }
                             type="button"
                           >
-                            Fork &amp; Customize
+                            Re-run AI
                           </button>
                           <button
                             className="composer-home__ghost composer-home__ghost--violet"
                             onClick={() =>
-                              setStatusMessage(
+                              announce(
                                 "Propose as new Pattern requires an authorized proposal contract.",
                               )
                             }
                             type="button"
                           >
-                            Propose as new Pattern
+                            Propose pattern
                           </button>
                         </div>
-                        <p className="composer-home__hint">
-                          Iterate: &quot;make verification stricter&quot;, &quot;use cheaper models for data agents&quot;…
-                        </p>
                       </article>
                     ) : null}
                   </div>
@@ -336,332 +684,402 @@ export function ComposerHome({
             )}
           </div>
 
-          <div className="composer-home__bottom-bar">
-            <button
-              className="composer-home__ghost"
-              onClick={() =>
-                announce(L(labels, "regenerate_requires_the_composer_recommend_strea"))
-              }
-              type="button"
-            >
-              Regenerate
-            </button>
-            <Link className="composer-home__ghost" href="/canvas">
-              Start from blank graph instead
-            </Link>
-            <button
-              className="composer-home__ghost"
-              onClick={() =>
-                setStatusMessage(
-                  "Save conversation as template requires an authorized template write.",
-                )
-              }
-              type="button"
-            >
-              Save this conversation as template
-            </button>
+          {activeRec ? (
+            <dl className="composer-home__metrics-strip">
+              <div>
+                <dt>Agents / slots</dt>
+                <dd>{activeRec.slots.length}</dd>
+              </div>
+              <div>
+                <dt>Pipeline depth</dt>
+                <dd>{Math.max(2, workflowGraph.phaseCount)}</dd>
+              </div>
+              <div>
+                <dt>Verify</dt>
+                <dd className="composer-home__metrics">
+                  {workflowGraph.gateCount > 0 ? "full gate" : "optional"}
+                </dd>
+              </div>
+            </dl>
+          ) : null}
+
+          <div className="composer-home__hitl-banner" role="note">
+            <strong>Human exception path (needs_hitl)</strong>
+            <p>
+              Shown only when AI cannot decide — e.g. cost vs quality, domain
+              mix, or missing catalog capability. Not for agent shopping.
+            </p>
+            <p>
+              Current:{" "}
+              {hitlOpen === 0
+                ? "no open questions · AI proceeding"
+                : `${hitlOpen} open question(s)`}
+            </p>
           </div>
 
-          <div
-            aria-label={L(labels, "goal_examples")}
-            className="composer-home__chips"
-            role="group"
+          <div className="composer-home__inventory">
+            <p className="composer-home__section-label">
+              Available agents (building blocks)
+            </p>
+            <p>
+              Host catalog · closed world · AI binds only{" "}
+              <code>agent_id</code> present in inventory · never invents roles
+            </p>
+          </div>
+
+          <form
+            className="composer-home__input"
+            onSubmit={(e) => void handleAiPlan(e)}
           >
-            {view.goalChips.map((chip) => (
-              <button
-                className="composer-home__chip"
-                key={chip}
-                onClick={() => applyChip(chip)}
-                type="button"
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-
-          <form className="composer-home__input" onSubmit={handleSend}>
             <label className="visually-hidden" htmlFor="composer-goal">
-              Describe your swarm goal
+              {L(labels, "send_goal")}
             </label>
             <textarea
               id="composer-goal"
               onChange={(event) => setGoal(event.target.value)}
               onKeyDown={onKeyDown}
               placeholder={view.inputPlaceholder}
+              rows={3}
               value={goal}
             />
             <div className="composer-home__input-tools">
-              <label className="composer-home__attach">
-                <span className="visually-hidden">{L(labels, "attach_requirements_file")}</span>
+              <label
+                className="composer-home__attach"
+                title={L(labels, "attach_requirements_file")}
+              >
+                <span aria-hidden="true">📎</span>
                 <input
-                  accept=".md,.pdf,text/markdown,application/pdf"
+                  accept=".md,.txt,.pdf"
                   onChange={() =>
-                    setStatusMessage(
-                      "File attach is local-only feedback; server ingestion is not connected.",
+                    announce(
+                      "File attach is local-only until Host parse contract is authorized.",
                     )
                   }
                   type="file"
                 />
-                📎
               </label>
               <button
-                aria-label={L(labels, "send_goal")}
-                className="composer-home__send"
+                className="composer-home__send-label"
+                disabled={aiBusy}
                 type="submit"
               >
-                ↑
+                {aiBusy ? "…" : "AI plan"}
               </button>
             </div>
           </form>
-        </section>
 
-        <aside
-          aria-label={L(labels, "common_pattern_browser")}
-          className={
-            patternsOpen
-              ? "composer-home__browser composer-home__browser--open"
-              : "composer-home__browser"
-          }
-          id="composer-pattern-browser"
-        >
-          <div className="composer-home__browser-head">
-            <h2>{L(labels, "common_pattern_browser")}</h2>
-            <button
-              className="composer-home__browser-close"
-              onClick={() => setPatternsOpen(false)}
-              type="button"
+          {samplesOpen ? (
+            <div
+              className="composer-home__modal-root"
+              role="presentation"
             >
-              Close
-            </button>
-          </div>
-          <label className="composer-home__search">
-            <span className="visually-hidden">{L(labels, "search_patterns")}</span>
-            <input
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder={L(labels, "search_patterns_2")}
-              value={query}
-            />
-          </label>
-          <div
-            aria-label={L(labels, "pattern_filters")}
-            className="composer-home__filters"
-            role="group"
-          >
-            {view.filters.map((filter) => (
               <button
-                aria-pressed={activeFilter === filter}
-                className={
-                  activeFilter === filter
-                    ? "composer-home__filter composer-home__filter--active"
-                    : "composer-home__filter"
-                }
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
+                aria-label="Close sample requirements"
+                className="composer-home__modal-backdrop"
+                onClick={() => setSamplesOpen(false)}
                 type="button"
+              />
+              <div
+                aria-labelledby={samplesDialogTitleId}
+                aria-modal="true"
+                className="composer-home__modal"
+                role="dialog"
               >
-                {filter}
-              </button>
-            ))}
-          </div>
-          <ul className="composer-home__patterns">
-            {filteredPatterns.map((pattern) => (
-              <li
-                key={pattern.id}
-                ref={(node) => {
-                  patternRefs.current.set(pattern.id, node);
-                }}
-              >
-                <PatternCard
-                  onInstantiate={() => instantiatePattern(pattern)}
-                  onSelect={() => selectPattern(pattern.id)}
-                  pattern={pattern}
-                  selected={selectedPattern?.id === pattern.id}
-                  labels={labels}
-                />
-              </li>
-            ))}
-          </ul>
-
-          {selectedPattern ? (
-            <div className="composer-home__preview panel">
-              <p className="composer-home__preview-label">
-                Live Preview — {selectedPattern.name} v{selectedPattern.version}
-              </p>
-              <MiniGraph style={selectedPattern.graphStyle}  labels={labels} />
-              <dl className="composer-home__summary">
-                <div>
-                  <dt>{L(labels, "total_agents_slots")}</dt>
-                  <dd>{selectedPattern.previewSummary.totalSlots}</dd>
-                </div>
-                <div>
-                  <dt>{L(labels, "parallelism_factor")}</dt>
-                  <dd>{selectedPattern.previewSummary.parallelism}</dd>
-                </div>
-                <div>
-                  <dt>{L(labels, "est_cost_latency")}</dt>
-                  <dd>{selectedPattern.previewSummary.estCostLatency}</dd>
-                </div>
-                <div>
-                  <dt>{L(labels, "verification_coverage")}</dt>
-                  <dd className="composer-home__metrics">
-                    {selectedPattern.previewSummary.verificationCoverage}
-                  </dd>
-                </div>
-              </dl>
-              <Link className="composer-home__primary" href="/canvas">
-                Load into Canvas →
-              </Link>
+                <header className="composer-home__modal-head">
+                  <div>
+                    <h2 id={samplesDialogTitleId}>
+                      Sample requirements (load into UI)
+                    </h2>
+                    <p>
+                      Load fills the requirements box. Load + AI plan runs Host
+                      composition.
+                    </p>
+                  </div>
+                  <button
+                    ref={samplesCloseRef}
+                    className="composer-home__modal-close"
+                    onClick={() => setSamplesOpen(false)}
+                    type="button"
+                  >
+                    ✕
+                  </button>
+                </header>
+                <ul className="composer-home__sample-list">
+                  {samples.map((sample) => (
+                    <li
+                      className={
+                        sample.kind === "hitl_demo"
+                          ? "composer-home__sample composer-home__sample--hitl"
+                          : "composer-home__sample"
+                      }
+                      key={sample.id}
+                    >
+                      <div className="composer-home__sample-copy">
+                        <strong>{sample.label}</strong>
+                        <span>{sample.summary}</span>
+                        {sample.kind === "hitl_demo" ? (
+                          <span className="composer-home__sample-tag">
+                            HITL demo
+                          </span>
+                        ) : null}
+                      </div>
+                      <div className="composer-home__sample-actions">
+                        <button
+                          className="composer-home__ghost composer-home__primary--small"
+                          disabled={aiBusy}
+                          onClick={() => loadSample(sample, false)}
+                          type="button"
+                        >
+                          Load
+                        </button>
+                        <button
+                          className="composer-home__primary composer-home__primary--small"
+                          disabled={aiBusy}
+                          onClick={() => loadSample(sample, true)}
+                          type="button"
+                        >
+                          Load + AI plan
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {samples.length === 0 && view.goalChips.length > 0 ? (
+                  <div className="composer-home__chips">
+                    {view.goalChips.map((chip) => (
+                      <button
+                        className="composer-home__chip"
+                        key={chip}
+                        onClick={() => {
+                          setGoal(chip);
+                          setSamplesOpen(false);
+                          announce(`Loaded “${chip}”. Run AI plan when ready.`);
+                        }}
+                        type="button"
+                      >
+                        {chip}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             </div>
           ) : null}
 
-          <button
-            className="composer-home__suggest"
-            onClick={() =>
-              setStatusMessage(
-                "Suggest new Common Pattern requires an authorized proposal action.",
-              )
-            }
-            type="button"
-          >
-            {view.suggestNewLabel}
-          </button>
+          <div className="composer-home__pattern-context">
+            <p className="composer-home__section-label">
+              AI pattern context (not a pick list)
+            </p>
+            <ul>
+              {view.patterns.slice(0, 3).map((pattern) => (
+                <li
+                  className={
+                    aiSelectedPattern?.id === pattern.id
+                      ? "composer-home__pattern-chip composer-home__pattern-chip--active"
+                      : "composer-home__pattern-chip"
+                  }
+                  key={pattern.id}
+                >
+                  <strong>{pattern.name}</strong>
+                  <span>
+                    {aiSelectedPattern?.id === pattern.id
+                      ? "AI selected · bias only"
+                      : "Considered · not primary pick"}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* ── RIGHT: workflow diagram ── */}
+        <section
+          aria-label="Generated workflow diagram"
+          className="composer-home__workflow panel"
+        >
+          <header className="composer-home__workflow-head">
+            <p className="composer-home__section-label">
+              Generated workflow · primary output
+            </p>
+            <h2>Crew workflow diagram</h2>
+            <p>
+              Same visual language as Registry → Agent Workflow · phases ·
+              agents · gates
+            </p>
+          </header>
+
+          <div className="composer-home__workflow-toolbar">
+            <span className="composer-home__wf-stat">
+              Template: {activeRec ? "AI composed" : "—"}
+            </span>
+            <span className="composer-home__wf-stat composer-home__wf-stat--indigo">
+              {workflowGraph.agentCount + workflowGraph.gateCount} nodes
+            </span>
+            <span className="composer-home__wf-stat composer-home__wf-stat--violet">
+              {workflowGraph.phaseCount} phases
+            </span>
+            <span className="composer-home__wf-stat composer-home__wf-stat--ok">
+              {workflowGraph.gateCount} gate
+            </span>
+            <button
+              className="composer-home__primary composer-home__primary--small"
+              disabled={aiBusy || !lastGoal}
+              onClick={() => void materializeAndOpen()}
+              type="button"
+            >
+              Materialize draft
+            </button>
+          </div>
+
+          <ul className="composer-home__workflow-legend">
+            <li className="composer-home__legend composer-home__legend--phase">
+              Phase
+            </li>
+            <li className="composer-home__legend composer-home__legend--agent">
+              Agent
+            </li>
+            <li className="composer-home__legend composer-home__legend--gate">
+              Critic / verify
+            </li>
+            <li className="composer-home__legend composer-home__legend--edge">
+              handoff
+            </li>
+            <li className="composer-home__legend composer-home__legend--refine">
+              refine cycle
+            </li>
+          </ul>
+
+          <WorkflowDiagram graph={workflowGraph} />
+
+          <div className="composer-home__workflow-footer">
+            <p>
+              <strong>Output package (Host)</strong>
+            </p>
+            <p>
+              workflow graph · pattern_ref · agent pins · edges · critic_status
+              · canvas handoff
+            </p>
+            <p className="composer-home__hint">
+              Materialize creates draft swarm members only · production
+              activation stays fail-closed
+            </p>
+            <div className="composer-home__rec-actions">
+              <button
+                className="composer-home__ghost"
+                onClick={() =>
+                  announce(
+                    "Export graph requires an authorized export action reference.",
+                  )
+                }
+                type="button"
+              >
+                Export
+              </button>
+              {lastCanvasPath ? (
+                <Link className="composer-home__primary" href={lastCanvasPath}>
+                  Canvas
+                </Link>
+              ) : (
+                <button
+                  className="composer-home__primary"
+                  disabled={aiBusy || !lastGoal}
+                  onClick={() => void materializeAndOpen()}
+                  type="button"
+                >
+                  Canvas
+                </button>
+              )}
+            </div>
+          </div>
+
           {view.handoffNotes.map((note) => (
             <p className="composer-home__handoff-note" key={note}>
               {note}
             </p>
           ))}
-        </aside>
+        </section>
       </div>
-
-      <button
-        aria-controls="composer-pattern-browser"
-        aria-expanded={patternsOpen}
-        className="composer-home__fab"
-        onClick={() => setPatternsOpen((open) => !open)}
-        type="button"
-      >
-        Browse Patterns
-      </button>
 
       <p className="composer-home__footer">{view.footerNote}</p>
     </section>
   );
 }
 
-function PatternCard({
-  pattern,
-  selected,
-  onSelect,
-  onInstantiate,
-  labels,
-}: Readonly<{
-  pattern: ComposerPatternCard;
-  selected: boolean;
-  onSelect: () => void;
-  onInstantiate: () => void;
-  labels: ScreenLabels;
-}>): JSX.Element {
-  return (
-    <article
-      className={
-        selected
-          ? "composer-home__pattern composer-home__pattern--selected"
-          : "composer-home__pattern"
-      }
-    >
-      <button
-        aria-pressed={selected}
-        className="composer-home__pattern-select"
-        onClick={onSelect}
-        type="button"
-      >
-        {pattern.recommended ? (
-          <span className="composer-home__badge">{L(labels, "recommended")}</span>
-        ) : null}
-        <strong>
-          {pattern.name}
-          <span className="composer-home__version">v{pattern.version}</span>
-        </strong>
-        <MiniGraph style={pattern.graphStyle}  labels={labels} />
-        <span className="composer-home__when">{pattern.whenToUse}</span>
-        <span className="composer-home__metrics">{pattern.metrics}</span>
-      </button>
-      <div className="composer-home__pattern-actions">
-        <button
-          className="composer-home__primary composer-home__primary--small"
-          onClick={onInstantiate}
-          type="button"
-        >
-          Instantiate
-        </button>
-        <button
-          className="composer-home__ghost"
-          onClick={onSelect}
-          type="button"
-        >
-          Fork
-        </button>
-      </div>
-    </article>
-  );
-}
+function WorkflowDiagram({
+  graph,
+}: Readonly<{ graph: ComposerWorkflowGraph }>): JSX.Element {
+  const phases = graph.nodes.filter((n) => n.kind === "phase");
+  const agents = graph.nodes.filter((n) => n.kind !== "phase");
 
-function MiniGraph({
-  style,
-  labels,
-}: Readonly<{
-  style: ComposerGraphStyle;
-  labels: ScreenLabels;
-}>): JSX.Element {
-  if (style === "verification_loop") {
-    return (
-      <div
-        aria-hidden="true"
-        className="composer-home__mini-graph composer-home__mini-graph--loop"
-      >
-        <span>{L(labels, "agent")}</span>
-        <i>→</i>
-        <span className="composer-home__mini-graph-verify">{L(labels, "verify")}</span>
-        <b>↺</b>
-      </div>
-    );
-  }
-  if (style === "dynamic_router") {
-    return (
-      <div
-        aria-hidden="true"
-        className="composer-home__mini-graph composer-home__mini-graph--router"
-      >
-        <em>◇</em>
-        <span>{L(labels, "b1")}</span>
-        <span>{L(labels, "b2")}</span>
-      </div>
-    );
-  }
-  if (style === "supervisor") {
-    return (
-      <div
-        aria-hidden="true"
-        className="composer-home__mini-graph composer-home__mini-graph--supervisor"
-      >
-        <span className="composer-home__mini-graph-hub">S</span>
-        <span>A</span>
-        <span>B</span>
-        <span>C</span>
-      </div>
-    );
-  }
   return (
-    <div
-      aria-hidden="true"
-      className="composer-home__mini-graph composer-home__mini-graph--parallel"
-    >
-      <span>A</span>
-      <span>B</span>
-      <span>C</span>
-      <i>→</i>
-      <span className="composer-home__mini-graph-verify">{L(labels, "verify")}</span>
-      <small>{L(labels, "big_rows_verifier_cycle")}</small>
+    <div className="composer-home__wf-canvas" aria-label="Workflow graph">
+      <div className="composer-home__wf-phases">
+        {phases.map((phase) => (
+          <div className="composer-home__wf-phase" key={phase.id}>
+            {phase.title}
+          </div>
+        ))}
+      </div>
+      <div className="composer-home__wf-nodes">
+        {agents.length === 0 ? (
+          <p className="composer-home__wf-empty">
+            Run <strong>AI plan</strong> on a goal/spec to generate the crew
+            workflow diagram.
+          </p>
+        ) : (
+          agents.map((node, index) => (
+            <React.Fragment key={node.id}>
+              {index > 0 ? (
+                <span
+                  aria-hidden="true"
+                  className={
+                    node.kind === "gate"
+                      ? "composer-home__wf-arrow composer-home__wf-arrow--gate"
+                      : "composer-home__wf-arrow"
+                  }
+                >
+                  →
+                </span>
+              ) : null}
+              <article
+                className={
+                  node.kind === "gate"
+                    ? "composer-home__wf-node composer-home__wf-node--gate"
+                    : "composer-home__wf-node"
+                }
+              >
+                {node.kind === "gate" ? (
+                  <span className="composer-home__wf-badge">GATE</span>
+                ) : (
+                  <span className="composer-home__wf-badge composer-home__wf-badge--agent">
+                    agent
+                  </span>
+                )}
+                <strong>{node.title}</strong>
+                <span title={node.subtitle}>{node.subtitle}</span>
+              </article>
+            </React.Fragment>
+          ))
+        )}
+      </div>
+      {graph.edges.some((e) => e.style === "refine") ? (
+        <p className="composer-home__wf-refine">
+          refine ≤3 · verify cycle back to craft (Agent Workflow style)
+        </p>
+      ) : null}
+      <div className="composer-home__wf-callouts">
+        <div>
+          <strong>Closed world</strong>
+          <span>0 invented agents</span>
+        </div>
+        <div>
+          <strong>Trace · brief → slots</strong>
+          <span>AI binds catalog only</span>
+        </div>
+      </div>
     </div>
   );
 }
+
+// Keep type export used by tests for pattern cards if needed
+export type { ComposerPatternCard, ScreenLabels };

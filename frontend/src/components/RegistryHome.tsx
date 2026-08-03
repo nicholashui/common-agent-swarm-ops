@@ -307,7 +307,17 @@ export function RegistryHome({
       </p>
 
       {feedback ? (
-        <p aria-live="polite" className="registry-home__status" role="status">
+        <p
+          aria-live="polite"
+          className={
+            /fail|error|denied|could not|rejected|no eligible/i.test(feedback)
+              ? "registry-home__status registry-home__status--error"
+              : /added |success|proposal/i.test(feedback)
+                ? "registry-home__status registry-home__status--success"
+                : "registry-home__status registry-home__status--busy"
+          }
+          role="status"
+        >
           {feedback}
         </p>
       ) : null}
@@ -327,6 +337,7 @@ export function RegistryHome({
                     labels={labels}
                     onAction={onAction}
                     onAnnounce={announce}
+                    onLocalStatus={setStatusMessage}
                   />
                 ))}
               </div>
@@ -336,7 +347,9 @@ export function RegistryHome({
                 <AgentTable
                   agents={visibleAgents}
                   labels={labels}
+                  onAction={onAction}
                   onAnnounce={announce}
+                  onLocalStatus={setStatusMessage}
                 />
               </div>
             ) : null}
@@ -568,11 +581,13 @@ function AgentCard({
   agent,
   onAnnounce,
   onAction,
+  onLocalStatus,
   labels,
 }: Readonly<{
   agent: RegistryAgentCard;
   onAnnounce: (message: string) => void;
   onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  onLocalStatus?: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
   return (
@@ -620,11 +635,30 @@ function AgentCard({
       <div className="registry-home__card-actions">
         <button
           className="registry-home__action registry-home__action--primary"
-          onClick={() =>
+          onClick={() => {
+            onLocalStatus?.(
+              `Adding ${agent.name} (${agent.id}) to a new swarm draft…`,
+            );
+            if (onAction) {
+              void Promise.resolve(
+                onAction({
+                  kind: "commons.add_to_swarm",
+                  agentId: agent.id,
+                  swarmName: `Draft with ${agent.name}`,
+                }),
+              ).catch((error: unknown) => {
+                const message =
+                  error instanceof Error
+                    ? error.message
+                    : "Add to Swarm failed unexpectedly.";
+                onLocalStatus?.(message);
+              });
+              return;
+            }
             onAnnounce(
-              "Add to Swarm / Instantiate requires an authorized draft action.",
-            )
-          }
+              "Add to Swarm requires Host commons + swarms API (open with bound registry actions).",
+            );
+          }}
           type="button"
         >
           Add to Swarm
@@ -662,10 +696,14 @@ function AgentCard({
 function AgentTable({
   agents,
   onAnnounce,
+  onAction,
+  onLocalStatus,
   labels,
 }: Readonly<{
   agents: readonly RegistryAgentCard[];
   onAnnounce: (message: string) => void;
+  onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
+  onLocalStatus?: (message: string) => void;
   labels: ScreenLabels;
 }>): JSX.Element {
   return (
@@ -696,11 +734,30 @@ function AgentTable({
               <td>
                 <button
                   className="registry-home__linkish"
-                  onClick={() =>
+                  onClick={() => {
+                    onLocalStatus?.(
+                      `Adding ${agent.name} (${agent.id}) to a new swarm draft…`,
+                    );
+                    if (onAction) {
+                      void Promise.resolve(
+                        onAction({
+                          kind: "commons.add_to_swarm",
+                          agentId: agent.id,
+                          swarmName: `Draft with ${agent.name}`,
+                        }),
+                      ).catch((error: unknown) => {
+                        const message =
+                          error instanceof Error
+                            ? error.message
+                            : "Add to Swarm failed unexpectedly.";
+                        onLocalStatus?.(message);
+                      });
+                      return;
+                    }
                     onAnnounce(
-                      "Add to Swarm requires an authorized draft action.",
-                    )
-                  }
+                      "Add to Swarm requires Host commons + swarms API (open with bound registry actions).",
+                    );
+                  }}
                   type="button"
                 >
                   Add

@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1100" viewBox="0 0 1440 1100" font-family="Inter, system-ui, sans-serif">
+  <title>Compose · AI Crew Formation (requirements → workflow diagram)</title>
+  <desc>
+    Mockup: AI-pick mainly. Human pastes requirements/spec; Host AI selects available agents
+    and emits a workflow diagram similar to Agent Workflow. Human only on needs_hitl conflicts.
+    Style tokens from common-style.html / ui_03_swarm_composer.svg.
+  </desc>
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#1c1917" flood-opacity="0.06"/>
+    </filter>
+    <filter id="sh2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="#78716c" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#a8a29e"/>
+    </marker>
+    <marker id="arrowIndigo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#818cf8"/>
+    </marker>
+    <marker id="arrowGate" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#10b981"/>
+    </marker>
+    <linearGradient id="wfBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafaf9"/>
+      <stop offset="100%" stop-color="#f5f5f4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Page -->
+  <rect width="1440" height="1100" fill="#ffffff"/>
+
+  <!-- ═══ TOP APP BAR ═══ -->
+  <rect width="1440" height="56" fill="#ffffff"/>
+  <line x1="0" y1="56" x2="1440" y2="56" stroke="#e7e5e4"/>
+  <!-- mark -->
+  <rect x="24" y="15" width="26" height="26" rx="8" fill="#4f46e5"/>
+  <g stroke="#fff" stroke-width="1.4" fill="none">
+    <circle cx="37" cy="24" r="1.9"/>
+    <circle cx="31" cy="34" r="1.9"/>
+    <circle cx="43" cy="34" r="1.9"/>
+    <path d="M37 26l-6 7M37 26l6 7M31.6 34h10.8"/>
+  </g>
+  <text x="60" y="27" font-size="13" font-weight="700" fill="#1c1917">caso</text>
+  <text x="60" y="41" font-size="9" fill="#a8a29e">Compose · AI crew</text>
+
+  <!-- workspace pill -->
+  <rect x="120" y="14" width="140" height="28" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+  <circle cx="136" cy="28" r="4" fill="#4f46e5"/>
+  <text x="148" y="32" font-size="11" fill="#44403c">Video Studio</text>
+
+  <!-- swarm name -->
+  <rect x="276" y="14" width="320" height="28" rx="8" fill="#fff" stroke="#e7e5e4"/>
+  <text x="290" y="32" font-size="12" fill="#57534e">AI · Hierarchical Supervisor · Wuxia Short</text>
+
+  <!-- status: AI resolved -->
+  <rect x="612" y="16" width="118" height="24" rx="12" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <circle cx="628" cy="28" r="3.5" fill="#10b981"/>
+  <text x="638" y="32" font-size="10" font-weight="600" fill="#047857">AI resolved</text>
+
+  <!-- actions -->
+  <rect x="1100" y="14" width="112" height="28" rx="14" fill="#fff" stroke="#e7e5e4"/>
+  <text x="1156" y="32" text-anchor="middle" font-size="11" fill="#57534e">Save Draft</text>
+  <rect x="1224" y="14" width="148" height="28" rx="14" fill="#1c1917"/>
+  <text x="1298" y="32" text-anchor="middle" font-size="11" font-weight="500" fill="#fff">Open Canvas →</text>
+  <text x="1404" y="33" text-anchor="middle" font-size="16" fill="#a8a29e">✕</text>
+
+  <!-- ═══ TITLE + STEPPER ═══ -->
+  <text x="40" y="92" font-size="22" font-weight="700" fill="#1c1917">Swarm Composer</text>
+  <text x="40" y="112" font-size="12" fill="#78716c">AI-pick mainly · requirements in → workflow diagram out · human only on conflicts</text>
+
+  <!-- step rail -->
+  <g transform="translate(40,128)">
+    <!-- track -->
+    <line x1="40" y1="16" x2="720" y2="16" stroke="#e7e5e4" stroke-width="2"/>
+    <!-- s1 done -->
+    <circle cx="40" cy="16" r="12" fill="#4f46e5"/>
+    <path d="M34 16l4 4 8-8" stroke="#fff" stroke-width="1.6" fill="none"/>
+    <text x="40" y="42" text-anchor="middle" font-size="10" font-weight="600" fill="#4f46e5">1 Spec</text>
+    <!-- s2 done -->
+    <circle cx="220" cy="16" r="12" fill="#4f46e5"/>
+    <path d="M214 16l4 4 8-8" stroke="#fff" stroke-width="1.6" fill="none"/>
+    <text x="220" y="42" text-anchor="middle" font-size="10" font-weight="600" fill="#4f46e5">2 AI plan</text>
+    <!-- s3 active -->
+    <circle cx="400" cy="16" r="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+    <text x="400" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#4f46e5">3</text>
+    <text x="400" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#1c1917">3 Workflow</text>
+    <!-- s4 idle -->
+    <circle cx="580" cy="16" r="12" fill="#fff" stroke="#e7e5e4" stroke-width="2"/>
+    <text x="580" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#a8a29e">4</text>
+    <text x="580" y="42" text-anchor="middle" font-size="10" fill="#a8a29e">4 Materialize</text>
+    <!-- s5 idle -->
+    <circle cx="720" cy="16" r="12" fill="#fff" stroke="#e7e5e4" stroke-width="2"/>
+    <text x="720" y="20" text-anchor="middle" font-size="11" font-weight="600" fill="#a8a29e">5</text>
+    <text x="720" y="42" text-anchor="middle" font-size="10" fill="#a8a29e">5 Canvas</text>
+  </g>
+
+  <!-- ═══ LEFT: Requirements + AI status ═══ -->
+  <g transform="translate(40,188)" filter="url(#sh)">
+    <rect width="400" height="860" rx="16" fill="#ffffff" stroke="#e7e5e4"/>
+
+    <!-- section label -->
+    <text x="20" y="32" font-size="11" font-weight="700" letter-spacing="1" fill="#a8a29e">REQUIREMENTS</text>
+    <rect x="280" y="16" width="100" height="22" rx="11" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="330" y="31" text-anchor="middle" font-size="9" font-weight="600" fill="#4f46e5">AI-pick mainly</text>
+
+    <!-- intent card -->
+    <rect x="16" y="48" width="368" height="168" rx="12" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="32" y="72" font-size="11" font-weight="600" fill="#57534e">Production brief / spec</text>
+    <text x="32" y="96" font-size="12" fill="#1c1917">Wuxia short for YouTube:</text>
+    <text x="32" y="116" font-size="12" fill="#44403c">· 90s cinematic opening + hook</text>
+    <text x="32" y="134" font-size="12" fill="#44403c">· verification loop before publish</text>
+    <text x="32" y="152" font-size="12" fill="#44403c">· social cut + captions</text>
+    <text x="32" y="170" font-size="12" fill="#44403c">· stay under mid-tier cost band</text>
+    <text x="32" y="196" font-size="10" fill="#a8a29e">Human provides intent only · not agent shopping</text>
+
+    <!-- constraints -->
+    <text x="20" y="244" font-size="11" font-weight="700" letter-spacing="1" fill="#a8a29e">CONSTRAINTS</text>
+    <g font-size="10" fill="#44403c">
+      <rect x="16" y="256" width="88" height="26" rx="13" fill="#eef2ff" stroke="#c7d2fe"/>
+      <text x="60" y="273" text-anchor="middle" fill="#4338ca">domain: video</text>
+      <rect x="112" y="256" width="96" height="26" rx="13" fill="#fff" stroke="#e7e5e4"/>
+      <text x="160" y="273" text-anchor="middle">budget: mid</text>
+      <rect x="216" y="256" width="100" height="26" rx="13" fill="#fff" stroke="#e7e5e4"/>
+      <text x="266" y="273" text-anchor="middle">quality: high</text>
+      <rect x="324" y="256" width="60" height="26" rx="13" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text x="354" y="273" text-anchor="middle" fill="#047857">HITL: 0</text>
+    </g>
+
+    <!-- inventory strip -->
+    <text x="20" y="314" font-size="11" font-weight="700" letter-spacing="1" fill="#a8a29e">BUILDING BLOCKS</text>
+    <rect x="16" y="326" width="368" height="72" rx="12" fill="#fff" stroke="#e7e5e4"/>
+    <text x="32" y="350" font-size="11" font-weight="600" fill="#1c1917">Available agents (Host catalog)</text>
+    <text x="32" y="370" font-size="11" fill="#78716c">114 video · 19 specials · closed world</text>
+    <text x="32" y="388" font-size="10" fill="#4f46e5">AI may only bind agent_id from this inventory</text>
+
+    <!-- AI decision log -->
+    <text x="20" y="430" font-size="11" font-weight="700" letter-spacing="1" fill="#a8a29e">AI DECISION LOG</text>
+    <rect x="16" y="442" width="368" height="220" rx="12" fill="#fafaf9" stroke="#e7e5e4"/>
+    <g font-size="11" fill="#44403c">
+      <circle cx="36" cy="466" r="5" fill="#10b981"/>
+      <text x="50" y="470">Intent classified · video production</text>
+      <circle cx="36" cy="494" r="5" fill="#10b981"/>
+      <text x="50" y="498">No requirement conflict · skip HITL</text>
+      <circle cx="36" cy="522" r="5" fill="#4f46e5"/>
+      <text x="50" y="526">Workflow type · hierarchical + verify</text>
+      <circle cx="36" cy="550" r="5" fill="#4f46e5"/>
+      <text x="50" y="554">Core · Orchestrator + Planner pinned</text>
+      <circle cx="36" cy="578" r="5" fill="#4f46e5"/>
+      <text x="50" y="582">Bound 6 specialists from catalog</text>
+      <circle cx="36" cy="606" r="5" fill="#7c3aed"/>
+      <text x="50" y="610">Edges · phases + critic gate cycle</text>
+      <circle cx="36" cy="634" r="5" fill="#10b981"/>
+      <text x="50" y="638">Critic gate · pass · ready to materialize</text>
+    </g>
+
+    <!-- HITL empty state note -->
+    <rect x="16" y="678" width="368" height="72" rx="12" fill="#fffbeb" stroke="#fde68a"/>
+    <text x="32" y="702" font-size="11" font-weight="600" fill="#92400e">Human intervenes only if…</text>
+    <text x="32" y="722" font-size="11" fill="#a16207">requirement conflict (e.g. lowest cost AND</text>
+    <text x="32" y="738" font-size="11" fill="#a16207">premium quality) · missing catalog capability</text>
+
+    <!-- primary CTA left -->
+    <rect x="16" y="770" width="368" height="44" rx="22" fill="#1c1917"/>
+    <text x="200" y="797" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Accept AI workflow · Materialize</text>
+
+    <rect x="16" y="826" width="176" height="36" rx="18" fill="#fff" stroke="#e7e5e4"/>
+    <text x="104" y="849" text-anchor="middle" font-size="11" fill="#57534e">Re-run AI plan</text>
+    <rect x="208" y="826" width="176" height="36" rx="18" fill="#fff" stroke="#c7d2fe"/>
+    <text x="296" y="849" text-anchor="middle" font-size="11" fill="#4f46e5">Edit requirements</text>
+  </g>
+
+  <!-- ═══ RIGHT: Workflow diagram (Agent Workflow style) ═══ -->
+  <g transform="translate(460,188)" filter="url(#sh2)">
+    <rect width="940" height="860" rx="16" fill="#ffffff" stroke="#e7e5e4"/>
+
+    <!-- header -->
+    <text x="24" y="34" font-size="11" font-weight="700" letter-spacing="1" fill="#a8a29e">GENERATED WORKFLOW</text>
+    <text x="24" y="58" font-size="16" font-weight="700" fill="#1c1917">Hierarchical Supervisor + Verification</text>
+    <text x="24" y="78" font-size="12" fill="#78716c">Similar to Agent Workflow · nodes = available agents · edges = handoffs / gates</text>
+
+    <!-- badges -->
+    <rect x="700" y="28" width="96" height="22" rx="11" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="748" y="43" text-anchor="middle" font-size="9" font-weight="600" fill="#4f46e5">8 agents</text>
+    <rect x="808" y="28" width="108" height="22" rx="11" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <text x="862" y="43" text-anchor="middle" font-size="9" font-weight="600" fill="#7c3aed">pattern · host</text>
+
+    <!-- legend -->
+    <g transform="translate(24,96)" font-size="9" fill="#78716c">
+      <rect width="14" height="14" rx="4" fill="#eef2ff" stroke="#c7d2fe"/>
+      <text x="20" y="11">Meta / control</text>
+      <rect x="110" width="14" height="14" rx="4" fill="#fff" stroke="#e7e5e4"/>
+      <text x="130" y="11">Craft agent</text>
+      <rect x="210" width="14" height="14" rx="4" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text x="230" y="11">Gate / critic</text>
+      <rect x="310" width="14" height="14" rx="4" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="330" y="11">Phase</text>
+      <line x1="400" y1="7" x2="430" y2="7" stroke="#a8a29e" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="438" y="11">handoff</text>
+      <line x1="500" y1="7" x2="530" y2="7" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrowGate)"/>
+      <text x="538" y="11">verify cycle</text>
+    </g>
+
+    <!-- canvas surface -->
+    <rect x="16" y="120" width="908" height="620" rx="14" fill="url(#wfBg)" stroke="#e7e5e4"/>
+    <!-- subtle grid dots -->
+    <g fill="#e7e5e4" opacity="0.7">
+      <circle cx="60" cy="160" r="1.2"/><circle cx="100" cy="160" r="1.2"/><circle cx="140" cy="160" r="1.2"/>
+      <circle cx="60" cy="200" r="1.2"/><circle cx="100" cy="200" r="1.2"/><circle cx="140" cy="200" r="1.2"/>
+      <circle cx="800" cy="160" r="1.2"/><circle cx="840" cy="160" r="1.2"/><circle cx="880" cy="160" r="1.2"/>
+      <circle cx="800" cy="680" r="1.2"/><circle cx="840" cy="680" r="1.2"/><circle cx="880" cy="680" r="1.2"/>
+    </g>
+
+    <!-- Phase banners -->
+    <g font-size="10" font-weight="700" letter-spacing="0.8" fill="#7c3aed">
+      <rect x="40" y="144" width="200" height="24" rx="8" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="140" y="160" text-anchor="middle">PHASE · CONTROL</text>
+      <rect x="280" y="144" width="280" height="24" rx="8" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="420" y="160" text-anchor="middle">PHASE · CRAFT PIPELINE</text>
+      <rect x="620" y="144" width="200" height="24" rx="8" fill="#ecfdf5" stroke="#a7f3d0"/>
+      <text x="720" y="160" text-anchor="middle" fill="#047857">PHASE · VERIFY</text>
+    </g>
+
+    <!-- Edges (drawn under nodes) -->
+    <!-- orch -> planner -->
+    <line x1="140" y1="280" x2="140" y2="320" stroke="#818cf8" stroke-width="2" marker-end="url(#arrowIndigo)"/>
+    <!-- planner -> screen / director / editor (fan) -->
+    <path d="M140 400 C140 440, 220 450, 280 470" fill="none" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <path d="M140 400 C140 450, 360 470, 420 470" fill="none" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <path d="M140 400 C140 460, 500 490, 560 490" fill="none" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <!-- craft chain -->
+    <line x1="360" y1="510" x2="400" y2="510" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <line x1="500" y1="510" x2="540" y2="510" stroke="#a8a29e" stroke-width="1.6" marker-end="url(#arrow)"/>
+    <!-- editor -> sound / captions -->
+    <path d="M600 530 C640 560, 640 600, 680 620" fill="none" stroke="#a8a29e" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <path d="M600 530 C620 580, 700 600, 760 620" fill="none" stroke="#a8a29e" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <!-- join to judge -->
+    <path d="M720 680 C760 700, 780 700, 780 360" fill="none" stroke="#10b981" stroke-width="1.8" stroke-dasharray="5 3"/>
+    <line x1="720" y1="360" x2="760" y2="360" stroke="#10b981" stroke-width="1.8" marker-end="url(#arrowGate)"/>
+    <!-- judge loop back dashed -->
+    <path d="M820 400 C860 480, 860 560, 720 640" fill="none" stroke="#10b981" stroke-width="1.4" stroke-dasharray="4 3"/>
+    <text x="850" y="520" font-size="9" fill="#059669" transform="rotate(90 850 520)">refine ≤3</text>
+
+    <!-- NODE: Orchestrator -->
+    <g transform="translate(60,200)">
+      <rect width="160" height="72" rx="12" fill="#eef2ff" stroke="#c7d2fe" filter="url(#sh)"/>
+      <text x="14" y="24" font-size="10" fill="#6366f1">META · COMMON</text>
+      <text x="14" y="44" font-size="13" font-weight="700" fill="#1c1917">Orchestrator</text>
+      <text x="14" y="60" font-size="10" fill="#78716c">video.orchestrator</text>
+    </g>
+
+    <!-- NODE: Planner -->
+    <g transform="translate(60,320)">
+      <rect width="160" height="72" rx="12" fill="#eef2ff" stroke="#c7d2fe" filter="url(#sh)"/>
+      <text x="14" y="24" font-size="10" fill="#6366f1">META · COMMON</text>
+      <text x="14" y="44" font-size="13" font-weight="700" fill="#1c1917">Planner</text>
+      <text x="14" y="60" font-size="10" fill="#78716c">video.planner</text>
+    </g>
+
+    <!-- NODE: Screenwriter -->
+    <g transform="translate(260,470)">
+      <rect width="120" height="72" rx="12" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="12" y="24" font-size="9" fill="#a8a29e">CRAFT</text>
+      <text x="12" y="44" font-size="12" font-weight="700" fill="#1c1917">Screenwriter</text>
+      <text x="12" y="60" font-size="9" fill="#78716c">video.screenwriter</text>
+    </g>
+
+    <!-- NODE: Director -->
+    <g transform="translate(400,470)">
+      <rect width="120" height="72" rx="12" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="12" y="24" font-size="9" fill="#a8a29e">CRAFT</text>
+      <text x="12" y="44" font-size="12" font-weight="700" fill="#1c1917">Director</text>
+      <text x="12" y="60" font-size="9" fill="#78716c">video.director</text>
+    </g>
+
+    <!-- NODE: Editor -->
+    <g transform="translate(540,470)">
+      <rect width="120" height="72" rx="12" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="12" y="24" font-size="9" fill="#a8a29e">CRAFT</text>
+      <text x="12" y="44" font-size="12" font-weight="700" fill="#1c1917">Editor</text>
+      <text x="12" y="60" font-size="9" fill="#78716c">video.editor</text>
+    </g>
+
+    <!-- NODE: Sound -->
+    <g transform="translate(620,620)">
+      <rect width="120" height="64" rx="12" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="12" y="22" font-size="9" fill="#a8a29e">CRAFT</text>
+      <text x="12" y="40" font-size="12" font-weight="700" fill="#1c1917">Sound Design</text>
+      <text x="12" y="54" font-size="9" fill="#78716c">video.sounddesign</text>
+    </g>
+
+    <!-- NODE: Captions / a11y -->
+    <g transform="translate(760,620)">
+      <rect width="120" height="64" rx="12" fill="#fff" stroke="#e7e5e4" filter="url(#sh)"/>
+      <text x="12" y="22" font-size="9" fill="#a8a29e">CRAFT</text>
+      <text x="12" y="40" font-size="12" font-weight="700" fill="#1c1917">Accessibility</text>
+      <text x="12" y="54" font-size="9" fill="#78716c">video.accessibility</text>
+    </g>
+
+    <!-- NODE: Judge (gate) -->
+    <g transform="translate(700,320)">
+      <rect width="160" height="80" rx="12" fill="#ecfdf5" stroke="#a7f3d0" filter="url(#sh)"/>
+      <rect x="12" y="12" width="44" height="16" rx="8" fill="#d1fae5"/>
+      <text x="34" y="23" text-anchor="middle" font-size="8" font-weight="700" fill="#047857">GATE</text>
+      <text x="12" y="48" font-size="13" font-weight="700" fill="#1c1917">Judge</text>
+      <text x="12" y="66" font-size="10" fill="#78716c">video.judge · verify</text>
+    </g>
+
+    <!-- mini callouts -->
+    <rect x="260" y="200" width="200" height="56" rx="10" fill="#fff" stroke="#e7e5e4"/>
+    <text x="276" y="222" font-size="10" font-weight="600" fill="#1c1917">Traceability (lite)</text>
+    <text x="276" y="240" font-size="10" fill="#78716c">brief §hook → Screenwriter</text>
+
+    <rect x="480" y="200" width="180" height="56" rx="10" fill="#fff" stroke="#e7e5e4"/>
+    <text x="496" y="222" font-size="10" font-weight="600" fill="#1c1917">Closed world</text>
+    <text x="496" y="240" font-size="10" fill="#78716c">0 invented agents</text>
+
+    <!-- footer bar inside right panel -->
+    <g transform="translate(16,756)">
+      <rect width="908" height="84" rx="12" fill="#fafaf9" stroke="#e7e5e4"/>
+      <text x="20" y="28" font-size="12" font-weight="600" fill="#1c1917">Output package</text>
+      <text x="20" y="50" font-size="11" fill="#57534e">workflow.json · pattern_ref · agent pins · edges · critic_status=pass</text>
+      <text x="20" y="70" font-size="11" fill="#78716c">Next: materialize draft swarm → /swarms/{id}/canvas · production fail-closed</text>
+
+      <rect x="620" y="22" width="128" height="40" rx="20" fill="#fff" stroke="#e7e5e4"/>
+      <text x="684" y="47" text-anchor="middle" font-size="11" fill="#57534e">Export graph</text>
+      <rect x="760" y="22" width="128" height="40" rx="20" fill="#4f46e5"/>
+      <text x="824" y="47" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Open Canvas</text>
+    </g>
+  </g>
+
+  <!-- page footer note -->
+  <text x="40" y="1080" font-size="10" fill="#a8a29e">ui_03_swarm_composer_ai_v2 · style: common-style.html (stone / indigo / white / Inter) · AI-pick mainly · ACC crew formation</text>
+</svg>

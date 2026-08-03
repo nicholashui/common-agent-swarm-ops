@@ -1188,6 +1188,530 @@ class ProductFacadeService:
             "state": "cached",
         }
 
+    def list_swarms(self, organization_id: OrganizationId) -> list[dict[str, Any]]:
+        """All organization-owned swarms (drafts, queued, running, etc.). In-memory façade only."""
+        with self._lock:
+            rows = [
+                s
+                for s in self._swarms.values()
+                if s.organization_id == str(organization_id)
+            ]
+        rows_sorted = sorted(rows, key=lambda s: s.updated_at, reverse=True)
+        return [
+            {
+                "id": s.swarm_id,
+                "name": s.name,
+                "status": s.status,
+                "revision": s.revision,
+                "member_count": len(s.members),
+                "last_run_id": s.last_run_id,
+                "updated_at": s.updated_at.isoformat(),
+                "created_at": s.created_at.isoformat(),
+            }
+            for s in rows_sorted
+        ]
+
+    def recommend_composition(
+        self,
+        *,
+        organization_id: OrganizationId,
+        goal: str,
+        max_slots: int = 8,
+        human_resolutions: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """AI-pick composition from pack catalog (deterministic, fail-closed, no LLM network).
+
+        Humans supply the goal/spec. Host selects pattern + agent slots.
+        Human is required only when AI cannot resolve conflicts (needs_hitl).
+        Optional human_resolutions answers open questions from a prior pass.
+        """
+        text = (goal or "").strip()
+        if not text:
+            return {
+                "ok": False,
+                "message": "Goal/spec is required for AI composition.",
+            }
+        g = text.lower()
+        tokens = [t for t in re.split(r"[^a-z0-9]+", g) if len(t) >= 3]
+        resolutions = {str(k): str(v).strip().lower() for k, v in (human_resolutions or {}).items()}
+
+        # --- Conflict / ambiguity detection (HITL only when AI cannot decide) ---
+        open_questions: list[dict[str, Any]] = []
+
+        want_cheap = any(
+            k in g for k in ("cheap", "lowest cost", "budget", "frugal", "minimal cost", "low cost")
+        )
+        want_premium = any(
+            k in g
+            for k in (
+                "premium quality",
+                "highest quality",
+                "max quality",
+                "cinematic quality",
+                "broadcast quality",
+                "no compromise",
+            )
+        )
+        want_fast = any(k in g for k in ("asap", "urgent", "fastest", "realtime", "real-time", "same day"))
+        want_thorough = any(
+            k in g
+            for k in (
+                "thorough",
+                "exhaustive",
+                "deep research",
+                "full pipeline",
+                "feature film",
+                "multi-phase",
+            )
+        )
+        prefer_video = any(
+            k in g
+            for k in (
+                "video",
+                "youtube",
+                "film",
+                "cinematic",
+                "shot",
+                "script",
+                "wuxia",
+                "storyboard",
+                "director",
+                "editor",
+            )
+        )
+        prefer_specials = any(
+            k in g for k in ("cobol", "legacy", "software", "code", "devops", "api", "implementation")
+        )
+        explicit_conflict = any(
+            k in g
+            for k in (
+                "conflict",
+                "contradiction",
+                "cannot decide",
+                "either or",
+                "either/or",
+                "vs quality",
+                "vs cost",
+                "trade-off undecided",
+                "tradeoff undecided",
+            )
+        )
+
+        cost_res = resolutions.get("q_cost_quality", "")
+        if want_cheap and want_premium and cost_res not in {"prefer_cost", "prefer_quality", "balanced"}:
+            open_questions.append(
+                {
+                    "id": "q_cost_quality",
+                    "kind": "requirement_conflict",
+                    "severity": "blocker",
+                    "question": (
+                        "Spec asks for both lowest cost and premium/highest quality. "
+                        "Which priority should AI optimize?"
+                    ),
+                    "options": [
+                        {
+                            "id": "prefer_cost",
+                            "label": "Prefer cost (smaller crew, lighter verification)",
+                        },
+                        {
+                            "id": "prefer_quality",
+                            "label": "Prefer quality (heavier verification + specialists)",
+                        },
+                        {
+                            "id": "balanced",
+                            "label": "Balanced (default hierarchy with mid-size crew)",
+                        },
+                    ],
+                }
+            )
+        elif cost_res in {"prefer_cost", "prefer_quality", "balanced"}:
+            # Applied below
+            pass
+
+        speed_res = resolutions.get("q_speed_depth", "")
+        if want_fast and want_thorough and speed_res not in {"prefer_speed", "prefer_depth", "phased"}:
+            open_questions.append(
+                {
+                    "id": "q_speed_depth",
+                    "kind": "requirement_conflict",
+                    "severity": "blocker",
+                    "question": (
+                        "Spec asks for both maximum speed and thorough/full-depth work. "
+                        "How should AI structure the workflow?"
+                    ),
+                    "options": [
+                        {
+                            "id": "prefer_speed",
+                            "label": "Prefer speed (parallel, thinner gates)",
+                        },
+                        {
+                            "id": "prefer_depth",
+                            "label": "Prefer depth (sequential phases, full gates)",
+                        },
+                        {
+                            "id": "phased",
+                            "label": "Phased (fast MVP then depth refinement)",
+                        },
+                    ],
+                }
+            )
+
+        domain_res = resolutions.get("q_domain", "")
+        if (
+            prefer_video
+            and prefer_specials
+            and domain_res not in {"video", "software", "hybrid"}
+        ):
+            open_questions.append(
+                {
+                    "id": "q_domain",
+                    "kind": "requirement_conflict",
+                    "severity": "blocker",
+                    "question": (
+                        "Spec mixes video/film signals with software/legacy signals. "
+                        "Which domain inventory should AI draw agents from?"
+                    ),
+                    "options": [
+                        {"id": "video", "label": "Video pack agents"},
+                        {"id": "software", "label": "Specials / software agents"},
+                        {"id": "hybrid", "label": "Hybrid (both packs)"},
+                    ],
+                }
+            )
+
+        if explicit_conflict and not open_questions and not resolutions:
+            open_questions.append(
+                {
+                    "id": "q_explicit_conflict",
+                    "kind": "requirement_conflict",
+                    "severity": "blocker",
+                    "question": (
+                        "Spec explicitly flags a conflict or undecided trade-off. "
+                        "State the winning constraint for AI to proceed."
+                    ),
+                    "options": [
+                        {"id": "proceed_balanced", "label": "Proceed with balanced AI defaults"},
+                        {"id": "pause", "label": "Keep paused — I will rewrite the spec"},
+                    ],
+                }
+            )
+
+        if open_questions:
+            return {
+                "ok": True,
+                "mode": "ai_pick",
+                "decision_status": "needs_hitl",
+                "auto_materialize": False,
+                "goal": text,
+                "pattern": None,
+                "slots": [],
+                "open_questions": open_questions,
+                "metrics": {
+                    "slot_count": 0,
+                    "selection": "blocked_on_human",
+                    "production_activation": False,
+                },
+                "procedure_steps": [
+                    "1. Ingest goal/spec.",
+                    "2. AI detected requirement conflict(s) it cannot safely resolve.",
+                    "3. Human answers only the open questions.",
+                    "4. AI re-runs pick and materializes workflow.",
+                ],
+                "compose_action": self.issue_compose_action(organization_id),
+                "note": (
+                    "Human input required only for unresolved conflicts. "
+                    "AI does not invent a compromised plan without a choice."
+                ),
+            }
+
+        # Apply human resolutions into scoring biases
+        if cost_res == "prefer_cost":
+            max_slots = min(max_slots, 5)
+        elif cost_res == "prefer_quality":
+            max_slots = max(max_slots, 8)
+        if domain_res == "video":
+            prefer_specials = False
+            prefer_video = True
+        elif domain_res == "software":
+            prefer_video = False
+            prefer_specials = True
+        # hybrid / empty: leave prefer_* as detected
+
+        # Pattern AI pick (may be steered by speed/depth resolution)
+        if speed_res == "prefer_speed" or (
+            want_fast and not want_thorough and any(k in g for k in ("parallel", "research", "market"))
+        ):
+            pattern_id = "parallel-research"
+            pattern_why = "AI chose parallel pattern for speed / independent branches."
+        elif any(k in g for k in ("verify", "verification", "quality", "critic", "loop", "rubric")) or (
+            cost_res == "prefer_quality" or speed_res == "prefer_depth"
+        ):
+            pattern_id = "verification-loop"
+            pattern_why = "AI chose verification loop for quality / depth gates."
+        elif any(k in g for k in ("parallel", "research", "market", "intelligence", "multi-branch")):
+            pattern_id = "parallel-research"
+            pattern_why = "Goal signals independent parallel analysis branches."
+        else:
+            pattern_id = "hierarchical-supervisor"
+            pattern_why = (
+                "Default AI pick: Orchestrator→Planner→specialists (supervisor hierarchy)."
+            )
+        if speed_res == "phased":
+            pattern_id = "hierarchical-supervisor"
+            pattern_why = "Phased resolution: hierarchical pipeline for MVP then depth."
+        if resolutions.get("q_explicit_conflict") == "pause":
+            return {
+                "ok": True,
+                "mode": "ai_pick",
+                "decision_status": "needs_hitl",
+                "auto_materialize": False,
+                "goal": text,
+                "pattern": None,
+                "slots": [],
+                "open_questions": [
+                    {
+                        "id": "q_explicit_conflict",
+                        "kind": "requirement_conflict",
+                        "severity": "blocker",
+                        "question": "You chose to pause. Rewrite the spec, then re-run AI pick.",
+                        "options": [
+                            {
+                                "id": "proceed_balanced",
+                                "label": "Proceed with balanced AI defaults after all",
+                            }
+                        ],
+                    }
+                ],
+                "metrics": {
+                    "slot_count": 0,
+                    "selection": "paused_by_human",
+                    "production_activation": False,
+                },
+                "procedure_steps": ["Human paused; awaiting rewritten spec."],
+                "compose_action": self.issue_compose_action(organization_id),
+                "note": "AI pick paused by human resolution.",
+            }
+
+        pattern = next((p for p in self._patterns if p["id"] == pattern_id), self._patterns[0])
+
+        scored: list[tuple[float, PackAgentCatalogEntry]] = []
+        for agent in self.catalog():
+            hay = " ".join(
+                [
+                    agent.agent_id,
+                    agent.name,
+                    agent.role,
+                    agent.description,
+                    agent.pack,
+                ]
+            ).lower()
+            score = 0.0
+            for t in tokens:
+                if t in hay:
+                    score += 2.0
+                if t in agent.agent_id.lower():
+                    score += 1.5
+            if prefer_video and agent.pack == "video":
+                score += 1.0
+            if prefer_specials and agent.pack == "specials":
+                score += 1.0
+            if prefer_video and not prefer_specials and agent.pack == "specials":
+                score -= 0.5
+            if prefer_specials and not prefer_video and agent.pack == "video":
+                score -= 0.5
+            if not prefer_specials and agent.pack == "video":
+                score += 0.2
+            if "orchestrat" in hay:
+                score += 0.5
+            if "planner" in hay:
+                score += 0.5
+            if cost_res == "prefer_cost" and any(
+                k in hay for k in ("orchestrat", "planner", "editor", "director")
+            ):
+                score += 0.3
+            if cost_res == "prefer_quality" and any(
+                k in hay for k in ("judge", "gate", "qa", "compliance", "critic")
+            ):
+                score += 0.8
+            if score > 0:
+                scored.append((score, agent))
+        scored.sort(key=lambda row: (-row[0], row[1].agent_id))
+
+        core_ids: list[str] = []
+        if pattern_id == "hierarchical-supervisor" or prefer_video:
+            for cid in ("video.orchestrator", "video.planner"):
+                if self.get_agent(cid) is not None:
+                    core_ids.append(cid)
+        if pattern_id == "verification-loop" or cost_res == "prefer_quality":
+            for cid in ("video.judge", "video.gatekeeper", "video.aiqaconsistency"):
+                if self.get_agent(cid) is not None and cid not in core_ids:
+                    core_ids.append(cid)
+                    break
+
+        picked: list[str] = list(core_ids)
+        for _score, agent in scored:
+            if agent.agent_id in picked:
+                continue
+            picked.append(agent.agent_id)
+            if len(picked) >= max(3, min(max_slots, 10)):
+                break
+
+        if len(picked) < 3:
+            for fallback in (
+                "video.orchestrator",
+                "video.planner",
+                "video.director",
+                "video.editor",
+                "video.screenwriter",
+            ):
+                if fallback not in picked and self.get_agent(fallback) is not None:
+                    picked.append(fallback)
+                if len(picked) >= 4:
+                    break
+
+        slots: list[dict[str, Any]] = []
+        for idx, agent_id in enumerate(picked):
+            entry = self.get_agent(agent_id)
+            if entry is None:
+                continue
+            is_verify = any(
+                k in agent_id for k in ("judge", "gate", "qa", "compliance", "verifier")
+            )
+            slots.append(
+                {
+                    "id": f"slot_{idx}",
+                    "agent_id": agent_id,
+                    "label": entry.name,
+                    "role": entry.role,
+                    "version": entry.version_label,
+                    "pack": entry.pack,
+                    "verified": is_verify,
+                    "rationale": "AI-selected from pack catalog for goal match.",
+                }
+            )
+
+        applied = {k: v for k, v in resolutions.items() if v}
+        return {
+            "ok": True,
+            "mode": "ai_pick",
+            "decision_status": "ai_resolved",
+            "auto_materialize": True,
+            "goal": text,
+            "pattern": {
+                "id": pattern["id"],
+                "name": pattern["name"],
+                "version_label": pattern.get("version_label", "pattern · 1.0"),
+                "when_to_use": pattern.get("when_to_use", ""),
+                "rationale": pattern_why,
+            },
+            "slots": slots,
+            "open_questions": [],
+            "human_resolutions_applied": applied,
+            "metrics": {
+                "slot_count": len(slots),
+                "selection": "deterministic_catalog_score",
+                "production_activation": False,
+            },
+            "procedure_steps": [
+                "1. Ingest goal/spec (human only when conflicts).",
+                "2. AI select pattern from Host registry.",
+                "3. AI score available pack agents (closed world).",
+                "4. Emit workflow slots (Planner-like).",
+                "5. Auto-materialize draft when decision_status=ai_resolved.",
+                "6. Open Canvas for inspection (fail-closed run).",
+            ],
+            "compose_action": self.issue_compose_action(organization_id),
+            "note": (
+                "AI-pick mainly. Human only for needs_hitl conflicts. "
+                "Host-deterministic ranking; no production activation."
+            ),
+        }
+
+    def materialize_ai_composition(
+        self,
+        *,
+        organization_id: OrganizationId,
+        actor_id: ActorId,
+        correlation_id: CorrelationId,
+        goal: str,
+        swarm_name: str | None = None,
+        max_slots: int = 8,
+        human_resolutions: dict[str, str] | None = None,
+    ) -> dict[str, Any] | None:
+        """AI recommend + create draft + attach AI-picked members.
+
+        Returns needs_hitl payload (no swarm) when AI cannot resolve conflicts.
+        """
+        rec = self.recommend_composition(
+            organization_id=organization_id,
+            goal=goal,
+            max_slots=max_slots,
+            human_resolutions=human_resolutions,
+        )
+        if not rec.get("ok"):
+            return None
+        if rec.get("decision_status") == "needs_hitl":
+            return {
+                "decision_status": "needs_hitl",
+                "auto_materialize": False,
+                "recommendation": rec,
+                "swarm_id": None,
+                "canvas_path": None,
+                "message": "Human resolution required before AI can materialize a workflow.",
+            }
+        pattern_id = str(rec["pattern"]["id"])
+        name = (swarm_name or "").strip() or f"AI · {rec['pattern']['name']}"
+        if len(name) > 200:
+            name = name[:200]
+        action_id = self.issue_compose_action(organization_id)["id"]
+        swarm = self.create_swarm(
+            organization_id=organization_id,
+            actor_id=actor_id,
+            correlation_id=correlation_id,
+            name=name,
+            action_reference_id=action_id,
+            pattern_ref=pattern_id,
+            goal_summary=goal[:2000],
+            initial_graph=None,
+        )
+        if swarm is None:
+            return None
+        added: list[dict[str, Any]] = []
+        for slot in rec["slots"]:
+            agent_id = str(slot["agent_id"])
+            add_action = self.issue_action(
+                organization_id=organization_id,
+                kind="add_to_swarm",
+                label="Add to Swarm",
+                resource_ref=agent_id,
+                eligible=True,
+            )
+            member = self.add_member(
+                organization_id=organization_id,
+                swarm_id=swarm.swarm_id,
+                action_reference_id=add_action.action_id,
+                agent_id=agent_id,
+                agent_version="current",
+                pin_policy="exact",
+            )
+            if member is not None:
+                added.append(member)
+        fresh = self.get_swarm(organization_id, swarm.swarm_id)
+        assert fresh is not None
+        return {
+            "decision_status": "ai_resolved",
+            "auto_materialize": True,
+            "swarm_id": fresh.swarm_id,
+            "name": fresh.name,
+            "revision": fresh.revision,
+            "status": fresh.status,
+            "pattern_ref": fresh.pattern_ref,
+            "member_count": len(fresh.members),
+            "members_added": len(added),
+            "recommendation": rec,
+            "canvas_path": f"/swarms/{fresh.swarm_id}/canvas",
+        }
+
     def list_running_swarms(self, organization_id: OrganizationId) -> list[dict[str, Any]]:
         with self._lock:
             rows = [

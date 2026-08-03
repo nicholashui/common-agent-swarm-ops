@@ -1,6 +1,6 @@
 /**
  * Local Swarm Composer fixture for ui_03_swarm_composer.md / .svg.
- * Presentation-only until composer recommendation contracts connect.
+ * Primary path is Host AI pick (POST /api/v1/composer/*); local reply is fallback only.
  */
 
 import type { ScreenLabels } from "./screen-labels";
@@ -12,6 +12,8 @@ export interface ComposerAgentSlot {
   readonly label: string;
   readonly version: string;
   readonly verified?: boolean;
+  /** Host AI-picked pack agent id when available. */
+  readonly agentId?: string;
 }
 
 export interface ComposerPatternCard {
@@ -32,6 +34,19 @@ export interface ComposerPatternCard {
   };
 }
 
+export interface ComposerHitlOption {
+  readonly id: string;
+  readonly label: string;
+}
+
+export interface ComposerHitlQuestion {
+  readonly id: string;
+  readonly kind: string;
+  readonly severity: string;
+  readonly question: string;
+  readonly options: readonly ComposerHitlOption[];
+}
+
 export interface ComposerChatMessage {
   readonly id: string;
   readonly role: "user" | "assistant";
@@ -45,6 +60,23 @@ export interface ComposerChatMessage {
     readonly metrics: string;
     readonly slots: readonly ComposerAgentSlot[];
   };
+  /** Present when AI cannot resolve without human (e.g. requirement conflict). */
+  readonly hitl?: {
+    readonly questions: readonly ComposerHitlQuestion[];
+  };
+}
+
+/** Loadable Compose sample: full requirement text for the UI textarea. */
+export type ComposerSampleKind = "happy_path" | "hitl_demo" | "domain_bias";
+
+export interface ComposerSample {
+  readonly id: string;
+  readonly label: string;
+  /** Short line under the label in the sample list. */
+  readonly summary: string;
+  readonly kind: ComposerSampleKind;
+  /** Full requirements body loaded into the composer input. */
+  readonly body: string;
 }
 
 export interface ComposerLandingView {
@@ -56,7 +88,10 @@ export interface ComposerLandingView {
   readonly architectTitle: string;
   readonly architectSubtitle: string;
   readonly messages: readonly ComposerChatMessage[];
+  /** @deprecated Prefer `samples` — kept as short labels for chips. */
   readonly goalChips: readonly string[];
+  /** Full loadable sample specs for the ACC Compose UI. */
+  readonly samples: readonly ComposerSample[];
   readonly inputPlaceholder: string;
   readonly patterns: readonly ComposerPatternCard[];
   readonly filters: readonly string[];
@@ -65,6 +100,90 @@ export interface ComposerLandingView {
   readonly handoffNotes: readonly string[];
   readonly footerNote: string;
 }
+
+/** Canonical loadable samples (also documented in compose_acc_samples.md). */
+export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
+  {
+    id: "sample-wuxia",
+    label: "YouTube wuxia short",
+    summary: "Happy path · hierarchical + verify",
+    kind: "happy_path",
+    body: [
+      "Wuxia short for YouTube:",
+      "- 90s cinematic opening + strong hook in first 3 seconds",
+      "- verification loop before publish",
+      "- social cut + captions",
+      "- mid-tier cost band",
+      "Domain: video production",
+    ].join("\n"),
+  },
+  {
+    id: "sample-market",
+    label: "Market intel + verify",
+    summary: "Parallel research + final critic",
+    kind: "happy_path",
+    body: [
+      "Build a daily market intelligence swarm with a report-quality verification loop.",
+      "Prefer parallel research branches, then a final critic before the brief is published.",
+      "Keep token cost reasonable.",
+    ].join("\n"),
+  },
+  {
+    id: "sample-social-budget",
+    label: "Social under budget",
+    summary: "Lean crew · cost-efficient",
+    kind: "happy_path",
+    body: [
+      "Short-form social video crew under budget.",
+      "Fast turnaround for 15–30s clips, captions, light music bed.",
+      "Prefer cost-efficient crew; still need a minimum quality check.",
+    ].join("\n"),
+  },
+  {
+    id: "sample-conflict",
+    label: "Cost vs quality (HITL demo)",
+    summary: "Triggers needs_hitl · human picks priority only",
+    kind: "hitl_demo",
+    body: [
+      "Lowest cost AND premium quality cinematic film with no compromise.",
+      "Either we ship same-day ASAP or we do a thorough multi-phase feature pipeline —",
+      "I cannot decide which priority wins.",
+      "Trade-off undecided. Conflict.",
+    ].join("\n"),
+  },
+  {
+    id: "sample-feature",
+    label: "Full feature hierarchy",
+    summary: "Orch → Planner → departments",
+    kind: "happy_path",
+    body: [
+      "Full feature film production hierarchy.",
+      "Need Orchestrator → Planner → departments: story, direction, picture, sound, and final QC gate.",
+      "Video domain. Multi-phase, thorough.",
+    ].join("\n"),
+  },
+  {
+    id: "sample-cobol",
+    label: "Legacy COBOL / software",
+    summary: "Specials / software domain bias",
+    kind: "domain_bias",
+    body: [
+      "Legacy COBOL analysis swarm for a migration assessment.",
+      "Software implementation planning, API inventory, risk register.",
+      "Prefer specials / software-oriented agents when available.",
+    ].join("\n"),
+  },
+  {
+    id: "sample-explicit-conflict",
+    label: "Scope contradiction (HITL)",
+    summary: "UGC vs broadcast · explicit conflict",
+    kind: "hitl_demo",
+    body: [
+      "There is a contradiction in scope: we want either a cheap UGC pipeline",
+      "or a broadcast-quality drama series. Trade-off undecided. Conflict.",
+    ].join("\n"),
+  },
+];
 
 export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
   labels: {
@@ -96,51 +215,25 @@ export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
     "send_goal": "Send goal",
     "pattern_filters": "Pattern filters",
   },
-  eyebrow: "SWARM COMPOSER",
+  eyebrow: "SWARM COMPOSER · ACC",
   title: "Swarm Composer",
   description:
-    "Turn goals into Common Pattern + Common Agent compositions — pattern-first, NL-driven.",
-  swarmName: "Untitled Swarm from Parallel + Verification",
-  architectTitle: "Common Swarm Architect",
+    "Form a multi-agent work from available agents · requirements in · workflow diagram out · human only on conflicts",
+  swarmName: "Untitled AI Swarm",
+  architectTitle: "AI Swarm Architect (Host)",
   architectSubtitle:
-    "Recommends from Registry · prioritizes verification, parallelism, token efficiency, collective improvement",
+    "Goal/spec in · catalog agents only · AI plan draws workflow · Accept AI → Canvas · fail-closed",
   messages: [
     {
-      id: "m1",
-      role: "user",
-      lines: [
-        "Build a daily market intelligence swarm",
-        "with a report-quality verification loop.",
-      ],
-    },
-    {
-      id: "m2",
+      id: "m0",
       role: "assistant",
-      text: "Recommended starting Common Pattern:",
-      recommendation: {
-        patternId: "pattern-parallel-verification-v1.4",
-        patternName: "Parallel Independent + Verification Loop",
-        version: "1.4",
-        rationale:
-          "Independent branches benefit from parallel; final verifier cuts hallucinations.",
-        metrics: "Est. 23% token saving vs sequential · 94% success · 1.2k runs",
-        slots: [
-          { id: "s1", label: "DataFetcher", version: "Common v2.1" },
-          { id: "s2", label: "SentimentAgent", version: "v1.9" },
-          { id: "s3", label: "MarketPredictor", version: "v2.0" },
-          { id: "s4", label: "VerifierNode", version: "v3.0", verified: true },
-        ],
-      },
+      text:
+        "Paste a goal or short production spec. I AI-pick pattern + agents and draw a crew workflow diagram. You only answer when I cannot resolve a conflict.",
     },
   ],
-  goalChips: [
-    "Daily market intelligence",
-    "YouTube wuxia cinematic pipeline",
-    "DSE ICT adaptive tutor",
-    "Legacy COBOL analysis swarm",
-    "Moltbot distributed",
-  ],
-  inputPlaceholder: "Describe your goal (EN / 繁體中文)… ⌘↵ to send",
+  samples: COMPOSER_SAMPLES,
+  goalChips: COMPOSER_SAMPLES.map((s) => s.label),
+  inputPlaceholder: "Paste goal or short production spec… ⌘↵",
   patterns: [
     {
       id: "pattern-parallel-verification-v1.4",
@@ -211,16 +304,17 @@ export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
   ],
   filters: ["All domains", "Parallelism", "Verification", "Cost tier"],
   activeFilter: "All domains",
-  suggestNewLabel: "✧ Suggest new Common Pattern from my goal",
+  suggestNewLabel: "✧ AI: propose new pattern from this goal (Host)",
   handoffNotes: [
-    "Graph JSON handoff includes linked_common_pattern_id + pinned agent versions + BIG ROW layout.",
-    "Suggestions are inert data · \"Load into Canvas\" is a server-authorized action reference.",
+    "AI-pick mainly: materialize when decision_status=ai_resolved.",
+    "Human only for open_questions (needs_hitl) e.g. requirement conflicts.",
+    "Building blocks = Host catalog agents only · production fail-closed.",
   ],
   footerNote:
-    "Local preview · recommendations are inert until /api/composer contracts connect.",
+    "AI-pick mainly · human exception path for conflicts · Host catalog ranking · process-local drafts.",
 };
 
-/** Local multi-turn response when the recommend API is not connected. */
+/** Offline fallback only when Host recommend is unreachable. */
 export function buildLocalAssistantReply(
   goal: string,
   patterns: readonly ComposerPatternCard[],
@@ -230,17 +324,32 @@ export function buildLocalAssistantReply(
   return {
     id: `local-${Date.now()}`,
     role: "assistant",
-    text: "Local preview recommendation (API not connected):",
+    text: "Host AI unavailable — offline fallback (not a human pick):",
     recommendation: {
       patternId: recommended?.id ?? "pattern-parallel-verification-v1.4",
       patternName: recommended?.name ?? "Parallel Independent + Verification Loop",
       version: recommended?.version ?? "1.4",
-      rationale: `For “${goal.slice(0, 120)}”, start from a battle-tested common pattern with verification coverage.`,
-      metrics: recommended?.metrics ?? "94% success · local preview",
+      rationale: `Offline AI stub for “${goal.slice(0, 120)}”. Start backend for real Host AI pick from pack catalog.`,
+      metrics: recommended?.metrics ?? "offline fallback",
       slots: [
-        { id: "ls1", label: "Planner", version: "Common v1.0" },
-        { id: "ls2", label: "Worker", version: "Common v1.0" },
-        { id: "ls3", label: "VerifierNode", version: "v3.0", verified: true },
+        {
+          id: "ls1",
+          label: "Orchestrator",
+          version: "Common v1.0",
+          agentId: "video.orchestrator",
+        },
+        {
+          id: "ls2",
+          label: "Planner",
+          version: "Common v1.0",
+          agentId: "video.planner",
+        },
+        {
+          id: "ls3",
+          label: "Director",
+          version: "Common v1.0",
+          agentId: "video.director",
+        },
       ],
     },
   };
