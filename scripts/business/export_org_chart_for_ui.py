@@ -169,12 +169,40 @@ def _build_pack_group(pack_dir: Path, pack_id: str) -> dict | None:
     for a in agents:
         a["isTopManagement"] = a["id"] in top_ids
 
-    # Primary top leader (orchestrator preferred)
-    primary_top = top_ids[0]
-    for tid in top_ids:
-        if tid.endswith(".orchestrator") or "orchestrator" in tid:
-            primary_top = tid
-            break
+    # Orchestration pipeline order (aligns with common-agent-structure.svg):
+    #   Planner → Orchestrator → departments → agents
+    # Prefer planner as pipeline head when both entry tops exist; orchestrator
+    # remains the node that links into departments (execution layer).
+    def _top_sort_key(tid: str) -> tuple[int, str]:
+        leaf = tid.rsplit(".", 1)[-1].lower()
+        if leaf == "planner":
+            return (0, tid)
+        if leaf == "orchestrator":
+            return (1, tid)
+        if "planner" in leaf:
+            return (0, tid)
+        if "orchestrator" in leaf:
+            return (1, tid)
+        return (2, tid)
+
+    pipeline_tops = sorted(top_ids, key=_top_sort_key)
+    planner_id = next(
+        (t for t in pipeline_tops if t.rsplit(".", 1)[-1].lower() == "planner" or t.endswith(".planner")),
+        None,
+    )
+    orchestrator_id = next(
+        (
+            t
+            for t in pipeline_tops
+            if t.rsplit(".", 1)[-1].lower() == "orchestrator" or t.endswith(".orchestrator")
+        ),
+        None,
+    )
+    # Node that owns department fan-out (execution): orchestrator if present, else last pipeline top
+    execution_top = orchestrator_id or pipeline_tops[-1]
+    # Pipeline head (plan): planner if present, else execution_top
+    plan_top = planner_id or pipeline_tops[0]
+    primary_top = execution_top
 
     # Department nodes from categories (excluding pure top-management-only empties)
     categories_map: dict[str, list[str]] = {}
@@ -197,25 +225,30 @@ def _build_pack_group(pack_dir: Path, pack_id: str) -> dict | None:
                 "categoryId": cat_id,
                 "label": _CATEGORY_LABELS.get(cat_id, cat_id),
                 "memberIds": member_ids,
-                "reportsTo": primary_top,
+                "reportsTo": execution_top,
+                "reportsToIds": [execution_top],
             }
         )
 
-    # Hierarchy edges: top → departments → agents (agents report to dept; secondary top managers report to primary)
+    # Hierarchy: Planner → Orchestrator → depts → agents (SVG orchestration pipeline, vertical).
     hierarchy_edges: list[dict] = []
-    for tid in top_ids:
-        if tid != primary_top:
-            hierarchy_edges.append(
-                {"fromId": primary_top, "toId": tid, "kind": "management"}
-            )
+    if plan_top != execution_top and plan_top in by_id and execution_top in by_id:
+        hierarchy_edges.append(
+            {"fromId": plan_top, "toId": execution_top, "kind": "management"}
+        )
+    # Any other entry tops (rare) hang under execution top after orchestrator
+    for tid in pipeline_tops:
+        if tid in {plan_top, execution_top}:
+            continue
+        hierarchy_edges.append(
+            {"fromId": execution_top, "toId": tid, "kind": "management"}
+        )
     for dept in departments:
         hierarchy_edges.append(
-            {"fromId": primary_top, "toId": dept["id"], "kind": "department"}
+            {"fromId": execution_top, "toId": dept["id"], "kind": "department"}
         )
         for mid in dept["memberIds"]:
             if mid in top_ids:
-                # Top managers already hang under primary; skip double-link under dept
-                # but still list them in dept for membership stats.
                 continue
             hierarchy_edges.append(
                 {"fromId": dept["id"], "toId": mid, "kind": "member"}
@@ -226,7 +259,7 @@ def _build_pack_group(pack_dir: Path, pack_id: str) -> dict | None:
         "label": pack_id.replace("-", " ").title(),
         "folderPath": f"business/{pack_id}",
         "primaryTopId": primary_top,
-        "topManagementIds": top_ids,
+        "topManagementIds": pipeline_tops,
         "agentCount": len(agents),
         "departmentCount": len(departments),
         "agents": sorted(agents, key=lambda a: (a["vaId"] is None, a["vaId"] or 9999, a["id"])),
@@ -296,7 +329,10 @@ export interface OrgChartDepartmentNode {{
   readonly categoryId: string;
   readonly label: string;
   readonly memberIds: readonly string[];
+  /** Layout anchor only; peer tops jointly own the tree. */
   readonly reportsTo: string;
+  /** All top-management peers that link into this department. */
+  readonly reportsToIds: readonly string[];
 }}
 
 export interface OrgChartEdge {{

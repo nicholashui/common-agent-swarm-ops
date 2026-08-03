@@ -24,26 +24,53 @@ test("org chart payload excludes specials and includes video pack", () => {
   assert.ok(video.topManagementIds.includes("video.orchestrator"));
 });
 
-test("video hierarchy places orchestrator above departments and agents", () => {
+test("video hierarchy is Planner → Orchestrator → departments → agents", () => {
   const video = getOrgChartGroup("video")!;
   const layout = buildOrgChartLayout(video);
-  const top = layout.nodes.find((n) => n.id === "video.orchestrator");
-  assert.ok(top);
-  assert.equal(top.data.kind, "top");
+  const orchestrator = layout.nodes.find((n) => n.id === "video.orchestrator");
+  const planner = layout.nodes.find((n) => n.id === "video.planner");
+  assert.ok(orchestrator);
+  assert.ok(planner);
+  assert.equal(orchestrator.data.kind, "top");
+  assert.equal(planner.data.kind, "top");
+  // Planner above Orchestrator (pipeline order)
+  assert.ok(planner.position.y < orchestrator.position.y);
+  assert.ok(
+    layout.edges.some(
+      (e) =>
+        e.source === "video.planner" &&
+        e.target === "video.orchestrator" &&
+        e.data.kind === "management",
+    ),
+  );
+  assert.ok(
+    video.hierarchyEdges.some(
+      (e) =>
+        e.fromId === "video.planner" &&
+        e.toId === "video.orchestrator" &&
+        e.kind === "management",
+    ),
+  );
+  // Departments hang under Orchestrator only
+  assert.ok(
+    layout.edges
+      .filter((e) => e.data.kind === "department")
+      .every((e) => e.source === "video.orchestrator"),
+  );
 
   const depts = layout.nodes.filter((n) => n.data.kind === "department");
   assert.ok(depts.length >= 8);
-  assert.ok(depts.every((d) => d.position.y > top.position.y));
+  assert.ok(depts.every((d) => d.position.y > orchestrator.position.y));
 
   const agents = layout.nodes.filter((n) => n.data.kind === "agent");
   assert.ok(agents.length >= 100);
-  // Agents sit under departments
   const minDeptY = Math.min(...depts.map((d) => d.position.y));
   assert.ok(agents.every((a) => a.position.y > minDeptY));
 
   const kinds = countEdgesByKind([...video.hierarchyEdges]);
   assert.ok((kinds.department ?? 0) >= 8);
   assert.ok((kinds.member ?? 0) >= 100);
+  assert.ok((kinds.management ?? 0) >= 1);
 });
 
 test("critique overlay adds animated critique edges only when enabled", () => {

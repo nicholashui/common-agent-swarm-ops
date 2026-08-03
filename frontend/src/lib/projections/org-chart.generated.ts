@@ -25,7 +25,10 @@ export interface OrgChartDepartmentNode {
   readonly categoryId: string;
   readonly label: string;
   readonly memberIds: readonly string[];
+  /** Layout anchor only; peer tops jointly own the tree. */
   readonly reportsTo: string;
+  /** All top-management peers that link into this department. */
+  readonly reportsToIds: readonly string[];
 }
 
 export interface OrgChartEdge {
@@ -68,8 +71,8 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
       "folderPath": "business/video",
       "primaryTopId": "video.orchestrator",
       "topManagementIds": [
-        "video.orchestrator",
-        "video.planner"
+        "video.planner",
+        "video.orchestrator"
       ],
       "agentCount": 114,
       "departmentCount": 10,
@@ -1341,7 +1344,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.showrunner",
             "video.casting"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.2-Cam",
@@ -1352,7 +1358,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.cameraoperator",
             "video.dronepilot"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.3-Edit",
@@ -1370,7 +1379,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.costumedesign",
             "video.mua_makeup"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.4-Snd",
@@ -1382,7 +1394,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.voiceover",
             "video.soundmixer"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.5-Perf",
@@ -1395,7 +1410,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.talent",
             "video.ugccreator"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.6-Dist",
@@ -1407,7 +1425,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.creativedirector",
             "video.performancemarketer"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.7-Edu",
@@ -1429,7 +1450,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.localizationqa",
             "video.realestatephoto"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.8-AI",
@@ -1444,7 +1468,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.trailereditor",
             "video.sportsanalyst"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.9-Meta",
@@ -1480,7 +1507,10 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.evaluationharness",
             "video.safetyredteam"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         },
         {
           "id": "video.dept.10-Sup",
@@ -1522,13 +1552,16 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.awardsstrategist",
             "video.archivemaster"
           ],
-          "reportsTo": "video.orchestrator"
+          "reportsTo": "video.orchestrator",
+          "reportsToIds": [
+            "video.orchestrator"
+          ]
         }
       ],
       "hierarchyEdges": [
         {
-          "fromId": "video.orchestrator",
-          "toId": "video.planner",
+          "fromId": "video.planner",
+          "toId": "video.orchestrator",
           "kind": "management"
         },
         {

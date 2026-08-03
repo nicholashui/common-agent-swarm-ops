@@ -81,8 +81,35 @@ export function buildOrgChartLayout(
   const nodes: OrgChartFlowNode[] = [];
   const edges: OrgChartFlowEdge[] = [];
 
-  const primary = agentById.get(group.primaryTopId);
-  const secondaryTop = group.topManagementIds.filter((id) => id !== group.primaryTopId);
+  // Orchestration pipeline (common-agent-structure.svg, vertical):
+  //   Planner → Orchestrator → departments → agents
+  const pipelineTopIds =
+    group.topManagementIds.length > 0
+      ? [...group.topManagementIds]
+      : [group.primaryTopId];
+  // Prefer explicit planner → orchestrator order for layout when both exist
+  const orderedPipeline = (() => {
+    const planner = pipelineTopIds.find(
+      (id) => id.endsWith(".planner") || id.split(".").pop() === "planner",
+    );
+    const orchestrator = pipelineTopIds.find(
+      (id) =>
+        id.endsWith(".orchestrator") || id.split(".").pop() === "orchestrator",
+    );
+    const rest = pipelineTopIds.filter(
+      (id) => id !== planner && id !== orchestrator,
+    );
+    const ordered: string[] = [];
+    if (planner) ordered.push(planner);
+    if (orchestrator) ordered.push(orchestrator);
+    ordered.push(...rest);
+    return ordered.length > 0 ? ordered : [group.primaryTopId];
+  })();
+  const executionTopId =
+    orderedPipeline.find(
+      (id) =>
+        id.endsWith(".orchestrator") || id.split(".").pop() === "orchestrator",
+    ) ?? orderedPipeline[orderedPipeline.length - 1]!;
 
   // Department columns — measure widths first for centering
   const deptLayouts = group.departments.map((dept) => {
@@ -107,42 +134,27 @@ export function buildOrgChartLayout(
   const topY = 24;
   const centerX = originX + totalWidth / 2;
 
-  // Top management node
-  nodes.push({
-    id: group.primaryTopId,
-    type: "orgNode",
-    position: { x: centerX - NODE_W / 2, y: topY },
-    data: {
-      kind: "top",
-      title: primary?.name ?? group.primaryTopId,
-      subtitle: "Top management · orchestrates pack agents",
-      href: primary?.href,
-      isTopManagement: true,
-      status: primary?.status,
-      categoryId: primary?.categoryId,
-    },
-    draggable: false,
-    connectable: false,
-  });
-
-  // Secondary top managers (planner, etc.) just under primary
-  const secondaryY = topY + NODE_H + V_GAP * 0.55;
-  const secondarySpan = Math.max(secondaryTop.length, 1) * (NODE_W + H_GAP);
-  secondaryTop.forEach((id, index) => {
+  // Pipeline tops stacked vertically (Planner above Orchestrator)
+  orderedPipeline.forEach((id, index) => {
     const agent = agentById.get(id);
-    const x =
-      centerX -
-      secondarySpan / 2 +
-      index * (NODE_W + H_GAP) +
-      (NODE_W + H_GAP - NODE_W) / 2;
+    const leaf = id.split(".").pop()?.toLowerCase() ?? "";
+    const subtitle =
+      leaf === "planner"
+        ? "Scope & task graph"
+        : leaf === "orchestrator"
+          ? "State, retries, fan-out"
+          : "Pack entry";
     nodes.push({
       id,
       type: "orgNode",
-      position: { x, y: secondaryY },
+      position: {
+        x: centerX - NODE_W / 2,
+        y: topY + index * (NODE_H + V_GAP * 0.65),
+      },
       data: {
         kind: "top",
         title: agent?.name ?? id,
-        subtitle: "Entry / management",
+        subtitle,
         href: agent?.href,
         isTopManagement: true,
         status: agent?.status,
@@ -151,21 +163,24 @@ export function buildOrgChartLayout(
       draggable: false,
       connectable: false,
     });
-    edges.push({
-      id: `mgmt-${group.primaryTopId}-${id}`,
-      source: group.primaryTopId,
-      target: id,
-      type: "smoothstep",
-      animated: false,
-      className: "org-chart-edge org-chart-edge--management",
-      data: { kind: "management" },
-    });
+    if (index > 0) {
+      const prev = orderedPipeline[index - 1]!;
+      edges.push({
+        id: `pipeline-${prev}-${id}`,
+        source: prev,
+        target: id,
+        type: "smoothstep",
+        animated: false,
+        className: "org-chart-edge org-chart-edge--management",
+        data: { kind: "management" },
+      });
+    }
   });
 
   const deptY =
-    secondaryTop.length > 0
-      ? secondaryY + NODE_H + V_GAP
-      : topY + NODE_H + V_GAP;
+    topY +
+    orderedPipeline.length * (NODE_H + V_GAP * 0.65) +
+    V_GAP * 0.35;
 
   const deptBlockHeight = (layout: { rows: number }): number =>
     NODE_H + V_GAP * 0.75 + layout.rows * (NODE_H + 20);
@@ -194,9 +209,10 @@ export function buildOrgChartLayout(
         connectable: false,
       });
 
+      // Only Orchestrator (execution top) fans out to departments
       edges.push({
-        id: `dept-${group.primaryTopId}-${dept.id}`,
-        source: group.primaryTopId,
+        id: `dept-${executionTopId}-${dept.id}`,
+        source: executionTopId,
         target: dept.id,
         type: "smoothstep",
         animated: false,

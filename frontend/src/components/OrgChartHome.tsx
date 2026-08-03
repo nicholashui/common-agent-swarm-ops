@@ -212,10 +212,12 @@ export function OrgChartHome({
           <p className="eyebrow">Registry · Agent Org Chart</p>
           <h1 id="org-chart-title">Agent Org Chart</h1>
           <p className="org-chart-page__lede">
-            Organization hierarchy for agent groups.{" "}
-            <strong>{topNames || activeGroup.primaryTopId}</strong> is top
-            management and orchestrates the group's agents. Agents are grouped
-            into category departments.
+            Organization hierarchy for agent groups, aligned with{" "}
+            <code>common-agent-structure.svg</code>:{" "}
+            <strong>Planner → Orchestrator → departments</strong>. Pipeline:{" "}
+            <strong>{topNames || activeGroup.primaryTopId}</strong>. Planner
+            defines the task graph; Orchestrator runs it and fans out to category
+            departments.
           </p>
         </div>
 
