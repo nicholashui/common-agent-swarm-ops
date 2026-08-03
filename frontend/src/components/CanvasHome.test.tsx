@@ -13,89 +13,59 @@ import { CanvasHome } from "./CanvasHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
 
-test("canvas home matches ui_04 md/svg structure", () => {
-  const markup = renderToStaticMarkup(<CanvasHome view={getScreenParameters("canvas")} />);
+test("canvas orchestration board matches ui_04 redesign", () => {
+  const markup = renderToStaticMarkup(
+    <CanvasHome view={getScreenParameters("canvas")} />,
+  );
 
   assert.match(markup, /TradingResearch α/);
   assert.match(markup, /Parallel Indep\. \+ Verify v1\.4/);
   assert.match(markup, /Design/);
+  assert.match(markup, /Inspect/);
   assert.match(markup, /Run/);
-  assert.match(markup, /Compare/);
-  assert.match(markup, /12\/14 on latest common/);
-  assert.match(markup, /Co-Pilot/);
-  // Co-Pilot menu starts collapsed; actions live in the fixture until opened.
-  assert.match(markup, /aria-expanded="false"/);
-  assert.doesNotMatch(markup, /Optimize tokens/);
-  assert.match(markup, /Layout/);
-  assert.match(markup, /Focus/);
-  assert.match(markup, /Export/);
-  assert.match(markup, /▶ Run/);
-  assert.match(markup, /A\/B Test/);
-  assert.match(markup, /AI Suggest Node/);
+  assert.match(markup, /Instance lifecycle|INSTANCE LIFECYCLE|Compose created workflow/i);
+  assert.match(markup, /Materialized draft instance/);
+  assert.match(markup, /Canvas inspect \/ run board/);
+  assert.match(markup, /Host run \(fail-closed\)/);
+  assert.match(markup, /WORKFLOW DIAGRAM|Crew workflow/i);
+  assert.match(markup, /Agent Workflow style/);
+  assert.match(markup, /CREW MEMBERS|crew members/i);
+  assert.match(markup, /Open sample instances|Sample instances|samples-trigger/i);
+  assert.match(markup, /Fail-closed run/);
+  assert.match(markup, /Edit in Compose/);
+  assert.match(markup, /Run instance/);
+  assert.match(markup, /Human board ≠ Orchestrator|Orchestrator agent/i);
+  assert.match(markup, /RUN READINESS|Run readiness/i);
+  assert.match(markup, /Validate graph/);
+  assert.match(markup, /Activity/);
   assert.match(markup, /DataFetcher/);
   assert.match(markup, /VerifierNode/);
-  // Custom agent appears on the board (not only Custom palette tab).
-  assert.match(markup, /CustomReportAgent/);
-  assert.match(markup, /Parallel Data &amp; Analysis \(BIG ROW\)/);
-  assert.match(markup, /Synthesis \+ Verification/);
-  assert.match(markup, /cycle ↺/);
-  assert.match(markup, /Supervisor/);
-  assert.match(markup, /Dynamic Router/);
-  assert.match(markup, /Registry-linked|Custom — contribute back/);
-  assert.match(markup, /Iteration|Data flow/);
-  assert.match(markup, /Partial replay/);
+  assert.match(markup, /Layout/);
+  assert.match(markup, /Export/);
   assert.match(markup, /Cancel/);
-  assert.match(markup, /≡ logs/);
-  assert.match(markup, /Aggregate eval/);
-  assert.match(markup, /Improvement history/);
-  assert.match(markup, /Update to latest safe/);
-  assert.match(markup, /Pin version/);
-  assert.match(markup, /Propose imp/);
-  assert.match(markup, /Open Detail \(nn_ui_05\)/);
-  assert.match(markup, /Live Inspector/);
-  assert.match(markup, /groundedness below 0\.9/);
   assert.match(markup, />Task</);
-  assert.match(markup, />Artifacts</);
-  assert.match(markup, />Critique</);
-  assert.match(markup, />Quality</);
-  assert.match(markup, />Provenance</);
   assert.match(markup, /Returned validation/);
   assert.doesNotMatch(markup, /tenant_id|password=/i);
 });
 
-test("canvas landing fixture includes both groups and special nodes", () => {
+test("canvas landing fixture includes orchestration instance meta", () => {
+  assert.equal(LOCAL_CANVAS_LANDING.viewMode, "inspect");
+  assert.ok(LOCAL_CANVAS_LANDING.instanceId);
   assert.equal(LOCAL_CANVAS_LANDING.groups.length, 2);
   assert.ok(LOCAL_CANVAS_LANDING.nodes.some((node) => node.kind === "supervisor"));
-  assert.ok(LOCAL_CANVAS_LANDING.nodes.some((node) => node.kind === "router"));
   assert.ok(LOCAL_CANVAS_LANDING.nodes.some((node) => node.kind === "verifier"));
-  assert.ok(LOCAL_CANVAS_LANDING.nodes.some((node) => node.kind === "custom"));
   assert.equal(LOCAL_CANVAS_LANDING.inspectorTabs.length, 5);
-  assert.deepEqual(
-    [...LOCAL_CANVAS_LANDING.inspectorTabs.map((tab) => tab.id)],
-    ["task", "artifacts", "critique", "quality", "provenance"],
-  );
-  assert.ok(
-    LOCAL_CANVAS_LANDING.copilotActions.includes("Optimize tokens"),
-  );
-  assert.ok(
-    LOCAL_CANVAS_LANDING.copilotActions.includes(
-      "Propose as new Common Pattern",
-    ),
-  );
-  assert.ok(LOCAL_CANVAS_LANDING.copilotActions.length >= 3);
-  assert.equal(LOCAL_CANVAS_LANDING.groups[0]?.tone, "parallel");
-  assert.equal(LOCAL_CANVAS_LANDING.groups[1]?.tone, "verification");
 });
 
-test("canvas CSS defines three-column shell, overlays, and run bar", async () => {
+test("canvas CSS defines orchestration shell", async () => {
   const css = await readFile(
     resolve(componentDirectory, "../app/globals.css"),
     "utf8",
   );
   assert.match(css, /\.canvas-home \{/);
-  assert.match(css, /\.canvas-home__group--verification/);
-  assert.match(css, /\.canvas-home__minimap/);
+  assert.match(css, /\.canvas-home__body--orch/);
+  assert.match(css, /\.canvas-home__lifecycle/);
+  assert.match(css, /\.canvas-home__workflow-panel/);
+  assert.match(css, /\.workflow-diagram/);
   assert.match(css, /\.canvas-home__runbar/);
-  assert.match(css, /\.canvas-home__live/);
-  assert.match(css, /\.canvas-home--focus/);
 });

@@ -53,6 +53,37 @@ function isGate(agentId: string, label: string, verified?: boolean): boolean {
 }
 
 /**
+ * Build workflow graph from canvas / swarm node labels (Agent Workflow style).
+ */
+export function buildWorkflowGraphFromCanvasNodes(
+  nodes: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly kind?: string;
+    readonly versionLabel?: string;
+  }[],
+  patternName?: string,
+): ComposerWorkflowGraph {
+  return buildComposerWorkflowGraph(
+    nodes.map((n) => {
+      const hay = `${n.id} ${n.label} ${n.kind ?? ""}`.toLowerCase();
+      return {
+        id: n.id,
+        label: n.label,
+        agentId: n.label.includes(".") ? n.label : n.id,
+        verified:
+          n.kind === "verifier" ||
+          hay.includes("verif") ||
+          hay.includes("judge") ||
+          hay.includes("gate") ||
+          hay.includes("supervisor"),
+      };
+    }),
+    patternName,
+  );
+}
+
+/**
  * Layout: control meta → craft agents → gate (if any), with sequential handoffs.
  */
 export function buildComposerWorkflowGraph(

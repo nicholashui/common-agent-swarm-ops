@@ -27,3 +27,18 @@ test("buildComposerWorkflowGraph empty shows await phase", () => {
   assert.equal(graph.agentCount, 0);
   assert.match(graph.nodes[0]!.title, /AWAITING|PHASE/i);
 });
+
+test("buildWorkflowGraphFromCanvasNodes maps verifier kind to gate", async () => {
+  const { buildWorkflowGraphFromCanvasNodes } = await import(
+    "./composer-workflow"
+  );
+  const graph = buildWorkflowGraphFromCanvasNodes(
+    [
+      { id: "o", label: "video.orchestrator", kind: "common" },
+      { id: "v", label: "video.judge", kind: "verifier" },
+    ],
+    "demo",
+  );
+  assert.ok(graph.gateCount >= 1);
+  assert.ok(graph.agentCount + graph.gateCount >= 2);
+});

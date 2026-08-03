@@ -5,7 +5,8 @@
 
 import type { ScreenLabels } from "./screen-labels";
 
-export type CanvasViewMode = "design" | "run" | "compare";
+/** Design = palette tools · Inspect = workflow board (default) · Run = execution posture */
+export type CanvasViewMode = "design" | "inspect" | "run" | "compare";
 export type CanvasPaletteTab = "common" | "custom" | "patterns";
 export type CanvasNodeKind =
   | "common"
@@ -107,11 +108,18 @@ export interface CanvasLandingView {
   readonly inspectorTabs: readonly CanvasInspectorTab[];
   readonly copilotActions: readonly string[];
   readonly footerNote: string;
+  /** Host draft id when live instance (Compose materialize). */
+  readonly instanceId?: string;
+  readonly instanceStatus?: string;
+  readonly instanceRevision?: number;
+  /** e.g. Compose ACC · AI-pick */
+  readonly sourceLabel?: string;
+  readonly fromCompose?: boolean;
 }
 
 export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
   labels: {
-    swarm_canvas: "Swarm canvas",
+    swarm_canvas: "Swarm canvas · orchestration board",
     swarm_name: "Swarm name",
     view_mode: "View mode",
     auto_layout_is_local_only_feedback: "Auto layout is local-only feedback.",
@@ -141,13 +149,18 @@ export const LOCAL_CANVAS_LANDING: CanvasLandingView = {
     returned_validation: "Returned validation",
     registry_linked: "Registry-linked",
   },
-  eyebrow: "SWARM CANVAS",
-  settingsEyebrow: "SWARM SETTINGS",
+  eyebrow: "SWARM CANVAS · ORCHESTRATION",
+  settingsEyebrow: "INSTANCE SETTINGS",
   selectedEyebrowTemplate: "SELECTED · {kind}",
   swarmName: "TradingResearch α",
   patternBadge: "Based on: Parallel Indep. + Verify v1.4",
   commonsSummary: "12/14 on latest common · 2 forks",
-  viewMode: "design",
+  viewMode: "inspect",
+  instanceId: "demo-landing",
+  instanceStatus: "draft",
+  instanceRevision: 0,
+  sourceLabel: "Demo landing · open Compose instance for live draft",
+  fromCompose: false,
   palette: [
     {
       id: "p-data",

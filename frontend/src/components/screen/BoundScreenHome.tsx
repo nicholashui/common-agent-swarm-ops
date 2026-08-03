@@ -526,27 +526,58 @@ function BoundLiveSwarmCanvas({
                 agentId: n.agentId ?? n.id,
                 agentVersion: n.agentVersion ?? "current",
               }));
-      const nodes = memberNodes.map((m, index) => ({
-        id: m.nodeId || `node_${index}`,
-        label: m.agentId,
-        kind: "common" as const,
-        versionLabel: m.agentVersion || "current",
-        status: "idle" as const,
-        statusLabel: "Draft member",
-        metrics: "Host draft · not run",
-        linked: true,
+      const nodes = memberNodes.map((m, index) => {
+        const agentId = m.agentId;
+        const isGate =
+          /judge|gate|verif|qa|compliance/i.test(agentId) ||
+          /judge|gate|verif|qa|compliance/i.test(m.nodeId);
+        return {
+          id: m.nodeId || `node_${index}`,
+          label: agentId,
+          kind: (isGate ? "verifier" : "common") as
+            | "common"
+            | "verifier"
+            | "supervisor"
+            | "router"
+            | "custom",
+          versionLabel: m.agentVersion || "current",
+          status: "idle" as const,
+          statusLabel: "Draft member",
+          metrics: "Host draft · inspect on workflow diagram",
+          linked: true,
+        };
+      });
+      const edgeList = nodes.slice(0, -1).map((node, index) => ({
+        id: `e-${node.id}-${nodes[index + 1]!.id}`,
+        from: node.id,
+        to: nodes[index + 1]!.id,
+        label: "handoff",
+        style: "solid" as const,
       }));
       setLiveView({
         ...baseView,
+        viewMode: "inspect",
         swarmName: swarm.name,
         patternBadge: swarm.patternRef
-          ? `Pattern: ${swarm.patternRef}`
-          : `Status: ${swarm.status} · rev ${swarm.revision}`,
-        commonsSummary: `${memberNodes.length} member(s) on Host draft ${swarm.id}`,
+          ? `From Compose · pattern ${swarm.patternRef}`
+          : `From Compose · ${swarm.status} · rev ${swarm.revision}`,
+        commonsSummary: `${memberNodes.length} member(s) · workflow diagram · draft ${swarm.id}`,
+        instanceId: swarm.id,
+        instanceStatus: swarm.status,
+        instanceRevision: swarm.revision,
+        sourceLabel: "Compose ACC · AI-pick",
+        fromCompose: true,
         nodes,
         groups: [],
-        edges: [],
-        footerNote: `Live Host draft ${swarm.id} · revision ${swarm.revision} · ${swarm.status}. Façade is process-local (restart clears drafts). Production stays fail-closed.`,
+        edges: edgeList,
+        footerNote: `Live Host draft ${swarm.id} · revision ${swarm.revision} · ${swarm.status}. Orchestration board · Agent Workflow style. Production fail-closed.`,
+        runBar: {
+          ...baseView.runBar,
+          statusLabel: swarm.status,
+          activeNodesLabel: `${memberNodes.length} agents (draft)`,
+          progressLabel: "Not run · inspect workflow",
+          progressPercent: 0,
+        },
       });
       setLoadNote(
         `Loaded draft ${swarm.id}: ${swarm.name} (${memberNodes.length} member(s), rev ${swarm.revision}).`,
