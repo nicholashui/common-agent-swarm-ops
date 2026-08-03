@@ -169,40 +169,38 @@ def _build_pack_group(pack_dir: Path, pack_id: str) -> dict | None:
     for a in agents:
         a["isTopManagement"] = a["id"] in top_ids
 
-    # Orchestration pipeline order (aligns with common-agent-structure.svg):
-    #   Planner → Orchestrator → departments → agents
-    # Prefer planner as pipeline head when both entry tops exist; orchestrator
-    # remains the node that links into departments (execution layer).
+    # Orchestration pipeline (common-agent-structure.svg + org chart):
+    #   Orchestrator → Planner → departments → agents
     def _top_sort_key(tid: str) -> tuple[int, str]:
         leaf = tid.rsplit(".", 1)[-1].lower()
-        if leaf == "planner":
+        if leaf == "orchestrator" or "orchestrator" in leaf:
             return (0, tid)
-        if leaf == "orchestrator":
-            return (1, tid)
-        if "planner" in leaf:
-            return (0, tid)
-        if "orchestrator" in leaf:
+        if leaf == "planner" or "planner" in leaf:
             return (1, tid)
         return (2, tid)
 
     pipeline_tops = sorted(top_ids, key=_top_sort_key)
     planner_id = next(
-        (t for t in pipeline_tops if t.rsplit(".", 1)[-1].lower() == "planner" or t.endswith(".planner")),
+        (
+            t
+            for t in pipeline_tops
+            if t.rsplit(".", 1)[-1].lower() == "planner" or t.endswith(".planner")
+        ),
         None,
     )
     orchestrator_id = next(
         (
             t
             for t in pipeline_tops
-            if t.rsplit(".", 1)[-1].lower() == "orchestrator" or t.endswith(".orchestrator")
+            if t.rsplit(".", 1)[-1].lower() == "orchestrator"
+            or t.endswith(".orchestrator")
         ),
         None,
     )
-    # Node that owns department fan-out (execution): orchestrator if present, else last pipeline top
-    execution_top = orchestrator_id or pipeline_tops[-1]
-    # Pipeline head (plan): planner if present, else execution_top
-    plan_top = planner_id or pipeline_tops[0]
-    primary_top = execution_top
+    # Pipeline head: orchestrator; fan-out into depts: planner (or orchestrator if no planner)
+    head_top = orchestrator_id or pipeline_tops[0]
+    fanout_top = planner_id or head_top
+    primary_top = head_top
 
     # Department nodes from categories (excluding pure top-management-only empties)
     categories_map: dict[str, list[str]] = {}
@@ -225,27 +223,27 @@ def _build_pack_group(pack_dir: Path, pack_id: str) -> dict | None:
                 "categoryId": cat_id,
                 "label": _CATEGORY_LABELS.get(cat_id, cat_id),
                 "memberIds": member_ids,
-                "reportsTo": execution_top,
-                "reportsToIds": [execution_top],
+                "reportsTo": fanout_top,
+                "reportsToIds": [fanout_top],
             }
         )
 
-    # Hierarchy: Planner → Orchestrator → depts → agents (SVG orchestration pipeline, vertical).
+    # Hierarchy: Orchestrator → Planner → depts → agents
     hierarchy_edges: list[dict] = []
-    if plan_top != execution_top and plan_top in by_id and execution_top in by_id:
+    if head_top != fanout_top and head_top in by_id and fanout_top in by_id:
         hierarchy_edges.append(
-            {"fromId": plan_top, "toId": execution_top, "kind": "management"}
+            {"fromId": head_top, "toId": fanout_top, "kind": "management"}
         )
-    # Any other entry tops (rare) hang under execution top after orchestrator
+    # Any other entry tops hang under fanout (planner) after the main pipeline
     for tid in pipeline_tops:
-        if tid in {plan_top, execution_top}:
+        if tid in {head_top, fanout_top}:
             continue
         hierarchy_edges.append(
-            {"fromId": execution_top, "toId": tid, "kind": "management"}
+            {"fromId": fanout_top, "toId": tid, "kind": "management"}
         )
     for dept in departments:
         hierarchy_edges.append(
-            {"fromId": execution_top, "toId": dept["id"], "kind": "department"}
+            {"fromId": fanout_top, "toId": dept["id"], "kind": "department"}
         )
         for mid in dept["memberIds"]:
             if mid in top_ids:

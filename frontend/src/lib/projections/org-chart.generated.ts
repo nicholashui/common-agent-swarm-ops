@@ -71,8 +71,8 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
       "folderPath": "business/video",
       "primaryTopId": "video.orchestrator",
       "topManagementIds": [
-        "video.planner",
-        "video.orchestrator"
+        "video.orchestrator",
+        "video.planner"
       ],
       "agentCount": 114,
       "departmentCount": 10,
@@ -1344,9 +1344,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.showrunner",
             "video.casting"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1358,9 +1358,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.cameraoperator",
             "video.dronepilot"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1379,9 +1379,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.costumedesign",
             "video.mua_makeup"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1394,9 +1394,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.voiceover",
             "video.soundmixer"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1410,9 +1410,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.talent",
             "video.ugccreator"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1425,9 +1425,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.creativedirector",
             "video.performancemarketer"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1450,9 +1450,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.localizationqa",
             "video.realestatephoto"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1468,9 +1468,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.trailereditor",
             "video.sportsanalyst"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1507,9 +1507,9 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.evaluationharness",
             "video.safetyredteam"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         },
         {
@@ -1552,20 +1552,20 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
             "video.awardsstrategist",
             "video.archivemaster"
           ],
-          "reportsTo": "video.orchestrator",
+          "reportsTo": "video.planner",
           "reportsToIds": [
-            "video.orchestrator"
+            "video.planner"
           ]
         }
       ],
       "hierarchyEdges": [
         {
-          "fromId": "video.planner",
-          "toId": "video.orchestrator",
+          "fromId": "video.orchestrator",
+          "toId": "video.planner",
           "kind": "management"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.1-ATL",
           "kind": "department"
         },
@@ -1595,7 +1595,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.2-Cam",
           "kind": "department"
         },
@@ -1615,7 +1615,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.3-Edit",
           "kind": "department"
         },
@@ -1670,7 +1670,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.4-Snd",
           "kind": "department"
         },
@@ -1695,7 +1695,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.5-Perf",
           "kind": "department"
         },
@@ -1725,7 +1725,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.6-Dist",
           "kind": "department"
         },
@@ -1750,7 +1750,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.7-Edu",
           "kind": "department"
         },
@@ -1825,7 +1825,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.8-AI",
           "kind": "department"
         },
@@ -1865,7 +1865,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.9-Meta",
           "kind": "department"
         },
@@ -2000,7 +2000,7 @@ export const ORG_CHART_PAYLOAD: OrgChartPayload = {
           "kind": "member"
         },
         {
-          "fromId": "video.orchestrator",
+          "fromId": "video.planner",
           "toId": "video.dept.10-Sup",
           "kind": "department"
         },

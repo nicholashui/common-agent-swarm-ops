@@ -24,7 +24,7 @@ test("org chart payload excludes specials and includes video pack", () => {
   assert.ok(video.topManagementIds.includes("video.orchestrator"));
 });
 
-test("video hierarchy is Planner → Orchestrator → departments → agents", () => {
+test("video hierarchy is Orchestrator → Planner → departments → agents", () => {
   const video = getOrgChartGroup("video")!;
   const layout = buildOrgChartLayout(video);
   const orchestrator = layout.nodes.find((n) => n.id === "video.orchestrator");
@@ -33,34 +33,34 @@ test("video hierarchy is Planner → Orchestrator → departments → agents", (
   assert.ok(planner);
   assert.equal(orchestrator.data.kind, "top");
   assert.equal(planner.data.kind, "top");
-  // Planner above Orchestrator (pipeline order)
-  assert.ok(planner.position.y < orchestrator.position.y);
+  // Orchestrator above Planner
+  assert.ok(orchestrator.position.y < planner.position.y);
   assert.ok(
     layout.edges.some(
       (e) =>
-        e.source === "video.planner" &&
-        e.target === "video.orchestrator" &&
+        e.source === "video.orchestrator" &&
+        e.target === "video.planner" &&
         e.data.kind === "management",
     ),
   );
   assert.ok(
     video.hierarchyEdges.some(
       (e) =>
-        e.fromId === "video.planner" &&
-        e.toId === "video.orchestrator" &&
+        e.fromId === "video.orchestrator" &&
+        e.toId === "video.planner" &&
         e.kind === "management",
     ),
   );
-  // Departments hang under Orchestrator only
+  // Departments hang under Planner
   assert.ok(
     layout.edges
       .filter((e) => e.data.kind === "department")
-      .every((e) => e.source === "video.orchestrator"),
+      .every((e) => e.source === "video.planner"),
   );
 
   const depts = layout.nodes.filter((n) => n.data.kind === "department");
   assert.ok(depts.length >= 8);
-  assert.ok(depts.every((d) => d.position.y > orchestrator.position.y));
+  assert.ok(depts.every((d) => d.position.y > planner.position.y));
 
   const agents = layout.nodes.filter((n) => n.data.kind === "agent");
   assert.ok(agents.length >= 100);

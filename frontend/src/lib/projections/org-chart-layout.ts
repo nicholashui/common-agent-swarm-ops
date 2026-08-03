@@ -82,12 +82,11 @@ export function buildOrgChartLayout(
   const edges: OrgChartFlowEdge[] = [];
 
   // Orchestration pipeline (common-agent-structure.svg, vertical):
-  //   Planner → Orchestrator → departments → agents
+  //   Orchestrator → Planner → departments → agents
   const pipelineTopIds =
     group.topManagementIds.length > 0
       ? [...group.topManagementIds]
       : [group.primaryTopId];
-  // Prefer explicit planner → orchestrator order for layout when both exist
   const orderedPipeline = (() => {
     const planner = pipelineTopIds.find(
       (id) => id.endsWith(".planner") || id.split(".").pop() === "planner",
@@ -100,15 +99,15 @@ export function buildOrgChartLayout(
       (id) => id !== planner && id !== orchestrator,
     );
     const ordered: string[] = [];
-    if (planner) ordered.push(planner);
     if (orchestrator) ordered.push(orchestrator);
+    if (planner) ordered.push(planner);
     ordered.push(...rest);
     return ordered.length > 0 ? ordered : [group.primaryTopId];
   })();
-  const executionTopId =
+  // Department fan-out hangs under Planner (second stage), else last pipeline node
+  const fanoutTopId =
     orderedPipeline.find(
-      (id) =>
-        id.endsWith(".orchestrator") || id.split(".").pop() === "orchestrator",
+      (id) => id.endsWith(".planner") || id.split(".").pop() === "planner",
     ) ?? orderedPipeline[orderedPipeline.length - 1]!;
 
   // Department columns — measure widths first for centering
@@ -134,15 +133,15 @@ export function buildOrgChartLayout(
   const topY = 24;
   const centerX = originX + totalWidth / 2;
 
-  // Pipeline tops stacked vertically (Planner above Orchestrator)
+  // Pipeline tops stacked vertically (Orchestrator above Planner)
   orderedPipeline.forEach((id, index) => {
     const agent = agentById.get(id);
     const leaf = id.split(".").pop()?.toLowerCase() ?? "";
     const subtitle =
-      leaf === "planner"
-        ? "Scope & task graph"
-        : leaf === "orchestrator"
-          ? "State, retries, fan-out"
+      leaf === "orchestrator"
+        ? "State, retries, fan-out"
+        : leaf === "planner"
+          ? "Scope & task graph"
           : "Pack entry";
     nodes.push({
       id,
@@ -209,10 +208,10 @@ export function buildOrgChartLayout(
         connectable: false,
       });
 
-      // Only Orchestrator (execution top) fans out to departments
+      // Planner (fan-out top) links to departments
       edges.push({
-        id: `dept-${executionTopId}-${dept.id}`,
-        source: executionTopId,
+        id: `dept-${fanoutTopId}-${dept.id}`,
+        source: fanoutTopId,
         target: dept.id,
         type: "smoothstep",
         animated: false,
