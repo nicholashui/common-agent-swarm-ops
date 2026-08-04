@@ -101,7 +101,11 @@ export interface ComposerLandingView {
   readonly footerNote: string;
 }
 
-/** Canonical loadable samples (also documented in compose_acc_samples.md). */
+/**
+ * Loadable Plan samples — video pack (and optional specials) only.
+ * Specs must map to existing business/video/agents + business/specials/agents.
+ * No trading / COBOL / out-of-domain demos.
+ */
 export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-wuxia",
@@ -109,78 +113,87 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
     summary: "Happy path · hierarchical + verify",
     kind: "happy_path",
     body: [
-      "Wuxia short for YouTube:",
+      "Wuxia short for YouTube (video domain only):",
       "- 90s cinematic opening + strong hook in first 3 seconds",
-      "- verification loop before publish",
-      "- social cut + captions",
+      "- verification / judge gate before publish",
+      "- social cut + captions (accessibility)",
       "- mid-tier cost band",
-      "Domain: video production",
+      "Bind from video pack: orchestrator, planner, screenwriter, director, editor, judge.",
     ].join("\n"),
   },
   {
-    id: "sample-market",
-    label: "Market intel + verify",
-    summary: "Parallel research + final critic",
+    id: "sample-trend-research",
+    label: "Trend research → script",
+    summary: "Web/trend research + copy · video pack",
     kind: "happy_path",
     body: [
-      "Build a daily market intelligence swarm with a report-quality verification loop.",
-      "Prefer parallel research branches, then a final critic before the brief is published.",
-      "Keep token cost reasonable.",
+      "Video content research pipeline for a vertical short series:",
+      "- web research + trend intelligence on topic hooks",
+      "- competitor glance for format novelty",
+      "- copywriter / screenwriter handoff",
+      "- critic or judge quality gate before production",
+      "Use only video.* agents (e.g. webresearch, trendintelligence, copywriter, screenwriter, critic, judge).",
     ].join("\n"),
   },
   {
     id: "sample-social-budget",
     label: "Social under budget",
-    summary: "Lean crew · cost-efficient",
+    summary: "Lean video crew · cost-efficient",
     kind: "happy_path",
     body: [
       "Short-form social video crew under budget.",
       "Fast turnaround for 15–30s clips, captions, light music bed.",
-      "Prefer cost-efficient crew; still need a minimum quality check.",
+      "Prefer cost-efficient video crew; still need a minimum QC / judge gate.",
+      "Agents from video pack only (orchestrator, editor, accessibility, sounddesign, judge).",
     ].join("\n"),
   },
   {
     id: "sample-conflict",
     label: "Cost vs quality (HITL demo)",
-    summary: "Triggers needs_hitl · human picks priority only",
+    summary: "Triggers needs_hitl · video production conflict",
     kind: "hitl_demo",
     body: [
-      "Lowest cost AND premium quality cinematic film with no compromise.",
+      "Video production conflict: lowest cost AND premium cinematic quality film with no compromise.",
       "Either we ship same-day ASAP or we do a thorough multi-phase feature pipeline —",
       "I cannot decide which priority wins.",
       "Trade-off undecided. Conflict.",
+      "Domain remains video (not software, not trading).",
     ].join("\n"),
   },
   {
     id: "sample-feature",
     label: "Full feature hierarchy",
-    summary: "Orch → Planner → departments",
+    summary: "Orch → Planner → video departments",
     kind: "happy_path",
     body: [
-      "Full feature film production hierarchy.",
-      "Need Orchestrator → Planner → departments: story, direction, picture, sound, and final QC gate.",
-      "Video domain. Multi-phase, thorough.",
+      "Full feature film production hierarchy (video domain).",
+      "Need Orchestrator → Planner → departments: story, direction, cinematography, picture, sound, and final QC/judge gate.",
+      "Multi-phase, thorough. Bind video.* pack agents only.",
     ].join("\n"),
   },
   {
-    id: "sample-cobol",
-    label: "Legacy COBOL / software",
-    summary: "Specials / software domain bias",
-    kind: "domain_bias",
+    id: "sample-brand-spot",
+    label: "Brand spot + compliance",
+    summary: "Brand / creative + legal-ish gates · video",
+    kind: "happy_path",
     body: [
-      "Legacy COBOL analysis swarm for a migration assessment.",
-      "Software implementation planning, API inventory, risk register.",
-      "Prefer specials / software-oriented agents when available.",
+      "30s brand film for social and CTV:",
+      "- brand strategist + creative director framing",
+      "- director / cinematographer look",
+      "- editor cut + music supervisor cues",
+      "- compliance / judge review before publish",
+      "Use video pack agents (brandstrategist, creativedirector, director, cinematographer, editor, musicsupervisor, compliance, judge).",
     ].join("\n"),
   },
   {
     id: "sample-explicit-conflict",
-    label: "Scope contradiction (HITL)",
-    summary: "UGC vs broadcast · explicit conflict",
+    label: "UGC vs cinematic (HITL)",
+    summary: "Video scope conflict · HITL only",
     kind: "hitl_demo",
     body: [
-      "There is a contradiction in scope: we want either a cheap UGC pipeline",
-      "or a broadcast-quality drama series. Trade-off undecided. Conflict.",
+      "There is a contradiction in video scope: we want either a cheap UGC-style social pipeline",
+      "or a broadcast-quality cinematic drama series. Trade-off undecided. Conflict.",
+      "Stay in video domain — human resolves priority only, not agent shopping.",
     ].join("\n"),
   },
 ];
@@ -201,34 +214,34 @@ export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
     "verify": "Verify",
     "b1": "→ B1",
     "b2": "→ B2",
-    "big_rows_verifier_cycle": "BIG ROWs → verifier cycle ↺",
+    "big_rows_verifier_cycle": "Parallel crew → judge cycle",
     "goal_chip_applied_chip": "Goal chip applied: ${chip}",
     "enter_a_goal_before_sending": "Enter a goal before sending.",
     "save_draft_requires_an_authorized_compose_contra": "Save Draft requires an authorized compose contract.",
     "load_template_requires_an_authorized_template_pr": "Load Template requires an authorized template projection.",
     "regenerate_requires_the_composer_recommend_strea": "Regenerate requires the composer recommend stream.",
     "search_patterns_2": "Search patterns…",
-    "swarm_composer": "Swarm composer",
-    "close_composer": "Close composer",
-    "chat_composer": "Chat composer",
+    "swarm_composer": "Plan",
+    "close_composer": "Close plan",
+    "chat_composer": "Plan requirements",
     "goal_examples": "Goal examples",
     "send_goal": "Send goal",
     "pattern_filters": "Pattern filters",
   },
-  eyebrow: "SWARM COMPOSER · ACC",
-  title: "Swarm Composer",
+  eyebrow: "",
+  title: "Plan",
   description:
-    "Form a multi-agent work from available agents · requirements in · workflow diagram out · human only on conflicts",
+    "Form a multi-agent work from available agents · requirements in · workflow diagram out · human only on conflicts · then Execute",
   swarmName: "Untitled AI Swarm",
   architectTitle: "AI Swarm Architect (Host)",
   architectSubtitle:
-    "Goal/spec in · catalog agents only · AI plan draws workflow · Accept AI → Canvas · fail-closed",
+    "Goal/spec in · catalog agents only · AI plan draws workflow · Accept AI → Execute · fail-closed",
   messages: [
     {
       id: "m0",
       role: "assistant",
       text:
-        "Paste a goal or short production spec. I AI-pick pattern + agents and draw a crew workflow diagram. You only answer when I cannot resolve a conflict.",
+        "Paste a goal or short production spec. I AI-pick pattern + agents and draw a crew workflow diagram. You only answer when I cannot resolve a conflict. Accept to open Execute.",
     },
   ],
   samples: COMPOSER_SAMPLES,
@@ -306,12 +319,12 @@ export const LOCAL_COMPOSER_LANDING: ComposerLandingView = {
   activeFilter: "All domains",
   suggestNewLabel: "✧ AI: propose new pattern from this goal (Host)",
   handoffNotes: [
-    "AI-pick mainly: materialize when decision_status=ai_resolved.",
+    "AI-pick mainly: materialize when decision_status=ai_resolved, then open Execute.",
     "Human only for open_questions (needs_hitl) e.g. requirement conflicts.",
     "Building blocks = Host catalog agents only · production fail-closed.",
   ],
   footerNote:
-    "AI-pick mainly · human exception path for conflicts · Host catalog ranking · process-local drafts.",
+    "Plan · AI-pick mainly · human exception path for conflicts · open Execute for instance · process-local drafts.",
 };
 
 /** Offline fallback only when Host recommend is unreachable. */

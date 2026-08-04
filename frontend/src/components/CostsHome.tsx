@@ -8,15 +8,18 @@
  * @mustnot Adjust billing or invent spend without host contracts.
  * @redesign docs/frontend_redesign/ui_19_costs.md
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
   type CostsLandingView,
 } from "../lib/projections/costs-landing";
+import { applyCostsSamples } from "../lib/projections/operate-samples";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { SamplesBanner, SamplesToggle } from "./ui/SamplesToggle";
 
 const COST_PERIODS = [
   "Last 24 hours",
@@ -36,13 +39,21 @@ export function CostsHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const hostEmpty =
+    view.swarmBreakdown.length === 0 && view.agentUsage.length === 0;
+  const [showSamples, setShowSamples] = useState(hostEmpty);
+  const dataView = showSamples ? applyCostsSamples(view) : view;
   const [query, setQuery] = useState("");
   const [selectedSwarmId, setSelectedSwarmId] = useState<string | undefined>();
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [simEnabled, setSimEnabled] = useState(true);
   const [period, setPeriod] = useState(
-    () => view.periodLabel || COST_PERIODS[1],
+    () => dataView.periodLabel || COST_PERIODS[1],
   );
+
+  useEffect(() => {
+    setShowSamples(hostEmpty);
+  }, [hostEmpty]);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -55,36 +66,49 @@ export function CostsHome({
 
   const swarms = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (q.length === 0) return view.swarmBreakdown;
-    return view.swarmBreakdown.filter((row) =>
+    if (q.length === 0) return dataView.swarmBreakdown;
+    return dataView.swarmBreakdown.filter((row) =>
       row.name.toLowerCase().includes(q),
     );
-  }, [query, view.swarmBreakdown]);
+  }, [query, dataView.swarmBreakdown]);
 
   const agents = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (q.length === 0) return view.agentUsage;
-    return view.agentUsage.filter(
+    if (q.length === 0) return dataView.agentUsage;
+    return dataView.agentUsage.filter(
       (row) =>
         row.agent.toLowerCase().includes(q) ||
         row.commonVersion.toLowerCase().includes(q),
     );
-  }, [query, view.agentUsage]);
+  }, [query, dataView.agentUsage]);
 
   return (
     <section aria-label={L(labels, "cost_and_token_analytics")} className="costs-home">
       <header className="costs-home__header">
         <div>
-          <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <p className="eyebrow">{dataView.eyebrow}</p>
+          <div className="page-title-row">
+            <SamplesToggle
+              show={showSamples}
+              onToggle={() => setShowSamples((v) => !v)}
+              labelShow="Show sample costs"
+              labelHide="Hide sample costs"
+            />
+            <h1>{dataView.title}</h1>
+            <InfoTooltip label="About this screen" text={dataView.description} />
+          </div>
+          {showSamples ? (
+            <SamplesBanner>
+              Sample costs on · demo bands only (not billing). Toggle ▦ to hide.
+            </SamplesBanner>
+          ) : null}
         </div>
         <div className="costs-home__header-actions">
           <label className="costs-home__search">
             <span className="visually-hidden">{L(labels, "search_costs")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder={view.searchPlaceholder}
+              placeholder={dataView.searchPlaceholder}
               value={query}
             />
           </label>
@@ -92,10 +116,10 @@ export function CostsHome({
             aria-label={`Cost period: ${period}. Click to cycle.`}
             className="costs-home__chip"
             onClick={() => {
-              const options = view.periodLabel
+              const options = dataView.periodLabel
                 ? [
-                    view.periodLabel,
-                    ...COST_PERIODS.filter((p) => p !== view.periodLabel),
+                    dataView.periodLabel,
+                    ...COST_PERIODS.filter((p) => p !== dataView.periodLabel),
                   ]
                 : [...COST_PERIODS];
               const next = cycleOption(options, period);
@@ -121,7 +145,7 @@ export function CostsHome({
       </header>
 
       <div className="costs-home__kpis" aria-label={L(labels, "cost_kpis")}>
-        {view.kpis.map((kpi) => (
+        {dataView.kpis.map((kpi) => (
           <article
             className={`costs-home__kpi costs-home__kpi--${kpi.tone}`}
             key={kpi.id}
@@ -143,7 +167,7 @@ export function CostsHome({
         <div className="costs-home__main">
           <section className="costs-home__panel" aria-labelledby="trend-heading">
             <h2 id="trend-heading">{L(labels, "cost_trend")}</h2>
-            <p className="costs-home__muted">{view.trendNote}</p>
+            <p className="costs-home__muted">{dataView.trendNote}</p>
             <div className="costs-home__chart" aria-hidden="true">
               <i style={{ height: "42%" }} />
               <i style={{ height: "48%" }} />
@@ -229,7 +253,7 @@ export function CostsHome({
               </table>
             </div>
             <p className="costs-home__hint" role="status">
-              ↘ Suggest using CommonReportAgent v2.2 instead (−42% tokens, same
+              ↘ Suggest using video.editor v2.2 instead (−42% tokens, same
               quality).
             </p>
           </section>
@@ -241,26 +265,26 @@ export function CostsHome({
             <dl className="costs-home__budget">
               <div>
                 <dt>{L(labels, "monthly_budget")}</dt>
-                <dd>{view.budget.monthly}</dd>
+                <dd>{dataView.budget.monthly}</dd>
               </div>
               <div>
                 <dt>{L(labels, "spent")}</dt>
-                <dd>{view.budget.spent}</dd>
+                <dd>{dataView.budget.spent}</dd>
               </div>
               <div>
                 <dt>{L(labels, "remaining")}</dt>
-                <dd>{view.budget.remaining}</dd>
+                <dd>{dataView.budget.remaining}</dd>
               </div>
               <div>
                 <dt>{L(labels, "utilization")}</dt>
-                <dd>{view.budget.utilization}</dd>
+                <dd>{dataView.budget.utilization}</dd>
               </div>
               <div>
                 <dt>{L(labels, "alert_threshold")}</dt>
-                <dd>{view.budget.alertThreshold}</dd>
+                <dd>{dataView.budget.alertThreshold}</dd>
               </div>
             </dl>
-            <p className="costs-home__projected">{view.budget.projectedEom}</p>
+            <p className="costs-home__projected">{dataView.budget.projectedEom}</p>
             <button
               className="costs-home__action"
               onClick={() =>
@@ -278,40 +302,40 @@ export function CostsHome({
             <h2 id="savings-heading">{L(labels, "commons_savings_impact")}</h2>
             <ul className="costs-home__savings">
               <li>
-                <strong>{view.savings.savedThisMonth}</strong>
+                <strong>{dataView.savings.savedThisMonth}</strong>
                 <span>{L(labels, "saved_this_month_by_using_commons")}</span>
               </li>
               <li>
-                <strong>{view.savings.efficiencyGain}</strong>
+                <strong>{dataView.savings.efficiencyGain}</strong>
                 <span>{L(labels, "token_efficiency_gain_from_commons")}</span>
               </li>
               <li>
-                <strong>{view.savings.ifAllCommons}</strong>
+                <strong>{dataView.savings.ifAllCommons}</strong>
                 <span>{L(labels, "if_all_custom_commons_equivalent")}</span>
               </li>
             </ul>
             <p className="costs-home__muted">
-              Upgrade CustomReportAgent → CommonReportAgent v2.2 to realize
+              Upgrade video.copywriter → video.editor v2.2 to realize
               additional savings.
             </p>
           </section>
 
           <section className="costs-home__panel" aria-labelledby="sim-heading">
-            <h2 id="sim-heading">{view.simulator.title}</h2>
+            <h2 id="sim-heading">{dataView.simulator.title}</h2>
             <label className="costs-home__check">
               <input
                 checked={simEnabled}
                 onChange={(event) => setSimEnabled(event.target.checked)}
                 type="checkbox"
               />
-              Run CommonReportAgent v2.2 scenario
+              Run video.editor v2.2 scenario
             </label>
-            <p>{view.simulator.scenario}</p>
+            <p>{dataView.simulator.scenario}</p>
             {simEnabled ? (
-              <p className="costs-home__delta">{view.simulator.projectedDelta}</p>
+              <p className="costs-home__delta">{dataView.simulator.projectedDelta}</p>
             ) : null}
             <p className="costs-home__guard" role="note">
-              {view.simulator.qualityGuard}
+              {dataView.simulator.qualityGuard}
             </p>
             <button
               className="costs-home__action costs-home__action--primary"
@@ -329,7 +353,7 @@ export function CostsHome({
           <section className="costs-home__panel" aria-labelledby="rec-heading">
             <h2 id="rec-heading">{L(labels, "optimization_recommendations")}</h2>
             <ul className="costs-home__recs">
-              {view.recommendations.map((rec) => (
+              {dataView.recommendations.map((rec) => (
                 <li key={rec.id}>
                   <strong>{rec.title}</strong>
                   <p>{rec.body}</p>
@@ -343,7 +367,7 @@ export function CostsHome({
           <section className="costs-home__panel" aria-labelledby="reports-heading">
             <h2 id="reports-heading">{L(labels, "reports")}</h2>
             <ul className="costs-home__reports">
-              {view.reports.map((report) => (
+              {dataView.reports.map((report) => (
                 <li key={report}>
                   <button
                     className="costs-home__linkish"
@@ -364,9 +388,9 @@ export function CostsHome({
       </div>
 
       <p className="costs-home__safety" role="note">
-        {view.safetyNote}
+        {dataView.safetyNote}
       </p>
-      <p className="costs-home__footer">{view.footerNote}</p>
+      <p className="costs-home__footer">{dataView.footerNote}</p>
     </section>
   );
 }

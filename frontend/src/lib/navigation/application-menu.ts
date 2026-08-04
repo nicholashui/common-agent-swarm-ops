@@ -125,8 +125,8 @@ export const APPLICATION_MENU_GROUPS: readonly ApplicationMenuGroup[] = [
 
 /**
  * Full menu table items. Routes align with screen-manifest where a route exists.
- * Swarm Canvas uses the non-inventing /canvas entry; nested swarm canvas paths
- * still mark it active.
+ * Execute uses the non-inventing /canvas entry; nested swarm canvas paths
+ * still mark it active. Plan uses /composer.
  */
 export const APPLICATION_MENU_ITEMS: readonly ApplicationMenuItem[] = [
   {
@@ -141,7 +141,7 @@ export const APPLICATION_MENU_ITEMS: readonly ApplicationMenuItem[] = [
   },
   {
     id: "compose",
-    label: "Compose",
+    label: "Plan",
     href: "/composer",
     icon: "compose",
     groupId: "build",
@@ -150,7 +150,7 @@ export const APPLICATION_MENU_ITEMS: readonly ApplicationMenuItem[] = [
   },
   {
     id: "swarm-canvas",
-    label: "Swarm Canvas",
+    label: "Execute",
     href: "/canvas",
     icon: "canvas",
     groupId: "build",
@@ -404,7 +404,7 @@ export function isMenuItemActive(
         if (pathname === "/") return true;
         continue;
       }
-      // Swarm canvas: any /swarms/*/canvas path.
+      // Execute (swarm canvas): any /swarms/*/canvas path.
       if (prefix === "/swarms/") {
         if (/^\/swarms\/[^/]+\/canvas(?:\/|$)/.test(pathname)) {
           return true;

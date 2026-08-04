@@ -17,6 +17,7 @@ import {
 } from "../lib/projections/mobile-landing";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { InfoTooltip } from "./design";
 
 export function MobileHome({
   view,
@@ -44,11 +45,13 @@ export function MobileHome({
 
   return (
     <section aria-label={L(labels, "mobile_companion")} className="mobile-home">
-      <p className="mobile-home__intro lede">
-        Mobile / PWA companion views for on-the-go monitoring, approvals, and
-        quick actions. Desktop canvas editing is intentionally out of scope
-        here.
-      </p>
+      <div className="page-title-row mobile-home__intro">
+        <strong>Mobile companion</strong>
+        <InfoTooltip
+          label="About mobile companion"
+          text="Mobile / PWA companion views for on-the-go monitoring, approvals, and quick actions. Desktop canvas editing is intentionally out of scope here."
+        />
+      </div>
 
       <div className="mobile-home__device" aria-label={L(labels, "phone_preview")}>
         <header className="mobile-home__status-bar">
@@ -115,7 +118,7 @@ export function MobileHome({
                 className="mobile-home__btn mobile-home__btn--primary"
                 href="/composer"
               >
-                Open Compose
+                Open Plan
               </Link>
             </div>
           ) : null}
@@ -227,7 +230,7 @@ function HomeTab({
                   </p>
                 ) : null}
                 <Link className="mobile-home__btn" href={swarm.canvasHref}>
-                  Canvas
+                  Execute
                 </Link>
               </article>
             </li>
@@ -305,7 +308,7 @@ function HomeTab({
             Browse Commons
           </Link>
           <Link className="mobile-home__btn" href="/composer">
-            Compose Swarm
+            Plan Swarm
           </Link>
         </div>
       </section>

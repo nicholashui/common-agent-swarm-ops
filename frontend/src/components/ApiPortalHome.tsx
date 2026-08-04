@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/ui_15_api_portal.md
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -70,7 +71,7 @@ export function ApiPortalHome({
 
 client = Client(token=os.environ["CASOPS_TOKEN"])
 run = client.swarms.run(
-    "trading-alpha",
+    "wuxia-short",
     inputs={"as_of": "local-preview"},
     pin_commons=True,
     idempotency_key="7f3c…",
@@ -79,7 +80,7 @@ run = client.swarms.run(
         : `import { createClient } from "@casops/sdk";
 
 const client = createClient({ token: process.env.CASOPS_TOKEN! });
-const run = await client.swarms.run("trading-alpha", {
+const run = await client.swarms.run("wuxia-short", {
   inputs: { as_of: "local-preview" },
   pinCommons: true,
   idempotencyKey: "7f3c…",
@@ -91,8 +92,10 @@ const run = await client.swarms.run("trading-alpha", {
       <header className="api-portal__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
         </div>
         <label className="api-portal__search">
           <span className="visually-hidden">{L(labels, "search_endpoints_and_sdk")}</span>

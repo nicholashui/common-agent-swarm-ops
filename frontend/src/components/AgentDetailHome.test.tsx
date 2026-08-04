@@ -33,7 +33,7 @@ test("agent detail home shows pack agent settings (no demo VerificationLoop)", (
   assert.match(markup, /business\/video\/agents/);
   assert.match(markup, /Agent SPEC|Loading document/);
   assert.doesNotMatch(markup, /VerificationLoopAgent/);
-  assert.doesNotMatch(markup, /MarketSentimentAgent/);
+  assert.doesNotMatch(markup, /Marketvideo.trendintelligence/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
 });
 

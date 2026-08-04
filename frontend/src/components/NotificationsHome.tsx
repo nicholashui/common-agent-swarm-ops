@@ -8,16 +8,19 @@
  * @mustnot Auto-open external untrusted destinations.
  * @redesign docs/frontend_redesign/ui_12_notifications.md
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
   type NotificationItem,
   type NotificationsLandingView,
 } from "../lib/projections/notifications-landing";
+import { applyNotificationsSamples } from "../lib/projections/operate-samples";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { SamplesBanner, SamplesToggle } from "./ui/SamplesToggle";
 
 const GROUP_BY_OPTIONS = [
   "Group by: time",
@@ -36,17 +39,28 @@ export function NotificationsHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
-  const [filter, setFilter] = useState(view.filters[0] ?? "All (7)");
+  const hostEmpty = view.items.length === 0;
+  const [showSamples, setShowSamples] = useState(hostEmpty);
+  const dataView = showSamples ? applyNotificationsSamples(view) : view;
+  const [filter, setFilter] = useState(dataView.filters[0] ?? "All");
   const [query, setQuery] = useState("");
   const [readIds, setReadIds] = useState<ReadonlySet<string>>(() => new Set());
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const [groupBy, setGroupBy] = useState<string>(GROUP_BY_OPTIONS[0]);
   const [notifyAbout, setNotifyAbout] = useState(
-    () => new Map(view.notifyAbout.map((item) => [item.id, item.enabled])),
+    () => new Map(dataView.notifyAbout.map((item) => [item.id, item.enabled])),
   );
   const [channels, setChannels] = useState(
-    () => new Map(view.channels.map((item) => [item.id, item.enabled])),
+    () => new Map(dataView.channels.map((item) => [item.id, item.enabled])),
   );
+
+  useEffect(() => {
+    setShowSamples(hostEmpty);
+  }, [hostEmpty]);
+
+  useEffect(() => {
+    setFilter(dataView.filters[0] ?? "All");
+  }, [dataView.filters]);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -59,7 +73,7 @@ export function NotificationsHome({
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const filtered = view.items.filter((item) => {
+    const filtered = dataView.items.filter((item) => {
       if (filter.startsWith("Proposals") && item.kind !== "proposal") return false;
       if (filter.startsWith("Rollouts") && item.kind !== "rollout" && item.kind !== "common") {
         return false;
@@ -84,19 +98,19 @@ export function NotificationsHome({
       });
     }
     return filtered;
-  }, [filter, groupBy, query, view.items]);
+  }, [filter, groupBy, query, dataView.items]);
 
   const highPriority = items.filter((item) => item.group === "today-high");
   const earlier = items.filter((item) => item.group === "earlier");
   const flatGroups =
     groupBy.includes("none") || groupBy.includes("kind") || groupBy.includes("priority");
 
-  const unreadCount = view.items.filter(
+  const unreadCount = dataView.items.filter(
     (item) => item.unread && !readIds.has(item.id),
   ).length;
 
   const markAllRead = (): void => {
-    const ids = view.items.map((item) => item.id);
+    const ids = dataView.items.map((item) => item.id);
     setReadIds(new Set(ids));
     if (onAction) {
       void onAction({ kind: "local.mark_read", ids });
@@ -137,14 +151,27 @@ export function NotificationsHome({
     <section aria-label={L(labels, "notifications_center")} className="notifications-home">
       <header className="notifications-home__header">
         <div>
-          <p className="eyebrow">{view.eyebrow}</p>
-          <h1>
-            {view.title}
-            <span className="notifications-home__badge" aria-label={`${unreadCount} unread`}>
-              {unreadCount}
-            </span>
-          </h1>
-          <p className="lede">{view.description}</p>
+          <p className="eyebrow">{dataView.eyebrow}</p>
+          <div className="page-title-row">
+            <SamplesToggle
+              show={showSamples}
+              onToggle={() => setShowSamples((v) => !v)}
+              labelShow="Show sample notifications"
+              labelHide="Hide sample notifications"
+            />
+            <h1>
+              {dataView.title}
+              <span className="notifications-home__badge" aria-label={`${unreadCount} unread`}>
+                {unreadCount}
+              </span>
+            </h1>
+            <InfoTooltip label="About this screen" text={dataView.description} />
+          </div>
+          {showSamples ? (
+            <SamplesBanner>
+              Sample notifications on · video demos. Toggle ▦ to hide.
+            </SamplesBanner>
+          ) : null}
         </div>
         <div className="notifications-home__header-actions">
           <label className="notifications-home__search">
@@ -182,7 +209,7 @@ export function NotificationsHome({
         className="notifications-home__filters"
         role="group"
       >
-        {view.filters.map((entry) => (
+        {dataView.filters.map((entry) => (
           <button
             aria-pressed={filter === entry}
             className={
@@ -276,7 +303,7 @@ export function NotificationsHome({
           <h2>{L(labels, "preferences")}</h2>
           <h3>{L(labels, "notify_me_about")}</h3>
           <ul className="notifications-home__pref-list">
-            {view.notifyAbout.map((item) => (
+            {dataView.notifyAbout.map((item) => (
               <li key={item.id}>
                 <label>
                   <input
@@ -298,7 +325,7 @@ export function NotificationsHome({
 
           <h3>{L(labels, "delivery_channels")}</h3>
           <ul className="notifications-home__pref-list">
-            {view.channels.map((item) => (
+            {dataView.channels.map((item) => (
               <li key={item.id}>
                 <label>
                   <input
@@ -320,7 +347,7 @@ export function NotificationsHome({
 
           <div className="notifications-home__quiet">
             <h3>{L(labels, "quiet_hours_digest")}</h3>
-            <p>{view.quietHours}</p>
+            <p>{dataView.quietHours}</p>
           </div>
 
           <button
@@ -340,12 +367,12 @@ export function NotificationsHome({
           </button>
 
           <p className="notifications-home__safety" role="note">
-            {view.safetyNote}
+            {dataView.safetyNote}
           </p>
         </aside>
       </div>
 
-      <p className="notifications-home__footer">{view.footerNote}</p>
+      <p className="notifications-home__footer">{dataView.footerNote}</p>
     </section>
   );
 }

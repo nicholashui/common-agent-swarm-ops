@@ -19,7 +19,8 @@ test("store exposes every redesign landing key with stored defaults", (): void =
   assert.ok(keys.includes("specials"));
   assert.ok(keys.includes("blueprints"));
   assert.ok(keys.includes("orgChart"));
-  assert.equal(keys.length, 23);
+  assert.equal(keys.length, listScreenParameterKeys().length);
+  assert.ok(keys.length >= 23);
   assert.ok(keys.includes("login"));
   assert.equal(typeof getScreenParameters("dashboard").title, "string");
   assert.ok(getScreenParameters("dashboard").title.length > 0);

@@ -115,8 +115,8 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
   facets: ["All types", "Common", "Business-scoped", "Health"],
   collections: [
     {
-      id: "trading-corpus",
-      name: "Trading Corpus (Common)",
+      id: "video-corpus",
+      name: "Video Corpus (Common)",
       scope: "common",
       health: "healthy",
       healthLabel: "Healthy",
@@ -145,11 +145,11 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
       bindingKinds: ["rag", "correction", "constitutional"],
     },
   ],
-  selectedCollectionId: "trading-corpus",
+  selectedCollectionId: "video-corpus",
   sources: [
     {
       id: "s1",
-      name: "market_reports_2026.md",
+      name: "wuxia_hooks_2026.md",
       type: "markdown",
       status: "indexed",
       chunks: "420",
@@ -158,7 +158,7 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
     },
     {
       id: "s2",
-      name: "sentiment_dataset.csv",
+      name: "trend_dataset.csv",
       type: "dataset",
       status: "indexed",
       chunks: "1.2k",
@@ -167,7 +167,7 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
     },
     {
       id: "s3",
-      name: "strategy_wiki (Git)",
+      name: "production_wiki (Git)",
       type: "git",
       status: "synced",
       chunks: "890",
@@ -184,19 +184,19 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
       bindingKind: "correction",
     },
   ],
-  searchQuery: "bullish divergence patterns",
+  searchQuery: "strong opening hook for wuxia short",
   searchHits: [
     {
       id: "h1",
       score: "0.94",
-      snippet: "Bullish divergence confirmed when price lows lower while RSI higher…",
-      metadata: "market_reports_2026.md · chunk 88 · freshness 14m",
+      snippet: "Hook lands when first 3 seconds establish stakes and motion…",
+      metadata: "wuxia_hooks_2026.md · chunk 88 · freshness 14m",
     },
     {
       id: "h2",
       score: "0.88",
-      snippet: "Divergence filters reduced false positives 12% in verified eval pack…",
-      metadata: "sentiment_dataset.csv · few-shot · retention 30d",
+      snippet: "Trend filters reduced weak hooks 12% in verified eval pack…",
+      metadata: "trend_dataset.csv · few-shot · retention 30d",
     },
   ],
   contributions: [
@@ -216,7 +216,7 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
   syncJobs: [
     {
       id: "j1",
-      label: "Git · Trading Corpus",
+      label: "Git · Video Corpus",
       status: "ok",
       note: "Last 14m · schedule hourly",
     },
@@ -240,7 +240,7 @@ export const LOCAL_KNOWLEDGE_LANDING: KnowledgeLandingView = {
     { label: "Retention", value: "30d · access policy enforced" },
   ],
   retrievalTrace: [
-    "Task/agent version: VerifierNode Common v3.0",
+    "Task/agent version: video.judge Common v3.0",
     "Query purpose: groundedness evidence",
     "Selected references: 2 chunks (redacted)",
     "Freshness: 14m · correction-memory: not used",

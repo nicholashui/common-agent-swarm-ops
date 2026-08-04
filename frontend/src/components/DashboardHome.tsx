@@ -7,6 +7,7 @@
  * @redesign docs/frontend_redesign/ui_02_dashboard.md
  */
 import React from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -44,8 +45,10 @@ export function DashboardHome({
       <header className="dashboard-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
         </div>
         <p
           aria-live="polite"
@@ -189,11 +192,17 @@ export function DashboardHome({
                 <span>{L(labels, "colStatus")}</span>
                 <span>{L(labels, "colAction")}</span>
               </div>
-              <ul className="dashboard-recent__list">
-                {view.recentRuns.map((run) => (
-                  <RecentRunRow key={run.id} run={run} />
-                ))}
-              </ul>
+              {view.recentRuns.length === 0 ? (
+                <p className="dashboard-home__section-intro">
+                  {L(labels, "emptyFleet")}
+                </p>
+              ) : (
+                <ul className="dashboard-recent__list">
+                  {view.recentRuns.map((run) => (
+                    <RecentRunRow key={run.id} run={run} />
+                  ))}
+                </ul>
+              )}
             </div>
           </section>
         </div>
@@ -209,44 +218,50 @@ export function DashboardHome({
           </h2>
           <p className="dashboard-home__section-intro">{view.insightsIntro}</p>
         </div>
-        <div className="dashboard-insights">
-          {view.insights.map((insight) => (
-            <article
-              className={`dashboard-insight dashboard-insight--${insight.tone}`}
-              key={insight.id}
-            >
-              <div className="dashboard-insight__title-row">
-                <h3>{insight.title}</h3>
-                {insight.badge ? (
-                  <span className="dashboard-insight__badge">{insight.badge}</span>
-                ) : null}
-              </div>
-              <p>{insight.body}</p>
-              <div className="dashboard-insight__actions">
-                <Link
-                  className="dashboard-insight__button"
-                  href={insight.primaryActionHref}
-                >
-                  {insight.primaryActionLabel}
-                </Link>
-                <Link
-                  className="dashboard-insight__button dashboard-insight__button--ghost"
-                  href={insight.secondaryActionHref}
-                >
-                  {insight.secondaryActionLabel}
-                </Link>
-                {insight.tertiaryActionLabel && insight.tertiaryActionHref ? (
+        {view.insights.length === 0 ? (
+          <p className="dashboard-home__section-intro panel" role="status">
+            No Host insight projections on this view.
+          </p>
+        ) : (
+          <div className="dashboard-insights">
+            {view.insights.map((insight) => (
+              <article
+                className={`dashboard-insight dashboard-insight--${insight.tone}`}
+                key={insight.id}
+              >
+                <div className="dashboard-insight__title-row">
+                  <h3>{insight.title}</h3>
+                  {insight.badge ? (
+                    <span className="dashboard-insight__badge">{insight.badge}</span>
+                  ) : null}
+                </div>
+                <p>{insight.body}</p>
+                <div className="dashboard-insight__actions">
+                  <Link
+                    className="dashboard-insight__button"
+                    href={insight.primaryActionHref}
+                  >
+                    {insight.primaryActionLabel}
+                  </Link>
                   <Link
                     className="dashboard-insight__button dashboard-insight__button--ghost"
-                    href={insight.tertiaryActionHref}
+                    href={insight.secondaryActionHref}
                   >
-                    {insight.tertiaryActionLabel}
+                    {insight.secondaryActionLabel}
                   </Link>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+                  {insight.tertiaryActionLabel && insight.tertiaryActionHref ? (
+                    <Link
+                      className="dashboard-insight__button dashboard-insight__button--ghost"
+                      href={insight.tertiaryActionHref}
+                    >
+                      {insight.tertiaryActionLabel}
+                    </Link>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section

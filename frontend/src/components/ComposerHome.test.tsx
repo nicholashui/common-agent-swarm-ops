@@ -21,8 +21,11 @@ test("composer ACC home matches redesign: requirements + workflow diagram", () =
     <ComposerHome view={getScreenParameters("composer")} />,
   );
 
-  assert.match(markup, /Swarm Composer/);
+  assert.match(markup, />Plan</);
+  assert.doesNotMatch(markup, /PLAN · ACC/);
+  assert.match(markup, /Untitled AI Swarm|swarm_name|Swarm name/i);
   assert.match(markup, /Form a multi-agent work/);
+  assert.match(markup, /info-tooltip|About Plan|ⓘ/);
   assert.match(markup, /AI-pick mainly/);
   assert.match(markup, /AI Swarm Architect/);
   assert.match(markup, /Requirements/);
@@ -30,16 +33,13 @@ test("composer ACC home matches redesign: requirements + workflow diagram", () =
   assert.match(markup, /Human exception path \(needs_hitl\)/);
   assert.match(markup, /Generated workflow/);
   assert.match(markup, /Crew workflow diagram/);
-  assert.match(markup, /Accept AI → Canvas/);
+  assert.match(markup, /Accept AI → Execute/);
   assert.match(markup, /AI plan/);
   assert.match(markup, /Materialize draft/);
   assert.match(markup, /Workflow diagram/);
   assert.match(markup, /Save Draft/);
-  assert.match(markup, /Requirements/);
   assert.match(markup, /AI plan &amp; bind|AI plan & bind/);
-  assert.match(markup, /Workflow diagram/);
-  assert.match(markup, /Materialize draft/);
-  assert.match(markup, /Canvas inspect/);
+  assert.match(markup, /Execute inspect/);
   assert.match(markup, /Open sample requirements|Sample requirements/);
   assert.match(markup, /composer-home__samples-trigger|aria-haspopup="dialog"/);
   assert.doesNotMatch(markup, /YouTube wuxia short/);

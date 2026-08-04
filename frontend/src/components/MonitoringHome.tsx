@@ -8,7 +8,8 @@
  * @mustnot Fabricate infrastructure health from unauthorized probes.
  * @redesign docs/frontend_redesign/ui_09_monitoring.md
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -16,9 +17,11 @@ import {
   type MonitoringTabId,
   type MonitoringTraceNode,
 } from "../lib/projections/monitoring-landing";
+import { applyMonitoringSamples } from "../lib/projections/operate-samples";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { SamplesBanner, SamplesToggle } from "./ui/SamplesToggle";
 
 const MONITORING_FILTER_CYCLES: Readonly<Record<string, readonly string[]>> = {
   environment: ["All envs", "demo", "local", "staging"],
@@ -37,13 +40,26 @@ export function MonitoringHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const hostEmpty = view.fleet.length === 0 && view.traceTree.length === 0;
+  const [showSamples, setShowSamples] = useState(hostEmpty);
   const [tab, setTab] = useState<MonitoringTabId>("traces");
   const [search, setSearch] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
-  const [selectedNodeId, setSelectedNodeId] = useState("pred");
+  const dataView = showSamples ? applyMonitoringSamples(view) : view;
+  const [selectedNodeId, setSelectedNodeId] = useState("judge");
   const [filterValues, setFilterValues] = useState<ReadonlyMap<string, string>>(
-    () => new Map(view.filters.map((filter) => [filter.id, filter.value])),
+    () => new Map(dataView.filters.map((filter) => [filter.id, filter.value])),
   );
+
+  useEffect(() => {
+    setShowSamples(hostEmpty);
+  }, [hostEmpty]);
+
+  useEffect(() => {
+    setFilterValues(
+      new Map(dataView.filters.map((filter) => [filter.id, filter.value])),
+    );
+  }, [dataView.filters]);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -58,19 +74,32 @@ export function MonitoringHome({
     <section aria-label={L(labels, "advanced_monitoring")} className="monitoring-home">
       <header className="monitoring-home__header">
         <div>
-          <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <p className="eyebrow">{dataView.eyebrow}</p>
+          <div className="page-title-row">
+            <SamplesToggle
+              show={showSamples}
+              onToggle={() => setShowSamples((v) => !v)}
+              labelShow="Show sample monitoring"
+              labelHide="Hide sample monitoring"
+            />
+            <h1>{dataView.title}</h1>
+            <InfoTooltip label="About this screen" text={dataView.description} />
+          </div>
           <p className="monitoring-home__live" role="status">
             <span aria-hidden="true" className="monitoring-home__live-dot" />
-            {view.liveLabel}
+            {dataView.liveLabel}
           </p>
+          {showSamples ? (
+            <SamplesBanner>
+              Sample monitoring on · video demos. Toggle ▦ to hide. Not Host SSE.
+            </SamplesBanner>
+          ) : null}
         </div>
         <label className="monitoring-home__search">
           <span className="visually-hidden">{L(labels, "search_traces_and_alerts")}</span>
           <input
             onChange={(event) => setSearch(event.target.value)}
-            placeholder={view.searchPlaceholder}
+            placeholder={dataView.searchPlaceholder}
             value={search}
           />
         </label>
@@ -82,7 +111,7 @@ export function MonitoringHome({
         role="region"
         aria-label={L(labels, "live_fleet_cards")}
       >
-        {view.fleet.map((card) => (
+        {dataView.fleet.map((card) => (
           <article
             className={`monitoring-home__fleet-card monitoring-home__fleet-card--${card.tone}`}
             key={card.id}
@@ -103,7 +132,7 @@ export function MonitoringHome({
       <div className="monitoring-home__body">
         <aside aria-label={L(labels, "monitoring_filters")} className="monitoring-home__filters">
           <h2>{L(labels, "filters")}</h2>
-          {view.filters.map((filter) => {
+          {dataView.filters.map((filter) => {
             const current = filterValues.get(filter.id) ?? filter.value;
             return (
               <button
@@ -140,7 +169,7 @@ export function MonitoringHome({
               </button>
             );
           })}
-          <p className="monitoring-home__muted">{view.eventTypesNote}</p>
+          <p className="monitoring-home__muted">{dataView.eventTypesNote}</p>
         </aside>
 
         <div className="monitoring-home__main">
@@ -149,7 +178,7 @@ export function MonitoringHome({
             className="monitoring-home__tabs"
             role="tablist"
           >
-            {view.tabs.map((entry) => (
+            {dataView.tabs.map((entry) => (
               <button
                 aria-selected={tab === entry.id}
                 className={
@@ -169,7 +198,7 @@ export function MonitoringHome({
 
           {tab === "traces" ? (
             <TracesPanel
-              view={view}
+              view={dataView}
               selectedNodeId={selectedNodeId}
               onSelect={setSelectedNodeId}
               onAnnounce={announce}
@@ -177,16 +206,16 @@ export function MonitoringHome({
              labels={labels} />
           ) : null}
           {tab === "alerts" ? (
-            <AlertsPanel view={view} onAnnounce={announce}  labels={labels} />
+            <AlertsPanel view={dataView} onAnnounce={announce}  labels={labels} />
           ) : null}
-          {tab === "metrics" ? <MetricsPanel view={view}  labels={labels} /> : null}
+          {tab === "metrics" ? <MetricsPanel view={dataView}  labels={labels} /> : null}
           {tab === "anomalies" ? (
-            <AnomaliesPanel view={view} onAnnounce={announce}  labels={labels} />
+            <AnomaliesPanel view={dataView} onAnnounce={announce}  labels={labels} />
           ) : null}
         </div>
       </div>
 
-      <p className="monitoring-home__footer">{view.footerNote}</p>
+      <p className="monitoring-home__footer">{dataView.footerNote}</p>
     </section>
   );
 }
@@ -248,7 +277,7 @@ function TracesPanel({
             Open Agent Detail →
           </Link>
           <Link className="monitoring-home__action" href="/canvas">
-            View in Canvas
+            View in Execute
           </Link>
           <button
             className="monitoring-home__action"

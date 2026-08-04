@@ -101,16 +101,16 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
     {
       id: "i1",
       kind: "swarm",
-      title: "TradingResearch α (Swarm)",
+      title: "Wuxia Short (Swarm)",
       detail: "Parallel + Verify v1.4 · 8 agents",
       owner: "Ava Lin",
-      scope: "Team: Trading",
+      scope: "Team: Video",
       actions: ["Open", "Duplicate"],
     },
     {
       id: "i2",
       kind: "agent",
-      title: "VerifierNode v3.0 (Common Agent)",
+      title: "video.judge v3.0 (Common Agent)",
       detail: "Common · 97% success · 31.2k runs",
       owner: "Ecosystem",
       scope: "Public",
@@ -127,24 +127,24 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
     },
   ],
   shareModal: {
-    title: "Share TradingResearch α",
+    title: "Share Wuxia Short",
     members: [
       { id: "m1", initials: "NH", name: "You", role: "Owner" },
       { id: "m2", initials: "AL", name: "Ava Lin", role: "Editor" },
     ],
-    link: "https://caso.local/s/tr-alpha-7f2a",
+    link: "https://caso.local/s/wuxia-short-7f2a",
     note: "Access controlled server-side · link can be revoked anytime. Permissions: view, comment, edit — never peer execution authority.",
   },
   contributions: [
     {
       id: "c1",
-      title: "CustomReportAgent",
+      title: "video.copywriter",
       detail: "Fork of Common v2.3 · used 312 times · 93% success",
       cta: "Propose to Registry",
     },
     {
       id: "c2",
-      title: "Improved SentimentAgent",
+      title: "Improved video.trendintelligence",
       detail: "Fork of v1.9 · +5% quality · 12 swarm runs verified",
       cta: "Create Proposal",
     },
@@ -154,14 +154,14 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
   sessions: [
     {
       id: "s1",
-      title: "TradingResearch α — Canvas",
+      title: "Wuxia Short — Execute",
       presence: "2 editing now",
       editors: ["NH", "AL"],
       canJoin: true,
     },
     {
       id: "s2",
-      title: "ContentPipeline β — Canvas",
+      title: "Brand Spot — Execute",
       presence: "No one editing · last edit 2h ago",
       editors: [],
       canJoin: false,
@@ -171,7 +171,7 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
     {
       id: "t1",
       initials: "AL",
-      text: "Commented on VerifierNode proposal (not a critique)",
+      text: "Commented on video.judge proposal (not a critique)",
       time: "12m",
     },
     {
@@ -183,7 +183,7 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
     {
       id: "t3",
       initials: "NH",
-      text: "Shared TradingResearch α with Trading team",
+      text: "Shared Wuxia Short with Video team",
       time: "1h",
     },
     {
@@ -196,13 +196,13 @@ export const LOCAL_COLLABORATION_LANDING: CollaborationLandingView = {
   proposalQueue: [
     {
       id: "p1",
-      title: "CommonReportAgent → v3.0",
+      title: "video.editor → v3.0",
       assignee: "NH",
       status: "Awaiting review",
     },
     {
       id: "p2",
-      title: "SentimentAgent fork proposal",
+      title: "video.trendintelligence fork proposal",
       assignee: "AL",
       status: "Discussion",
     },

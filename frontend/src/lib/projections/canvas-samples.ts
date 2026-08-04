@@ -1,6 +1,6 @@
 /**
- * Loadable Canvas sample instances (orchestration board demos).
- * Mirrors Compose ACC samples — full crew graphs for the workflow diagram.
+ * Loadable Execute sample instances — video pack (and real specials) agents only.
+ * No trading / COBOL / fictional non-pack agents.
  */
 
 import type {
@@ -10,7 +10,7 @@ import type {
   CanvasNodeStatus,
 } from "./canvas-landing";
 
-export type CanvasSampleKind = "happy_path" | "lean" | "hierarchy" | "demo";
+export type CanvasSampleKind = "happy_path" | "lean" | "hierarchy" | "research";
 
 export type CanvasSample = {
   readonly id: string;
@@ -38,7 +38,7 @@ function node(
     id,
     label,
     kind,
-    versionLabel: opts.versionLabel ?? "Common · sample",
+    versionLabel: opts.versionLabel ?? "video · sample",
     status: opts.status ?? "idle",
     statusLabel: opts.statusLabel ?? "Draft member",
     metrics: opts.metrics ?? "Sample instance · not run",
@@ -46,16 +46,19 @@ function node(
   };
 }
 
-/** Canonical loadable Canvas samples (workflow diagram + crew list). */
+/**
+ * Samples use agent_id-shaped labels that exist under business/video/agents
+ * (e.g. video.orchestrator, video.judge).
+ */
 export const CANVAS_SAMPLES: readonly CanvasSample[] = [
   {
     id: "canvas-wuxia",
     label: "YouTube wuxia short",
-    summary: "Hierarchical + verify · Compose-style crew",
+    summary: "Hierarchical + verify · video pack",
     kind: "happy_path",
     swarmName: "AI · Hierarchical + Verify · Wuxia Short",
     patternBadge: "Sample · hierarchical-supervisor + verify",
-    sourceLabel: "Sample instance · video crew",
+    sourceLabel: "Sample · video pack only",
     nodes: [
       node("orch", "video.orchestrator", "supervisor", {
         versionLabel: "meta",
@@ -68,6 +71,7 @@ export const CANVAS_SAMPLES: readonly CanvasSample[] = [
       node("writer", "video.screenwriter", "common"),
       node("dir", "video.director", "common"),
       node("edit", "video.editor", "common"),
+      node("a11y", "video.accessibility", "common"),
       node("judge", "video.judge", "verifier", {
         statusLabel: "Gate",
         metrics: "GATE · sample",
@@ -75,17 +79,17 @@ export const CANVAS_SAMPLES: readonly CanvasSample[] = [
     ],
   },
   {
-    id: "canvas-market",
-    label: "Market intel + verify",
-    summary: "Parallel research branches · final critic",
-    kind: "happy_path",
-    swarmName: "AI · Parallel Research · Market Intel",
-    patternBadge: "Sample · parallel-research + verify",
-    sourceLabel: "Sample instance · research crew",
+    id: "canvas-trend-research",
+    label: "Trend research → script",
+    summary: "webresearch · trend · writer · judge",
+    kind: "research",
+    swarmName: "AI · Video Research → Script",
+    patternBadge: "Sample · research + verify",
+    sourceLabel: "Sample · video research agents",
     nodes: [
       node("orch", "video.orchestrator", "supervisor", { versionLabel: "meta" }),
       node("plan", "video.planner", "common", { versionLabel: "meta" }),
-      node("data", "video.webresearch", "common", {
+      node("web", "video.webresearch", "common", {
         status: "complete",
         statusLabel: "Done",
       }),
@@ -93,33 +97,35 @@ export const CANVAS_SAMPLES: readonly CanvasSample[] = [
         status: "queued",
         statusLabel: "Queued",
       }),
-      node("synth", "video.copywriter", "common"),
+      node("copy", "video.copywriter", "common"),
+      node("writer", "video.screenwriter", "common"),
       node("ver", "video.judge", "verifier", { statusLabel: "Gate" }),
     ],
   },
   {
     id: "canvas-social-lean",
     label: "Social under budget",
-    summary: "Lean crew · cost-efficient",
+    summary: "Lean video crew · cost-efficient",
     kind: "lean",
     swarmName: "AI · Lean Social · Budget",
-    patternBadge: "Sample · minimal crew",
-    sourceLabel: "Sample instance · lean",
+    patternBadge: "Sample · minimal video crew",
+    sourceLabel: "Sample · lean video pack",
     nodes: [
       node("orch", "video.orchestrator", "supervisor", { versionLabel: "meta" }),
       node("edit", "video.editor", "common"),
       node("a11y", "video.accessibility", "common"),
+      node("sound", "video.sounddesign", "common"),
       node("judge", "video.judge", "verifier", { statusLabel: "Gate" }),
     ],
   },
   {
     id: "canvas-feature",
     label: "Full feature hierarchy",
-    summary: "Orch → Planner → departments + QC",
+    summary: "Orch → Planner → video departments + QC",
     kind: "hierarchy",
     swarmName: "AI · Feature Film Hierarchy",
     patternBadge: "Sample · hierarchical-supervisor",
-    sourceLabel: "Sample instance · full hierarchy",
+    sourceLabel: "Sample · full video hierarchy",
     nodes: [
       node("orch", "video.orchestrator", "supervisor", { versionLabel: "meta" }),
       node("plan", "video.planner", "common", { versionLabel: "meta" }),
@@ -132,39 +138,25 @@ export const CANVAS_SAMPLES: readonly CanvasSample[] = [
     ],
   },
   {
-    id: "canvas-trading-demo",
-    label: "Trading parallel demo",
-    summary: "Classic ui_04 BIG ROW demo crew",
-    kind: "demo",
-    swarmName: "TradingResearch α",
-    patternBadge: "Sample · Parallel Indep. + Verify v1.4",
-    sourceLabel: "Sample instance · trading demo",
+    id: "canvas-brand-spot",
+    label: "Brand spot + compliance",
+    summary: "Brand / creative · editor · compliance · judge",
+    kind: "happy_path",
+    swarmName: "AI · Brand Spot · Compliance",
+    patternBadge: "Sample · brand film + gates",
+    sourceLabel: "Sample · brand video pack",
     nodes: [
-      node("supervisor", "Supervisor", "supervisor", {
-        status: "running",
-        statusLabel: "Running",
-        versionLabel: "Common supervisor",
+      node("orch", "video.orchestrator", "supervisor", { versionLabel: "meta" }),
+      node("brand", "video.brandstrategist", "common"),
+      node("cd", "video.creativedirector", "common"),
+      node("dir", "video.director", "common"),
+      node("edit", "video.editor", "common"),
+      node("music", "video.musicsupervisor", "common"),
+      node("comp", "video.compliance", "verifier", {
+        statusLabel: "Gate",
+        metrics: "GATE · compliance",
       }),
-      node("data", "DataFetcher", "common", {
-        status: "complete",
-        statusLabel: "Done",
-        versionLabel: "Common v2.1",
-      }),
-      node("sentiment", "Sentiment", "common", {
-        status: "running",
-        statusLabel: "Run",
-        versionLabel: "Common v1.9",
-      }),
-      node("predictor", "Predictor", "common", {
-        status: "queued",
-        statusLabel: "Idle",
-        versionLabel: "Common v2.0",
-      }),
-      node("verifier", "VerifierNode", "verifier", {
-        status: "self_refine",
-        statusLabel: "Live",
-        versionLabel: "Common v3.0",
-      }),
+      node("judge", "video.judge", "verifier", { statusLabel: "Gate" }),
     ],
   },
 ];
@@ -188,7 +180,7 @@ export function applyCanvasSample(
     viewMode: "inspect",
     swarmName: sample.swarmName,
     patternBadge: sample.patternBadge,
-    commonsSummary: `${sample.nodes.length} members · sample instance · workflow diagram`,
+    commonsSummary: `${sample.nodes.length} members · video sample · workflow diagram`,
     instanceId: `sample-${sample.id}`,
     instanceStatus: "draft",
     instanceRevision: 0,
@@ -206,6 +198,6 @@ export function applyCanvasSample(
       costSoFar: "—",
       elapsed: "—",
     },
-    footerNote: `Sample “${sample.label}” loaded on Canvas. Local/demo only · not a Host draft · production fail-closed.`,
+    footerNote: `Sample “${sample.label}” (video pack agents only). Local/demo · not a Host draft · production fail-closed.`,
   };
 }

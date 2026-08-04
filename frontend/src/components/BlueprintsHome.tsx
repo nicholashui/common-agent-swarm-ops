@@ -8,14 +8,16 @@
  * @mustnot Realize blueprints or claim pack authority in the browser.
  * @redesign docs/frontend_redesign/ui_20_blueprints.md
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
+  BLUEPRINT_SAMPLES,
   type BlueprintCard,
   type BlueprintsLandingView,
 } from "../lib/projections/blueprints-landing";
-import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
+import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
 export function BlueprintsHome({
@@ -28,13 +30,61 @@ export function BlueprintsHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const sampleIds = useMemo(
+    () => new Set(BLUEPRINT_SAMPLES.map((bp) => bp.id)),
+    [],
+  );
+  const hostBlueprints = useMemo(
+    () => view.blueprints.filter((bp) => !sampleIds.has(bp.id)),
+    [sampleIds, view.blueprints],
+  );
+
   const [query, setQuery] = useState("");
-  const [facet, setFacet] = useState(view.filters[0] ?? "All (24)");
+  const [facet, setFacet] = useState(view.filters[0] ?? "All");
   const [sort, setSort] = useState(view.sorts[0] ?? "Most deployed");
-  const [selectedId, setSelectedId] = useState(
-    view.blueprints.find((b) => b.featured)?.id ?? view.blueprints[0]?.id,
+  /** Compact icon toggles sample gallery visibility (default: show when Host empty). */
+  const [showSamples, setShowSamples] = useState(
+    () => Boolean(view.showingSamples) || hostBlueprints.length === 0,
   );
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+
+  const gallerySource: readonly BlueprintCard[] = showSamples
+    ? hostBlueprints.length > 0
+      ? [...hostBlueprints, ...BLUEPRINT_SAMPLES]
+      : BLUEPRINT_SAMPLES
+    : hostBlueprints;
+
+  const showingSamples = showSamples;
+
+  const [selectedId, setSelectedId] = useState(
+    () =>
+      gallerySource.find((b) => b.featured)?.id ?? gallerySource[0]?.id,
+  );
+
+  useEffect(() => {
+    if (!gallerySource.some((bp) => bp.id === selectedId)) {
+      setSelectedId(
+        gallerySource.find((b) => b.featured)?.id ?? gallerySource[0]?.id,
+      );
+    }
+  }, [gallerySource, selectedId]);
+
+  useEffect(() => {
+    setFacet(
+      showSamples
+        ? `All (${gallerySource.length})`
+        : (view.filters[0] ?? "All"),
+    );
+  }, [showSamples, gallerySource.length, view.filters]);
+
+  useEffect(() => {
+    // When Host finishes loading with real records, keep samples off unless empty.
+    if (hostBlueprints.length > 0 && !view.showingSamples) {
+      setShowSamples(false);
+    } else if (hostBlueprints.length === 0) {
+      setShowSamples(true);
+    }
+  }, [hostBlueprints.length, view.showingSamples]);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -45,13 +95,26 @@ export function BlueprintsHome({
   };
   const feedback = externalStatus ?? statusMessage;
 
+  const toggleSamples = (): void => {
+    // Do not call announce() inside a setState updater — parent setState during
+    // render (Strict Mode / concurrent) throws "Cannot update BoundBlueprintsHome".
+    const next = !showSamples;
+    setShowSamples(next);
+    announce(
+      next
+        ? `Sample blueprints shown (${BLUEPRINT_SAMPLES.length} video-pack templates).`
+        : hostBlueprints.length > 0
+          ? "Sample blueprints hidden · Host records only."
+          : "Sample blueprints hidden · Host list empty.",
+    );
+  };
+
   const blueprints = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let list = view.blueprints.filter((bp) => {
+    let list = gallerySource.filter((bp) => {
       if (!facet.startsWith("All")) {
         const domain = facet;
         if (!bp.domains.some((d) => d === domain || d.includes(domain))) {
-          // also match Content filter loosely
           if (
             domain === "Content" &&
             !bp.domains.some((d) =>
@@ -83,23 +146,61 @@ export function BlueprintsHome({
       );
     }
     return list;
-  }, [facet, query, sort, view.blueprints]);
+  }, [facet, gallerySource, query, sort]);
 
   const selected =
     blueprints.find((bp) => bp.id === selectedId) ??
     blueprints[0] ??
-    view.blueprints[0];
+    gallerySource[0];
+
+  const filterChips = [
+    `All (${gallerySource.length})`,
+    "Video",
+    "Content",
+    "Research",
+    "Creative",
+  ];
 
   return (
     <section aria-label={L(labels, "blueprints_and_templates_gallery")} className="blueprints-home">
       <header className="blueprints-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <button
+              aria-label={
+                showSamples
+                  ? "Hide sample blueprints"
+                  : "Show sample blueprints"
+              }
+              aria-pressed={showSamples}
+              className={
+                showSamples
+                  ? "blueprints-home__samples-icon blueprints-home__samples-icon--on"
+                  : "blueprints-home__samples-icon"
+              }
+              onClick={toggleSamples}
+              title={
+                showSamples
+                  ? "Hide sample blueprints"
+                  : "Show sample blueprints (video pack)"
+              }
+              type="button"
+            >
+              <span aria-hidden="true">▦</span>
+            </button>
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
           <p className="blueprints-home__migration" role="note">
             {view.migrationNote}
           </p>
+          {showingSamples ? (
+            <p className="blueprints-home__sample-banner" role="status">
+              Sample blueprints on · video pack templates (not Host records).
+              Toggle <strong>▦</strong> to hide. Deploy still needs Host actions.
+            </p>
+          ) : null}
         </div>
         <div className="blueprints-home__header-actions">
           <label className="blueprints-home__search">
@@ -130,7 +231,7 @@ export function BlueprintsHome({
           className="blueprints-home__facets"
           role="group"
         >
-          {view.filters.map((entry) => (
+          {filterChips.map((entry) => (
             <button
               aria-pressed={facet === entry}
               className={

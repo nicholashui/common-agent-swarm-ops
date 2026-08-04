@@ -62,7 +62,7 @@ export function WorkflowDiagramPanel({
           {agents.length === 0 ? (
             <p className="workflow-diagram__empty">
               {emptyHint ??
-                "No workflow agents yet. Materialize from Compose or load a swarm draft."}
+                "No workflow agents yet. Materialize from Plan or load a swarm draft."}
             </p>
           ) : (
             agents.map((node, index) => (

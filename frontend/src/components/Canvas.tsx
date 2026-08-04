@@ -28,14 +28,14 @@ const DEFAULT_CANVAS_PROJECTION = {
   graph_revision: "graph-revision-42",
   state_label: "Running",
   nodes: [
-    { id: "signal", label: "Market Sentinel", kind: "common", immutable_version: "2.4", provenance_reference: "prov:agent:market-sentinel:2.4", task: { lifecycle: "complete", status_detail: "Evidence collection complete" } },
-    { id: "research", label: "Research Collector", kind: "common", immutable_version: "1.3", provenance_reference: "prov:agent:research-collector:1.3", task: { lifecycle: "running", status_detail: "Collecting returned sources" } },
-    { id: "writer", label: "Executive Synthesizer", kind: "custom", fork_origin: "common:executive-synthesizer:1.0", custom_reason: "Executive reporting terminology", task: { lifecycle: "waiting_for_critique", status_detail: "Awaiting verifier critique" } },
+    { id: "web", label: "video.webresearch", kind: "common", immutable_version: "2.4", provenance_reference: "prov:agent:video.webresearch:2.4", task: { lifecycle: "complete", status_detail: "Research bundle complete" } },
+    { id: "trend", label: "video.trendintelligence", kind: "common", immutable_version: "1.3", provenance_reference: "prov:agent:video.trendintelligence:1.3", task: { lifecycle: "running", status_detail: "Scoring hooks" } },
+    { id: "writer", label: "video.screenwriter", kind: "custom", fork_origin: "video.screenwriter:1.0", custom_reason: "Series bible terminology", task: { lifecycle: "waiting_for_critique", status_detail: "Awaiting judge critique" } },
   ],
   edges: [
-    { id: "signal-to-research", source_id: "signal", target_id: "research", relationship: "data_flow", label: "Evidence bundle" },
-    { id: "research-to-writer", source_id: "research", target_id: "writer", relationship: "state_flow", label: "Ready for synthesis" },
-    { id: "writer-to-research", source_id: "writer", target_id: "research", relationship: "iteration", label: "Critique revision" },
+    { id: "web-to-trend", source_id: "web", target_id: "trend", relationship: "data_flow", label: "Research bundle" },
+    { id: "trend-to-writer", source_id: "trend", target_id: "writer", relationship: "state_flow", label: "Ready for script" },
+    { id: "writer-to-trend", source_id: "writer", target_id: "trend", relationship: "iteration", label: "Critique revision" },
   ],
   validation: {
     eligible: true,

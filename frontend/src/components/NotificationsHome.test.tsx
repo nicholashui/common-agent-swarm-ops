@@ -26,7 +26,7 @@ test("notifications home matches ui_12 md/svg structure", () => {
   assert.match(markup, /Mark all read/);
   assert.match(markup, /Today · High priority|Today/);
   assert.match(markup, /Approval gate ready/);
-  assert.match(markup, /ReportAgent v3\.0/);
+  assert.match(markup, /video.editor v3\.0/);
   assert.match(markup, /L1 pass/);
   assert.match(markup, /L2 rubric 0\.94/);
   assert.match(markup, /GateKeeper/);
@@ -35,9 +35,9 @@ test("notifications home matches ui_12 md/svg structure", () => {
   assert.match(markup, /Anomaly/);
   assert.match(markup, /error spike/);
   assert.match(markup, /Rollback/);
-  assert.match(markup, /CommonMarketPredictor/);
-  assert.match(markup, /LegacyModernizer/);
-  assert.match(markup, /VerifierNode v3\.0/);
+  assert.match(markup, /video.analyst/);
+  assert.match(markup, /Archive Batch/);
+  assert.match(markup, /video.judge v3\.0/);
   assert.match(markup, /Update to latest/);
   assert.match(markup, /Preferences/);
   assert.match(markup, /Notify me about/);

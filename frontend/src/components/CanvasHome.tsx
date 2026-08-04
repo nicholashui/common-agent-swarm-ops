@@ -26,6 +26,8 @@ import { buildWorkflowGraphFromCanvasNodes } from "../lib/projections/composer-w
 import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { clampZoom } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { InfoTooltip } from "./design";
+import { WithTooltip } from "./ui/tooltip";
 import { WorkflowDiagramPanel } from "./workflow/WorkflowDiagramPanel";
 
 export function CanvasHome({
@@ -191,14 +193,27 @@ export function CanvasHome({
       {/* ── Toolbar ── */}
       <header className="canvas-home__toolbar">
         <div className="canvas-home__toolbar-left">
-          <label className="canvas-home__name">
-            <span className="visually-hidden">{L(labels, "swarm_name")}</span>
-            <input
-              aria-label={L(labels, "swarm_name")}
-              onChange={(event) => setSwarmName(event.target.value)}
-              value={swarmName}
-            />
-          </label>
+          <div className="canvas-home__name-row">
+            <button
+              aria-haspopup="dialog"
+              aria-expanded={samplesOpen}
+              className="canvas-home__samples-trigger"
+              onClick={() => setSamplesOpen(true)}
+              title="Sample instances (load into UI)"
+              type="button"
+            >
+              <span aria-hidden="true">▦</span>
+              <span className="visually-hidden">Open sample instances</span>
+            </button>
+            <label className="canvas-home__name">
+              <span className="visually-hidden">{L(labels, "swarm_name")}</span>
+              <input
+                aria-label={L(labels, "swarm_name")}
+                onChange={(event) => setSwarmName(event.target.value)}
+                value={swarmName}
+              />
+            </label>
+          </div>
           {view.instanceId ? (
             <span className="canvas-home__instance-meta">
               instance{" "}
@@ -215,17 +230,34 @@ export function CanvasHome({
           ) : null}
           <span className="canvas-home__pattern-badge">{view.patternBadge}</span>
           {view.fromCompose ? (
-            <span className="canvas-home__pill canvas-home__pill--indigo">
-              From Compose
-            </span>
+            <WithTooltip content="Opened from Plan materialize (Host draft instance).">
+              <span className="canvas-home__pill canvas-home__pill--indigo" tabIndex={0}>
+                From Plan
+              </span>
+            </WithTooltip>
           ) : (
-            <span className="canvas-home__pill">Demo / local landing</span>
+            <WithTooltip
+              content={
+                view.sourceLabel ??
+                "Local demo landing · open Plan instance for a live draft"
+              }
+            >
+              <span className="canvas-home__pill" tabIndex={0}>
+                Demo / local landing
+              </span>
+            </WithTooltip>
           )}
           {isLiveInstance ? (
-            <span className="canvas-home__pill canvas-home__pill--ok">
-              Live draft
-            </span>
+            <WithTooltip content="Live Host draft · fail-closed until run is authorized.">
+              <span className="canvas-home__pill canvas-home__pill--ok" tabIndex={0}>
+                Live draft
+              </span>
+            </WithTooltip>
           ) : null}
+          <InfoTooltip
+            label="Execute"
+            text="Human inspect/run board for a swarm instance. Materialize from Plan for a live draft. Host owns execution authority."
+          />
         </div>
 
         <div
@@ -288,7 +320,7 @@ export function CanvasHome({
             ▶ Run instance
           </button>
           <Link className="canvas-home__ghost" href="/composer">
-            ← Compose
+            ← Plan
           </Link>
         </div>
       </header>
@@ -303,7 +335,7 @@ export function CanvasHome({
           }
         >
           <span className="canvas-home__life-n">1</span>
-          Compose created workflow
+          Plan created workflow
         </li>
         <li className="canvas-home__life-sep" aria-hidden="true">
           →
@@ -323,7 +355,7 @@ export function CanvasHome({
         </li>
         <li className="canvas-home__life canvas-home__life--active">
           <span className="canvas-home__life-n">3</span>
-          Canvas inspect / run board
+          Execute inspect / run board
         </li>
         <li className="canvas-home__life-sep" aria-hidden="true">
           →
@@ -354,20 +386,7 @@ export function CanvasHome({
       <div className="canvas-home__body canvas-home__body--orch">
         {/* ── LEFT: instance + members ── */}
         <aside className="canvas-home__rail" aria-label="Instance crew">
-          <div className="canvas-home__rail-head">
-            <p className="canvas-home__rail-kicker">INSTANCE</p>
-            <button
-              aria-haspopup="dialog"
-              aria-expanded={samplesOpen}
-              className="canvas-home__samples-trigger"
-              onClick={() => setSamplesOpen(true)}
-              title="Sample instances (load into UI)"
-              type="button"
-            >
-              <span aria-hidden="true">▦</span>
-              <span className="visually-hidden">Open sample instances</span>
-            </button>
-          </div>
+          <p className="canvas-home__rail-kicker">INSTANCE</p>
           <h2 className="canvas-home__rail-title">Swarm draft</h2>
           <p className="canvas-home__rail-id">
             <code>{view.instanceId ?? "local-demo"}</code>
@@ -383,13 +402,18 @@ export function CanvasHome({
           ) : null}
 
           <div className="canvas-home__rail-card">
-            <strong>Source</strong>
+            <strong>
+              Source{" "}
+              <InfoTooltip
+                label="Source"
+                text={
+                  view.fromCompose
+                    ? `${view.sourceLabel ?? "Plan materialize"} · closed-world catalog · AI-pick`
+                    : `${view.sourceLabel ?? "Local canvas projection"} · Use Plan → Accept AI for live Host draft`
+                }
+              />
+            </strong>
             <span>{view.sourceLabel ?? "Local canvas projection"}</span>
-            <span className="canvas-home__rail-muted">
-              {view.fromCompose
-                ? "closed-world catalog · AI-pick"
-                : "Use Compose → Accept AI for live Host draft"}
-            </span>
           </div>
 
           <p className="canvas-home__rail-kicker">CREW MEMBERS</p>
@@ -434,15 +458,13 @@ export function CanvasHome({
               setDesignToolsOpen((o) => !o);
               setMode("design");
             }}
+            title="Available in Design mode. Inspect prioritizes workflow."
             type="button"
           >
             {designToolsOpen || mode === "design"
               ? "Hide palette · AI suggest · Patterns"
               : "Palette · AI suggest · Patterns"}
           </button>
-          <p className="canvas-home__rail-muted">
-            Available in Design mode. Inspect prioritizes workflow.
-          </p>
 
           {(designToolsOpen || mode === "design") && (
             <div className="canvas-home__palette canvas-home__palette--embedded">
@@ -502,14 +524,17 @@ export function CanvasHome({
           )}
 
           <div className="canvas-home__fail-closed" role="note">
-            <strong>Fail-closed run</strong>
-            <p>Run needs Host action reference.</p>
-            <p>No silent production activation.</p>
-            <p>Drafts process-local (restart clears).</p>
+            <strong>
+              Fail-closed run{" "}
+              <InfoTooltip
+                label="Fail-closed run"
+                text="Run needs Host action reference. No silent production activation. Drafts are process-local (restart clears)."
+              />
+            </strong>
           </div>
 
           <Link className="canvas-home__rail-link" href="/composer">
-            ← Edit in Compose
+            ← Edit in Plan
           </Link>
           <Link className="canvas-home__rail-link canvas-home__rail-link--ghost" href="/registry">
             All Host drafts…
@@ -524,17 +549,19 @@ export function CanvasHome({
           >
             <header className="canvas-home__workflow-head">
               <p className="canvas-home__workflow-kicker">
-                WORKFLOW DIAGRAM · ORCHESTRATION BOARD
+                WORKFLOW DIAGRAM
               </p>
-              <h2>Crew workflow (Agent Workflow style)</h2>
-              <p>
-                Inspect the instance graph: phases · agents · gates. Run when
-                Host authorizes · fail-closed. Human board ≠ Orchestrator agent.
-              </p>
+              <div className="page-title-row">
+                <h2>Crew workflow</h2>
+                <InfoTooltip
+                  label="Crew workflow"
+                  text="Inspect the instance graph: phases · agents · gates. Run when Host authorizes · fail-closed. Execute is the human board, not the Orchestrator agent."
+                />
+              </div>
             </header>
             <div style={{ transform: `scale(${zoom})`, transformOrigin: "top left" }}>
               <WorkflowDiagramPanel
-                emptyHint="No agents on this canvas yet. Materialize from Compose (Accept AI → Canvas) or open /swarms/{id}/canvas."
+                emptyHint="No agents on Execute yet. Materialize from Plan (Accept AI → Execute) or open /swarms/{id}/canvas."
                 graph={workflowGraph}
               />
             </div>
@@ -729,14 +756,13 @@ export function CanvasHome({
             <li data-ok="warn">Run action: needs Host ref</li>
           </ul>
 
-          <div className="canvas-home__orch-note">
-            <strong>Human board ≠ Orchestrator agent</strong>
-            <p>Canvas is the inspect/run console.</p>
-            <p>
-              Orchestrator (when bound) is a <em>node</em> on the graph.
-            </p>
-            <p>Host owns real execution authority.</p>
-          </div>
+          <p className="canvas-home__section-label">
+            Human board{" "}
+            <InfoTooltip
+              label="Human board vs Orchestrator"
+              text="Canvas is the inspect/run console. Orchestrator (when bound) is a node on the graph. Host owns real execution authority."
+            />
+          </p>
 
           <button className="canvas-home__run canvas-home__run--block" onClick={runInstance} type="button">
             ▶ Run instance (Host)
@@ -788,7 +814,11 @@ export function CanvasHome({
         </aside>
       </div>
 
-      <p className="canvas-home__footer">{view.footerNote}</p>
+      {view.footerNote ? (
+        <p className="canvas-home__footer canvas-home__footer--tip">
+          <InfoTooltip label="Execute notes" text={view.footerNote} />
+        </p>
+      ) : null}
 
       {samplesOpen ? (
         <div className="canvas-home__modal-root" role="presentation">
@@ -811,7 +841,7 @@ export function CanvasHome({
                 </h2>
                 <p>
                   Loads a local demo crew onto the workflow diagram — same idea
-                  as Compose samples. Does not create a Host draft.
+                  as Plan samples. Does not create a Host draft.
                 </p>
               </div>
               <button

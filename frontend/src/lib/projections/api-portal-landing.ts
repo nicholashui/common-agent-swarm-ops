@@ -178,7 +178,7 @@ export const LOCAL_API_PORTAL_LANDING: ApiPortalLandingView = {
   ],
   selectedEndpointId: "swarm-run",
   sampleCurl: `$ curl -X POST https://api.caso.local/v1/swarms/\\\\
-  trading-alpha/run \\\\
+  wuxia-short/run \\\\
   -H "Authorization: Bearer $CASOPS_TOKEN" \\\\
   -H "Idempotency-Key: 7f3c…" \\\\
   -d '{"inputs":{"as_of":"local-preview"},"pin_commons":true}'
@@ -187,8 +187,8 @@ export const LOCAL_API_PORTAL_LANDING: ApiPortalLandingView = {
   sampleResponse: `{
   "run_id": "run-4421",
   "status": "accepted",
-  "events_url": "/api/v1/swarms/trading-alpha/runs/run-4421/events",
-  "pinned_commons": ["VerifierNode@v3.0", "DataFetcher@v2.1"],
+  "events_url": "/api/v1/swarms/wuxia-short/runs/run-4421/events",
+  "pinned_commons": ["video.judge@v3.0", "video.webresearch@v2.1"],
   "graph_revision": "r-12"
 }`,
   tokens: [

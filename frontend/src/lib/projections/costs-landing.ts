@@ -151,28 +151,28 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
   swarmBreakdown: [
     {
       id: "s1",
-      name: "TradingResearch α",
+      name: "Wuxia Short",
       spend: "$412",
       sharePercent: 33,
       tokens: "12.1M",
     },
     {
       id: "s2",
-      name: "ContentPipeline β",
+      name: "Brand Spot",
       spend: "$298",
       sharePercent: 24,
       tokens: "9.4M",
     },
     {
       id: "s3",
-      name: "DSE Tutor Fleet",
+      name: "Tutor Fleet",
       spend: "$186",
       sharePercent: 15,
       tokens: "6.2M",
     },
     {
       id: "s4",
-      name: "LegacyModernizer",
+      name: "Archive Batch",
       spend: "$154",
       sharePercent: 12,
       tokens: "5.1M",
@@ -188,7 +188,7 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
   agentUsage: [
     {
       id: "a1",
-      agent: "DataFetcher v2.1",
+      agent: "video.webresearch v2.1",
       tokens: "8.2M",
       cost: "$186",
       inputShare: "62%",
@@ -198,7 +198,7 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
     },
     {
       id: "a2",
-      agent: "SentimentAgent v1.9",
+      agent: "video.trendintelligence v1.9",
       tokens: "6.4M",
       cost: "$142",
       inputShare: "55%",
@@ -208,7 +208,7 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
     },
     {
       id: "a3",
-      agent: "VerifierNode v3.0",
+      agent: "video.judge v3.0",
       tokens: "5.1M",
       cost: "$128",
       inputShare: "48%",
@@ -218,7 +218,7 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
     },
     {
       id: "a4",
-      agent: "CustomReportAgent",
+      agent: "video.copywriter",
       tokens: "4.8M",
       cost: "$156",
       inputShare: "50%",
@@ -243,14 +243,14 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
   recommendations: [
     {
       id: "r1",
-      title: "Suggest using CommonReportAgent v2.2 instead",
-      body: "Replace CustomReportAgent fork where compatible.",
+      title: "Suggest using video.editor v2.2 instead",
+      body: "Replace video.copywriter fork where compatible.",
       savings: "−42% tokens",
       qualityNote: "Same quality band · L1/L2 gates retained",
     },
     {
       id: "r2",
-      title: "Route SentimentAgent cheap model for pre-filter",
+      title: "Route video.trendintelligence cheap model for pre-filter",
       body: "Policy-approved quality-cost routing only.",
       savings: "−18% tokens on pre-filter",
       qualityNote: "Cannot weaken required L2 groundedness",
@@ -259,7 +259,7 @@ export const LOCAL_COSTS_LANDING: CostsLandingView = {
   simulator: {
     title: "What-If Simulator",
     scenario:
-      "Upgrade CustomReportAgent → CommonReportAgent v2.2 across 19 swarms",
+      "Upgrade video.copywriter → video.editor v2.2 across 19 swarms",
     projectedDelta: "Est. −$96/mo · quality delta 0.0 within held-out band",
     qualityGuard:
       "Optimizations may recommend policy-approved model/routing changes but cannot silently weaken required L1/L2/L3 quality, rights/provenance, or approval controls.",

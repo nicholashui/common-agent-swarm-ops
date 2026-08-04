@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/ui_14_audit.md
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -100,8 +101,10 @@ export function AuditHome({
       <header className="audit-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
         </div>
         <div className="audit-home__header-actions">
           <label className="audit-home__search">

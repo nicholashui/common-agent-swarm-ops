@@ -250,7 +250,7 @@ export function sessionCookieMaxAgeSeconds(claims: SessionClaims): number {
 export function demoSeedSummary(): readonly string[] {
   return [
     "Common Registry preview agents",
-    "Sample Trading Swarm pattern",
+    "Sample video swarm pattern",
     "Content Pipeline pattern",
     "DSE Tutor pattern",
     "Activity and monitoring local projections",

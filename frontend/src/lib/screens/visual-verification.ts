@@ -28,7 +28,7 @@ export interface VisualFixtureValues {
 export const FIXED_VISUAL_FIXTURE_VALUES: VisualFixtureValues = {
   asOf: "2026-07-20T04:12Z",
   correlationIdentifier: "corr-frontend-v1",
-  workspaceName: "Trading Lab",
+  workspaceName: "Video Studio",
 };
 
 export interface VisualFixture {
@@ -163,8 +163,9 @@ export function normalizeFixtureSvg(
     /\bcorr(?:elation)?\s+[a-z0-9-]+\b/gi,
     `corr ${fixture.values.correlationIdentifier}`,
   );
+  // Normalize historical and current workspace labels to the fixture value.
   normalized = normalized.replace(
-    /\bTrading Lab\b/g,
+    /\b(?:Trading Lab|Video Studio)\b/g,
     fixture.values.workspaceName,
   );
   normalized = normalized.replace(

@@ -8,65 +8,66 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { LOCAL_DASHBOARD_LANDING } from "../lib/projections/dashboard-landing";
-import { getScreenParameters } from "../lib/projections/screen-parameters";
+import { buildLiveDashboardView } from "../lib/projections/dashboard-live";
+import { PACK_AGENT_CATALOG_COUNTS } from "../lib/projections/pack-agents-catalog.generated";
 import { DashboardHome } from "./DashboardHome";
 
 const componentDirectory = dirname(fileURLToPath(import.meta.url));
+const NOW = Date.parse("2026-06-01T12:00:00.000Z");
 
-test("dashboard home matches ui_02_dashboard structure from md and svg", () => {
-  const markup = renderToStaticMarkup(<DashboardHome view={getScreenParameters("dashboard")} />);
+test("dashboard home renders live Host fleet projection", () => {
+  const view = buildLiveDashboardView(
+    {
+      hostReachable: true,
+      loading: false,
+      swarms: [
+        {
+          id: "swarm_a",
+          name: "Live Plan Draft",
+          status: "draft",
+          revision: 2,
+          memberCount: 4,
+          lastRunId: null,
+          updatedAt: "2026-06-01T11:55:00.000Z",
+          createdAt: "2026-06-01T11:00:00.000Z",
+        },
+      ],
+    },
+    NOW,
+  );
+  const markup = renderToStaticMarkup(<DashboardHome view={view} />);
 
   assert.match(markup, /Common Health &amp; Fleet Ops/);
   assert.match(markup, /Common Health/);
-  assert.match(markup, /Common Agents Active/);
-  assert.match(markup, />87</);
-  assert.match(markup, /Global Success Rate/);
-  assert.match(markup, /91\.4%/);
-  assert.match(markup, /Pending Improvement Proposals/);
-  assert.match(markup, /Your Fleet Health/);
-  assert.match(markup, /\$412/);
+  assert.match(markup, /Pack agents \(catalog\)/);
+  assert.match(markup, new RegExp(String(PACK_AGENT_CATALOG_COUNTS.total)));
+  assert.match(markup, /Host swarm drafts/);
   assert.match(markup, /dashboard-sparkline/);
   assert.match(markup, /Quick Actions/);
   assert.match(markup, /Explore Common Registry Hub/);
-  assert.match(markup, /Compose from Common Patterns/);
-  assert.match(markup, /Review Improvement Proposals/);
+  assert.match(markup, /Plan a multi-agent work/);
   assert.match(markup, /Your Swarms Fleet Ops/);
-  assert.match(markup, /Running Now/);
-  assert.match(markup, /TradingResearch α/);
-  assert.match(markup, /ContentPipeline β/);
-  assert.match(markup, /View Canvas/);
-  assert.match(markup, />Pause</);
+  assert.match(markup, /Host drafts/);
+  assert.match(markup, /Live Plan Draft/);
+  assert.match(markup, /View Execute/);
   assert.match(markup, /dashboard-running__bar/);
-  assert.match(markup, /Recent Activity/);
-  assert.match(markup, /View all →/);
-  assert.match(markup, /Self-Refining/);
-  assert.match(markup, /Replay ↻/);
-  assert.match(markup, /Debug →/);
+  assert.match(markup, /Recent Host drafts/);
+  assert.match(markup, /Open Execute/);
   assert.match(markup, /Common Impact Insights/);
-  assert.match(markup, /Rollout Opportunity/);
-  assert.match(markup, /Approve Rollout/);
-  assert.match(markup, /A\/B Test First/);
-  assert.match(markup, /View Diff/);
-  assert.match(markup, /Collective Intelligence/);
+  assert.match(markup, /No Host insight projections/);
   assert.match(markup, /Control-Plane Health/);
-  assert.match(markup, /API \/ Projection Health/);
-  assert.match(markup, /SSE Transport/);
-  assert.match(markup, /Affected swarms/);
-  assert.match(markup, /Pinned \/ Favorites/);
-  assert.match(markup, /VerificationLoopAgent/);
-  assert.match(markup, /Redacted projections only/);
+  assert.match(markup, /Host \/ Swarm list/);
+  assert.match(markup, /REST snapshot/);
+  assert.match(markup, /Recent drafts/);
+  assert.doesNotMatch(markup, /91\.4%|\$412|Wuxia Short|Brand Spot|Rollout Opportunity/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
 });
 
-test("dashboard landing fixture covers svg sections", () => {
-  assert.equal(LOCAL_DASHBOARD_LANDING.commonHealth.length, 5);
-  assert.equal(LOCAL_DASHBOARD_LANDING.quickActions.length, 3);
+test("dashboard empty shell has no fabricated fleet rows", () => {
+  assert.equal(LOCAL_DASHBOARD_LANDING.runningSwarms.length, 0);
+  assert.equal(LOCAL_DASHBOARD_LANDING.recentRuns.length, 0);
+  assert.equal(LOCAL_DASHBOARD_LANDING.insights.length, 0);
   assert.equal(LOCAL_DASHBOARD_LANDING.quickActions[0]?.href, "/registry");
-  assert.equal(LOCAL_DASHBOARD_LANDING.runningSwarms.length, 2);
-  assert.equal(LOCAL_DASHBOARD_LANDING.recentRuns.length, 4);
-  assert.equal(LOCAL_DASHBOARD_LANDING.insights.length, 2);
-  assert.ok(LOCAL_DASHBOARD_LANDING.controlPlane.backlogCount);
-  assert.equal(LOCAL_DASHBOARD_LANDING.pinned.length, 3);
 });
 
 test("dashboard CSS covers health row, control plane, and mobile scroll", async () => {

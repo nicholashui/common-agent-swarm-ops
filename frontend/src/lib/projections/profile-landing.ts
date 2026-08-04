@@ -113,7 +113,7 @@ export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
   initials: "NH",
   badge: "Top Contributor",
   roleLabel: "Owner",
-  workspaceLabel: "Trading Lab",
+  workspaceLabel: "Video Studio",
   rankLabel: "Rank #12 globally · reputation 4,820 · member since 2025",
   sections: [
     { id: "overview", label: "Overview" },
@@ -171,7 +171,7 @@ export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
   contributions: [
     {
       id: "c1",
-      common: "VerifierNode v3.0",
+      common: "video.judge v3.0",
       type: "agent",
       status: "merged",
       impact: "+12% pass rate",
@@ -185,14 +185,14 @@ export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
     },
     {
       id: "c3",
-      common: "DataFetcher v2.2",
+      common: "video.webresearch v2.2",
       type: "agent",
       status: "merged",
       impact: "−9% tokens",
     },
     {
       id: "c4",
-      common: "SentimentAgent v1.9",
+      common: "video.trendintelligence v1.9",
       type: "agent",
       status: "proposed",
       impact: "+5% quality",
@@ -207,10 +207,10 @@ export const LOCAL_PROFILE_LANDING: ProfileLandingView = {
     { id: "name", label: "Display name", value: "Nicholas Hui" },
     { id: "lang", label: "Preferred language", value: "EN · 繁體中文 available" },
     { id: "theme", label: "Theme", value: "Light frame (product default)" },
-    { id: "workspace", label: "Default workspace", value: "Trading Lab" },
+    { id: "workspace", label: "Default workspace", value: "Video Studio" },
     { id: "public", label: "Public profile", value: "Attribution: Public" },
     { id: "contrib", label: "Contribution defaults", value: "Opt-in with provenance" },
-    { id: "canvas", label: "Canvas defaults", value: "Design mode · focus off" },
+    { id: "canvas", label: "Execute defaults", value: "Inspect mode · focus off" },
   ],
   tokens: [
     {

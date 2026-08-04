@@ -13,6 +13,7 @@ import {
   Background,
   Controls,
   MiniMap,
+  Panel,
   ReactFlow,
   ReactFlowProvider,
   Handle,
@@ -131,46 +132,86 @@ function WorkflowCanvas({
           return "#0f766e";
         }}
       />
+      <TemplateNotesPanel template={template} />
     </ReactFlow>
   );
 }
 
-function TemplateMeta({
+/**
+ * Compact template remarks (Background → Archetypes) as a small in-diagram note,
+ * not a full-width page panel.
+ */
+function TemplateNotesPanel({
   template,
 }: Readonly<{ template: AgentWorkflowTemplate }>): JSX.Element {
+  const archetypes =
+    template.archetypes.length > 0
+      ? template.archetypes.join(" · ")
+      : null;
+  const summaryBits = [
+    template.background ? "Background" : null,
+    template.whenToUse ? "When" : null,
+    template.whoShouldUse ? "Who" : null,
+    template.howToUse ? "How" : null,
+    archetypes ? "Archetypes" : null,
+    template.dnaWorkflowId ? "DNA" : null,
+  ].filter(Boolean);
+
   return (
-    <div className="agent-workflow-page__meta" aria-label="Workflow template details">
-      <div>
-        <h2>Background</h2>
-        <p>{template.background}</p>
-      </div>
-      <div>
-        <h2>When to use</h2>
-        <p>{template.whenToUse}</p>
-      </div>
-      <div>
-        <h2>Who should use</h2>
-        <p>{template.whoShouldUse}</p>
-      </div>
-      <div>
-        <h2>How to use</h2>
-        <p>{template.howToUse}</p>
-      </div>
-      {template.archetypes.length > 0 ? (
-        <div>
-          <h2>Archetypes</h2>
-          <p>{template.archetypes.join(" · ")}</p>
-        </div>
-      ) : null}
-      {template.dnaWorkflowId ? (
-        <div>
-          <h2>DNA workflow</h2>
-          <p>
-            <code>{template.dnaWorkflowId}</code>
-          </p>
-        </div>
-      ) : null}
-    </div>
+    <Panel
+      position="top-left"
+      className="agent-workflow-notes-panel"
+      aria-label="Template notes"
+    >
+      <details className="agent-workflow-notes">
+        <summary className="agent-workflow-notes__summary">
+          <span className="agent-workflow-notes__kicker">Notes</span>
+          <span className="agent-workflow-notes__peek">
+            {summaryBits.join(" · ") || "Template remarks"}
+          </span>
+        </summary>
+        <dl className="agent-workflow-notes__list">
+          {template.background ? (
+            <div>
+              <dt>Background</dt>
+              <dd>{template.background}</dd>
+            </div>
+          ) : null}
+          {template.whenToUse ? (
+            <div>
+              <dt>When to use</dt>
+              <dd>{template.whenToUse}</dd>
+            </div>
+          ) : null}
+          {template.whoShouldUse ? (
+            <div>
+              <dt>Who should use</dt>
+              <dd>{template.whoShouldUse}</dd>
+            </div>
+          ) : null}
+          {template.howToUse ? (
+            <div>
+              <dt>How to use</dt>
+              <dd>{template.howToUse}</dd>
+            </div>
+          ) : null}
+          {archetypes ? (
+            <div>
+              <dt>Archetypes</dt>
+              <dd>{archetypes}</dd>
+            </div>
+          ) : null}
+          {template.dnaWorkflowId ? (
+            <div>
+              <dt>DNA workflow</dt>
+              <dd>
+                <code>{template.dnaWorkflowId}</code>
+              </dd>
+            </div>
+          ) : null}
+        </dl>
+      </details>
+    </Panel>
   );
 }
 
@@ -325,8 +366,6 @@ export function AgentWorkflowHome({
           {feedback ? <p role="status">{feedback}</p> : null}
         </div>
       </header>
-
-      <TemplateMeta template={activeTemplate} />
 
       <div
         className="agent-workflow-page__legend"

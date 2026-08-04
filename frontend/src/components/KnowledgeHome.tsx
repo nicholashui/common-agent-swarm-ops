@@ -8,14 +8,17 @@
  * @mustnot Treat local checks as security boundary for ingestion.
  * @redesign docs/frontend_redesign/ui_10_knowledge.md; Req 8.5
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 
 import {
   type KnowledgeDetailTab,
   type KnowledgeLandingView,
 } from "../lib/projections/knowledge-landing";
+import { applyKnowledgeSamples } from "../lib/projections/operate-samples";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { SamplesBanner, SamplesToggle } from "./ui/SamplesToggle";
 
 export function KnowledgeHome({
   view,
@@ -29,12 +32,28 @@ export function KnowledgeHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const hostEmpty =
+    view.collections.length === 0 && view.sources.length === 0;
+  const [showSamples, setShowSamples] = useState(hostEmpty);
+  const dataView = showSamples ? applyKnowledgeSamples(view) : view;
   const [query, setQuery] = useState("");
   const [facet, setFacet] = useState("All types");
-  const [selectedId, setSelectedId] = useState(view.selectedCollectionId);
+  const [selectedId, setSelectedId] = useState(dataView.selectedCollectionId);
   const [detailTab, setDetailTab] = useState<KnowledgeDetailTab>("sources");
-  const [searchTest, setSearchTest] = useState(view.searchQuery);
+  const [searchTest, setSearchTest] = useState(dataView.searchQuery);
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
+
+  useEffect(() => {
+    setShowSamples(hostEmpty);
+  }, [hostEmpty]);
+
+  useEffect(() => {
+    if (
+      !dataView.collections.some((collection) => collection.id === selectedId)
+    ) {
+      setSelectedId(dataView.selectedCollectionId);
+    }
+  }, [dataView.collections, dataView.selectedCollectionId, selectedId]);
 
   const announce = (message: string): void => {
     if (onAction) {
@@ -43,11 +62,12 @@ export function KnowledgeHome({
     }
     setStatusMessage(message);
   };
-  const feedback = externalStatus ?? statusMessage ?? view.searchResultNote;
+  const feedback =
+    externalStatus ?? statusMessage ?? dataView.searchResultNote;
 
   const collections = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return view.collections.filter((collection) => {
+    return dataView.collections.filter((collection) => {
       if (facet === "Common" && collection.scope !== "common") return false;
       if (facet === "Business-scoped" && collection.scope !== "business") {
         return false;
@@ -59,26 +79,40 @@ export function KnowledgeHome({
         collection.syncDetail.toLowerCase().includes(q)
       );
     });
-  }, [facet, query, view.collections]);
+  }, [facet, query, dataView.collections]);
 
   const selected =
-    view.collections.find((collection) => collection.id === selectedId) ??
-    view.collections[0];
+    dataView.collections.find((collection) => collection.id === selectedId) ??
+    dataView.collections[0];
 
   return (
     <section aria-label={L(labels, "knowledge_management_hub")} className="knowledge-home">
       <header className="knowledge-home__header">
         <div>
-          <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <p className="eyebrow">{dataView.eyebrow}</p>
+          <div className="page-title-row">
+            <SamplesToggle
+              show={showSamples}
+              onToggle={() => setShowSamples((v) => !v)}
+              labelShow="Show sample knowledge"
+              labelHide="Hide sample knowledge"
+            />
+            <h1>{dataView.title}</h1>
+            <InfoTooltip label="About this screen" text={dataView.description} />
+          </div>
+          {showSamples ? (
+            <SamplesBanner>
+              Sample knowledge on · video corpus demos (not Host sources). Toggle
+              ▦ to hide.
+            </SamplesBanner>
+          ) : null}
         </div>
         <div className="knowledge-home__header-actions">
           <label className="knowledge-home__search">
             <span className="visually-hidden">{L(labels, "search_collections")}</span>
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder={view.searchPlaceholder}
+              placeholder={dataView.searchPlaceholder}
               value={query}
             />
           </label>
@@ -112,7 +146,7 @@ export function KnowledgeHome({
         className="knowledge-home__facets"
         role="group"
       >
-        {view.facets.map((entry) => (
+        {dataView.facets.map((entry) => (
           <button
             aria-pressed={facet === entry}
             className={
@@ -235,11 +269,11 @@ export function KnowledgeHome({
               </div>
 
               {detailTab === "sources" ? (
-                <SourcesPanel view={view} onAnnounce={announce}  labels={labels} />
+                <SourcesPanel view={dataView} onAnnounce={announce}  labels={labels} />
               ) : null}
               {detailTab === "search" ? (
                 <SearchPanel
-                  view={view}
+                  view={dataView}
                   query={searchTest}
                   onQuery={setSearchTest}
                   onAnnounce={announce}
@@ -247,12 +281,12 @@ export function KnowledgeHome({
                   labels={labels}
                 />
               ) : null}
-              {detailTab === "config" ? <ConfigPanel view={view}  labels={labels} /> : null}
+              {detailTab === "config" ? <ConfigPanel view={dataView}  labels={labels} /> : null}
               {detailTab === "contributions" ? (
-                <ContributionsPanel view={view} onAnnounce={announce}  labels={labels} />
+                <ContributionsPanel view={dataView} onAnnounce={announce}  labels={labels} />
               ) : null}
               {detailTab === "analytics" ? (
-                <AnalyticsPanel view={view} labels={labels} />
+                <AnalyticsPanel view={dataView} labels={labels} />
               ) : null}
             </section>
           ) : null}
@@ -261,7 +295,7 @@ export function KnowledgeHome({
         <aside aria-label={L(labels, "sync_jobs_2")} className="knowledge-home__sidebar">
           <h2>{L(labels, "sync_jobs")}</h2>
           <ul className="knowledge-home__jobs">
-            {view.syncJobs.map((job) => (
+            {dataView.syncJobs.map((job) => (
               <li key={job.id}>
                 <strong>{job.label}</strong>
                 <span className="knowledge-home__job-status">{job.status}</span>
@@ -270,12 +304,12 @@ export function KnowledgeHome({
             ))}
           </ul>
           <p className="knowledge-home__governance" role="note">
-            {view.governanceNote}
+            {dataView.governanceNote}
           </p>
         </aside>
       </div>
 
-      <p className="knowledge-home__footer">{view.footerNote}</p>
+      <p className="knowledge-home__footer">{dataView.footerNote}</p>
     </section>
   );
 }

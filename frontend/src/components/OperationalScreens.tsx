@@ -21,6 +21,7 @@ import { ActionControl } from "./projection/ActionControl";
 import { EvidenceLink } from "./projection/EvidenceLink";
 import { ProjectionStatus } from "./projection/ProjectionStatus";
 import { GeneratedFilterBar } from "./GeneratedFilterBar";
+import { InfoTooltip } from "./design";
 
 export interface OperationalScreenProps {
   readonly projection: GeneratedJsonObject;
@@ -102,9 +103,13 @@ export function OperationalScreen({
     <header className="page-header">
       <div>
         <p className="eyebrow">{presentation.eyebrow}</p>
-        <h1>{presentation.title}</h1>
+        <div className="page-title-row">
+          <h1>{presentation.title}</h1>
+          {description === undefined ? null : (
+            <InfoTooltip label="About this screen" text={description} />
+          )}
+        </div>
         {title === undefined ? null : <p className="operational-screen__projection-title">{title}</p>}
-        {description === undefined ? null : <p className="lede">{description}</p>}
       </div>
     </header>
     <GeneratedFilterBar filters={view.filters} onFilterChange={onFilterChange} />

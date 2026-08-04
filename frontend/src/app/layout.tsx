@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
 
+import { AppTooltipProvider } from "../components/ui/AppTooltipProvider";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
 function RootLayout({ children }: Readonly<{ children: ReactNode }>): ReactNode {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AppTooltipProvider>{children}</AppTooltipProvider>
+      </body>
     </html>
   );
 }

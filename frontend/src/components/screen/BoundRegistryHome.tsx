@@ -149,7 +149,7 @@ export function BoundRegistryHome(): JSX.Element {
                 `Added ${result.agentId} to swarm draft ${result.swarmId} ` +
                 `(${result.swarmName}, rev ${result.revision}, node ${result.nodeId}` +
                 `${result.createdSwarm ? ", new draft" : ", same draft"}). ` +
-                "Open the draft below or use “Open canvas”. " +
+                "Open the draft below or use “Open execute”. " +
                 (appendToLastDraft
                   ? "Next Add to Swarm will use this draft."
                   : "“Add to last draft” is off — next click creates another new draft.") +
@@ -211,7 +211,7 @@ export function BoundRegistryHome(): JSX.Element {
               className="registry-home__linkish"
               href={`/swarms/${encodeURIComponent(activeDraft.swarmId)}/canvas`}
             >
-              Open canvas
+              Open execute
             </Link>
             <button
               className="registry-home__linkish"

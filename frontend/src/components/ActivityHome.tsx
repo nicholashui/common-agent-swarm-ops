@@ -8,7 +8,8 @@
  * @mustnot Invent run status or bypass host inspect gates.
  * @redesign docs/frontend_redesign/ui_06_activity.md
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -17,9 +18,11 @@ import {
   type ActivityLandingView,
   type ActivityViewMode,
 } from "../lib/projections/activity-landing";
+import { applyActivitySamples } from "../lib/projections/operate-samples";
 import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption, matchesAnyChip, toggleChip } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { SamplesBanner, SamplesToggle } from "./ui/SamplesToggle";
 
 const ACTIVITY_DATE_RANGES = [
   "Last 24 hours",
@@ -38,6 +41,9 @@ export function ActivityHome({
   statusMessage?: string;
 }>): JSX.Element {
   const labels = view.labels;
+  const hostEmpty =
+    view.boardColumns.length === 0 && view.tableRows.length === 0;
+  const [showSamples, setShowSamples] = useState(hostEmpty);
   const [mode, setMode] = useState<ActivityViewMode>("board");
   const [liveUpdate, setLiveUpdate] = useState(true);
   const [search, setSearch] = useState("");
@@ -54,6 +60,12 @@ export function ActivityHome({
     () => new Set(),
   );
 
+  useEffect(() => {
+    setShowSamples(hostEmpty);
+  }, [hostEmpty]);
+
+  const dataView = showSamples ? applyActivitySamples(view) : view;
+
   const announce = (message: string): void => {
     if (onAction) {
       void onAction(classifyAnnounce(message));
@@ -65,7 +77,7 @@ export function ActivityHome({
 
   const filteredColumns = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return view.boardColumns.map((column) => ({
+    return dataView.boardColumns.map((column) => ({
       ...column,
       cards: column.cards.filter((card) => {
         if (outdatedOnly && !/v1\.|v2\.0|Fork/.test(card.versionLabel)) {
@@ -90,11 +102,11 @@ export function ActivityHome({
         return haystack.toLowerCase().includes(q);
       }),
     }));
-  }, [outdatedOnly, contributedOnly, search, view.boardColumns, activeChips]);
+  }, [outdatedOnly, contributedOnly, search, dataView.boardColumns, activeChips]);
 
   const filteredTableRows = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return view.tableRows.filter((row) => {
+    return dataView.tableRows.filter((row) => {
       const haystack = [
         row.swarm,
         row.agent,
@@ -107,7 +119,7 @@ export function ActivityHome({
       if (q.length === 0) return true;
       return haystack.toLowerCase().includes(q);
     });
-  }, [search, view.tableRows, activeChips]);
+  }, [search, dataView.tableRows, activeChips]);
 
   const toggleSelected = (id: string): void => {
     setSelectedIds((current) => {
@@ -122,17 +134,31 @@ export function ActivityHome({
     <section aria-label={L(labels, "activity_and_ops_intelligence")} className="activity-home">
       <header className="activity-home__header">
         <div>
-          <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
-          <p className="activity-home__workspace">{view.workspaceLabel}</p>
+          <p className="eyebrow">{dataView.eyebrow}</p>
+          <div className="page-title-row">
+            <SamplesToggle
+              show={showSamples}
+              onToggle={() => setShowSamples((v) => !v)}
+              labelShow="Show sample activity"
+              labelHide="Hide sample activity"
+            />
+            <h1>{dataView.title}</h1>
+            <InfoTooltip label="About this screen" text={dataView.description} />
+          </div>
+          <p className="activity-home__workspace">{dataView.workspaceLabel}</p>
+          {showSamples ? (
+            <SamplesBanner>
+              Sample activity on · video demos (not Host history). Toggle ▦ to
+              hide.
+            </SamplesBanner>
+          ) : null}
         </div>
         <div className="activity-home__header-controls">
           <label className="activity-home__search">
             <span className="visually-hidden">{L(labels, "search_activity")}</span>
             <input
               onChange={(event) => setSearch(event.target.value)}
-              placeholder={view.searchPlaceholder}
+              placeholder={dataView.searchPlaceholder}
               value={search}
             />
           </label>
@@ -141,8 +167,8 @@ export function ActivityHome({
             className="activity-home__chip"
             onClick={() => {
               const next = cycleOption(
-                view.dateRangeLabel
-                  ? [view.dateRangeLabel, ...ACTIVITY_DATE_RANGES.filter((r) => r !== view.dateRangeLabel)]
+                dataView.dateRangeLabel
+                  ? [dataView.dateRangeLabel, ...ACTIVITY_DATE_RANGES.filter((r) => r !== dataView.dateRangeLabel)]
                   : [...ACTIVITY_DATE_RANGES],
                 dateRange,
               );
@@ -191,7 +217,7 @@ export function ActivityHome({
         className="activity-home__filters"
         role="group"
       >
-        {view.filterChips.map((chip) => (
+        {dataView.filterChips.map((chip) => (
           <button
             aria-pressed={activeChips.has(chip)}
             className={
@@ -213,7 +239,7 @@ export function ActivityHome({
             {chip} ▾
           </button>
         ))}
-        {view.toggleFilters.map((toggle) => (
+        {dataView.toggleFilters.map((toggle) => (
           <label className="activity-home__toggle" key={toggle.id}>
             <input
               checked={
@@ -262,13 +288,13 @@ export function ActivityHome({
              labels={labels} />
           ) : null}
           {mode === "timeline" ? (
-            <TimelineView view={view} onAction={announce}  labels={labels} />
+            <TimelineView view={dataView} onAction={announce}  labels={labels} />
           ) : null}
 
           {selectedIds.size > 0 ? (
             <div className="activity-home__bulk" role="region" aria-label={L(labels, "bulk_actions")}>
               <span>{selectedIds.size} selected</span>
-              {view.bulkActions.map((action) => (
+              {dataView.bulkActions.map((action) => (
                 <button
                   className="activity-home__action"
                   key={action}
@@ -289,7 +315,7 @@ export function ActivityHome({
         <aside aria-label={L(labels, "ops_intelligence_2")} className="activity-home__insights">
           <h2>{L(labels, "ops_intelligence")}</h2>
           <ul className="activity-home__kpis">
-            {view.kpis.map((kpi) => (
+            {dataView.kpis.map((kpi) => (
               <li key={kpi.id}>
                 <strong>{kpi.value}</strong>
                 <span>{kpi.label}</span>
@@ -298,7 +324,7 @@ export function ActivityHome({
             ))}
           </ul>
           <div className="activity-home__chart" aria-hidden="true">
-            <p>{view.chartNote}</p>
+            <p>{dataView.chartNote}</p>
             <div className="activity-home__chart-bars">
               <i style={{ height: "40%" }} />
               <i style={{ height: "62%" }} />
@@ -311,7 +337,7 @@ export function ActivityHome({
 
           <h3>{L(labels, "rollout_opportunities_anomalies")}</h3>
           <ul className="activity-home__rollouts">
-            {view.rolloutCards.map((card) => (
+            {dataView.rolloutCards.map((card) => (
               <li
                 className={`activity-home__rollout activity-home__rollout--${card.tone}`}
                 key={card.id}
@@ -344,9 +370,9 @@ export function ActivityHome({
 
           <section className="activity-home__impact">
             <h3>{L(labels, "collective_improvement_impact")}</h3>
-            <p>{view.collectiveImpact}</p>
+            <p>{dataView.collectiveImpact}</p>
             <div className="activity-home__bulk-inline">
-              {view.bulkActions.map((action) => (
+              {dataView.bulkActions.map((action) => (
                 <button
                   className="activity-home__action"
                   key={action}
@@ -364,12 +390,12 @@ export function ActivityHome({
           </section>
 
           <p className="activity-home__freshness" role="status">
-            {view.freshnessLabel}
+            {dataView.freshnessLabel}
           </p>
         </aside>
       </div>
 
-      <p className="activity-home__footer">{view.footerNote}</p>
+      <p className="activity-home__footer">{dataView.footerNote}</p>
     </section>
   );
 }
@@ -449,7 +475,7 @@ function ExecutionCard({
       {card.teaser ? <p className="activity-home__teaser">{card.teaser}</p> : null}
       <div className="activity-home__card-actions">
         {card.actions.map((action) => {
-          if (action === "View in Canvas") {
+          if (action === "View in Execute" || action === "View in Canvas") {
             return (
               <Link className="activity-home__linkish" href="/canvas" key={action}>
                 {action}
@@ -575,7 +601,7 @@ function TableView({
                   Replay
                 </button>
                 <Link className="activity-home__linkish" href="/canvas">
-                  Canvas
+                  Execute
                 </Link>
               </td>
             </tr>

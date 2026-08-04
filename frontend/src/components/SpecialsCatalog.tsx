@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/component_duty_catalog.md §3.5; ui_07_registry_hub.md embed
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {

@@ -13,8 +13,8 @@ import {
 
 const EXPECTED_LABELS = [
   "Dashboard",
-  "Compose",
-  "Swarm Canvas",
+  "Plan",
+  "Execute",
   "Blueprints",
   "Registry Hub",
   "Agent Org Chart",
@@ -62,7 +62,8 @@ test("default shell hides VA and unscoped agent detail", () => {
   const labels = menu.flatMap((group) => group.items.map((item) => item.label));
 
   assert.ok(labels.includes("Dashboard"));
-  assert.ok(labels.includes("Swarm Canvas"));
+  assert.ok(labels.includes("Execute"));
+  assert.ok(labels.includes("Plan"));
   assert.ok(labels.includes("Approvals & Rollouts"));
   assert.equal(labels.includes("VA Production"), false);
   assert.equal(labels.includes("Agent & Pattern Detail"), false);

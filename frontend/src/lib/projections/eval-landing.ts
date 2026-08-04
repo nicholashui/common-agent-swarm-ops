@@ -136,7 +136,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
     {
       id: "i2",
       title: "Token waste hotspot",
-      body: "Sentiment pre-filter re-runs on already-verified chunks (+18% tokens).",
+      body: "Trend pre-filter re-runs on already-verified chunks (+18% tokens).",
     },
     {
       id: "i3",
@@ -147,7 +147,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
   proposals: [
     {
       id: "p1",
-      target: "CommonReportAgent → v3.0",
+      target: "video.editor → v3.0",
       impact: "+18% ↓ hallucination",
       traces: "2.1k traces",
       layers: "L1 pass · L2 0.91 · L3 pending",
@@ -155,7 +155,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
     },
     {
       id: "p2",
-      target: "CommonMarketPredictor → v2.5",
+      target: "video.analyst → v2.5",
       impact: "+4.2% success",
       traces: "890 traces",
       layers: "L1 pass · L2 0.88 · L3 n/a",
@@ -163,7 +163,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
     },
     {
       id: "p3",
-      target: "CommonDataFetcher → v2.2",
+      target: "video.webresearch → v2.2",
       impact: "−9% tokens",
       traces: "1.4k traces",
       layers: "L1 pass · L2 0.94",
@@ -171,7 +171,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
     },
     {
       id: "p4",
-      target: "CommonSentiment → v2.0",
+      target: "video.trendintelligence → v2.0",
       impact: "+5% quality",
       traces: "640 traces",
       layers: "L1 pass · L2 0.86 · held-out",
@@ -183,13 +183,13 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
   history: [
     {
       id: "h1",
-      title: "VerifierNode v2.9 → v3.0",
+      title: "video.judge v2.9 → v3.0",
       beforeAfter: "pass 85% → 97%",
       metrics: "graph rev retained · canary complete",
     },
     {
       id: "h2",
-      title: "DataFetcher v2.0 → v2.1",
+      title: "video.webresearch v2.0 → v2.1",
       beforeAfter: "avg tok 780 → 612",
       metrics: "rollback plan retained",
     },
@@ -197,7 +197,7 @@ export const LOCAL_EVAL_LANDING: EvalLandingView = {
   experiments: [
     {
       id: "e1",
-      title: "ReportAgent v3.0 vs v2.9",
+      title: "video.editor v3.0 vs v2.9",
       result: "v3.0 leads · p<0.01 · 1.2k samples each",
       recommendation: "Promote winner requires proposal + approval + canary stages",
     },

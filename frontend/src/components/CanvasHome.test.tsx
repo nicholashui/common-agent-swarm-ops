@@ -18,28 +18,29 @@ test("canvas orchestration board matches ui_04 redesign", () => {
     <CanvasHome view={getScreenParameters("canvas")} />,
   );
 
-  assert.match(markup, /TradingResearch α/);
-  assert.match(markup, /Parallel Indep\. \+ Verify v1\.4/);
+  assert.match(markup, /Wuxia Short/);
+  assert.match(markup, /Hierarchical \+ Verify/);
   assert.match(markup, /Design/);
   assert.match(markup, /Inspect/);
   assert.match(markup, /Run/);
-  assert.match(markup, /Instance lifecycle|INSTANCE LIFECYCLE|Compose created workflow/i);
+  assert.match(markup, /Instance lifecycle|INSTANCE LIFECYCLE|Plan created workflow/i);
   assert.match(markup, /Materialized draft instance/);
-  assert.match(markup, /Canvas inspect \/ run board/);
+  assert.match(markup, /Execute inspect \/ run board/);
   assert.match(markup, /Host run \(fail-closed\)/);
   assert.match(markup, /WORKFLOW DIAGRAM|Crew workflow/i);
-  assert.match(markup, /Agent Workflow style/);
+  assert.match(markup, /Crew workflow/);
   assert.match(markup, /CREW MEMBERS|crew members/i);
   assert.match(markup, /Open sample instances|Sample instances|samples-trigger/i);
   assert.match(markup, /Fail-closed run/);
-  assert.match(markup, /Edit in Compose/);
+  assert.match(markup, /Edit in Plan/);
   assert.match(markup, /Run instance/);
-  assert.match(markup, /Human board ≠ Orchestrator|Orchestrator agent/i);
+  assert.match(markup, /Human board|Orchestrator agent|Host owns/i);
+  assert.match(markup, /info-tooltip|About|ⓘ/);
   assert.match(markup, /RUN READINESS|Run readiness/i);
   assert.match(markup, /Validate graph/);
   assert.match(markup, /Activity/);
-  assert.match(markup, /DataFetcher/);
-  assert.match(markup, /VerifierNode/);
+  assert.match(markup, /video.webresearch/);
+  assert.match(markup, /video.judge/);
   assert.match(markup, /Layout/);
   assert.match(markup, /Export/);
   assert.match(markup, /Cancel/);

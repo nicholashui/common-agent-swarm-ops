@@ -48,7 +48,125 @@ export interface BlueprintsLandingView {
   readonly footerNote: string;
   /** migration_redesign fail-closed banner for video/domain pack claims. */
   readonly migrationNote: string;
+  /** True when gallery is showing local video-pack samples (not Host records). */
+  readonly showingSamples?: boolean;
 }
+
+/**
+ * Video-pack sample blueprints for gallery demos when Host has none.
+ * Pins use real video.* agent ids only (no trading / COBOL).
+ */
+export const BLUEPRINT_SAMPLES: readonly BlueprintCard[] = [
+  {
+    id: "sample-wuxia-short",
+    name: "Wuxia Short Pipeline",
+    description:
+      "YouTube wuxia short: research → trend → script → judge gate → edit package.",
+    pattern: "Pattern: Hierarchical + Verify",
+    agentCount: "7 video pack agents",
+    knowledge: "Knowledge: Video corpus",
+    metrics: "Sample · not Host-deployed",
+    author: "Sample · video pack",
+    rating: "Sample",
+    domains: ["Video", "Content"],
+    governance: "official",
+    featured: true,
+    previewStyle: "parallel",
+    pins: [
+      "video.orchestrator@meta",
+      "video.planner@meta",
+      "video.webresearch@v1",
+      "video.screenwriter@v1",
+      "video.director@v1",
+      "video.editor@v1",
+      "video.judge@v1",
+    ],
+    vaHints: [
+      "Sample only · Deploy still requires Host blueprint action",
+      "Parallel research + judge verification loop",
+      "Pinned video pack agents · new graph revision on deploy",
+    ],
+    maturityLabel: "sample · registered pack ids",
+  },
+  {
+    id: "sample-trend-script",
+    name: "Trend research → script",
+    description:
+      "Web/trend research to copywriter/screenwriter with judge gate before production.",
+    pattern: "Pattern: Research + Verify",
+    agentCount: "6 video pack agents",
+    knowledge: "Hooks · competitors · script package",
+    metrics: "Sample · not Host-deployed",
+    author: "Sample · video pack",
+    domains: ["Video", "Research", "Content"],
+    governance: "team",
+    previewStyle: "router",
+    pins: [
+      "video.orchestrator@meta",
+      "video.webresearch@v1",
+      "video.trendintelligence@v1",
+      "video.copywriter@v1",
+      "video.screenwriter@v1",
+      "video.judge@v1",
+    ],
+    vaHints: [
+      "Sample only · Host list empty uses these for gallery preview",
+      "Research handoff → script → QC gate",
+    ],
+    maturityLabel: "sample · registered pack ids",
+  },
+  {
+    id: "sample-social-lean",
+    name: "Social under budget",
+    description:
+      "Lean short-form crew: edit, captions, sound, judge — cost-efficient social cuts.",
+    pattern: "Pattern: Minimal video crew",
+    agentCount: "5 video pack agents",
+    knowledge: "15–30s social cut package",
+    metrics: "Sample · not Host-deployed",
+    author: "Sample · video pack",
+    domains: ["Video", "Content"],
+    governance: "team",
+    previewStyle: "verify",
+    pins: [
+      "video.orchestrator@meta",
+      "video.editor@v1",
+      "video.accessibility@v1",
+      "video.sounddesign@v1",
+      "video.judge@v1",
+    ],
+    vaHints: ["Sample lean crew · still has judge gate"],
+    maturityLabel: "sample · registered pack ids",
+  },
+  {
+    id: "sample-brand-spot",
+    name: "Brand spot + compliance",
+    description:
+      "30s brand film: strategist → creative → director → edit → compliance/judge.",
+    pattern: "Pattern: Brand + gate",
+    agentCount: "7 video pack agents",
+    knowledge: "Brand look · music cues · compliance",
+    metrics: "Sample · not Host-deployed",
+    author: "Sample · video pack",
+    domains: ["Video", "Content", "Creative"],
+    governance: "beta",
+    previewStyle: "mapreduce",
+    pins: [
+      "video.brandstrategist@v1",
+      "video.creativedirector@v1",
+      "video.director@v1",
+      "video.cinematographer@v1",
+      "video.editor@v1",
+      "video.compliance@v1",
+      "video.judge@v1",
+    ],
+    vaHints: [
+      "Sample brand path · compliance before publish",
+      `${VIDEO_DOMAIN_MIGRATION_CLAIM.agentInventoryCount} video pack agents remain non-active until Host gates pass`,
+    ],
+    maturityLabel: "sample · registered pack ids",
+  },
+];
 
 export const LOCAL_BLUEPRINTS_LANDING: BlueprintsLandingView = {
   labels: {
@@ -71,103 +189,18 @@ export const LOCAL_BLUEPRINTS_LANDING: BlueprintsLandingView = {
   eyebrow: "BLUEPRINTS & TEMPLATES",
   title: "Blueprints & Templates Gallery",
   description:
-    "Swarm blueprint gallery (local presentation): pattern + agents + knowledge config. Deploy or customize only through authorized host actions.",
+    "Swarm blueprint gallery: Host records when present, or video-pack samples via Use sample blueprints. Deploy only through authorized Host actions.",
   searchPlaceholder: "Search blueprints or describe your use case…",
   filters: [
-    "All (24)",
-    "Trading",
+    `All (${BLUEPRINT_SAMPLES.length})`,
+    "Video",
     "Content",
-    "Education",
     "Research",
+    "Creative",
   ],
   sorts: ["Most deployed", "Highest rated"],
-  blueprints: [
-    {
-      id: "market-intel",
-      name: "Market Intelligence Pipeline",
-      description:
-        "Complete daily market analysis: data fetch → sentiment → prediction → synthesis → verified report.",
-      pattern: "Pattern: Parallel + Verify v1.4",
-      agentCount: "8 Common Agents",
-      knowledge: "Knowledge: Trading Corpus",
-      metrics: "312 deployments · 94% success · est $0.14/run",
-      author: "by @ecosystem",
-      rating: "4.9 (142 reviews)",
-      domains: ["Trading"],
-      governance: "official",
-      featured: true,
-      previewStyle: "parallel",
-      pins: [
-        "DataFetcher@v2.1",
-        "SentimentAgent@v1.9",
-        "MarketPredictor@v2.0",
-        "VerifierNode@v3.0",
-      ],
-      vaHints: [
-        "Parallel branches + self-refine verification loop",
-        "L1/L2 quality requirements on report handoff",
-        "Pinned Common versions · new graph revision on deploy",
-      ],
-    },
-    {
-      id: "cinematic",
-      name: "Cinematic Content Pipeline",
-      description:
-        "YouTube wuxia-style content pipeline preview — bilingual. Domain-pack roles remain registered/non-active until host gates pass.",
-      pattern: "Pattern: Dynamic Router v2.2",
-      agentCount: "6 Agents (cataloged)",
-      knowledge: "Script → storyboard → voice → edit → publish (preview graph).",
-      metrics: "Preview fixture · not production activation",
-      author: "by @content-team",
-      domains: ["Creative", "Bilingual", "Video", "Content"],
-      governance: "team",
-      previewStyle: "router",
-      pins: ["ContentDirector@v1.8", "VerifierNode@v3.0"],
-      maturityLabel: "cataloged · registered · non-active",
-      vaHints: [
-        "Router architecture + delivery channel settings (presentation only)",
-        "Rights/consent on publish artifact remain server-gated",
-        "pack_spine is the sole safe stub — not blueprint realization",
-        `${VIDEO_DOMAIN_MIGRATION_CLAIM.agentInventoryCount} common video agents stay non-active (COMPLETE pack is offline, not production-activated)`,
-      ],
-    },
-    {
-      id: "dse-tutor",
-      name: "DSE Adaptive Tutor",
-      description: "Hong Kong DSE ICT education",
-      pattern: "Pattern: Verification Loop v1.2",
-      agentCount: "5 Agents",
-      knowledge: "Diagnostic → generate → verify → adapt.",
-      metrics: "64 deployments · 96%",
-      author: "by @edu-team",
-      domains: ["Education", "Adaptive", "Research"],
-      governance: "team",
-      previewStyle: "verify",
-      pins: ["TutorAgent@v1.4", "VerifierNode@v3.0"],
-      vaHints: [
-        "Domain-adapter template mapping (not universal)",
-        "Approval gate optional for assessment release",
-      ],
-    },
-    {
-      id: "legacy",
-      name: "Legacy Code Modernizer",
-      description: "Automated codebase refactoring",
-      pattern: "Pattern: Map-Reduce + Verifier v1.1",
-      agentCount: "7 Agents",
-      knowledge: "Analyze → plan → refactor → verify → PR.",
-      metrics: "42 deployments · 87%",
-      author: "by @dev-team",
-      domains: ["DevOps", "Refactoring", "Research"],
-      governance: "beta",
-      previewStyle: "mapreduce",
-      pins: ["Analyzer@v1.0", "RefactorAgent@v1.2", "VerifierNode@v3.0"],
-      vaHints: [
-        "Map-reduce parallel shards + verify gate",
-        "Artifact handoff schemas for PR generation",
-      ],
-    },
-  ],
+  blueprints: BLUEPRINT_SAMPLES,
+  showingSamples: true,
   createNote:
     "Save any working swarm as a reusable blueprint, optionally publish to the gallery. Includes: pattern graph + pinned agent versions + knowledge sources + default config.",
   publishNote:
@@ -175,6 +208,6 @@ export const LOCAL_BLUEPRINTS_LANDING: BlueprintsLandingView = {
   safetyNote:
     "Instantiation creates a new graph revision with pinned versions; it does not copy opaque tool credentials or bypass required validation/gates. Required critique relationships, L1/L2/L3, rights/consent, continuity, and provenance remain enforced server-side. Catalog or stub graphs do not imply production activation.",
   footerNote:
-    "Local preview blueprints · Deploy / Fork / Publish require authorized blueprint actions. Mini graph previews are presentation chrome (React Flow deferred).",
+    "Sample blueprints use video pack agent ids only · Deploy / Fork / Publish require authorized Host blueprint actions.",
   migrationNote: VIDEO_DOMAIN_MIGRATION_CLAIM.disclaimer,
 };

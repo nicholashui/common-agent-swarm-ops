@@ -33,7 +33,8 @@ test("shell navigation renders ui_00_menu product chrome and IA groups", () => {
   assert.match(markup, /data-menu-item="blueprints"/);
   assert.match(markup, /data-menu-item="approvals-rollouts"/);
   assert.match(markup, />Dashboard</);
-  assert.match(markup, />Swarm Canvas</);
+  assert.match(markup, />Execute</);
+  assert.match(markup, />Plan</);
   assert.match(markup, />Approvals &amp; Rollouts</);
   assert.match(markup, /HOME/);
   assert.match(markup, /Reconnecting/);

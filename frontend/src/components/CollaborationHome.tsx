@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/ui_18_collaboration.md
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -59,8 +60,10 @@ export function CollaborationHome({
       <header className="collab-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
         </div>
         <div className="collab-home__header-actions">
           <label className="collab-home__search">
@@ -269,12 +272,12 @@ export function CollaborationHome({
                       className="collab-home__action"
                       onClick={() =>
                         announce(
-                          "Open canvas in read-only presence mode when authorized.",
+                          "Open execute in read-only presence mode when authorized.",
                         )
                       }
                       type="button"
                     >
-                      Open canvas
+                      Open execute
                     </button>
                   )}
                 </li>

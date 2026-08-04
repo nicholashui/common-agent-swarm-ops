@@ -140,7 +140,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
   filters: [
     { id: "time", label: "Time range", value: "Last 1 hour" },
     { id: "version", label: "Common version", value: "All" },
-    { id: "swarm", label: "Swarm", value: "TradingResearch α" },
+    { id: "swarm", label: "Swarm", value: "Wuxia Short" },
     { id: "status", label: "Status", value: "Success" },
   ],
   tabs: [
@@ -166,7 +166,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
           children: [
             {
               id: "data",
-              label: "DataFetcher",
+              label: "video.webresearch",
               kind: "agent",
               version: "v2.1",
               status: "success",
@@ -174,7 +174,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
             },
             {
               id: "sent",
-              label: "Sentiment",
+              label: "video.trendintelligence",
               kind: "agent",
               version: "v1.9",
               status: "success",
@@ -182,7 +182,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
             },
             {
               id: "pred",
-              label: "Predictor",
+              label: "video.analyst",
               kind: "agent",
               version: "v2.0",
               status: "success",
@@ -192,13 +192,13 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
         },
         {
           id: "synth",
-          label: "Synthesis + Verify",
+          label: "Script + judge",
           kind: "group",
           status: "self_refine",
           children: [
             {
               id: "ver",
-              label: "VerifierNode",
+              label: "video.judge",
               kind: "verify",
               version: "v3.0",
               status: "self_refine",
@@ -210,7 +210,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
     },
   ],
   selectedSpan: {
-    title: "Selected span · Predictor v2.0",
+    title: "Selected span · video.analyst",
     metrics: "Duration 320ms · tokens 640 · cost $0.02",
     detailLines: [
       "Graph revision: 12",
@@ -245,7 +245,7 @@ export const LOCAL_MONITORING_LANDING: MonitoringLandingView = {
   anomalies: [
     {
       id: "n1",
-      title: "Error spike · CommonReportAgent",
+      title: "Error spike · video.editor",
       body: "After v2.1 rollout, error ↑ in 3 swarms.",
       freshness: "as_of 04:12Z · corr b7f2c9d0",
       highRisk: false,

@@ -68,7 +68,7 @@ export function Composer({
       <header className="composer-header">
         <div>
           <p className="eyebrow">NEW SWARM DRAFT</p>
-          <h1>Swarm composer</h1>
+          <h1>Plan</h1>
           <input
             aria-label="Swarm name"
             onChange={(event): void => setSwarmName(event.target.value)}
@@ -104,7 +104,7 @@ export function Composer({
             <div>
               <strong>Common Swarm Architect</strong>
               <p>
-                Compose from returned common patterns and their immutable
+                Plan from returned common patterns and their immutable
                 provenance.
               </p>
             </div>

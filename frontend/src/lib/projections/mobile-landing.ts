@@ -78,7 +78,7 @@ export interface MobileLandingView {
 
 export const LOCAL_MOBILE_LANDING: MobileLandingView = {
   labels: {
-    "compose_opens_the_full_composer_for_guided_creat": "Compose opens the full composer for guided creation.",
+    "compose_opens_the_full_composer_for_guided_creat": "Plan opens guided creation from common patterns.",
     "your_swarms": "Your Swarms",
     "notifications": "Notifications",
     "quick_actions": "Quick Actions",
@@ -99,13 +99,13 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
     "mobile_bottom_navigation": "Mobile bottom navigation",
   },
   brand: "caso",
-  workspaceLabel: "Trading Lab",
+  workspaceLabel: "Video Studio",
   timeLabel: "9:41",
   liveSummary: "Live · 6 running · 92% success",
   tabs: [
     { id: "home", label: "Home" },
     { id: "activity", label: "Activity" },
-    { id: "compose", label: "Compose", href: "/composer" },
+    { id: "compose", label: "Plan", href: "/composer" },
     { id: "registry", label: "Registry" },
     { id: "more", label: "More" },
   ],
@@ -116,7 +116,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
   runningSwarms: [
     {
       id: "s1",
-      name: "TradingResearch α",
+      name: "Wuxia Short",
       status: "Running",
       statusTone: "running",
       pattern: "Parallel + Verify v1.4",
@@ -125,7 +125,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
     },
     {
       id: "s2",
-      name: "ContentPipeline β",
+      name: "Brand Spot",
       status: "Live",
       statusTone: "live",
       pattern: "Hierarchical v2.0",
@@ -138,7 +138,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
       id: "n1",
       kind: "gate",
       title: "Approval gate",
-      body: "ReportAgent v3.0 · 19 swarms",
+      body: "video.editor v3.0 · 19 swarms",
       meta: "8m left · L1 pass · L2 0.94 · gate criteria returned",
       actions: [
         { id: "approve", label: "Approve", primary: true },
@@ -148,7 +148,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
     {
       id: "n2",
       kind: "anomaly",
-      title: "Error spike · ReportAgent v2.1",
+      title: "Error spike · video.editor v2.1",
       body: "3 swarms affected · tap to rollback",
       meta: "Rollback eligibility: server-determined",
       highRisk: false,
@@ -161,7 +161,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
       id: "n3",
       kind: "critique",
       title: "Critique severity major",
-      body: "waiting_for_critique · SynthesisAgent",
+      body: "waiting_for_critique · video.screenwriter",
       meta: "Evidence ref only · resolution open",
       actions: [
         {
@@ -175,17 +175,17 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
   activity: [
     {
       id: "a1",
-      title: "TradingResearch α",
+      title: "Wuxia Short",
       status: "Success",
-      version: "VerifierNode Common v3.0",
+      version: "video.judge Common v3.0",
       meta: "12s · redacted metrics",
       lifecycle: "complete · graph rev r-18",
     },
     {
       id: "a2",
-      title: "ContentPipeline β",
+      title: "Brand Spot",
       status: "Blocked",
-      version: "ReportAgent Common v2.1",
+      version: "video.editor Common v2.1",
       meta: "missing approval · gate g-44",
       lifecycle: "blocked · retry eligible",
     },
@@ -193,7 +193,7 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
       id: "a3",
       title: "OpsBrief ε",
       status: "Self-refine",
-      version: "VerifierNode Common v3.0",
+      version: "video.judge Common v3.0",
       meta: "iter 2/5 · L2 in progress",
       lifecycle: "self_refine",
     },
@@ -201,13 +201,13 @@ export const LOCAL_MOBILE_LANDING: MobileLandingView = {
   registryHits: [
     {
       id: "r1",
-      name: "VerifierNode",
+      name: "video.judge",
       version: "Common v3.0",
       metric: "97% · High Verify",
     },
     {
       id: "r2",
-      name: "DataFetcher",
+      name: "video.webresearch",
       version: "Common v2.1",
       metric: "94% · 12.4k runs",
     },

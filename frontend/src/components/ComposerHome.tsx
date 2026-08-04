@@ -32,6 +32,8 @@ import {
 } from "../lib/projections/composer-workflow";
 import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import { InfoTooltip } from "./design";
+import { WithTooltip } from "./ui/tooltip";
 
 type ActiveRec = {
   readonly patternId: string;
@@ -357,7 +359,7 @@ export function ComposerHome({
         },
       ]);
       setStatusMessage(
-        `AI selected ${active.patternName} with ${active.slots.length} agents. Review diagram, then Accept AI → Canvas.`,
+        `AI selected ${active.patternName} with ${active.slots.length} agents. Review diagram, then Accept AI → Execute.`,
       );
     } catch (error) {
       setStatusMessage(
@@ -417,27 +419,38 @@ export function ComposerHome({
     >
       <header className="composer-home__toolbar">
         <div className="composer-home__toolbar-main">
-          <label className="composer-home__name">
-            <span className="visually-hidden">{L(labels, "swarm_name")}</span>
-            <input
-              aria-label={L(labels, "swarm_name")}
-              onChange={(event) => setSwarmName(event.target.value)}
-              value={swarmName}
-            />
-          </label>
+          <div className="composer-home__title-row">
+            <h1 className="composer-home__title">{view.title}</h1>
+            <InfoTooltip label="About Plan" text={view.description} />
+            <label className="composer-home__name">
+              <span className="visually-hidden">{L(labels, "swarm_name")}</span>
+              <input
+                aria-label={L(labels, "swarm_name")}
+                onChange={(event) => setSwarmName(event.target.value)}
+                placeholder={L(labels, "swarm_name")}
+                value={swarmName}
+              />
+            </label>
+          </div>
           {decisionStatus === "ai_resolved" ? (
-            <span className="composer-home__pill composer-home__pill--ok">
-              AI resolved
-            </span>
+            <WithTooltip content="AI resolved conflicts and bound agents from the closed-world catalog.">
+              <span className="composer-home__pill composer-home__pill--ok" tabIndex={0}>
+                AI resolved
+              </span>
+            </WithTooltip>
           ) : null}
           {decisionStatus === "needs_hitl" ? (
-            <span className="composer-home__pill composer-home__pill--hitl">
-              needs_hitl
-            </span>
+            <WithTooltip content="Human required — AI could not decide a conflict (e.g. cost vs quality).">
+              <span className="composer-home__pill composer-home__pill--hitl" tabIndex={0}>
+                needs_hitl
+              </span>
+            </WithTooltip>
           ) : null}
-          <span className="composer-home__pill composer-home__pill--ai">
-            AI-pick mainly
-          </span>
+          <WithTooltip content="AI picks pattern and agents from the Host catalog. You only resolve conflicts (needs_hitl).">
+            <span className="composer-home__pill composer-home__pill--ai" tabIndex={0}>
+              AI-pick mainly
+            </span>
+          </WithTooltip>
         </div>
         <div className="composer-home__toolbar-actions">
           <button
@@ -455,7 +468,7 @@ export function ComposerHome({
             onClick={() => void materializeAndOpen()}
             type="button"
           >
-            Accept AI → Canvas
+            Accept AI → Execute
           </button>
           <Link
             aria-label={L(labels, "close_composer")}
@@ -467,12 +480,6 @@ export function ComposerHome({
         </div>
       </header>
 
-      <div className="composer-home__intro">
-        <p className="composer-home__eyebrow">{view.eyebrow}</p>
-        <h1>{view.title}</h1>
-        <p>{view.description}</p>
-      </div>
-
       <ol className="composer-home__steps" aria-label="Composition process">
         {(
           [
@@ -480,7 +487,7 @@ export function ComposerHome({
             [2, "AI plan & bind"],
             [3, "Workflow diagram"],
             [4, "Materialize draft"],
-            [5, "Canvas inspect"],
+            [5, "Execute inspect"],
           ] as const
         ).map(([n, label], index, all) => (
           <li
@@ -539,29 +546,36 @@ export function ComposerHome({
           className="composer-home__chat panel"
         >
           <div className="composer-home__architect">
-            <button
-              aria-controls={architectPanelId}
-              aria-expanded={architectOpen}
-              className="composer-home__architect-toggle"
-              onClick={() => setArchitectOpen((open) => !open)}
-              type="button"
-            >
-              <span aria-hidden="true" className="composer-home__architect-mark">
-                ✓
-              </span>
-              <span className="composer-home__architect-copy">
-                <strong>{view.architectTitle}</strong>
-                {architectOpen ? (
-                  <span id={architectPanelId}>{view.architectSubtitle}</span>
-                ) : (
-                  <span>{L(labels, "show_system_context")}</span>
-                )}
-              </span>
-              <span aria-hidden="true">{architectOpen ? "⌃" : "⌄"}</span>
-            </button>
+            <div className="composer-home__architect-row">
+              <button
+                aria-controls={architectPanelId}
+                aria-expanded={architectOpen}
+                className="composer-home__architect-toggle"
+                onClick={() => setArchitectOpen((open) => !open)}
+                type="button"
+              >
+                <span aria-hidden="true" className="composer-home__architect-mark">
+                  ✓
+                </span>
+                <span className="composer-home__architect-copy">
+                  <strong id={architectPanelId}>{view.architectTitle}</strong>
+                </span>
+                <span aria-hidden="true">{architectOpen ? "⌃" : "⌄"}</span>
+              </button>
+              <InfoTooltip
+                label={view.architectTitle}
+                text={view.architectSubtitle}
+              />
+            </div>
           </div>
 
-          <p className="composer-home__section-label">Requirements</p>
+          <p className="composer-home__section-label">
+            Requirements{" "}
+            <InfoTooltip
+              label="Requirements"
+              text="Paste a goal or short production spec. AI binds catalog agents and draws the crew workflow."
+            />
+          </p>
           <div className="composer-home__messages" role="log">
             {messages.map((message) =>
               message.role === "user" ? (
@@ -652,7 +666,7 @@ export function ComposerHome({
                             onClick={() => void materializeAndOpen()}
                             type="button"
                           >
-                            Accept AI → Canvas
+                            Accept AI → Execute
                           </button>
                           <button
                             className="composer-home__ghost"
@@ -703,12 +717,14 @@ export function ComposerHome({
             </dl>
           ) : null}
 
-          <div className="composer-home__hitl-banner" role="note">
-            <strong>Human exception path (needs_hitl)</strong>
-            <p>
-              Shown only when AI cannot decide — e.g. cost vs quality, domain
-              mix, or missing catalog capability. Not for agent shopping.
-            </p>
+          <div className="composer-home__hitl-banner" role="status">
+            <strong>
+              Human exception path (needs_hitl){" "}
+              <InfoTooltip
+                label="Human exception path"
+                text="Shown only when AI cannot decide — e.g. cost vs quality, domain mix, or missing catalog capability. Not for agent shopping."
+              />
+            </strong>
             <p>
               Current:{" "}
               {hitlOpen === 0
@@ -719,11 +735,11 @@ export function ComposerHome({
 
           <div className="composer-home__inventory">
             <p className="composer-home__section-label">
-              Available agents (building blocks)
-            </p>
-            <p>
-              Host catalog · closed world · AI binds only{" "}
-              <code>agent_id</code> present in inventory · never invents roles
+              Available agents (building blocks){" "}
+              <InfoTooltip
+                label="Available agents"
+                text="Host catalog · closed world · AI binds only agent_id present in inventory · never invents roles."
+              />
             </p>
           </div>
 
@@ -868,7 +884,11 @@ export function ComposerHome({
 
           <div className="composer-home__pattern-context">
             <p className="composer-home__section-label">
-              AI pattern context (not a pick list)
+              AI pattern context{" "}
+              <InfoTooltip
+                label="AI pattern context"
+                text="Bias only — not a human pick list. AI selects the pattern from Host catalog context."
+              />
             </p>
             <ul>
               {view.patterns.slice(0, 3).map((pattern) => (
@@ -879,13 +899,13 @@ export function ComposerHome({
                       : "composer-home__pattern-chip"
                   }
                   key={pattern.id}
+                  title={
+                    aiSelectedPattern?.id === pattern.id
+                      ? "AI selected · bias only"
+                      : "Considered · not primary pick"
+                  }
                 >
                   <strong>{pattern.name}</strong>
-                  <span>
-                    {aiSelectedPattern?.id === pattern.id
-                      ? "AI selected · bias only"
-                      : "Considered · not primary pick"}
-                  </span>
                 </li>
               ))}
             </ul>
@@ -899,13 +919,19 @@ export function ComposerHome({
         >
           <header className="composer-home__workflow-head">
             <p className="composer-home__section-label">
-              Generated workflow · primary output
+              Generated workflow{" "}
+              <InfoTooltip
+                label="Generated workflow"
+                text="Primary output of Plan. Same visual language as Registry → Agent Workflow: phases · agents · gates."
+              />
             </p>
-            <h2>Crew workflow diagram</h2>
-            <p>
-              Same visual language as Registry → Agent Workflow · phases ·
-              agents · gates
-            </p>
+            <div className="page-title-row">
+              <h2>Crew workflow diagram</h2>
+              <InfoTooltip
+                label="Crew workflow diagram"
+                text="AI-composed crew graph. Materialize creates a draft instance for Execute — production stays fail-closed."
+              />
+            </div>
           </header>
 
           <div className="composer-home__workflow-toolbar">
@@ -952,16 +978,18 @@ export function ComposerHome({
           <WorkflowDiagram graph={workflowGraph} />
 
           <div className="composer-home__workflow-footer">
-            <p>
-              <strong>Output package (Host)</strong>
-            </p>
-            <p>
-              workflow graph · pattern_ref · agent pins · edges · critic_status
-              · canvas handoff
-            </p>
-            <p className="composer-home__hint">
-              Materialize creates draft swarm members only · production
-              activation stays fail-closed
+            <p className="composer-home__section-label">
+              Output package (Host){" "}
+              <InfoTooltip
+                label="Output package"
+                text={[
+                  "workflow graph · pattern_ref · agent pins · edges · critic_status · canvas handoff",
+                  "Materialize creates draft swarm members only · production activation stays fail-closed",
+                  ...view.handoffNotes,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              />
             </p>
             <div className="composer-home__rec-actions">
               <button
@@ -977,7 +1005,7 @@ export function ComposerHome({
               </button>
               {lastCanvasPath ? (
                 <Link className="composer-home__primary" href={lastCanvasPath}>
-                  Canvas
+                  Execute
                 </Link>
               ) : (
                 <button
@@ -986,21 +1014,19 @@ export function ComposerHome({
                   onClick={() => void materializeAndOpen()}
                   type="button"
                 >
-                  Canvas
+                  Execute
                 </button>
               )}
             </div>
           </div>
-
-          {view.handoffNotes.map((note) => (
-            <p className="composer-home__handoff-note" key={note}>
-              {note}
-            </p>
-          ))}
         </section>
       </div>
 
-      <p className="composer-home__footer">{view.footerNote}</p>
+      {view.footerNote ? (
+        <p className="composer-home__footer composer-home__footer--tip">
+          <InfoTooltip label="Plan notes" text={view.footerNote} />
+        </p>
+      ) : null}
     </section>
   );
 }

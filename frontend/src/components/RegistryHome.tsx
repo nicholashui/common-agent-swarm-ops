@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/ui_07_registry_hub.md
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 import Link from "next/link";
 
 import {
@@ -119,8 +120,10 @@ export function RegistryHome({
       <header className="registry-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.subtitle}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.subtitle} />
+          </div>
           <p className="registry-home__workspace">{view.workspaceLabel}</p>
         </div>
         <div className="registry-home__header-actions">
@@ -869,7 +872,7 @@ function PatternCard({
           className="registry-home__action registry-home__action--primary"
           href="/canvas"
         >
-          Instantiate in Canvas
+          Instantiate in Execute
         </Link>
         <button
           className="registry-home__action"

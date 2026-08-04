@@ -20,7 +20,7 @@ test("profile home matches ui_13 md/svg structure", () => {
   assert.match(markup, /Nicholas Hui/);
   assert.match(markup, /Top Contributor/);
   assert.match(markup, /Owner/);
-  assert.match(markup, /Trading Lab/);
+  assert.match(markup, /Video Studio/);
   assert.match(markup, /Rank #12/);
   assert.match(markup, /reputation 4,820/);
   assert.match(markup, /Commons contributed/);
@@ -35,7 +35,7 @@ test("profile home matches ui_13 md/svg structure", () => {
   assert.match(markup, /Reputation breakdown/);
   assert.match(markup, /server-attributed provenance/);
   assert.match(markup, /My Contributions/);
-  assert.match(markup, /VerifierNode v3\.0/);
+  assert.match(markup, /video.judge v3\.0/);
   assert.match(markup, /Parallel \+ Verify Pattern/);
   assert.match(markup, /Export contribution history/);
   assert.match(markup, />Overview</);

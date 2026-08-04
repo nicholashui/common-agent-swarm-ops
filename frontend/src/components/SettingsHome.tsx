@@ -9,6 +9,7 @@
  * @redesign docs/frontend_redesign/ui_08_settings.md
  */
 import React, { useMemo, useState } from "react";
+import { InfoTooltip } from './design';
 
 import {
   type SettingsLandingView,
@@ -57,8 +58,10 @@ export function SettingsHome({
       <header className="settings-home__header">
         <div>
           <p className="eyebrow">{view.eyebrow}</p>
-          <h1>{view.title}</h1>
-          <p className="lede">{view.description}</p>
+          <div className="page-title-row">
+            <h1>{view.title}</h1>
+            <InfoTooltip label="About this screen" text={view.description} />
+          </div>
         </div>
         <label className="settings-home__search">
           <span className="visually-hidden">{L(labels, "search_across_settings")}</span>

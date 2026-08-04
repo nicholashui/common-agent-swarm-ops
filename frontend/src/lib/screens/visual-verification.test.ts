@@ -23,7 +23,7 @@ function solidImage(red: number, green: number, blue: number): Buffer {
 test("normalizes baselines to fixed fonts, fixture values, and capture metadata", () => {
   const definition = getScreenDefinition("ui_02_dashboard");
   const normalized = normalizeFixtureSvg(
-    '<svg width="1440" height="1480" font-family="Inter, system-ui, sans-serif"><text>as_of 2026-01-01T00:00Z corr old-value Trading Lab</text></svg>',
+    '<svg width="1440" height="1480" font-family="Inter, system-ui, sans-serif"><text>as_of 2026-01-01T00:00Z corr old-value Video Studio</text></svg>',
     definition,
     { width: 390, height: 844 },
   );

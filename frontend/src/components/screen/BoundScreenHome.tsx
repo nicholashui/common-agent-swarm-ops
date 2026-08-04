@@ -11,10 +11,47 @@ import dynamic from "next/dynamic";
 
 import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
 import { resolveAgentDetailView } from "../../lib/projections/agent-detail-landing";
+import {
+  buildEmptyLiveDashboardShell,
+} from "../../lib/projections/dashboard-live";
+import type { DashboardLandingView } from "../../lib/projections/dashboard-landing";
+import {
+  loadLiveBlueprints,
+  loadLiveCanvasLanding,
+  loadLiveCollaboration,
+  loadLiveCosts,
+  loadLiveDashboard,
+  loadLiveKnowledge,
+  loadLiveMobile,
+  loadLiveMonitoring,
+  loadLiveNotifications,
+  loadLiveProfile,
+  loadLiveSettings,
+} from "../../lib/projections/screen-live-loaders";
 import { useInteractionRuntime } from "../../lib/ui/interaction-runtime";
 import { useScreenActionBridge } from "../../lib/ui/use-screen-action";
 import { InteractionStatusBar } from "../ui/InteractionStatusBar";
+import { SamplesBanner, SamplesToggle } from "../ui/SamplesToggle";
+import { buildSampleApprovalProjection } from "../../lib/projections/operate-samples";
 import type { ScreenUiAction } from "../../lib/ui/screen-actions";
+import type { GeneratedJsonObject } from "../../lib/api/client";
+
+function useLiveView<T>(
+  initial: T,
+  loader: () => Promise<T>,
+): T {
+  const [view, setView] = useState(initial);
+  useEffect(() => {
+    let cancelled = false;
+    void loader().then((next) => {
+      if (!cancelled) setView(next);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [loader]);
+  return view;
+}
 
 export type BoundScreenKey =
   | "activity"
@@ -228,7 +265,8 @@ function BoundAuditHome(): JSX.Element {
 }
 
 function BoundBlueprintsHome(): JSX.Element {
-  const view = useScreenParameters("blueprints");
+  const fallback = useScreenParameters("blueprints");
+  const view = useLiveView(fallback, loadLiveBlueprints);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -242,7 +280,8 @@ function BoundBlueprintsHome(): JSX.Element {
 }
 
 function BoundCanvasHome(): JSX.Element {
-  const view = useScreenParameters("canvas");
+  const fallback = useScreenParameters("canvas");
+  const view = useLiveView(fallback, loadLiveCanvasLanding);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -256,7 +295,8 @@ function BoundCanvasHome(): JSX.Element {
 }
 
 function BoundCollaborationHome(): JSX.Element {
-  const view = useScreenParameters("collaboration");
+  const fallback = useScreenParameters("collaboration");
+  const view = useLiveView(fallback, loadLiveCollaboration);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -284,7 +324,8 @@ function BoundComposerHome(): JSX.Element {
 }
 
 function BoundCostsHome(): JSX.Element {
-  const view = useScreenParameters("costs");
+  const fallback = useScreenParameters("costs");
+  const view = useLiveView(fallback, loadLiveCosts);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -298,8 +339,21 @@ function BoundCostsHome(): JSX.Element {
 }
 
 function BoundDashboardHome(): JSX.Element {
-  const view = useScreenParameters("dashboard");
   const bridge = useScreenActionBridge();
+  const [view, setView] = useState<DashboardLandingView>(() =>
+    buildEmptyLiveDashboardShell(),
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    void loadLiveDashboard().then((next) => {
+      if (!cancelled) setView(next);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <BoundShell status={bridge.runtime.status}>
       <DashboardHome
@@ -329,7 +383,8 @@ function BoundEvalHome(): JSX.Element {
 }
 
 function BoundKnowledgeHome(): JSX.Element {
-  const view = useScreenParameters("knowledge");
+  const fallback = useScreenParameters("knowledge");
+  const view = useLiveView(fallback, loadLiveKnowledge);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -346,7 +401,8 @@ function BoundKnowledgeHome(): JSX.Element {
 }
 
 function BoundMobileHome(): JSX.Element {
-  const view = useScreenParameters("mobile");
+  const fallback = useScreenParameters("mobile");
+  const view = useLiveView(fallback, loadLiveMobile);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -360,7 +416,8 @@ function BoundMobileHome(): JSX.Element {
 }
 
 function BoundNotificationsHome(): JSX.Element {
-  const view = useScreenParameters("notifications");
+  const fallback = useScreenParameters("notifications");
+  const view = useLiveView(fallback, loadLiveNotifications);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -416,7 +473,8 @@ function BoundAgentWorkflowHome(): JSX.Element {
 }
 
 function BoundProfileHome(): JSX.Element {
-  const view = useScreenParameters("profile");
+  const fallback = useScreenParameters("profile");
+  const view = useLiveView(fallback, loadLiveProfile);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -444,7 +502,8 @@ function BoundRegistryHomeLegacy(): JSX.Element {
 }
 
 function BoundSettingsHome(): JSX.Element {
-  const view = useScreenParameters("settings");
+  const fallback = useScreenParameters("settings");
+  const view = useLiveView(fallback, loadLiveSettings);
   const bridge = useScreenActionBridge();
   return (
     <BoundShell status={bridge.runtime.status}>
@@ -559,13 +618,13 @@ function BoundLiveSwarmCanvas({
         viewMode: "inspect",
         swarmName: swarm.name,
         patternBadge: swarm.patternRef
-          ? `From Compose · pattern ${swarm.patternRef}`
-          : `From Compose · ${swarm.status} · rev ${swarm.revision}`,
+          ? `From Plan · pattern ${swarm.patternRef}`
+          : `From Plan · ${swarm.status} · rev ${swarm.revision}`,
         commonsSummary: `${memberNodes.length} member(s) · workflow diagram · draft ${swarm.id}`,
         instanceId: swarm.id,
         instanceStatus: swarm.status,
         instanceRevision: swarm.revision,
-        sourceLabel: "Compose ACC · AI-pick",
+        sourceLabel: "Plan ACC · AI-pick",
         fromCompose: true,
         nodes,
         groups: [],
@@ -610,13 +669,27 @@ function BoundLiveSwarmCanvas({
  * authenticated shell server-rendered.
  */
 export function BoundMonitoringHome(): JSX.Element {
-  const monitoring = useScreenParameters("monitoring");
+  const monitoringFallback = useScreenParameters("monitoring");
+  const monitoring = useLiveView(monitoringFallback, loadLiveMonitoring);
   const approval = useScreenParameters("approval");
   const runtime = useInteractionRuntime();
   const bridge = useScreenActionBridge();
+  const hostApprovalId =
+    typeof approval.approval_id === "string" ? approval.approval_id : "";
+  const hostApprovalEmpty =
+    !hostApprovalId || hostApprovalId.includes("local") || hostApprovalId === "";
+  const [showApprovalSamples, setShowApprovalSamples] =
+    useState(hostApprovalEmpty);
+  const approvalProjection: GeneratedJsonObject = showApprovalSamples
+    ? buildSampleApprovalProjection()
+    : approval;
+
+  useEffect(() => {
+    setShowApprovalSamples(hostApprovalEmpty);
+  }, [hostApprovalEmpty]);
 
   return (
-    <div className="responsive-stack">
+    <div className="operations-page responsive-stack">
       <InteractionStatusBar status={runtime.status} />
       <OperationsConsole />
       <MonitoringHome
@@ -624,38 +697,66 @@ export function BoundMonitoringHome(): JSX.Element {
         onAction={bridge.onAction}
         statusMessage={bridge.statusMessage}
       />
-      <ApprovalGateScreen
-        projection={approval}
-        onAction={(action) => {
-          const id = typeof action.id === "string" ? action.id : "";
-          const kind = typeof action.kind === "string" ? action.kind : "";
-          if (kind.includes("approve") || id.includes("approve")) {
-            void runtime.decideApproval(
-              String(approval.approval_id ?? ""),
-              "approved",
-              "Approved from returned gate action.",
+      <section
+        aria-label="Approvals and rollouts samples control"
+        className="operations-approvals-wrap"
+      >
+        <div className="page-title-row operations-approvals-wrap__head">
+          <h2 className="operations-approvals-wrap__title">
+            Approvals &amp; Rollouts
+          </h2>
+          <SamplesToggle
+            show={showApprovalSamples}
+            onToggle={() => setShowApprovalSamples((v) => !v)}
+            labelShow="Show sample approval gate"
+            labelHide="Hide sample approval gate"
+          />
+        </div>
+        {showApprovalSamples ? (
+          <SamplesBanner>
+            Sample approval gate on · decisions disabled · not a Host approval
+            id. Toggle ▦ to hide.
+          </SamplesBanner>
+        ) : null}
+        <ApprovalGateScreen
+          projection={approvalProjection}
+          onAction={(action) => {
+            if (showApprovalSamples) {
+              runtime.setInfo(
+                "Sample approval actions are display-only. Load a live Host approval id to decide.",
+              );
+              return;
+            }
+            const id = typeof action.id === "string" ? action.id : "";
+            const kind = typeof action.kind === "string" ? action.kind : "";
+            if (kind.includes("approve") || id.includes("approve")) {
+              void runtime.decideApproval(
+                String(approval.approval_id ?? ""),
+                "approved",
+                "Approved from returned gate action.",
+              );
+              return;
+            }
+            if (kind.includes("deny") || id.includes("deny")) {
+              void runtime.decideApproval(
+                String(approval.approval_id ?? ""),
+                "denied",
+                "Denied from returned gate action.",
+              );
+              return;
+            }
+            runtime.setInfo(
+              `Action “${id || kind || "unknown"}” invoked. Load a live approval id in Operations Console to submit governed decisions.`,
             );
-            return;
+          }}
+          onEvidence={() =>
+            runtime.setInfo("Evidence reference selected (opaque id only).")
           }
-          if (kind.includes("deny") || id.includes("deny")) {
-            void runtime.decideApproval(
-              String(approval.approval_id ?? ""),
-              "denied",
-              "Denied from returned gate action.",
-            );
-            return;
+          onReference={() =>
+            runtime.setInfo("Reference resolved for display only.")
           }
-          runtime.setInfo(
-            `Action “${id || kind || "unknown"}” invoked. Load a live approval id in Operations Console to submit governed decisions.`,
-          );
-        }}
-        onEvidence={() =>
-          runtime.setInfo("Evidence reference selected (opaque id only).")
-        }
-        onReference={() =>
-          runtime.setInfo("Reference resolved for display only.")
-        }
-      />
+        />
+      </section>
     </div>
   );
 }

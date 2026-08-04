@@ -25,7 +25,7 @@ test("monitoring home matches ui_09 md/svg structure", () => {
   assert.match(markup, /Alerts firing/);
   assert.match(markup, /Filters/);
   assert.match(markup, /Last 1 hour/);
-  assert.match(markup, /TradingResearch α/);
+  assert.match(markup, /Wuxia Short/);
   assert.match(markup, />Traces</);
   assert.match(markup, />Alerts</);
   assert.match(markup, />Metrics</);
@@ -36,14 +36,14 @@ test("monitoring home matches ui_09 md/svg structure", () => {
   assert.match(markup, /graph rev 12/);
   assert.match(markup, /Swarm root/);
   assert.match(markup, /Parallel group/);
-  assert.match(markup, /DataFetcher/);
-  assert.match(markup, /Sentiment/);
-  assert.match(markup, /Predictor/);
-  assert.match(markup, /VerifierNode/);
+  assert.match(markup, /video.webresearch/);
+  assert.match(markup, /video.trendintelligence/);
+  assert.match(markup, /video.analyst/);
+  assert.match(markup, /video.judge/);
   assert.match(markup, /iter 3 \(pass\)/);
   assert.match(markup, /Selected span/);
   assert.match(markup, /Open Agent Detail/);
-  assert.match(markup, /View in Canvas/);
+  assert.match(markup, /View in Execute/);
   assert.match(markup, /task-state|critique|approval/);
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
   assert.doesNotMatch(markup, /localhost|redis:|kubectl|readiness/i);
@@ -71,4 +71,15 @@ test("monitoring CSS defines fleet, trace tree, inspector, and anomalies", async
   assert.match(css, /\.monitoring-home__tree/);
   assert.match(css, /\.monitoring-home__inspector/);
   assert.match(css, /\.monitoring-home__anomaly--risk/);
+});
+
+test("operations console CSS uses common-style tokens", async () => {
+  const css = await readFile(
+    resolve(componentDirectory, "../app/globals.css"),
+    "utf8",
+  );
+  assert.match(css, /\.operations-console \{/);
+  assert.match(css, /\.operations-console__btn--primary/);
+  assert.match(css, /\.operations-console__live/);
+  assert.match(css, /\.operations-page/);
 });
