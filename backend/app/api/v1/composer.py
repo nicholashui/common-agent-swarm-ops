@@ -26,6 +26,15 @@ class ComposerRecommendRequest(StrictSchema):
     human_resolutions: dict[str, str] = Field(default_factory=dict, max_length=20)
 
 
+class UserBriefMeta(StrictSchema):
+    """Optional UserBriefV1 metadata (text comes from goal)."""
+
+    locale: str | None = Field(default=None, max_length=16)
+    scale_profile: str | None = Field(default=None, max_length=8)
+    archetype: str | None = Field(default=None, max_length=4)
+    constraints: dict[str, object] | None = Field(default=None)
+
+
 class ComposerMaterializeRequest(StrictSchema):
     """Materialize AI recommendation into a draft swarm (blocked if needs_hitl)."""
 
@@ -33,6 +42,7 @@ class ComposerMaterializeRequest(StrictSchema):
     swarm_name: str | None = Field(default=None, max_length=200)
     max_slots: int = Field(default=8, ge=3, le=12)
     human_resolutions: dict[str, str] = Field(default_factory=dict, max_length=20)
+    brief: UserBriefMeta | None = Field(default=None)
 
 
 def _denied(correlation_id: str, message: str) -> None:
@@ -84,6 +94,9 @@ async def materialize_composition(
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
     """AI recommend + create draft, or return needs_hitl without creating a swarm."""
+    brief_meta: dict[str, Any] | None = None
+    if request.brief is not None:
+        brief_meta = request.brief.model_dump(exclude_none=True)
     result = facade.materialize_ai_composition(
         organization_id=context.organization_id,
         actor_id=context.actor_id,
@@ -92,10 +105,17 @@ async def materialize_composition(
         swarm_name=request.swarm_name,
         max_slots=request.max_slots,
         human_resolutions=request.human_resolutions or None,
+        brief=brief_meta,
     )
     if result is None:
         _denied(
             str(context.correlation_id),
             "Could not materialize AI composition (create swarm or add members denied).",
+        )
+    assert result is not None
+    if result.get("decision_status") == "validation_failed" or result.get("ok") is False:
+        _bad_request(
+            str(context.correlation_id),
+            str(result.get("message") or "Brief validation failed."),
         )
     return result

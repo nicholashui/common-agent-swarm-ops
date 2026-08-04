@@ -38,7 +38,45 @@ import {
   listWorkflowGroups,
   type WorkflowFlowNodeData,
 } from "../lib/projections/agent-workflow-layout";
+import {
+  STUB_RUN_HONESTY,
+  VIDEO_SPINE_TEMPLATE_ID,
+  VIDEO_SPINE_WORKFLOW_ID,
+  buildVideoSpineWorkflowTemplate,
+  isVideoSpineTemplateId,
+} from "../lib/projections/video-spine-template";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+
+/** Inject Host product spine template into video pack (Epic E). */
+function withProductSpineTemplate(
+  group: AgentWorkflowPackGroup | undefined,
+): AgentWorkflowPackGroup | undefined {
+  if (!group || group.packId !== "video") return group;
+  if (
+    group.templates.some(
+      (t) =>
+        t.id === VIDEO_SPINE_TEMPLATE_ID ||
+        t.dnaWorkflowId === VIDEO_SPINE_WORKFLOW_ID,
+    )
+  ) {
+    return group;
+  }
+  const spine = buildVideoSpineWorkflowTemplate();
+  return {
+    ...group,
+    templateCount: group.templateCount + 1,
+    templates: [spine, ...group.templates],
+  };
+}
+
+function readTemplateQuery(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    return new URLSearchParams(window.location.search).get("template") ?? "";
+  } catch {
+    return "";
+  }
+}
 
 type WfFlowNode = Node<WorkflowFlowNodeData, "workflowNode">;
 
@@ -225,8 +263,11 @@ export function AgentWorkflowHome({
   statusMessage?: string;
 }>): JSX.Element {
   const groups = useMemo(() => listWorkflowGroups(view), [view]);
-  const [packId, setPackId] = useState(() => groups[0]?.packId ?? "");
-  const [templateId, setTemplateId] = useState("");
+  const [packId, setPackId] = useState(() => groups[0]?.packId ?? "video");
+  const [templateId, setTemplateId] = useState(() => {
+    const q = readTemplateQuery();
+    return isVideoSpineTemplateId(q) ? VIDEO_SPINE_TEMPLATE_ID : q || "";
+  });
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
 
   const announce = (message: string): void => {
@@ -238,19 +279,32 @@ export function AgentWorkflowHome({
   };
   const feedback = externalStatus ?? statusMessage;
 
-  const activeGroup: AgentWorkflowPackGroup | undefined = useMemo(
-    () => groups.find((g) => g.packId === packId) ?? groups[0],
-    [groups, packId],
-  );
+  const activeGroup: AgentWorkflowPackGroup | undefined = useMemo(() => {
+    const base = groups.find((g) => g.packId === packId) ?? groups[0];
+    return withProductSpineTemplate(base);
+  }, [groups, packId]);
 
   const templates = useMemo(
     () => listTemplatesForGroup(activeGroup),
     [activeGroup],
   );
 
-  // Keep template selection valid when pack changes
+  // Keep template selection valid when pack changes; honor ?template= deep link once
   useEffect(() => {
     if (!activeGroup) return;
+    const query = readTemplateQuery();
+    if (query) {
+      const fromQuery = activeGroup.templates.find(
+        (t) =>
+          t.id === query ||
+          t.dnaWorkflowId === query ||
+          isVideoSpineTemplateId(query),
+      );
+      if (fromQuery && templateId !== fromQuery.id) {
+        setTemplateId(fromQuery.id);
+        return;
+      }
+    }
     const exists = activeGroup.templates.some((t) => t.id === templateId);
     if (!exists) {
       setTemplateId(activeGroup.templates[0]?.id ?? "");
@@ -261,6 +315,19 @@ export function AgentWorkflowHome({
     () => findTemplate(activeGroup, templateId),
     [activeGroup, templateId],
   );
+
+  const openSpineTemplate = (): void => {
+    setPackId("video");
+    setTemplateId(VIDEO_SPINE_TEMPLATE_ID);
+    announce(
+      `Opened Host product spine ${VIDEO_SPINE_WORKFLOW_ID} · ${STUB_RUN_HONESTY}.`,
+    );
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("template", VIDEO_SPINE_TEMPLATE_ID);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const onPackChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     setPackId(event.target.value);
@@ -288,8 +355,15 @@ export function AgentWorkflowHome({
     );
   }
 
+  const hostSpineTemplates = templates.filter(
+    (t) => t.id === VIDEO_SPINE_TEMPLATE_ID,
+  );
   const scaleTemplates = templates.filter((t) => t.kind === "scale");
-  const dnaTemplates = templates.filter((t) => t.kind === "dna");
+  const dnaTemplates = templates.filter(
+    (t) => t.kind === "dna" && t.id !== VIDEO_SPINE_TEMPLATE_ID,
+  );
+  const spineSelected = isVideoSpineTemplateId(activeTemplate.id) ||
+    activeTemplate.dnaWorkflowId === VIDEO_SPINE_WORKFLOW_ID;
 
   return (
     <section className="agent-workflow-page" aria-labelledby="agent-workflow-title">
@@ -303,6 +377,13 @@ export function AgentWorkflowHome({
             how agents call each other (handoffs, phase transitions, human
             gates). Click an agent node for Registry detail.
           </p>
+          {spineSelected ? (
+            <p className="agent-workflow-page__honesty" role="status">
+              Host product spine <code>{VIDEO_SPINE_WORKFLOW_ID}</code> ·{" "}
+              <strong>{STUB_RUN_HONESTY}</strong> · package step is always HITL
+              · not production activation.
+            </p>
+          ) : null}
         </div>
 
         <div
@@ -332,6 +413,15 @@ export function AgentWorkflowHome({
               onChange={onTemplateChange}
               aria-label="Select workflow template"
             >
+              {hostSpineTemplates.length > 0 ? (
+                <optgroup label="Host product spine">
+                  {hostSpineTemplates.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label} ({t.agentIds.length} agents)
+                    </option>
+                  ))}
+                </optgroup>
+              ) : null}
               {scaleTemplates.length > 0 ? (
                 <optgroup label="Production scale framework">
                   {scaleTemplates.map((t) => (
@@ -353,12 +443,24 @@ export function AgentWorkflowHome({
             </select>
           </label>
 
+          <button
+            className="agent-workflow-page__spine-link"
+            onClick={openSpineTemplate}
+            type="button"
+          >
+            Open spine template
+          </button>
+
           <div className="agent-workflow-page__stats" aria-live="polite">
             <span>{activeTemplate.agentIds.length} agents</span>
             <span>{activeTemplate.callEdges.length} call links</span>
             <span>{activeTemplate.phaseOrder.length} phases</span>
             {activeTemplate.scaleId ? (
               <span>Scale {activeTemplate.scaleId}</span>
+            ) : activeTemplate.dnaWorkflowId ? (
+              <span>
+                DNA <code>{activeTemplate.dnaWorkflowId}</code>
+              </span>
             ) : (
               <span>DNA</span>
             )}
@@ -396,6 +498,13 @@ export function AgentWorkflowHome({
           Source: <code>{activeTemplate.source}</code> · Pack{" "}
           <code>{activeGroup.folderPath}</code> · Generated from{" "}
           <code>{view.source}</code>
+          {spineSelected ? (
+            <>
+              {" "}
+              · Host dry-run id <code>{VIDEO_SPINE_WORKFLOW_ID}</code> ·{" "}
+              {STUB_RUN_HONESTY}
+            </>
+          ) : null}
         </p>
       </footer>
     </section>

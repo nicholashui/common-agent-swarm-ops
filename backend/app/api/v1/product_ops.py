@@ -60,8 +60,9 @@ async def common_impact(
 async def list_approvals_inbox(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
     services: Annotated[ControlPlaneServices, Depends(get_control_plane_services)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
-    """Approvals inbox from Host-held pending operations; detail via GET /approvals/{id}."""
+    """Approvals inbox: Host-held pending ops + façade package gates (spine)."""
     items: list[dict[str, Any]] = []
     for approval_id in services.list_pending_approval_ids(context.organization_id):
         gate = services.get_approval(context.organization_id, approval_id, context.correlation_id)
@@ -76,6 +77,7 @@ async def list_approvals_inbox(
                     "created_at": g.metadata.created_at.isoformat()
                     if hasattr(g.metadata.created_at, "isoformat")
                     else str(g.metadata.created_at),
+                    "source": "control_plane",
                 }
             )
         else:
@@ -84,8 +86,24 @@ async def list_approvals_inbox(
                     "approval_id": str(approval_id),
                     "gate_status": "pending",
                     "note": "Pending operation registered; load detail for preview.",
+                    "source": "control_plane",
                 }
             )
+    for pkg in facade.list_package_approvals(context.organization_id):
+        items.append(
+            {
+                "approval_id": pkg.get("approval_id"),
+                "run_id": pkg.get("run_id"),
+                "risk_tier": pkg.get("risk_tier"),
+                "gate_status": pkg.get("gate_status"),
+                "created_at": pkg.get("created_at"),
+                "swarm_id": pkg.get("swarm_id"),
+                "summary": pkg.get("summary"),
+                "kind": pkg.get("kind", "video_package"),
+                "source": "video_spine_package",
+                "note": "stub package gate · not production media",
+            }
+        )
     return {
         "items": items,
         "page": {"next_cursor": None, "limit": 50},

@@ -4,6 +4,7 @@
  */
 
 import {
+  fetchActivityFeed,
   fetchApprovalsInbox,
   fetchBlueprints,
   fetchCommonsHealth,
@@ -69,16 +70,29 @@ function str(v: unknown, fallback = "—"): string {
 }
 
 export async function loadLiveDashboard(): Promise<DashboardLandingView> {
-  const [swarms, health, impact] = await Promise.all([
+  const [swarms, health, impact, activity] = await Promise.all([
     listSwarms(),
     fetchCommonsHealth(),
     fetchCommonImpact(),
+    fetchActivityFeed({ limit: 50 }),
   ]);
+  const spineActivityCount = activity.ok
+    ? activity.data.items.filter((item) => {
+        const hay = `${item.category} ${item.summary} ${item.status}`.toLowerCase();
+        return (
+          item.category === "spine" ||
+          item.category === "approval" ||
+          hay.includes("spine") ||
+          hay.includes("package")
+        );
+      }).length
+    : 0;
   const base = buildLiveDashboardView({
     swarms: swarms.ok ? swarms.items : [],
     hostReachable: swarms.ok,
     hostMessage: swarms.ok ? undefined : swarms.message,
     loading: false,
+    spineActivityCount,
     catalogCounts: health.ok
       ? {
           total: health.data.total_agents,

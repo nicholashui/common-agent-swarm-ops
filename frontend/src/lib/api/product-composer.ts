@@ -40,6 +40,13 @@ export type ComposerRecommendation = {
   readonly note: string;
 };
 
+export type UserBriefMeta = {
+  readonly locale?: string;
+  readonly scaleProfile?: string;
+  readonly archetype?: string;
+  readonly constraints?: Readonly<Record<string, string | number>>;
+};
+
 export type ComposerMaterializeResult =
   | {
       readonly ok: true;
@@ -50,6 +57,8 @@ export type ComposerMaterializeResult =
       readonly memberCount: number;
       readonly canvasPath: string;
       readonly recommendation: ComposerRecommendation;
+      readonly briefId?: string;
+      readonly spineWorkflowId?: string | null;
     }
   | {
       readonly ok: true;
@@ -233,6 +242,7 @@ export async function materializeAiComposition(
     readonly fetchImpl?: typeof fetch;
     readonly maxSlots?: number;
     readonly humanResolutions?: Readonly<Record<string, string>>;
+    readonly brief?: UserBriefMeta;
   } = {},
 ): Promise<ComposerMaterializeResult> {
   const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
@@ -241,6 +251,25 @@ export async function materializeAiComposition(
     return { ok: false, message: "Enter a goal/spec — AI builds the swarm." };
   }
   try {
+    const briefBody =
+      options.brief &&
+      (options.brief.locale ||
+        options.brief.scaleProfile ||
+        options.brief.archetype ||
+        options.brief.constraints)
+        ? {
+            ...(options.brief.locale ? { locale: options.brief.locale } : {}),
+            ...(options.brief.scaleProfile
+              ? { scale_profile: options.brief.scaleProfile }
+              : {}),
+            ...(options.brief.archetype
+              ? { archetype: options.brief.archetype }
+              : {}),
+            ...(options.brief.constraints
+              ? { constraints: options.brief.constraints }
+              : {}),
+          }
+        : undefined;
     const response = await fetchImpl("/api/v1/composer/materialize", {
       method: "POST",
       credentials: "same-origin",
@@ -253,6 +282,7 @@ export async function materializeAiComposition(
         max_slots: options.maxSlots ?? 8,
         human_resolutions: options.humanResolutions ?? {},
         ...(options.swarmName ? { swarm_name: options.swarmName } : {}),
+        ...(briefBody ? { brief: briefBody } : {}),
       }),
     });
     if (!response.ok) {
@@ -272,6 +302,8 @@ export async function materializeAiComposition(
       canvas_path?: string | null;
       message?: string;
       recommendation?: RawRecommendation;
+      brief_id?: string;
+      spine_workflow_id?: string | null;
     }>(raw);
 
     if (data.decision_status === "needs_hitl" || !data.swarm_id) {
@@ -296,6 +328,8 @@ export async function materializeAiComposition(
         data.canvas_path ??
         `/swarms/${encodeURIComponent(data.swarm_id)}/canvas`,
       recommendation: mapRecommendation(data.recommendation ?? {}),
+      briefId: data.brief_id,
+      spineWorkflowId: data.spine_workflow_id ?? null,
     };
   } catch {
     return {

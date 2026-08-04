@@ -227,6 +227,32 @@ test("getSwarm maps members and nodes", async () => {
           common_agent: { id: "video.director", version: "current" },
         },
       ],
+      brief: {
+        brief_id: "brief_1",
+        text: "wuxia brief",
+        locale: "zh-Hant",
+        scale_profile: "S1",
+        archetype: "A",
+      },
+      spine: {
+        workflow_id: "wf_video_spine_v1",
+        status: "ready",
+        mode: "stub",
+        production_ready: false,
+        note: "stub run · not production media",
+        steps: [
+          {
+            id: "orchestrate",
+            agent_id: "video.orchestrator",
+            status: "queued",
+            human_gate_required: false,
+          },
+        ],
+        artifacts: {},
+      },
+      actions: [
+        { id: "act_1", kind: "run_spine_step", label: "Run spine step (stub)" },
+      ],
     });
   };
   const result = await getSwarm("swarm_1", {
@@ -237,5 +263,8 @@ test("getSwarm maps members and nodes", async () => {
     assert.equal(result.swarm.name, "Crew");
     assert.equal(result.swarm.members[0]!.agentId, "video.director");
     assert.equal(result.swarm.nodes[0]!.agentId, "video.director");
+    assert.equal(result.swarm.brief?.scaleProfile, "S1");
+    assert.equal(result.swarm.spine?.workflowId, "wf_video_spine_v1");
+    assert.equal(result.swarm.actions[0]!.kind, "run_spine_step");
   }
 });

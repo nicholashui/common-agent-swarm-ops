@@ -13,6 +13,11 @@ import {
   type DashboardStatCard,
   LOCAL_DASHBOARD_LANDING,
 } from "./dashboard-landing";
+import {
+  STUB_RUN_HONESTY,
+  VIDEO_SPINE_WORKFLOW_ID,
+  agentWorkflowSpineHref,
+} from "./video-spine-template";
 
 export type LiveDashboardInput = {
   readonly swarms: readonly SwarmListItem[];
@@ -25,6 +30,8 @@ export type LiveDashboardInput = {
     readonly video: number;
     readonly specials: number;
   };
+  /** Count of Host activity events in spine/package categories (Epic E). */
+  readonly spineActivityCount?: number;
 };
 
 function formatRelative(iso: string, nowMs: number): string {
@@ -54,8 +61,13 @@ function mapStatus(status: string): {
   if (s === "complete" || s === "completed" || s === "success" || s === "succeeded") {
     return { tone: "complete", label: "Complete" };
   }
-  if (s === "failed" || s === "error") return { tone: "failed", label: "Failed" };
-  if (s === "paused") return { tone: "paused", label: "Paused" };
+  if (s === "failed" || s === "error" || s === "denied") {
+    return { tone: "failed", label: s === "denied" ? "Denied" : "Failed" };
+  }
+  if (s === "waiting_for_approval" || s === "paused") {
+    return { tone: "paused", label: s === "waiting_for_approval" ? "Package gate" : "Paused" };
+  }
+  if (s === "ready") return { tone: "paused", label: "Spine ready" };
   if (s === "draft") return { tone: "paused", label: "Draft" };
   if (s.includes("refine")) return { tone: "self_refining", label: status };
   return { tone: "live", label: status || "Unknown" };
@@ -76,36 +88,61 @@ function sortByUpdatedDesc(
 }
 
 function mapRunningSwarm(item: SwarmListItem, nowMs: number): DashboardRunningSwarm {
-  const { tone, label } = mapStatus(item.status);
+  const spine = Boolean(item.hasSpine);
+  const displayStatus = spine && item.spineStatus ? item.spineStatus : item.status;
+  const { tone, label } = mapStatus(displayStatus);
   const members = item.memberCount;
   return {
     id: item.id,
     name: item.name,
-    pattern: `rev ${item.revision} · Host draft`,
+    pattern: spine
+      ? `${item.spineWorkflowId ?? VIDEO_SPINE_WORKFLOW_ID} · ${STUB_RUN_HONESTY}`
+      : `rev ${item.revision} · Host draft`,
     status: tone,
-    statusLabel: label,
-    progressLabel: `${members} member${members === 1 ? "" : "s"} · rev ${item.revision}`,
+    statusLabel: spine ? `Spine · ${label}` : label,
+    progressLabel: spine
+      ? `spine ${item.spineStatus ?? "ready"} · ${members} member(s)`
+      : `${members} member${members === 1 ? "" : "s"} · rev ${item.revision}`,
     // Drafts are not scored runs — show full bar as "assembled", not fake progress.
-    progressPercent: members > 0 ? 100 : 8,
+    // Spine waiting_for_approval → partial progress only (never invent "complete production").
+    progressPercent: spine
+      ? item.spineStatus === "completed"
+        ? 100
+        : item.spineStatus === "waiting_for_approval"
+          ? 88
+          : item.spineStatus === "running"
+            ? 45
+            : 20
+      : members > 0
+        ? 100
+        : 8,
     elapsed: formatRelative(item.updatedAt || item.createdAt, nowMs),
     costRate: "—",
-    commonsOnLatest: item.lastRunId
-      ? `last run ${item.lastRunId.slice(0, 12)}…`
-      : "no Host run yet",
+    commonsOnLatest: spine
+      ? STUB_RUN_HONESTY
+      : item.lastRunId
+        ? `last run ${item.lastRunId.slice(0, 12)}…`
+        : "no Host run yet",
     canvasHref: canvasHref(item.id),
   };
 }
 
 function mapRecentRow(item: SwarmListItem, nowMs: number): DashboardRecentRun {
-  const { tone, label } = mapStatus(item.status);
+  const spine = Boolean(item.hasSpine);
+  const displayStatus = spine && item.spineStatus ? item.spineStatus : item.status;
+  const { tone, label } = mapStatus(displayStatus);
   return {
     id: item.id,
     time: formatRelative(item.updatedAt || item.createdAt, nowMs),
     swarm: item.name,
-    pattern: item.lastRunId ? `run ${item.lastRunId.slice(0, 10)}…` : "draft",
+    pattern: spine
+      ? `spine · ${item.spineStatus ?? "ready"} · ${STUB_RUN_HONESTY}`
+      : item.lastRunId
+        ? `run ${item.lastRunId.slice(0, 10)}…`
+        : "draft",
     commons: `${item.memberCount} agents`,
     status: tone,
-    statusLabel: label,
+    statusLabel: spine ? `Spine · ${label}` : label,
     duration: "—",
     cost: "—",
     actionLabel: "Open Execute →",
@@ -131,6 +168,10 @@ export function buildLiveDashboardView(
   const draftCount = sorted.filter((s) =>
     s.status.toLowerCase() === "draft",
   ).length;
+  const spineDrafts = sorted.filter((s) => s.hasSpine).length;
+  const packageWaiting = sorted.filter(
+    (s) => s.spineStatus === "waiting_for_approval",
+  ).length;
   const asOf =
     input.asOf ??
     new Date(nowMs).toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -153,7 +194,7 @@ export function buildLiveDashboardView(
       detail: input.loading
         ? "Loading Host list…"
         : input.hostReachable
-          ? `${draftCount} draft · ${sorted.length - draftCount} other`
+          ? `${draftCount} draft · ${spineDrafts} with spine · ${sorted.length - draftCount} other`
           : "Host unreachable",
       trend: input.hostReachable
         ? "From GET /api/v1/swarms"
@@ -161,6 +202,22 @@ export function buildLiveDashboardView(
       tone: input.hostReachable ? "green" : "amber",
       sparkline: sparkFromValue(sorted.length * 10),
       href: "/registry",
+    },
+    {
+      id: "spine-drafts",
+      label: "Video spine drafts",
+      value: input.loading ? "…" : String(spineDrafts),
+      detail:
+        packageWaiting > 0
+          ? `${packageWaiting} waiting package HITL · ${STUB_RUN_HONESTY}`
+          : STUB_RUN_HONESTY,
+      trend:
+        (input.spineActivityCount ?? 0) > 0
+          ? `${input.spineActivityCount} spine activity event(s) on Host`
+          : "Materialize a video brief in Plan to attach spine",
+      tone: spineDrafts > 0 ? "violet" : "amber",
+      sparkline: sparkFromValue(Math.min(100, spineDrafts * 20)),
+      href: agentWorkflowSpineHref(),
     },
     {
       id: "members",
@@ -239,12 +296,20 @@ export function buildLiveDashboardView(
         description: "Ops history when Host projects it  →",
         href: "/activity",
       },
+      {
+        id: "spine-template",
+        label: "Open spine template",
+        description: `${VIDEO_SPINE_WORKFLOW_ID} · ${STUB_RUN_HONESTY}  →`,
+        href: agentWorkflowSpineHref(),
+      },
     ],
     fleetSectionTitle: "Your Swarms Fleet Ops",
     runningSwarms,
     recentRuns,
     insightsIntro: input.hostReachable
-      ? "Aggregate insights appear when Host Ops/eval projections authorize them. Fleet rows above are live Host drafts only."
+      ? spineDrafts > 0
+        ? `Live Host drafts include ${spineDrafts} video spine draft(s). ${STUB_RUN_HONESTY}. No fabricated production completion.`
+        : "Aggregate insights appear when Host Ops/eval projections authorize them. Fleet rows above are live Host drafts only."
       : "Connect Host to load fleet drafts. Insights stay empty until Ops projections are authorized.",
     insights: [],
     controlPlane: {
@@ -260,8 +325,14 @@ export function buildLiveDashboardView(
           : "degraded",
       delayedEventWarning: "SSE not used for this snapshot",
       backlogCount: String(sorted.length),
-      backlogDetail: "Host drafts listed",
-      approvalExpiryAlert: "No approval projection on this view",
+      backlogDetail:
+        spineDrafts > 0
+          ? `${spineDrafts} spine draft(s) · ${packageWaiting} package gate(s)`
+          : "Host drafts listed",
+      approvalExpiryAlert:
+        packageWaiting > 0
+          ? `${packageWaiting} package gate(s) waiting · never auto-approve`
+          : "No package gate waiting on listed drafts",
       sseLabel: "REST snapshot",
       sseDetail: input.hostReachable
         ? "GET /api/v1/swarms · process-local drafts"
@@ -270,12 +341,12 @@ export function buildLiveDashboardView(
       affectedSummary:
         sorted.length === 0
           ? "No Host drafts in this process"
-          : `${sorted.length} swarm(s) · ${totalMembers} members`,
+          : `${sorted.length} swarm(s) · ${totalMembers} members · ${spineDrafts} spine`,
       affectedHref: "/registry",
     },
     pinned,
     footerNote: input.hostReachable
-      ? "Fleet from Host GET /api/v1/swarms · drafts are process-local (restart clears) · catalog counts from pack inventory · redacted only."
+      ? `Fleet from Host GET /api/v1/swarms · process-local · pack inventory · ${STUB_RUN_HONESTY} when spine attached.`
       : "Host fleet not loaded · catalog counts still from local pack inventory · start backend with BACKEND_API_ORIGIN.",
   };
 }

@@ -5,12 +5,14 @@ from __future__ import annotations
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, status
+from pydantic import Field
 
 from app.api.v1.dependencies import AuthenticatedRequestContext, get_authenticated_request_context
 from app.api.v1.errors import PublicApiException
 from app.api.v1.product_facade import ProductFacadeService, get_product_facade
 from app.api.v1.schemas import (
     PublicError,
+    StrictSchema,
     SwarmCreateRequest,
     SwarmCreateResponse,
     SwarmExportRequest,
@@ -53,6 +55,8 @@ def _conflict(correlation_id: str, message: str) -> None:
 def _swarm_payload(
     facade: ProductFacadeService, context: AuthenticatedRequestContext, swarm: Any
 ) -> dict[str, Any]:
+    from app.api.v1.video_brief_spine import public_spine_view
+
     return {
         "id": swarm.swarm_id,
         "name": swarm.name,
@@ -65,6 +69,9 @@ def _swarm_payload(
         "members": swarm.members,
         "pins": swarm.pins,
         "last_run_id": swarm.last_run_id,
+        "goal_summary": getattr(swarm, "goal_summary", None),
+        "brief": getattr(swarm, "brief", None),
+        "spine": public_spine_view(getattr(swarm, "spine", None)),
         "created_at": swarm.created_at.isoformat(),
         "updated_at": swarm.updated_at.isoformat(),
         "actions": facade.issue_swarm_actions(context.organization_id, swarm),
@@ -282,4 +289,89 @@ async def export_swarm(
     if result is None:
         _denied(str(context.correlation_id), "Export requires an eligible export_swarm action.")
     assert result is not None
+    return result
+
+
+class SpineStepRequest(StrictSchema):
+    """Advance one video spine stub step (requires run_spine_step action)."""
+
+    action_reference_id: str = Field(min_length=1, max_length=100)
+    step_id: str | None = Field(default=None, max_length=64)
+    idempotency_key: str | None = Field(default=None, max_length=100)
+
+
+class PackageDecisionRequest(StrictSchema):
+    """Human decision for package gate (always HITL on package)."""
+
+    action_reference_id: str = Field(min_length=1, max_length=100)
+    decision: str = Field(min_length=1, max_length=20)
+    reason: str = Field(min_length=3, max_length=500)
+
+
+def _bad_request(correlation_id: str, message: str) -> None:
+    raise PublicApiException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        error=PublicError(
+            code="validation_failed",
+            message=message,
+            correlation_id=correlation_id,
+            retryable=False,
+        ),
+    )
+
+
+@router.post("/{swarm_id}/spine/steps")
+async def run_spine_step(
+    swarm_id: str,
+    request: SpineStepRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Dry-run advance one spine stub step; package pauses for human approval."""
+    result = facade.run_spine_step(
+        organization_id=context.organization_id,
+        swarm_id=swarm_id,
+        action_reference_id=request.action_reference_id,
+        correlation_id=context.correlation_id,
+        step_id=request.step_id,
+        idempotency_key=request.idempotency_key,
+    )
+    if result is None:
+        _denied(
+            str(context.correlation_id),
+            "Spine step requires an eligible run_spine_step action and a known swarm.",
+        )
+    assert result is not None
+    if result.get("ok") is False:
+        _bad_request(str(context.correlation_id), str(result.get("message") or "Spine step failed."))
+    return result
+
+
+@router.post("/{swarm_id}/spine/package-decision")
+async def decide_package(
+    swarm_id: str,
+    request: PackageDecisionRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Approve or deny package gate; deny fails closed, no production media claim."""
+    result = facade.decide_package_gate(
+        organization_id=context.organization_id,
+        swarm_id=swarm_id,
+        action_reference_id=request.action_reference_id,
+        correlation_id=context.correlation_id,
+        decision=request.decision,
+        reason=request.reason,
+    )
+    if result is None:
+        _denied(
+            str(context.correlation_id),
+            "Package decision requires an eligible decide_package action.",
+        )
+    assert result is not None
+    if result.get("ok") is False:
+        _bad_request(
+            str(context.correlation_id),
+            str(result.get("message") or "Package decision failed."),
+        )
     return result

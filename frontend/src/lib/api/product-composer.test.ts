@@ -73,6 +73,11 @@ test("materializeAiComposition returns canvas path", async () => {
   ): Promise<Response> => {
     assert.equal(String(input), "/api/v1/composer/materialize");
     assert.equal(init?.method, "POST");
+    const body = JSON.parse(String(init?.body)) as {
+      brief?: { scale_profile?: string; locale?: string };
+    };
+    assert.equal(body.brief?.scale_profile, "S1");
+    assert.equal(body.brief?.locale, "zh-Hant");
     return Response.json({
       decision_status: "ai_resolved",
       swarm_id: "swarm_ai1",
@@ -80,6 +85,8 @@ test("materializeAiComposition returns canvas path", async () => {
       revision: 4,
       member_count: 4,
       canvas_path: "/swarms/swarm_ai1/canvas",
+      brief_id: "brief_abc",
+      spine_workflow_id: "wf_video_spine_v1",
       recommendation: {
         mode: "ai_pick",
         decision_status: "ai_resolved",
@@ -91,11 +98,14 @@ test("materializeAiComposition returns canvas path", async () => {
   };
   const result = await materializeAiComposition("test goal", {
     fetchImpl: fetchImpl as typeof fetch,
+    brief: { locale: "zh-Hant", scaleProfile: "S1", archetype: "A" },
   });
   assert.equal(result.ok, true);
   if (result.ok && result.decisionStatus === "ai_resolved") {
     assert.equal(result.swarmId, "swarm_ai1");
     assert.equal(result.canvasPath, "/swarms/swarm_ai1/canvas");
     assert.equal(result.memberCount, 4);
+    assert.equal(result.briefId, "brief_abc");
+    assert.equal(result.spineWorkflowId, "wf_video_spine_v1");
   }
 });

@@ -16,6 +16,17 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from app.api.v1.video_brief_spine import (
+    PHASE_1_AGENT_IDS,
+    SPINE_WORKFLOW_ID,
+    apply_stub_step,
+    build_user_brief,
+    decide_package,
+    goal_looks_like_video_brief,
+    init_spine_state,
+    phase1_and_spine_member_ids,
+    public_spine_view,
+)
 from app.models.identifiers import ActorId, CorrelationId, OrganizationId
 
 # backend/app/api/v1/this.py -> parents[4] == repository root
@@ -131,6 +142,9 @@ class SwarmRecord:
     members: list[dict[str, Any]] = field(default_factory=list)
     pins: list[dict[str, Any]] = field(default_factory=list)
     last_run_id: str | None = None
+    goal_summary: str | None = None
+    brief: dict[str, Any] | None = None
+    spine: dict[str, Any] | None = None
 
 
 @dataclass
@@ -157,6 +171,8 @@ class ProductFacadeService:
         self._rollouts: dict[str, RolloutRecord] = {}
         self._swarms: dict[str, SwarmRecord] = {}
         self._activity: list[ActivityRecord] = []
+        # Package human gates for spine stub runs (process-local).
+        self._package_approvals: dict[str, dict[str, Any]] = {}
         self._patterns: tuple[dict[str, Any], ...] = (
             {
                 "id": "parallel-research",
@@ -860,6 +876,7 @@ class ProductFacadeService:
             nodes=nodes,
             edges=edges,
             policy=policy,
+            goal_summary=(goal_summary or None),
         )
         with self._lock:
             self._swarms[record.swarm_id] = record
@@ -926,7 +943,7 @@ class ProductFacadeService:
             ("add_to_swarm", "Add agent member"),
             ("pin_versions", "Pin versions"),
         ]
-        return [
+        actions = [
             self.action_payload(
                 self.issue_action(
                     organization_id=organization_id,
@@ -937,6 +954,29 @@ class ProductFacadeService:
             )
             for kind, label in kinds
         ]
+        if swarm.spine is not None:
+            actions.append(
+                self.action_payload(
+                    self.issue_action(
+                        organization_id=organization_id,
+                        kind="run_spine_step",
+                        label="Run spine step (stub)",
+                        resource_ref=swarm.swarm_id,
+                    )
+                )
+            )
+            if str((swarm.spine or {}).get("status")) == "waiting_for_approval":
+                actions.append(
+                    self.action_payload(
+                        self.issue_action(
+                            organization_id=organization_id,
+                            kind="decide_package",
+                            label="Decide package gate",
+                            resource_ref=swarm.swarm_id,
+                        )
+                    )
+                )
+        return actions
 
     def validate_swarm(
         self,
@@ -1207,6 +1247,22 @@ class ProductFacadeService:
                 "last_run_id": s.last_run_id,
                 "updated_at": s.updated_at.isoformat(),
                 "created_at": s.created_at.isoformat(),
+                "has_spine": isinstance(s.spine, dict),
+                "spine_status": (
+                    str(s.spine.get("status"))
+                    if isinstance(s.spine, dict)
+                    else None
+                ),
+                "spine_workflow_id": (
+                    str(s.spine.get("workflow_id"))
+                    if isinstance(s.spine, dict)
+                    else None
+                ),
+                "brief_id": (
+                    str(s.brief.get("brief_id"))
+                    if isinstance(s.brief, dict)
+                    else None
+                ),
             }
             for s in rows_sorted
         ]
@@ -1538,11 +1594,29 @@ class ProductFacadeService:
         scored.sort(key=lambda row: (-row[0], row[1].agent_id))
 
         core_ids: list[str] = []
-        if pattern_id == "hierarchical-supervisor" or prefer_video:
-            for cid in ("video.orchestrator", "video.planner"):
+        # Epic B: video briefs bind Phase-1 + spine-capable crew (closed world).
+        video_brief = prefer_video or goal_looks_like_video_brief(text)
+        if video_brief:
+            for cid in phase1_and_spine_member_ids(
+                prefer_video=True, max_slots=max_slots
+            ):
+                if self.get_agent(cid) is not None and cid not in core_ids:
+                    core_ids.append(cid)
+            pattern_id = "hierarchical-supervisor"
+            pattern = next(
+                (p for p in self._patterns if p["id"] == pattern_id), self._patterns[0]
+            )
+            pattern_why = (
+                "AI chose Phase-1 Intent & Planning crew + video spine-capable members "
+                f"(workflow {SPINE_WORKFLOW_ID}, stub-only)."
+            )
+        elif pattern_id == "hierarchical-supervisor":
+            for cid in ("video.orchestrator", "video.planner", "video.producer"):
                 if self.get_agent(cid) is not None:
                     core_ids.append(cid)
-        if pattern_id == "verification-loop" or cost_res == "prefer_quality":
+        if not video_brief and (
+            pattern_id == "verification-loop" or cost_res == "prefer_quality"
+        ):
             for cid in ("video.judge", "video.gatekeeper", "video.aiqaconsistency"):
                 if self.get_agent(cid) is not None and cid not in core_ids:
                     core_ids.append(cid)
@@ -1552,6 +1626,8 @@ class ProductFacadeService:
         for _score, agent in scored:
             if agent.agent_id in picked:
                 continue
+            if video_brief and agent.pack != "video":
+                continue
             picked.append(agent.agent_id)
             if len(picked) >= max(3, min(max_slots, 10)):
                 break
@@ -1560,8 +1636,8 @@ class ProductFacadeService:
             for fallback in (
                 "video.orchestrator",
                 "video.planner",
+                "video.producer",
                 "video.director",
-                "video.editor",
                 "video.screenwriter",
             ):
                 if fallback not in picked and self.get_agent(fallback) is not None:
@@ -1570,6 +1646,7 @@ class ProductFacadeService:
                     break
 
         slots: list[dict[str, Any]] = []
+        phase1_set = set(PHASE_1_AGENT_IDS)
         for idx, agent_id in enumerate(picked):
             entry = self.get_agent(agent_id)
             if entry is None:
@@ -1577,6 +1654,12 @@ class ProductFacadeService:
             is_verify = any(
                 k in agent_id for k in ("judge", "gate", "qa", "compliance", "verifier")
             )
+            if agent_id in phase1_set:
+                rationale = "Phase-1 Intent & Planning crew (closed-world template)."
+            elif video_brief:
+                rationale = f"Spine-capable agent for {SPINE_WORKFLOW_ID} stub dry-run."
+            else:
+                rationale = "AI-selected from pack catalog for goal match."
             slots.append(
                 {
                     "id": f"slot_{idx}",
@@ -1586,7 +1669,8 @@ class ProductFacadeService:
                     "version": entry.version_label,
                     "pack": entry.pack,
                     "verified": is_verify,
-                    "rationale": "AI-selected from pack catalog for goal match.",
+                    "rationale": rationale,
+                    "phase": "intent_planning" if agent_id in phase1_set else None,
                 }
             )
 
@@ -1637,11 +1721,28 @@ class ProductFacadeService:
         swarm_name: str | None = None,
         max_slots: int = 8,
         human_resolutions: dict[str, str] | None = None,
+        brief: dict[str, Any] | None = None,
     ) -> dict[str, Any] | None:
         """AI recommend + create draft + attach AI-picked members.
 
         Returns needs_hitl payload (no swarm) when AI cannot resolve conflicts.
+        Attaches UserBriefV1 + spine stub state for video briefs (Epic A–C).
         """
+        brief_snapshot, brief_err = build_user_brief(
+            text=goal,
+            brief_meta=brief,
+            correlation_id=str(correlation_id),
+        )
+        if brief_err:
+            return {
+                "ok": False,
+                "decision_status": "validation_failed",
+                "message": brief_err,
+                "swarm_id": None,
+                "canvas_path": None,
+            }
+        assert brief_snapshot is not None
+
         rec = self.recommend_composition(
             organization_id=organization_id,
             goal=goal,
@@ -1676,6 +1777,19 @@ class ProductFacadeService:
         )
         if swarm is None:
             return None
+        # Attach brief + spine (video path always when goal looks like production brief)
+        attach_spine = goal_looks_like_video_brief(goal) or any(
+            str(s.get("agent_id", "")).startswith("video.") for s in rec.get("slots") or []
+        )
+        with self._lock:
+            record = self._swarms.get(swarm.swarm_id)
+            if record is not None:
+                record.brief = brief_snapshot
+                record.goal_summary = goal[:2000]
+                if attach_spine:
+                    record.spine = init_spine_state(brief_id=str(brief_snapshot["brief_id"]))
+                record.updated_at = _utc_now()
+
         added: list[dict[str, Any]] = []
         for slot in rec["slots"]:
             agent_id = str(slot["agent_id"])
@@ -1698,6 +1812,7 @@ class ProductFacadeService:
                 added.append(member)
         fresh = self.get_swarm(organization_id, swarm.swarm_id)
         assert fresh is not None
+        spine_view = public_spine_view(fresh.spine)
         return {
             "decision_status": "ai_resolved",
             "auto_materialize": True,
@@ -1710,7 +1825,196 @@ class ProductFacadeService:
             "members_added": len(added),
             "recommendation": rec,
             "canvas_path": f"/swarms/{fresh.swarm_id}/canvas",
+            "brief_id": brief_snapshot["brief_id"],
+            "brief": brief_snapshot,
+            "spine_workflow_id": SPINE_WORKFLOW_ID if spine_view else None,
+            "spine": spine_view,
         }
+
+    def run_spine_step(
+        self,
+        *,
+        organization_id: OrganizationId,
+        swarm_id: str,
+        action_reference_id: str,
+        correlation_id: CorrelationId,
+        step_id: str | None = None,
+        idempotency_key: str | None = None,
+    ) -> dict[str, Any] | None:
+        """Advance one video spine stub step (fail-closed without action ref)."""
+        action = self.consume_action(
+            organization_id=organization_id,
+            action_reference_id=action_reference_id,
+            expected_kind="run_spine_step",
+            resource_ref=swarm_id,
+        )
+        if action is None:
+            return None
+        with self._lock:
+            swarm = self._swarms.get(swarm_id)
+            if swarm is None or swarm.organization_id != str(organization_id):
+                return None
+            if not isinstance(swarm.spine, dict):
+                return {
+                    "ok": False,
+                    "message": "Swarm has no spine attached. Materialize a video brief first.",
+                }
+            brief_text = ""
+            if isinstance(swarm.brief, dict):
+                brief_text = str(swarm.brief.get("text") or "")
+            if not brief_text:
+                brief_text = swarm.goal_summary or swarm.name
+            updated, err = apply_stub_step(
+                swarm.spine,
+                step_id=step_id,
+                brief_text=brief_text,
+                idempotency_key=idempotency_key,
+            )
+            if err:
+                return {"ok": False, "message": err, "spine": public_spine_view(swarm.spine)}
+            assert updated is not None
+            swarm.updated_at = _utc_now()
+            # Register package approval when gate opens
+            approval_id = swarm.spine.get("approval_id")
+            if (
+                str(swarm.spine.get("status")) == "waiting_for_approval"
+                and approval_id
+                and approval_id not in self._package_approvals
+            ):
+                self._package_approvals[str(approval_id)] = {
+                    "approval_id": str(approval_id),
+                    "organization_id": str(organization_id),
+                    "swarm_id": swarm_id,
+                    "run_id": swarm.last_run_id or f"spine:{swarm_id}",
+                    "risk_tier": "tier_3_package_gate",
+                    "gate_status": "paused",
+                    "kind": "video_package",
+                    "summary": f"Package gate for swarm {swarm.name} (stub · not production media)",
+                    "created_at": _utc_now().isoformat(),
+                    "correlation_id": str(correlation_id),
+                    "decision": None,
+                }
+                self._activity.append(
+                    ActivityRecord(
+                        activity_id=_new_id("acty"),
+                        organization_id=str(organization_id),
+                        category="approval",
+                        severity="warning",
+                        summary=f"Package human gate opened for {swarm.name}",
+                        subject_reference=str(approval_id),
+                        occurred_at=_utc_now(),
+                        correlation_id=str(correlation_id),
+                        status="waiting_for_approval",
+                    )
+                )
+            else:
+                step_done = step_id or "next"
+                self._activity.append(
+                    ActivityRecord(
+                        activity_id=_new_id("acty"),
+                        organization_id=str(organization_id),
+                        category="spine",
+                        severity="info",
+                        summary=f"Spine stub step advanced ({step_done}) on {swarm.name}",
+                        subject_reference=swarm_id,
+                        occurred_at=_utc_now(),
+                        correlation_id=str(correlation_id),
+                        status=str(swarm.spine.get("status") or "running"),
+                    )
+                )
+            view = public_spine_view(swarm.spine)
+            return {
+                "ok": True,
+                "swarm_id": swarm_id,
+                "spine": view,
+                "approval_id": (view or {}).get("approval_id"),
+                "note": "stub run · not production media",
+            }
+
+    def decide_package_gate(
+        self,
+        *,
+        organization_id: OrganizationId,
+        swarm_id: str,
+        action_reference_id: str,
+        correlation_id: CorrelationId,
+        decision: str,
+        reason: str,
+    ) -> dict[str, Any] | None:
+        """Human approve/deny package step; fail-closed, idempotent once decided."""
+        action = self.consume_action(
+            organization_id=organization_id,
+            action_reference_id=action_reference_id,
+            expected_kind="decide_package",
+            resource_ref=swarm_id,
+        )
+        if action is None:
+            return None
+        with self._lock:
+            swarm = self._swarms.get(swarm_id)
+            if swarm is None or swarm.organization_id != str(organization_id):
+                return None
+            if not isinstance(swarm.spine, dict):
+                return {"ok": False, "message": "Swarm has no spine."}
+            # Already decided — idempotent return
+            if swarm.spine.get("package_decision"):
+                return {
+                    "ok": True,
+                    "idempotent": True,
+                    "swarm_id": swarm_id,
+                    "spine": public_spine_view(swarm.spine),
+                    "approval_id": swarm.spine.get("approval_id"),
+                }
+            updated, err = decide_package(swarm.spine, decision=decision, reason=reason)
+            if err:
+                return {"ok": False, "message": err, "spine": public_spine_view(swarm.spine)}
+            assert updated is not None
+            swarm.updated_at = _utc_now()
+            approval_id = str(swarm.spine.get("approval_id") or "")
+            if approval_id and approval_id in self._package_approvals:
+                rec = self._package_approvals[approval_id]
+                rec["gate_status"] = (
+                    "resumed" if decision.strip().lower() == "approved" else "denied"
+                )
+                rec["decision"] = {
+                    "value": decision.strip().lower(),
+                    "reason": reason.strip(),
+                    "decided_at": _utc_now().isoformat(),
+                    "correlation_id": str(correlation_id),
+                }
+            self._activity.append(
+                ActivityRecord(
+                    activity_id=_new_id("acty"),
+                    organization_id=str(organization_id),
+                    category="approval",
+                    severity="info" if decision.strip().lower() == "approved" else "warning",
+                    summary=(
+                        f"Package {decision.strip().lower()} for {swarm.name}: {reason.strip()[:120]}"
+                    ),
+                    subject_reference=approval_id or swarm_id,
+                    occurred_at=_utc_now(),
+                    correlation_id=str(correlation_id),
+                    status=str(swarm.spine.get("status")),
+                )
+            )
+            return {
+                "ok": True,
+                "swarm_id": swarm_id,
+                "spine": public_spine_view(swarm.spine),
+                "approval_id": approval_id or None,
+                "decision": swarm.spine.get("package_decision"),
+            }
+
+    def list_package_approvals(self, organization_id: OrganizationId) -> list[dict[str, Any]]:
+        """Process-local package gates for Approvals inbox merge."""
+        with self._lock:
+            rows = [
+                dict(v)
+                for v in self._package_approvals.values()
+                if v.get("organization_id") == str(organization_id)
+            ]
+        rows.sort(key=lambda r: str(r.get("created_at") or ""), reverse=True)
+        return rows
 
     def list_running_swarms(self, organization_id: OrganizationId) -> list[dict[str, Any]]:
         with self._lock:

@@ -39,6 +39,41 @@ test("live dashboard maps Host swarms without inventing success rates", () => {
   assert.equal(view.insights.length, 0);
   assert.doesNotMatch(view.footerNote + view.freshnessLabel, /91\.4%|\$412|TradingResearch/);
   assert.match(view.controlPlane.apiHealthLabel, /Reachable/i);
+  assert.ok(view.quickActions.some((a) => a.id === "spine-template"));
+});
+
+test("live dashboard labels spine drafts with honesty copy", () => {
+  const view = buildLiveDashboardView(
+    {
+      hostReachable: true,
+      loading: false,
+      spineActivityCount: 3,
+      swarms: [
+        {
+          id: "swarm_spine_1",
+          name: "Spine Crew",
+          status: "draft",
+          revision: 4,
+          memberCount: 7,
+          lastRunId: null,
+          updatedAt: "2026-06-01T11:50:00.000Z",
+          createdAt: "2026-06-01T10:00:00.000Z",
+          hasSpine: true,
+          spineStatus: "waiting_for_approval",
+          spineWorkflowId: "wf_video_spine_v1",
+        },
+      ],
+    },
+    NOW,
+  );
+  assert.match(view.runningSwarms[0]?.pattern ?? "", /stub run|not production media/i);
+  assert.match(view.runningSwarms[0]?.statusLabel ?? "", /Spine/i);
+  assert.match(view.recentRuns[0]?.pattern ?? "", /spine/i);
+  const spineCard = view.commonHealth.find((c) => c.id === "spine-drafts");
+  assert.equal(spineCard?.value, "1");
+  assert.match(spineCard?.detail ?? "", /not production media/i);
+  assert.match(view.footerNote, /not production media/i);
+  assert.match(view.controlPlane.approvalExpiryAlert, /package gate/i);
 });
 
 test("live dashboard stays empty and honest when Host is down", () => {

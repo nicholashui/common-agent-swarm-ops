@@ -28,6 +28,43 @@ export type SwarmListItem = {
   readonly lastRunId: string | null;
   readonly updatedAt: string;
   readonly createdAt: string;
+  /** Host product spine attached (Epic C/E). */
+  readonly hasSpine?: boolean;
+  readonly spineStatus?: string | null;
+  readonly spineWorkflowId?: string | null;
+  readonly briefId?: string | null;
+};
+
+export type SwarmSpineStep = {
+  readonly id: string;
+  readonly agentId: string;
+  readonly status: string;
+  readonly artifactRef: string | null;
+  readonly humanGateRequired: boolean;
+  readonly note: string | null;
+  readonly stubTool: string | null;
+};
+
+export type SwarmSpine = {
+  readonly workflowId: string;
+  readonly status: string;
+  readonly productionReady: false;
+  readonly mode: string;
+  readonly approvalId: string | null;
+  readonly note: string;
+  readonly steps: readonly SwarmSpineStep[];
+  readonly artifacts: Readonly<
+    Record<
+      string,
+      {
+        readonly ref: string;
+        readonly kind: string;
+        readonly stepId: string;
+        readonly summary: string;
+        readonly stub: true;
+      }
+    >
+  >;
 };
 
 export type SwarmDetail = {
@@ -47,6 +84,19 @@ export type SwarmDetail = {
     readonly agentId?: string;
     readonly agentVersion?: string;
   }[];
+  readonly actions: readonly {
+    readonly id: string;
+    readonly kind: string;
+    readonly label: string;
+  }[];
+  readonly brief: {
+    readonly briefId: string;
+    readonly text: string;
+    readonly locale: string;
+    readonly scaleProfile: string | null;
+    readonly archetype: string | null;
+  } | null;
+  readonly spine: SwarmSpine | null;
 };
 
 function unwrapData<T>(payload: unknown): T {
@@ -117,6 +167,10 @@ export async function listSwarms(
         last_run_id?: string | null;
         updated_at?: string;
         created_at?: string;
+        has_spine?: boolean;
+        spine_status?: string | null;
+        spine_workflow_id?: string | null;
+        brief_id?: string | null;
       }[];
     }>(raw);
     const items = (data.items ?? [])
@@ -132,6 +186,10 @@ export async function listSwarms(
         lastRunId: row.last_run_id ?? null,
         updatedAt: row.updated_at ?? "",
         createdAt: row.created_at ?? "",
+        hasSpine: Boolean(row.has_spine),
+        spineStatus: row.spine_status ?? null,
+        spineWorkflowId: row.spine_workflow_id ?? null,
+        briefId: row.brief_id ?? null,
       }));
     return { ok: true, items };
   } catch {
@@ -197,8 +255,59 @@ export async function getSwarm(
         kind?: string;
         common_agent?: { id?: string; version?: string };
       }[];
+      actions?: readonly {
+        id?: string;
+        kind?: string;
+        label?: string;
+      }[];
+      brief?: {
+        brief_id?: string;
+        text?: string;
+        locale?: string;
+        scale_profile?: string | null;
+        archetype?: string | null;
+      } | null;
+      spine?: {
+        workflow_id?: string;
+        status?: string;
+        mode?: string;
+        approval_id?: string | null;
+        note?: string;
+        steps?: readonly {
+          id?: string;
+          agent_id?: string;
+          status?: string;
+          artifact_ref?: string | null;
+          human_gate_required?: boolean;
+          note?: string | null;
+          stub_tool?: string | null;
+        }[];
+        artifacts?: Record<
+          string,
+          {
+            ref?: string;
+            kind?: string;
+            step_id?: string;
+            summary?: string;
+            stub?: boolean;
+          }
+        >;
+      } | null;
     }>(raw);
     const swarmIdResolved = data.id ?? id;
+    const spineRaw = data.spine;
+    const artifacts: SwarmSpine["artifacts"] = {};
+    if (spineRaw?.artifacts) {
+      for (const [ref, art] of Object.entries(spineRaw.artifacts)) {
+        artifacts[ref] = {
+          ref: art.ref ?? ref,
+          kind: art.kind ?? "",
+          stepId: art.step_id ?? "",
+          summary: art.summary ?? "",
+          stub: true,
+        };
+      }
+    }
     return {
       ok: true,
       swarm: {
@@ -218,6 +327,42 @@ export async function getSwarm(
           agentId: n.common_agent?.id,
           agentVersion: n.common_agent?.version,
         })),
+        actions: (data.actions ?? [])
+          .filter((a) => Boolean(a.id && a.kind))
+          .map((a) => ({
+            id: a.id ?? "",
+            kind: a.kind ?? "",
+            label: a.label ?? a.kind ?? "",
+          })),
+        brief: data.brief
+          ? {
+              briefId: data.brief.brief_id ?? "",
+              text: data.brief.text ?? "",
+              locale: data.brief.locale ?? "en",
+              scaleProfile: data.brief.scale_profile ?? null,
+              archetype: data.brief.archetype ?? null,
+            }
+          : null,
+        spine: spineRaw
+          ? {
+              workflowId: spineRaw.workflow_id ?? "wf_video_spine_v1",
+              status: spineRaw.status ?? "ready",
+              productionReady: false,
+              mode: spineRaw.mode ?? "stub",
+              approvalId: spineRaw.approval_id ?? null,
+              note: spineRaw.note ?? "stub run · not production media",
+              steps: (spineRaw.steps ?? []).map((s) => ({
+                id: s.id ?? "",
+                agentId: s.agent_id ?? "",
+                status: s.status ?? "queued",
+                artifactRef: s.artifact_ref ?? null,
+                humanGateRequired: Boolean(s.human_gate_required),
+                note: s.note ?? null,
+                stubTool: s.stub_tool ?? null,
+              })),
+              artifacts,
+            }
+          : null,
       },
     };
   } catch {
@@ -225,6 +370,154 @@ export async function getSwarm(
       ok: false,
       message: `Network error loading swarm ${id}. Is the backend running?`,
     };
+  }
+}
+
+/**
+ * Advance one video spine stub step (requires Host action reference).
+ */
+export async function runSpineStep(
+  swarmId: string,
+  actionReferenceId: string,
+  options: {
+    readonly stepId?: string;
+    readonly fetchImpl?: typeof fetch;
+  } = {},
+): Promise<
+  | { readonly ok: true; readonly spine: SwarmSpine | null; readonly approvalId: string | null }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/swarms/${encodeURIComponent(swarmId)}/spine/steps`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action_reference_id: actionReferenceId,
+          ...(options.stepId ? { step_id: options.stepId } : {}),
+        }),
+      },
+    );
+    if (!response.ok) {
+      const detail = await parseErrorDetail(response, `HTTP ${response.status}`);
+      return { ok: false, message: `Spine step failed: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{
+      spine?: {
+        workflow_id?: string;
+        status?: string;
+        mode?: string;
+        approval_id?: string | null;
+        note?: string;
+        steps?: readonly {
+          id?: string;
+          agent_id?: string;
+          status?: string;
+          artifact_ref?: string | null;
+          human_gate_required?: boolean;
+          note?: string | null;
+          stub_tool?: string | null;
+        }[];
+        artifacts?: Record<
+          string,
+          {
+            ref?: string;
+            kind?: string;
+            step_id?: string;
+            summary?: string;
+          }
+        >;
+      };
+      approval_id?: string | null;
+    }>(raw);
+    const spineRaw = data.spine;
+    if (!spineRaw) {
+      return { ok: true, spine: null, approvalId: data.approval_id ?? null };
+    }
+    const artifacts: SwarmSpine["artifacts"] = {};
+    for (const [ref, art] of Object.entries(spineRaw.artifacts ?? {})) {
+      artifacts[ref] = {
+        ref: art.ref ?? ref,
+        kind: art.kind ?? "",
+        stepId: art.step_id ?? "",
+        summary: art.summary ?? "",
+        stub: true,
+      };
+    }
+    return {
+      ok: true,
+      approvalId: data.approval_id ?? spineRaw.approval_id ?? null,
+      spine: {
+        workflowId: spineRaw.workflow_id ?? "wf_video_spine_v1",
+        status: spineRaw.status ?? "ready",
+        productionReady: false,
+        mode: spineRaw.mode ?? "stub",
+        approvalId: spineRaw.approval_id ?? null,
+        note: spineRaw.note ?? "stub run · not production media",
+        steps: (spineRaw.steps ?? []).map((s) => ({
+          id: s.id ?? "",
+          agentId: s.agent_id ?? "",
+          status: s.status ?? "queued",
+          artifactRef: s.artifact_ref ?? null,
+          humanGateRequired: Boolean(s.human_gate_required),
+          note: s.note ?? null,
+          stubTool: s.stub_tool ?? null,
+        })),
+        artifacts,
+      },
+    };
+  } catch {
+    return { ok: false, message: "Network error running spine step." };
+  }
+}
+
+/**
+ * Human package gate decision (approve | denied).
+ */
+export async function decidePackageGate(
+  swarmId: string,
+  actionReferenceId: string,
+  decision: "approved" | "denied",
+  reason: string,
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<
+  | { readonly ok: true; readonly status: string }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/swarms/${encodeURIComponent(swarmId)}/spine/package-decision`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action_reference_id: actionReferenceId,
+          decision,
+          reason,
+        }),
+      },
+    );
+    if (!response.ok) {
+      const detail = await parseErrorDetail(response, `HTTP ${response.status}`);
+      return { ok: false, message: `Package decision failed: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{ spine?: { status?: string } }>(raw);
+    return { ok: true, status: data.spine?.status ?? decision };
+  } catch {
+    return { ok: false, message: "Network error on package decision." };
   }
 }
 

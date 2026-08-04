@@ -66,6 +66,9 @@ export function ComposerHome({
   const labels = view.labels;
   const [swarmName, setSwarmName] = useState(view.swarmName);
   const [goal, setGoal] = useState("");
+  const [scaleProfile, setScaleProfile] = useState<string>("");
+  const [archetype, setArchetype] = useState<string>("");
+  const [briefLocale, setBriefLocale] = useState<string>("en");
   const [statusMessage, setStatusMessage] = useState<string | undefined>();
   const feedback = externalStatus ?? statusMessage;
   const announce = (message: string): void => {
@@ -226,6 +229,11 @@ export function ComposerHome({
       const result = await materializeAiComposition(g, {
         swarmName,
         humanResolutions: resolutions ?? humanResolutions,
+        brief: {
+          locale: briefLocale || "en",
+          ...(scaleProfile ? { scaleProfile } : {}),
+          ...(archetype ? { archetype } : {}),
+        },
       });
       if (!result.ok) {
         setStatusMessage(result.message);
@@ -238,9 +246,12 @@ export function ComposerHome({
       setPendingHitlIds([]);
       setDecisionStatus("ai_resolved");
       setStep(5);
+      const spineNote = result.spineWorkflowId
+        ? ` · spine ${result.spineWorkflowId} · stub run · not production media`
+        : "";
       const active = setRecFromSlots(
         result.recommendation,
-        `${result.memberCount} members · materialize · draft only`,
+        `${result.memberCount} members · materialize · draft only${spineNote}`,
       );
       setLastCanvasPath(result.canvasPath);
       setMessages((current) => [
@@ -248,7 +259,9 @@ export function ComposerHome({
         {
           id: `mat-${Date.now()}`,
           role: "assistant",
-          text: "AI resolved and materialised workflow:",
+          text: result.spineWorkflowId
+            ? `AI resolved and materialised workflow (spine ${result.spineWorkflowId}; stub run · not production media):`
+            : "AI resolved and materialised workflow:",
           recommendation: {
             patternId: active.patternId,
             patternName: active.patternName,
@@ -260,7 +273,7 @@ export function ComposerHome({
         },
       ]);
       setStatusMessage(
-        `AI draft ${result.swarmId} ready (${result.memberCount} members). Opening canvas…`,
+        `AI draft ${result.swarmId} ready (${result.memberCount} members${spineNote}). Opening canvas…`,
       );
       if (onNavigate) {
         onNavigate(result.canvasPath);
@@ -758,6 +771,65 @@ export function ComposerHome({
               rows={3}
               value={goal}
             />
+            <div
+              className="composer-home__brief-meta"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                alignItems: "center",
+                marginTop: "0.35rem",
+                fontSize: "0.8rem",
+              }}
+            >
+              <label>
+                Locale{" "}
+                <select
+                  aria-label="Brief locale"
+                  onChange={(e) => setBriefLocale(e.target.value)}
+                  value={briefLocale}
+                >
+                  <option value="en">en</option>
+                  <option value="zh-Hant">zh-Hant</option>
+                </select>
+              </label>
+              <label>
+                Scale{" "}
+                <select
+                  aria-label="Scale profile"
+                  onChange={(e) => setScaleProfile(e.target.value)}
+                  value={scaleProfile}
+                >
+                  <option value="">—</option>
+                  {["S1", "S2", "S3", "S4", "S5"].map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Archetype{" "}
+                <select
+                  aria-label="Archetype"
+                  onChange={(e) => setArchetype(e.target.value)}
+                  value={archetype}
+                >
+                  <option value="">—</option>
+                  {["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"].map(
+                    (a) => (
+                      <option key={a} value={a}>
+                        {a}
+                      </option>
+                    ),
+                  )}
+                </select>
+              </label>
+              <InfoTooltip
+                label="User brief metadata"
+                text="Optional UserBriefV1 fields stored on the draft when AI materializes. Free-text goal remains the brief text. No secrets."
+              />
+            </div>
             <div className="composer-home__input-tools">
               <label
                 className="composer-home__attach"
