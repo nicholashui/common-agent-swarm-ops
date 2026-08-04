@@ -5,13 +5,48 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, status
+from pydantic import Field
 
 from app.api.v1.dependencies import AuthenticatedRequestContext, get_authenticated_request_context
+from app.api.v1.errors import PublicApiException
 from app.api.v1.product_facade import ProductFacadeService, get_product_facade
+from app.api.v1.schemas import PublicError, StrictSchema
 from app.api.v1.services import ControlPlaneServices, get_control_plane_services
 
 router = APIRouter(tags=["product-ops"])
+
+
+class PackageApprovalDecisionRequest(StrictSchema):
+    """Decide a façade package gate (spine) without inventing control-plane authority."""
+
+    action_reference_id: str = Field(min_length=1, max_length=100)
+    decision: str = Field(min_length=1, max_length=20)
+    reason: str = Field(min_length=3, max_length=500)
+
+
+def _denied(correlation_id: str, message: str = "Protected resource access is not permitted.") -> None:
+    raise PublicApiException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        error=PublicError(
+            code="authorization_denied",
+            message=message,
+            correlation_id=correlation_id,
+            retryable=False,
+        ),
+    )
+
+
+def _bad_request(correlation_id: str, message: str) -> None:
+    raise PublicApiException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        error=PublicError(
+            code="validation_failed",
+            message=message,
+            correlation_id=correlation_id,
+            retryable=False,
+        ),
+    )
 
 
 @router.get("/activity")
@@ -113,3 +148,73 @@ async def list_approvals_inbox(
         },
         "correlation_id": str(context.correlation_id),
     }
+
+
+@router.get("/product-audit")
+async def list_product_audit(
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+    limit: Annotated[int, Query(ge=1, le=500)] = 100,
+) -> dict[str, Any]:
+    """Immutable product audit trail (spine steps, materialize, package decisions)."""
+    items = facade.list_product_audit(context.organization_id, limit=limit)
+    return {
+        "items": items,
+        "page": {"next_cursor": None, "limit": limit},
+        "freshness": {"as_of": datetime.now(UTC).isoformat(), "state": "live"},
+        "note": "Append-only audit; durable when CASOPS_PRODUCT_FACADE_PERSIST is enabled.",
+        "correlation_id": str(context.correlation_id),
+    }
+
+
+@router.get("/package-approvals/{approval_id}")
+async def read_package_approval(
+    approval_id: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Package gate detail for Operations / Approvals (façade spine HITL)."""
+    detail = facade.get_package_approval(context.organization_id, approval_id)
+    if detail is None:
+        _denied(str(context.correlation_id), "Package approval not found for this organization.")
+    assert detail is not None
+    return detail
+
+
+@router.post("/package-approvals/{approval_id}/decision")
+async def decide_package_approval(
+    approval_id: str,
+    request: PackageApprovalDecisionRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Approve/deny package gate via approval_id (action-gated, fail-closed)."""
+    detail = facade.get_package_approval(
+        context.organization_id, approval_id, issue_action=False
+    )
+    if detail is None:
+        _denied(str(context.correlation_id), "Package approval not found for this organization.")
+    assert detail is not None
+    swarm_id = str(detail.get("swarm_id") or "")
+    if not swarm_id:
+        _bad_request(str(context.correlation_id), "Package approval has no swarm_id.")
+    result = facade.decide_package_gate(
+        organization_id=context.organization_id,
+        swarm_id=swarm_id,
+        action_reference_id=request.action_reference_id,
+        correlation_id=context.correlation_id,
+        decision=request.decision,
+        reason=request.reason,
+    )
+    if result is None:
+        _denied(
+            str(context.correlation_id),
+            "Package decision requires an eligible decide_package action.",
+        )
+    assert result is not None
+    if result.get("ok") is False:
+        _bad_request(
+            str(context.correlation_id),
+            str(result.get("message") or "Package decision failed."),
+        )
+    return result

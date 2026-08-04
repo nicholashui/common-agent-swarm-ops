@@ -176,12 +176,30 @@ function mapRecommendation(raw: RawRecommendation): ComposerRecommendation {
 /**
  * Host AI-picks pattern + agents, or returns open_questions when blocked.
  */
+function briefBodyFromMeta(
+  brief: UserBriefMeta | undefined,
+): Record<string, unknown> | undefined {
+  if (
+    !brief ||
+    !(brief.locale || brief.scaleProfile || brief.archetype || brief.constraints)
+  ) {
+    return undefined;
+  }
+  return {
+    ...(brief.locale ? { locale: brief.locale } : {}),
+    ...(brief.scaleProfile ? { scale_profile: brief.scaleProfile } : {}),
+    ...(brief.archetype ? { archetype: brief.archetype } : {}),
+    ...(brief.constraints ? { constraints: brief.constraints } : {}),
+  };
+}
+
 export async function recommendComposition(
   goal: string,
   options: {
     readonly fetchImpl?: typeof fetch;
     readonly maxSlots?: number;
     readonly humanResolutions?: Readonly<Record<string, string>>;
+    readonly brief?: UserBriefMeta;
   } = {},
 ): Promise<
   | { readonly ok: true; readonly recommendation: ComposerRecommendation }
@@ -193,6 +211,7 @@ export async function recommendComposition(
     return { ok: false, message: "Enter a goal/spec — AI picks the crew." };
   }
   try {
+    const briefBody = briefBodyFromMeta(options.brief);
     const response = await fetchImpl("/api/v1/composer/recommend", {
       method: "POST",
       credentials: "same-origin",
@@ -204,6 +223,7 @@ export async function recommendComposition(
         goal: trimmed,
         max_slots: options.maxSlots ?? 8,
         human_resolutions: options.humanResolutions ?? {},
+        ...(briefBody ? { brief: briefBody } : {}),
       }),
     });
     if (!response.ok) {
@@ -251,25 +271,7 @@ export async function materializeAiComposition(
     return { ok: false, message: "Enter a goal/spec — AI builds the swarm." };
   }
   try {
-    const briefBody =
-      options.brief &&
-      (options.brief.locale ||
-        options.brief.scaleProfile ||
-        options.brief.archetype ||
-        options.brief.constraints)
-        ? {
-            ...(options.brief.locale ? { locale: options.brief.locale } : {}),
-            ...(options.brief.scaleProfile
-              ? { scale_profile: options.brief.scaleProfile }
-              : {}),
-            ...(options.brief.archetype
-              ? { archetype: options.brief.archetype }
-              : {}),
-            ...(options.brief.constraints
-              ? { constraints: options.brief.constraints }
-              : {}),
-          }
-        : undefined;
+    const briefBody = briefBodyFromMeta(options.brief);
     const response = await fetchImpl("/api/v1/composer/materialize", {
       method: "POST",
       credentials: "same-origin",

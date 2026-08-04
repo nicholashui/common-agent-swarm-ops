@@ -449,10 +449,39 @@ export async function loadLiveMonitoring(): Promise<MonitoringLandingView> {
   ]);
   const items = running.ok ? running.data.items ?? [] : [];
   const approvalItems = approvals.ok ? approvals.data.items ?? [] : [];
+  const packageGates = approvalItems.filter(
+    (row) =>
+      str(row.source) === "video_spine_package" ||
+      str(row.kind) === "video_package",
+  );
+  const spineAttention = items.filter(
+    (row) =>
+      Boolean(row.has_spine) ||
+      str(row.spine_status) === "waiting_for_approval" ||
+      str(row.status) === "waiting_for_approval",
+  );
+  const anomaliesWithLinks = packageGates.slice(0, 6).map((row, index) => {
+    const aid = str(row.approval_id, `pkg-${index}`);
+    const swarmId = str(row.swarm_id, "");
+    const canvas =
+      swarmId && swarmId !== "—"
+        ? `/swarms/${encodeURIComponent(swarmId)}/canvas`
+        : null;
+    const baseBody = `${str(row.gate_status, "paused")} · ${str(row.note, "stub package gate · not production media")} · Open Execute to approve/deny.`;
+    return {
+      id: aid,
+      title: str(row.summary, `Package gate ${aid.slice(0, 12)}…`),
+      body: canvas ? `${baseBody} Canvas: ${canvas}` : baseBody,
+      freshness: str(row.created_at, "live"),
+      highRisk: str(row.gate_status) === "paused",
+    };
+  });
   return {
     ...LOCAL_MONITORING_LANDING,
     description: running.ok
-      ? "Live Host running swarms + approvals inbox."
+      ? packageGates.length > 0
+        ? `Live Host running swarms + approvals · ${packageGates.length} package gate(s) (stub · not production media).`
+        : "Live Host running swarms + approvals inbox."
       : running.message,
     fleet: [
       {
@@ -469,12 +498,34 @@ export async function loadLiveMonitoring(): Promise<MonitoringLandingView> {
         detail: "GET /api/v1/approvals",
         tone: approvalItems.length > 0 ? ("amber" as const) : ("indigo" as const),
       },
-      ...items.slice(0, 4).map((row, index) => ({
+      {
+        id: "package-gates",
+        label: "Package gates (spine)",
+        value: String(packageGates.length),
+        detail: "video_spine_package · stub · not production media",
+        tone: packageGates.length > 0 ? ("amber" as const) : ("indigo" as const),
+      },
+      {
+        id: "spine-attention",
+        label: "Spine attention",
+        value: String(spineAttention.length),
+        detail:
+          spineAttention.length > 0
+            ? "running / waiting_for_approval · stub · not production media"
+            : "No active spine drafts in running list",
+        tone: spineAttention.length > 0 ? ("amber" as const) : ("indigo" as const),
+      },
+      ...items.slice(0, 3).map((row, index) => ({
         id: str(row.id, `fleet-${index}`),
         label: str(row.name, "Swarm"),
-        value: str(row.status, "—"),
-        detail: `rev ${row.revision ?? 0} · members ${row.member_count ?? 0}`,
-        tone: "green" as const,
+        value: str(row.spine_status ?? row.status, "—"),
+        detail: row.has_spine
+          ? `spine · rev ${row.revision ?? 0} · members ${row.member_count ?? 0}`
+          : `rev ${row.revision ?? 0} · members ${row.member_count ?? 0}`,
+        tone:
+          str(row.spine_status ?? row.status) === "waiting_for_approval"
+            ? ("amber" as const)
+            : ("green" as const),
       })),
     ],
     filters: [
@@ -492,28 +543,41 @@ export async function loadLiveMonitoring(): Promise<MonitoringLandingView> {
     ],
     traceTitle: "Host running fleets (no synthetic traces)",
     traceMeta: running.ok
-      ? `${items.length} running · ${approvalItems.length} approvals`
+      ? `${items.length} running · ${approvalItems.length} approvals · ${packageGates.length} package`
       : "Host unreachable",
     traceTree: [],
     selectedSpan: {
-      title: items[0]
-        ? `Selected · ${str(items[0].name)}`
-        : "No running swarm selected",
-      metrics: items[0]
-        ? `rev ${items[0].revision ?? 0} · members ${items[0].member_count ?? 0}`
-        : "—",
-      detailLines: [
-        running.ok
-          ? "Trace tree empty until Host projects run spans."
-          : running.message,
-      ],
+      title: packageGates[0]
+        ? `Package · ${str(packageGates[0].approval_id).slice(0, 14)}…`
+        : items[0]
+          ? `Selected · ${str(items[0].name)}`
+          : "No running swarm selected",
+      metrics: packageGates[0]
+        ? str(packageGates[0].gate_status, "paused")
+        : items[0]
+          ? `rev ${items[0].revision ?? 0} · members ${items[0].member_count ?? 0}`
+          : "—",
+      detailLines: packageGates[0]
+        ? [
+            str(packageGates[0].summary, "Package gate"),
+            str(packageGates[0].note, "stub package gate · not production media"),
+            packageGates[0].swarm_id
+              ? `Canvas /swarms/${String(packageGates[0].swarm_id)}/canvas`
+              : "Open Activity for subject ref",
+          ]
+        : [
+            running.ok
+              ? "Trace tree empty until Host projects run spans."
+              : running.message,
+          ],
     },
     alertRules: [],
-    anomalies: [],
+    anomalies: anomaliesWithLinks,
     metricBars: [],
-    eventTypesNote: "Live Host running list only — no fabricated SSE traces.",
+    eventTypesNote:
+      "Live Host running list + package gates · no fabricated SSE traces · stub package never auto-approves.",
     footerNote: running.ok
-      ? `Running from GET /api/v1/swarms/running (${items.length}) · approvals ${approvalItems.length}.`
+      ? `Running from GET /api/v1/swarms/running (${items.length}) · approvals ${approvalItems.length} · package gates ${packageGates.length} (stub · not production media).`
       : running.message,
   };
 }

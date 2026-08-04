@@ -205,6 +205,74 @@ test("listSwarms maps Host draft items", async () => {
   }
 });
 
+test("runSpineToPackage posts dry-run path", async () => {
+  const { runSpineToPackage } = await import("./product-swarms");
+  const fetchImpl = async (
+    input: RequestInfo | URL,
+    init?: RequestInit,
+  ): Promise<Response> => {
+    assert.match(String(input), /\/spine\/run-to-package$/);
+    assert.equal(init?.method, "POST");
+    const body = JSON.parse(String(init?.body)) as {
+      action_reference_id: string;
+    };
+    assert.equal(body.action_reference_id, "act_dry");
+    return Response.json({
+      ok: true,
+      steps_run: 8,
+      approval_id: "appr_1",
+      spine: {
+        workflow_id: "wf_video_spine_v1",
+        status: "waiting_for_approval",
+        mode: "stub",
+        approval_id: "appr_1",
+        note: "stub run · not production media",
+        steps: [],
+        artifacts: {},
+      },
+    });
+  };
+  const result = await runSpineToPackage("swarm_x", "act_dry", {
+    fetchImpl: fetchImpl as typeof fetch,
+  });
+  assert.equal(result.ok, true);
+  if (result.ok) {
+    assert.equal(result.stepsRun, 8);
+    assert.equal(result.spine?.status, "waiting_for_approval");
+    assert.equal(result.approvalId, "appr_1");
+  }
+});
+
+test("listSwarmArtifacts maps handoff list", async () => {
+  const { listSwarmArtifacts } = await import("./product-swarms");
+  const fetchImpl = async (input: RequestInfo | URL): Promise<Response> => {
+    assert.match(String(input), /\/swarms\/swarm_x\/artifacts$/);
+    return Response.json({
+      swarm_id: "swarm_x",
+      count: 1,
+      note: "stub run · not production media",
+      items: [
+        {
+          ref: "art_1",
+          kind: "parsed_brief",
+          step_id: "plan",
+          summary: "[stub] parsed_brief",
+          stub: true,
+        },
+      ],
+    });
+  };
+  const result = await listSwarmArtifacts("swarm_x", {
+    fetchImpl: fetchImpl as typeof fetch,
+  });
+  assert.equal(result.ok, true);
+  if (result.ok) {
+    assert.equal(result.count, 1);
+    assert.equal(result.items[0]!.kind, "parsed_brief");
+    assert.match(result.note, /not production media/);
+  }
+});
+
 test("getSwarm maps members and nodes", async () => {
   const fetchImpl = async (input: RequestInfo | URL): Promise<Response> => {
     assert.match(String(input), /\/swarms\/swarm_1$/);

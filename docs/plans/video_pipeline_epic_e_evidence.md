@@ -39,3 +39,40 @@ node --import tsx --test src/lib/projections/video-spine-template.test.ts src/li
 - No fabricated production media quality or success rates  
 - Package gates never auto-approve  
 - `production_ready` remains false on spine payload  
+
+## Follow-up polish (relevant product path)
+
+| Item | Status |
+|------|--------|
+| `GET /api/v1/package-approvals/{id}` + POST decision | Done |
+| `GET /api/v1/swarms/{id}/artifacts/{ref}` | Done |
+| Brief meta on recommend (`brief_preview`) | Done |
+| Plan samples auto-fill scale/archetype | Done |
+| Spine step idempotency map | Done |
+| Monitoring package-gate anomalies | Done |
+| Canvas Phase-1 groups | Done |
+| SDD `.kiro/specs/video-pipeline-brief-spine/` | Done |
+| Standard `GET/POST /approvals/{id}` package fallback | Done |
+| `GET …/artifacts` list + `POST …/spine/run-to-package` | Done |
+| Operations live package Approve/Deny panel | Done |
+| Running list includes spine package attention | Done |
+| Execute artifact handoff list panel | Done |
+| `listSwarmArtifacts` + dry-run client tests | Done |
+| Durable façade store (`.data/product_facade`) | Done |
+| ArtifactHandoffV1 + L1 validation on spine steps | Done |
+| Append-only product audit (`GET /api/v1/product-audit`) | Done |
+| Spine Plan→Act→Self-Review offline L2 (planner + QC) | Done |
+| Critique emit + fail-closed on loop fail | Done |
+| Activation policy on spine public view | Done |
+
+```text
+python -m pytest tests/unit/api/test_video_brief_spine.py -q
+# 18 passed — includes persist, L1 handoff, agent loop
+```
+
+### Persistence env
+
+| Env | Meaning |
+|-----|---------|
+| `CASOPS_PRODUCT_FACADE_PERSIST` | default `1`; set `0` for memory-only |
+| `CASOPS_PRODUCT_FACADE_DATA` | store directory (default `<repo>/.data/product_facade`) |

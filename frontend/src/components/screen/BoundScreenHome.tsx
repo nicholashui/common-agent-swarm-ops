@@ -569,6 +569,14 @@ function BoundLiveSwarmCanvas({
   const [spineActions, setSpineActions] = useState<
     readonly { id: string; kind: string; label: string }[]
   >([]);
+  const [artifactItems, setArtifactItems] = useState<
+    readonly {
+      ref: string;
+      kind: string;
+      stepId: string;
+      summary: string;
+    }[]
+  >([]);
   const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
@@ -664,6 +672,15 @@ function BoundLiveSwarmCanvas({
       setSpineStatus(swarm.spine?.status ?? null);
       setSpineApprovalId(swarm.spine?.approvalId ?? null);
       setSpineActions(swarm.actions);
+      if (swarm.spine) {
+        const { listSwarmArtifacts } = await import("../../lib/api/product-swarms");
+        const arts = await listSwarmArtifacts(swarmId);
+        if (!cancelled && arts.ok) {
+          setArtifactItems(arts.items);
+        }
+      } else if (!cancelled) {
+        setArtifactItems([]);
+      }
       setLiveView({
         ...baseView,
         viewMode: "inspect",
@@ -684,7 +701,36 @@ function BoundLiveSwarmCanvas({
           : "Plan ACC · AI-pick",
         fromCompose: true,
         nodes,
-        groups: [],
+        groups:
+          swarm.spine != null
+            ? (
+                [
+                  {
+                    id: "phase-intent-planning",
+                    title: "Phase-1 · Intent & Planning",
+                    tone: "parallel" as const,
+                    nodeIds: memberNodes
+                      .filter((m) =>
+                        /orchestrator|planner|producer/i.test(m.agentId),
+                      )
+                      .map((m) => m.nodeId)
+                      .filter(Boolean),
+                  },
+                  {
+                    id: "phase-spine",
+                    title: "Spine stubs · not production media",
+                    tone: "verification" as const,
+                    nodeIds: memberNodes
+                      .filter(
+                        (m) =>
+                          !/orchestrator|planner|producer/i.test(m.agentId),
+                      )
+                      .map((m) => m.nodeId)
+                      .filter(Boolean),
+                  },
+                ] as const
+              ).filter((g) => g.nodeIds.length > 0)
+            : [],
         edges: edgeList,
         footerNote: swarm.spine
           ? `Live Host draft ${swarm.id} · spine ${swarm.spine.status} · ${swarm.spine.note}. Package always HITL.`
@@ -738,6 +784,35 @@ function BoundLiveSwarmCanvas({
       } else {
         setSpineNote(`Spine advanced · status ${result.spine?.status ?? "ok"}`);
       }
+      setReloadToken((n) => n + 1);
+    } finally {
+      setSpineBusy(false);
+    }
+  };
+
+  const dryRunToPackage = async (): Promise<void> => {
+    if (spineBusy) return;
+    const action = spineActions.find((a) => a.kind === "run_spine_to_package");
+    if (!action) {
+      setSpineNote(
+        "No run_spine_to_package action — reload draft (ready spine only).",
+      );
+      setReloadToken((n) => n + 1);
+      return;
+    }
+    setSpineBusy(true);
+    setSpineNote("Dry-running spine stubs to package gate…");
+    try {
+      const { runSpineToPackage } = await import("../../lib/api/product-swarms");
+      const result = await runSpineToPackage(swarmId, action.id);
+      if (!result.ok) {
+        setSpineNote(result.message);
+        return;
+      }
+      setSpineNote(
+        `Dry-run done (${result.stepsRun} step(s)) · ${result.spine?.status ?? "ok"} · stub · not production media` +
+          (result.approvalId ? ` · approval ${result.approvalId}` : ""),
+      );
       setReloadToken((n) => n + 1);
     } finally {
       setSpineBusy(false);
@@ -815,10 +890,56 @@ function BoundLiveSwarmCanvas({
               <li key={s.id}>
                 <code>{s.id}</code> · {s.agentId} · <em>{s.status}</em>
                 {s.humanGateRequired ? " · human gate" : ""}
-                {s.artifactRef ? ` · art ${s.artifactRef}` : ""}
+                {s.artifactRef ? (
+                  <>
+                    {" · "}
+                    <button
+                      className="registry-home__linkish"
+                      onClick={() => {
+                        void (async () => {
+                          const { getSwarmArtifact } = await import(
+                            "../../lib/api/product-swarms"
+                          );
+                          const art = await getSwarmArtifact(
+                            swarmId,
+                            s.artifactRef!,
+                          );
+                          setSpineNote(
+                            art.ok
+                              ? `${art.artifact.kind}: ${art.artifact.summary}`
+                              : art.message,
+                          );
+                        })();
+                      }}
+                      type="button"
+                    >
+                      art {s.artifactRef.slice(0, 12)}…
+                    </button>
+                  </>
+                ) : null}
               </li>
             ))}
           </ol>
+          {artifactItems.length > 0 ? (
+            <div style={{ marginBottom: "0.75rem" }}>
+              <strong>Artifact handoffs</strong>
+              <span> · {artifactItems.length} ref(s) · stub only</span>
+              <ul style={{ margin: "0.35rem 0 0", paddingLeft: "1.25rem" }}>
+                {artifactItems.map((a) => (
+                  <li key={a.ref}>
+                    <code>{a.kind}</code> · step {a.stepId} ·{" "}
+                    <button
+                      className="registry-home__linkish"
+                      onClick={() => setSpineNote(`${a.kind}: ${a.summary}`)}
+                      type="button"
+                    >
+                      {a.ref.slice(0, 14)}…
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
             <button
               disabled={spineBusy || spineStatus === "waiting_for_approval" || spineStatus === "completed" || spineStatus === "denied"}
@@ -826,6 +947,18 @@ function BoundLiveSwarmCanvas({
               type="button"
             >
               {spineBusy ? "…" : "Run next spine step"}
+            </button>
+            <button
+              disabled={
+                spineBusy ||
+                spineStatus === "waiting_for_approval" ||
+                spineStatus === "completed" ||
+                spineStatus === "denied"
+              }
+              onClick={() => void dryRunToPackage()}
+              type="button"
+            >
+              Dry-run to package
             </button>
             {spineStatus === "waiting_for_approval" ? (
               <>
@@ -881,15 +1014,189 @@ export function BoundMonitoringHome(): JSX.Element {
   const approvalProjection: GeneratedJsonObject = showApprovalSamples
     ? buildSampleApprovalProjection()
     : approval;
+  const [packageGates, setPackageGates] = useState<
+    readonly {
+      approvalId: string;
+      summary: string;
+      gateStatus: string;
+      swarmId: string;
+      canvasPath: string;
+    }[]
+  >([]);
+  const [packageBusy, setPackageBusy] = useState<string | null>(null);
+  const [packageNote, setPackageNote] = useState<string | null>(null);
+  const [packageTick, setPackageTick] = useState(0);
 
   useEffect(() => {
     setShowApprovalSamples(hostApprovalEmpty);
   }, [hostApprovalEmpty]);
 
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const { fetchApprovalsInbox } = await import("../../lib/api/product-ops");
+      const result = await fetchApprovalsInbox();
+      if (cancelled || !result.ok) return;
+      const rows = (result.data.items ?? [])
+        .filter(
+          (row) =>
+            String(row.source ?? "") === "video_spine_package" ||
+            String(row.kind ?? "") === "video_package",
+        )
+        .map((row) => {
+          const swarmId = String(row.swarm_id ?? "");
+          return {
+            approvalId: String(row.approval_id ?? ""),
+            summary: String(row.summary ?? "Package gate"),
+            gateStatus: String(row.gate_status ?? "paused"),
+            swarmId,
+            canvasPath: swarmId
+              ? `/swarms/${encodeURIComponent(swarmId)}/canvas`
+              : "/activity",
+          };
+        })
+        .filter((r) => Boolean(r.approvalId));
+      setPackageGates(rows);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [packageTick]);
+
+  const decideLivePackage = async (
+    approvalId: string,
+    decision: "approved" | "denied",
+  ): Promise<void> => {
+    if (packageBusy) return;
+    setPackageBusy(approvalId);
+    setPackageNote(`Loading package gate ${approvalId.slice(0, 12)}…`);
+    try {
+      const { fetchPackageApproval, decidePackageApproval } = await import(
+        "../../lib/api/product-ops"
+      );
+      const detail = await fetchPackageApproval(approvalId);
+      if (!detail.ok) {
+        setPackageNote(detail.message);
+        return;
+      }
+      const actionId = (detail.data.actions ?? []).find(
+        (a) => a.kind === "decide_package",
+      )?.id;
+      if (!actionId) {
+        // Fall back to standard approvals decision API (Host-issued action)
+        const fetchImpl = globalThis.fetch.bind(globalThis);
+        const response = await fetchImpl(
+          `/api/v1/approvals/${encodeURIComponent(approvalId)}/decision`,
+          {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+              accept: "application/json",
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              selected_value: decision,
+              reason:
+                decision === "approved"
+                  ? "Ops approved stub package gate"
+                  : "Ops denied stub package gate",
+            }),
+          },
+        );
+        if (!response.ok) {
+          setPackageNote(`Decision failed HTTP ${response.status}`);
+          return;
+        }
+        setPackageNote(`Package ${decision} via /approvals/{id}/decision`);
+        setPackageTick((n) => n + 1);
+        return;
+      }
+      const decided = await decidePackageApproval(approvalId, {
+        actionReferenceId: actionId,
+        decision,
+        reason:
+          decision === "approved"
+            ? "Ops approved stub package gate"
+            : "Ops denied stub package gate",
+      });
+      if (!decided.ok) {
+        setPackageNote(decided.message);
+        return;
+      }
+      setPackageNote(`Package ${decision} · stub · not production media`);
+      setPackageTick((n) => n + 1);
+    } finally {
+      setPackageBusy(null);
+    }
+  };
+
   return (
     <div className="operations-page responsive-stack">
       <InteractionStatusBar status={runtime.status} />
       <OperationsConsole />
+      {packageGates.length > 0 ? (
+        <section
+          aria-label="Live video package gates"
+          className="operations-approvals-wrap"
+          style={{
+            margin: "0.75rem 0",
+            padding: "0.75rem 1rem",
+            border: "1px solid var(--border, #333)",
+            borderRadius: 8,
+          }}
+        >
+          <h2 className="operations-approvals-wrap__title">
+            Live package gates (spine stub)
+          </h2>
+          <p style={{ fontSize: "0.85rem", marginTop: 0 }}>
+            Host façade · stub run · not production media · never auto-approve
+          </p>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {packageGates.map((gate) => (
+              <li
+                key={gate.approvalId}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "0.5rem",
+                  alignItems: "center",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                <code>{gate.approvalId.slice(0, 16)}…</code>
+                <span>{gate.summary}</span>
+                <em>{gate.gateStatus}</em>
+                <a className="registry-home__linkish" href={gate.canvasPath}>
+                  Open Execute
+                </a>
+                {gate.gateStatus === "paused" ? (
+                  <>
+                    <button
+                      disabled={packageBusy === gate.approvalId}
+                      onClick={() =>
+                        void decideLivePackage(gate.approvalId, "approved")
+                      }
+                      type="button"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      disabled={packageBusy === gate.approvalId}
+                      onClick={() =>
+                        void decideLivePackage(gate.approvalId, "denied")
+                      }
+                      type="button"
+                    >
+                      Deny
+                    </button>
+                  </>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          {packageNote ? <p role="status">{packageNote}</p> : null}
+        </section>
+      ) : null}
       <MonitoringHome
         view={monitoring}
         onAction={bridge.onAction}

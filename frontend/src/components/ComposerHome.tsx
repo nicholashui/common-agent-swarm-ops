@@ -124,12 +124,23 @@ export function ComposerHome({
 
   const loadSample = (sample: ComposerSample, runPlan: boolean): void => {
     setGoal(sample.body);
+    if (sample.locale) setBriefLocale(sample.locale);
+    if (sample.scaleProfile) setScaleProfile(sample.scaleProfile);
+    else setScaleProfile("");
+    if (sample.archetype) setArchetype(sample.archetype);
+    else setArchetype("");
     setStep(1);
     setSamplesOpen(false);
+    const metaBits = [
+      sample.scaleProfile ? `scale ${sample.scaleProfile}` : null,
+      sample.archetype ? `archetype ${sample.archetype}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
     announce(
       runPlan
-        ? `Loaded sample “${sample.label}” and running AI plan…`
-        : `Loaded sample “${sample.label}” into requirements. Review text, then AI plan.`,
+        ? `Loaded sample “${sample.label}”${metaBits ? ` (${metaBits})` : ""} and running AI plan…`
+        : `Loaded sample “${sample.label}”${metaBits ? ` (${metaBits})` : ""} into requirements. Review text, then AI plan.`,
     );
     if (runPlan) {
       void handleAiPlan(undefined, sample.body);
@@ -325,6 +336,11 @@ export function ComposerHome({
       );
       const result = await recommendComposition(trimmed, {
         humanResolutions: resolutions ?? humanResolutions,
+        brief: {
+          locale: briefLocale || "en",
+          ...(scaleProfile ? { scaleProfile } : {}),
+          ...(archetype ? { archetype } : {}),
+        },
       });
       if (!result.ok) {
         const fallback = buildLocalAssistantReply(trimmed, view.patterns);

@@ -18,14 +18,6 @@ from app.api.v1.schemas import PublicError, StrictSchema
 router = APIRouter(prefix="/composer", tags=["composer"])
 
 
-class ComposerRecommendRequest(StrictSchema):
-    """Human supplies goal/spec; optional resolutions for prior open questions."""
-
-    goal: str = Field(min_length=1, max_length=2_000)
-    max_slots: int = Field(default=8, ge=3, le=12)
-    human_resolutions: dict[str, str] = Field(default_factory=dict, max_length=20)
-
-
 class UserBriefMeta(StrictSchema):
     """Optional UserBriefV1 metadata (text comes from goal)."""
 
@@ -33,6 +25,15 @@ class UserBriefMeta(StrictSchema):
     scale_profile: str | None = Field(default=None, max_length=8)
     archetype: str | None = Field(default=None, max_length=4)
     constraints: dict[str, object] | None = Field(default=None)
+
+
+class ComposerRecommendRequest(StrictSchema):
+    """Human supplies goal/spec; optional resolutions + brief meta."""
+
+    goal: str = Field(min_length=1, max_length=2_000)
+    max_slots: int = Field(default=8, ge=3, le=12)
+    human_resolutions: dict[str, str] = Field(default_factory=dict, max_length=20)
+    brief: UserBriefMeta | None = Field(default=None)
 
 
 class ComposerMaterializeRequest(StrictSchema):
@@ -76,11 +77,16 @@ async def recommend_composition(
     facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
 ) -> dict[str, Any]:
     """AI-pick pattern + agents. Returns needs_hitl + open_questions when blocked."""
+    brief_meta: dict[str, Any] | None = None
+    if request.brief is not None:
+        brief_meta = request.brief.model_dump(exclude_none=True)
     result = facade.recommend_composition(
         organization_id=context.organization_id,
         goal=request.goal,
         max_slots=request.max_slots,
         human_resolutions=request.human_resolutions or None,
+        brief=brief_meta,
+        correlation_id=str(context.correlation_id),
     )
     if not result.get("ok"):
         _bad_request(str(context.correlation_id), str(result.get("message") or "Recommend failed."))

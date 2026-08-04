@@ -333,23 +333,27 @@ Wave 1–3 done when:
 
 ---
 
-## 14. Open questions (please answer in review)
+## 14. Open questions — frozen defaults (2026-08-04)
 
-1. **Locale default** for brief: `en` only, or bilingual `zh-Hant` first-class?  
-2. **DIA in Wave 1:** skip bind entirely, or allow non-active specials member for display only?  
-3. **Package gate:** always HITL, or only when `scale_profile ≥ S2`? (DNA currently human_gate on package.)  
-4. **Should Plan samples auto-fill scale/archetype** when loading wuxia/social samples?  
-5. **Persistence:** keep process-local façade for drafts, or require DB for brief/artifacts in Wave 2?
+| # | Question | Decision |
+|---|----------|----------|
+| 1 | Locale default | **`en` default; `zh-Hant` first-class optional** on brief chips |
+| 2 | DIA in Wave 1 | **Skip bind** — planner owns parse brief stub |
+| 3 | Package gate | **Always HITL** (DNA human_gate on package) |
+| 4 | Sample scale/archetype | **Yes** — Plan samples auto-fill chips when loaded |
+| 5 | Persistence | **Process-local façade** for drafts/brief/artifacts (until Host DB story) |
+
+Also shipped as follow-up polish: package-approval detail API, artifact GET by ref, brief on recommend, stronger step idempotency.
 
 ---
 
 ## 15. Review checklist
 
-- [ ] Goals G1–G6 accepted  
-- [ ] Non-goals accepted  
-- [ ] Wave order accepted  
-- [ ] Open questions answered  
-- [ ] Ready for SDD (requirements/design/tasks) before coding  
+- [x] Goals G1–G6 accepted (product path implemented)  
+- [x] Non-goals accepted  
+- [x] Wave order accepted  
+- [x] Open questions answered (frozen §14)  
+- [x] SDD under `.kiro/specs/video-pipeline-brief-spine/`  
 
 ---
 

@@ -16,6 +16,13 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from app.api.v1.product_facade_store import (
+    ProductFacadeStore,
+    _parse_dt,
+    persistence_enabled,
+    serialize_activity,
+    serialize_swarm,
+)
 from app.api.v1.video_brief_spine import (
     PHASE_1_AGENT_IDS,
     SPINE_WORKFLOW_ID,
@@ -25,6 +32,7 @@ from app.api.v1.video_brief_spine import (
     goal_looks_like_video_brief,
     init_spine_state,
     phase1_and_spine_member_ids,
+    public_artifact_view,
     public_spine_view,
 )
 from app.models.identifiers import ActorId, CorrelationId, OrganizationId
@@ -163,7 +171,12 @@ class ActivityRecord:
 class ProductFacadeService:
     """Org-scoped façade backing /commons, /swarms, /activity product routes."""
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        persist: bool | None = None,
+        store: ProductFacadeStore | None = None,
+    ) -> None:
         self._lock = threading.RLock()
         self._catalog: tuple[PackAgentCatalogEntry, ...] | None = None
         self._actions: dict[str, ActionRefRecord] = {}
@@ -171,8 +184,16 @@ class ProductFacadeService:
         self._rollouts: dict[str, RolloutRecord] = {}
         self._swarms: dict[str, SwarmRecord] = {}
         self._activity: list[ActivityRecord] = []
-        # Package human gates for spine stub runs (process-local).
+        # Package human gates for spine stub runs (durable when persist enabled).
         self._package_approvals: dict[str, dict[str, Any]] = {}
+        # In-memory audit mirror (also appended to durable JSONL when enabled).
+        self._audit: list[dict[str, Any]] = []
+        enabled = persistence_enabled() if persist is None else persist
+        self._store: ProductFacadeStore | None = (
+            store if store is not None else (ProductFacadeStore() if enabled else None)
+        )
+        if self._store is not None:
+            self._hydrate_from_store()
         self._patterns: tuple[dict[str, Any], ...] = (
             {
                 "id": "parallel-research",
@@ -196,6 +217,118 @@ class ProductFacadeService:
                 "status": "active",
             },
         )
+
+    def _hydrate_from_store(self) -> None:
+        assert self._store is not None
+        state = self._store.load_state()
+        swarms_raw = state.get("swarms") if isinstance(state.get("swarms"), dict) else {}
+        for sid, raw in swarms_raw.items():
+            if not isinstance(raw, dict):
+                continue
+            try:
+                record = SwarmRecord(
+                    swarm_id=str(raw.get("swarm_id") or sid),
+                    organization_id=str(raw.get("organization_id") or ""),
+                    name=str(raw.get("name") or "Untitled"),
+                    revision=int(raw.get("revision") or 0),
+                    status=str(raw.get("status") or "draft"),
+                    created_at=_parse_dt(raw.get("created_at")),
+                    updated_at=_parse_dt(raw.get("updated_at")),
+                    pattern_ref=raw.get("pattern_ref"),
+                    nodes=list(raw.get("nodes") or []),
+                    edges=list(raw.get("edges") or []),
+                    policy=dict(raw.get("policy") or {}),
+                    members=list(raw.get("members") or []),
+                    pins=list(raw.get("pins") or []),
+                    last_run_id=raw.get("last_run_id"),
+                    goal_summary=raw.get("goal_summary"),
+                    brief=raw.get("brief") if isinstance(raw.get("brief"), dict) else None,
+                    spine=raw.get("spine") if isinstance(raw.get("spine"), dict) else None,
+                )
+            except (TypeError, ValueError):
+                continue
+            self._swarms[record.swarm_id] = record
+        approvals = state.get("package_approvals")
+        if isinstance(approvals, dict):
+            self._package_approvals = {
+                str(k): dict(v) for k, v in approvals.items() if isinstance(v, dict)
+            }
+        activity_raw = state.get("activity")
+        if isinstance(activity_raw, list):
+            for row in activity_raw:
+                if not isinstance(row, dict):
+                    continue
+                try:
+                    self._activity.append(
+                        ActivityRecord(
+                            activity_id=str(row.get("activity_id") or _new_id("acty")),
+                            organization_id=str(row.get("organization_id") or ""),
+                            category=str(row.get("category") or "ops"),
+                            severity=str(row.get("severity") or "info"),
+                            summary=str(row.get("summary") or ""),
+                            subject_reference=str(row.get("subject_reference") or ""),
+                            occurred_at=_parse_dt(row.get("occurred_at")),
+                            correlation_id=str(row.get("correlation_id") or ""),
+                            status=str(row.get("status") or "recorded"),
+                        )
+                    )
+                except (TypeError, ValueError):
+                    continue
+
+    def _persist_state(self) -> None:
+        if self._store is None:
+            return
+        with self._lock:
+            swarms = {sid: serialize_swarm(s) for sid, s in self._swarms.items()}
+            activity = [serialize_activity(a) for a in self._activity]
+            approvals = dict(self._package_approvals)
+        self._store.save_swarms(swarms)
+        self._store.save_package_approvals(approvals)
+        self._store.save_activity(activity)
+
+    def _append_audit(
+        self,
+        *,
+        organization_id: str,
+        kind: str,
+        subject_reference: str,
+        summary: str,
+        correlation_id: str,
+        payload: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        record = {
+            "audit_id": _new_id("aud"),
+            "organization_id": organization_id,
+            "kind": kind,
+            "subject_reference": subject_reference,
+            "summary": summary,
+            "correlation_id": correlation_id,
+            "occurred_at": _utc_now().isoformat(),
+            "payload": payload or {},
+            "immutable": True,
+        }
+        with self._lock:
+            self._audit.append(record)
+            if len(self._audit) > 5000:
+                self._audit = self._audit[-4000:]
+        if self._store is not None:
+            self._store.append_audit(record)
+        return record
+
+    def list_product_audit(
+        self,
+        organization_id: OrganizationId,
+        *,
+        limit: int = 100,
+    ) -> list[dict[str, Any]]:
+        """Immutable product audit entries (spine steps, package decisions, materialize)."""
+        org = str(organization_id)
+        limit = max(1, min(limit, 500))
+        if self._store is not None:
+            return self._store.list_audit(organization_id=org, limit=limit)
+        with self._lock:
+            rows = [r for r in self._audit if r.get("organization_id") == org]
+        return rows[-limit:]
 
     def catalog(self) -> tuple[PackAgentCatalogEntry, ...]:
         with self._lock:
@@ -892,6 +1025,15 @@ class ProductFacadeService:
                     correlation_id=str(correlation_id),
                 )
             )
+        self._append_audit(
+            organization_id=str(organization_id),
+            kind="swarm_created",
+            subject_reference=record.swarm_id,
+            summary=f"Swarm draft created: {record.name}",
+            correlation_id=str(correlation_id),
+            payload={"swarm_id": record.swarm_id, "name": record.name},
+        )
+        self._persist_state()
         return record
 
     def get_swarm(self, organization_id: OrganizationId, swarm_id: str) -> SwarmRecord | None:
@@ -955,17 +1097,29 @@ class ProductFacadeService:
             for kind, label in kinds
         ]
         if swarm.spine is not None:
-            actions.append(
-                self.action_payload(
-                    self.issue_action(
-                        organization_id=organization_id,
-                        kind="run_spine_step",
-                        label="Run spine step (stub)",
-                        resource_ref=swarm.swarm_id,
+            spine_status = str((swarm.spine or {}).get("status") or "")
+            if spine_status not in {"waiting_for_approval", "completed", "denied", "failed"}:
+                actions.append(
+                    self.action_payload(
+                        self.issue_action(
+                            organization_id=organization_id,
+                            kind="run_spine_step",
+                            label="Run spine step (stub)",
+                            resource_ref=swarm.swarm_id,
+                        )
                     )
                 )
-            )
-            if str((swarm.spine or {}).get("status")) == "waiting_for_approval":
+                actions.append(
+                    self.action_payload(
+                        self.issue_action(
+                            organization_id=organization_id,
+                            kind="run_spine_to_package",
+                            label="Dry-run spine to package (stub)",
+                            resource_ref=swarm.swarm_id,
+                        )
+                    )
+                )
+            if spine_status == "waiting_for_approval":
                 actions.append(
                     self.action_payload(
                         self.issue_action(
@@ -1274,12 +1428,15 @@ class ProductFacadeService:
         goal: str,
         max_slots: int = 8,
         human_resolutions: dict[str, str] | None = None,
+        brief: dict[str, Any] | None = None,
+        correlation_id: str | None = None,
     ) -> dict[str, Any]:
         """AI-pick composition from pack catalog (deterministic, fail-closed, no LLM network).
 
         Humans supply the goal/spec. Host selects pattern + agent slots.
         Human is required only when AI cannot resolve conflicts (needs_hitl).
         Optional human_resolutions answers open questions from a prior pass.
+        Optional brief meta is validated and returned as brief_preview (no mint until materialize).
         """
         text = (goal or "").strip()
         if not text:
@@ -1287,6 +1444,18 @@ class ProductFacadeService:
                 "ok": False,
                 "message": "Goal/spec is required for AI composition.",
             }
+        brief_preview: dict[str, Any] | None = None
+        if brief is not None or text:
+            snap, brief_err = build_user_brief(
+                text=text,
+                brief_meta=brief,
+                correlation_id=correlation_id or "recommend",
+                mint_id=False,
+            )
+            if brief is not None and brief_err:
+                return {"ok": False, "message": brief_err}
+            if snap is not None and brief_err is None:
+                brief_preview = snap
         g = text.lower()
         tokens = [t for t in re.split(r"[^a-z0-9]+", g) if len(t) >= 3]
         resolutions = {str(k): str(v).strip().lower() for k, v in (human_resolutions or {}).items()}
@@ -1474,6 +1643,7 @@ class ProductFacadeService:
                     "4. AI re-runs pick and materializes workflow.",
                 ],
                 "compose_action": self.issue_compose_action(organization_id),
+                "brief_preview": brief_preview,
                 "note": (
                     "Human input required only for unresolved conflicts. "
                     "AI does not invent a compromised plan without a choice."
@@ -1705,6 +1875,7 @@ class ProductFacadeService:
                 "6. Open Canvas for inspection (fail-closed run).",
             ],
             "compose_action": self.issue_compose_action(organization_id),
+            "brief_preview": brief_preview,
             "note": (
                 "AI-pick mainly. Human only for needs_hitl conflicts. "
                 "Host-deterministic ranking; no production activation."
@@ -1813,6 +1984,23 @@ class ProductFacadeService:
         fresh = self.get_swarm(organization_id, swarm.swarm_id)
         assert fresh is not None
         spine_view = public_spine_view(fresh.spine)
+        self._append_audit(
+            organization_id=str(organization_id),
+            kind="composition_materialized",
+            subject_reference=fresh.swarm_id,
+            summary=(
+                f"Materialized draft {fresh.name} with brief "
+                f"{brief_snapshot['brief_id']} · members {len(fresh.members)}"
+            ),
+            correlation_id=str(correlation_id),
+            payload={
+                "swarm_id": fresh.swarm_id,
+                "brief_id": brief_snapshot["brief_id"],
+                "member_count": len(fresh.members),
+                "spine_workflow_id": SPINE_WORKFLOW_ID if spine_view else None,
+            },
+        )
+        self._persist_state()
         return {
             "decision_status": "ai_resolved",
             "auto_materialize": True,
@@ -1923,6 +2111,21 @@ class ProductFacadeService:
                     )
                 )
             view = public_spine_view(swarm.spine)
+            self._append_audit(
+                organization_id=str(organization_id),
+                kind="spine_step",
+                subject_reference=swarm_id,
+                summary=f"Spine stub step advanced on {swarm.name}",
+                correlation_id=str(correlation_id),
+                payload={
+                    "swarm_id": swarm_id,
+                    "spine_status": (view or {}).get("status"),
+                    "approval_id": (view or {}).get("approval_id"),
+                    "step_id": step_id,
+                    "idempotency_key": idempotency_key,
+                },
+            )
+            self._persist_state()
             return {
                 "ok": True,
                 "swarm_id": swarm_id,
@@ -1997,6 +2200,22 @@ class ProductFacadeService:
                     status=str(swarm.spine.get("status")),
                 )
             )
+            decision_value = decision.strip().lower()
+            self._append_audit(
+                organization_id=str(organization_id),
+                kind="package_decision",
+                subject_reference=approval_id or swarm_id,
+                summary=f"Package {decision_value} for {swarm.name}",
+                correlation_id=str(correlation_id),
+                payload={
+                    "swarm_id": swarm_id,
+                    "approval_id": approval_id,
+                    "decision": decision_value,
+                    "reason": reason.strip()[:500],
+                    "spine_status": swarm.spine.get("status"),
+                },
+            )
+            self._persist_state()
             return {
                 "ok": True,
                 "swarm_id": swarm_id,
@@ -2016,23 +2235,254 @@ class ProductFacadeService:
         rows.sort(key=lambda r: str(r.get("created_at") or ""), reverse=True)
         return rows
 
+    def get_package_approval(
+        self,
+        organization_id: OrganizationId,
+        approval_id: str,
+        *,
+        issue_action: bool = True,
+    ) -> dict[str, Any] | None:
+        """Detail for a façade package gate; optionally issues decide_package when paused."""
+        with self._lock:
+            rec = self._package_approvals.get(approval_id)
+            if rec is None or rec.get("organization_id") != str(organization_id):
+                return None
+            payload = dict(rec)
+            swarm_id = str(rec.get("swarm_id") or "")
+            swarm = self._swarms.get(swarm_id) if swarm_id else None
+            payload["canvas_path"] = f"/swarms/{swarm_id}/canvas" if swarm_id else None
+            payload["note"] = "stub package gate · not production media"
+            if swarm is not None and isinstance(swarm.spine, dict):
+                payload["spine_status"] = swarm.spine.get("status")
+                payload["package_decision"] = swarm.spine.get("package_decision")
+                payload["spine_workflow_id"] = swarm.spine.get("workflow_id", SPINE_WORKFLOW_ID)
+            actions: list[dict[str, Any]] = []
+            if (
+                issue_action
+                and str(rec.get("gate_status")) == "paused"
+                and swarm_id
+            ):
+                actions.append(
+                    self.action_payload(
+                        self.issue_action(
+                            organization_id=organization_id,
+                            kind="decide_package",
+                            label="Decide package gate",
+                            resource_ref=swarm_id,
+                        )
+                    )
+                )
+            payload["actions"] = actions
+            return payload
+
+    def get_swarm_artifact(
+        self,
+        organization_id: OrganizationId,
+        swarm_id: str,
+        artifact_ref: str,
+    ) -> dict[str, Any] | None:
+        """Opaque artifact ref lookup (redacted stub summary only)."""
+        swarm = self.get_swarm(organization_id, swarm_id)
+        if swarm is None or not isinstance(swarm.spine, dict):
+            return None
+        arts = swarm.spine.get("artifacts")
+        if not isinstance(arts, dict):
+            return None
+        art = arts.get(artifact_ref)
+        return public_artifact_view(art if isinstance(art, dict) else None, swarm_id=swarm_id)
+
+    def list_swarm_artifacts(
+        self, organization_id: OrganizationId, swarm_id: str
+    ) -> dict[str, Any] | None:
+        """List redacted stub artifact handoffs for a spine draft."""
+        swarm = self.get_swarm(organization_id, swarm_id)
+        if swarm is None:
+            return None
+        if not isinstance(swarm.spine, dict):
+            return {
+                "swarm_id": swarm_id,
+                "items": [],
+                "note": "No spine attached.",
+            }
+        arts = swarm.spine.get("artifacts") if isinstance(swarm.spine.get("artifacts"), dict) else {}
+        items = [
+            public_artifact_view(art, swarm_id=swarm_id)
+            for art in arts.values()
+            if isinstance(art, dict)
+        ]
+        items = [i for i in items if i is not None]
+        items.sort(key=lambda row: str(row.get("created_at") or ""))
+        return {
+            "swarm_id": swarm_id,
+            "items": items,
+            "count": len(items),
+            "note": "stub run · not production media",
+        }
+
+    def run_spine_to_package(
+        self,
+        *,
+        organization_id: OrganizationId,
+        swarm_id: str,
+        action_reference_id: str,
+        correlation_id: CorrelationId,
+        max_steps: int = 12,
+    ) -> dict[str, Any] | None:
+        """Dry-run advance stub steps until package gate or terminal (one action)."""
+        action = self.consume_action(
+            organization_id=organization_id,
+            action_reference_id=action_reference_id,
+            expected_kind="run_spine_to_package",
+            resource_ref=swarm_id,
+        )
+        if action is None:
+            return None
+        steps_run = 0
+        last: dict[str, Any] | None = None
+        for i in range(max(1, min(max_steps, 16))):
+            # Internal step actions issued+consumed for fail-closed step runner
+            step_action = self.issue_action(
+                organization_id=organization_id,
+                kind="run_spine_step",
+                label="Run spine step (stub)",
+                resource_ref=swarm_id,
+                eligible=True,
+            )
+            last = self.run_spine_step(
+                organization_id=organization_id,
+                swarm_id=swarm_id,
+                action_reference_id=step_action.action_id,
+                correlation_id=correlation_id,
+                step_id=None,
+                idempotency_key=f"to_package:{swarm_id}:{i}",
+            )
+            if last is None:
+                return {
+                    "ok": False,
+                    "message": "Spine step denied mid dry-run.",
+                    "steps_run": steps_run,
+                }
+            if last.get("ok") is False:
+                # Waiting for package or terminal already
+                spine = last.get("spine") if isinstance(last.get("spine"), dict) else {}
+                status = str(spine.get("status") or "")
+                if status == "waiting_for_approval":
+                    break
+                return {
+                    **last,
+                    "steps_run": steps_run,
+                    "dry_run": True,
+                }
+            steps_run += 1
+            spine = last.get("spine") if isinstance(last.get("spine"), dict) else {}
+            status = str(spine.get("status") or "")
+            if status in {"waiting_for_approval", "completed", "denied", "failed"}:
+                break
+        assert last is not None
+        return {
+            **last,
+            "ok": True,
+            "steps_run": steps_run,
+            "dry_run": True,
+            "note": "stub dry-run to package · not production media",
+        }
+
+    def decide_package_gate_host_issued(
+        self,
+        *,
+        organization_id: OrganizationId,
+        approval_id: str,
+        correlation_id: CorrelationId,
+        decision: str,
+        reason: str,
+    ) -> dict[str, Any] | None:
+        """Decide package using Host-issued action (for control-plane style decision body)."""
+        detail = self.get_package_approval(
+            organization_id, approval_id, issue_action=False
+        )
+        if detail is None:
+            return None
+        swarm_id = str(detail.get("swarm_id") or "")
+        if not swarm_id:
+            return {"ok": False, "message": "Package approval has no swarm_id."}
+        if str(detail.get("gate_status")) != "paused":
+            # Idempotent read of already decided gate
+            swarm = self.get_swarm(organization_id, swarm_id)
+            return {
+                "ok": True,
+                "idempotent": True,
+                "swarm_id": swarm_id,
+                "approval_id": approval_id,
+                "spine": public_spine_view(swarm.spine if swarm else None),
+                "decision": (swarm.spine or {}).get("package_decision") if swarm else None,
+            }
+        action = self.issue_action(
+            organization_id=organization_id,
+            kind="decide_package",
+            label="Decide package gate",
+            resource_ref=swarm_id,
+            eligible=True,
+        )
+        return self.decide_package_gate(
+            organization_id=organization_id,
+            swarm_id=swarm_id,
+            action_reference_id=action.action_id,
+            correlation_id=correlation_id,
+            decision=decision,
+            reason=reason,
+        )
+
     def list_running_swarms(self, organization_id: OrganizationId) -> list[dict[str, Any]]:
+        """Queued/running façade swarms plus spine package-waiting attention items."""
         with self._lock:
             rows = [
                 s
                 for s in self._swarms.values()
-                if s.organization_id == str(organization_id) and s.status in {"queued", "running"}
+                if s.organization_id == str(organization_id)
+                and (
+                    s.status in {"queued", "running"}
+                    or (
+                        isinstance(s.spine, dict)
+                        and str(s.spine.get("status"))
+                        in {"running", "waiting_for_approval"}
+                    )
+                )
             ]
-        return [
-            {
-                "id": s.swarm_id,
-                "name": s.name,
-                "status": s.status,
-                "revision": s.revision,
-                "last_run_id": s.last_run_id,
-            }
-            for s in rows
-        ]
+        rows_sorted = sorted(rows, key=lambda s: s.updated_at, reverse=True)
+        out: list[dict[str, Any]] = []
+        for s in rows_sorted:
+            spine_status = (
+                str(s.spine.get("status")) if isinstance(s.spine, dict) else None
+            )
+            display_status = spine_status or s.status
+            out.append(
+                {
+                    "id": s.swarm_id,
+                    "name": s.name,
+                    "status": display_status,
+                    "revision": s.revision,
+                    "last_run_id": s.last_run_id,
+                    "member_count": len(s.members),
+                    "has_spine": isinstance(s.spine, dict),
+                    "spine_status": spine_status,
+                    "spine_workflow_id": (
+                        str(s.spine.get("workflow_id"))
+                        if isinstance(s.spine, dict)
+                        else None
+                    ),
+                    "approval_id": (
+                        s.spine.get("approval_id")
+                        if isinstance(s.spine, dict)
+                        else None
+                    ),
+                    "note": (
+                        "stub run · not production media"
+                        if isinstance(s.spine, dict)
+                        else None
+                    ),
+                }
+            )
+        return out
 
     def issue_compose_action(self, organization_id: OrganizationId) -> dict[str, Any]:
         return self.action_payload(
@@ -2781,8 +3231,8 @@ def get_product_facade() -> ProductFacadeService:
 
 
 def reset_product_facade_for_tests() -> ProductFacadeService:
-    """Replace the process singleton (tests only)."""
+    """Replace the process singleton (tests only; memory-only, no disk hydrate)."""
     global _FACADE
     with _FACADE_LOCK:
-        _FACADE = ProductFacadeService()
+        _FACADE = ProductFacadeService(persist=False)
         return _FACADE

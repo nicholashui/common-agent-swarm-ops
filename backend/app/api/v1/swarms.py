@@ -375,3 +375,71 @@ async def decide_package(
             str(result.get("message") or "Package decision failed."),
         )
     return result
+
+
+@router.get("/{swarm_id}/artifacts/{artifact_ref}")
+async def read_swarm_artifact(
+    swarm_id: str,
+    artifact_ref: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Read a redacted stub artifact by opaque ref (not production media)."""
+    art = facade.get_swarm_artifact(context.organization_id, swarm_id, artifact_ref)
+    if art is None:
+        _denied(
+            str(context.correlation_id),
+            "Artifact not found for this swarm (or spine not attached).",
+        )
+    assert art is not None
+    return art
+
+
+@router.get("/{swarm_id}/artifacts")
+async def list_swarm_artifacts(
+    swarm_id: str,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """List redacted spine artifact handoffs for a draft."""
+    result = facade.list_swarm_artifacts(context.organization_id, swarm_id)
+    if result is None:
+        _denied(str(context.correlation_id))
+    assert result is not None
+    return result
+
+
+class SpineToPackageRequest(StrictSchema):
+    """Dry-run advance stub steps until package human gate."""
+
+    action_reference_id: str = Field(min_length=1, max_length=100)
+    max_steps: int = Field(default=12, ge=1, le=16)
+
+
+@router.post("/{swarm_id}/spine/run-to-package")
+async def run_spine_to_package(
+    swarm_id: str,
+    request: SpineToPackageRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Advance stub spine until package waits for human (or terminal)."""
+    result = facade.run_spine_to_package(
+        organization_id=context.organization_id,
+        swarm_id=swarm_id,
+        action_reference_id=request.action_reference_id,
+        correlation_id=context.correlation_id,
+        max_steps=request.max_steps,
+    )
+    if result is None:
+        _denied(
+            str(context.correlation_id),
+            "Dry-run requires eligible run_spine_to_package action and known swarm.",
+        )
+    assert result is not None
+    if result.get("ok") is False:
+        _bad_request(
+            str(context.correlation_id),
+            str(result.get("message") or "Spine dry-run failed."),
+        )
+    return result

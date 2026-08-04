@@ -77,6 +77,10 @@ export interface ComposerSample {
   readonly kind: ComposerSampleKind;
   /** Full requirements body loaded into the composer input. */
   readonly body: string;
+  /** Optional UserBriefV1 chips applied when sample loads (Epic A polish). */
+  readonly locale?: string;
+  readonly scaleProfile?: string;
+  readonly archetype?: string;
 }
 
 export interface ComposerLandingView {
@@ -110,8 +114,11 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-wuxia",
     label: "YouTube wuxia short",
-    summary: "Happy path · hierarchical + verify",
+    summary: "Happy path · hierarchical + verify · S1 / A",
     kind: "happy_path",
+    locale: "en",
+    scaleProfile: "S1",
+    archetype: "A",
     body: [
       "Wuxia short for YouTube (video domain only):",
       "- 90s cinematic opening + strong hook in first 3 seconds",
@@ -124,8 +131,11 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-trend-research",
     label: "Trend research → script",
-    summary: "Web/trend research + copy · video pack",
+    summary: "Web/trend research + copy · video pack · S2 / B",
     kind: "happy_path",
+    locale: "en",
+    scaleProfile: "S2",
+    archetype: "B",
     body: [
       "Video content research pipeline for a vertical short series:",
       "- web research + trend intelligence on topic hooks",
@@ -138,8 +148,11 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-social-budget",
     label: "Social under budget",
-    summary: "Lean video crew · cost-efficient",
+    summary: "Lean video crew · cost-efficient · S1 / H",
     kind: "happy_path",
+    locale: "en",
+    scaleProfile: "S1",
+    archetype: "H",
     body: [
       "Short-form social video crew under budget.",
       "Fast turnaround for 15–30s clips, captions, light music bed.",
@@ -150,8 +163,10 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-conflict",
     label: "Cost vs quality (HITL demo)",
-    summary: "Triggers needs_hitl · video production conflict",
+    summary: "Triggers needs_hitl · video production conflict · S3",
     kind: "hitl_demo",
+    locale: "en",
+    scaleProfile: "S3",
     body: [
       "Video production conflict: lowest cost AND premium cinematic quality film with no compromise.",
       "Either we ship same-day ASAP or we do a thorough multi-phase feature pipeline —",
@@ -163,8 +178,11 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-feature",
     label: "Full feature hierarchy",
-    summary: "Orch → Planner → video departments",
+    summary: "Orch → Planner → video departments · S5 / J",
     kind: "happy_path",
+    locale: "en",
+    scaleProfile: "S5",
+    archetype: "J",
     body: [
       "Full feature film production hierarchy (video domain).",
       "Need Orchestrator → Planner → departments: story, direction, cinematography, picture, sound, and final QC/judge gate.",
@@ -174,8 +192,11 @@ export const COMPOSER_SAMPLES: readonly ComposerSample[] = [
   {
     id: "sample-brand-spot",
     label: "Brand spot + compliance",
-    summary: "Brand / creative + legal-ish gates · video",
+    summary: "Brand / creative + legal-ish gates · S2 / C",
     kind: "happy_path",
+    locale: "en",
+    scaleProfile: "S2",
+    archetype: "C",
     body: [
       "30s brand film for social and CTV:",
       "- brand strategist + creative director framing",

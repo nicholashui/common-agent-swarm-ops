@@ -188,6 +188,81 @@ export async function fetchApprovalsInbox(
   return getJson("/api/v1/approvals", options);
 }
 
+export type PackageApprovalDetail = {
+  readonly approval_id?: string;
+  readonly swarm_id?: string;
+  readonly gate_status?: string;
+  readonly summary?: string;
+  readonly canvas_path?: string;
+  readonly note?: string;
+  readonly spine_status?: string;
+  readonly actions?: readonly {
+    readonly id?: string;
+    readonly kind?: string;
+    readonly label?: string;
+  }[];
+};
+
+export async function fetchPackageApproval(
+  approvalId: string,
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<ProductOpsResult<PackageApprovalDetail>> {
+  return getJson(
+    `/api/v1/package-approvals/${encodeURIComponent(approvalId)}`,
+    options,
+  );
+}
+
+export async function decidePackageApproval(
+  approvalId: string,
+  body: {
+    readonly actionReferenceId: string;
+    readonly decision: "approved" | "denied";
+    readonly reason: string;
+  },
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<ProductOpsResult<Record<string, unknown>>> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/package-approvals/${encodeURIComponent(approvalId)}/decision`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action_reference_id: body.actionReferenceId,
+          decision: body.decision,
+          reason: body.reason,
+        }),
+      },
+    );
+    if (!response.ok) {
+      let detail = `HTTP ${response.status}`;
+      try {
+        const errBody = (await response.json()) as {
+          error?: { message?: string };
+          detail?: { message?: string };
+        };
+        detail = errBody.error?.message ?? errBody.detail?.message ?? detail;
+      } catch {
+        /* keep */
+      }
+      return { ok: false, message: detail };
+    }
+    const raw: unknown = await response.json();
+    return { ok: true, data: unwrapData(raw) };
+  } catch {
+    return {
+      ok: false,
+      message: "Could not reach Host for package decision.",
+    };
+  }
+}
+
 export async function fetchCollaborationPresence(
   options: { readonly fetchImpl?: typeof fetch } = {},
 ): Promise<ProductOpsResult<Record<string, unknown>>> {
@@ -207,6 +282,11 @@ export async function fetchRunningSwarms(
       last_run_id?: string | null;
       updated_at?: string;
       created_at?: string;
+      has_spine?: boolean;
+      spine_status?: string | null;
+      spine_workflow_id?: string | null;
+      approval_id?: string | null;
+      note?: string | null;
     }[];
     readonly freshness?: { readonly as_of?: string };
   }>

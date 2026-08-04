@@ -21,6 +21,23 @@ _DESIGN_SPINE_DNA = (
 
 SPINE_WORKFLOW_ID = "wf_video_spine_v1"
 USER_BRIEF_VERSION = "UserBriefV1"
+HANDOFF_CONTRACT_VERSION = "ArtifactHandoffV1"
+
+# L1 required fields for spine stub handoffs (common-agent-structure Input Package subset)
+_HANDOFF_L1_REQUIRED: tuple[str, ...] = (
+    "artifact_id",
+    "version",
+    "kind",
+    "step_id",
+    "agent_id",
+    "stub",
+    "production_media",
+    "parent_assets",
+    "qc_status",
+    "summary",
+    "created_at",
+    "provenance_manifest",
+)
 
 # Phase-1 crew (Epic B) — closed world, required when video brief materializes.
 PHASE_1_AGENT_IDS: tuple[str, ...] = (
@@ -136,8 +153,12 @@ def build_user_brief(
     text: str,
     brief_meta: dict[str, Any] | None,
     correlation_id: str,
+    mint_id: bool = True,
 ) -> tuple[dict[str, Any] | None, str | None]:
-    """Build UserBriefV1 snapshot. Returns (brief, error_message)."""
+    """Build UserBriefV1 snapshot. Returns (brief, error_message).
+
+    When mint_id is False (recommend preview), omit brief_id so materialize owns identity.
+    """
     err = validate_user_brief_text(text)
     if err:
         return None, err
@@ -174,8 +195,7 @@ def build_user_brief(
         if banned in {k.lower() for k in meta}:
             return None, f"Brief must not include field {banned!r}."
 
-    brief = {
-        "brief_id": _new_id("brief"),
+    brief: dict[str, Any] = {
         "version": USER_BRIEF_VERSION,
         "text": text.strip(),
         "locale": locale,
@@ -185,6 +205,8 @@ def build_user_brief(
         "as_of": _utc_now().isoformat(),
         "correlation_id": correlation_id,
     }
+    if mint_id:
+        brief["brief_id"] = _new_id("brief")
     return brief, None
 
 
@@ -274,6 +296,84 @@ def next_runnable_step(spine: dict[str, Any]) -> dict[str, Any] | None:
     return None
 
 
+def collect_parent_asset_refs(spine: dict[str, Any], up_to_index: int) -> list[str]:
+    """Prior completed step artifact refs for linear handoff lineage."""
+    steps = spine.get("steps") if isinstance(spine.get("steps"), list) else []
+    parents: list[str] = []
+    for j in range(max(0, up_to_index)):
+        step = steps[j] if j < len(steps) else None
+        if not isinstance(step, dict):
+            continue
+        ref = step.get("artifact_ref")
+        if ref:
+            parents.append(str(ref))
+    brief_id = spine.get("brief_id")
+    if brief_id and not parents:
+        parents.append(f"brief:{brief_id}")
+    return parents
+
+
+def build_handoff_artifact(
+    *,
+    step_id: str,
+    agent_id: str,
+    kind: str,
+    stub_tool: str | None,
+    brief_text: str,
+    parent_assets: list[str],
+    human_gate: bool,
+) -> dict[str, Any]:
+    """Build ArtifactHandoffV1 payload (stub · not production media)."""
+    art_ref = _new_id("art")
+    qc = "pending_human" if human_gate else "l1_pass"
+    return {
+        "artifact_id": art_ref,
+        "ref": art_ref,
+        "version": 1,
+        "contract": HANDOFF_CONTRACT_VERSION,
+        "kind": kind,
+        "step_id": step_id,
+        "agent_id": agent_id,
+        "stub_tool": stub_tool,
+        "stub": True,
+        "production_media": False,
+        "parent_assets": list(parent_assets),
+        "qc_status": qc,
+        "technical_spec": {"mode": "stub", "handoff": HANDOFF_CONTRACT_VERSION},
+        "rights_and_consent": "n/a_stub",
+        "continuity_state": None,
+        "target_channels": [],
+        "provenance_manifest": f"stub:{step_id}:{art_ref}",
+        "summary": _stub_summary(step_id, kind, brief_text),
+        "created_at": _utc_now().isoformat(),
+    }
+
+
+def validate_handoff_l1(artifact: dict[str, Any] | None) -> list[str]:
+    """Return L1 validation errors (empty list = pass). Fail-closed on production_media=true for stubs."""
+    if not isinstance(artifact, dict):
+        return ["handoff is not an object"]
+    errors: list[str] = []
+    for key in _HANDOFF_L1_REQUIRED:
+        if key not in artifact or artifact.get(key) is None:
+            errors.append(f"missing required field {key}")
+    if artifact.get("stub") is not True:
+        errors.append("stub must be true for spine dry-run handoffs")
+    if artifact.get("production_media") is True:
+        errors.append("production_media must be false for spine stub path")
+    parents = artifact.get("parent_assets")
+    if not isinstance(parents, list):
+        errors.append("parent_assets must be a list")
+    if not str(artifact.get("artifact_id") or "").strip():
+        errors.append("artifact_id must be non-empty")
+    if not str(artifact.get("summary") or "").strip():
+        errors.append("summary must be non-empty")
+    qc = str(artifact.get("qc_status") or "")
+    if qc not in {"l1_pass", "pending_human", "l1_fail", "denied"}:
+        errors.append(f"qc_status invalid: {qc!r}")
+    return errors
+
+
 def apply_stub_step(
     spine: dict[str, Any],
     *,
@@ -284,6 +384,7 @@ def apply_stub_step(
     """Advance one stub step. Returns (updated_spine_snapshot_fields, error).
 
     Mutates spine in place; caller holds lock.
+    Emits ArtifactHandoffV1 and fails closed on L1 validation errors.
     """
     if not isinstance(spine, dict):
         return None, "Spine not attached."
@@ -319,47 +420,114 @@ def apply_stub_step(
         return None, "No queued spine step to run."
 
     sid = str(target["id"])
-    # Idempotency: if already completed with same key, no-op success is handled by caller store
-    if idempotency_key and spine.get("_last_idempotency_key") == idempotency_key:
+    # Idempotency map: same key reuses prior success without re-running side effects
+    idem_map = spine.get("_idempotency")
+    if not isinstance(idem_map, dict):
+        idem_map = {}
+        spine["_idempotency"] = idem_map
+    if idempotency_key and idempotency_key in idem_map:
         return spine, None
 
     art_kind = str(target.get("artifact_kind") or f"{sid}_output")
-    art_ref = _new_id("art")
-    artifact = {
-        "ref": art_ref,
-        "kind": art_kind,
-        "step_id": sid,
-        "agent_id": target.get("agent_id"),
-        "stub_tool": target.get("stub_tool"),
-        "stub": True,
-        "production_media": False,
-        "summary": _stub_summary(sid, art_kind, brief_text),
-        "created_at": _utc_now().isoformat(),
-    }
+    human_gate = bool(target.get("human_gate_required"))
+    agent_id = str(target.get("agent_id") or "")
+    parents = collect_parent_asset_refs(spine, target_index)
+
+    # Plan → Act → Self-Review for selected spine agents (offline L2)
+    from app.api.v1.spine_agent_loop import (
+        SPINE_L2_AGENT_IDS,
+        loop_passed,
+        run_spine_agent_loop,
+    )
+
+    agent_loop: dict[str, Any] | None = None
+    if agent_id in SPINE_L2_AGENT_IDS and not human_gate:
+        corr = str(spine.get("brief_id") or spine.get("workflow_id") or "spine")
+        agent_loop = run_spine_agent_loop(
+            agent_id,
+            goal=brief_text,
+            correlation_id=f"{corr}:{sid}",
+            step_id=sid,
+            parent_assets=parents,
+        )
+        # Record critiques on spine for operator visibility
+        critiques = spine.setdefault("critiques", [])
+        if isinstance(critiques, list):
+            for c in agent_loop.get("critiques") or []:
+                if isinstance(c, dict):
+                    critiques.append(c)
+        if not loop_passed(agent_loop):
+            target["status"] = "failed"
+            target["note"] = (
+                f"Agent loop fail-closed: status={agent_loop.get('status')} "
+                f"l2={((agent_loop.get('l2') or {}).get('score'))}"
+            )
+            spine["status"] = "failed"
+            spine["last_agent_loop"] = agent_loop
+            return None, (
+                f"Spine step {sid} failed Plan/Act/Self-Review "
+                f"(status={agent_loop.get('status')}; "
+                f"refinements={agent_loop.get('refinement_count')}). "
+                "Fail-closed; no production tools."
+            )
+
+    artifact = build_handoff_artifact(
+        step_id=sid,
+        agent_id=agent_id,
+        kind=art_kind,
+        stub_tool=str(target.get("stub_tool") or "") or None,
+        brief_text=brief_text,
+        parent_assets=parents,
+        human_gate=human_gate,
+    )
+    if agent_loop is not None:
+        artifact["agent_loop"] = {
+            "status": agent_loop.get("status"),
+            "l1": agent_loop.get("l1"),
+            "l2": agent_loop.get("l2"),
+            "refinement_count": agent_loop.get("refinement_count"),
+            "phases": agent_loop.get("phases"),
+            "policy": agent_loop.get("policy"),
+            "rubric_reference": agent_loop.get("rubric_reference"),
+            "evidence_refs": (agent_loop.get("evidence_refs") or [])[:8],
+        }
+        l2 = agent_loop.get("l2") if isinstance(agent_loop.get("l2"), dict) else {}
+        if l2.get("passed"):
+            artifact["qc_status"] = "l1_pass"
+    l1_errors = validate_handoff_l1(artifact)
+    if l1_errors:
+        return None, "L1 handoff validation failed: " + "; ".join(l1_errors)
+
+    art_ref = str(artifact["artifact_id"])
     arts = spine.setdefault("artifacts", {})
     if not isinstance(arts, dict):
         spine["artifacts"] = {}
         arts = spine["artifacts"]
     arts[art_ref] = artifact
 
-    if bool(target.get("human_gate_required")):
+    if human_gate:
         # Package: complete stub artifact but pause for human
         target["status"] = "waiting_for_approval"
         target["artifact_ref"] = art_ref
-        target["note"] = "Package stub ready · human gate required"
+        target["note"] = "Package stub ready · human gate required · L1 pending_human"
         target["completed_at"] = None
         spine["status"] = "waiting_for_approval"
         spine["current_step_index"] = target_index
         approval_id = _new_id("appr")
         spine["approval_id"] = approval_id
         if idempotency_key:
+            idem_map[idempotency_key] = {"step_id": sid, "artifact_ref": art_ref}
             spine["_last_idempotency_key"] = idempotency_key
         return spine, None
 
     target["status"] = "completed"
     target["artifact_ref"] = art_ref
     target["completed_at"] = _utc_now().isoformat()
-    target["note"] = "stub completed"
+    loop_note = ""
+    if agent_loop and not agent_loop.get("skipped"):
+        l2s = (agent_loop.get("l2") or {}).get("score")
+        loop_note = f" · agent_loop L2={l2s}"
+    target["note"] = f"stub completed · L1 pass{loop_note}"
     spine["current_step_index"] = target_index + 1
     spine["status"] = "running"
     # If last non-gate step finished, stay running until package
@@ -367,6 +535,7 @@ def apply_stub_step(
     if not remaining:
         spine["status"] = "completed"
     if idempotency_key:
+        idem_map[idempotency_key] = {"step_id": sid, "artifact_ref": art_ref}
         spine["_last_idempotency_key"] = idempotency_key
     return spine, None
 
@@ -432,6 +601,41 @@ def _stub_summary(step_id: str, art_kind: str, brief_text: str) -> str:
     )
 
 
+def public_artifact_view(
+    artifact: dict[str, Any] | None,
+    *,
+    swarm_id: str | None = None,
+) -> dict[str, Any] | None:
+    """Redacted artifact payload for GET-by-ref (stub · not production media)."""
+    if not isinstance(artifact, dict):
+        return None
+    ref = artifact.get("artifact_id") or artifact.get("ref")
+    out: dict[str, Any] = {
+        "artifact_id": ref,
+        "ref": ref,
+        "version": artifact.get("version", 1),
+        "contract": artifact.get("contract") or HANDOFF_CONTRACT_VERSION,
+        "kind": artifact.get("kind"),
+        "step_id": artifact.get("step_id"),
+        "agent_id": artifact.get("agent_id"),
+        "stub_tool": artifact.get("stub_tool"),
+        "stub": True,
+        "production_media": False,
+        "parent_assets": list(artifact.get("parent_assets") or [])
+        if isinstance(artifact.get("parent_assets"), list)
+        else [],
+        "qc_status": artifact.get("qc_status"),
+        "summary": artifact.get("summary"),
+        "created_at": artifact.get("created_at"),
+        "provenance_manifest": artifact.get("provenance_manifest"),
+        "agent_loop": artifact.get("agent_loop"),
+        "note": "stub run · not production media",
+    }
+    if swarm_id:
+        out["swarm_id"] = swarm_id
+    return out
+
+
 def public_spine_view(spine: dict[str, Any] | None) -> dict[str, Any] | None:
     """Redact internal keys for API response."""
     if not isinstance(spine, dict):
@@ -466,6 +670,20 @@ def public_spine_view(spine: dict[str, Any] | None) -> dict[str, Any] | None:
                 "summary": art.get("summary"),
                 "created_at": art.get("created_at"),
             }
+    critiques_out: list[dict[str, Any]] = []
+    for c in spine.get("critiques") or []:
+        if isinstance(c, dict):
+            critiques_out.append(
+                {
+                    "message_id": c.get("message_id"),
+                    "from_id": c.get("from_id"),
+                    "to_id": c.get("to_id"),
+                    "severity": c.get("severity"),
+                    "claim": c.get("claim"),
+                    "kind": c.get("kind"),
+                    "artifact_ref": c.get("artifact_ref"),
+                }
+            )
     return {
         "workflow_id": spine.get("workflow_id", SPINE_WORKFLOW_ID),
         "production_ready": False,
@@ -475,8 +693,15 @@ def public_spine_view(spine: dict[str, Any] | None) -> dict[str, Any] | None:
         "brief_id": spine.get("brief_id"),
         "steps": steps_out,
         "artifacts": arts_out,
+        "critiques": critiques_out[-20:],
         "approval_id": spine.get("approval_id"),
         "package_decision": spine.get("package_decision"),
+        "activation_policy": {
+            "production_tools": False,
+            "network": False,
+            "production_media": False,
+            "registered_only": True,
+        },
         "note": spine.get("note") or "stub run · not production media",
     }
 
@@ -494,6 +719,11 @@ __all__ = [
     "load_design_spine_steps",
     "next_runnable_step",
     "phase1_and_spine_member_ids",
+    "HANDOFF_CONTRACT_VERSION",
+    "build_handoff_artifact",
+    "collect_parent_asset_refs",
+    "public_artifact_view",
     "public_spine_view",
+    "validate_handoff_l1",
     "validate_user_brief_text",
 ]

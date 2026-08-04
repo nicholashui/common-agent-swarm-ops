@@ -522,6 +522,238 @@ export async function decidePackageGate(
 }
 
 /**
+ * Dry-run advance stub spine until package human gate.
+ */
+export async function runSpineToPackage(
+  swarmId: string,
+  actionReferenceId: string,
+  options: { readonly fetchImpl?: typeof fetch; readonly maxSteps?: number } = {},
+): Promise<
+  | {
+      readonly ok: true;
+      readonly stepsRun: number;
+      readonly spine: SwarmSpine | null;
+      readonly approvalId: string | null;
+    }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/swarms/${encodeURIComponent(swarmId)}/spine/run-to-package`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action_reference_id: actionReferenceId,
+          max_steps: options.maxSteps ?? 12,
+        }),
+      },
+    );
+    if (!response.ok) {
+      const detail = await parseErrorDetail(response, `HTTP ${response.status}`);
+      return { ok: false, message: `Dry-run to package failed: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{
+      steps_run?: number;
+      approval_id?: string | null;
+      spine?: {
+        workflow_id?: string;
+        status?: string;
+        mode?: string;
+        approval_id?: string | null;
+        note?: string;
+        steps?: readonly {
+          id?: string;
+          agent_id?: string;
+          status?: string;
+          artifact_ref?: string | null;
+          human_gate_required?: boolean;
+          note?: string | null;
+          stub_tool?: string | null;
+        }[];
+        artifacts?: Record<
+          string,
+          { ref?: string; kind?: string; step_id?: string; summary?: string }
+        >;
+      };
+    }>(raw);
+    const spineRaw = data.spine;
+    if (!spineRaw) {
+      return {
+        ok: true,
+        stepsRun: data.steps_run ?? 0,
+        spine: null,
+        approvalId: data.approval_id ?? null,
+      };
+    }
+    const artifacts: SwarmSpine["artifacts"] = {};
+    for (const [ref, art] of Object.entries(spineRaw.artifacts ?? {})) {
+      artifacts[ref] = {
+        ref: art.ref ?? ref,
+        kind: art.kind ?? "",
+        stepId: art.step_id ?? "",
+        summary: art.summary ?? "",
+        stub: true,
+      };
+    }
+    return {
+      ok: true,
+      stepsRun: data.steps_run ?? 0,
+      approvalId: data.approval_id ?? spineRaw.approval_id ?? null,
+      spine: {
+        workflowId: spineRaw.workflow_id ?? "wf_video_spine_v1",
+        status: spineRaw.status ?? "ready",
+        productionReady: false,
+        mode: spineRaw.mode ?? "stub",
+        approvalId: spineRaw.approval_id ?? null,
+        note: spineRaw.note ?? "stub run · not production media",
+        steps: (spineRaw.steps ?? []).map((s) => ({
+          id: s.id ?? "",
+          agentId: s.agent_id ?? "",
+          status: s.status ?? "queued",
+          artifactRef: s.artifact_ref ?? null,
+          humanGateRequired: Boolean(s.human_gate_required),
+          note: s.note ?? null,
+          stubTool: s.stub_tool ?? null,
+        })),
+        artifacts,
+      },
+    };
+  } catch {
+    return { ok: false, message: "Network error on spine dry-run." };
+  }
+}
+
+/**
+ * List redacted stub artifact handoffs for a spine draft.
+ */
+export async function listSwarmArtifacts(
+  swarmId: string,
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<
+  | {
+      readonly ok: true;
+      readonly items: readonly {
+        readonly ref: string;
+        readonly kind: string;
+        readonly stepId: string;
+        readonly summary: string;
+        readonly stub: true;
+      }[];
+      readonly count: number;
+      readonly note: string;
+    }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/swarms/${encodeURIComponent(swarmId)}/artifacts`,
+      {
+        method: "GET",
+        credentials: "same-origin",
+        headers: { accept: "application/json" },
+      },
+    );
+    if (!response.ok) {
+      const detail = await parseErrorDetail(response, `HTTP ${response.status}`);
+      return { ok: false, message: `Artifact list failed: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{
+      items?: readonly {
+        ref?: string;
+        kind?: string;
+        step_id?: string;
+        summary?: string;
+      }[];
+      count?: number;
+      note?: string;
+    }>(raw);
+    const items = (data.items ?? []).map((a) => ({
+      ref: a.ref ?? "",
+      kind: a.kind ?? "",
+      stepId: a.step_id ?? "",
+      summary: a.summary ?? "",
+      stub: true as const,
+    }));
+    return {
+      ok: true,
+      items,
+      count: data.count ?? items.length,
+      note: data.note ?? "stub run · not production media",
+    };
+  } catch {
+    return { ok: false, message: "Network error listing artifacts." };
+  }
+}
+
+/**
+ * Fetch redacted stub artifact by opaque ref.
+ */
+export async function getSwarmArtifact(
+  swarmId: string,
+  artifactRef: string,
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<
+  | {
+      readonly ok: true;
+      readonly artifact: {
+        readonly ref: string;
+        readonly kind: string;
+        readonly stepId: string;
+        readonly summary: string;
+        readonly stub: true;
+        readonly note: string;
+      };
+    }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/swarms/${encodeURIComponent(swarmId)}/artifacts/${encodeURIComponent(artifactRef)}`,
+      {
+        method: "GET",
+        credentials: "same-origin",
+        headers: { accept: "application/json" },
+      },
+    );
+    if (!response.ok) {
+      const detail = await parseErrorDetail(response, `HTTP ${response.status}`);
+      return { ok: false, message: `Artifact load failed: ${detail}` };
+    }
+    const raw: unknown = await response.json();
+    const data = unwrapData<{
+      ref?: string;
+      kind?: string;
+      step_id?: string;
+      summary?: string;
+      note?: string;
+    }>(raw);
+    return {
+      ok: true,
+      artifact: {
+        ref: data.ref ?? artifactRef,
+        kind: data.kind ?? "",
+        stepId: data.step_id ?? "",
+        summary: data.summary ?? "",
+        stub: true,
+        note: data.note ?? "stub run · not production media",
+      },
+    };
+  } catch {
+    return { ok: false, message: "Network error loading artifact." };
+  }
+}
+
+/**
  * Create an organization draft swarm (Host may issue compose action when none provided).
  */
 export async function createSwarmDraft(

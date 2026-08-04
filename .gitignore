@@ -2,6 +2,7 @@ node_modules/
 external/sources/
 external/docs/
 .run/
+.data/
 *.log
 .DS_Store
 .env
