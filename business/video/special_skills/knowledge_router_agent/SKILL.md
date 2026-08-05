@@ -1,29 +1,15 @@
 # Special skill integration — `knowledge_router_agent`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** routing  
-**Plan:** [`planning/special/knowledge_router_agent.md`](../../../planning/special/knowledge_router_agent.md)  
-**Summary:** Knowledge routing via router_table + research agents
+**Plan:** [`docs/plans/knowledge_research_thinking_host_foundation.md`](../../../../docs/plans/knowledge_research_thinking_host_foundation.md)  
+**Summary:** Offline knowledge routing to memory/RAG/aesthetics/pack destinations
 
-## Host binding
-
-### Agents
-- `video.router` — SPEC 263.6KB, ALC=yes [OK]
-- `video.memory` — SPEC 293.1KB, ALC=yes [OK]
-- `video.webresearch` — SPEC 147.4KB, ALC=yes [OK]
-
-### Workflow DNA
-- `wf_video_spine_v1` — steps=8 depth=None [OK]
-
-### Host modules
-- `business/video/router_table.json` [OK]
-- `backend/app/domain/knowledge/retrieval.py` [OK]
+## Host modules
+- `backend/app/knowledge/` — keyword hybrid-lite router  
+- `backend/app/api/v1/knowledge.py` — `/api/v1/knowledge/*`  
+- Tool: `knowledge.route`
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Fail-closed: no live web / embedding GNN  
+- Entry: `POST /api/v1/knowledge/route`  

@@ -1,23 +1,26 @@
 {
   "skill_id": "agent_loop_v3",
-  "plan": "planning/special/agent_loop_v3.md",
+  "plan": "docs/plans/agent_loop_v3_host_foundation.md",
   "kind": "host_loop_pattern",
-  "summary": "Cognitive agent loop maps to orchestrator/planner/memory + DNA spine",
-  "status": "mvp_integrated",
-  "integrated_at": "2026-07-13",
+  "summary": "Offline agent_loop_v3 cognitive envelope over pack Plan→Act→Self-Review",
+  "status": "host_offline_foundation",
+  "integrated_at": "2026-08-05",
   "n1": "video logic in pack only; host modules are infrastructure",
   "agents": [
     "video.orchestrator",
     "video.planner",
     "video.memory",
-    "video.judge"
+    "video.judge",
+    "specials.agent-loop-creator"
   ],
   "dna": [
     "wf_video_spine_v1"
   ],
   "modules": [
-    "backend/app/domain/workflows/engine.py",
-    "backend/app/runtime.py"
+    "backend/app/video/agent_loop_service.py",
+    "backend/app/video/loop_v3/engine.py",
+    "backend/app/api/v1/agent_loops.py",
+    "backend/app/video/tool_activation.py"
   ],
   "process_ids": [
     "video.spine.orchestrate"
@@ -29,32 +32,28 @@
         "folder": true,
         "spec": true,
         "agent_spec": true,
-        "alc": true,
-        "spec_kb": 472.9
+        "alc": true
       },
       {
         "pack_id": "video.planner",
         "folder": true,
         "spec": true,
         "agent_spec": true,
-        "alc": true,
-        "spec_kb": 553.1
+        "alc": true
       },
       {
         "pack_id": "video.memory",
         "folder": true,
         "spec": true,
         "agent_spec": true,
-        "alc": true,
-        "spec_kb": 293.1
+        "alc": true
       },
       {
         "pack_id": "video.judge",
         "folder": true,
         "spec": true,
         "agent_spec": true,
-        "alc": true,
-        "spec_kb": 246.7
+        "alc": true
       }
     ],
     "dna": [
@@ -69,16 +68,23 @@
     ],
     "modules": [
       {
-        "path": "backend/app/domain/workflows/engine.py",
+        "path": "backend/app/video/agent_loop_service.py",
         "exists": true
       },
       {
-        "path": "backend/app/runtime.py",
+        "path": "backend/app/video/loop_v3/engine.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/api/v1/agent_loops.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/video/tool_activation.py",
         "exists": true
       }
     ],
-    "plan_exists": true,
-    "plan_bytes": 23052
+    "plan_exists": true
   },
   "notes": {
     "privacy": false,

@@ -154,6 +154,101 @@ export async function fetchAgentLoopTools(
   }
 }
 
+export async function fetchAgentLoopV3Policy(
+  options: { readonly fetchImpl?: typeof fetch } = {},
+): Promise<
+  | {
+      readonly ok: true;
+      readonly patterns: readonly string[];
+      readonly criticModes: readonly string[];
+      readonly productionMedia: boolean;
+    }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl("/api/v1/agent-loops/v3/policy", {
+      method: "GET",
+      credentials: "same-origin",
+      headers: { accept: "application/json" },
+    });
+    if (!response.ok) {
+      return { ok: false, message: await parseError(response, `HTTP ${response.status}`) };
+    }
+    const data = unwrapData<{
+      patterns?: string[];
+      critic_modes?: string[];
+      activation_policy?: { production_media?: boolean };
+    }>(await response.json());
+    return {
+      ok: true,
+      patterns: data.patterns ?? [],
+      criticModes: data.critic_modes ?? [],
+      productionMedia: data.activation_policy?.production_media ?? false,
+    };
+  } catch {
+    return { ok: false, message: "Could not load agent-loop v3 policy." };
+  }
+}
+
+export async function runAgentLoop(
+  agentId: string,
+  goal: string,
+  options: {
+    readonly fetchImpl?: typeof fetch;
+    readonly enableV3?: boolean;
+    readonly maxSteps?: number;
+    readonly criticModes?: readonly string[];
+  } = {},
+): Promise<
+  | {
+      readonly ok: true;
+      readonly agentId: string;
+      readonly status: string;
+      readonly hasV3: boolean;
+      readonly cynefinDomain?: string;
+    }
+  | { readonly ok: false; readonly message: string }
+> {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch.bind(globalThis);
+  try {
+    const response = await fetchImpl(
+      `/api/v1/agent-loops/agents/${encodeURIComponent(agentId)}/run`,
+      {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          goal,
+          enable_v3: options.enableV3 ?? true,
+          max_steps: options.maxSteps ?? 3,
+          ...(options.criticModes ? { critic_modes: options.criticModes } : {}),
+        }),
+      },
+    );
+    if (!response.ok) {
+      return { ok: false, message: await parseError(response, `HTTP ${response.status}`) };
+    }
+    const data = unwrapData<{
+      agent_id?: string;
+      status?: string;
+      v3?: { phase0?: { cynefin?: { domain?: string } } };
+    }>(await response.json());
+    return {
+      ok: true,
+      agentId: data.agent_id ?? agentId,
+      status: data.status ?? "",
+      hasV3: Boolean(data.v3),
+      cynefinDomain: data.v3?.phase0?.cynefin?.domain,
+    };
+  } catch {
+    return { ok: false, message: "Network error running agent loop." };
+  }
+}
+
 export async function runWorkflowLoops(
   workflowId: string,
   goal: string,

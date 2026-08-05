@@ -21,6 +21,12 @@ class AgentLoopRunRequest(StrictSchema):
     correlation_id: str | None = Field(default=None, max_length=100)
     allow_production: bool = False
     allow_network: bool = False
+    # agent_loop_v3 offline cognitive envelope (default on)
+    enable_v3: bool = True
+    max_steps: int = Field(default=3, ge=1, le=8)
+    enable_fast_path: bool = True
+    critic_modes: list[str] = Field(default_factory=lambda: ["standard"])
+    cynefin_override: str | None = Field(default=None, max_length=32)
 
 
 class AgentLoopCrewRequest(StrictSchema):
@@ -84,6 +90,28 @@ async def list_agent_loop_inventory(
     }
 
 
+@router.get("/v3/policy")
+async def agent_loop_v3_policy(
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+) -> dict[str, Any]:
+    """Offline agent_loop_v3 Host foundation policy (Cynefin/AAR/critics/patterns)."""
+    service = get_agent_loop_service()
+    return {**service.v3_policy(), "correlation_id": str(context.correlation_id)}
+
+
+@router.get("/v3/patterns")
+async def agent_loop_v3_patterns(
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    limit: Annotated[int, Query(ge=1, le=200)] = 50,
+) -> dict[str, Any]:
+    """List RPD pattern-store entries recorded by offline v3 loops."""
+    service = get_agent_loop_service()
+    return {
+        "items": service.list_v3_patterns(limit=limit),
+        "correlation_id": str(context.correlation_id),
+    }
+
+
 @router.get("/runs")
 async def list_agent_loop_runs(
     context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
@@ -112,6 +140,11 @@ async def run_agent_loop(
         correlation_id=request.correlation_id or str(context.correlation_id),
         allow_production=request.allow_production,
         allow_network=request.allow_network,
+        enable_v3=request.enable_v3,
+        max_steps=request.max_steps,
+        enable_fast_path=request.enable_fast_path,
+        critic_modes=request.critic_modes,
+        cynefin_override=request.cynefin_override,
     )
     if result.get("error") and result.get("ok") is False and "required" in str(result.get("error")):
         _bad(str(context.correlation_id), str(result["error"]))

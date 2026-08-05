@@ -1,30 +1,15 @@
 # Special skill integration — `complex_problem_solution_process_model`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** process_model  
-**Plan:** [`planning/special/complex_problem_solution_process_model.md`](../../../planning/special/complex_problem_solution_process_model.md)  
-**Summary:** Complex problem process → planner decomposition + gates
+**Plan:** [`docs/plans/creative_complex_strategic_llm_host_foundation.md`](../../../../docs/plans/creative_complex_strategic_llm_host_foundation.md)  
+**Summary:** Offline decompose → options → gates → plan for planner/orchestrator
 
-## Host binding
-
-### Agents
-- `video.planner` — SPEC 553.1KB, ALC=yes [OK]
-- `video.orchestrator` — SPEC 472.9KB, ALC=yes [OK]
-- `video.judge` — SPEC 246.7KB, ALC=yes [OK]
-- `video.gatekeeper` — SPEC 235.8KB, ALC=yes [OK]
-
-### Workflow DNA
-- `wf_video_spine_v1` — steps=8 depth=None [OK]
-- `wf_video_production_e2e_v1` — steps=9 depth=thin_stub_n3 [OK]
-
-### Host modules
-- `backend/app/domain/workflows/archetype_selector.py` [OK]
+## Host modules
+- `backend/app/complex_problem/`  
+- `backend/app/api/v1/complex_problem.py`  
+- Tool: `complex_problem.solve`  
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Fail-closed offline process scaffold  
+- Entry: `POST /api/v1/complex-problem/solve`  

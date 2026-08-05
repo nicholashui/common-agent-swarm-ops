@@ -1,28 +1,15 @@
 # Special skill integration — `coding_agent`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** host_infra  
-**Plan:** [`planning/special/coding_agent.md`](../../../planning/special/coding_agent.md)  
-**Summary:** Host engineering agent capability (not video business logic)
+**Plan:** [`docs/plans/psychology_coding_skills_catalog_host_foundation.md`](../../../../docs/plans/psychology_coding_skills_catalog_host_foundation.md)  
+**Summary:** Offline engineering plan-only (touch points, steps, tests) — no shell/network exec
 
-## Host binding
-
-### Agents
-- _None (host-infra skill)_
-
-### Workflow DNA
-- _None_
-
-### Host modules
-- `backend/app/runtime.py` [OK]
-- `.grok/skills/workflow-dna/SKILL.md` [OK]
-- `backend/app/infrastructure/llm/base.py` [OK]
+## Host modules
+- `backend/app/coding/`  
+- `backend/app/api/v1/coding.py`  
+- Tool: `coding.plan`  
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Fail-closed: no arbitrary shell, remote installers, network  
+- Entry: `POST /api/v1/coding/plan`  

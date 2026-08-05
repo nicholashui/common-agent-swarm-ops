@@ -195,6 +195,32 @@ def build_user_brief(
         if banned in {k.lower() for k in meta}:
             return None, f"Brief must not include field {banned!r}."
 
+    # Offline intent enrichment (DIA lite) — optional, never blocks brief mint
+    intent_enrichment: dict[str, Any] | None = None
+    try:
+        from app.intent.service import IntentAnalyzeRequest, get_intent_service
+
+        intent_res = get_intent_service().analyze(
+            IntentAnalyzeRequest(text=text.strip(), locale=locale, channel="video_brief")
+        )
+        if intent_res.get("ok"):
+            synth = (intent_res.get("phases") or {}).get("synthesis") or {}
+            intent_enrichment = {
+                "primary_intent": intent_res.get("primary_intent"),
+                "recommended_archetype": intent_res.get("recommended_archetype"),
+                "emotional_target": intent_res.get("emotional_target"),
+                "brief_enrichment": synth.get("brief_enrichment"),
+                "run_id": intent_res.get("run_id"),
+            }
+            # Fill archetype/scale only when caller left them empty
+            if arch_s is None and intent_res.get("recommended_archetype") in _VALID_ARCHETYPE:
+                arch_s = str(intent_res["recommended_archetype"])
+            scale_hint = synth.get("recommended_scale")
+            if scale_s is None and scale_hint in _VALID_SCALE:
+                scale_s = str(scale_hint)
+    except Exception:  # noqa: BLE001 — brief must not fail on intent hooks
+        intent_enrichment = None
+
     brief: dict[str, Any] = {
         "version": USER_BRIEF_VERSION,
         "text": text.strip(),
@@ -205,6 +231,8 @@ def build_user_brief(
         "as_of": _utc_now().isoformat(),
         "correlation_id": correlation_id,
     }
+    if intent_enrichment is not None:
+        brief["intent_analysis"] = intent_enrichment
     if mint_id:
         brief["brief_id"] = _new_id("brief")
     return brief, None

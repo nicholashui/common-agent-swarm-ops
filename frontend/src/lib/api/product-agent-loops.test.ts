@@ -7,6 +7,8 @@ import test from "node:test";
 import {
   fetchAgentLoopInventory,
   fetchAgentLoopTools,
+  fetchAgentLoopV3Policy,
+  runAgentLoop,
   runSwarmMemberLoops,
   runWorkflowLoops,
 } from "./product-agent-loops";
@@ -122,6 +124,45 @@ test("fetchAgentLoopTools maps catalog", async () => {
     assert.equal(result.mediaLiveEnv, false);
     assert.equal(result.tools[0]?.toolId, "media.sora");
     assert.equal(result.tools[0]?.activeMode, "stub");
+  }
+});
+
+test("fetchAgentLoopV3Policy and runAgentLoop map v3 fields", async () => {
+  const fetchImpl = async (
+    input: RequestInfo | URL,
+    init?: RequestInit,
+  ): Promise<Response> => {
+    const url = String(input);
+    if (url.includes("/v3/policy")) {
+      return Response.json({
+        patterns: ["Cynefin", "AAR"],
+        critic_modes: ["standard"],
+        activation_policy: { production_media: false },
+      });
+    }
+    assert.match(url, /\/agent-loops\/agents\/video\.planner\/run/);
+    assert.equal(init?.method, "POST");
+    return Response.json({
+      agent_id: "video.planner",
+      status: "ok",
+      v3: { phase0: { cynefin: { domain: "complicated" } } },
+    });
+  };
+  const pol = await fetchAgentLoopV3Policy({
+    fetchImpl: fetchImpl as typeof fetch,
+  });
+  assert.equal(pol.ok, true);
+  if (pol.ok) {
+    assert.equal(pol.productionMedia, false);
+    assert.ok(pol.patterns.includes("Cynefin"));
+  }
+  const run = await runAgentLoop("video.planner", "Plan short", {
+    fetchImpl: fetchImpl as typeof fetch,
+  });
+  assert.equal(run.ok, true);
+  if (run.ok) {
+    assert.equal(run.hasV3, true);
+    assert.equal(run.cynefinDomain, "complicated");
   }
 });
 

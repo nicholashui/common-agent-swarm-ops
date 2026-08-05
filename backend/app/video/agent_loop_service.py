@@ -20,6 +20,7 @@ from typing import Any
 from uuid import uuid4
 
 from app.api.v1.product_facade_store import ProductFacadeStore, persistence_enabled
+from app.video.loop_v3 import get_pattern_store, reset_pattern_store_for_tests, run_v3_envelope
 from app.video.pack_runtime.critique import CritiqueBus, CritiqueSeverity
 from app.video.pack_runtime.loader import PackAgentLoader
 from app.video.pack_runtime.paths import AGENTS_ROOT
@@ -32,8 +33,12 @@ ACTIVATION_POLICY: dict[str, Any] = {
     "production_media": False,
     "registered_only": True,
     "mode": "offline_pack_harness",
+    "agent_loop_v3_offline": True,
     "media_live_env": False,
-    "note": "Live media tools require CASOPS_MEDIA_LIVE=1 and separate Host go-live review.",
+    "note": (
+        "Live media tools require CASOPS_MEDIA_LIVE=1 and separate Host go-live review. "
+        "agent_loop_v3 Host foundation: Cynefin/Premortem/AAR/critics/pattern-store offline."
+    ),
 }
 
 
@@ -217,8 +222,18 @@ class AgentLoopService:
         inputs: dict[str, Any] | None = None,
         allow_production: bool = False,
         allow_network: bool = False,
+        enable_v3: bool = True,
+        max_steps: int = 3,
+        enable_fast_path: bool = True,
+        critic_modes: list[str] | None = None,
+        cynefin_override: str | None = None,
     ) -> dict[str, Any]:
-        """Run one agent loop. Refuses production/network activation flags."""
+        """Run one agent loop. Refuses production/network activation flags.
+
+        When ``enable_v3`` (default True), wraps the offline pack harness with
+        agent_loop_v3 cognitive scaffolding (Cynefin, Premortem, AAR, critics,
+        pattern store). Core Act remains fail-closed stub tools + L1/L2.
+        """
         policy = current_activation_policy()
         goal_s = (goal or "").strip()
         if not goal_s:
@@ -238,6 +253,82 @@ class AgentLoopService:
             }
 
         corr = (correlation_id or "").strip() or f"loop_{uuid4().hex[:12]}"
+
+        def _core() -> dict[str, Any]:
+            return self._run_core_pack(
+                agent_id,
+                organization_id=organization_id,
+                goal=goal_s,
+                correlation_id=corr,
+                inputs=inputs,
+                policy=policy,
+            )
+
+        if enable_v3:
+            # Thinking-model hooks can refine cognitive profile when caller uses defaults
+            thinking_profile: dict[str, Any] | None = None
+            try:
+                from app.thinking.service import ThinkingRecommendRequest, get_thinking_service
+
+                thinking_profile = get_thinking_service().recommend(
+                    ThinkingRecommendRequest(
+                        goal=goal_s,
+                        cynefin_override=cynefin_override,
+                    )
+                )
+                profile = thinking_profile.get("cognitive_profile") or {}
+                if critic_modes is None and profile.get("critic_modes"):
+                    critic_modes = list(profile["critic_modes"])
+                if max_steps == 3 and profile.get("max_steps"):
+                    max_steps = int(profile["max_steps"])
+                if enable_fast_path and profile.get("enable_fast_path") is False:
+                    enable_fast_path = False
+            except Exception:  # noqa: BLE001 — thinking hooks are optional
+                thinking_profile = None
+
+            envelope = run_v3_envelope(
+                agent_id=agent_id,
+                goal=goal_s,
+                max_steps=max_steps,
+                enable_fast_path=enable_fast_path,
+                critic_modes=critic_modes,
+                cynefin_override=cynefin_override,
+                run_core=_core,
+            )
+            if thinking_profile:
+                envelope["thinking_recommendation"] = {
+                    "cognitive_profile": thinking_profile.get("cognitive_profile"),
+                    "selected_model_ids": [
+                        m.get("id")
+                        for m in (thinking_profile.get("selected_models") or [])
+                        if isinstance(m, dict)
+                    ],
+                }
+            core = envelope.get("core") or {}
+            out = dict(core)
+            out["v3"] = {k: v for k, v in envelope.items() if k != "core"}
+            # Only hard critic blockers escalate HITL (warnings stay advisory)
+            critic = envelope.get("critic") or {}
+            if not critic.get("pass"):
+                out["needs_hitl"] = True
+                out["ok"] = False
+            return out
+
+        return _core()
+
+    def _run_core_pack(
+        self,
+        agent_id: str,
+        *,
+        organization_id: str,
+        goal: str,
+        correlation_id: str,
+        inputs: dict[str, Any] | None,
+        policy: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Offline pack Plan→Act→Self-Review + durable memory (core harness)."""
+        goal_s = goal
+        corr = correlation_id
         try:
             result: PackAgentRunResult = self._runner.run(
                 agent_id,
@@ -258,6 +349,12 @@ class AgentLoopService:
                 "correlation_id": corr,
                 "error": str(exc)[:500],
                 "activation_policy": policy,
+                "status": "error",
+                "needs_hitl": True,
+                "l1": {},
+                "l2": {},
+                "tool_invocations": [],
+                "artifact_summary": "",
             }
 
         payload = result.to_dict()
@@ -282,6 +379,7 @@ class AgentLoopService:
             "plan": "parse ticket/goal + select path (offline harness)",
             "act": "Host tool registry · stub by default · no production media",
             "self_review": "L1 pack checks + L2 rubric offline",
+            "v3": "Cynefin/Premortem/AAR envelope when enable_v3",
         }
         payload["tool_invocations"] = tool_invocations
         payload["activation_policy"] = policy
@@ -381,6 +479,31 @@ class AgentLoopService:
             "activation_policy": policy,
             "result": payload,
         }
+
+    def v3_policy(self) -> dict[str, Any]:
+        store = get_pattern_store()
+        return {
+            "activation_policy": current_activation_policy(),
+            "patterns": [
+                "ReAct_lite",
+                "Cynefin",
+                "Premortem",
+                "AAR",
+                "DoubleLoop_scaffold",
+                "RPD_pattern_store",
+                "MultiModeCritic",
+            ],
+            "critic_modes": ["standard", "red_team", "paul_elder", "six_hats"],
+            "default_max_steps": 3,
+            "pattern_store": store.stats(),
+            "note": (
+                "Offline agent_loop_v3 Host foundation over pack Plan→Act→Self-Review. "
+                "Not full multi-step LLM ReAct or TextGrad self-evolution."
+            ),
+        }
+
+    def list_v3_patterns(self, *, limit: int = 50) -> list[dict[str, Any]]:
+        return get_pattern_store().list_patterns(limit=limit)
 
     def project_memory(
         self, organization_id: str, *, limit: int = 50
@@ -539,6 +662,7 @@ def get_agent_loop_service() -> AgentLoopService:
 def reset_agent_loop_service_for_tests() -> AgentLoopService:
     global _SERVICE
     with _SERVICE_LOCK:
+        reset_pattern_store_for_tests()
         _SERVICE = AgentLoopService()
         return _SERVICE
 

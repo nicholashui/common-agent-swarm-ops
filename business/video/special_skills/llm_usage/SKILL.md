@@ -1,30 +1,15 @@
 # Special skill integration — `llm_usage`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** host_infra  
-**Plan:** [`planning/special/llm_usage.md`](../../../planning/special/llm_usage.md)  
-**Summary:** LLM usage policy via host providers + cost/latency optimizers
+**Plan:** [`docs/plans/creative_complex_strategic_llm_host_foundation.md`](../../../../docs/plans/creative_complex_strategic_llm_host_foundation.md)  
+**Summary:** Offline token budget ledger + mode recommend (no live billing)
 
-## Host binding
-
-### Agents
-- `video.costoptimizer` — SPEC 88.0KB, ALC=yes [OK]
-- `video.latencyoptimizer` — SPEC 68.3KB, ALC=yes [OK]
-- `video.router` — SPEC 263.6KB, ALC=yes [OK]
-
-### Workflow DNA
-- _None_
-
-### Host modules
-- `backend/app/infrastructure/llm/base.py` [OK]
-- `backend/app/infrastructure/llm/mock_provider.py` [OK]
-- `backend/app/infrastructure/llm/openai_provider.py` [OK]
+## Host modules
+- `backend/app/llm_usage/`  
+- `backend/app/api/v1/llm_usage.py`  
+- Tool: `llm_usage.record`  
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Fail-closed: offline estimates only  
+- Entry: `GET /api/v1/llm-usage/policy`, `POST /record`, `POST /recommend-mode`  

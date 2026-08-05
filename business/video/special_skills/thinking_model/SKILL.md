@@ -1,30 +1,16 @@
 # Special skill integration — `thinking_model`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** host_loop_pattern  
-**Plan:** [`planning/special/thinking_model.md`](../../../planning/special/thinking_model.md)  
-**Summary:** Thinking models configure loop intensity (orchestrator/planner/judge)
+**Plan:** [`docs/plans/knowledge_research_thinking_host_foundation.md`](../../../../docs/plans/knowledge_research_thinking_host_foundation.md)  
+**Summary:** Ranked thinking models configure agent-loop cognitive intensity
 
-## Host binding
-
-### Agents
-- `video.orchestrator` — SPEC 472.9KB, ALC=yes [OK]
-- `video.planner` — SPEC 553.1KB, ALC=yes [OK]
-- `video.judge` — SPEC 246.7KB, ALC=yes [OK]
-- `video.safetyredteam` — SPEC 68.1KB, ALC=yes [OK]
-
-### Workflow DNA
-- `wf_video_spine_v1` — steps=8 depth=None [OK]
-
-### Host modules
-- `backend/app/domain/workflows/archetype_selector.py` [OK]
-- `.grok/skills/workflow-dna/SKILL.md` [OK]
+## Host modules
+- `backend/app/thinking/` — catalog + recommend  
+- `backend/app/api/v1/thinking.py`  
+- Tool: `thinking.recommend`  
+- Wired into `AgentLoopService` v3 defaults  
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Offline catalog hooks only (not live 40-model LLM metacognition)  
+- Entry: `POST /api/v1/thinking/recommend`  

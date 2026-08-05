@@ -63,12 +63,74 @@ def test_run_single_agent_loop(client: TestClient) -> None:
     )
     assert result.get("agent_id") == "video.planner"
     assert "l1" in result or result.get("ok") is False
+    # Default enable_v3 attaches cognitive envelope
+    assert "v3" in result
+    assert result["v3"]["phase0"]["cynefin"]["domain"] in {
+        "simple",
+        "complicated",
+        "complex",
+        "chaotic",
+    }
+    assert result["v3"]["aar"]["what_next"]
+    assert result["v3"]["critic"]["modes"]
     # Production flags rejected
     denied = client.post(
         "/api/v1/agent-loops/agents/video.planner/run",
         json={"goal": "x", "allow_production": True},
     )
     assert denied.status_code in {403, 400}
+
+
+def test_agent_loop_v3_policy_patterns_and_fast_path(client: TestClient) -> None:
+    pol = body(client.get("/api/v1/agent-loops/v3/policy"))
+    assert pol["activation_policy"]["production_media"] is False
+    assert "Cynefin" in pol["patterns"]
+    assert "standard" in pol["critic_modes"]
+
+    # Seed a successful pattern then similar goal can match
+    first = body(
+        client.post(
+            "/api/v1/agent-loops/agents/video.planner/run",
+            json={
+                "goal": "Plan a short social video for product launch stub tools",
+                "enable_v3": True,
+                "critic_modes": ["standard", "red_team"],
+                "cynefin_override": "simple",
+            },
+        )
+    )
+    assert first.get("v3")
+    assert first["v3"]["phase0"]["cynefin"]["domain"] == "simple"
+    assert first["v3"]["pattern_recorded"]
+
+    patterns = body(client.get("/api/v1/agent-loops/v3/patterns"))
+    assert len(patterns["items"]) >= 1
+
+    second = body(
+        client.post(
+            "/api/v1/agent-loops/agents/video.planner/run",
+            json={
+                "goal": "Plan a short social video for product launch stub tools again",
+                "enable_v3": True,
+                "enable_fast_path": True,
+                "cynefin_override": "simple",
+            },
+        )
+    )
+    assert second.get("v3")
+    # May or may not hit fast path depending on token overlap; envelope always present
+    assert second["v3"]["step_count"] >= 1
+    assert "Premortem" in second["v3"]["patterns_used"]
+
+    # Explicit disable v3 keeps classic payload without envelope
+    classic = body(
+        client.post(
+            "/api/v1/agent-loops/agents/video.planner/run",
+            json={"goal": "Classic loop without v3", "enable_v3": False},
+        )
+    )
+    assert classic.get("agent_id") == "video.planner"
+    assert "v3" not in classic
 
 
 def test_tools_memory_critiques_and_fleet_sample(client: TestClient) -> None:

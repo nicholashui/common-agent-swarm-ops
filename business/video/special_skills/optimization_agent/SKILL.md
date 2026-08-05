@@ -1,30 +1,15 @@
 # Special skill integration — `optimization_agent`
 
-**Status:** MVP integrated (2026-07-13)  
+**Status:** Host offline foundation (2026-08-05)  
 **Kind:** agent_family  
-**Plan:** [`planning/special/optimization_agent.md`](../../../planning/special/optimization_agent.md)  
-**Summary:** Optimization family (prompt/cost/retention/ROAS/eval)
+**Plan:** [`docs/plans/intent_optimization_skill_evals_host_foundation.md`](../../../../docs/plans/intent_optimization_skill_evals_host_foundation.md)  
+**Summary:** Offline prompt/cost/retention/eval optimization recommendations
 
-## Host binding
-
-### Agents
-- `video.promptoptimizer` — SPEC 80.6KB, ALC=yes [OK]
-- `video.costoptimizer` — SPEC 88.0KB, ALC=yes [OK]
-- `video.retentionoptimizer` — SPEC 272.1KB, ALC=yes [OK]
-- `video.roasoptimizer` — SPEC 63.3KB, ALC=yes [OK]
-- `video.evaluationharness` — SPEC 262.7KB, ALC=yes [OK]
-
-### Workflow DNA
-- `wf_video_arch_b_ugc_ad_v1` — steps=11 depth=phased_v1 [OK]
-
-### Host modules
-- `backend/app/domain/evaluations/evaluators.py` [OK]
+## Host modules
+- `backend/app/optimization/`  
+- `backend/app/api/v1/optimization.py`  
+- Tool: `optimization.recommend`  
 
 ## Runtime contract
-
-- Entry agents: `video.orchestrator` / `video.planner` when DNA-bound.
-- Tools: host allow-list only; design-time vendors stay in SPEC.
-- Irreversible package/publish steps require human gate.
-- No second control plane (N1).
-
-Machine manifest: `integration.json`
+- Fail-closed: no live ROAS training  
+- Entry: `POST /api/v1/optimization/recommend`  
