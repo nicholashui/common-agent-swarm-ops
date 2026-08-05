@@ -1,0 +1,79 @@
+{
+  "org2": [
+    {
+      "message_id": "crit_a084bb6a7d8e",
+      "correlation_id": "crew_91cc356aea40:video.screenwriter",
+      "from_id": "video.screenwriter",
+      "to_id": "video.screenwriter",
+      "severity": "nit",
+      "claim": "video.screenwriter completed status=ok for goal",
+      "artifact_ref": "artifact:video.screenwriter:crew_91cc356aea40:video.screenwriter",
+      "evidence_refs": [
+        "prompt:video.prompt.screenwriter.v1"
+      ],
+      "kind": "critique",
+      "requires_hitl": false,
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "message_id": "crit_fffe92dec349",
+      "correlation_id": "crew_91cc356aea40:video.producer",
+      "from_id": "video.producer",
+      "to_id": "video.producer",
+      "severity": "nit",
+      "claim": "video.producer completed status=ok for goal",
+      "artifact_ref": "artifact:video.producer:crew_91cc356aea40:video.producer",
+      "evidence_refs": [
+        "prompt:video.prompt.producer.v1"
+      ],
+      "kind": "critique",
+      "requires_hitl": false,
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "message_id": "crit_4c5e9f48e9aa",
+      "correlation_id": "crew_91cc356aea40:video.orchestrator",
+      "from_id": "video.orchestrator",
+      "to_id": "video.orchestrator",
+      "severity": "nit",
+      "claim": "video.orchestrator completed status=ok for goal",
+      "artifact_ref": "artifact:video.orchestrator:crew_91cc356aea40:video.orchestrator",
+      "evidence_refs": [
+        "prompt:video.prompt.orchestrator.v1"
+      ],
+      "kind": "critique",
+      "requires_hitl": false,
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "message_id": "crit_5861ffdc7900",
+      "correlation_id": "crew_91cc356aea40:video.director",
+      "from_id": "video.director",
+      "to_id": "video.director",
+      "severity": "nit",
+      "claim": "video.director completed status=ok for goal",
+      "artifact_ref": "artifact:video.director:crew_91cc356aea40:video.director",
+      "evidence_refs": [
+        "prompt:video.prompt.director.v1"
+      ],
+      "kind": "critique",
+      "requires_hitl": false,
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "message_id": "crit_e4e677d56c43",
+      "correlation_id": "crew_91cc356aea40:video.planner",
+      "from_id": "video.planner",
+      "to_id": "video.planner",
+      "severity": "nit",
+      "claim": "video.planner completed status=ok for goal",
+      "artifact_ref": "artifact:video.planner:crew_91cc356aea40:video.planner",
+      "evidence_refs": [
+        "prompt:video.prompt.planner.v1"
+      ],
+      "kind": "critique",
+      "requires_hitl": false,
+      "created_at": "2026-08-05T00:58:48Z"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 /**
  * @duty OrgChartHome — Registry agent organization chart
  * @role Visualize non-special pack hierarchy (orchestrator top management → departments → agents).
- * @controls Pack selector, critique-edge toggle, fit-view, agent detail links.
+ * @controls Pack selector, critique On/Off CTA + status pill (common-style), fit-view, agent detail links.
  * @must Use pack-generated hierarchy only; specials excluded.
  * @mustnot Invent management relationships outside generated org-chart payload.
  */
@@ -177,16 +177,6 @@ export function OrgChartHome({
     announce(`Agent group changed to ${event.target.value}.`);
   };
 
-  const onCritiqueChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ): void => {
-    const isVisible = event.target.checked;
-    setShowCritique(isVisible);
-    announce(
-      `Critique interconnections ${isVisible ? "shown" : "hidden"}.`,
-    );
-  };
-
   if (!activeGroup) {
     return (
       <section className="org-chart-page" aria-labelledby="org-chart-title">
@@ -237,14 +227,52 @@ export function OrgChartHome({
             </select>
           </label>
 
-          <label className="org-chart-page__toggle">
-            <input
-              type="checkbox"
-              checked={showCritique}
-              onChange={onCritiqueChange}
-            />
-            <span>Show critique interconnections</span>
-          </label>
+          <span className="org-chart-page__critique-control">
+            <span className="org-chart-page__field-label" id="org-critique-label">
+              Critique links
+            </span>
+            <button
+              aria-labelledby="org-critique-label"
+              aria-pressed={showCritique}
+              className={
+                showCritique
+                  ? "ds-cta ds-cta--common ds-cta--sm"
+                  : "ds-cta ds-cta--secondary ds-cta--sm"
+              }
+              onClick={() => {
+                const next = !showCritique;
+                setShowCritique(next);
+                announce(
+                  `Critique interconnections ${next ? "shown" : "hidden"}.`,
+                );
+              }}
+              type="button"
+            >
+              {showCritique ? "On" : "Off"}
+            </button>
+            <span
+              className={
+                showCritique
+                  ? "ds-status ds-status--live org-chart-page__critique-status"
+                  : "ds-status ds-status--stale org-chart-page__critique-status"
+              }
+              role="status"
+              aria-live="polite"
+            >
+              <span
+                aria-hidden="true"
+                className={
+                  showCritique
+                    ? "ds-status__dot ds-status__dot--pulse"
+                    : "ds-status__dot"
+                }
+              />
+              {feedback ??
+                (showCritique
+                  ? "Critique interconnections shown."
+                  : "Critique interconnections hidden.")}
+            </span>
+          </span>
 
           <div className="org-chart-page__stats" aria-live="polite">
             <span>{activeGroup.agentCount} agents</span>
@@ -254,7 +282,6 @@ export function OrgChartHome({
               <span>{activeGroup.critiqueEdges.length} critique links</span>
             ) : null}
           </div>
-          {feedback ? <p role="status">{feedback}</p> : null}
         </div>
       </header>
 

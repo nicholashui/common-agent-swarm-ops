@@ -330,6 +330,74 @@ class ProductFacadeService:
             rows = [r for r in self._audit if r.get("organization_id") == org]
         return rows[-limit:]
 
+    def run_member_loops(
+        self,
+        *,
+        organization_id: OrganizationId,
+        swarm_id: str,
+        action_reference_id: str,
+        correlation_id: CorrelationId,
+        goal: str | None = None,
+        agent_ids: list[str] | None = None,
+        stop_on_failure: bool = False,
+    ) -> dict[str, Any] | None:
+        """Run offline AgentLoopService for swarm members (fleet path seed)."""
+        action = self.consume_action(
+            organization_id=organization_id,
+            action_reference_id=action_reference_id,
+            expected_kind="run_member_loops",
+            resource_ref=swarm_id,
+        )
+        if action is None:
+            return None
+        swarm = self.get_swarm(organization_id, swarm_id)
+        if swarm is None:
+            return None
+        ids = list(agent_ids or [])
+        if not ids:
+            ids = [
+                str(m.get("agent_id"))
+                for m in swarm.members
+                if isinstance(m, dict) and m.get("agent_id")
+            ]
+        goal_text = (goal or "").strip() or (swarm.goal_summary or swarm.name or "swarm run")
+        if isinstance(swarm.brief, dict) and swarm.brief.get("text"):
+            goal_text = str(swarm.brief["text"])
+
+        from app.video.agent_loop_service import get_agent_loop_service
+
+        service = get_agent_loop_service()
+        crew = service.run_crew(
+            ids,
+            organization_id=str(organization_id),
+            goal=goal_text,
+            correlation_id=str(correlation_id),
+            stop_on_failure=stop_on_failure,
+        )
+        self._append_audit(
+            organization_id=str(organization_id),
+            kind="member_loops",
+            subject_reference=swarm_id,
+            summary=(
+                f"Member loops completed={crew.get('completed')} "
+                f"passed={crew.get('passed')} failed={crew.get('failed')}"
+            ),
+            correlation_id=str(correlation_id),
+            payload={
+                "swarm_id": swarm_id,
+                "requested": crew.get("requested"),
+                "passed": crew.get("passed"),
+                "failed": crew.get("failed"),
+            },
+        )
+        self._persist_state()
+        return {
+            "ok": bool(crew.get("ok")),
+            "swarm_id": swarm_id,
+            "crew": crew,
+            "note": "offline pack loops · not production media · not full concurrent production",
+        }
+
     def catalog(self) -> tuple[PackAgentCatalogEntry, ...]:
         with self._lock:
             if self._catalog is None:
@@ -1130,6 +1198,17 @@ class ProductFacadeService:
                         )
                     )
                 )
+        if swarm.members:
+            actions.append(
+                self.action_payload(
+                    self.issue_action(
+                        organization_id=organization_id,
+                        kind="run_member_loops",
+                        label="Run offline loops for members",
+                        resource_ref=swarm.swarm_id,
+                    )
+                )
+            )
         return actions
 
     def validate_swarm(

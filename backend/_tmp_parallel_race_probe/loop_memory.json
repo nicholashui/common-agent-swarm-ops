@@ -1,0 +1,36 @@
+{
+  "org-race": [
+    {
+      "run_id": "alr_757bceed130049e2",
+      "agent_id": "video.producer",
+      "correlation_id": "crew_503388ed1a1a:video.producer",
+      "summary": "video.producer offline result for: Parallel durable race probe",
+      "handoff_ref": "loop:video.producer:alr_757bceed130049e2",
+      "created_at": "2026-08-05T00:58:27Z"
+    },
+    {
+      "run_id": "alr_dbca7de448aa4934",
+      "agent_id": "video.orchestrator",
+      "correlation_id": "crew_503388ed1a1a:video.orchestrator",
+      "summary": "video.orchestrator offline result for: Parallel durable race probe",
+      "handoff_ref": "loop:video.orchestrator:alr_dbca7de448aa4934",
+      "created_at": "2026-08-05T00:58:27Z"
+    },
+    {
+      "run_id": "alr_71cb6488efb44cdc",
+      "agent_id": "video.director",
+      "correlation_id": "crew_503388ed1a1a:video.director",
+      "summary": "video.director offline result for: Parallel durable race probe",
+      "handoff_ref": "loop:video.director:alr_71cb6488efb44cdc",
+      "created_at": "2026-08-05T00:58:27Z"
+    },
+    {
+      "run_id": "alr_6acb58f3fa414bfb",
+      "agent_id": "video.planner",
+      "correlation_id": "crew_503388ed1a1a:video.planner",
+      "summary": "video.planner offline result for: Parallel durable race probe",
+      "handoff_ref": "loop:video.planner:alr_6acb58f3fa414bfb",
+      "created_at": "2026-08-05T00:58:27Z"
+    }
+  ]
+}

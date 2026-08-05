@@ -26,6 +26,15 @@ import { buildWorkflowGraphFromCanvasNodes } from "../lib/projections/composer-w
 import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { clampZoom } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import {
+  browserFileStore,
+  createWorkspaceFile,
+  getWorkspaceFile,
+  listWorkspaceFiles,
+  saveWorkspaceFile,
+  stringField,
+  type WorkspaceFileRecord,
+} from "../lib/ui/workspace-files";
 import { InfoTooltip } from "./design";
 import { WithTooltip } from "./ui/tooltip";
 import { WorkflowDiagramPanel } from "./workflow/WorkflowDiagramPanel";
@@ -63,8 +72,104 @@ export function CanvasHome({
   const [aiSuggest, setAiSuggest] = useState("");
   const [designToolsOpen, setDesignToolsOpen] = useState(false);
   const [samplesOpen, setSamplesOpen] = useState(false);
+  const [workspaceFiles, setWorkspaceFiles] = useState<
+    readonly WorkspaceFileRecord[]
+  >([]);
+  const [activeFileId, setActiveFileId] = useState<string>("");
   const samplesDialogTitleId = useId();
   const samplesCloseRef = useRef<HTMLButtonElement | null>(null);
+
+  const feedback = externalStatus ?? statusMessage;
+  const announce = (message: string): void => {
+    if (onAction) {
+      void onAction(classifyAnnounce(message));
+      return;
+    }
+    setStatusMessage(message);
+  };
+
+  const refreshWorkspaceFiles = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      setWorkspaceFiles([]);
+      return;
+    }
+    setWorkspaceFiles(listWorkspaceFiles("canvas", store));
+  };
+
+  useEffect(() => {
+    refreshWorkspaceFiles();
+  }, []);
+
+  const applyCanvasFile = (file: WorkspaceFileRecord): void => {
+    setActiveFileId(file.id);
+    setSwarmName(stringField(file.payload, "swarmName", file.name));
+    const modeRaw = stringField(file.payload, "mode", "inspect");
+    if (modeRaw === "design" || modeRaw === "inspect" || modeRaw === "run") {
+      setMode(modeRaw);
+    }
+    setAiSuggest(stringField(file.payload, "aiSuggest"));
+  };
+
+  const saveCanvasFile = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      announce("Save unavailable in this browser (local storage blocked).");
+      return;
+    }
+    const name = swarmName.trim() || "Untitled canvas";
+    const record = saveWorkspaceFile("canvas", store, {
+      id: activeFileId || null,
+      name,
+      payload: {
+        swarmName: name,
+        mode,
+        aiSuggest,
+        instanceId: view.instanceId ?? "",
+      },
+    });
+    setActiveFileId(record.id);
+    setSwarmName(record.name);
+    refreshWorkspaceFiles();
+    announce(`Saved “${record.name}” to local Execute files.`);
+  };
+
+  const newCanvasFile = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      announce("New file unavailable in this browser (local storage blocked).");
+      return;
+    }
+    const record = createWorkspaceFile("canvas", store, {
+      name: "Untitled canvas",
+      payload: {
+        swarmName: "Untitled canvas",
+        mode: "inspect",
+        aiSuggest: "",
+        instanceId: "",
+      },
+    });
+    applyCanvasFile(record);
+    refreshWorkspaceFiles();
+    announce(`Created “${record.name}”. Edit and Save to keep changes.`);
+  };
+
+  const onSelectCanvasFile = (id: string): void => {
+    if (!id) {
+      setActiveFileId("");
+      return;
+    }
+    const store = browserFileStore();
+    if (!store) return;
+    const file = getWorkspaceFile("canvas", store, id);
+    if (!file) {
+      refreshWorkspaceFiles();
+      announce("That file is no longer available.");
+      return;
+    }
+    applyCanvasFile(file);
+    announce(`Loaded “${file.name}” for editing.`);
+  };
 
   useEffect(() => {
     if (!samplesOpen) return;
@@ -142,15 +247,6 @@ export function CanvasHome({
     });
   }, [paletteQuery, paletteTab, view.palette]);
 
-  const announce = (message: string): void => {
-    if (onAction) {
-      void onAction(classifyAnnounce(message));
-      return;
-    }
-    setStatusMessage(message);
-  };
-  const feedback = externalStatus ?? statusMessage;
-
   const toggleGroup = (groupId: string): void => {
     setExpandedGroups((current) => {
       const next = new Set(current);
@@ -193,7 +289,7 @@ export function CanvasHome({
       {/* ── Toolbar ── */}
       <header className="canvas-home__toolbar">
         <div className="canvas-home__toolbar-left">
-          <div className="canvas-home__name-row">
+          <div className="canvas-home__name-row workspace-file-picker">
             <button
               aria-haspopup="dialog"
               aria-expanded={samplesOpen}
@@ -205,7 +301,22 @@ export function CanvasHome({
               <span aria-hidden="true">▦</span>
               <span className="visually-hidden">Open sample instances</span>
             </button>
-            <label className="canvas-home__name">
+            <label className="workspace-file-picker__select">
+              <span className="visually-hidden">Select canvas file</span>
+              <select
+                aria-label="Select canvas file to edit"
+                onChange={(event) => onSelectCanvasFile(event.target.value)}
+                value={activeFileId}
+              >
+                <option value="">— Untitled / new —</option>
+                {workspaceFiles.map((file) => (
+                  <option key={file.id} value={file.id}>
+                    {file.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="canvas-home__name workspace-file-picker__name">
               <span className="visually-hidden">{L(labels, "swarm_name")}</span>
               <input
                 aria-label={L(labels, "swarm_name")}
@@ -213,6 +324,20 @@ export function CanvasHome({
                 value={swarmName}
               />
             </label>
+            <button
+              className="ds-cta ds-cta--secondary ds-cta--sm"
+              onClick={newCanvasFile}
+              type="button"
+            >
+              New
+            </button>
+            <button
+              className="ds-cta ds-cta--primary ds-cta--sm"
+              onClick={saveCanvasFile}
+              type="button"
+            >
+              Save
+            </button>
           </div>
           {view.instanceId ? (
             <span className="canvas-home__instance-meta">

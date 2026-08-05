@@ -443,3 +443,36 @@ async def run_spine_to_package(
             str(result.get("message") or "Spine dry-run failed."),
         )
     return result
+
+
+class SwarmMemberLoopsRequest(StrictSchema):
+    action_reference_id: str = Field(min_length=1, max_length=100)
+    goal: str | None = Field(default=None, max_length=2_000)
+    agent_ids: list[str] | None = Field(default=None, max_length=120)
+    stop_on_failure: bool = False
+
+
+@router.post("/{swarm_id}/agent-loops")
+async def run_swarm_member_loops(
+    swarm_id: str,
+    request: SwarmMemberLoopsRequest,
+    context: Annotated[AuthenticatedRequestContext, Depends(get_authenticated_request_context)],
+    facade: Annotated[ProductFacadeService, Depends(get_product_facade)],
+) -> dict[str, Any]:
+    """Run offline Plan→Act→Self-Review for swarm members (pack inventory)."""
+    result = facade.run_member_loops(
+        organization_id=context.organization_id,
+        swarm_id=swarm_id,
+        action_reference_id=request.action_reference_id,
+        correlation_id=context.correlation_id,
+        goal=request.goal,
+        agent_ids=list(request.agent_ids) if request.agent_ids else None,
+        stop_on_failure=request.stop_on_failure,
+    )
+    if result is None:
+        _denied(
+            str(context.correlation_id),
+            "Member loops require eligible run_member_loops action and known swarm.",
+        )
+    assert result is not None
+    return result

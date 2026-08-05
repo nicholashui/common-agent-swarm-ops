@@ -32,6 +32,15 @@ import {
 } from "../lib/projections/composer-workflow";
 import { L, type ScreenLabels } from "../lib/projections/screen-labels";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
+import {
+  browserFileStore,
+  createWorkspaceFile,
+  getWorkspaceFile,
+  listWorkspaceFiles,
+  saveWorkspaceFile,
+  stringField,
+  type WorkspaceFileRecord,
+} from "../lib/ui/workspace-files";
 import { InfoTooltip } from "./design";
 import { WithTooltip } from "./ui/tooltip";
 
@@ -95,9 +104,99 @@ export function ComposerHome({
   >("idle");
   const [step, setStep] = useState<StepId>(1);
   const [samplesOpen, setSamplesOpen] = useState(false);
+  const [workspaceFiles, setWorkspaceFiles] = useState<
+    readonly WorkspaceFileRecord[]
+  >([]);
+  const [activeFileId, setActiveFileId] = useState<string>("");
   const architectPanelId = useId();
   const samplesDialogTitleId = useId();
   const samplesCloseRef = useRef<HTMLButtonElement | null>(null);
+
+  const refreshWorkspaceFiles = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      setWorkspaceFiles([]);
+      return;
+    }
+    setWorkspaceFiles(listWorkspaceFiles("composer", store));
+  };
+
+  useEffect(() => {
+    refreshWorkspaceFiles();
+  }, []);
+
+  const applyComposerFile = (file: WorkspaceFileRecord): void => {
+    setActiveFileId(file.id);
+    setSwarmName(stringField(file.payload, "swarmName", file.name));
+    setGoal(stringField(file.payload, "goal"));
+    setScaleProfile(stringField(file.payload, "scaleProfile"));
+    setArchetype(stringField(file.payload, "archetype"));
+    setBriefLocale(stringField(file.payload, "briefLocale", "en") || "en");
+    setLastGoal(stringField(file.payload, "goal"));
+    setStep(1);
+  };
+
+  const saveComposerFile = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      announce("Save unavailable in this browser (local storage blocked).");
+      return;
+    }
+    const name = swarmName.trim() || "Untitled plan";
+    const record = saveWorkspaceFile("composer", store, {
+      id: activeFileId || null,
+      name,
+      payload: {
+        swarmName: name,
+        goal,
+        scaleProfile,
+        archetype,
+        briefLocale,
+      },
+    });
+    setActiveFileId(record.id);
+    setSwarmName(record.name);
+    refreshWorkspaceFiles();
+    announce(`Saved “${record.name}” to local Plan files.`);
+  };
+
+  const newComposerFile = (): void => {
+    const store = browserFileStore();
+    if (!store) {
+      announce("New file unavailable in this browser (local storage blocked).");
+      return;
+    }
+    const record = createWorkspaceFile("composer", store, {
+      name: "Untitled plan",
+      payload: {
+        swarmName: "Untitled plan",
+        goal: "",
+        scaleProfile: "",
+        archetype: "",
+        briefLocale: "en",
+      },
+    });
+    applyComposerFile(record);
+    refreshWorkspaceFiles();
+    announce(`Created “${record.name}”. Edit and Save to keep changes.`);
+  };
+
+  const onSelectComposerFile = (id: string): void => {
+    if (!id) {
+      setActiveFileId("");
+      return;
+    }
+    const store = browserFileStore();
+    if (!store) return;
+    const file = getWorkspaceFile("composer", store, id);
+    if (!file) {
+      refreshWorkspaceFiles();
+      announce("That file is no longer available.");
+      return;
+    }
+    applyComposerFile(file);
+    announce(`Loaded “${file.name}” for editing.`);
+  };
 
   const workflowGraph: ComposerWorkflowGraph = useMemo(
     () =>
@@ -451,15 +550,39 @@ export function ComposerHome({
           <div className="composer-home__title-row">
             <h1 className="composer-home__title">{view.title}</h1>
             <InfoTooltip label="About Plan" text={view.description} />
-            <label className="composer-home__name">
-              <span className="visually-hidden">{L(labels, "swarm_name")}</span>
-              <input
-                aria-label={L(labels, "swarm_name")}
-                onChange={(event) => setSwarmName(event.target.value)}
-                placeholder={L(labels, "swarm_name")}
-                value={swarmName}
-              />
-            </label>
+            <div className="workspace-file-picker">
+              <label className="workspace-file-picker__select">
+                <span className="visually-hidden">Select plan file</span>
+                <select
+                  aria-label="Select plan file to edit"
+                  onChange={(event) => onSelectComposerFile(event.target.value)}
+                  value={activeFileId}
+                >
+                  <option value="">— Untitled / new —</option>
+                  {workspaceFiles.map((file) => (
+                    <option key={file.id} value={file.id}>
+                      {file.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="composer-home__name workspace-file-picker__name">
+                <span className="visually-hidden">{L(labels, "swarm_name")}</span>
+                <input
+                  aria-label={L(labels, "swarm_name")}
+                  onChange={(event) => setSwarmName(event.target.value)}
+                  placeholder={L(labels, "swarm_name")}
+                  value={swarmName}
+                />
+              </label>
+              <button
+                className="ds-cta ds-cta--secondary ds-cta--sm"
+                onClick={newComposerFile}
+                type="button"
+              >
+                New
+              </button>
+            </div>
           </div>
           {decisionStatus === "ai_resolved" ? (
             <WithTooltip content="AI resolved conflicts and bound agents from the closed-world catalog.">
@@ -483,13 +606,11 @@ export function ComposerHome({
         </div>
         <div className="composer-home__toolbar-actions">
           <button
-            className="composer-home__ghost"
-            onClick={() =>
-              announce(L(labels, "save_draft_requires_an_authorized_compose_contra"))
-            }
+            className="ds-cta ds-cta--secondary ds-cta--sm"
+            onClick={saveComposerFile}
             type="button"
           >
-            Save Draft
+            Save
           </button>
           <button
             className="composer-home__primary"

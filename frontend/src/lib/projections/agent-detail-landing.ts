@@ -87,6 +87,22 @@ export interface AgentDetailLandingView {
   readonly specDocPath?: string | null;
   /** Public path to README.md when present. */
   readonly readmeDocPath?: string | null;
+  /** Structure-map fields (common-agent-structure layout, not SVG embed). */
+  readonly structure?: {
+    readonly role: string;
+    readonly category: string;
+    readonly folderPath: string;
+    readonly promptReference: string;
+    readonly rubricReference: string;
+    readonly tools: readonly string[];
+    readonly networkAccess: boolean;
+    readonly productionActivationRequested: boolean;
+    readonly critiqueIn: readonly string[];
+    readonly critiqueOut: readonly string[];
+    readonly hasSpec: boolean;
+    readonly hasSources: boolean;
+    readonly architecture: string;
+  };
 }
 
 const AGENT_DETAIL_LABELS: ScreenLabels = {
@@ -120,12 +136,29 @@ const AGENT_DETAIL_LABELS: ScreenLabels = {
   "playground_panels": "Playground panels",
 };
 
+function parseCritiqueEdges(raw: string): {
+  readonly inputs: readonly string[];
+  readonly outputs: readonly string[];
+} {
+  if (!raw?.trim()) return { inputs: [], outputs: [] };
+  try {
+    const parsed = JSON.parse(raw) as { inputs?: unknown; outputs?: unknown };
+    return {
+      inputs: Array.isArray(parsed.inputs) ? parsed.inputs.map(String) : [],
+      outputs: Array.isArray(parsed.outputs) ? parsed.outputs.map(String) : [],
+    };
+  } catch {
+    return { inputs: [], outputs: [] };
+  }
+}
+
 /** Build agent detail projection from a pack self-contained agent record. */
 export function buildAgentDetailView(
   agent: PackAgentRecord,
   agentId?: string,
 ): AgentDetailLandingView {
   const id = agentId ?? agent.id;
+  const critique = parseCritiqueEdges(agent.critiqueCompat);
   return {
     labels: AGENT_DETAIL_LABELS,
     eyebrow: `${agent.pack.toUpperCase()} AGENT DETAIL`,
@@ -237,6 +270,21 @@ export function buildAgentDetailView(
       "Agent settings projected from self-contained pack folders. Browser is non-authority; mutations require host action refs.",
     specDocPath: agent.specDocPath,
     readmeDocPath: agent.readmeDocPath,
+    structure: {
+      role: agent.role,
+      category: agent.category,
+      folderPath: agent.folderPath,
+      promptReference: agent.promptReference,
+      rubricReference: agent.rubricReference,
+      tools: [...agent.allowedTools],
+      networkAccess: agent.networkAccess,
+      productionActivationRequested: agent.productionActivationRequested,
+      critiqueIn: critique.inputs,
+      critiqueOut: critique.outputs,
+      hasSpec: agent.hasSpecMd,
+      hasSources: agent.hasSources,
+      architecture: agent.architecture,
+    },
   };
 }
 
@@ -281,13 +329,80 @@ function defaultPackAgentDetail(): AgentDetailLandingView {
   };
 }
 
-/** Resolve detail view for a route agentId from the full pack catalog (133). */
-export function resolveAgentDetailView(agentId: string | undefined): AgentDetailLandingView {
-  if (agentId) {
-    const packAgent = getPackAgent(agentId);
-    if (packAgent) return buildAgentDetailView(packAgent, agentId);
+/** Normalize route param (Next may leave encoding; trim empty). */
+export function normalizeAgentRouteId(agentId: string | undefined): string {
+  const raw = (agentId ?? "").trim();
+  if (!raw) return "";
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
   }
-  return LOCAL_AGENT_DETAIL_LANDING;
+}
+
+function unknownAgentDetail(agentId: string): AgentDetailLandingView {
+  return {
+    labels: AGENT_DETAIL_LABELS,
+    eyebrow: "PACK AGENT DETAIL",
+    agentName: `Unknown agent`,
+    versionBadge: "not in catalog",
+    statusLabel: "unavailable",
+    velocityLabel: "check agent id",
+    headerStats: [
+      {
+        id: "id",
+        label: "Requested id",
+        value: agentId,
+        detail: "No matching pack folder in the UI catalog",
+      },
+    ],
+    insightStrip: `No pack agent matches “${agentId}”. Open Registry Hub and pick a listed id.`,
+    yourUsageNote: "—",
+    historyFilters: [],
+    usageRows: [],
+    paginationLabel: "0",
+    versions: [],
+    currentVersionNote: `Unknown id: ${agentId}`,
+    metaCriticNote: "—",
+    evidenceNote: "—",
+    configSummaries: [
+      {
+        id: "lookup",
+        title: "Lookup",
+        lines: [
+          `agent_id: ${agentId}`,
+          "status: not found in pack-agents.generated catalog",
+          "hint: ids look like video.planner or specials.aesthetics-agent",
+        ],
+      },
+    ],
+    playgroundMessages: [],
+    evalScores: [],
+    knowledgeStats: [],
+    knowledgeSources: [],
+    opsAlert: "Agent id not found in closed-world pack catalog.",
+    opsWhereUsed: "—",
+    opsMetrics: [],
+    footerNote:
+      "Fail-closed: missing agent ids do not fall back to another agent (e.g. Orchestrator).",
+    specDocPath: null,
+    readmeDocPath: null,
+  };
+}
+
+/**
+ * Resolve detail view for a route agentId from the full pack catalog (133).
+ * Does **not** silently substitute Orchestrator when the id is wrong or missing
+ * from params — that was masking Next.js 16 async-params bugs.
+ */
+export function resolveAgentDetailView(agentId: string | undefined): AgentDetailLandingView {
+  const id = normalizeAgentRouteId(agentId);
+  if (!id) {
+    return LOCAL_AGENT_DETAIL_LANDING;
+  }
+  const packAgent = getPackAgent(id) ?? getPackAgent(agentId ?? "");
+  if (packAgent) return buildAgentDetailView(packAgent, packAgent.id);
+  return unknownAgentDetail(id);
 }
 
 /** Pack-backed default (no demo registered agents). */

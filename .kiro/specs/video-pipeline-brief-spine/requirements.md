@@ -19,7 +19,8 @@ CASOPS product façade turns a production **user brief** into a **Phase-1-capabl
 - REQ-8: Agent Workflow shall expose Host product spine template id `wf_video_spine_v1`.
 - REQ-9: When persistence is enabled, the system shall retain swarm drafts, brief, spine, package gates, and append-only audit across process restarts (local durable store).
 - REQ-10: When a spine step emits an artifact, the system shall apply ArtifactHandoffV1 L1 validation (fail closed on missing fields or production_media=true for stubs).
-- REQ-11: When spine steps `plan` or `qc` run, the system shall execute offline Plan→Act→Self-Review with pack L2 rubric for `video.planner` / `video.aiqaconsistency`, record critiques, and fail closed if the loop does not pass (no production tools / network).
+- REQ-11: When spine steps run for spine pack agents, the system shall execute offline Plan→Act→Self-Review via Host AgentLoopService where the pack loads, record critiques, and fail closed if the loop does not pass (no production tools / network).
+- REQ-12: Host shall expose fleet agent-loop inventory and run APIs so any loadable `video.*` pack agent can execute offline Plan→Act→Self-Review; production media/network activation remains denied.
 
 ## Non-goals
 

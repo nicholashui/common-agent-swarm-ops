@@ -200,6 +200,21 @@ test("canonical canvas route renders canvas while preserving the opaque resource
   );
 });
 
+test("agent detail route awaits Next.js 16 params Promise", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { dirname, resolve } = await import("node:path");
+  const { fileURLToPath } = await import("node:url");
+  const here = dirname(fileURLToPath(import.meta.url));
+  const source = await readFile(
+    resolve(here, "registry/agents/[agentId]/page.tsx"),
+    "utf8",
+  );
+  assert.match(source, /async function AgentDetailPage|export default async function/);
+  assert.match(source, /await params/);
+  assert.match(source, /Promise<\{\s*readonly agentId/);
+  assert.doesNotMatch(source, /params\.agentId(?!\s*=)/);
+});
+
 test("agent detail route renders AgentDetailHome local preview", () => {
   const source = readSource(
     new URL("./registry/agents/[agentId]/page.tsx", import.meta.url),

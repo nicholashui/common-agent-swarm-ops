@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildLiveDashboardView } from "./dashboard-live";
+import {
+  buildEmptyLiveDashboardShell,
+  buildLiveDashboardView,
+} from "./dashboard-live";
 import { PACK_AGENT_CATALOG_COUNTS } from "./pack-agents-catalog.generated";
 
 const NOW = Date.parse("2026-06-01T12:00:00.000Z");
@@ -74,6 +77,27 @@ test("live dashboard labels spine drafts with honesty copy", () => {
   assert.match(spineCard?.detail ?? "", /not production media/i);
   assert.match(view.footerNote, /not production media/i);
   assert.match(view.controlPlane.approvalExpiryAlert, /package gate/i);
+});
+
+test("empty dashboard shell is SSR/client hydration stable (no Date.now asOf)", () => {
+  const a = buildEmptyLiveDashboardShell();
+  const b = buildEmptyLiveDashboardShell();
+  assert.equal(a.asOf, "pending");
+  assert.equal(b.asOf, "pending");
+  assert.equal(a.asOf, b.asOf);
+  assert.equal(a.freshnessLabel, b.freshnessLabel);
+  assert.match(a.freshnessLabel, /Loading/i);
+  // Loading path must not stamp wall-clock times into asOf
+  assert.doesNotMatch(a.asOf, /^\d{4}-\d{2}-\d{2}T/);
+  const loading = buildLiveDashboardView(
+    {
+      hostReachable: false,
+      loading: true,
+      swarms: [],
+    },
+    Date.parse("2026-06-01T12:00:00.000Z"),
+  );
+  assert.equal(loading.asOf, "pending");
 });
 
 test("live dashboard stays empty and honest when Host is down", () => {

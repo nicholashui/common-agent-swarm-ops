@@ -37,6 +37,27 @@ test("agent detail home shows pack agent settings (no demo VerificationLoop)", (
   assert.doesNotMatch(markup, /tenant_id|password=|authorization:\s*bearer/i);
 });
 
+test("agent detail structure map mirrors common-agent-structure zones", () => {
+  const view = resolveAgentDetailView("video.casting");
+  const markup = renderToStaticMarkup(
+    <AgentDetailHome agentId="video.casting" view={view} />,
+  );
+  assert.match(markup, /agent-structure/);
+  assert.match(markup, /Common AI agent structure|Common agent structure/i);
+  assert.match(markup, /Orchestration layer/i);
+  assert.match(markup, /Knowledge and memory/i);
+  assert.match(markup, /Tool and policy/i);
+  assert.match(markup, /Plan/);
+  assert.match(markup, /Act/);
+  assert.match(markup, /Self-review|Self-Review/i);
+  assert.match(markup, /Critique/);
+  assert.match(markup, /L1 Spec/);
+  assert.match(markup, /L2 Rubric/);
+  assert.doesNotMatch(markup, /<img[^>]+common-agent-structure\.svg/i);
+  assert.ok(view.structure);
+  assert.ok(view.structure?.critiqueIn !== undefined);
+});
+
 test("agent detail resolves every pack agent id", () => {
   assert.equal(PACK_AGENT_COUNTS.total, 133);
   assert.equal(PACK_AGENT_COUNTS.video, 114);
@@ -59,6 +80,22 @@ test("agent detail resolves every pack agent id", () => {
   // Plain summary — not raw markdown heading dump
   assert.doesNotMatch(videoView.insightStrip, /###\s/);
   assert.doesNotMatch(videoView.insightStrip, /^#\s/m);
+});
+
+test("unknown agent id does not fall back to Orchestrator", () => {
+  const view = resolveAgentDetailView("video.does-not-exist-xyz");
+  assert.match(view.agentName, /Unknown agent/i);
+  assert.doesNotMatch(view.agentName, /Orchestrator/i);
+  assert.match(view.insightStrip, /does-not-exist-xyz/);
+  assert.match(view.footerNote, /do not fall back/i);
+});
+
+test("encoded agent id still resolves the correct pack agent", () => {
+  const encoded = encodeURIComponent("video.planner");
+  const view = resolveAgentDetailView(encoded);
+  assert.match(view.agentName, /Planner/i);
+  assert.doesNotMatch(view.agentName, /Orchestrator/i);
+  assert.equal(view.specDocPath, "/docs/agents/video.planner/SPEC.md");
 });
 
 test("agent detail tabs remain five; Spec/Config first; default landing pack-backed", () => {

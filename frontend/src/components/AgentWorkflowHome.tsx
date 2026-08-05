@@ -378,7 +378,7 @@ export function AgentWorkflowHome({
             gates). Click an agent node for Registry detail.
           </p>
           {spineSelected ? (
-            <p className="agent-workflow-page__honesty" role="status">
+            <p className="ds-callout agent-workflow-page__honesty" role="status">
               Host product spine <code>{VIDEO_SPINE_WORKFLOW_ID}</code> ·{" "}
               <strong>{STUB_RUN_HONESTY}</strong> · package step is always HITL
               · not production activation.
@@ -444,7 +444,7 @@ export function AgentWorkflowHome({
           </label>
 
           <button
-            className="agent-workflow-page__spine-link"
+            className="ds-cta ds-cta--secondary agent-workflow-page__spine-link"
             onClick={openSpineTemplate}
             type="button"
           >

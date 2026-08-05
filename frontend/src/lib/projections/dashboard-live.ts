@@ -172,9 +172,13 @@ export function buildLiveDashboardView(
   const packageWaiting = sorted.filter(
     (s) => s.spineStatus === "waiting_for_approval",
   ).length;
+  // Loading / empty shell must not call Date.now() for asOf — SSR vs client
+  // hydration would differ by ~1s and trip React hydration mismatch.
   const asOf =
     input.asOf ??
-    new Date(nowMs).toISOString().replace(/\.\d{3}Z$/, "Z");
+    (input.loading
+      ? "pending"
+      : new Date(nowMs).toISOString().replace(/\.\d{3}Z$/, "Z"));
 
   const commonHealth: DashboardStatCard[] = [
     {
@@ -353,10 +357,15 @@ export function buildLiveDashboardView(
 
 /** Honest empty shell used as store default / loading skeleton. */
 export function buildEmptyLiveDashboardShell(): DashboardLandingView {
-  return buildLiveDashboardView({
-    swarms: [],
-    hostReachable: false,
-    loading: true,
-    hostMessage: "Awaiting Host list…",
-  });
+  // Fixed nowMs + asOf so server and client first paint match exactly.
+  return buildLiveDashboardView(
+    {
+      swarms: [],
+      hostReachable: false,
+      loading: true,
+      hostMessage: "Awaiting Host list…",
+      asOf: "pending",
+    },
+    0,
+  );
 }

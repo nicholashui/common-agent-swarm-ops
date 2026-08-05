@@ -1,0 +1,44 @@
+{
+  "org3": [
+    {
+      "run_id": "alr_40eb444642604d34",
+      "agent_id": "video.screenwriter",
+      "correlation_id": "crew_f5447a6ab307:video.screenwriter",
+      "summary": "video.screenwriter offline result for: race 3",
+      "handoff_ref": "loop:video.screenwriter:alr_40eb444642604d34",
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "run_id": "alr_b9db94afe8834ea2",
+      "agent_id": "video.producer",
+      "correlation_id": "crew_f5447a6ab307:video.producer",
+      "summary": "video.producer offline result for: race 3",
+      "handoff_ref": "loop:video.producer:alr_b9db94afe8834ea2",
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "run_id": "alr_7e456a2620f34e68",
+      "agent_id": "video.orchestrator",
+      "correlation_id": "crew_f5447a6ab307:video.orchestrator",
+      "summary": "video.orchestrator offline result for: race 3",
+      "handoff_ref": "loop:video.orchestrator:alr_7e456a2620f34e68",
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "run_id": "alr_d1b9c800def24ffb",
+      "agent_id": "video.director",
+      "correlation_id": "crew_f5447a6ab307:video.director",
+      "summary": "video.director offline result for: race 3",
+      "handoff_ref": "loop:video.director:alr_d1b9c800def24ffb",
+      "created_at": "2026-08-05T00:58:48Z"
+    },
+    {
+      "run_id": "alr_f4eca211e18f4b58",
+      "agent_id": "video.planner",
+      "correlation_id": "crew_f5447a6ab307:video.planner",
+      "summary": "video.planner offline result for: race 3",
+      "handoff_ref": "loop:video.planner:alr_f4eca211e18f4b58",
+      "created_at": "2026-08-05T00:58:48Z"
+    }
+  ]
+}

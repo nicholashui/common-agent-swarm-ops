@@ -8,9 +8,13 @@
 import type { ComponentType, ReactNode } from "react";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
 
 import { useScreenParameters } from "../../lib/projections/use-screen-parameters";
-import { resolveAgentDetailView } from "../../lib/projections/agent-detail-landing";
+import {
+  normalizeAgentRouteId,
+  resolveAgentDetailView,
+} from "../../lib/projections/agent-detail-landing";
 import {
   buildEmptyLiveDashboardShell,
 } from "../../lib/projections/dashboard-live";
@@ -521,11 +525,21 @@ export function BoundAgentDetailHome({
   agentId,
 }: Readonly<{ agentId: string }>): JSX.Element {
   const bridge = useScreenActionBridge();
-  const view = resolveAgentDetailView(agentId);
+  // Client fallback: if server passed empty id (e.g. un-awaited Promise params),
+  // recover from the URL segment so detail is never stuck on default Orchestrator.
+  const routeParams = useParams();
+  const paramId =
+    typeof routeParams?.agentId === "string"
+      ? routeParams.agentId
+      : Array.isArray(routeParams?.agentId)
+        ? routeParams.agentId[0]
+        : "";
+  const resolvedId = normalizeAgentRouteId(agentId) || normalizeAgentRouteId(paramId);
+  const view = resolveAgentDetailView(resolvedId);
   return (
     <BoundShell status={bridge.runtime.status}>
       <AgentDetailHome
-        agentId={agentId}
+        agentId={resolvedId}
         view={view}
         onAction={bridge.onAction as (action: ScreenUiAction) => void}
         statusMessage={bridge.statusMessage}
@@ -577,6 +591,7 @@ function BoundLiveSwarmCanvas({
       summary: string;
     }[]
   >([]);
+  const [spineGoal, setSpineGoal] = useState<string>("");
   const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
@@ -672,6 +687,9 @@ function BoundLiveSwarmCanvas({
       setSpineStatus(swarm.spine?.status ?? null);
       setSpineApprovalId(swarm.spine?.approvalId ?? null);
       setSpineActions(swarm.actions);
+      setSpineGoal(
+        (swarm.brief?.text || swarm.name || "Video spine offline DNA loops").trim(),
+      );
       if (swarm.spine) {
         const { listSwarmArtifacts } = await import("../../lib/api/product-swarms");
         const arts = await listSwarmArtifacts(swarmId);
@@ -790,6 +808,62 @@ function BoundLiveSwarmCanvas({
     }
   };
 
+  const runMemberLoops = async (): Promise<void> => {
+    if (spineBusy) return;
+    const action = spineActions.find((a) => a.kind === "run_member_loops");
+    if (!action) {
+      setSpineNote("No run_member_loops action — reload draft.");
+      setReloadToken((n) => n + 1);
+      return;
+    }
+    setSpineBusy(true);
+    setSpineNote("Running offline member agent loops…");
+    try {
+      const { runSwarmMemberLoops } = await import(
+        "../../lib/api/product-agent-loops"
+      );
+      const result = await runSwarmMemberLoops(swarmId, action.id, {
+        goal: spineGoal || undefined,
+      });
+      if (!result.ok) {
+        setSpineNote(result.message);
+        return;
+      }
+      setSpineNote(
+        `Member loops done · passed ${result.passed} · failed ${result.failed} · offline · not production media`,
+      );
+      setReloadToken((n) => n + 1);
+    } finally {
+      setSpineBusy(false);
+    }
+  };
+
+  const runWorkflowSpineLoops = async (): Promise<void> => {
+    if (spineBusy) return;
+    setSpineBusy(true);
+    setSpineNote("Running DNA workflow spine offline loops (wf_video_spine_v1)…");
+    try {
+      const { runWorkflowLoops } = await import(
+        "../../lib/api/product-agent-loops"
+      );
+      const result = await runWorkflowLoops(
+        "wf_video_spine_v1",
+        spineGoal || "Video spine offline DNA agent loops",
+        { maxNodes: 8 },
+      );
+      if (!result.ok) {
+        setSpineNote(result.message);
+        return;
+      }
+      setSpineNote(
+        `DNA spine loops · ${result.workflowId} · passed ${result.passed} · failed ${result.failed} · completed ${result.completed} · offline · not production media`,
+      );
+      setReloadToken((n) => n + 1);
+    } finally {
+      setSpineBusy(false);
+    }
+  };
+
   const dryRunToPackage = async (): Promise<void> => {
     if (spineBusy) return;
     const action = spineActions.find((a) => a.kind === "run_spine_to_package");
@@ -853,39 +927,35 @@ function BoundLiveSwarmCanvas({
     <BoundShell status={bridge.runtime.status}>
       <p className="bound-swarm-canvas__banner" role="status">
         {loadNote}{" "}
-        <a className="registry-home__linkish" href="/registry">
+        <a className="ds-link" href="/registry">
           ← Registry drafts
         </a>
       </p>
       {spineSteps.length > 0 ? (
-        <div
-          className="bound-swarm-canvas__spine"
-          style={{
-            margin: "0.5rem 1rem",
-            padding: "0.75rem 1rem",
-            border: "1px solid var(--border, #333)",
-            borderRadius: 8,
-            fontSize: "0.85rem",
-          }}
-        >
-          <strong>Video spine (stub · not production media)</strong>
-          {spineStatus ? (
-            <span> · status <code>{spineStatus}</code></span>
-          ) : null}
-          {spineApprovalId ? (
-            <span>
-              {" "}
-              · approval <code>{spineApprovalId}</code>
+        <div className="bound-swarm-canvas__spine ds-panel">
+          <div className="bound-swarm-canvas__spine-head">
+            <strong>Video spine</strong>
+            <span className="bound-swarm-canvas__spine-honesty">
+              stub · not production media
             </span>
-          ) : null}
-          {" · "}
-          <a
-            className="registry-home__linkish"
-            href="/registry/agent-workflow?template=video.host.wf_video_spine_v1"
-          >
-            Open spine template
-          </a>
-          <ol style={{ margin: "0.5rem 0 0.75rem", paddingLeft: "1.25rem" }}>
+            {spineStatus ? (
+              <span>
+                · status <code>{spineStatus}</code>
+              </span>
+            ) : null}
+            {spineApprovalId ? (
+              <span>
+                · approval <code>{spineApprovalId}</code>
+              </span>
+            ) : null}
+            <a
+              className="ds-link"
+              href="/registry/agent-workflow?template=video.host.wf_video_spine_v1"
+            >
+              Open spine template
+            </a>
+          </div>
+          <ol className="bound-swarm-canvas__spine-steps">
             {spineSteps.map((s) => (
               <li key={s.id}>
                 <code>{s.id}</code> · {s.agentId} · <em>{s.status}</em>
@@ -894,7 +964,7 @@ function BoundLiveSwarmCanvas({
                   <>
                     {" · "}
                     <button
-                      className="registry-home__linkish"
+                      className="ds-link"
                       onClick={() => {
                         void (async () => {
                           const { getSwarmArtifact } = await import(
@@ -921,15 +991,15 @@ function BoundLiveSwarmCanvas({
             ))}
           </ol>
           {artifactItems.length > 0 ? (
-            <div style={{ marginBottom: "0.75rem" }}>
+            <div className="bound-swarm-canvas__artifacts">
               <strong>Artifact handoffs</strong>
               <span> · {artifactItems.length} ref(s) · stub only</span>
-              <ul style={{ margin: "0.35rem 0 0", paddingLeft: "1.25rem" }}>
+              <ul className="bound-swarm-canvas__artifact-list">
                 {artifactItems.map((a) => (
                   <li key={a.ref}>
                     <code>{a.kind}</code> · step {a.stepId} ·{" "}
                     <button
-                      className="registry-home__linkish"
+                      className="ds-link"
                       onClick={() => setSpineNote(`${a.kind}: ${a.summary}`)}
                       type="button"
                     >
@@ -940,15 +1010,22 @@ function BoundLiveSwarmCanvas({
               </ul>
             </div>
           ) : null}
-          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          <div className="ds-actions bound-swarm-canvas__spine-actions">
             <button
-              disabled={spineBusy || spineStatus === "waiting_for_approval" || spineStatus === "completed" || spineStatus === "denied"}
+              className="ds-cta ds-cta--primary ds-cta--sm"
+              disabled={
+                spineBusy ||
+                spineStatus === "waiting_for_approval" ||
+                spineStatus === "completed" ||
+                spineStatus === "denied"
+              }
               onClick={() => void advanceSpine()}
               type="button"
             >
               {spineBusy ? "…" : "Run next spine step"}
             </button>
             <button
+              className="ds-cta ds-cta--secondary ds-cta--sm"
               disabled={
                 spineBusy ||
                 spineStatus === "waiting_for_approval" ||
@@ -960,9 +1037,26 @@ function BoundLiveSwarmCanvas({
             >
               Dry-run to package
             </button>
+            <button
+              className="ds-cta ds-cta--secondary ds-cta--sm"
+              disabled={spineBusy}
+              onClick={() => void runMemberLoops()}
+              type="button"
+            >
+              Run member loops (offline)
+            </button>
+            <button
+              className="ds-cta ds-cta--secondary ds-cta--sm"
+              disabled={spineBusy}
+              onClick={() => void runWorkflowSpineLoops()}
+              type="button"
+            >
+              Run DNA spine loops (offline)
+            </button>
             {spineStatus === "waiting_for_approval" ? (
               <>
                 <button
+                  className="ds-cta ds-cta--success ds-cta--sm"
                   disabled={spineBusy}
                   onClick={() => void decidePackage("approved")}
                   type="button"
@@ -970,6 +1064,7 @@ function BoundLiveSwarmCanvas({
                   Approve package
                 </button>
                 <button
+                  className="ds-cta ds-cta--danger ds-cta--sm"
                   disabled={spineBusy}
                   onClick={() => void decidePackage("denied")}
                   type="button"
@@ -980,7 +1075,7 @@ function BoundLiveSwarmCanvas({
             ) : null}
           </div>
           {spineNote ? (
-            <p role="status" style={{ margin: "0.5rem 0 0" }}>
+            <p className="bound-swarm-canvas__spine-note" role="status">
               {spineNote}
             </p>
           ) : null}
@@ -1137,41 +1232,27 @@ export function BoundMonitoringHome(): JSX.Element {
       {packageGates.length > 0 ? (
         <section
           aria-label="Live video package gates"
-          className="operations-approvals-wrap"
-          style={{
-            margin: "0.75rem 0",
-            padding: "0.75rem 1rem",
-            border: "1px solid var(--border, #333)",
-            borderRadius: 8,
-          }}
+          className="operations-approvals-wrap package-gates-panel ds-panel"
         >
           <h2 className="operations-approvals-wrap__title">
             Live package gates (spine stub)
           </h2>
-          <p style={{ fontSize: "0.85rem", marginTop: 0 }}>
+          <p className="package-gates-panel__lede">
             Host façade · stub run · not production media · never auto-approve
           </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          <ul className="package-gates-panel__list">
             {packageGates.map((gate) => (
-              <li
-                key={gate.approvalId}
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.5rem",
-                  alignItems: "center",
-                  marginBottom: "0.5rem",
-                }}
-              >
+              <li key={gate.approvalId} className="package-gates-panel__row">
                 <code>{gate.approvalId.slice(0, 16)}…</code>
                 <span>{gate.summary}</span>
                 <em>{gate.gateStatus}</em>
-                <a className="registry-home__linkish" href={gate.canvasPath}>
+                <a className="ds-link" href={gate.canvasPath}>
                   Open Execute
                 </a>
                 {gate.gateStatus === "paused" ? (
-                  <>
+                  <span className="ds-actions">
                     <button
+                      className="ds-cta ds-cta--success ds-cta--sm"
                       disabled={packageBusy === gate.approvalId}
                       onClick={() =>
                         void decideLivePackage(gate.approvalId, "approved")
@@ -1181,6 +1262,7 @@ export function BoundMonitoringHome(): JSX.Element {
                       Approve
                     </button>
                     <button
+                      className="ds-cta ds-cta--danger ds-cta--sm"
                       disabled={packageBusy === gate.approvalId}
                       onClick={() =>
                         void decideLivePackage(gate.approvalId, "denied")
@@ -1189,12 +1271,16 @@ export function BoundMonitoringHome(): JSX.Element {
                     >
                       Deny
                     </button>
-                  </>
+                  </span>
                 ) : null}
               </li>
             ))}
           </ul>
-          {packageNote ? <p role="status">{packageNote}</p> : null}
+          {packageNote ? (
+            <p className="package-gates-panel__note" role="status">
+              {packageNote}
+            </p>
+          ) : null}
         </section>
       ) : null}
       <MonitoringHome

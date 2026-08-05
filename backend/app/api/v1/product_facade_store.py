@@ -66,6 +66,9 @@ class ProductFacadeStore:
         self._approvals_path = self.root / "package_approvals.json"
         self._activity_path = self.root / "activity.json"
         self._audit_path = self.root / "audit.jsonl"
+        self._loop_memory_path = self.root / "loop_memory.json"
+        self._loop_critiques_path = self.root / "loop_critiques.json"
+        self._loop_tools_path = self.root / "loop_tool_invocations.jsonl"
         self._lock = threading.RLock()
 
     def load_state(self) -> dict[str, Any]:
@@ -74,6 +77,8 @@ class ProductFacadeStore:
                 "swarms": self._read_json(self._swarms_path, default={}),
                 "package_approvals": self._read_json(self._approvals_path, default={}),
                 "activity": self._read_json(self._activity_path, default=[]),
+                "loop_memory": self._read_json(self._loop_memory_path, default={}),
+                "loop_critiques": self._read_json(self._loop_critiques_path, default={}),
             }
 
     def save_swarms(self, swarms: dict[str, dict[str, Any]]) -> None:
@@ -94,6 +99,56 @@ class ProductFacadeStore:
         with self._lock:
             with self._audit_path.open("a", encoding="utf-8") as handle:
                 handle.write(line + "\n")
+
+    def save_loop_memory(self, by_org: dict[str, list[dict[str, Any]]]) -> None:
+        # Cap per org
+        capped = {
+            org: rows[-1500:] if isinstance(rows, list) else []
+            for org, rows in by_org.items()
+        }
+        with self._lock:
+            self._write_json(self._loop_memory_path, capped)
+
+    def save_loop_critiques(self, by_org: dict[str, list[dict[str, Any]]]) -> None:
+        capped = {
+            org: rows[-2000:] if isinstance(rows, list) else []
+            for org, rows in by_org.items()
+        }
+        with self._lock:
+            self._write_json(self._loop_critiques_path, capped)
+
+    def append_tool_invocation(self, record: dict[str, Any]) -> None:
+        line = json.dumps(record, ensure_ascii=False, separators=(",", ":"), default=str)
+        with self._lock:
+            with self._loop_tools_path.open("a", encoding="utf-8") as handle:
+                handle.write(line + "\n")
+
+    def list_tool_invocations(
+        self, *, organization_id: str | None = None, limit: int = 100
+    ) -> list[dict[str, Any]]:
+        limit = max(1, min(limit, 500))
+        if not self._loop_tools_path.is_file():
+            return []
+        rows: list[dict[str, Any]] = []
+        with self._lock:
+            try:
+                text = self._loop_tools_path.read_text(encoding="utf-8")
+            except OSError:
+                return []
+        for line in text.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(row, dict):
+                continue
+            if organization_id and str(row.get("organization_id") or "") != organization_id:
+                continue
+            rows.append(row)
+        return rows[-limit:]
 
     def list_audit(self, *, organization_id: str | None = None, limit: int = 100) -> list[dict[str, Any]]:
         limit = max(1, min(limit, 500))
@@ -130,10 +185,23 @@ class ProductFacadeStore:
         return raw if raw is not None else default
 
     def _write_json(self, path: Path, payload: Any) -> None:
-        tmp = path.with_suffix(path.suffix + ".tmp")
-        data = json.dumps(payload, ensure_ascii=False, indent=2, default=str)
-        tmp.write_text(data + "\n", encoding="utf-8")
-        tmp.replace(path)
+        data = json.dumps(payload, ensure_ascii=False, indent=2, default=str) + "\n"
+        # Write via temp then replace; on Windows AccessDenied fall back to direct write.
+        import os
+
+        tmp = path.with_suffix(path.suffix + f".{os.getpid()}.tmp")
+        try:
+            tmp.write_text(data, encoding="utf-8")
+            try:
+                os.replace(str(tmp), str(path))
+            except OSError:
+                path.write_text(data, encoding="utf-8")
+                try:
+                    tmp.unlink(missing_ok=True)
+                except OSError:
+                    pass
+        except OSError:
+            path.write_text(data, encoding="utf-8")
 
 
 def serialize_swarm(record: Any) -> dict[str, Any]:

@@ -209,13 +209,14 @@
 /* ── Surfaces & CTAs ─────────────────────────────────────── */
 .ds-panel {
   padding: 16px 18px;
-  color: var(--ds-text);
-  background: var(--ds-base-bg);
-  border: 1px solid var(--ds-border);
-  border-radius: var(--ds-radius-lg);
+  color: var(--ds-text, #1c1917);
+  background: var(--ds-base-bg, #ffffff);
+  border: 1px solid var(--ds-border, #e7e5e4);
+  border-radius: var(--ds-radius-lg, 16px);
   box-shadow: 0 1px 2px #1c19170a;
 }
 
+/* Buttons — filled → outlined → ghost (common-style.html Components) */
 .ds-cta {
   display: inline-flex;
   min-height: 36px;
@@ -223,35 +224,137 @@
   justify-content: center;
   gap: 8px;
   padding: 0 16px;
-  border-radius: var(--ds-radius-pill);
+  border-radius: var(--ds-radius-pill, 999px);
   font-size: 13px;
+  font-weight: 600;
+  font-family: var(--ds-font, Inter, system-ui, sans-serif);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.ds-cta:disabled,
+.ds-cta[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ds-cta--primary {
+  color: #fff;
+  background: var(--ds-cta, #1c1917);
+  border: 1px solid var(--ds-cta, #1c1917);
+}
+
+.ds-cta--primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: #292524;
+  border-color: #292524;
+}
+
+.ds-cta--common {
+  color: #fff;
+  background: var(--ds-common, #4f46e5);
+  border: 1px solid var(--ds-common, #4f46e5);
+}
+
+.ds-cta--common:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--ds-common-hover, #4338ca);
+  border-color: var(--ds-common-hover, #4338ca);
+}
+
+.ds-cta--secondary {
+  color: #44403c;
+  background: var(--ds-base-bg, #ffffff);
+  border: 1px solid var(--ds-border, #e7e5e4);
+}
+
+.ds-cta--secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--ds-text, #1c1917);
+  border-color: #d6d3d1;
+  background: var(--ds-surface, #fafaf9);
+}
+
+.ds-cta--ghost {
+  color: var(--ds-common, #4f46e5);
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.ds-cta--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--ds-common-hover, #4338ca);
+  background: var(--ds-common-surface, #eef2ff);
+}
+
+.ds-cta--danger {
+  color: #fff;
+  background: var(--ds-error, #ef4444);
+  border: 1px solid var(--ds-error, #ef4444);
+}
+
+.ds-cta--danger:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.ds-cta--success {
+  color: #fff;
+  background: #059669;
+  border: 1px solid #059669;
+}
+
+.ds-cta--success:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: #047857;
+  border-color: #047857;
+}
+
+.ds-cta--sm {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.ds-link {
+  color: var(--ds-common, #4f46e5);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
 }
 
-.ds-cta--primary {
-  color: #fff;
-  background: var(--ds-cta);
-  border: 1px solid var(--ds-cta);
+.ds-link:hover {
+  color: var(--ds-common-hover, #4338ca);
+  text-decoration: underline;
 }
 
-.ds-cta--common {
-  color: #fff;
-  background: var(--ds-common);
-  border: 1px solid var(--ds-common);
+.ds-callout {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--ds-common-border, #c7d2fe);
+  background: var(--ds-common-surface, #eef2ff);
+  color: #3730a3;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
-.ds-cta--secondary {
-  color: var(--ds-text-secondary);
-  background: var(--ds-base-bg);
-  border: 1px solid var(--ds-border);
+.ds-callout code {
+  font-family: var(--ds-mono, ui-monospace, Menlo, Consolas, monospace);
+  font-size: 0.92em;
+  padding: 0.05em 0.3em;
+  border-radius: 4px;
+  background: #fff;
+  color: #4338ca;
 }
 
-.ds-cta--ghost {
-  color: var(--ds-common);
-  background: transparent;
-  border: 1px solid transparent;
+.ds-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
 /* Freshness / projection truthfulness labels (req 8.4) */

@@ -41,7 +41,42 @@ test("design-system.css encodes common-style.html light-frame tokens", async () 
   assert.match(css, /\.ds-status--manual_recovery_required/);
   assert.match(css, /\.ds-common-badge/);
   assert.match(css, /\.ds-freshness/);
+  assert.match(css, /\.ds-cta/);
+  assert.match(css, /\.ds-cta--primary/);
+  assert.match(css, /\.ds-cta--secondary/);
+  assert.match(css, /\.ds-cta--danger/);
+  assert.match(css, /\.ds-link/);
+  assert.match(css, /\.ds-callout/);
+  assert.match(css, /border-radius:\s*var\(--ds-radius-pill\)/);
   assert.match(css, /Inter/);
+});
+
+test("product spine UI uses common-style CTA primitives", async () => {
+  const agentWorkflow = await readFile(
+    resolve(root, "components/AgentWorkflowHome.tsx"),
+    "utf8",
+  );
+  assert.match(
+    agentWorkflow,
+    /className=\"ds-cta ds-cta--secondary agent-workflow-page__spine-link\"/,
+  );
+  assert.match(agentWorkflow, /Open spine template/);
+  assert.match(agentWorkflow, /ds-callout/);
+
+  const bound = await readFile(
+    resolve(root, "components/screen/BoundScreenHome.tsx"),
+    "utf8",
+  );
+  assert.match(bound, /bound-swarm-canvas__spine ds-panel/);
+  assert.match(bound, /ds-cta ds-cta--primary/);
+  assert.match(bound, /Run member loops \(offline\)/);
+  assert.match(bound, /Run DNA spine loops \(offline\)/);
+  assert.match(bound, /ds-cta ds-cta--success/);
+  assert.match(bound, /ds-cta ds-cta--danger/);
+  assert.doesNotMatch(
+    bound,
+    /style=\{\{\s*border:\s*[\"']1px solid var\(--border/,
+  );
 });
 
 test("globals.css imports design-system and authenticated shell uses light frame", async () => {

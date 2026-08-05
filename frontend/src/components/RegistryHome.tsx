@@ -25,6 +25,10 @@ import {
   filterRegistryPatterns,
   toggleFacetSelection,
 } from "../lib/ui/registry-filters";
+import {
+  groupAgentsByVideoCategory,
+  videoGroupLabel,
+} from "../lib/projections/video-agent-groups";
 import { SpecialsCatalog } from "./SpecialsCatalog";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 
@@ -32,10 +36,16 @@ export function RegistryHome({
   view,
   onAction,
   statusMessage: externalStatus,
+  titleActions,
+  belowHeader,
 }: Readonly<{
   view: RegistryLandingView;
   onAction?: (action: ScreenUiAction) => void | Promise<void | boolean>;
   statusMessage?: string;
+  /** Label+button pairs rendered on the same row as the “Common Registry” title. */
+  titleActions?: React.ReactNode;
+  /** Optional strip under the header (e.g. compact draft list). */
+  belowHeader?: React.ReactNode;
 }>): JSX.Element {
   const labels = view.labels;
   const [mode, setMode] = useState<RegistryViewMode>("cards");
@@ -75,10 +85,34 @@ export function RegistryHome({
     [search, view.patterns],
   );
 
-  const visibleAgents = useMemo(
-    () => filteredAgents.slice(0, visibleLimit),
-    [filteredAgents, visibleLimit],
+  const groupedAgents = useMemo(
+    () => groupAgentsByVideoCategory(filteredAgents),
+    [filteredAgents],
   );
+
+  /** Flat list for progressive reveal, preserving group order. */
+  const orderedFilteredAgents = useMemo(
+    () => groupedAgents.flatMap((bucket) => bucket.agents),
+    [groupedAgents],
+  );
+
+  const visibleAgents = useMemo(
+    () => orderedFilteredAgents.slice(0, visibleLimit),
+    [orderedFilteredAgents, visibleLimit],
+  );
+
+  const visibleGroupedAgents = useMemo(() => {
+    let remaining = visibleLimit;
+    const out: typeof groupedAgents = [];
+    for (const bucket of groupedAgents) {
+      if (remaining <= 0) break;
+      const slice = bucket.agents.slice(0, remaining);
+      if (slice.length === 0) continue;
+      out.push({ ...bucket, agents: slice });
+      remaining -= slice.length;
+    }
+    return out;
+  }, [groupedAgents, visibleLimit]);
 
   // Reset window when filters change so search feels instant on small result sets.
   React.useEffect(() => {
@@ -118,11 +152,20 @@ export function RegistryHome({
   return (
     <section aria-label={L(labels, "common_registry_hub")} className="registry-home">
       <header className="registry-home__header">
-        <div>
+        <div className="registry-home__header-intro">
           <p className="eyebrow">{view.eyebrow}</p>
-          <div className="page-title-row">
+          <div className="page-title-row registry-home__title-with-actions">
             <h1>{view.title}</h1>
             <InfoTooltip label="About this screen" text={view.subtitle} />
+            {titleActions ? (
+              <div
+                className="registry-home__inline-draft-actions"
+                role="group"
+                aria-label="Draft and swarm actions"
+              >
+                {titleActions}
+              </div>
+            ) : null}
           </div>
           <p className="registry-home__workspace">{view.workspaceLabel}</p>
         </div>
@@ -179,6 +222,8 @@ export function RegistryHome({
           </Link>
         </div>
       </header>
+
+      {belowHeader}
 
       {contributionsOpen ? (
         <section
@@ -294,6 +339,31 @@ export function RegistryHome({
         ))}
       </div>
 
+      <div
+        aria-label="Video agent groups"
+        className="registry-home__group-tags"
+        role="group"
+      >
+        <span className="registry-home__group-tags-label">Video groups</span>
+        {(view.videoGroupLabels ?? []).map((g) => (
+          <button
+            aria-pressed={activeFacets.has(g.id)}
+            className={
+              activeFacets.has(g.id)
+                ? "registry-home__group-tag registry-home__group-tag--active"
+                : "registry-home__group-tag"
+            }
+            key={g.id}
+            onClick={() => onToggleFacet(g.id)}
+            title={g.label}
+            type="button"
+          >
+            <span className="registry-home__group-tag-id">{g.tag}</span>
+            <span className="registry-home__group-tag-name">{g.label}</span>
+          </button>
+        ))}
+      </div>
+
       <p
         aria-live="polite"
         className="registry-home__result-meta"
@@ -303,10 +373,11 @@ export function RegistryHome({
         Showing <strong>{filteredAgents.length}</strong> of {view.agents.length}{" "}
         agents
         {activeFacets.size > 0
-          ? ` · facets: ${[...activeFacets].join(", ")}`
+          ? ` · tags: ${[...activeFacets].join(", ")}`
           : ""}
         {search.trim().length > 0 ? ` · query: “${search.trim()}”` : ""}
         {` · view: ${mode}`}
+        {` · ${groupedAgents.length} group(s)`}
       </p>
 
       {feedback ? (
@@ -332,48 +403,108 @@ export function RegistryHome({
               Common Agents
             </h2>
             {mode === "cards" ? (
-              <div className="registry-home__agent-grid" data-registry-view="cards">
-                {visibleAgents.map((agent) => (
-                  <AgentCard
-                    agent={agent}
-                    key={agent.id}
-                    labels={labels}
-                    onAction={onAction}
-                    onAnnounce={announce}
-                    onLocalStatus={setStatusMessage}
-                  />
+              <div
+                className="registry-home__agent-groups"
+                data-registry-view="cards"
+              >
+                {visibleGroupedAgents.map((bucket) => (
+                  <section
+                    aria-labelledby={`registry-group-${bucket.key}`}
+                    className="registry-home__agent-group"
+                    key={bucket.key}
+                  >
+                    <header className="registry-home__agent-group-head">
+                      <h3 id={`registry-group-${bucket.key}`}>
+                        {bucket.label}
+                      </h3>
+                      <span className="registry-home__agent-group-count">
+                        {bucket.agents.length}
+                        {groupedAgents.find((g) => g.key === bucket.key)
+                          ?.agents.length !== bucket.agents.length
+                          ? ` / ${
+                              groupedAgents.find((g) => g.key === bucket.key)
+                                ?.agents.length ?? bucket.agents.length
+                            }`
+                          : ""}{" "}
+                        agents
+                      </span>
+                      {bucket.group ? (
+                        <button
+                          className={
+                            activeFacets.has(bucket.group.id)
+                              ? "registry-home__group-tag registry-home__group-tag--active registry-home__group-tag--sm"
+                              : "registry-home__group-tag registry-home__group-tag--sm"
+                          }
+                          onClick={() => onToggleFacet(bucket.group!.id)}
+                          type="button"
+                        >
+                          Filter {bucket.group.tag}
+                        </button>
+                      ) : null}
+                    </header>
+                    <div className="registry-home__agent-grid">
+                      {bucket.agents.map((agent) => (
+                        <AgentCard
+                          agent={agent}
+                          key={agent.id}
+                          labels={labels}
+                          onAction={onAction}
+                          onAnnounce={announce}
+                          onLocalStatus={setStatusMessage}
+                        />
+                      ))}
+                    </div>
+                  </section>
                 ))}
               </div>
             ) : null}
             {mode === "table" ? (
               <div data-registry-view="table">
-                <AgentTable
-                  agents={visibleAgents}
-                  labels={labels}
-                  onAction={onAction}
-                  onAnnounce={announce}
-                  onLocalStatus={setStatusMessage}
-                />
+                {visibleGroupedAgents.map((bucket) => (
+                  <section
+                    aria-labelledby={`registry-table-group-${bucket.key}`}
+                    className="registry-home__agent-group"
+                    key={bucket.key}
+                  >
+                    <header className="registry-home__agent-group-head">
+                      <h3 id={`registry-table-group-${bucket.key}`}>
+                        {bucket.label}
+                      </h3>
+                      <span className="registry-home__agent-group-count">
+                        {bucket.agents.length} agents
+                      </span>
+                    </header>
+                    <AgentTable
+                      agents={bucket.agents}
+                      labels={labels}
+                      onAction={onAction}
+                      onAnnounce={announce}
+                      onLocalStatus={setStatusMessage}
+                    />
+                  </section>
+                ))}
               </div>
             ) : null}
             {mode === "graph" ? (
               <RegistryGraph
-                agents={filteredAgents}
+                agents={orderedFilteredAgents}
                 labels={labels}
                 onSelect={setSelectedGraphId}
                 selectedId={selectedGraphId}
               />
             ) : null}
-            {filteredAgents.length > visibleLimit && mode !== "graph" ? (
+            {orderedFilteredAgents.length > visibleLimit && mode !== "graph" ? (
               <div className="registry-home__more">
                 <button
                   className="registry-home__action registry-home__action--primary"
                   onClick={() =>
-                    setVisibleLimit((n) => Math.min(n + 36, filteredAgents.length))
+                    setVisibleLimit((n) =>
+                      Math.min(n + 36, orderedFilteredAgents.length),
+                    )
                   }
                   type="button"
                 >
-                  Show more ({visibleLimit} of {filteredAgents.length})
+                  Show more ({visibleLimit} of {orderedFilteredAgents.length})
                 </button>
               </div>
             ) : null}
@@ -628,11 +759,18 @@ function AgentCard({
           <li key={badge}>{badge}</li>
         ))}
       </ul>
-      {agent.category || agent.architecture || agent.critiqueCompat ? (
+      {agent.category ? (
         <p className="registry-home__va">
-          {[agent.category, agent.architecture, agent.critiqueCompat]
-            .filter(Boolean)
-            .join(" · ")}
+          <span className="registry-home__group-chip">
+            {videoGroupLabel(agent.category)}
+          </span>
+          {agent.architecture || agent.critiqueCompat
+            ? ` · ${[agent.architecture, agent.critiqueCompat].filter(Boolean).join(" · ")}`
+            : null}
+        </p>
+      ) : agent.architecture || agent.critiqueCompat ? (
+        <p className="registry-home__va">
+          {[agent.architecture, agent.critiqueCompat].filter(Boolean).join(" · ")}
         </p>
       ) : null}
       <div className="registry-home__card-actions">

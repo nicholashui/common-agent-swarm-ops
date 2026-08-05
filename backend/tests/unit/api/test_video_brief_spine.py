@@ -65,6 +65,18 @@ def test_spine_agent_loop_planner_offline() -> None:
     assert "plan" in (loop.get("phases") or {})
 
 
+def test_loop_passed_fail_closed_on_l2_or_status() -> None:
+    from app.api.v1.spine_agent_loop import loop_passed
+
+    assert loop_passed({"skipped": True}) is True
+    assert loop_passed({"needs_hitl": True, "status": "ok", "l2": {"passed": True}}) is False
+    assert loop_passed({"status": "failed", "l2": {"passed": True}}) is False
+    assert loop_passed({"status": "needs_refine", "l2": {"passed": False}}) is False
+    # Explicit L2 fail must fail-close even if status string is still "ok"
+    assert loop_passed({"status": "ok", "l2": {"passed": False, "score": 10}}) is False
+    assert loop_passed({"status": "ok", "l2": {"passed": True}}) is True
+
+
 def test_spine_plan_step_attaches_agent_loop(client: TestClient) -> None:
     mat = body(
         client.post(

@@ -5,7 +5,7 @@
  * Intentionally does NOT import screen-parameters (that graph pulls full pack-agents
  * + every landing and blocks hydration for ~seconds, freezing search/facets/modes).
  *
- * Also hosts draft-swarm session UX: last draft memory + live Host draft list.
+ * Draft UX: compact title buttons next to “Common Registry” (not a wall of copy).
  */
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
@@ -33,10 +33,8 @@ export function BoundRegistryHome(): JSX.Element {
   /** When true (default), further Add to Swarm clicks append to activeDraft. */
   const [appendToLastDraft, setAppendToLastDraft] = useState(true);
   const [draftList, setDraftList] = useState<readonly SwarmListItem[]>([]);
-  const [draftListMessage, setDraftListMessage] = useState<string>(
-    "Loading Host drafts…",
-  );
   const [draftListBusy, setDraftListBusy] = useState(false);
+  const [draftsOpen, setDraftsOpen] = useState(false);
 
   const refreshDraftList = useCallback(async (): Promise<void> => {
     setDraftListBusy(true);
@@ -45,24 +43,17 @@ export function BoundRegistryHome(): JSX.Element {
       const result = await listSwarms();
       if (!result.ok) {
         setDraftList([]);
-        setDraftListMessage(result.message);
+        setStatus({ kind: "error", message: result.message });
         return;
       }
       setDraftList(result.items);
-      if (result.items.length === 0) {
-        setDraftListMessage(
-          "No Host drafts yet. Use Add to Swarm on an agent. Drafts live only in the current backend process (restart clears them).",
-        );
-      } else {
-        setDraftListMessage(
-          `${result.items.length} swarm(s) on this Host (including drafts).`,
-        );
-      }
     } catch (error) {
       setDraftList([]);
-      setDraftListMessage(
-        error instanceof Error ? error.message : "Failed to list swarms.",
-      );
+      setStatus({
+        kind: "error",
+        message:
+          error instanceof Error ? error.message : "Failed to list swarms.",
+      });
     } finally {
       setDraftListBusy(false);
     }
@@ -99,16 +90,17 @@ export function BoundRegistryHome(): JSX.Element {
             const { proposeAgentImprovement } = await import(
               "../../lib/api/product-commons"
             );
-            const result = await proposeAgentImprovement(action.agentId, {
-              summary: action.summary,
-            });
+            const result = await proposeAgentImprovement(
+              action.agentId,
+              action.summary,
+            );
             if (!result.ok) {
               setStatus({ kind: "error", message: result.message });
               return;
             }
             setStatus({
               kind: "success",
-              message: `Proposal ${result.proposalId} ${result.status} for ${result.targetId}.`,
+              message: `Proposal recorded for ${action.agentId}.`,
             });
             return;
           }
@@ -121,7 +113,6 @@ export function BoundRegistryHome(): JSX.Element {
               targetSwarmId && activeDraft?.swarmId === targetSwarmId
                 ? activeDraft.swarmName
                 : action.swarmName;
-
             setStatus({
               kind: "busy",
               message: targetSwarmId
@@ -146,32 +137,16 @@ export function BoundRegistryHome(): JSX.Element {
             setStatus({
               kind: "success",
               message:
-                `Added ${result.agentId} to swarm draft ${result.swarmId} ` +
-                `(${result.swarmName}, rev ${result.revision}, node ${result.nodeId}` +
-                `${result.createdSwarm ? ", new draft" : ", same draft"}). ` +
-                "Open the draft below or use “Open execute”. " +
-                (appendToLastDraft
-                  ? "Next Add to Swarm will use this draft."
-                  : "“Add to last draft” is off — next click creates another new draft.") +
-                " Production stays fail-closed.",
+                `Added ${result.agentId} to ${result.swarmName}` +
+                (result.createdSwarm ? " (new draft)." : " (same draft)."),
             });
             void refreshDraftList();
             return;
           }
-          case "governed.fail_closed":
-            setStatus({
-              kind: "error",
-              message: `${action.message}${
-                action.actionHint
-                  ? ` ${action.actionHint}`
-                  : " Provide a host action reference; the browser will not invent one."
-              }`,
-            });
-            return;
           default:
             setStatus({
               kind: "info",
-              message: `Action “${action.kind}” is not a local registry discovery control.`,
+              message: `Action “${action.kind}” is not wired on Registry.`,
             });
         }
       } catch (error) {
@@ -187,69 +162,99 @@ export function BoundRegistryHome(): JSX.Element {
 
   const statusMessage = status.kind === "idle" ? undefined : status.message;
 
-  return (
+  // Inline next to h1 "Common Registry": Label · Button (no toast above the title).
+  const titleActions = (
     <>
-      <InteractionStatusBar status={status} />
+      <span className="registry-home__title-action">
+        <span className="registry-home__title-action-label" id="reg-same-draft-label">
+          Crew draft
+        </span>
+        <button
+          aria-labelledby="reg-same-draft-label"
+          aria-pressed={appendToLastDraft}
+          className={
+            appendToLastDraft
+              ? "ds-cta ds-cta--common ds-cta--sm"
+              : "ds-cta ds-cta--secondary ds-cta--sm"
+          }
+          onClick={() => {
+            // Toggle only — do not push InteractionStatusBar above the title.
+            setAppendToLastDraft((on) => !on);
+          }}
+          title={
+            appendToLastDraft
+              ? "On: further Add to Swarm appends to the same draft"
+              : "Off: each Add to Swarm can start a new draft"
+          }
+          type="button"
+        >
+          {appendToLastDraft ? "On" : "Off"}
+        </button>
+      </span>
+      <span className="registry-home__title-action">
+        <span className="registry-home__title-action-label" id="reg-drafts-label">
+          Host drafts
+        </span>
+        <button
+          aria-expanded={draftsOpen}
+          aria-labelledby="reg-drafts-label"
+          className="ds-cta ds-cta--secondary ds-cta--sm"
+          disabled={draftListBusy}
+          onClick={() => {
+            setDraftsOpen((open) => !open);
+            if (!draftsOpen) void refreshDraftList();
+          }}
+          type="button"
+        >
+          {draftListBusy
+            ? "…"
+            : draftsOpen
+              ? "Hide"
+              : draftList.length > 0
+                ? `Show (${draftList.length})`
+                : "Show"}
+        </button>
+      </span>
+      {activeDraft ? (
+        <span className="registry-home__title-action">
+          <span className="registry-home__title-action-label" id="reg-active-label">
+            Active
+          </span>
+          <Link
+            aria-labelledby="reg-active-label"
+            className="ds-cta ds-cta--primary ds-cta--sm"
+            href={`/swarms/${encodeURIComponent(activeDraft.swarmId)}/canvas`}
+            title={activeDraft.swarmName}
+          >
+            Open execute
+          </Link>
+          <button
+            className="ds-cta ds-cta--secondary ds-cta--sm"
+            onClick={() => setActiveDraft(null)}
+            type="button"
+          >
+            Clear
+          </button>
+        </span>
+      ) : null}
+    </>
+  );
+
+  const belowHeader =
+    draftsOpen || activeDraft ? (
       <div
-        className="registry-home__draft-bar"
+        className="registry-home__draft-bar registry-home__draft-bar--compact"
         role="region"
-        aria-label="Active swarm draft"
+        aria-label="Swarm drafts"
       >
-        <label className="registry-home__draft-toggle">
-          <input
-            checked={appendToLastDraft}
-            onChange={(event) => setAppendToLastDraft(event.target.checked)}
-            type="checkbox"
-          />
-          <span>Add to last draft (same swarm for multiple agents)</span>
-        </label>
         {activeDraft ? (
           <p className="registry-home__draft-meta">
-            Active draft: <code>{activeDraft.swarmId}</code> ·{" "}
-            <strong>{activeDraft.swarmName}</strong>{" "}
-            <Link
-              className="registry-home__linkish"
-              href={`/swarms/${encodeURIComponent(activeDraft.swarmId)}/canvas`}
-            >
-              Open execute
-            </Link>
-            <button
-              className="registry-home__linkish"
-              onClick={() => {
-                setActiveDraft(null);
-                setStatus({
-                  kind: "info",
-                  message:
-                    "Cleared active draft. Next Add to Swarm will create a new draft.",
-                });
-              }}
-              type="button"
-            >
-              Clear
-            </button>
+            Active: <strong>{activeDraft.swarmName}</strong>{" "}
+            <code>{activeDraft.swarmId}</code>
           </p>
-        ) : (
-          <p className="registry-home__draft-meta">
-            No active draft in this browser session. First{" "}
-            <strong>Add to Swarm</strong> creates one; further adds join it
-            while the checkbox is on. Or open a Host draft from the list below.
-          </p>
-        )}
-
-        <div className="registry-home__draft-list" aria-live="polite">
-          <div className="registry-home__draft-list-head">
-            <strong>Host drafts (live)</strong>
-            <button
-              className="registry-home__linkish"
-              disabled={draftListBusy}
-              onClick={() => void refreshDraftList()}
-              type="button"
-            >
-              {draftListBusy ? "Refreshing…" : "Refresh"}
-            </button>
-          </div>
-          <p className="registry-home__draft-meta">{draftListMessage}</p>
-          {draftList.length > 0 ? (
+        ) : null}
+        {draftsOpen ? (
+          draftList.length > 0 ? (
             <ul className="registry-home__draft-items">
               {draftList.map((item) => (
                 <li key={item.id}>
@@ -261,12 +266,11 @@ export function BoundRegistryHome(): JSX.Element {
                   </Link>
                   <span className="registry-home__draft-item-meta">
                     {" "}
-                    · <code>{item.id}</code> · {item.status} · rev{" "}
-                    {item.revision} · {item.memberCount} member
+                    · {item.memberCount} member
                     {item.memberCount === 1 ? "" : "s"}
                   </span>
                   <button
-                    className="registry-home__linkish"
+                    className="ds-cta ds-cta--secondary ds-cta--sm"
                     onClick={() => {
                       setActiveDraft({
                         swarmId: item.id,
@@ -274,24 +278,43 @@ export function BoundRegistryHome(): JSX.Element {
                       });
                       setStatus({
                         kind: "info",
-                        message: `Active draft set to ${item.id}. Further Add to Swarm will append members here.`,
+                        message: `Next Add to Swarm will add members to ${item.name}.`,
                       });
                     }}
                     type="button"
                   >
-                    Use for next adds
+                    Use next
                   </button>
                 </li>
               ))}
             </ul>
-          ) : null}
-        </div>
+          ) : (
+            <p className="registry-home__draft-meta registry-home__draft-meta--quiet">
+              No Host drafts yet. Use <strong>Add to Swarm</strong> on an agent.
+            </p>
+          )
+        ) : null}
       </div>
-      <RegistryHome
-        onAction={onAction}
-        statusMessage={statusMessage}
-        view={view}
-      />
-    </>
+    ) : null;
+
+  // Status under the header (never above "Common Registry").
+  const statusUnderHeader =
+    status.kind !== "idle" && status.message.length > 0 ? (
+      <InteractionStatusBar status={status} />
+    ) : null;
+
+  return (
+    <RegistryHome
+      belowHeader={
+        <>
+          {statusUnderHeader}
+          {belowHeader}
+        </>
+      }
+      onAction={onAction}
+      statusMessage={statusMessage}
+      titleActions={titleActions}
+      view={view}
+    />
   );
 }

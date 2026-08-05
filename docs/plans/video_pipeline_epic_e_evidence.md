@@ -64,11 +64,47 @@ node --import tsx --test src/lib/projections/video-spine-template.test.ts src/li
 | Spine Plan→Act→Self-Review offline L2 (planner + QC) | Done |
 | Critique emit + fail-closed on loop fail | Done |
 | Activation policy on spine public view | Done |
+| Host AgentLoopService for fleet pack agents | Done |
+| `GET /api/v1/agent-loops/inventory` + run/crew APIs | Done |
+| `POST /swarms/{id}/agent-loops` member crew run | Done |
+| Spine uses AgentLoopService for spine agents | Done |
+| DNA workflow sequential offline loops + project memory | Done |
+| `GET/POST /agent-loops/workflows…` | Done |
+| Execute “Run member loops (offline)” | Done |
+| Host tool registry (stub default; live gated) | Done |
+| Tool invocations on each agent loop Act | Done |
+| Org project memory + critique log APIs | Done |
+| Fleet sample offline run API | Done |
+| Durable loop memory / critiques / tool JSONL | Done |
+| Bounded parallel crew (`parallel` + `max_workers`) | Done |
+| `GET /agent-loops/tool-invocations` | Done |
+| Execute “Run DNA spine loops (offline)” | Done |
+| Durable rehydrate across fresh `AgentLoopService` instances | Done (`test_durable_loop_memory_and_tools_rehydrate_across_service_instances`) |
+| Execute UI structural test (member + DNA spine offline controls) | Done |
+| Tool catalog honesty (never claims live on agent-loop Act) | Done (`test_tool_catalog_never_claims_live_on_agent_loop_surface`) |
+| `loop_passed` fail-closed on explicit L2 fail | Done (`test_loop_passed_fail_closed_on_l2_or_status`) |
+| Parallel crew durable memory (no lost rows on rehydrate) | Done (`test_parallel_crew_durable_memory_rehydrates_all_agents`; stress 20/20) |
 
 ```text
-python -m pytest tests/unit/api/test_video_brief_spine.py -q
-# 18 passed — includes persist, L1 handoff, agent loop
+# Backend (2026-08-05 parallel-persist fix) — twice, exit 0 both
+python -m pytest tests/unit/api/test_agent_loops.py tests/unit/api/test_video_brief_spine.py -q --tb=short
+# → 28 passed (×2)
+
+# Frontend (2026-08-05)
+node --import tsx --test src/lib/api/product-agent-loops.test.ts
+# → 5 passed
+
+# Parallel rehydrate stress: 20/20
+# Durable rehydrate smoke (parallel crew): mem >= completed; all agent_ids; REHYDRATE_OK
+# Catalog honesty: CASOPS_MEDIA_LIVE=1 still production_media=False
 ```
+
+### Honest scope note
+
+Fleet offline loops = loadable pack agents Plan→Act→Self-Review offline with **stub tools**;  
+DNA workflows = sequential loops + project memory; crew may use **bounded parallel** threads (not Temporal).  
+When `CASOPS_PRODUCT_FACADE_PERSIST` is enabled (default), agent-loop project memory, critiques, and tool-invocation JSONL **survive process re-init** for a shared durable store — they are **not** memory-only loss.  
+**Not** included: concurrent Temporal production swarm + unrestricted live Sora/Veo for all 114.
 
 ### Persistence env
 
@@ -76,3 +112,5 @@ python -m pytest tests/unit/api/test_video_brief_spine.py -q
 |-----|---------|
 | `CASOPS_PRODUCT_FACADE_PERSIST` | default `1`; set `0` for memory-only |
 | `CASOPS_PRODUCT_FACADE_DATA` | store directory (default `<repo>/.data/product_facade`) |
+
+Loop durable files under the data dir: `loop_memory.json`, `loop_critiques.json`, `loop_tool_invocations.jsonl`.

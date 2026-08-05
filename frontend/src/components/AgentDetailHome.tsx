@@ -21,6 +21,7 @@ import { L, Lfmt, type ScreenLabels } from "../lib/projections/screen-labels";
 import { cycleOption } from "../lib/ui/local-controls";
 import { classifyAnnounce, type ScreenUiAction } from "../lib/ui/screen-actions";
 import { AgentPackMarkdown } from "./AgentPackMarkdown";
+import { AgentStructureMap } from "./AgentStructureMap";
 
 const PLAYGROUND_MODELS = [
   "Model override: default",
@@ -175,6 +176,30 @@ export function AgentDetailHome({
         <p aria-live="polite" className="agent-detail__status" role="status">
           {feedback}
         </p>
+      ) : null}
+
+      {view.structure && agentId ? (
+        <AgentStructureMap
+          model={{
+            agentId,
+            agentName: view.agentName,
+            role: view.structure.role,
+            category: view.structure.category,
+            versionLabel: view.versionBadge,
+            folderPath: view.structure.folderPath,
+            promptReference: view.structure.promptReference,
+            rubricReference: view.structure.rubricReference,
+            tools: view.structure.tools,
+            networkAccess: view.structure.networkAccess,
+            productionActivationRequested:
+              view.structure.productionActivationRequested,
+            critiqueIn: view.structure.critiqueIn,
+            critiqueOut: view.structure.critiqueOut,
+            hasSpec: view.structure.hasSpec,
+            hasSources: view.structure.hasSources,
+            architecture: view.structure.architecture,
+          }}
+        />
       ) : null}
 
       <div

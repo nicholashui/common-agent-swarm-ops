@@ -433,15 +433,15 @@ def apply_stub_step(
     agent_id = str(target.get("agent_id") or "")
     parents = collect_parent_asset_refs(spine, target_index)
 
-    # Plan → Act → Self-Review for selected spine agents (offline L2)
+    # Plan → Act → Self-Review for spine agents (offline Host AgentLoopService)
     from app.api.v1.spine_agent_loop import (
-        SPINE_L2_AGENT_IDS,
+        SPINE_LOOP_AGENT_IDS,
         loop_passed,
         run_spine_agent_loop,
     )
 
     agent_loop: dict[str, Any] | None = None
-    if agent_id in SPINE_L2_AGENT_IDS and not human_gate:
+    if agent_id in SPINE_LOOP_AGENT_IDS and not human_gate:
         corr = str(spine.get("brief_id") or spine.get("workflow_id") or "spine")
         agent_loop = run_spine_agent_loop(
             agent_id,

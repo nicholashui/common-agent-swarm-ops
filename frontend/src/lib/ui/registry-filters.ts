@@ -7,6 +7,10 @@ import type {
   RegistryPatternCard,
   RegistryViewMode,
 } from "../projections/registry-landing";
+import {
+  isVideoGroupFacet,
+  videoGroupForCategory,
+} from "../projections/video-agent-groups";
 import type { SpecialAgentCatalogEntry } from "../specials/specials-catalog";
 
 export const REGISTRY_VIEW_MODES: readonly {
@@ -38,13 +42,23 @@ function agentHaystack(agent: RegistryAgentCard): string {
     .toLowerCase();
 }
 
-/** Soft facet match: badge/domain/category/id prefix/usage. */
+/** Soft facet match: badge/domain/category/id prefix/usage + video group tags. */
 export function agentMatchesFacet(
   agent: RegistryAgentCard,
   facet: string,
 ): boolean {
   const f = facet.trim().toLowerCase();
   if (f.length === 0) return true;
+  // Ten video groups (1-ATL … 10-Sup)
+  if (isVideoGroupFacet(f)) {
+    const cat = (agent.category ?? "").trim().toLowerCase();
+    if (cat === f) return true;
+    const g = videoGroupForCategory(agent.category);
+    if (g && g.id.toLowerCase() === f) return true;
+    // Allow short tag match e.g. "atl" via badge
+    if (agent.badges.some((b) => b.toLowerCase() === f)) return true;
+    return false;
+  }
   if (agent.badges.some((badge) => badge.toLowerCase() === f || badge.toLowerCase().includes(f))) {
     return true;
   }
@@ -75,6 +89,7 @@ export function agentMatchesSearch(
 
 /**
  * Domain facets (video/specials) use OR within the domain group.
+ * Video group tags (1-ATL…10-Sup) use OR within the group set.
  * Other facets (draft, registered, …) use AND.
  * Search tokens all must match (AND).
  */
@@ -88,11 +103,13 @@ export function filterRegistryAgents(
     domainFacets.map((facet) => facet.trim().toLowerCase()).filter(Boolean),
   );
   const selectedDomains: string[] = [];
+  const selectedVideoGroups: string[] = [];
   const selectedOther: string[] = [];
   for (const facet of activeFacets) {
     const key = facet.trim().toLowerCase();
     if (key.length === 0) continue;
     if (domainSet.has(key)) selectedDomains.push(key);
+    else if (isVideoGroupFacet(key)) selectedVideoGroups.push(key);
     else selectedOther.push(key);
   }
 
@@ -102,6 +119,12 @@ export function filterRegistryAgents(
         agentMatchesFacet(agent, facet),
       );
       if (!hitsDomain) return false;
+    }
+    if (selectedVideoGroups.length > 0) {
+      const hitsGroup = selectedVideoGroups.some((facet) =>
+        agentMatchesFacet(agent, facet),
+      );
+      if (!hitsGroup) return false;
     }
     for (const facet of selectedOther) {
       if (!agentMatchesFacet(agent, facet)) return false;

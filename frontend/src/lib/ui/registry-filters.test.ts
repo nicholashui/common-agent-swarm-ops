@@ -79,6 +79,37 @@ test("toggleFacetSelection adds and removes", () => {
   assert.equal(none.has("video"), false);
 });
 
+test("video group tag 1-ATL filters only that category", () => {
+  const hits = filterRegistryAgents(agents, "", new Set(["1-ATL"]), domains);
+  assert.ok(hits.length >= 1);
+  assert.ok(hits.every((a) => a.category === "1-ATL"));
+  assert.ok(hits.every((a) => a.id.startsWith("video.")));
+});
+
+test("video group tags OR across groups", () => {
+  const hits = filterRegistryAgents(
+    agents,
+    "",
+    new Set(["1-ATL", "10-Sup"]),
+    domains,
+  );
+  assert.ok(hits.length >= 2);
+  assert.ok(
+    hits.every((a) => a.category === "1-ATL" || a.category === "10-Sup"),
+  );
+});
+
+test("video + group tag composes", () => {
+  const hits = filterRegistryAgents(
+    agents,
+    "",
+    new Set(["video", "9-Meta"]),
+    domains,
+  );
+  assert.ok(hits.length >= 1);
+  assert.ok(hits.every((a) => a.category === "9-Meta"));
+});
+
 test("specials pack filter follows registry search", () => {
   const hits = filterSpecialAgents(
     SPECIAL_AGENT_CATALOG,

@@ -13,6 +13,7 @@ import {
   PACK_AGENT_CATALOG_COUNTS,
 } from "./pack-agents-catalog.generated";
 import { PACK_PROCESS_CATALOG } from "./pack-process.generated";
+import { VIDEO_AGENT_GROUPS, VIDEO_GROUP_FACET_IDS } from "./video-agent-groups";
 
 export type RegistryViewMode = "cards" | "table" | "graph";
 
@@ -59,6 +60,16 @@ export interface RegistryLandingView {
   readonly facets: readonly string[];
   /** Facets treated as domain filters (subset of `facets`). */
   readonly domainFacets: readonly string[];
+  /**
+   * Video pack ten-group tags (1-ATL … 10-Sup). OR within this set when filtering.
+   * Not duplicated in `facets` — shown as a dedicated tag row in Registry UI.
+   */
+  readonly videoGroupFacets: readonly string[];
+  readonly videoGroupLabels: readonly {
+    readonly id: string;
+    readonly tag: string;
+    readonly label: string;
+  }[];
   readonly successRateFacet: string;
   readonly usedInSwarmsFacet: string;
   readonly highVerificationFacet: string;
@@ -124,6 +135,12 @@ export const LOCAL_REGISTRY_LANDING: RegistryLandingView = {
     "no-network",
   ],
   domainFacets: ["video", "specials"],
+  videoGroupFacets: VIDEO_GROUP_FACET_IDS,
+  videoGroupLabels: VIDEO_AGENT_GROUPS.map((g) => ({
+    id: g.id,
+    tag: g.tag,
+    label: g.label,
+  })),
   successRateFacet: "registered",
   usedInSwarmsFacet: "self-contained",
   highVerificationFacet: "no-network",
