@@ -2,22 +2,25 @@
   "skill_id": "agentic_rag",
   "plan": "planning/special/agentic_rag.md",
   "kind": "research_retrieval",
-  "summary": "Agentic RAG via research agents + host knowledge/memory",
-  "status": "mvp_integrated",
-  "integrated_at": "2026-07-13",
+  "summary": "Offline Host Agentic RAG foundation + research agents",
+  "status": "host_offline_foundation",
+  "integrated_at": "2026-08-05",
   "n1": "video logic in pack only; host modules are infrastructure",
   "agents": [
     "video.webresearch",
     "video.archiveresearch",
     "video.citation",
-    "video.memory"
+    "video.memory",
+    "specials.agentic-rag-agent"
   ],
   "dna": [
     "wf_video_spine_v1"
   ],
   "modules": [
-    "backend/app/domain/knowledge/retrieval.py",
-    "backend/app/domain/memory/retrieval.py"
+    "backend/app/rag/service.py",
+    "backend/app/rag/pipeline.py",
+    "backend/app/api/v1/rag.py",
+    "backend/app/memory/retrieval.py"
   ],
   "process_ids": [
     "video.spine.orchestrate"
@@ -69,11 +72,19 @@
     ],
     "modules": [
       {
-        "path": "backend/app/domain/knowledge/retrieval.py",
+        "path": "backend/app/rag/service.py",
         "exists": true
       },
       {
-        "path": "backend/app/domain/memory/retrieval.py",
+        "path": "backend/app/rag/pipeline.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/api/v1/rag.py",
+        "exists": true
+      },
+      {
+        "path": "backend/app/memory/retrieval.py",
         "exists": true
       }
     ],

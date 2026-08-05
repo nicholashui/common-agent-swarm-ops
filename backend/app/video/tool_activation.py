@@ -39,6 +39,12 @@ STUB_TOOL_IDS: frozenset[str] = frozenset(
         "video_package_stub",
         "local.validator",
         "local.echo",
+        # Offline aesthetics Critic/Aligner (process-local, no live vision)
+        "aesthetics.evaluate",
+        "aesthetics.compare",
+        # Offline Agentic RAG (process-local index, no Chroma/LightRAG/web)
+        "rag.query",
+        "rag.ingest",
     }
 )
 
@@ -184,6 +190,22 @@ class HostToolRegistry:
             self._retain(outcome, agent_id)
             return outcome
 
+        # Offline aesthetics Host tools (real deterministic Critic, not live vision)
+        if tid in {"aesthetics.evaluate", "aesthetics.compare"}:
+            outcome = self._invoke_aesthetics(
+                tid, agent_id=agent_id, args=args, digest=digest, now=now
+            )
+            self._retain(outcome, agent_id)
+            return outcome
+
+        # Offline Agentic RAG Host tools (local index only)
+        if tid in {"rag.query", "rag.ingest"}:
+            outcome = self._invoke_rag(
+                tid, agent_id=agent_id, args=args, digest=digest, now=now
+            )
+            self._retain(outcome, agent_id)
+            return outcome
+
         # Stub tools + unknown tools → deterministic stub act
         mode = "stub"
         detail = f"stub invoke for {agent_id}"
@@ -200,6 +222,167 @@ class HostToolRegistry:
         )
         self._retain(outcome, agent_id)
         return outcome
+
+    def _invoke_aesthetics(
+        self,
+        tool_id: str,
+        *,
+        agent_id: str,
+        args: dict[str, Any],
+        digest: str,
+        now: str,
+    ) -> ToolInvocationOutcome:
+        """Run offline aesthetics service and surface AQ in tool outcome detail."""
+        try:
+            from app.aesthetics.models import (
+                AestheticCompareRequest,
+                AestheticEvaluateRequest,
+            )
+            from app.aesthetics.service import get_aesthetics_service
+
+            service = get_aesthetics_service()
+            if tool_id == "aesthetics.compare":
+                candidates = args.get("candidates") or []
+                if not isinstance(candidates, list) or len(candidates) < 2:
+                    # Fall back to evaluate when compare args incomplete
+                    ref = str(args.get("artifact_ref") or "asset://tool_stub")
+                    result = service.evaluate(
+                        AestheticEvaluateRequest(artifact_ref=ref, mode="score")
+                    )
+                else:
+                    result = service.compare(
+                        AestheticCompareRequest(
+                            candidates=[str(c) for c in candidates[:32]],
+                            media_type=str(args.get("media_type") or "image"),  # type: ignore[arg-type]
+                            profile_id=args.get("profile_id"),
+                        )
+                    )
+            else:
+                ref = str(args.get("artifact_ref") or "asset://tool_stub")
+                result = service.evaluate(
+                    AestheticEvaluateRequest(
+                        artifact_ref=ref,
+                        media_type=str(args.get("media_type") or "image"),  # type: ignore[arg-type]
+                        mode=str(args.get("mode") or "score"),  # type: ignore[arg-type]
+                        profile_id=args.get("profile_id"),
+                    )
+                )
+            ok = bool(result.get("ok"))
+            if tool_id == "aesthetics.compare" and result.get("ranking"):
+                best = result.get("best_artifact_ref")
+                detail = (
+                    f"aesthetics.compare agent={agent_id} best={best} "
+                    f"n={len(result.get('ranking') or [])} offline"
+                )
+            else:
+                v = result.get("verdict") or {}
+                detail = (
+                    f"aesthetics.evaluate agent={agent_id} "
+                    f"AQ={v.get('aesthetic_quality')} "
+                    f"hack={v.get('hack_likelihood')} "
+                    f"escalate={v.get('escalate_to_hitl')} offline"
+                )
+            # Fold key result into effect digest for audit reproducibility
+            effect = sha256(
+                f"{digest}|{detail}|{result.get('ok')}".encode("utf-8", errors="replace")
+            ).hexdigest()[:32]
+            return ToolInvocationOutcome(
+                tool_id=tool_id,
+                mode="stub",
+                ok=ok,
+                outcome="stub_completed" if ok else "stub_failed",
+                effect_digest=effect,
+                detail=detail[:500],
+                invoked_at=now,
+            )
+        except Exception as exc:  # noqa: BLE001 — tool surface must not crash loops
+            return ToolInvocationOutcome(
+                tool_id=tool_id,
+                mode="stub",
+                ok=False,
+                outcome="stub_failed",
+                effect_digest=digest,
+                detail=f"aesthetics tool error: {exc}"[:500],
+                invoked_at=now,
+            )
+
+    def _invoke_rag(
+        self,
+        tool_id: str,
+        *,
+        agent_id: str,
+        args: dict[str, Any],
+        digest: str,
+        now: str,
+    ) -> ToolInvocationOutcome:
+        """Run offline Agentic RAG service from the agent-loop tool surface."""
+        try:
+            from app.rag.models import RagIngestRequest, RagQueryRequest
+            from app.rag.service import get_rag_service
+
+            service = get_rag_service()
+            if tool_id == "rag.ingest":
+                title = str(args.get("title") or "tool_ingest")
+                content = str(args.get("content") or args.get("text") or "")
+                if not content.strip():
+                    return ToolInvocationOutcome(
+                        tool_id=tool_id,
+                        mode="stub",
+                        ok=False,
+                        outcome="stub_failed",
+                        effect_digest=digest,
+                        detail="rag.ingest requires content",
+                        invoked_at=now,
+                    )
+                result = service.ingest(
+                    RagIngestRequest(
+                        title=title,
+                        content=content,
+                        source_ref=str(args.get("source_ref") or f"tool://{agent_id}"),
+                    )
+                )
+                detail = (
+                    f"rag.ingest agent={agent_id} doc={result.get('doc_id')} "
+                    f"children={result.get('children')} offline"
+                )
+                ok = bool(result.get("ok"))
+            else:
+                q = str(args.get("query") or args.get("q") or "Host memory retrieval")
+                result = service.query(
+                    RagQueryRequest(
+                        query=q,
+                        publish_bus=bool(args.get("publish_bus", False)),
+                    )
+                )
+                ok = bool(result.get("ok"))
+                run = result.get("run") or {}
+                detail = (
+                    f"rag.query agent={agent_id} conf={run.get('confidence')} "
+                    f"cites={len(run.get('citations') or [])} "
+                    f"reflect={run.get('reflection_triggered')} offline"
+                )
+            effect = sha256(
+                f"{digest}|{detail}|{ok}".encode("utf-8", errors="replace")
+            ).hexdigest()[:32]
+            return ToolInvocationOutcome(
+                tool_id=tool_id,
+                mode="stub",
+                ok=ok,
+                outcome="stub_completed" if ok else "stub_failed",
+                effect_digest=effect,
+                detail=detail[:500],
+                invoked_at=now,
+            )
+        except Exception as exc:  # noqa: BLE001
+            return ToolInvocationOutcome(
+                tool_id=tool_id,
+                mode="stub",
+                ok=False,
+                outcome="stub_failed",
+                effect_digest=digest,
+                detail=f"rag tool error: {exc}"[:500],
+                invoked_at=now,
+            )
 
     def invoke_for_agent(
         self,

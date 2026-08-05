@@ -7,7 +7,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 
 from app.api.v1.adoption import router as adoption_router
+from app.api.v1.aesthetics import router as aesthetics_router
 from app.api.v1.agent_loops import router as agent_loops_router
+from app.api.v1.rag import router as rag_router
 from app.api.v1.approvals import router as approvals_router
 from app.api.v1.commons import router as commons_router
 from app.api.v1.composer import router as composer_router
@@ -47,6 +49,8 @@ def create_public_api_router() -> APIRouter:
     router.include_router(composer_router)
     router.include_router(swarms_router)
     router.include_router(agent_loops_router)
+    router.include_router(aesthetics_router)
+    router.include_router(rag_router)
     router.include_router(product_ops_router)
     router.include_router(product_extended_router)
     return router
